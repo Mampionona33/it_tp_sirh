@@ -9,8 +9,10 @@ import {
 import { CCard } from '@coreui/react'
 import PropTypes from 'prop-types'
 import { Table, Button } from 'react-bootstrap'
+import { DebounceInput } from 'react-debounce-input'
 
 const DataTable = ({ data, columns }) => {
+  const [globalFilter, setGlobalFilter] = React.useState('')
   const table = useReactTable({
     data,
     columns,
@@ -35,6 +37,19 @@ const DataTable = ({ data, columns }) => {
 
   return (
     <CCard className="p-5">
+      <div className="d-flex bd-highlight mb-3 gap-1">
+        <h5 className="card-title me-auto p-2 bd-highlight">Liste employés</h5>
+        <DebounceInput
+          value={globalFilter ?? ''}
+          onChange={(value) => setGlobalFilter(String(value))}
+          className="p-2 font-lg shadow border border-block"
+          placeholder="Search all columns..."
+        />
+        <Button className="p-2 bd-highlight" variant="info" size="sm">
+          Export CSV
+        </Button>
+      </div>
+
       <div>
         <Table responsive striped bordered hover>
           <thead className="table-dark">
@@ -65,6 +80,7 @@ const DataTable = ({ data, columns }) => {
         <div className="flex justify-center">
           <div className="flex flex-wrap items-center gap-2">
             <Button
+              size="sm"
               variant="secondary"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
@@ -72,6 +88,7 @@ const DataTable = ({ data, columns }) => {
               {'<<'}
             </Button>
             <Button
+              size="sm"
               variant="secondary"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
@@ -79,6 +96,7 @@ const DataTable = ({ data, columns }) => {
               {'<'}
             </Button>
             <Button
+              size="sm"
               variant="secondary"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
@@ -86,6 +104,7 @@ const DataTable = ({ data, columns }) => {
               {'>'}
             </Button>
             <Button
+              size="sm"
               variant="secondary"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
