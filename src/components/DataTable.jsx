@@ -63,7 +63,7 @@ const DataTable = ({ data, columns }) => {
 
         <div className="h-2" />
         <div className="flex justify-center">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Button
               variant="secondary"
               onClick={() => table.setPageIndex(0)}
