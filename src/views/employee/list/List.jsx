@@ -65,6 +65,66 @@ const List = () => {
         firstName: 'kaleba',
       },
     },
+    {
+      matricule: 6,
+      cin: '10120102102',
+      email: 'kaleba@gmail.com',
+      post: 'Développeur',
+      telephone: '0342154657',
+      manager: 'Naivo',
+      name: {
+        lastName: 'rakoto',
+        firstName: 'kaleba',
+      },
+    },
+    {
+      matricule: 7,
+      cin: '10120102102',
+      email: 'kaleba@gmail.com',
+      post: 'Développeur',
+      telephone: '0342154657',
+      manager: 'Naivo',
+      name: {
+        lastName: 'rakoto',
+        firstName: 'kaleba',
+      },
+    },
+    {
+      matricule: 8,
+      cin: '10120102102',
+      email: 'kaleba@gmail.com',
+      post: 'Développeur',
+      telephone: '0342154657',
+      manager: 'Naivo',
+      name: {
+        lastName: 'rakoto',
+        firstName: 'kaleba',
+      },
+    },
+    {
+      matricule: 9,
+      cin: '10120102102',
+      email: 'kaleba@gmail.com',
+      post: 'Développeur',
+      telephone: '0342154657',
+      manager: 'Naivo',
+      name: {
+        lastName: 'rakoto',
+        firstName: 'kaleba',
+      },
+    },
+    {
+      matricule: 10,
+      cin: '10120102102',
+      email: 'kaleba@gmail.com',
+      post: 'Développeur',
+      telephone: '0342154657',
+      manager: 'Naivo',
+      name: {
+        lastName: 'rakoto',
+        firstName: 'kaleba',
+      },
+    },
   ]
 
   const columnHelper = createColumnHelper()

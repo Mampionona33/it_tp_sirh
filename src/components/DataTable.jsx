@@ -25,7 +25,7 @@ const DataTable = ({ data, columns }) => {
       pagination: {
         ...prev.pagination,
         pageIndex: 0, // Index initial de la page
-        pageSize: 4, // Taille de la page initiale
+        pageSize: 5, // Taille de la page initiale
       },
     }))
   }, [table])
@@ -116,7 +116,7 @@ const DataTable = ({ data, columns }) => {
                 table.setPageSize(Number(e.target.value))
               }}
             >
-              {[3, 4, 5, 6, 7, 8, 40, 50].map((pageSize) => (
+              {[5, 6, 7, 8, 40, 50].map((pageSize) => (
                 <option key={pageSize} value={pageSize}>
                   Show {pageSize}
                 </option>
