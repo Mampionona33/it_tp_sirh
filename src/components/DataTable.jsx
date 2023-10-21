@@ -8,6 +8,7 @@ import {
 } from '@tanstack/react-table'
 import { CCard } from '@coreui/react'
 import PropTypes from 'prop-types'
+import Table from 'react-bootstrap/Table'
 
 const DataTable = ({ data, columns }) => {
   const table = useReactTable({
@@ -35,7 +36,7 @@ const DataTable = ({ data, columns }) => {
   return (
     <CCard className="p-5">
       <div>
-        <table className="table table-striped round shadow-sm">
+        <Table responsive striped bordered hover>
           <thead className="table-dark">
             {headerGroups.map((headerGroup) => (
               <tr key={headerGroup.id}>
@@ -58,7 +59,7 @@ const DataTable = ({ data, columns }) => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </Table>
 
         <div className="h-2" />
         <div className="flex justify-center">
@@ -123,8 +124,8 @@ const DataTable = ({ data, columns }) => {
             </select>
           </div>
         </div>
-        <div>{table.getRowModel().rows.length} Rows</div>
-        <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre>
+        {/* <div>{table.getRowModel().rows.length} Rows</div> */}
+        {/* <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre> */}
       </div>
     </CCard>
   )
