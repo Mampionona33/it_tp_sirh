@@ -329,6 +329,7 @@ const _nav = [
   //   to: '/theme/typography',
   //   icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
   // },
+
   {
     component: CNavTitle,
     name: 'Components',
@@ -341,8 +342,21 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'list',
+        name: 'List',
         to: '/employee/list',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'base',
+    to: '/base',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Accordion',
+        to: '/base/accordion',
       },
       {
         component: CNavItem,
