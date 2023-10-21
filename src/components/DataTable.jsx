@@ -8,7 +8,7 @@ import {
 } from '@tanstack/react-table'
 import { CCard } from '@coreui/react'
 import PropTypes from 'prop-types'
-import Table from 'react-bootstrap/Table'
+import { Table, Button } from 'react-bootstrap'
 
 const DataTable = ({ data, columns }) => {
   const table = useReactTable({
@@ -64,34 +64,34 @@ const DataTable = ({ data, columns }) => {
         <div className="h-2" />
         <div className="flex justify-center">
           <div className="flex items-center gap-2">
-            <button
-              className="border rounded p-1"
+            <Button
+              variant="secondary"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
               {'<<'}
-            </button>
-            <button
-              className="border rounded p-1"
+            </Button>
+            <Button
+              variant="secondary"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
               {'<'}
-            </button>
-            <button
-              className="border rounded p-1"
+            </Button>
+            <Button
+              variant="secondary"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
               {'>'}
-            </button>
-            <button
-              className="border rounded p-1"
+            </Button>
+            <Button
+              variant="secondary"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
               {'>>'}
-            </button>
+            </Button>
             <span className="flex items-center gap-1">
               <div>Page</div>
               <strong>

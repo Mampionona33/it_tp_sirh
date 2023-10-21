@@ -6,7 +6,7 @@ import { createColumnHelper } from '@tanstack/react-table'
 const List = () => {
   const employes = [
     {
-      maticule: 1,
+      matricule: 1,
       cin: '10120102102',
       email: 'kaleba@gmail.com',
       post: 'Développeur',
@@ -18,7 +18,7 @@ const List = () => {
       },
     },
     {
-      nMaticule: 1,
+      matricule: 2,
       cin: '10120102102',
       email: 'kaleba@gmail.com',
       post: 'Développeur',
@@ -30,7 +30,31 @@ const List = () => {
       },
     },
     {
-      nMaticule: 2,
+      matricule: 3,
+      cin: '10120102102',
+      email: 'kaleba@gmail.com',
+      post: 'Développeur',
+      telephone: '0342154657',
+      manager: 'Naivo',
+      name: {
+        lastName: 'rakoto',
+        firstName: 'kaleba',
+      },
+    },
+    {
+      matricule: 4,
+      cin: '10120102102',
+      email: 'kaleba@gmail.com',
+      post: 'Développeur',
+      telephone: '0342154657',
+      manager: 'Naivo',
+      name: {
+        lastName: 'rakoto',
+        firstName: 'kaleba',
+      },
+    },
+    {
+      matricule: 5,
       cin: '10120102102',
       email: 'kaleba@gmail.com',
       post: 'Développeur',
@@ -43,20 +67,9 @@ const List = () => {
     },
   ]
 
-  // const fields = [
-  //   { key: 'Matricule' },
-  //   { key: 'Nom et Prénom' },
-  //   { key: 'CIN' },
-  //   { key: 'Email' },
-  //   { key: 'Post' },
-  //   { key: 'Télephone' },
-  //   { key: 'Manager' },
-  //   { key: 'Action' },
-  // ]
-
   const columnHelper = createColumnHelper()
   const columns = [
-    columnHelper.accessor('maticule', {
+    columnHelper.accessor('matricule', {
       cell: (info) => info.getValue(),
       header: () => 'matricule',
     }),
@@ -89,19 +102,6 @@ const List = () => {
     }),
   ]
 
-  // return (
-  //   <CCard className="p-5">
-  //     <CDataTable
-  //       items={employes}
-  //       fields={fields}
-  //       itemsPerPageSelect
-  //       itemsPerPage={5}
-  //       hover
-  //       pagination
-  //     />
-  //   </CCard>
-  // )
-
   return (
     <CRow>
       <CCol xs={12}>
@@ -109,27 +109,6 @@ const List = () => {
       </CCol>
     </CRow>
   )
-
-  // return (
-  //   <CRow>
-  //     <CCol xs={12}>
-  //       <CTable>
-  //         <CTableHead>
-  //           <CTableRow>
-  //             <CTableHeaderCell scope="col">Matricule</CTableHeaderCell>
-  //             <CTableHeaderCell scope="col">Nom et Prénom</CTableHeaderCell>
-  //             <CTableHeaderCell scope="col">CIN</CTableHeaderCell>
-  //             <CTableHeaderCell scope="col">Email</CTableHeaderCell>
-  //             <CTableHeaderCell scope="col">Post</CTableHeaderCell>
-  //             <CTableHeaderCell scope="col">Télephone</CTableHeaderCell>
-  //             <CTableHeaderCell scope="col">Manager</CTableHeaderCell>
-  //             <CTableHeaderCell scope="col">Action</CTableHeaderCell>
-  //           </CTableRow>
-  //         </CTableHead>
-  //       </CTable>
-  //     </CCol>
-  //   </CRow>
-  // )
 }
 
 export default List
