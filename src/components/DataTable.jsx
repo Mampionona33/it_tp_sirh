@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
-  flexRender,
-  getCoreRowModel,
   useReactTable,
+  getCoreRowModel,
   getPaginationRowModel,
   getFilteredRowModel,
 } from '@tanstack/react-table'
@@ -11,12 +10,23 @@ import PropTypes from 'prop-types'
 import { Table, Button } from 'react-bootstrap'
 import { DebounceInput } from 'react-debounce-input'
 
-const DataTable = ({ title, data, columns, exportCsvBtn }) => {
-  const [globalFilter, setGlobalFilter] = React.useState('')
+function DataTable({ title, data, columns, exportCsvBtn }) {
+  const [globalFilter, setGlobalFilter] = useState('')
+
+  const fuzzyTextFilter = (rows, id, filterValue) => {
+    return rows.filter((row) => {
+      const rowValue = row.values[id]
+      return rowValue !== undefined
+        ? String(rowValue).toLowerCase().includes(filterValue.toLowerCase())
+        : true
+    })
+  }
 
   const table = useReactTable({
     data,
     columns,
+    state: { globalFilter },
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
@@ -27,8 +37,8 @@ const DataTable = ({ title, data, columns, exportCsvBtn }) => {
       ...prev,
       pagination: {
         ...prev.pagination,
-        pageIndex: 0, // Index initial de la page
-        pageSize: 5, // Taille de la page initiale
+        pageIndex: 0,
+        pageSize: 5,
       },
     }))
   }, [table])
@@ -36,16 +46,28 @@ const DataTable = ({ title, data, columns, exportCsvBtn }) => {
   const headerGroups = table.getHeaderGroups()
   const rows = table.getRowModel().rows
 
+  const filteredRows = globalFilter
+    ? data.filter((row) => {
+        return Object.values(row).some((value) => {
+          return String(value).toLowerCase().includes(globalFilter.toString().toLowerCase())
+        })
+      })
+    : data
+
   return (
     <CCard className="">
       <div className="d-flex bd-highlight mb-3 gap-1 p-2">
         <h5 className="card-title me-auto p-2 bd-highlight">{title}</h5>
         <DebounceInput
-          value={globalFilter ?? ''}
-          onChange={(value) => setGlobalFilter(String(value))}
+          value={globalFilter || ''}
+          onChange={(e) => {
+            const value = e.target.value
+            setGlobalFilter(String(value))
+          }}
           className="p-2 font-lg shadow border border-block"
           placeholder="Search all columns..."
         />
+
         {exportCsvBtn ? (
           <Button className="p-2 bd-highlight" variant="info" size="sm">
             Export CSV
@@ -62,7 +84,7 @@ const DataTable = ({ title, data, columns, exportCsvBtn }) => {
                   <th className="capitalize" key={header.id}>
                     {header.isPlaceholder
                       ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
+                      : header.column.columnDef.header(header.getContext())}
                   </th>
                 ))}
               </tr>
@@ -72,7 +94,7 @@ const DataTable = ({ title, data, columns, exportCsvBtn }) => {
             {rows.map((row) => (
               <tr key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+                  <td key={cell.id}>{cell.column.columnDef.cell(cell.getContext())}</td>
                 ))}
               </tr>
             ))}
