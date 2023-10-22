@@ -1,7 +1,9 @@
 import React from 'react'
 import DataTable from '../../../components/DataTable'
-import { CRow, CCol } from '@coreui/react'
+import { CRow, CCol, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem } from '@coreui/react'
 import { createColumnHelper } from '@tanstack/react-table'
+import CIcon from '@coreui/icons-react'
+import { cilOptions } from '@coreui/icons'
 
 const List = () => {
   const employes = [
@@ -645,7 +647,7 @@ const List = () => {
           const { lastname, firstname } = info.getValue()
           return `${lastname} ${firstname}`
         },
-        header: () => 'name',
+        header: () => 'Nom et Prénom',
       }),
       columnHelper.accessor('cin', {
         cell: (info) => info.getValue(),
@@ -666,6 +668,25 @@ const List = () => {
       columnHelper.accessor('manager', {
         cell: (info) => info.getValue(),
         header: () => 'manager',
+      }),
+      columnHelper.accessor('matricule', {
+        header: () => 'action',
+        cell: (info) => (
+          <div>
+            <CDropdown variant="btn-group" direction="center">
+              <CDropdownToggle className="bg-transparent border-0 text-dark rounded-circle">
+                <CIcon size="sm" icon={cilOptions} title="more options" />
+              </CDropdownToggle>
+              <CDropdownMenu>
+                <CDropdownItem href={`/employee/modifier/${info.row.id}`}>Modifier</CDropdownItem>
+                <CDropdownItem href={`/employee/supprimer/${info.row.id}`}>Supprimer</CDropdownItem>
+                <CDropdownItem href={`/employee/details/${info.row.id}`}>
+                  Fiche employé
+                </CDropdownItem>
+              </CDropdownMenu>
+            </CDropdown>
+          </div>
+        ),
       }),
     ],
     [columnHelper],

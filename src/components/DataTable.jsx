@@ -64,7 +64,6 @@ function DataTable({
           value={globalFilter || ''}
           onChange={(e) => {
             const value = e.target.value
-            console.log(value)
             setGlobalFilter(String(value))
           }}
           className="flex p-2 shadow-sm rounded border border-block"
