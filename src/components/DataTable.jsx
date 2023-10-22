@@ -5,7 +5,14 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
 } from '@tanstack/react-table'
-import { CCard } from '@coreui/react'
+import { CCard, CButton } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
+import {
+  cilChevronLeft,
+  cilChevronRight,
+  cilChevronDoubleRight,
+  cilChevronDoubleLeft,
+} from '@coreui/icons'
 import PropTypes from 'prop-types'
 import { Table, Button } from 'react-bootstrap'
 import { DebounceInput } from 'react-debounce-input'
@@ -47,7 +54,7 @@ function DataTable({ title, data, columns, exportCsvBtn }) {
             const value = e.target.value
             setGlobalFilter(String(value))
           }}
-          className="p-2 font-lg shadow border border-block"
+          className="p-2 shadow-sm rounded border border-block"
           placeholder="Search all columns..."
         />
 
@@ -86,38 +93,37 @@ function DataTable({ title, data, columns, exportCsvBtn }) {
 
         <div className="flex justify-center p-2">
           <div className="flex flex-wrap items-center gap-2">
-            <Button
-              size="sm"
-              variant="secondary"
+            <CButton
+              color="secondary"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
-              {'<<'}
-            </Button>
-            <Button
-              size="sm"
-              variant="secondary"
+              <CIcon icon={cilChevronDoubleLeft} title="Download file" />
+            </CButton>
+
+            <CButton
+              color="secondary"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              {'<'}
-            </Button>
-            <Button
-              size="sm"
-              variant="secondary"
+              <CIcon icon={cilChevronLeft} title="Download file" />
+            </CButton>
+
+            <CButton
+              color="secondary"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              {'>'}
-            </Button>
-            <Button
-              size="sm"
-              variant="secondary"
+              <CIcon icon={cilChevronRight} title="Download file" />
+            </CButton>
+
+            <CButton
+              color="secondary"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
-              {'>>'}
-            </Button>
+              <CIcon icon={cilChevronDoubleRight} title="Download file" />
+            </CButton>
             <span className="flex items-center gap-1">
               <div>Page</div>
               <strong>
