@@ -203,7 +203,9 @@ const TableModal = ({
   const [visible, setVisible] = useState(false)
   return (
     <>
-      <CButton onClick={() => setVisible(!visible)}>Export CSV</CButton>
+      <CButton size="sm" onClick={() => setVisible(!visible)}>
+        Export CSV
+      </CButton>
       <CModal
         visible={visible}
         onClose={() => setVisible(false)}
