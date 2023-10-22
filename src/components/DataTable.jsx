@@ -98,35 +98,39 @@ function DataTable({ title, data, columns, exportCsvBtn, importCsvBtn }) {
         <div className="flex justify-center p-2">
           <div className="flex flex-wrap items-center gap-2">
             <CButton
+              size="sm"
               color="secondary"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
-              <CIcon icon={cilChevronDoubleLeft} title="Download file" />
+              <CIcon size="sm" icon={cilChevronDoubleLeft} title="Download file" />
             </CButton>
 
             <CButton
+              size="sm"
               color="secondary"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              <CIcon icon={cilChevronLeft} title="Download file" />
+              <CIcon size="sm" icon={cilChevronLeft} title="Download file" />
             </CButton>
 
             <CButton
+              size="sm"
               color="secondary"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              <CIcon icon={cilChevronRight} title="Download file" />
+              <CIcon size="sm" icon={cilChevronRight} title="Download file" />
             </CButton>
 
             <CButton
+              size="sm"
               color="secondary"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
-              <CIcon icon={cilChevronDoubleRight} title="Download file" />
+              <CIcon size="sm" icon={cilChevronDoubleRight} title="Download file" />
             </CButton>
             <span className="flex items-center gap-1">
               <div>Page</div>
