@@ -11,8 +11,9 @@ import PropTypes from 'prop-types'
 import { Table, Button } from 'react-bootstrap'
 import { DebounceInput } from 'react-debounce-input'
 
-const DataTable = ({ title, data, columns }) => {
+const DataTable = ({ title, data, columns, exportCsvBtn }) => {
   const [globalFilter, setGlobalFilter] = React.useState('')
+
   const table = useReactTable({
     data,
     columns,
@@ -45,9 +46,11 @@ const DataTable = ({ title, data, columns }) => {
           className="p-2 font-lg shadow border border-block"
           placeholder="Search all columns..."
         />
-        <Button className="p-2 bd-highlight" variant="info" size="sm">
-          Export CSV
-        </Button>
+        {exportCsvBtn ? (
+          <Button className="p-2 bd-highlight" variant="info" size="sm">
+            Export CSV
+          </Button>
+        ) : null}
       </div>
 
       <div>
@@ -151,6 +154,11 @@ DataTable.propTypes = {
   title: PropTypes.string,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
+  exportCsvBtn: PropTypes.bool,
+}
+
+DataTable.defaultProp = {
+  exportCsvBtn: false,
 }
 
 export default DataTable
