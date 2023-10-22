@@ -19,12 +19,14 @@ import { DebounceInput } from 'react-debounce-input'
 
 function DataTable({ title, data, columns, exportCsvBtn, importCsvBtn }) {
   const [globalFilter, setGlobalFilter] = useState('')
+  const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
     data,
     columns,
-    state: { globalFilter },
+    state: { globalFilter, rowSelection },
     onGlobalFilterChange: setGlobalFilter,
+    enableRowSelection: true,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

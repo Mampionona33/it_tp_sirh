@@ -610,7 +610,16 @@ const List = () => {
   const columnHelper = createColumnHelper()
   const columns = [
     columnHelper.accessor('matricule', {
-      cell: (info) => info.getValue(),
+      cell: (info) => {
+        console.log(info)
+        return (
+          <div className="flex gap-2">
+            <input type="checkbox" name="matricule" />
+            <label htmlFor="matricule">{info.getValue()}</label>
+          </div>
+        )
+      },
+
       header: () => 'matricule',
     }),
     columnHelper.accessor('name', {
