@@ -11,7 +11,7 @@ import PropTypes from 'prop-types'
 import { Table, Button } from 'react-bootstrap'
 import { DebounceInput } from 'react-debounce-input'
 
-const DataTable = ({ data, columns }) => {
+const DataTable = ({ title, data, columns }) => {
   const [globalFilter, setGlobalFilter] = React.useState('')
   const table = useReactTable({
     data,
@@ -36,9 +36,9 @@ const DataTable = ({ data, columns }) => {
   const rows = table.getRowModel().rows
 
   return (
-    <CCard className="p-5">
-      <div className="d-flex bd-highlight mb-3 gap-1">
-        <h5 className="card-title me-auto p-2 bd-highlight">Liste employés</h5>
+    <CCard className="">
+      <div className="d-flex bd-highlight mb-3 gap-1 p-2">
+        <h5 className="card-title me-auto p-2 bd-highlight">{title}</h5>
         <DebounceInput
           value={globalFilter ?? ''}
           onChange={(value) => setGlobalFilter(String(value))}
@@ -76,8 +76,7 @@ const DataTable = ({ data, columns }) => {
           </tbody>
         </Table>
 
-        <div className="h-2" />
-        <div className="flex justify-center">
+        <div className="flex justify-center p-2">
           <div className="flex flex-wrap items-center gap-2">
             <Button
               size="sm"
@@ -143,14 +142,13 @@ const DataTable = ({ data, columns }) => {
             </select>
           </div>
         </div>
-        {/* <div>{table.getRowModel().rows.length} Rows</div> */}
-        {/* <pre>{JSON.stringify(table.getState().pagination, null, 2)}</pre> */}
       </div>
     </CCard>
   )
 }
 
 DataTable.propTypes = {
+  title: PropTypes.string,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
 }

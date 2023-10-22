@@ -165,7 +165,7 @@ const List = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <DataTable data={employes} columns={columns} />
+        <DataTable title="List employés" data={employes} columns={columns} />
       </CCol>
     </CRow>
   )
