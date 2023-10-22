@@ -611,7 +611,7 @@ const List = () => {
   const columns = [
     columnHelper.accessor('matricule', {
       cell: (info) => {
-        console.log(info)
+        // console.log(info)
         return (
           <div className="flex gap-2">
             <input type="checkbox" name="matricule" />
@@ -620,7 +620,16 @@ const List = () => {
         )
       },
 
-      header: () => 'matricule',
+      header: () => {
+        return (
+          <div>
+            <div className="flex gap-2">
+              <input type="checkbox" name="matriculeHead" />
+              <label htmlFor="matriculeHead">Matricule</label>
+            </div>
+          </div>
+        )
+      },
     }),
     columnHelper.accessor('name', {
       cell: (info) => {
