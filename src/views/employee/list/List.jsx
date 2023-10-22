@@ -645,7 +645,13 @@ const List = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <DataTable title="List employés" data={employes} columns={columns} exportCsvBtn />
+        <DataTable
+          title="List employés"
+          data={employes}
+          columns={columns}
+          exportCsvBtn
+          importCsvBtn
+        />
       </CCol>
     </CRow>
   )
