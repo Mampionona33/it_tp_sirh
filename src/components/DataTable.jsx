@@ -5,7 +5,15 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
 } from '@tanstack/react-table'
-import { CCard, CButton } from '@coreui/react'
+import {
+  CCard,
+  CButton,
+  CModal,
+  CModalHeader,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
+} from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
   cilChevronLeft,
@@ -75,9 +83,9 @@ function DataTable({
           </Button>
         ) : null}
         {exportCsvBtn ? (
-          <Button className="p-2 bd-highlight" variant="info" size="sm">
-            Export CSV
-          </Button>
+          <>
+            <TableModal title="Export CSV" labelButtonShow="Export CSV" />
+          </>
         ) : null}
       </div>
 
@@ -179,6 +187,55 @@ function DataTable({
       </div>
     </CCard>
   )
+}
+
+const TableModal = ({
+  id,
+  title,
+  body,
+  labelButtonShow,
+  variantButtonShow,
+  fields,
+  handleSubmit,
+  dispatch,
+  initialValues,
+}) => {
+  const [visible, setVisible] = useState(false)
+  return (
+    <>
+      <CButton onClick={() => setVisible(!visible)}>Export CSV</CButton>
+      <CModal
+        visible={visible}
+        onClose={() => setVisible(false)}
+        aria-labelledby="ScrollingLongContentExampleLabel"
+      >
+        <CModalHeader>
+          <CModalTitle>{title}</CModalTitle>
+        </CModalHeader>
+        <CModalBody>
+          <p>Modal</p>
+        </CModalBody>
+        <CModalFooter>
+          <CButton color="secondary" onClick={() => setVisible(false)}>
+            Annuler
+          </CButton>
+          <CButton>Valider</CButton>
+        </CModalFooter>
+      </CModal>
+    </>
+  )
+}
+
+TableModal.propTypes = {
+  id: PropTypes.string | PropTypes.number,
+  title: PropTypes.string,
+  body: PropTypes.string,
+  labelButtonShow: PropTypes.string,
+  variantButtonShow: PropTypes.string,
+  fields: PropTypes.array,
+  handleSubmit: PropTypes.func,
+  dispatch: PropTypes.any,
+  initialValues: PropTypes.array,
 }
 
 DataTable.propTypes = {
