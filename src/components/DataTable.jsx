@@ -13,15 +13,6 @@ import { DebounceInput } from 'react-debounce-input'
 function DataTable({ title, data, columns, exportCsvBtn }) {
   const [globalFilter, setGlobalFilter] = useState('')
 
-  const fuzzyTextFilter = (rows, id, filterValue) => {
-    return rows.filter((row) => {
-      const rowValue = row.values[id]
-      return rowValue !== undefined
-        ? String(rowValue).toLowerCase().includes(filterValue.toLowerCase())
-        : true
-    })
-  }
-
   const table = useReactTable({
     data,
     columns,
@@ -45,14 +36,6 @@ function DataTable({ title, data, columns, exportCsvBtn }) {
 
   const headerGroups = table.getHeaderGroups()
   const rows = table.getRowModel().rows
-
-  const filteredRows = globalFilter
-    ? data.filter((row) => {
-        return Object.values(row).some((value) => {
-          return String(value).toLowerCase().includes(globalFilter.toString().toLowerCase())
-        })
-      })
-    : data
 
   return (
     <CCard className="">
