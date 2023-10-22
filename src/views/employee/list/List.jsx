@@ -608,57 +608,68 @@ const List = () => {
   ]
 
   const columnHelper = createColumnHelper()
-  const columns = [
-    columnHelper.accessor('matricule', {
-      cell: (info) => {
-        // console.log(info)
-        return (
-          <div className="flex gap-2">
-            <input type="checkbox" name="matricule" />
-            <label htmlFor="matricule">{info.getValue()}</label>
-          </div>
-        )
-      },
 
-      header: () => {
-        return (
+  const columns = React.useMemo(
+    () => [
+      columnHelper.accessor('matricule', {
+        cell: (info) => {
+          return (
+            <div className="flex gap-2">
+              <input
+                type="checkbox"
+                name="matricule"
+                checked={info.row.getIsSelected()}
+                onChange={info.row.getToggleSelectedHandler()}
+              />
+              <label htmlFor="matricule">{info.getValue()}</label>
+            </div>
+          )
+        },
+
+        header: ({ table }) => (
           <div>
             <div className="flex gap-2">
-              <input type="checkbox" name="matriculeHead" />
+              <input
+                type="checkbox"
+                name="matriculeHead"
+                checked={table.getIsAllRowsSelected()}
+                onChange={table.getToggleAllRowsSelectedHandler()}
+              />
               <label htmlFor="matriculeHead">Matricule</label>
             </div>
           </div>
-        )
-      },
-    }),
-    columnHelper.accessor('name', {
-      cell: (info) => {
-        const { lastname, firstname } = info.getValue()
-        return `${lastname} ${firstname}`
-      },
-      header: () => 'name',
-    }),
-    columnHelper.accessor('cin', {
-      cell: (info) => info.getValue(),
-      header: () => 'cin',
-    }),
-    columnHelper.accessor('email', {
-      cell: (info) => info.getValue(),
-      header: () => 'email',
-    }),
-    columnHelper.accessor('post', {
-      cell: (info) => info.getValue(),
-      header: () => 'post',
-    }),
-    columnHelper.accessor('telephone', {
-      cell: (info) => info.getValue(),
-      header: () => 'telephone',
-    }),
-    columnHelper.accessor('manager', {
-      cell: (info) => info.getValue(),
-      header: () => 'manager',
-    }),
-  ]
+        ),
+      }),
+      columnHelper.accessor('name', {
+        cell: (info) => {
+          const { lastname, firstname } = info.getValue()
+          return `${lastname} ${firstname}`
+        },
+        header: () => 'name',
+      }),
+      columnHelper.accessor('cin', {
+        cell: (info) => info.getValue(),
+        header: () => 'cin',
+      }),
+      columnHelper.accessor('email', {
+        cell: (info) => info.getValue(),
+        header: () => 'email',
+      }),
+      columnHelper.accessor('post', {
+        cell: (info) => info.getValue(),
+        header: () => 'post',
+      }),
+      columnHelper.accessor('telephone', {
+        cell: (info) => info.getValue(),
+        header: () => 'telephone',
+      }),
+      columnHelper.accessor('manager', {
+        cell: (info) => info.getValue(),
+        header: () => 'manager',
+      }),
+    ],
+    [columnHelper],
+  )
 
   return (
     <CRow>

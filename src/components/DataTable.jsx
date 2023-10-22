@@ -17,7 +17,15 @@ import PropTypes from 'prop-types'
 import { Table, Button } from 'react-bootstrap'
 import { DebounceInput } from 'react-debounce-input'
 
-function DataTable({ title, data, columns, exportCsvBtn, importCsvBtn }) {
+function DataTable({
+  title,
+  data,
+  columns,
+  exportCsvBtn,
+  importCsvBtn,
+  onRowSelect,
+  selectedRows,
+}) {
   const [globalFilter, setGlobalFilter] = useState('')
   const [rowSelection, setRowSelection] = React.useState({})
 
@@ -25,11 +33,13 @@ function DataTable({ title, data, columns, exportCsvBtn, importCsvBtn }) {
     data,
     columns,
     state: { globalFilter, rowSelection },
+    onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: setGlobalFilter,
     enableRowSelection: true,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    debugTable: true,
   })
 
   useEffect(() => {
@@ -54,6 +64,7 @@ function DataTable({ title, data, columns, exportCsvBtn, importCsvBtn }) {
           value={globalFilter || ''}
           onChange={(e) => {
             const value = e.target.value
+            console.log(value)
             setGlobalFilter(String(value))
           }}
           className="flex p-2 shadow-sm rounded border border-block"
@@ -177,6 +188,8 @@ DataTable.propTypes = {
   columns: PropTypes.array.isRequired,
   exportCsvBtn: PropTypes.bool,
   importCsvBtn: PropTypes.bool,
+  selectedRows: PropTypes.array,
+  onRowSelect: PropTypes.func,
 }
 
 DataTable.defaultProp = {
