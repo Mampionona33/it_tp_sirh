@@ -54,7 +54,7 @@ function DataTable({ title, data, columns, exportCsvBtn }) {
             const value = e.target.value
             setGlobalFilter(String(value))
           }}
-          className="p-2 shadow-sm rounded border border-block"
+          className="flex p-2 shadow-sm rounded border border-block"
           placeholder="Search all columns..."
         />
 
