@@ -37,7 +37,9 @@ function DataTable({
   onRowSelect,
   selectedRows,
   modalImportCsvField,
+  modalAddFields,
   colorButtonShowModalImport,
+  colorButtonShowModalAdd,
 }) {
   const [globalFilter, setGlobalFilter] = useState('')
   const [rowSelection, setRowSelection] = React.useState({})
@@ -82,11 +84,18 @@ function DataTable({
           className="flex p-2 shadow-sm rounded border border-block"
           placeholder="Search all columns..."
         />
+        {modalAddFields && modalAddFields.length > 0 ? (
+          <>
+            <TableModal
+              title="Ajouter"
+              labelButtonShow="Ajouter"
+              fields={modalAddFields}
+              colorButtonShowModalImport={colorButtonShowModalAdd && colorButtonShowModalAdd}
+            />
+          </>
+        ) : null}
         {importCsvBtn ? (
           <>
-            {/*<Button className="p-2 bd-highlight" variant="success" size="sm">
-            Import CSV
-          </Button>*/}
             <TableModal
               title="Import CSV"
               labelButtonShow="Import CSV"
@@ -347,8 +356,10 @@ DataTable.propTypes = {
   importCsvBtn: PropTypes.bool,
   selectedRows: PropTypes.array,
   onRowSelect: PropTypes.func,
+  modalAddFields: PropTypes.array,
   modalImportCsvField: PropTypes.array,
   colorButtonShowModalImport: PropTypes.string,
+  colorButtonShowModalAdd: PropTypes.string,
 }
 
 DataTable.defaultProps = {

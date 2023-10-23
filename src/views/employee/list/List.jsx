@@ -20,6 +20,13 @@ const List = () => {
     },
   ]
 
+  const modalAddFields = [
+    {
+      type: 'text',
+      placeholder: 'Nom',
+    },
+  ]
+
   const columns = React.useMemo(
     () => [
       columnHelper.accessor('matricule', {
@@ -110,6 +117,7 @@ const List = () => {
           columns={columns}
           exportCsvBtn
           importCsvBtn
+          modalAddFields={modalAddFields}
           colorButtonShowModalImport="success"
           modalImportCsvField={modalImportCsvField}
         />
