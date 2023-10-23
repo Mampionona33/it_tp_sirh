@@ -5,6 +5,7 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
 } from '@tanstack/react-table'
+import ButtonExportCsv from 'src/components/ButtonExportCsv'
 import {
   CCard,
   CButton,
@@ -35,7 +36,8 @@ function DataTable({
   importCsvBtn,
   onRowSelect,
   selectedRows,
-  modalExportCsvFields,
+  modalImportCsvField,
+  colorButtonShowModal,
 }) {
   const [globalFilter, setGlobalFilter] = useState('')
   const [rowSelection, setRowSelection] = React.useState({})
@@ -81,17 +83,26 @@ function DataTable({
           placeholder="Search all columns..."
         />
         {importCsvBtn ? (
-          <Button className="p-2 bd-highlight" variant="success" size="sm">
-            Import CSV
-          </Button>
-        ) : null}
-        {exportCsvBtn && modalExportCsvFields ? (
           <>
+            {/*<Button className="p-2 bd-highlight" variant="success" size="sm">
+            Import CSV
+          </Button>*/}
             <TableModal
+              title="Import CSV"
+              labelButtonShow="Import CSV"
+              fields={modalImportCsvField}
+              colorButtonShowModal={colorButtonShowModal && colorButtonShowModal}
+            />
+          </>
+        ) : null}
+        {exportCsvBtn ? (
+          <>
+            <ButtonExportCsv />
+            {/*<TableModal
               title="Export CSV"
               labelButtonShow="Export CSV"
               fields={modalExportCsvFields}
-            />
+            />*/}
           </>
         ) : null}
       </div>
@@ -204,7 +215,7 @@ const TableModal = ({
   title,
   body,
   labelButtonShow,
-  variantButtonShow,
+  colorButtonShowModal,
   fields,
   handleSubmit,
   dispatch,
@@ -232,9 +243,11 @@ const TableModal = ({
     // setFormValidate(true)
   }
 
+  console.log(colorButtonShowModal)
+
   return (
     <>
-      <CButton size="sm" onClick={() => setVisible(!visible)} variant={variantButtonShow}>
+      <CButton size="sm" onClick={() => setVisible(!visible)} color={colorButtonShowModal}>
         {labelButtonShow}
       </CButton>
       <CModal
@@ -336,7 +349,8 @@ DataTable.propTypes = {
   importCsvBtn: PropTypes.bool,
   selectedRows: PropTypes.array,
   onRowSelect: PropTypes.func,
-  modalExportCsvFields: PropTypes.array,
+  modalImportCsvField: PropTypes.array,
+  colorButtonShowModal: PropTypes.string,
 }
 
 DataTable.defaultProps = {
@@ -345,10 +359,10 @@ DataTable.defaultProps = {
 }
 
 TableModal.propTypes = {
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
   body: PropTypes.string,
   labelButtonShow: PropTypes.string,
-  variantButtonShow: PropTypes.string,
+  colorButtonShowModal: PropTypes.string,
   fields: PropTypes.arrayOf(TableModalFieldType),
   handleSubmit: PropTypes.func,
   dispatch: PropTypes.any,

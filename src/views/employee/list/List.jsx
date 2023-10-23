@@ -1,18 +1,19 @@
 import React from 'react'
-import DataTable from '../../../components/DataTable'
+// import DataTable from '../../../components/DataTable'
+import DataTable from 'src/components/DataTable'
 import { CRow, CCol, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem } from '@coreui/react'
 import { createColumnHelper } from '@tanstack/react-table'
 import CIcon from '@coreui/icons-react'
 import { cilOptions } from '@coreui/icons'
 import employesData from './employesData.json'
-// import DataTableTs from '../../../components/DataTableTs.tsx'
 
 const List = () => {
   const employes = employesData
   const columnHelper = createColumnHelper()
 
-  const modalExportCsvFields = [
+  const modalImportCsvField = [
     {
+      type: 'file',
       placeholder: 'employess data',
       required: true,
       accept: '.csv',
@@ -109,7 +110,8 @@ const List = () => {
           columns={columns}
           exportCsvBtn
           importCsvBtn
-          modalExportCsvFields={modalExportCsvFields}
+          colorButtonShowModal="success"
+          modalImportCsvField={modalImportCsvField}
         />
       </CCol>
     </CRow>
