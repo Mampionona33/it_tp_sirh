@@ -12,9 +12,7 @@ const List = () => {
 
   const modalExportCsvFields = [
     {
-      type: 'file',
-      id: 'firstname',
-      placeholder: 'Firstname',
+      placeholder: 'employess data',
       required: true,
       accept: '.csv',
     },

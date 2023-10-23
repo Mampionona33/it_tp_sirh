@@ -211,6 +211,7 @@ const TableModal = ({
   initialValues,
 }) => {
   const [visible, setVisible] = useState(false)
+  const [formValidate, setFormValidate] = useState(false)
 
   const handleSubmitModal = (event) => {
     const form = event.currentTarget
@@ -218,7 +219,17 @@ const TableModal = ({
       event.preventDefault()
       event.stopPropagation()
     }
-    console.log(form)
+
+    for (let index = 0; index < form.length; index++) {
+      const element = form[index]
+      if (element.tagName === 'INPUT') {
+        console.log(element.value)
+      }
+      if (element.tagName === 'SELECT') {
+      }
+    }
+
+    // setFormValidate(true)
   }
 
   return (
@@ -231,7 +242,7 @@ const TableModal = ({
         onClose={() => setVisible(false)}
         aria-labelledby="ScrollingLongContentExampleLabel"
       >
-        <CForm onSubmit={handleSubmitModal}>
+        <CForm validated={formValidate} onSubmit={handleSubmitModal}>
           <CModalHeader closeButton>
             <CModalTitle>{title}</CModalTitle>
           </CModalHeader>
@@ -283,16 +294,38 @@ const TableModal = ({
   )
 }
 
-TableModal.propTypes = {
-  // id: PropTypes.string | PropTypes.number | PropTypes.func,
-  title: PropTypes.string,
-  body: PropTypes.string,
-  labelButtonShow: PropTypes.string,
-  variantButtonShow: PropTypes.string,
-  fields: PropTypes.array,
-  handleSubmit: PropTypes.func,
-  dispatch: PropTypes.any,
-  initialValues: PropTypes.array,
+export const tableModalAllowedFields = [
+  'input',
+  'select',
+  'file',
+  'password',
+  'text',
+  'email',
+  'date',
+  'number',
+  'checkbox',
+  'radio',
+  'submit',
+  'reset',
+  'button',
+  'hidden',
+  'select',
+  'optgroup',
+  'time',
+  'month',
+]
+
+const TableModalFieldType = PropTypes.shape({
+  id: PropTypes.string,
+  type: PropTypes.oneOf(tableModalAllowedFields).isRequired,
+  placeholder: PropTypes.string,
+  required: PropTypes.bool,
+  accept: PropTypes.string,
+  label: PropTypes.string,
+})
+
+TableModalFieldType.defaultProps = {
+  required: false,
 }
 
 DataTable.propTypes = {
@@ -306,9 +339,20 @@ DataTable.propTypes = {
   modalExportCsvFields: PropTypes.array,
 }
 
-DataTable.defaultProp = {
+DataTable.defaultProps = {
   exportCsvBtn: false,
   importCsvBtn: false,
+}
+
+TableModal.propTypes = {
+  title: PropTypes.string,
+  body: PropTypes.string,
+  labelButtonShow: PropTypes.string,
+  variantButtonShow: PropTypes.string,
+  fields: PropTypes.arrayOf(TableModalFieldType),
+  handleSubmit: PropTypes.func,
+  dispatch: PropTypes.any,
+  initialValues: PropTypes.array,
 }
 
 export default DataTable
