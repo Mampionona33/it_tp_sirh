@@ -1,10 +1,11 @@
 import React from 'react'
-import DataTable from '../../../components/DataTable'
+// import DataTable from '../../../components/DataTable'
 import { CRow, CCol, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem } from '@coreui/react'
 import { createColumnHelper } from '@tanstack/react-table'
 import CIcon from '@coreui/icons-react'
 import { cilOptions } from '@coreui/icons'
 import employesData from './employesData.json'
+import DataTableTs from '../../../components/DataTableTs.tsx'
 
 const List = () => {
   const employes = employesData
@@ -102,7 +103,7 @@ const List = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        <DataTable
+        <DataTableTs
           title="List employés"
           data={employes}
           columns={columns}
