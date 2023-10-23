@@ -99,10 +99,10 @@ function DataTable({
       <div>
         <Table responsive striped bordered hover>
           <thead className="table-dark">
-            {headerGroups.map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th className="capitalize" key={header.id}>
+            {headerGroups.map((headerGroup, key) => (
+              <tr key={`headerRow_${key}`}>
+                {headerGroup.headers.map((header, headerIndex) => (
+                  <th className="capitalize" key={`header_${header.id}_${headerIndex}`}>
                     {header.isPlaceholder
                       ? null
                       : header.column.columnDef.header(header.getContext())}
@@ -111,17 +111,21 @@ function DataTable({
               </tr>
             ))}
           </thead>
+
           <tbody>
-            {rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>{cell.column.columnDef.cell(cell.getContext())}</td>
+            {rows.map((row, rowIndex) => (
+              <tr key={`row_${rowIndex}`}>
+                {row.getVisibleCells().map((cell, cellIndex) => (
+                  <td key={`cell_${rowIndex}_${cellIndex}`}>
+                    {cell.column.columnDef.cell(cell.getContext())}
+                  </td>
                 ))}
               </tr>
             ))}
           </tbody>
         </Table>
 
+        {/* Pagination */}
         <div className="flex justify-center p-2">
           <div className="flex flex-wrap items-center gap-2">
             <CButton
@@ -197,7 +201,6 @@ function DataTable({
 }
 
 const TableModal = ({
-  id,
   title,
   body,
   labelButtonShow,
@@ -281,7 +284,7 @@ const TableModal = ({
 }
 
 TableModal.propTypes = {
-  id: PropTypes.string | PropTypes.number,
+  // id: PropTypes.string | PropTypes.number | PropTypes.func,
   title: PropTypes.string,
   body: PropTypes.string,
   labelButtonShow: PropTypes.string,
