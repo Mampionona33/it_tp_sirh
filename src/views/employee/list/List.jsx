@@ -110,7 +110,7 @@ const List = () => {
           columns={columns}
           exportCsvBtn
           importCsvBtn
-          colorButtonShowModal="success"
+          colorButtonShowModalImport="success"
           modalImportCsvField={modalImportCsvField}
         />
       </CCol>

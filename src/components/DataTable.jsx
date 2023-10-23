@@ -37,7 +37,7 @@ function DataTable({
   onRowSelect,
   selectedRows,
   modalImportCsvField,
-  colorButtonShowModal,
+  colorButtonShowModalImport,
 }) {
   const [globalFilter, setGlobalFilter] = useState('')
   const [rowSelection, setRowSelection] = React.useState({})
@@ -91,7 +91,7 @@ function DataTable({
               title="Import CSV"
               labelButtonShow="Import CSV"
               fields={modalImportCsvField}
-              colorButtonShowModal={colorButtonShowModal && colorButtonShowModal}
+              colorButtonShowModalImport={colorButtonShowModalImport && colorButtonShowModalImport}
             />
           </>
         ) : null}
@@ -215,7 +215,7 @@ const TableModal = ({
   title,
   body,
   labelButtonShow,
-  colorButtonShowModal,
+  colorButtonShowModalImport,
   fields,
   handleSubmit,
   dispatch,
@@ -243,11 +243,9 @@ const TableModal = ({
     // setFormValidate(true)
   }
 
-  console.log(colorButtonShowModal)
-
   return (
     <>
-      <CButton size="sm" onClick={() => setVisible(!visible)} color={colorButtonShowModal}>
+      <CButton size="sm" onClick={() => setVisible(!visible)} color={colorButtonShowModalImport}>
         {labelButtonShow}
       </CButton>
       <CModal
@@ -350,7 +348,7 @@ DataTable.propTypes = {
   selectedRows: PropTypes.array,
   onRowSelect: PropTypes.func,
   modalImportCsvField: PropTypes.array,
-  colorButtonShowModal: PropTypes.string,
+  colorButtonShowModalImport: PropTypes.string,
 }
 
 DataTable.defaultProps = {
@@ -362,7 +360,7 @@ TableModal.propTypes = {
   title: PropTypes.string.isRequired,
   body: PropTypes.string,
   labelButtonShow: PropTypes.string,
-  colorButtonShowModal: PropTypes.string,
+  colorButtonShowModalImport: PropTypes.string,
   fields: PropTypes.arrayOf(TableModalFieldType),
   handleSubmit: PropTypes.func,
   dispatch: PropTypes.any,
