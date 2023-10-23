@@ -13,6 +13,8 @@ import {
   CModalTitle,
   CModalBody,
   CModalFooter,
+  CForm,
+  CFormInput,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import {
@@ -33,6 +35,7 @@ function DataTable({
   importCsvBtn,
   onRowSelect,
   selectedRows,
+  modalExportCsvFields,
 }) {
   const [globalFilter, setGlobalFilter] = useState('')
   const [rowSelection, setRowSelection] = React.useState({})
@@ -82,9 +85,13 @@ function DataTable({
             Import CSV
           </Button>
         ) : null}
-        {exportCsvBtn ? (
+        {exportCsvBtn && modalExportCsvFields ? (
           <>
-            <TableModal title="Export CSV" labelButtonShow="Export CSV" />
+            <TableModal
+              title="Export CSV"
+              labelButtonShow="Export CSV"
+              fields={modalExportCsvFields}
+            />
           </>
         ) : null}
       </div>
@@ -201,28 +208,73 @@ const TableModal = ({
   initialValues,
 }) => {
   const [visible, setVisible] = useState(false)
+
+  const handleSubmitModal = (event) => {
+    const form = event.currentTarget
+    if (form.checkValidity() === false) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+    console.log(form)
+  }
+
   return (
     <>
-      <CButton size="sm" onClick={() => setVisible(!visible)}>
-        Export CSV
+      <CButton size="sm" onClick={() => setVisible(!visible)} variant={variantButtonShow}>
+        {labelButtonShow}
       </CButton>
       <CModal
         visible={visible}
         onClose={() => setVisible(false)}
         aria-labelledby="ScrollingLongContentExampleLabel"
       >
-        <CModalHeader>
-          <CModalTitle>{title}</CModalTitle>
-        </CModalHeader>
-        <CModalBody>
-          <p>Modal</p>
-        </CModalBody>
-        <CModalFooter>
-          <CButton color="secondary" onClick={() => setVisible(false)}>
-            Annuler
-          </CButton>
-          <CButton>Valider</CButton>
-        </CModalFooter>
+        <CForm onSubmit={handleSubmitModal}>
+          <CModalHeader closeButton>
+            <CModalTitle>{title}</CModalTitle>
+          </CModalHeader>
+          <CModalBody>
+            {body ? body : null}
+            {fields && fields.length > 0 ? (
+              <div className="row">
+                {fields.map((item, key) => (
+                  <div className="col-md-6" key={key}>
+                    <label htmlFor={item.id} className="visually-hidden">
+                      {item.placeholder}
+                    </label>
+                    {(() => {
+                      switch (item.type) {
+                        case 'text':
+                        case 'password':
+                        case 'email':
+                        case 'file':
+                          return (
+                            <CFormInput
+                              type={item.type}
+                              className="form-control"
+                              id={item.id}
+                              placeholder={item.placeholder}
+                              required={item.required}
+                              label={item?.label}
+                              accept={item?.accept}
+                            />
+                          )
+
+                        default:
+                          return null
+                      }
+                    })()}
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </CModalBody>
+          <CModalFooter>
+            <CButton color="secondary" onClick={() => setVisible(false)}>
+              Annuler
+            </CButton>
+            <CButton type="submit">Valider</CButton>
+          </CModalFooter>
+        </CForm>
       </CModal>
     </>
   )
@@ -248,6 +300,7 @@ DataTable.propTypes = {
   importCsvBtn: PropTypes.bool,
   selectedRows: PropTypes.array,
   onRowSelect: PropTypes.func,
+  modalExportCsvFields: PropTypes.array,
 }
 
 DataTable.defaultProp = {

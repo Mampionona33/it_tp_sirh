@@ -10,6 +10,16 @@ const List = () => {
   const employes = employesData
   const columnHelper = createColumnHelper()
 
+  const modalExportCsvFields = [
+    {
+      type: 'file',
+      id: 'firstname',
+      placeholder: 'Firstname',
+      required: true,
+      accept: '.csv',
+    },
+  ]
+
   const columns = React.useMemo(
     () => [
       columnHelper.accessor('matricule', {
@@ -100,6 +110,7 @@ const List = () => {
           columns={columns}
           exportCsvBtn
           importCsvBtn
+          modalExportCsvFields={modalExportCsvFields}
         />
       </CCol>
     </CRow>
