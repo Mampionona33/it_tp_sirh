@@ -240,7 +240,7 @@ const TableModal = ({
             {fields && fields.length > 0 ? (
               <div className="row">
                 {fields.map((item, key) => (
-                  <div className="col-md-6" key={key}>
+                  <div className="col-md-6 " key={key}>
                     <label htmlFor={item.id} className="visually-hidden">
                       {item.placeholder}
                     </label>
