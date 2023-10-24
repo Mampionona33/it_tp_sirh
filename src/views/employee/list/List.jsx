@@ -90,11 +90,11 @@ const List = () => {
         header: () => 'action',
         cell: (info) => (
           <div>
-            <CDropdown variant="btn-group" direction="center">
+            <CDropdown variant="btn-group" direction="center" className="">
               <CDropdownToggle className="bg-transparent border-0 text-dark rounded-circle">
                 <CIcon size="sm" icon={cilOptions} title="more options" />
               </CDropdownToggle>
-              <CDropdownMenu>
+              <CDropdownMenu className="rounded-0">
                 <CDropdownItem component="button">
                   <Link
                     to={`/employee/modifier/${info.row.id}`}
