@@ -95,16 +95,26 @@ const List = () => {
                 <CIcon size="sm" icon={cilOptions} title="more options" />
               </CDropdownToggle>
               <CDropdownMenu>
-                <CDropdownItem component="a" href={`./employee/modifier/${info.row.id}`}>
-                  Modifier
+                <CDropdownItem component="button">
+                  <Link
+                    to={`/employee/modifier/${info.row.id}`}
+                    className="btn btn-link text-decoration-none text-reset"
+                  >
+                    Modifier
+                  </Link>
                 </CDropdownItem>
-                <CDropdownItem component="a" href={`./employee/supprimer/${info.row.id}`}>
-                  Supprimer
+                <CDropdownItem component="button">
+                  <Link
+                    to={`/employee/supprimer/${info.row.id}`}
+                    className="btn btn-link text-decoration-none text-reset"
+                  >
+                    Supprimer
+                  </Link>
                 </CDropdownItem>
                 <CDropdownItem component="button">
                   <Link
                     to={`/employee/fiche/${info.row.id}`}
-                    className="btn btn-link text-decoration-none"
+                    className="btn btn-link text-decoration-none text-reset"
                   >
                     Fiche employé
                   </Link>
