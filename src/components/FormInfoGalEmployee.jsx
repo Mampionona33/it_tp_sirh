@@ -29,6 +29,18 @@ const FormInfoGalEmployee = () => {
     { value: 'D2', label: 'D2' },
     { value: 'D3', label: 'D3' },
   ]
+  const [selectedCat, setSelectedCat] = React.useState(null)
+  const handleCatChange = (selectedOption) => {
+    setSelectedCat(selectedOption)
+  }
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      borderColor: state.isFocused ? '#80bdff' : '#ced4da', // Couleur de la bordure en fonction de l'état (focus ou non-focus)
+      boxShadow: state.isFocused ? '0 0 0 0.25rem rgba(50, 31, 219, 0.25);' : null, // Ajoute une ombre au focus
+    }),
+  }
 
   return (
     <>
@@ -101,7 +113,13 @@ const FormInfoGalEmployee = () => {
           <label className="h6" htmlFor="cat">
             Catégorie
           </label>
-          <Select options={cat} />
+          <Select
+            props
+            options={cat}
+            value={selectedCat}
+            onChange={handleCatChange}
+            styles={customStyles}
+          />
           {/* <select id="cat" className="form-control" autoComplete="on">
             {cat.map((item, key) => (
               <>
@@ -111,6 +129,19 @@ const FormInfoGalEmployee = () => {
               </>
             ))}
           </select> */}
+        </div>
+        <div className="form-group mb-3">
+          <label className="h6" htmlFor="salaireBase">
+            Salaire de base
+          </label>
+          <input
+            className="form-control rounded-0"
+            type="number"
+            min="0"
+            name="salaireBase"
+            id="salaireBase"
+            placeholder="Salaire de base"
+          />
         </div>
       </form>
     </>
