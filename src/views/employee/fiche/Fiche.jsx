@@ -36,7 +36,7 @@ const Fiche = () => {
                 role="tab"
                 aria-controls="controlled-tab-example-tabpane-infos"
                 aria-selected={activeTab === 'infos'}
-                className={`nav-link ${activeTab === 'infos' ? 'active' : ''}  rounded-0`}
+                className={`nav-link h5 ${activeTab === 'infos' ? 'active' : ''}  rounded-0`}
                 onClick={() => handleTabClick('infos')}
               >
                 Information générale
@@ -49,7 +49,7 @@ const Fiche = () => {
                 role="tab"
                 aria-controls="controlled-tab-example-tabpane-hrsNormal"
                 aria-selected={activeTab === 'hrsNormal'}
-                className={`nav-link ${activeTab === 'hrsNormal' ? 'active' : ''}  rounded-0`}
+                className={`nav-link h5 ${activeTab === 'hrsNormal' ? 'active' : ''}  rounded-0`}
                 onClick={() => handleTabClick('hrsNormal')}
               >
                 Heures normales
@@ -62,7 +62,7 @@ const Fiche = () => {
                 role="tab"
                 aria-controls="controlled-tab-example-tabpane-heuresSup"
                 aria-selected={activeTab === 'heuresSup'}
-                className={`nav-link ${activeTab === 'heuresSup' ? 'active' : ''}  rounded-0`}
+                className={`nav-link h5 ${activeTab === 'heuresSup' ? 'active' : ''}  rounded-0`}
                 onClick={() => handleTabClick('heuresSup')}
               >
                 Heures supplémentaires
@@ -75,7 +75,7 @@ const Fiche = () => {
               className={`tab-pane fade ${activeTab === 'infos' ? 'show active' : ''}`}
               id="controlled-tab-example-tabpane-infos"
             >
-              Information générale {selectedEmployee}
+              {/* Information générale {selectedEmployee} */}
               <FormInfoGalEmployee />
             </div>
             <div
