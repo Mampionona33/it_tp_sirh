@@ -72,7 +72,7 @@ function DataTable({
   const rows = table.getRowModel().rows
 
   return (
-    <CCard className="">
+    <CCard className="rounded-0">
       <div className="d-flex flex-wrap bd-highlight mb-3 gap-1 p-2">
         <h5 className="card-title me-auto p-2 bd-highlight">{title}</h5>
         <DebounceInput

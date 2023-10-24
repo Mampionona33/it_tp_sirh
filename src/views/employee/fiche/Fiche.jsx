@@ -23,7 +23,7 @@ const Fiche = () => {
 
   return (
     <>
-      <div className="card h-100">
+      <div className="card h-100 rounded-0">
         <div className="card-header">Fiche employé</div>
         <div className="card-body">
           {/* Onglets */}
@@ -35,33 +35,33 @@ const Fiche = () => {
                 role="tab"
                 aria-controls="controlled-tab-example-tabpane-infos"
                 aria-selected={activeTab === 'infos'}
-                className={`nav-link ${activeTab === 'infos' ? 'active' : ''}`}
+                className={`nav-link ${activeTab === 'infos' ? 'active' : ''}  rounded-0`}
                 onClick={() => handleTabClick('infos')}
               >
                 Information générale
               </button>
             </li>
-            <li className="nav-item">
+            <li className="nav-item rounded-0">
               <button
                 type="button"
                 id="controlled-tab-example-tab-hrsNormal"
                 role="tab"
                 aria-controls="controlled-tab-example-tabpane-hrsNormal"
                 aria-selected={activeTab === 'hrsNormal'}
-                className={`nav-link ${activeTab === 'hrsNormal' ? 'active' : ''}`}
+                className={`nav-link ${activeTab === 'hrsNormal' ? 'active' : ''}  rounded-0`}
                 onClick={() => handleTabClick('hrsNormal')}
               >
                 Heures normales
               </button>
             </li>
-            <li className="nav-item">
+            <li className="nav-item rounded-0">
               <button
                 type="button"
                 id="controlled-tab-example-tab-heuresSup"
                 role="tab"
                 aria-controls="controlled-tab-example-tabpane-heuresSup"
                 aria-selected={activeTab === 'heuresSup'}
-                className={`nav-link ${activeTab === 'heuresSup' ? 'active' : ''}`}
+                className={`nav-link ${activeTab === 'heuresSup' ? 'active' : ''}  rounded-0`}
                 onClick={() => handleTabClick('heuresSup')}
               >
                 Heures supplémentaires
