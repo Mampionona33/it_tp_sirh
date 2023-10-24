@@ -5,11 +5,12 @@ import { CRow, CCol, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem } 
 import { createColumnHelper } from '@tanstack/react-table'
 import CIcon from '@coreui/icons-react'
 import { cilOptions } from '@coreui/icons'
-import employesData from './employesData.json'
 import { Link } from 'react-router-dom'
 
+import { employees } from 'src/db/db'
+
 const List = () => {
-  const employes = employesData
+  const employes = employees
   const columnHelper = createColumnHelper()
 
   const modalImportCsvField = [
@@ -30,17 +31,17 @@ const List = () => {
 
   const columns = React.useMemo(
     () => [
-      columnHelper.accessor('matricule', {
+      columnHelper.accessor('id', {
         cell: (info) => {
           return (
             <div className="flex gap-2">
               <input
                 type="checkbox"
-                name="matricule"
+                name="id"
                 checked={info.row.getIsSelected()}
                 onChange={info.row.getToggleSelectedHandler()}
               />
-              <label htmlFor="matricule">{info.getValue()}</label>
+              <label htmlFor="id">{info.getValue()}</label>
             </div>
           )
         },
@@ -58,6 +59,10 @@ const List = () => {
             </div>
           </div>
         ),
+      }),
+      columnHelper.accessor('matricule', {
+        cell: (info) => info.getValue(),
+        header: () => 'matricule',
       }),
       columnHelper.accessor('name', {
         cell: (info) => {
