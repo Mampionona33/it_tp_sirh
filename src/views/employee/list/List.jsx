@@ -6,6 +6,7 @@ import { createColumnHelper } from '@tanstack/react-table'
 import CIcon from '@coreui/icons-react'
 import { cilOptions } from '@coreui/icons'
 import employesData from './employesData.json'
+import { Link } from 'react-router-dom'
 
 const List = () => {
   const employes = employesData
@@ -94,9 +95,20 @@ const List = () => {
                 <CIcon size="sm" icon={cilOptions} title="more options" />
               </CDropdownToggle>
               <CDropdownMenu>
-                <CDropdownItem href={`/employee/modifier/${info.row.id}`}>Modifier</CDropdownItem>
-                <CDropdownItem href={`/employee/supprimer/${info.row.id}`}>Supprimer</CDropdownItem>
-                <CDropdownItem href={`/employee/fiche/${info.row.id}`}>Fiche employé</CDropdownItem>
+                <CDropdownItem component="a" href={`./employee/modifier/${info.row.id}`}>
+                  Modifier
+                </CDropdownItem>
+                <CDropdownItem component="a" href={`./employee/supprimer/${info.row.id}`}>
+                  Supprimer
+                </CDropdownItem>
+                <CDropdownItem component="button">
+                  <Link
+                    to={`/employee/fiche/${info.row.id}`}
+                    className="btn btn-link text-decoration-none"
+                  >
+                    Fiche employé
+                  </Link>
+                </CDropdownItem>
               </CDropdownMenu>
             </CDropdown>
           </div>
