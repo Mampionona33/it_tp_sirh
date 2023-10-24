@@ -3,33 +3,6 @@ import Select from 'react-select'
 import { employeesCategories } from 'src/db/db'
 
 const FormInfoGalEmployee = () => {
-  const cat = [
-    { value: 'M1', label: 'M1' },
-    { value: 'M2', label: 'M2' },
-    { value: '1A', label: '1A' },
-    { value: '1B', label: '1B' },
-    { value: 'OS1', label: 'OS1' },
-    { value: 'OS2', label: 'OS2' },
-    { value: 'OS3', label: 'OS3' },
-    { value: 'OP1', label: 'OP1' },
-    { value: '2A', label: '2A' },
-    { value: '2B', label: '2B' },
-    { value: '3A', label: '3A' },
-    { value: '3B', label: '3B' },
-    { value: 'A1', label: 'A1' },
-    { value: 'A2', label: 'A2' },
-    { value: 'A3', label: 'A3' },
-    { value: 'B1', label: 'B1' },
-    { value: 'B2', label: 'B2' },
-    { value: 'B3', label: 'B3' },
-    { value: 'B4', label: 'B4' },
-    { value: 'C1', label: 'C1' },
-    { value: 'C2', label: 'C2' },
-    { value: 'C3', label: 'C3' },
-    { value: 'D1', label: 'D1' },
-    { value: 'D2', label: 'D2' },
-    { value: 'D3', label: 'D3' },
-  ]
   const [selectedCat, setSelectedCat] = React.useState(null)
   const handleCatChange = (selectedOption) => {
     setSelectedCat(selectedOption)
