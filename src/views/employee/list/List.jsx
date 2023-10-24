@@ -96,9 +96,7 @@ const List = () => {
               <CDropdownMenu>
                 <CDropdownItem href={`/employee/modifier/${info.row.id}`}>Modifier</CDropdownItem>
                 <CDropdownItem href={`/employee/supprimer/${info.row.id}`}>Supprimer</CDropdownItem>
-                <CDropdownItem href={`/employee/details/${info.row.id}`}>
-                  Fiche employé
-                </CDropdownItem>
+                <CDropdownItem href={`/employee/fiche/${info.row.id}`}>Fiche employé</CDropdownItem>
               </CDropdownMenu>
             </CDropdown>
           </div>
