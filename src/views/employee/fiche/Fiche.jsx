@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('infos')
@@ -75,6 +76,7 @@ const Fiche = () => {
               id="controlled-tab-example-tabpane-infos"
             >
               Information générale {selectedEmployee}
+              <FormInfoGalEmployee />
             </div>
             <div
               className={`tab-pane fade ${activeTab === 'hrsNormal' ? 'show active' : ''}`}
