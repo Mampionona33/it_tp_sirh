@@ -73,7 +73,7 @@ function DataTable({
 
   return (
     <CCard className="rounded-0">
-      <div className="d-flex flex-wrap bd-highlight mb-3 mt-3 gap-1 p-2">
+      <div className="d-flex flex-wrap bd-highlight mb-2 mt-2 gap-1 p-2">
         <h5 className="card-title me-auto p-2 bd-highlight">{title}</h5>
         <DebounceInput
           value={globalFilter || ''}
@@ -146,7 +146,7 @@ function DataTable({
         </Table>
 
         {/* Pagination */}
-        <div className="flex justify-center p-2 mt-4">
+        <div className="flex justify-center p-2 mt-2">
           <div className="flex flex-wrap items-center gap-2">
             <CButton
               size="sm"

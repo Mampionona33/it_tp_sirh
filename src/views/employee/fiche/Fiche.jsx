@@ -24,7 +24,7 @@ const Fiche = () => {
   return (
     <>
       <div className="card h-100 rounded-0">
-        <div className="card-header">Fiche employé</div>
+        <h5 className="card-header">Fiche employé</h5>
         <div className="card-body">
           {/* Onglets */}
           <ul className="nav nav-tabs" role="tablist">
