@@ -1,5 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
+import { employeesCategories } from 'src/db/db'
 
 const FormInfoGalEmployee = () => {
   const cat = [
@@ -115,7 +116,7 @@ const FormInfoGalEmployee = () => {
           </label>
           <Select
             props
-            options={cat}
+            options={employeesCategories}
             value={selectedCat}
             onChange={handleCatChange}
             styles={customStyles}

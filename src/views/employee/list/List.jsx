@@ -55,7 +55,7 @@ const List = () => {
                 checked={table.getIsAllRowsSelected()}
                 onChange={table.getToggleAllRowsSelectedHandler()}
               />
-              <label htmlFor="matriculeHead">Matricule</label>
+              <label htmlFor="matriculeHead">id</label>
             </div>
           </div>
         ),
@@ -66,8 +66,8 @@ const List = () => {
       }),
       columnHelper.accessor('name', {
         cell: (info) => {
-          const { lastname, firstname } = info.getValue()
-          return `${lastname} ${firstname}`
+          const { prenom, nom } = info.getValue()
+          return `${prenom} ${nom}`
         },
         header: () => 'Nom et Prénom',
       }),
@@ -91,7 +91,7 @@ const List = () => {
         cell: (info) => info.getValue(),
         header: () => 'manager',
       }),
-      columnHelper.accessor('matricule', {
+      columnHelper.accessor('id', {
         header: () => 'action',
         cell: (info) => (
           <div>
@@ -102,7 +102,7 @@ const List = () => {
               <CDropdownMenu className="rounded-0">
                 <CDropdownItem component="button">
                   <Link
-                    to={`/employee/modifier/${info.row.id}`}
+                    to={`/employee/modifier/${info.getValue()}`}
                     className="btn btn-link text-decoration-none text-reset"
                   >
                     Modifier
@@ -110,7 +110,7 @@ const List = () => {
                 </CDropdownItem>
                 <CDropdownItem component="button">
                   <Link
-                    to={`/employee/supprimer/${info.row.id}`}
+                    to={`/employee/supprimer/${info.getValue()}`}
                     className="btn btn-link text-decoration-none text-reset"
                   >
                     Supprimer
@@ -118,7 +118,7 @@ const List = () => {
                 </CDropdownItem>
                 <CDropdownItem component="button">
                   <Link
-                    to={`/employee/fiche/${info.row.id}`}
+                    to={`/employee/fiche/${info.getValue()}`}
                     className="btn btn-link text-decoration-none text-reset"
                   >
                     Fiche employé
