@@ -1,11 +1,25 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('infos')
-
+  const [selectedEmployee, setSelectedEmployee] = useState(null)
+  const params = useParams()
   const handleTabClick = (eventKey) => {
     setActiveTab(eventKey)
   }
+  React.useEffect(() => {
+    let mount = true
+    if (params) {
+      if (mount) {
+        console.log(params)
+        setSelectedEmployee(params.id)
+      }
+    }
+    return () => {
+      mount = false
+    }
+  }, [params])
 
   return (
     <>
@@ -60,19 +74,19 @@ const Fiche = () => {
               className={`tab-pane fade ${activeTab === 'infos' ? 'show active' : ''}`}
               id="controlled-tab-example-tabpane-infos"
             >
-              Information générale
+              Information générale {selectedEmployee}
             </div>
             <div
               className={`tab-pane fade ${activeTab === 'hrsNormal' ? 'show active' : ''}`}
               id="controlled-tab-example-tabpane-hrsNormal"
             >
-              Heures normales
+              Heures normales {selectedEmployee}
             </div>
             <div
               className={`tab-pane fade ${activeTab === 'heuresSup' ? 'show active' : ''}`}
               id="controlled-tab-example-tabpane-heuresSup"
             >
-              Heures supplémentaires
+              Heures supplémentaires {selectedEmployee}
             </div>
           </div>
         </div>
