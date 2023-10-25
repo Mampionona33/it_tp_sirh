@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
   CContainer,
   CHeader,
@@ -37,14 +38,20 @@ const AppHeader = () => {
         <CHeaderNav className="d-none d-md-flex me-auto">
           <CNavItem>
             <CNavLink to="/dashboard" component={NavLink}>
-              Dashboard
+              Accueil
             </CNavLink>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">Users</CNavLink>
+            {/* <CNavLink href="/employee/list">Employés</CNavLink> */}
+            <Link to={`/employee/list`} className="btn btn-link text-decoration-none text-reset">
+              Employés
+            </Link>
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">Settings</CNavLink>
+            <CNavLink href="#">Etats divers</CNavLink>
+          </CNavItem>
+          <CNavItem>
+            <CNavLink href="#">Administration</CNavLink>
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav>
