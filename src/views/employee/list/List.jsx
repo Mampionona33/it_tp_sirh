@@ -34,7 +34,7 @@ const List = () => {
       columnHelper.accessor('id', {
         cell: (info) => {
           return (
-            <div className="flex gap-2">
+            <div className="px-6 py-3 flex gap-2">
               <input
                 type="checkbox"
                 name="id"

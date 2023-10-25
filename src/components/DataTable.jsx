@@ -117,7 +117,6 @@ function DataTable({
       </div>
 
       <div>
-        {/* <Table responsive striped hover> */}
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
             {headerGroups.map((headerGroup, key) => (
@@ -149,9 +148,7 @@ function DataTable({
             ))}
           </tbody>
         </table>
-        {/* </Table> */}
 
-        {/* Pagination */}
         <div className="flex justify-center p-2 mt-2">
           <div className="flex flex-wrap items-center gap-2">
             <CButton
