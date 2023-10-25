@@ -40,8 +40,10 @@ const NormalHours = (props) => {
 
   return (
     <>
-      <CContainer>
-        <DataTable title="Heures normal" data={employeeNormalHours} columns={columns} />
+      <CContainer lg>
+        <CContainer md>
+          <DataTable title="Heures normal" data={employeeNormalHours} columns={columns} />
+        </CContainer>
       </CContainer>
     </>
   )
