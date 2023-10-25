@@ -117,12 +117,17 @@ function DataTable({
       </div>
 
       <div>
-        <Table responsive striped hover>
-          <thead className="table-dark ">
+        {/* <Table responsive striped hover> */}
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
             {headerGroups.map((headerGroup, key) => (
               <tr key={`headerRow_${key}`}>
                 {headerGroup.headers.map((header, headerIndex) => (
-                  <th className="capitalize" key={`header_${header.id}_${headerIndex}`}>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 bg-gray-50 dark:bg-gray-800"
+                    key={`header_${header.id}_${headerIndex}`}
+                  >
                     {header.isPlaceholder
                       ? null
                       : header.column.columnDef.header(header.getContext())}
@@ -134,7 +139,7 @@ function DataTable({
 
           <tbody>
             {rows.map((row, rowIndex) => (
-              <tr key={`row_${rowIndex}`}>
+              <tr className="border-b border-gray-200 dark:border-gray-700" key={`row_${rowIndex}`}>
                 {row.getVisibleCells().map((cell, cellIndex) => (
                   <td key={`cell_${rowIndex}_${cellIndex}`}>
                     {cell.column.columnDef.cell(cell.getContext())}
@@ -143,7 +148,8 @@ function DataTable({
               </tr>
             ))}
           </tbody>
-        </Table>
+        </table>
+        {/* </Table> */}
 
         {/* Pagination */}
         <div className="flex justify-center p-2 mt-2">
