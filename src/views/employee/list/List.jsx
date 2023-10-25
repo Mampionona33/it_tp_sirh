@@ -55,7 +55,9 @@ const List = () => {
                 checked={table.getIsAllRowsSelected()}
                 onChange={table.getToggleAllRowsSelectedHandler()}
               />
-              <label htmlFor="matriculeHead">id</label>
+              <label className="visually-hidden" htmlFor="matriculeHead">
+                id
+              </label>
             </div>
           </div>
         ),
