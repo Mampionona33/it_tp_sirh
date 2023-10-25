@@ -58,7 +58,7 @@ const FormInfoGalEmployee = (props) => {
 
   return (
     <>
-      <form action="" className="bg-slate-100 p-2">
+      <form action="" className="p-2">
         <div className="form-group mb-3">
           <label className="h6" htmlFor="nom">
             Nom
