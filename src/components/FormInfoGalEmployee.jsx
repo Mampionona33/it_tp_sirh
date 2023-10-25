@@ -2,16 +2,24 @@ import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 import { employeesCategories, employees } from 'src/db/db'
 import PropTypes from 'prop-types'
+import { format, parseISO } from 'date-fns'
 
 const FormInfoGalEmployee = (props) => {
-  const [selectedCat, setSelectedCat] = useState(null)
-  const [employee, setEmployee] = useState({})
-  const [formState, setFormState] = useState({
-    nom: '',
-    prenom: '',
-    sexe: 'homme', // Valeur par défaut
-    dateEmbauche: '',
-    salaireBase: '',
+  const [employee, setEmployee] = useState({
+    id: null,
+    matricule: null,
+    cin: '',
+    name: {
+      nom: '',
+      prenom: '',
+    },
+    post: '',
+    telephone: '',
+    manager: '',
+    email: '',
+    sexe: 'homme',
+    cat: 'A3',
+    dateEmbauche: '1990-01-01',
   })
 
   useEffect(() => {
@@ -20,13 +28,9 @@ const FormInfoGalEmployee = (props) => {
       const emp = employees.find((empl) => empl.id === props.id)
       console.log(emp)
       if (emp && mount) {
-        setEmployee(emp)
-        setFormState({
-          nom: emp.name ? emp.name.nom : '',
-          prenom: emp.name ? emp.name.prenom : '',
-          sexe: emp.sexe,
-          dateEmbauche: emp.dateEmbauche ? emp.dateEmbauche : '',
-          salaireBase: emp.salaireBase ? emp.salaireBase : '',
+        setEmployee({
+          ...emp,
+          dateEmbauche: emp.dateEmbauche ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd') : '',
         })
       }
     }
@@ -45,7 +49,7 @@ const FormInfoGalEmployee = (props) => {
 
   const handleChange = (ev) => {
     const { name, value } = ev.target
-    setFormState({ ...formState, [name]: value })
+    setEmployee({ ...employee, [name]: value })
   }
 
   return (
@@ -61,7 +65,7 @@ const FormInfoGalEmployee = (props) => {
             type="text"
             name="nom"
             id="nom"
-            value={formState.nom}
+            value={employee.name ? employee.name.nom : ''}
             onChange={handleChange}
           />
         </div>
@@ -75,7 +79,7 @@ const FormInfoGalEmployee = (props) => {
             name="prenom"
             id="prenom"
             placeholder="Prénom"
-            value={formState.prenom}
+            value={employee.name ? employee.name.prenom : ''}
             onChange={handleChange}
           />
         </div>
@@ -88,7 +92,7 @@ const FormInfoGalEmployee = (props) => {
               name="sexe"
               id="sexeHomme"
               value="homme"
-              checked={formState.sexe === 'homme'}
+              checked={employee.sexe === 'homme'}
               onChange={handleChange}
             />
             <label className="form-check-label" htmlFor="sexeHomme">
@@ -102,7 +106,7 @@ const FormInfoGalEmployee = (props) => {
               name="sexe"
               id="sexeFemme"
               value="femme"
-              checked={formState.sexe === 'femme'}
+              checked={employee.sexe === 'femme'}
               onChange={handleChange}
             />
             <label className="form-check-label" htmlFor="sexeFemme">
@@ -120,7 +124,7 @@ const FormInfoGalEmployee = (props) => {
             name="dateEmbauche"
             id="dateEmbauche"
             placeholder="Date d'embauche"
-            value={formState.dateEmbauche}
+            value={employee.dateEmbauche}
             onChange={handleChange}
           />
         </div>
@@ -128,7 +132,13 @@ const FormInfoGalEmployee = (props) => {
           <label className="h6" htmlFor="cat">
             Catégorie
           </label>
-          <Select options={employeesCategories} value={selectedCat} styles={customStyles} />
+          <Select
+            {...props}
+            onChange={(value) => setEmployee({ ...employee, cat: value.value })}
+            options={employeesCategories}
+            value={employeesCategories.find((cat) => cat.value === employee.cat)}
+            styles={customStyles}
+          />
         </div>
         <div className="form-group mb-3">
           <label className="h6" htmlFor="salaireBase">
@@ -141,7 +151,7 @@ const FormInfoGalEmployee = (props) => {
             name="salaireBase"
             id="salaireBase"
             placeholder="Salaire de base"
-            value={formState.salaireBase}
+            value={employee.salaireBase ? employee.salaireBase : ''}
             onChange={handleChange}
           />
         </div>
