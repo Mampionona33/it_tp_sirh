@@ -25,7 +25,7 @@ const Fiche = () => {
   }, [params])
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-4 shadow-lg">
+    <div className="bg-white dark:bg-gray-800 p-4 shadow">
       <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
         <ul
           className="flex flex-wrap -mb-px text-sm font-medium text-center"
@@ -84,7 +84,7 @@ const Fiche = () => {
       </div>
       <div id="myTabContent">
         <div
-          className={`p-4 rounded-lg bg-gray-50 dark:bg-gray-800 ${
+          className={`p-4  bg-gray-50 dark:bg-gray-800 ${
             activeTab === 'profile' ? 'block' : 'hidden'
           }`}
           id="profile"
@@ -94,7 +94,7 @@ const Fiche = () => {
           {selectedEmployee !== null && <FormInfoGalEmployee id={selectedEmployee} />}
         </div>
         <div
-          className={`p-4 rounded-lg bg-gray-50 dark:bg-gray-800 ${
+          className={`p-4  bg-gray-50 dark:bg-gray-800 ${
             activeTab === 'dashboard' ? 'block' : 'hidden'
           }`}
           id="dashboard"
@@ -104,7 +104,7 @@ const Fiche = () => {
           {selectedEmployee !== null && <NormalHours id={selectedEmployee} />}
         </div>
         <div
-          className={`p-4 rounded-lg bg-gray-50 dark:bg-gray-800 ${
+          className={`p-4  bg-gray-50 dark:bg-gray-800 ${
             activeTab === 'settings' ? 'block' : 'hidden'
           }`}
           id="settings"
