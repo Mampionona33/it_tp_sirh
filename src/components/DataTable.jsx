@@ -117,8 +117,8 @@ function DataTable({
       </div>
 
       <div>
-        <Table responsive striped bordered hover>
-          <thead className="table-dark">
+        <Table responsive striped hover>
+          <thead className="table-dark ">
             {headerGroups.map((headerGroup, key) => (
               <tr key={`headerRow_${key}`}>
                 {headerGroup.headers.map((header, headerIndex) => (
