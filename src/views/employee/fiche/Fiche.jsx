@@ -14,7 +14,7 @@ const Fiche = () => {
     if (params) {
       if (mount) {
         console.log(params)
-        setSelectedEmployee(params.id)
+        setSelectedEmployee(parseInt(params.id))
       }
     }
     return () => {
@@ -76,7 +76,7 @@ const Fiche = () => {
               id="controlled-tab-example-tabpane-infos"
             >
               {/* Information générale {selectedEmployee} */}
-              <FormInfoGalEmployee />
+              <FormInfoGalEmployee id={selectedEmployee} />
             </div>
             <div
               className={`tab-pane fade ${activeTab === 'hrsNormal' ? 'show active' : ''}`}
