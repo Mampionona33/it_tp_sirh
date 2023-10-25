@@ -18,7 +18,7 @@ const FormInfoGalEmployee = (props) => {
     manager: '',
     email: '',
     sexe: 'homme',
-    cat: 'A3',
+    cat: '',
     dateEmbauche: '1990-01-01',
   })
 
@@ -45,6 +45,10 @@ const FormInfoGalEmployee = (props) => {
       borderColor: state.isFocused ? '#80bdff' : '#ced4da',
       boxShadow: state.isFocused ? '0 0 0 0.25rem rgba(50, 31, 219, 0.25)' : null,
     }),
+  }
+
+  const handleSelectChange = (selectedOption) => {
+    setEmployee({ ...employee, cat: selectedOption.value })
   }
 
   const handleChange = (ev) => {
@@ -134,7 +138,7 @@ const FormInfoGalEmployee = (props) => {
           </label>
           <Select
             {...props}
-            onChange={(value) => setEmployee({ ...employee, cat: value.value })}
+            onChange={handleSelectChange}
             options={employeesCategories}
             value={employeesCategories.find((cat) => cat.value === employee.cat)}
             styles={customStyles}
