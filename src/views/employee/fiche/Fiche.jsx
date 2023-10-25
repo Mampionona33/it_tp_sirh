@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
+import NormalHours from 'src/components/NormalHours'
 
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('infos')
@@ -76,13 +77,14 @@ const Fiche = () => {
               id="controlled-tab-example-tabpane-infos"
             >
               {/* Information générale {selectedEmployee} */}
-              <FormInfoGalEmployee id={selectedEmployee} />
+              {selectedEmployee !== null && <FormInfoGalEmployee id={selectedEmployee} />}
             </div>
             <div
               className={`tab-pane fade ${activeTab === 'hrsNormal' ? 'show active' : ''}`}
               id="controlled-tab-example-tabpane-hrsNormal"
             >
-              Heures normales {selectedEmployee}
+              {/* Heures normales {selectedEmployee} */}
+              {selectedEmployee !== null && <NormalHours id={selectedEmployee} />}
             </div>
             <div
               className={`tab-pane fade ${activeTab === 'heuresSup' ? 'show active' : ''}`}

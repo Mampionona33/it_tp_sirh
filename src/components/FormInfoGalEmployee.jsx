@@ -165,7 +165,7 @@ const FormInfoGalEmployee = (props) => {
 }
 
 FormInfoGalEmployee.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.number.isRequired,
 }
 
 export default FormInfoGalEmployee
