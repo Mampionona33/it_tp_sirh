@@ -147,7 +147,7 @@ function DataTable({
             {rows.map((row, rowIndex) => (
               <tr className="border-b border-gray-200 dark:border-gray-700" key={`row_${rowIndex}`}>
                 {row.getVisibleCells().map((cell, cellIndex) => (
-                  <td key={`cell_${rowIndex}_${cellIndex}`}>
+                  <td className="px-1" key={`cell_${rowIndex}_${cellIndex}`}>
                     {cell.column.columnDef.cell(cell.getContext())}
                   </td>
                 ))}
