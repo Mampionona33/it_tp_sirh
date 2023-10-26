@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Button, IconButton } from '@material-tailwind/react'
 import CustomPagination from 'src/components/CustomPagination'
 import {
   useReactTable,
@@ -13,6 +12,7 @@ import {
   CButton,
   CModal,
   CModalHeader,
+  CTooltip,
   CModalTitle,
   CModalBody,
   CModalFooter,
@@ -94,6 +94,7 @@ function DataTable({
             <>
               <TableModal
                 title="Ajouter"
+                toolTip="Ajouter une ligne"
                 iconButtonShow="add"
                 fields={modalAddFields}
                 colorButtonShowModalImport={colorButtonShowModalAdd && colorButtonShowModalAdd}
@@ -180,6 +181,7 @@ const TableModal = ({
   initialValues,
   colorBgButtonShow,
   iconButtonShow,
+  toolTip,
 }) => {
   const [visible, setVisible] = useState(false)
   const [formValidate, setFormValidate] = useState(false)
@@ -205,13 +207,25 @@ const TableModal = ({
 
   return (
     <>
-      <button
-        className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
-        onClick={() => setVisible(!visible)}
-      >
-        <span className="material-icons-outlined">{iconButtonShow}</span>
-        {labelButtonShow}
-      </button>
+      {toolTip ? (
+        <CTooltip content={toolTip} placement="top">
+          <button
+            className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
+            onClick={() => setVisible(!visible)}
+          >
+            <span className="material-icons-outlined">{iconButtonShow}</span>
+            {labelButtonShow}
+          </button>
+        </CTooltip>
+      ) : (
+        <button
+          className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
+          onClick={() => setVisible(!visible)}
+        >
+          <span className="material-icons-outlined">{iconButtonShow}</span>
+          {labelButtonShow}
+        </button>
+      )}
 
       <CModal
         visible={visible}
@@ -334,6 +348,7 @@ TableModal.propTypes = {
   dispatch: PropTypes.any,
   initialValues: PropTypes.array,
   iconButtonShow: PropTypes.string,
+  toolTip: PropTypes.string,
 }
 
 export default DataTable
