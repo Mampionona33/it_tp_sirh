@@ -9,10 +9,8 @@ const FormInfoGalEmployee = (props) => {
     id: null,
     matricule: null,
     cin: '',
-    name: {
-      nom: '',
-      prenom: '',
-    },
+    nom: '',
+    prenom: '',
     post: '',
     telephone: '',
     manager: '',
