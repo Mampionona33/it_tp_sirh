@@ -73,7 +73,7 @@ function DataTable({
   const rows = table.getRowModel().rows
 
   return (
-    <div className="border shadow overflow-hidden">
+    <div className="border shadow-sm overflow-hidden">
       <div className="flex flex-row flex-wrap bg-indigo-900 gap-4 px-4 py-2 text-white">
         <div className="flex-grow">
           <h5 className="text-2xl font-semibold mb-2">{title}</h5>
