@@ -73,6 +73,7 @@ function DataTable({
 
   return (
     <CCard className="rounded-0 border-none">
+      {/* Table Header */}
       <div className="d-flex flex-wrap bd-highlight mb-2 mt-2 gap-1 p-2">
         <h5 className="card-title me-auto p-2 bd-highlight">{title}</h5>
         <DebounceInput
@@ -115,8 +116,8 @@ function DataTable({
           </>
         ) : null}
       </div>
-
-      <div className="flex overflow-auto">
+      {/* table */}
+      <div className="flex overflow-auto flex-col">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
             {headerGroups.map((headerGroup, key) => (
@@ -148,7 +149,7 @@ function DataTable({
             ))}
           </tbody>
         </table>
-
+        {/* Pagination */}
         <div className="flex justify-center p-2 mt-2">
           <div className="flex flex-wrap items-center gap-2">
             <CButton
