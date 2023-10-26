@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { Button, IconButton } from '@material-tailwind/react'
+import CustomPagination from 'src/components/CustomPagination'
 import {
   useReactTable,
   getCoreRowModel,
@@ -25,7 +27,7 @@ import {
   cilChevronDoubleLeft,
 } from '@coreui/icons'
 import PropTypes from 'prop-types'
-import { Table, Button } from 'react-bootstrap'
+// import { Table } from 'react-bootstrap'
 import { DebounceInput } from 'react-debounce-input'
 
 function DataTable({
@@ -158,7 +160,16 @@ function DataTable({
         {/* Pagination */}
         <div className="flex justify-center p-2 mt-2">
           <div className="flex flex-wrap items-center gap-2">
-            <CButton
+            <CustomPagination
+              pageIndex={table.getState().pagination.pageIndex}
+              pageCount={table.getPageCount()}
+              goToPage={table.setPageIndex}
+              nextPage={table.nextPage}
+              previousPage={table.previousPage}
+              canNextPage={table.getCanNextPage()}
+              canPreviousPage={table.getCanPreviousPage()}
+            />
+            {/* <CButton
               size="sm"
               color="secondary"
               onClick={() => table.setPageIndex(0)}
@@ -178,12 +189,12 @@ function DataTable({
 
             <CButton
               size="sm"
-              // color="secondary"
+              color="secondary"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
               className="bg-transparent text-black"
             >
-              {/* <CIcon size="sm" icon={cilChevronRight} title="Download file" /> */}
+              <CIcon size="sm" icon={cilChevronRight} title="Download file" />
               <span className="material-icons-outlined">navigate_next</span>
             </CButton>
 
@@ -224,7 +235,7 @@ function DataTable({
                   Show {pageSize}
                 </option>
               ))}
-            </select>
+            </select> */}
           </div>
         </div>
       </div>
