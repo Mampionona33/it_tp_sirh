@@ -73,67 +73,60 @@ function DataTable({
   const rows = table.getRowModel().rows
 
   return (
-    <CCard className="rounded-0 border-none">
-      {/* Table Header */}
-      <div className="d-flex text-white flex-wrap bg-indigo-900 mb-2 pt-2 pb-2 px-4 gap-4 ">
-        <h5 className="card-title me-auto p-2 bd-highlight">{title}</h5>
-        <DebounceInput
-          value={globalFilter || ''}
-          onChange={(e) => {
-            const value = e.target.value
-            setGlobalFilter(String(value))
-          }}
-          className="flex p-2 text-black  border border-block"
-          placeholder="Rechercher"
-        />
-        {modalAddFields && modalAddFields.length > 0 ? (
-          <>
-            <TableModal
-              title="Ajouter"
-              iconButtonShow="add"
-              // labelButtonShow="Ajouter"
-              // colorBgButtonShow={'red-600'}
-              fields={modalAddFields}
-              colorButtonShowModalImport={colorButtonShowModalAdd && colorButtonShowModalAdd}
-            />
-          </>
-        ) : null}
-        {importCsvBtn ? (
-          <>
-            <TableModal
-              iconButtonShow="save"
-              title="Import CSV"
-              // labelButtonShow="Import CSV"
-              fields={modalImportCsvField}
-              // colorBgButtonShow={'red-600'}
-              colorButtonShowModalImport={colorButtonShowModalImport && colorButtonShowModalImport}
-            />
-          </>
-        ) : null}
-        {exportCsvBtn ? (
-          <>
-            <TableModal
-              title="Export CSV"
-              // labelButtonShow="Export CSV"
-              iconButtonShow="download"
-              // colorBgButtonShow={'red-600'}
-              // fields={modalExportCsvFields}
-            />
-          </>
-        ) : null}
+    <div className="border shadow overflow-hidden">
+      <div className="flex flex-row flex-wrap bg-indigo-900 px-4 py-2 text-white">
+        <div className="flex-grow">
+          <h5 className="text-2xl font-semibold mb-2">{title}</h5>
+        </div>
+        <div className="flex-grow-0 flex-shrink-0 flex">
+          <DebounceInput
+            value={globalFilter || ''}
+            onChange={(e) => {
+              const value = e.target.value
+              setGlobalFilter(String(value))
+            }}
+            className="p-2 text-black "
+            placeholder="Rechercher"
+          />
+        </div>
+        <div className="flex-grow-0 flex-shrink-0 ml-auto flex gap-2">
+          {modalAddFields && modalAddFields.length > 0 ? (
+            <>
+              <TableModal
+                title="Ajouter"
+                iconButtonShow="add"
+                fields={modalAddFields}
+                colorButtonShowModalImport={colorButtonShowModalAdd && colorButtonShowModalAdd}
+              />
+            </>
+          ) : null}
+          {importCsvBtn ? (
+            <>
+              <TableModal
+                iconButtonShow="save"
+                title="Import CSV"
+                fields={modalImportCsvField}
+                colorButtonShowModalImport={
+                  colorButtonShowModalImport && colorButtonShowModalImport
+                }
+              />
+            </>
+          ) : null}
+          {exportCsvBtn ? (
+            <>
+              <TableModal title="Export CSV" iconButtonShow="download" />
+            </>
+          ) : null}
+        </div>
       </div>
-      {/* table */}
-      <div className="flex overflow-auto flex-col">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead className="text-xs text-gray-700 uppercase dark:text-gray-400">
+
+      <div className="overflow-x-auto">
+        <table className="w-full table-auto bg-white text-gray-800 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 bg-gray-100">
             {headerGroups.map((headerGroup, key) => (
               <tr key={`headerRow_${key}`}>
                 {headerGroup.headers.map((header, headerIndex) => (
-                  <th
-                    scope="col"
-                    className="px-6 py-3 bg-gray-50 dark:bg-gray-800"
-                    key={`header_${header.id}_${headerIndex}`}
-                  >
+                  <th scope="col" className="px-6 py-3" key={`header_${header.id}_${headerIndex}`}>
                     {header.isPlaceholder
                       ? null
                       : header.column.columnDef.header(header.getContext())}
@@ -142,12 +135,11 @@ function DataTable({
               </tr>
             ))}
           </thead>
-
           <tbody>
             {rows.map((row, rowIndex) => (
-              <tr className="border-b border-gray-200 dark:border-gray-700" key={`row_${rowIndex}`}>
+              <tr key={`row_${rowIndex}`}>
                 {row.getVisibleCells().map((cell, cellIndex) => (
-                  <td className="px-1" key={`cell_${rowIndex}_${cellIndex}`}>
+                  <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-3">
                     {cell.column.columnDef.cell(cell.getContext())}
                   </td>
                 ))}
@@ -155,7 +147,8 @@ function DataTable({
             ))}
           </tbody>
         </table>
-        {/* Pagination */}
+      </div>
+      <div className="bg-gray-100 py-2 px-4">
         <div className="flex justify-center p-2 mt-2">
           <div className="flex flex-wrap items-center gap-2">
             <CustomPagination
@@ -172,7 +165,7 @@ function DataTable({
           </div>
         </div>
       </div>
-    </CCard>
+    </div>
   )
 }
 
