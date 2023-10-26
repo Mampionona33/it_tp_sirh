@@ -74,7 +74,7 @@ function DataTable({
   return (
     <CCard className="rounded-0 border-none">
       {/* Table Header */}
-      <div className="d-flex flex-wrap bd-highlight mb-2 mt-2 gap-1 p-2">
+      <div className="d-flex flex-wrap bd-highlight mb-2 mt-2 gap-2 p-2">
         <h5 className="card-title me-auto p-2 bd-highlight">{title}</h5>
         <DebounceInput
           value={globalFilter || ''}
@@ -90,6 +90,7 @@ function DataTable({
             <TableModal
               title="Ajouter"
               labelButtonShow="Ajouter"
+              colorBgButtonShow={'red-600'}
               fields={modalAddFields}
               colorButtonShowModalImport={colorButtonShowModalAdd && colorButtonShowModalAdd}
             />
@@ -101,6 +102,7 @@ function DataTable({
               title="Import CSV"
               labelButtonShow="Import CSV"
               fields={modalImportCsvField}
+              colorBgButtonShow={'Indigo-900'}
               colorButtonShowModalImport={colorButtonShowModalImport && colorButtonShowModalImport}
             />
           </>
@@ -233,6 +235,7 @@ const TableModal = ({
   handleSubmit,
   dispatch,
   initialValues,
+  colorBgButtonShow,
 }) => {
   const [visible, setVisible] = useState(false)
   const [formValidate, setFormValidate] = useState(false)
@@ -255,12 +258,17 @@ const TableModal = ({
 
     // setFormValidate(true)
   }
+  console.log(colorBgButtonShow)
 
   return (
     <>
-      <CButton size="sm" onClick={() => setVisible(!visible)} color={colorButtonShowModalImport}>
+      <button
+        className={`font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
+        onClick={() => setVisible(!visible)}
+      >
         {labelButtonShow}
-      </CButton>
+      </button>
+
       <CModal
         visible={visible}
         onClose={() => setVisible(false)}
@@ -375,6 +383,7 @@ TableModal.propTypes = {
   title: PropTypes.string.isRequired,
   body: PropTypes.string,
   labelButtonShow: PropTypes.string,
+  colorBgButtonShow: PropTypes.string,
   colorButtonShowModalImport: PropTypes.string,
   fields: PropTypes.arrayOf(TableModalFieldType),
   handleSubmit: PropTypes.func,
