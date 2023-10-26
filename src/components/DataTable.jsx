@@ -74,7 +74,7 @@ function DataTable({
   return (
     <CCard className="rounded-0 border-none">
       {/* Table Header */}
-      <div className="d-flex flex-wrap bd-highlight mb-2 mt-2 gap-2 p-2">
+      <div className="d-flex text-white flex-wrap bg-indigo-900 mb-2 pt-2 pb-2 px-4 gap-4 ">
         <h5 className="card-title me-auto p-2 bd-highlight">{title}</h5>
         <DebounceInput
           value={globalFilter || ''}
@@ -89,8 +89,9 @@ function DataTable({
           <>
             <TableModal
               title="Ajouter"
-              labelButtonShow="Ajouter"
-              colorBgButtonShow={'red-600'}
+              iconButtonShow="add"
+              // labelButtonShow="Ajouter"
+              // colorBgButtonShow={'red-600'}
               fields={modalAddFields}
               colorButtonShowModalImport={colorButtonShowModalAdd && colorButtonShowModalAdd}
             />
@@ -99,22 +100,25 @@ function DataTable({
         {importCsvBtn ? (
           <>
             <TableModal
+              iconButtonShow="save"
               title="Import CSV"
-              labelButtonShow="Import CSV"
+              // labelButtonShow="Import CSV"
               fields={modalImportCsvField}
-              colorBgButtonShow={'Indigo-900'}
+              // colorBgButtonShow={'red-600'}
               colorButtonShowModalImport={colorButtonShowModalImport && colorButtonShowModalImport}
             />
           </>
         ) : null}
         {exportCsvBtn ? (
           <>
-            <ButtonExportCsv />
-            {/*<TableModal
+            {/* <ButtonExportCsv /> */}
+            <TableModal
               title="Export CSV"
-              labelButtonShow="Export CSV"
-              fields={modalExportCsvFields}
-            />*/}
+              // labelButtonShow="Export CSV"
+              iconButtonShow="download"
+              // colorBgButtonShow={'red-600'}
+              // fields={modalExportCsvFields}
+            />
           </>
         ) : null}
       </div>
@@ -236,6 +240,7 @@ const TableModal = ({
   dispatch,
   initialValues,
   colorBgButtonShow,
+  iconButtonShow,
 }) => {
   const [visible, setVisible] = useState(false)
   const [formValidate, setFormValidate] = useState(false)
@@ -258,14 +263,14 @@ const TableModal = ({
 
     // setFormValidate(true)
   }
-  console.log(colorBgButtonShow)
 
   return (
     <>
       <button
-        className={`font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
+        className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
         onClick={() => setVisible(!visible)}
       >
+        <span className="material-icons-outlined">{iconButtonShow}</span>
         {labelButtonShow}
       </button>
 
@@ -389,6 +394,7 @@ TableModal.propTypes = {
   handleSubmit: PropTypes.func,
   dispatch: PropTypes.any,
   initialValues: PropTypes.array,
+  iconButtonShow: PropTypes.string,
 }
 
 export default DataTable
