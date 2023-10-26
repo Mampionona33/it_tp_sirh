@@ -103,7 +103,7 @@ function DataTable({
           {importCsvBtn ? (
             <>
               <TableModal
-                iconButtonShow="save"
+                iconButtonShow="download"
                 title="Import CSV"
                 fields={modalImportCsvField}
                 colorButtonShowModalImport={
@@ -114,7 +114,7 @@ function DataTable({
           ) : null}
           {exportCsvBtn ? (
             <>
-              <TableModal title="Export CSV" iconButtonShow="download" />
+              <TableModal title="Export CSV" iconButtonShow="save" />
             </>
           ) : null}
         </div>
