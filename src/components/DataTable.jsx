@@ -27,7 +27,6 @@ import {
   cilChevronDoubleLeft,
 } from '@coreui/icons'
 import PropTypes from 'prop-types'
-// import { Table } from 'react-bootstrap'
 import { DebounceInput } from 'react-debounce-input'
 
 function DataTable({
@@ -113,7 +112,6 @@ function DataTable({
         ) : null}
         {exportCsvBtn ? (
           <>
-            {/* <ButtonExportCsv /> */}
             <TableModal
               title="Export CSV"
               // labelButtonShow="Export CSV"
@@ -169,73 +167,6 @@ function DataTable({
               canNextPage={table.getCanNextPage()}
               canPreviousPage={table.getCanPreviousPage()}
             />
-            {/* <CButton
-              size="sm"
-              color="secondary"
-              onClick={() => table.setPageIndex(0)}
-              disabled={!table.getCanPreviousPage()}
-            >
-              <CIcon size="sm" icon={cilChevronDoubleLeft} title="Download file" />
-            </CButton>
-
-            <CButton
-              size="sm"
-              color="secondary"
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-            >
-              <CIcon size="sm" icon={cilChevronLeft} title="Download file" />
-            </CButton>
-
-            <CButton
-              size="sm"
-              color="secondary"
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-              className="bg-transparent text-black"
-            >
-              <CIcon size="sm" icon={cilChevronRight} title="Download file" />
-              <span className="material-icons-outlined">navigate_next</span>
-            </CButton>
-
-            <CButton
-              size="sm"
-              color="secondary"
-              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-              disabled={!table.getCanNextPage()}
-            >
-              <CIcon size="sm" icon={cilChevronDoubleRight} title="Download file" />
-            </CButton>
-            <span className="flex items-center gap-1">
-              <div>Page</div>
-              <strong>
-                {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
-              </strong>
-            </span>
-            <span className="flex items-center gap-1">
-              | Go to page:
-              <input
-                type="number"
-                defaultValue={table.getState().pagination.pageIndex + 1}
-                onChange={(e) => {
-                  const page = e.target.value ? Number(e.target.value) - 1 : 0
-                  table.setPageIndex(page)
-                }}
-                className="border p-1 rounded w-16"
-              />
-            </span>
-            <select
-              value={table.getState().pagination.pageSize}
-              onChange={(e) => {
-                table.setPageSize(Number(e.target.value))
-              }}
-            >
-              {[5, 6, 7, 8, 40, 50].map((pageSize) => (
-                <option key={pageSize} value={pageSize}>
-                  Show {pageSize}
-                </option>
-              ))}
-            </select> */}
           </div>
         </div>
       </div>
