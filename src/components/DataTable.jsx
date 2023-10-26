@@ -178,11 +178,13 @@ function DataTable({
 
             <CButton
               size="sm"
-              color="secondary"
+              // color="secondary"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
+              className="bg-transparent text-black"
             >
-              <CIcon size="sm" icon={cilChevronRight} title="Download file" />
+              {/* <CIcon size="sm" icon={cilChevronRight} title="Download file" /> */}
+              <span className="material-icons-outlined">navigate_next</span>
             </CButton>
 
             <CButton
