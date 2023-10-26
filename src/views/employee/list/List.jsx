@@ -16,7 +16,7 @@ const List = () => {
   const modalImportCsvField = [
     {
       type: 'file',
-      placeholder: 'employess data',
+      placeholder: "Importer une liste d'employées.",
       required: true,
       accept: '.csv',
     },

@@ -139,7 +139,7 @@ function DataTable({
             {rows.map((row, rowIndex) => (
               <tr key={`row_${rowIndex}`}>
                 {row.getVisibleCells().map((cell, cellIndex) => (
-                  <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-3">
+                  <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
                     {cell.column.columnDef.cell(cell.getContext())}
                   </td>
                 ))}
@@ -227,8 +227,8 @@ const TableModal = ({
             {fields && fields.length > 0 ? (
               <div className="row">
                 {fields.map((item, key) => (
-                  <div className="col-md-6 " key={key}>
-                    <label htmlFor={item.id} className="visually-hidden">
+                  <div className="col-sm " key={key}>
+                    <label htmlFor={item.id} className="">
                       {item.placeholder}
                     </label>
                     {(() => {
