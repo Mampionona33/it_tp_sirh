@@ -82,8 +82,8 @@ function DataTable({
             const value = e.target.value
             setGlobalFilter(String(value))
           }}
-          className="flex p-2 shadow-sm rounded border border-block"
-          placeholder="Search all columns..."
+          className="flex p-2  border"
+          placeholder="Rechercher"
         />
         {modalAddFields && modalAddFields.length > 0 ? (
           <>
