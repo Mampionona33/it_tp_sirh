@@ -37,8 +37,13 @@ function CustomPagination({
       <IconButton
         key={page}
         onClick={() => goToPage(page - 1)}
-        color={pageIndex === page - 1 ? 'indigo' : 'gray'}
+        color={pageIndex === page - 1 ? 'bg-indigo-900' : 'gray'}
         variant={pageIndex === page - 1 ? 'filled' : 'text'}
+        className={
+          pageIndex === page - 1
+            ? 'bg-indigo-900 p-2 text-white rounded-full w-8 h-8 hover:bg-gray'
+            : 'rounded-full p-2'
+        }
       >
         {page}
       </IconButton>
@@ -57,9 +62,7 @@ function CustomPagination({
         <ArrowLeftIcon className="w-5 h-5" />
         Previous
       </Button>
-
-      {renderPageNumbers()}
-
+      <div className="flex items-center gap-3">{renderPageNumbers()}</div>
       <Button
         onClick={() => nextPage()}
         variant="text"
