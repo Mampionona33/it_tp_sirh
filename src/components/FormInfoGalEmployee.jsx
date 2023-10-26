@@ -28,6 +28,8 @@ const FormInfoGalEmployee = (props) => {
       if (emp && mount) {
         setEmployee({
           ...emp,
+          nom: emp.name.nom ? emp.name.nom : '',
+          prenom: emp.name.prenom ? emp.name.prenom : '',
           dateEmbauche: emp.dateEmbauche ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd') : '',
         })
       }
@@ -67,7 +69,7 @@ const FormInfoGalEmployee = (props) => {
             type="text"
             name="nom"
             id="nom"
-            value={employee.name ? employee.name.nom : ''}
+            value={employee.name ? employee.nom : ''}
             onChange={handleChange}
           />
         </div>
@@ -81,7 +83,7 @@ const FormInfoGalEmployee = (props) => {
             name="prenom"
             id="prenom"
             placeholder="Prénom"
-            value={employee.name ? employee.name.prenom : ''}
+            value={employee.name ? employee.prenom : ''}
             onChange={handleChange}
           />
         </div>
