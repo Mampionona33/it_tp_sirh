@@ -44,7 +44,7 @@ function DataTable({
 }) {
   const [globalFilter, setGlobalFilter] = useState('')
   const [rowSelection, setRowSelection] = React.useState({})
-
+  const pageSizeOptions = [5, 10, 15, 20, 25, 30]
   const table = useReactTable({
     data,
     columns,
@@ -166,6 +166,8 @@ function DataTable({
               previousPage={table.previousPage}
               canNextPage={table.getCanNextPage()}
               canPreviousPage={table.getCanPreviousPage()}
+              pageSizeOptions={pageSizeOptions}
+              setPageSize={table.setPageSize}
             />
           </div>
         </div>

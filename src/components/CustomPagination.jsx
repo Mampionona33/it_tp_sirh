@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IconButton, Button } from '@material-tailwind/react'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import PropTypes from 'prop-types'
@@ -11,7 +11,21 @@ function CustomPagination({
   previousPage,
   canNextPage,
   canPreviousPage,
+  pageSizeOptions,
+  setPageSize,
 }) {
+  const [selectedPageSize, setSelectedPageSize] = useState(pageSizeOptions[0]) // Initialize with the first option
+
+  const handlePageSizeChange = (e) => {
+    const newSize = Number(e.target.value)
+    const newSizeIndex = pageSizeOptions.indexOf(newSize)
+
+    if (newSizeIndex !== -1) {
+      setSelectedPageSize(newSize)
+      setPageSize(newSize)
+    }
+  }
+
   const renderPageNumbers = () => {
     const pageNumbers = []
 
@@ -56,6 +70,19 @@ function CustomPagination({
         Next
         <ArrowRightIcon className="w-5 h-5" />
       </Button>
+
+      {pageSizeOptions && (
+        <div>
+          <span>Page size:</span>
+          <select value={selectedPageSize} onChange={handlePageSizeChange}>
+            {pageSizeOptions.map((pageSizeOption) => (
+              <option key={pageSizeOption} value={pageSizeOption}>
+                {pageSizeOption}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
     </div>
   )
 }
@@ -68,6 +95,12 @@ CustomPagination.propTypes = {
   previousPage: PropTypes.func.isRequired,
   canNextPage: PropTypes.bool.isRequired,
   canPreviousPage: PropTypes.bool.isRequired,
+  pageSizeOptions: PropTypes.arrayOf(PropTypes.number),
+  setPageSize: PropTypes.func,
+}
+
+CustomPagination.defaultProps = {
+  pageSizeOptions: [5], // Default to [5] if not provided
 }
 
 export default CustomPagination
