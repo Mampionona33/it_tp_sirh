@@ -37,7 +37,7 @@ function CustomPagination({
       <IconButton
         key={page}
         onClick={() => goToPage(page - 1)}
-        color={pageIndex === page - 1 ? 'bg-indigo-900' : 'gray'}
+        color={pageIndex === page - 1 ? 'blue' : 'gray'}
         variant={pageIndex === page - 1 ? 'filled' : 'text'}
         className={
           pageIndex === page - 1
@@ -75,7 +75,7 @@ function CustomPagination({
       </Button>
 
       {pageSizeOptions && (
-        <div>
+        <div className="flex flex-wrap flex-row">
           <span>Page size:</span>
           <select value={selectedPageSize} onChange={handlePageSizeChange}>
             {pageSizeOptions.map((pageSizeOption) => (
