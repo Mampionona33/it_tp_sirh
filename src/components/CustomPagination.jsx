@@ -33,20 +33,34 @@ function CustomPagination({
       pageNumbers.push(i)
     }
 
-    return pageNumbers.map((page) => (
-      <IconButton
-        key={page}
-        onClick={() => goToPage(page - 1)}
-        color={pageIndex === page - 1 ? 'blue' : 'gray'}
-        variant={pageIndex === page - 1 ? 'filled' : 'text'}
-        className={
-          pageIndex === page - 1
-            ? 'bg-indigo-900 p-2 text-white rounded-full w-8 h-8 hover:bg-gray'
-            : 'rounded-full p-2'
-        }
-      >
-        {page}
-      </IconButton>
+    return pageNumbers.map((page, key) => (
+      <>
+        <button
+          key={key}
+          onClick={() => goToPage(page - 1)}
+          className={`rounded-full w-9 h-9 ${
+            pageIndex === page - 1
+              ? 'bg-indigo-900 text-white'
+              : 'hover:bg-gray-900/20 transition-colors duration-300'
+          }`}
+        >
+          {page}
+        </button>
+      </>
+
+      // <IconButton
+      //   key={page}
+      //   onClick={() => goToPage(page - 1)}
+      //   color={pageIndex === page - 1 ? 'blue' : 'gray'}
+      //   variant={pageIndex === page - 1 ? 'filled' : 'text'}
+      //   className={
+      //     pageIndex === page - 1
+      //       ? 'bg-indigo-900 p-1 text-white rounded-full w-9 h-9 hover:bg-gray'
+      //       : 'rounded-full p-1'
+      //   }
+      // >
+      //   {page}
+      // </IconButton>
     ))
   }
 

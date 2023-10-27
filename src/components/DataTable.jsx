@@ -207,25 +207,13 @@ const TableModal = ({
 
   return (
     <>
-      {toolTip ? (
-        <CTooltip content={toolTip} placement="top">
-          <button
-            className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
-            onClick={() => setVisible(!visible)}
-          >
-            <span className="material-icons-outlined">{iconButtonShow}</span>
-            {labelButtonShow}
-          </button>
-        </CTooltip>
-      ) : (
-        <button
-          className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
-          onClick={() => setVisible(!visible)}
-        >
-          <span className="material-icons-outlined">{iconButtonShow}</span>
-          {labelButtonShow}
-        </button>
-      )}
+      <button
+        className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
+        onClick={() => setVisible(!visible)}
+      >
+        <span className="material-icons-outlined">{iconButtonShow}</span>
+        {labelButtonShow}
+      </button>
 
       <CModal
         visible={visible}
