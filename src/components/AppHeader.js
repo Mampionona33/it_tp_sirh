@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { BellIcon, ListBulletIcon, EnvelopeIcon } from '@heroicons/react/24/outline'
 import {
   CContainer,
   CHeader,
@@ -60,19 +61,28 @@ const AppHeader = () => {
         </CHeaderNav>
         <CHeaderNav>
           <CNavItem>
-            <CNavLink href="#">
+            <Link to={`/#`} className="btn btn-link text-decoration-none ">
+              <BellIcon className="text-red-900 w-6 h-6" />
+            </Link>
+            {/* <CNavLink href="#">
               <CIcon icon={cilBell} size="lg" />
-            </CNavLink>
+            </CNavLink> */}
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">
+            <Link to={`/#`} className="btn btn-link text-decoration-none ">
+              <ListBulletIcon className="text-red-900 w-6 h-6" />
+            </Link>
+            {/* <CNavLink href="#">
               <CIcon icon={cilList} size="lg" />
-            </CNavLink>
+            </CNavLink> */}
           </CNavItem>
           <CNavItem>
-            <CNavLink href="#">
+            <Link to={`/#`} className="btn btn-link text-decoration-none ">
+              <EnvelopeIcon className="text-red-900 w-6 h-6" />
+            </Link>
+            {/* <CNavLink href="#">
               <CIcon icon={cilEnvelopeOpen} size="lg" />
-            </CNavLink>
+            </CNavLink> */}
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-3">
