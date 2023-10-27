@@ -6,6 +6,11 @@ import { createColumnHelper } from '@tanstack/react-table'
 import CIcon from '@coreui/icons-react'
 import { cilOptions } from '@coreui/icons'
 import { Link } from 'react-router-dom'
+import {
+  ArrowLeftIcon,
+  EllipsisHorizontalIcon,
+  EllipsisVerticalIcon,
+} from '@heroicons/react/24/outline'
 
 import { employees } from 'src/db/db'
 
@@ -97,9 +102,13 @@ const List = () => {
         header: () => 'action',
         cell: (info) => (
           <div>
-            <CDropdown variant="btn-group" direction="center" className="">
-              <CDropdownToggle className="bg-transparent border-0 text-dark rounded-circle">
-                <CIcon size="sm" icon={cilOptions} title="more options" />
+            <CDropdown>
+              <CDropdownToggle
+                aria-expanded="false"
+                className="flex bg-transparent border-0 text-dark clear-right rounded-circle "
+              >
+                {/* <CIcon size="sm" icon={cilOptions} title="more options" /> */}
+                <EllipsisVerticalIcon className="w-5 h-5 clear-right" />
               </CDropdownToggle>
               <CDropdownMenu className="rounded-0">
                 <CDropdownItem component="button">
