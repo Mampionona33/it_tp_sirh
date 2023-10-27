@@ -6,26 +6,26 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
 } from '@tanstack/react-table'
-import ButtonExportCsv from 'src/components/ButtonExportCsv'
+// import ButtonExportCsv from 'src/components/ButtonExportCsv'
 import {
-  CCard,
+  // CCard,
   CButton,
   CModal,
   CModalHeader,
-  CTooltip,
+  // CTooltip,
   CModalTitle,
   CModalBody,
   CModalFooter,
   CForm,
   CFormInput,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import {
-  cilChevronLeft,
-  cilChevronRight,
-  cilChevronDoubleRight,
-  cilChevronDoubleLeft,
-} from '@coreui/icons'
+// import CIcon from '@coreui/icons-react'
+// import {
+//   cilChevronLeft,
+//   cilChevronRight,
+//   cilChevronDoubleRight,
+//   cilChevronDoubleLeft,
+// } from '@coreui/icons'
 import PropTypes from 'prop-types'
 import { DebounceInput } from 'react-debounce-input'
 
