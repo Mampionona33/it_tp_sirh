@@ -38,10 +38,10 @@ function CustomPagination({
         <button
           key={key}
           onClick={() => goToPage(page - 1)}
-          className={`rounded-full w-9 h-9 ${
+          className={`rounded-full w-9 h-9 relative ${
             pageIndex === page - 1
               ? 'bg-indigo-900 text-white'
-              : 'hover:bg-gray-900/20 transition-colors duration-300'
+              : 'hover:bg-gray-200 hover:ring-4 hover:ring-gray-200 transition-all duration-300'
           }`}
         >
           {page}

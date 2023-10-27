@@ -207,22 +207,13 @@ const TableModal = ({
 
   return (
     <>
-      <div className="p-10">
-        <div className="group relative w-max">
-          <button
-            className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
-            onClick={() => setVisible(!visible)}
-          >
-            <span className="material-icons-outlined">{iconButtonShow}</span>
-            {labelButtonShow}
-          </button>
-          {toolTip ? (
-            <span className="pointer-events-none absolute -top-7 left-0 w-max opacity-0 transition-opacity group-hover:opacity-100">
-              This is a button.
-            </span>
-          ) : null}
-        </div>
-      </div>
+      <button
+        className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
+        onClick={() => setVisible(!visible)}
+      >
+        <span className="material-icons-outlined">{iconButtonShow}</span>
+        {labelButtonShow}
+      </button>
 
       {/* {toolTip ? (
         <CTooltip content={toolTip} placement="top">
