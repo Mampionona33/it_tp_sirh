@@ -149,8 +149,8 @@ function DataTable({
           </tbody>
         </table>
       </div>
-      <div className="bg-gray-100 py-2 px-4">
-        <div className="flex justify-center p-2 mt-2">
+      <div className="bg-gray-100 overflow-auto py-2 px-4">
+        <div className="flex justify-center  p-2 mt-2">
           <div className="flex flex-wrap items-center gap-2">
             <CustomPagination
               pageIndex={table.getState().pagination.pageIndex}
