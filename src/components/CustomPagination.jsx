@@ -65,15 +65,15 @@ function CustomPagination({
   }
 
   return (
-    <div className="flex flex-wrap items-center justify-center space-x-2">
+    <div className="flex flex-wrap items-center justify-center space-x-2 text-red-900">
       <Button
         onClick={() => previousPage()}
         variant="text"
         color="gray"
         disabled={!canPreviousPage}
-        className="flex items-center space-x-2"
+        className="flex items-center space-x-2 "
       >
-        <ArrowLeftIcon className="w-5 h-5" />
+        <ArrowLeftIcon className="w-5 h-5 " />
         Previous
       </Button>
 
