@@ -207,15 +207,6 @@ const TableModal = ({
 
   return (
     <>
-<<<<<<< HEAD
-      <button
-        className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
-        onClick={() => setVisible(!visible)}
-      >
-        <span className="material-icons-outlined">{iconButtonShow}</span>
-        {labelButtonShow}
-      </button>
-=======
       <div className="p-10">
         <div className="group relative w-max">
           <button
@@ -252,7 +243,6 @@ const TableModal = ({
           {labelButtonShow}
         </button>
       )} */}
->>>>>>> main
 
       <CModal
         visible={visible}
