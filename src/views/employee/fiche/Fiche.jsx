@@ -35,7 +35,7 @@ const Fiche = () => {
           <li className="mr-2" role="presentation">
             <button
               className={`inline-block p-4 border-b-2 rounded-t-lg ${
-                activeTab === 'profile' ? 'border-red-900' : ''
+                activeTab === 'profile' ? 'border-customRed-900' : ''
               }`}
               id="profile-tab"
               data-tabs-target="#profile"
@@ -51,7 +51,7 @@ const Fiche = () => {
           <li className="mr-2" role="presentation">
             <button
               className={`inline-block p-4 border-b-2 rounded-t-lg ${
-                activeTab === 'dashboard' ? 'border-red-900' : ''
+                activeTab === 'dashboard' ? 'border-customRed-900' : ''
               }`}
               id="dashboard-tab"
               data-tabs-target="#dashboard"
@@ -67,7 +67,7 @@ const Fiche = () => {
           <li role="presentation">
             <button
               className={`inline-block p-4 border-b-2 rounded-t-lg ${
-                activeTab === 'settings' ? 'border-red-900' : ''
+                activeTab === 'settings' ? 'border-customRed-900' : ''
               }`}
               id="settings-tab"
               data-tabs-target="#settings"
