@@ -40,7 +40,7 @@ function CustomPagination({
           onClick={() => goToPage(page - 1)}
           className={`rounded-full w-9 h-9 relative ${
             pageIndex === page - 1
-              ? 'bg-indigo-900 text-white'
+              ? 'bg-customRed-900 text-white'
               : 'hover:bg-gray-200 hover:ring-4 hover:ring-gray-200 transition-all duration-300'
           }`}
         >
@@ -65,7 +65,7 @@ function CustomPagination({
   }
 
   return (
-    <div className="flex flex-wrap items-center justify-center space-x-2 text-red-900">
+    <div className="flex flex-wrap items-center justify-center space-x-2 ">
       <Button
         onClick={() => previousPage()}
         variant="text"
