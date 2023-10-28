@@ -80,8 +80,8 @@ function CustomPagination({
         <div className="flex flex-wrap flex-row">
           <span>Page size:</span>
           <select value={selectedPageSize} onChange={handlePageSizeChange}>
-            {pageSizeOptions.map((pageSizeOption) => (
-              <option key={pageSizeOption} value={pageSizeOption}>
+            {pageSizeOptions.map((pageSizeOption, pageKey) => (
+              <option key={pageKey} value={pageSizeOption}>
                 {pageSizeOption}
               </option>
             ))}

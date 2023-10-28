@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import CalendarWorkingTime from 'src/components/CalendarWorkingTime'
+import { CustomCard } from 'src/components/CustomCard'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import NormalHours from 'src/components/NormalHours'
+import { employeeHours } from 'src/db/db'
 
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('profile') // Définissez l'onglet actif par défaut ici
@@ -12,6 +14,11 @@ const Fiche = () => {
   const handleTabClick = (eventKey) => {
     setActiveTab(eventKey)
   }
+
+  const selectedEmpHours =
+    employeeHours && employeeHours.filter((emH) => emH.employee.id === selectedEmployee)
+  const heureNormalArray = selectedEmpHours && selectedEmpHours.map((heurs) => heurs.normalHours)
+  const heurNormlNumber = heureNormalArray.length > 0 ? heureNormalArray.reduce((a, b) => a + b) : 0
 
   React.useEffect(() => {
     let mount = true
@@ -129,6 +136,9 @@ const Fiche = () => {
           role="tabpanel"
           aria-labelledby="calendar-tab"
         >
+          {selectedEmployee !== null && heurNormlNumber !== 0 && (
+            <CustomCard title="Heures normal" data={heurNormlNumber} />
+          )}
           {selectedEmployee !== null && <CalendarWorkingTime id={selectedEmployee} />}
         </div>
         <div
