@@ -137,7 +137,7 @@ const Fiche = () => {
           aria-labelledby="calendar-tab"
         >
           {selectedEmployee !== null && heurNormlNumber !== 0 && (
-            <CustomCard title="Heures normal" data={heurNormlNumber} />
+            <CustomCard title="Heures normal" data={heurNormlNumber} icon="schedule" />
           )}
           {selectedEmployee !== null && <CalendarWorkingTime id={selectedEmployee} />}
         </div>

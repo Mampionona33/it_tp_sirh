@@ -5,7 +5,9 @@ export const CustomCard = (props) => {
   return (
     <>
       <div className={`flex w-max p-1 ${props.bgColor}`}>
-        <div>{props.icon}</div>
+        <div>
+          {props.icon ? <span className="material-icons-outlined md-48">{props.icon}</span> : null}
+        </div>
         <div>
           <h2 className="text-white">{props.data}</h2>
           <p className="text-white">{props.title}</p>
