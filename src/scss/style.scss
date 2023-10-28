@@ -5,6 +5,7 @@
 @tailwind utilities;
 @import 'material-icons/iconfont/material-icons.scss';
 @import './coreui_custom';
+@import 'react-big-calendar/lib/sass/styles';
 
 $enable-ltr: true;
 $enable-rtl: true;

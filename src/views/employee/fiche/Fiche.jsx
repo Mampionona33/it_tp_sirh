@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
+import CalendarWorkingTime from 'src/components/CalendarWorkingTime'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import NormalHours from 'src/components/NormalHours'
 
@@ -64,6 +65,22 @@ const Fiche = () => {
               Heures normales
             </button>
           </li>
+          <li className="mr-2" role="presentation">
+            <button
+              className={`inline-block p-4 border-b-2 rounded-t-lg ${
+                activeTab === 'calendar' ? 'border-customRed-900' : ''
+              }`}
+              id="calendar-tab"
+              data-tabs-target="#calendar"
+              type="button"
+              role="tab"
+              aria-controls="calendar"
+              aria-selected={activeTab === 'calendar'}
+              onClick={() => handleTabClick('calendar')}
+            >
+              Calendrier
+            </button>
+          </li>
           <li role="presentation">
             <button
               className={`inline-block p-4 border-b-2 rounded-t-lg ${
@@ -82,6 +99,7 @@ const Fiche = () => {
           </li>
         </ul>
       </div>
+      {/* Tab contents */}
       <div id="myTabContent">
         <div
           className={`p-4  bg-gray-50 dark:bg-gray-800 ${
@@ -102,6 +120,16 @@ const Fiche = () => {
           aria-labelledby="dashboard-tab"
         >
           {selectedEmployee !== null && <NormalHours id={selectedEmployee} />}
+        </div>
+        <div
+          className={`p-4  bg-gray-50 dark:bg-gray-800 ${
+            activeTab === 'calendar' ? 'block' : 'hidden'
+          }`}
+          id="calendar"
+          role="tabpanel"
+          aria-labelledby="calendar-tab"
+        >
+          {selectedEmployee !== null && <CalendarWorkingTime id={selectedEmployee} />}
         </div>
         <div
           className={`p-4  bg-gray-50 dark:bg-gray-800 ${
