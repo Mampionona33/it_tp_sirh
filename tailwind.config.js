@@ -5,8 +5,12 @@ module.exports = {
     extend: {
       colors: {
         'regal-blue': '#243c5a',
-        'customRed': {
+        customRed: {
           900: '#da200d',
+          800: '#f19088',
+          200: '#fbbeb7',
+          100: '#fcd3cf',
+          50: '#fee9e7',
         },
       },
     },

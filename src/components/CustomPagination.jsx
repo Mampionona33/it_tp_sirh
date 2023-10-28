@@ -41,7 +41,7 @@ function CustomPagination({
           className={`rounded-full w-9 h-9 relative ${
             pageIndex === page - 1
               ? 'bg-customRed-900 text-white'
-              : 'hover:bg-gray-200 hover:ring-4 hover:ring-gray-200 transition-all duration-300'
+              : 'hover:bg-customRed-100 hover:-4 hover:ring-customRed-100 transition-all duration-300'
           }`}
         >
           {page}
