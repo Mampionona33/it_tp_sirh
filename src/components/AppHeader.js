@@ -64,25 +64,16 @@ const AppHeader = () => {
             <Link to={`/#`} className="btn btn-link text-decoration-none ">
               <BellIcon className="text-customRed-900 w-6 h-6" />
             </Link>
-            {/* <CNavLink href="#">
-              <CIcon icon={cilBell} size="lg" />
-            </CNavLink> */}
           </CNavItem>
           <CNavItem>
             <Link to={`/#`} className="btn btn-link text-decoration-none ">
               <ListBulletIcon className="text-customRed-900 w-6 h-6" />
             </Link>
-            {/* <CNavLink href="#">
-              <CIcon icon={cilList} size="lg" />
-            </CNavLink> */}
           </CNavItem>
           <CNavItem>
             <Link to={`/#`} className="btn btn-link text-decoration-none ">
               <EnvelopeIcon className="text-customRed-900 w-6 h-6" />
             </Link>
-            {/* <CNavLink href="#">
-              <CIcon icon={cilEnvelopeOpen} size="lg" />
-            </CNavLink> */}
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav className="ms-3">

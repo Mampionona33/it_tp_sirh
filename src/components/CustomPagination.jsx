@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { IconButton, Button } from '@material-tailwind/react'
+import { Button } from '@material-tailwind/react'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import PropTypes from 'prop-types'
 
@@ -47,20 +47,6 @@ function CustomPagination({
           {page}
         </button>
       </>
-
-      // <IconButton
-      //   key={page}
-      //   onClick={() => goToPage(page - 1)}
-      //   color={pageIndex === page - 1 ? 'blue' : 'gray'}
-      //   variant={pageIndex === page - 1 ? 'filled' : 'text'}
-      //   className={
-      //     pageIndex === page - 1
-      //       ? 'bg-indigo-900 p-1 text-white rounded-full w-9 h-9 hover:bg-gray'
-      //       : 'rounded-full p-1'
-      //   }
-      // >
-      //   {page}
-      // </IconButton>
     ))
   }
 
