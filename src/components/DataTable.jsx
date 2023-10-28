@@ -12,7 +12,7 @@ import {
   CButton,
   CModal,
   CModalHeader,
-  // CTooltip,
+  CTooltip,
   CModalTitle,
   CModalBody,
   CModalFooter,
@@ -105,6 +105,7 @@ function DataTable({
             <>
               <TableModal
                 iconButtonShow="download"
+                toolTip="Importer"
                 title="Import CSV"
                 fields={modalImportCsvField}
                 colorButtonShowModalImport={
@@ -115,7 +116,7 @@ function DataTable({
           ) : null}
           {exportCsvBtn ? (
             <>
-              <TableModal title="Export CSV" iconButtonShow="save" />
+              <TableModal title="Export CSV" iconButtonShow="save" toolTip="Enregistrer" />
             </>
           ) : null}
         </div>
@@ -207,15 +208,15 @@ const TableModal = ({
 
   return (
     <>
-      <button
+      {/* <button
         className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
         onClick={() => setVisible(!visible)}
       >
         <span className="material-icons-outlined">{iconButtonShow}</span>
         {labelButtonShow}
-      </button>
+      </button> */}
 
-      {/* {toolTip ? (
+      {toolTip ? (
         <CTooltip content={toolTip} placement="top">
           <button
             className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
@@ -233,7 +234,7 @@ const TableModal = ({
           <span className="material-icons-outlined">{iconButtonShow}</span>
           {labelButtonShow}
         </button>
-      )} */}
+      )}
 
       <CModal
         visible={visible}
