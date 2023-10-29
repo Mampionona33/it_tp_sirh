@@ -6,28 +6,9 @@ import {
   getPaginationRowModel,
   getFilteredRowModel,
 } from '@tanstack/react-table'
-// import ButtonExportCsv from 'src/components/ButtonExportCsv'
-import {
-  // CCard,
-  CButton,
-  CModal,
-  CModalHeader,
-  CTooltip,
-  CModalTitle,
-  CModalBody,
-  CModalFooter,
-  CForm,
-  CFormInput,
-} from '@coreui/react'
-// import CIcon from '@coreui/icons-react'
-// import {
-//   cilChevronLeft,
-//   cilChevronRight,
-//   cilChevronDoubleRight,
-//   cilChevronDoubleLeft,
-// } from '@coreui/icons'
 import PropTypes from 'prop-types'
 import { DebounceInput } from 'react-debounce-input'
+import TableModal from './TableModal'
 
 function DataTable({
   title,
@@ -171,162 +152,6 @@ function DataTable({
   )
 }
 
-const TableModal = ({
-  title,
-  body,
-  labelButtonShow,
-  colorButtonShowModalImport,
-  fields,
-  handleSubmit,
-  dispatch,
-  initialValues,
-  colorBgButtonShow,
-  iconButtonShow,
-  toolTip,
-}) => {
-  const [visible, setVisible] = useState(false)
-  const [formValidate, setFormValidate] = useState(false)
-
-  const handleSubmitModal = (event) => {
-    const form = event.currentTarget
-    if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
-
-    for (let index = 0; index < form.length; index++) {
-      const element = form[index]
-      if (element.tagName === 'INPUT') {
-        console.log(element.value)
-      }
-      if (element.tagName === 'SELECT') {
-      }
-    }
-
-    // setFormValidate(true)
-  }
-
-  return (
-    <>
-      {/* <button
-        className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
-        onClick={() => setVisible(!visible)}
-      >
-        <span className="material-icons-outlined">{iconButtonShow}</span>
-        {labelButtonShow}
-      </button> */}
-
-      {toolTip ? (
-        <CTooltip content={toolTip} placement="top">
-          <button
-            className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
-            onClick={() => setVisible(!visible)}
-          >
-            <span className="material-icons-outlined">{iconButtonShow}</span>
-            {labelButtonShow}
-          </button>
-        </CTooltip>
-      ) : (
-        <button
-          className={`flex items-center justify-center font-medium text-${colorBgButtonShow} border-transparent hover:border-b hover:border-${colorBgButtonShow}`}
-          onClick={() => setVisible(!visible)}
-        >
-          <span className="material-icons-outlined">{iconButtonShow}</span>
-          {labelButtonShow}
-        </button>
-      )}
-
-      <CModal
-        visible={visible}
-        onClose={() => setVisible(false)}
-        aria-labelledby="ScrollingLongContentExampleLabel"
-      >
-        <CForm validated={formValidate} onSubmit={handleSubmitModal}>
-          <CModalHeader closeButton>
-            <CModalTitle>{title}</CModalTitle>
-          </CModalHeader>
-          <CModalBody>
-            {body ? body : null}
-            {fields && fields.length > 0 ? (
-              <div className="row">
-                {fields.map((item, key) => (
-                  <div className="col-sm " key={key}>
-                    <label htmlFor={item.id} className="">
-                      {item.placeholder}
-                    </label>
-                    {(() => {
-                      switch (item.type) {
-                        case 'text':
-                        case 'password':
-                        case 'email':
-                        case 'file':
-                          return (
-                            <CFormInput
-                              type={item.type}
-                              className="form-control"
-                              id={item.id}
-                              placeholder={item.placeholder}
-                              required={item.required}
-                              label={item?.label}
-                              accept={item?.accept}
-                            />
-                          )
-
-                        default:
-                          return null
-                      }
-                    })()}
-                  </div>
-                ))}
-              </div>
-            ) : null}
-          </CModalBody>
-          <CModalFooter>
-            <CButton color="secondary" onClick={() => setVisible(false)}>
-              Annuler
-            </CButton>
-            <CButton type="submit">Valider</CButton>
-          </CModalFooter>
-        </CForm>
-      </CModal>
-    </>
-  )
-}
-
-export const tableModalAllowedFields = [
-  'input',
-  'select',
-  'file',
-  'password',
-  'text',
-  'email',
-  'date',
-  'number',
-  'checkbox',
-  'radio',
-  'submit',
-  'reset',
-  'button',
-  'hidden',
-  'select',
-  'optgroup',
-  'time',
-  'month',
-]
-
-const TableModalFieldType = PropTypes.shape({
-  id: PropTypes.string,
-  type: PropTypes.oneOf(tableModalAllowedFields).isRequired,
-  placeholder: PropTypes.string,
-  required: PropTypes.bool,
-  accept: PropTypes.string,
-  label: PropTypes.string,
-})
-
-TableModalFieldType.defaultProps = {
-  required: false,
-}
-
 DataTable.propTypes = {
   title: PropTypes.string,
   data: PropTypes.array.isRequired,
@@ -344,20 +169,6 @@ DataTable.propTypes = {
 DataTable.defaultProps = {
   exportCsvBtn: false,
   importCsvBtn: false,
-}
-
-TableModal.propTypes = {
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string,
-  labelButtonShow: PropTypes.string,
-  colorBgButtonShow: PropTypes.string,
-  colorButtonShowModalImport: PropTypes.string,
-  fields: PropTypes.arrayOf(TableModalFieldType),
-  handleSubmit: PropTypes.func,
-  dispatch: PropTypes.any,
-  initialValues: PropTypes.array,
-  iconButtonShow: PropTypes.string,
-  toolTip: PropTypes.string,
 }
 
 export default DataTable

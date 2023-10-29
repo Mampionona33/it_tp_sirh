@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { employeeHours } from 'src/db/db'
 import { createColumnHelper } from '@tanstack/react-table'
-import DataTable from 'src/components/DataTable'
 import { CContainer } from '@coreui/react'
 import { format, parseISO } from 'date-fns'
+import DataTable from 'src/components/DataTable/DataTable'
 
 const NormalHours = (props) => {
   const columnHelper = createColumnHelper()

@@ -1,6 +1,6 @@
 import React from 'react'
 // import DataTable from '../../../components/DataTable'
-import DataTable from 'src/components/DataTable'
+import DataTable from 'src/components/DataTable/DataTable'
 import { CRow, CCol, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem } from '@coreui/react'
 import { createColumnHelper } from '@tanstack/react-table'
 import CIcon from '@coreui/icons-react'
