@@ -58,108 +58,96 @@ const FormInfoGalEmployee = (props) => {
 
   return (
     <>
-      <form action="" className="p-2">
-        <div className="form-group mb-3">
-          <label className="h6" htmlFor="nom">
-            Nom
-          </label>
-          <input
-            className="form-control rounded-0"
-            placeholder="Nom"
-            type="text"
-            name="nom"
-            id="nom"
-            value={employee.name ? employee.nom : ''}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group mb-3">
-          <label className="h6" htmlFor="prenom">
-            Prénom
-          </label>
-          <input
-            className="form-control rounded-0"
-            type="text"
-            name="prenom"
-            id="prenom"
-            placeholder="Prénom"
-            value={employee.name ? employee.prenom : ''}
-            onChange={handleChange}
-          />
-        </div>
-        <fieldset className="mb-3">
-          <legend className="h6">Sexe</legend>
-          <div className="form-check">
+      <div className="columns-md">
+        <form action="" className="p-2 grid grid-cols-2 gap-4">
+          <div className="form-group mb-3">
+            <label className="h6" htmlFor="nom">
+              Nom
+            </label>
             <input
-              className="form-check-input"
-              type="radio"
-              name="sexe"
-              id="sexeHomme"
-              value="homme"
-              checked={employee.sexe === 'homme'}
+              className="form-control rounded-0"
+              placeholder="Nom"
+              type="text"
+              name="nom"
+              id="nom"
+              value={employee.name ? employee.nom : ''}
               onChange={handleChange}
             />
-            <label className="form-check-label" htmlFor="sexeHomme">
-              Homme
-            </label>
           </div>
-          <div className="form-check">
+          <div className="form-group mb-3">
+            <label className="h6" htmlFor="prenom">
+              Prénom
+            </label>
             <input
-              className="form-check-input"
-              type="radio"
-              name="sexe"
-              id="sexeFemme"
-              value="femme"
-              checked={employee.sexe === 'femme'}
+              className="form-control rounded-0"
+              type="text"
+              name="prenom"
+              id="prenom"
+              placeholder="Prénom"
+              value={employee.name ? employee.prenom : ''}
               onChange={handleChange}
             />
-            <label className="form-check-label" htmlFor="sexeFemme">
-              Femme
-            </label>
           </div>
-        </fieldset>
-        <div className="form-group mb-3">
-          <label className="h6" htmlFor="dateEmbauche">
-            {`Date d'embauche`}
-          </label>
-          <input
-            className="form-control rounded-0"
-            type="date"
-            name="dateEmbauche"
-            id="dateEmbauche"
-            placeholder="Date d'embauche"
-            value={employee.dateEmbauche}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group mb-3">
-          <label className="h6" htmlFor="cat">
-            Catégorie
-          </label>
-          <Select
-            {...props}
-            onChange={handleSelectChange}
-            options={employeesCategories}
-            value={employeesCategories.find((cat) => cat.value === employee.cat)}
-            styles={customStyles}
-          />
-        </div>
-        <div className="form-group mb-3">
-          <label className="h6" htmlFor="salaireBase">
-            Salaire de base
-          </label>
-          <input
-            className="form-control rounded-0"
-            type="number"
-            min="0"
-            name="salaireBase"
-            id="salaireBase"
-            placeholder="Salaire de base"
-            value={employee.salaireBase ? employee.salaireBase : ''}
-            onChange={handleChange}
-          />
-        </div>
-      </form>
+
+          <div className="form-group mb-3">
+            <label className="h6" htmlFor="dateEmbauche">
+              {`Date d'embauche`}
+            </label>
+            <input
+              className="form-control rounded-0"
+              type="date"
+              name="dateEmbauche"
+              id="dateEmbauche"
+              placeholder="Date d'embauche"
+              value={employee.dateEmbauche}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="form-group mb-3">
+            <label className="h6" htmlFor="cat">
+              Catégorie
+            </label>
+            <Select
+              {...props}
+              onChange={handleSelectChange}
+              options={employeesCategories}
+              value={employeesCategories.find((cat) => cat.value === employee.cat)}
+              styles={customStyles}
+            />
+          </div>
+          <fieldset className="mb-3 col-span-2">
+            <legend className="h6">Sexe</legend>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="sexe"
+                id="sexeHomme"
+                value="homme"
+                checked={employee.sexe === 'homme'}
+                onChange={handleChange}
+              />
+              <label className="form-check-label" htmlFor="sexeHomme">
+                Homme
+              </label>
+            </div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="sexe"
+                id="sexeFemme"
+                value="femme"
+                checked={employee.sexe === 'femme'}
+                onChange={handleChange}
+              />
+              <label className="form-check-label" htmlFor="sexeFemme">
+                Femme
+              </label>
+            </div>
+          </fieldset>
+        </form>
+      </div>
     </>
   )
 }
