@@ -10,7 +10,7 @@ const MoreButtonMenu = (props) => {
       <Menu>
         <MenuHandler>
           <Button
-            className="hover:bg-customRed-100 rounded-full p-1 w-12 h-12 flex items-center justify-center"
+            className="hover:bg-customRed-100 rounded-full p-1 w-10 h-10 flex items-center justify-center"
             variant="text"
           >
             <EllipsisVerticalIcon className="text-customRed-900 w-5 h-5" />
