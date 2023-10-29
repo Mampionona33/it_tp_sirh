@@ -42,8 +42,17 @@ const FormInfoGalEmployee = (props) => {
   const customStyles = {
     control: (provided, state) => ({
       ...provided,
-      borderColor: state.isFocused ? '#80bdff' : '#ced4da',
-      boxShadow: state.isFocused ? '0 0 0 0.25rem rgba(50, 31, 219, 0.25)' : null,
+      borderColor: state.isFocused ? '#da200d' : '',
+      boxShadow: state.isFocused ? '0 0 0 0.25rem #e7b7b4' : null,
+      borderRadius: 0,
+    }),
+    container: (provided) => ({
+      ...provided,
+      width: '100%',
+    }),
+    menu: (provided, state) => ({
+      ...provided,
+      width: '100%',
     }),
   }
 
@@ -58,8 +67,8 @@ const FormInfoGalEmployee = (props) => {
 
   return (
     <>
-      <div className="columns-md">
-        <form action="" className="p-2 grid grid-cols-2 gap-4">
+      <div className="columns-lg">
+        <form action="" className="p-2 grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="form-group mb-3">
             <label className="h6" htmlFor="nom">
               Nom
@@ -88,7 +97,6 @@ const FormInfoGalEmployee = (props) => {
               onChange={handleChange}
             />
           </div>
-
           <div className="form-group mb-3">
             <label className="h6" htmlFor="dateEmbauche">
               {`Date d'embauche`}
@@ -103,19 +111,25 @@ const FormInfoGalEmployee = (props) => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group mb-3">
-            <label className="h6" htmlFor="cat">
-              Catégorie
-            </label>
-            <Select
-              {...props}
-              onChange={handleSelectChange}
-              options={employeesCategories}
-              value={employeesCategories.find((cat) => cat.value === employee.cat)}
-              styles={customStyles}
-            />
+          <div>
+            <div className="relative mb-3 col-span-2 lg:col-span-1">
+              <div className="form-group mb-3 clear-left fixed">
+                <label className="h6" htmlFor="cat">
+                  Catégorie
+                </label>
+                <Select
+                  {...props}
+                  menuPlacement="auto"
+                  onChange={handleSelectChange}
+                  options={employeesCategories}
+                  value={employeesCategories.find((cat) => cat.value === employee.cat)}
+                  styles={customStyles}
+                  className="max-w-md"
+                />
+              </div>
+            </div>
           </div>
-          <fieldset className="mb-3 col-span-2">
+          <fieldset className="mb-3 col-span-2 lg:col-span-1">
             <legend className="h6">Sexe</legend>
             <div className="form-check">
               <input
