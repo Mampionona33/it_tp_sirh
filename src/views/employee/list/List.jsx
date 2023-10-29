@@ -103,42 +103,13 @@ const List = () => {
         header: () => 'action',
         cell: (info) => (
           <div className="flex">
-            <MoreButtonMenu />
-            <CDropdown>
-              <CDropdownToggle
-                aria-expanded="false"
-                className="flex bg-transparent border-0 text-dark clear-right rounded-circle "
-              >
-                {/* <CIcon size="sm" icon={cilOptions} title="more options" /> */}
-                <EllipsisVerticalIcon className="w-5 h-5 clear-right" />
-              </CDropdownToggle>
-              <CDropdownMenu className="rounded-0">
-                <CDropdownItem component="button">
-                  <Link
-                    to={`/employee/modifier/${info.getValue()}`}
-                    className="btn btn-link text-decoration-none text-reset"
-                  >
-                    Modifier
-                  </Link>
-                </CDropdownItem>
-                <CDropdownItem component="button">
-                  <Link
-                    to={`/employee/supprimer/${info.getValue()}`}
-                    className="btn btn-link text-decoration-none text-reset"
-                  >
-                    Supprimer
-                  </Link>
-                </CDropdownItem>
-                <CDropdownItem component="button">
-                  <Link
-                    to={`/employee/fiche/${info.getValue()}`}
-                    className="btn btn-link text-decoration-none text-reset"
-                  >
-                    Fiche employé
-                  </Link>
-                </CDropdownItem>
-              </CDropdownMenu>
-            </CDropdown>
+            <MoreButtonMenu
+              items={[
+                { path: `/employee/modifier/${info.getValue()}`, label: 'Modifier' },
+                { path: `/employee/supprimer/${info.getValue()}`, label: 'Supprimer' },
+                { path: `/employee/fiche/${info.getValue()}`, label: 'Fiche employé' },
+              ]}
+            />
           </div>
         ),
       }),

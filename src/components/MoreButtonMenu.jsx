@@ -1,33 +1,43 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import { Button, Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline'
-import { PropTypes } from 'prop-types'
+import { Link } from 'react-router-dom'
 
 const MoreButtonMenu = (props) => {
   return (
     <>
       <Menu>
         <MenuHandler>
-          <Button variant="text">
-            <EllipsisVerticalIcon className="text-customRed-900 w-6 h-6" />
+          <Button
+            className="hover:bg-customRed-100 rounded-full p-1 w-12 h-12 flex items-center justify-center"
+            variant="text"
+          >
+            <EllipsisVerticalIcon className="text-customRed-900 w-5 h-5" />
           </Button>
         </MenuHandler>
-        <MenuList>
+        <MenuList className="p-0">
           {props.items &&
             props.items.map((item, key) => (
-              <>
-                <MenuItem key={key}>{item}</MenuItem>
-              </>
+              <MenuItem className="p-0 border-0 hover:bg-customRed-100 hover:border-0" key={key}>
+                <Link className="btn " to={item.path}>
+                  {item.label}
+                </Link>
+              </MenuItem>
             ))}
-          <MenuItem>test2</MenuItem>
-          <MenuItem>test3</MenuItem>
         </MenuList>
       </Menu>
     </>
   )
 }
+
 MoreButtonMenu.propTypes = {
-  items: PropTypes.array,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    }),
+  ),
 }
 
 export default MoreButtonMenu
