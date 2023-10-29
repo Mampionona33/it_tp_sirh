@@ -13,6 +13,7 @@ import {
 } from '@heroicons/react/24/outline'
 
 import { employees } from 'src/db/db'
+import TableMoreButton from 'src/components/DataTable/TableMoreButton'
 
 const List = () => {
   const employes = employees
@@ -101,7 +102,8 @@ const List = () => {
       columnHelper.accessor('id', {
         header: () => 'action',
         cell: (info) => (
-          <div>
+          <div className="flex">
+            <TableMoreButton />
             <CDropdown>
               <CDropdownToggle
                 aria-expanded="false"
