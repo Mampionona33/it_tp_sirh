@@ -3,7 +3,7 @@ import { Button, Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwin
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline'
 import { PropTypes } from 'prop-types'
 
-const TableMoreButton = () => {
+const MoreButtonMenu = (props) => {
   return (
     <>
       <Menu>
@@ -13,7 +13,12 @@ const TableMoreButton = () => {
           </Button>
         </MenuHandler>
         <MenuList>
-          <MenuItem>test1</MenuItem>
+          {props.items &&
+            props.items.map((item, key) => (
+              <>
+                <MenuItem key={key}>{item}</MenuItem>
+              </>
+            ))}
           <MenuItem>test2</MenuItem>
           <MenuItem>test3</MenuItem>
         </MenuList>
@@ -21,6 +26,8 @@ const TableMoreButton = () => {
     </>
   )
 }
-TableMoreButton.propTypes = {}
+MoreButtonMenu.propTypes = {
+  items: PropTypes.array,
+}
 
-export default TableMoreButton
+export default MoreButtonMenu

@@ -13,7 +13,7 @@ import {
 } from '@heroicons/react/24/outline'
 
 import { employees } from 'src/db/db'
-import TableMoreButton from 'src/components/DataTable/TableMoreButton'
+import MoreButtonMenu from 'src/components/MoreButtonMenu'
 
 const List = () => {
   const employes = employees
@@ -103,7 +103,7 @@ const List = () => {
         header: () => 'action',
         cell: (info) => (
           <div className="flex">
-            <TableMoreButton />
+            <MoreButtonMenu />
             <CDropdown>
               <CDropdownToggle
                 aria-expanded="false"
