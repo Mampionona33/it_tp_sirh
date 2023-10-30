@@ -67,9 +67,9 @@ const TimeSheetTable = (props) => {
 
   return (
     <>
-      <div>
-        <table>
-          <thead>
+      <div className="overflow-x-auto">
+        <table className="w-full table-auto bg-white text-gray-800 dark:text-gray-400">
+          <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 bg-gray-100">
             {headerGroups.map((headerGroup, key) => (
               <tr key={`headerRow_${key}`}>
                 {headerGroup.headers.map((header, headerIndex) => (
