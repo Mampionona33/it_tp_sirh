@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useReactTable, createColumnHelper, getCoreRowModel } from '@tanstack/react-table'
+import {
+  useReactTable,
+  createColumnHelper,
+  getCoreRowModel,
+  getSortedRowModel,
+  SortingState,
+} from '@tanstack/react-table'
 import { employeeHours } from 'src/db/db'
 import { format, parseISO } from 'date-fns'
 
@@ -37,10 +43,23 @@ const TimeSheetTable = (props) => {
     }),
   ]
 
+  const defaultSorting = [
+    {
+      id: 'date',
+      asc: true,
+    },
+  ]
+
+  const [sorting, setSorting] = useState(defaultSorting)
+
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    state: {
+      sorting,
+    },
   })
 
   const headerGroups = table.getHeaderGroups()
@@ -48,7 +67,7 @@ const TimeSheetTable = (props) => {
 
   return (
     <>
-      <div className="overflow-x-auto">
+      <div>
         <table>
           <thead>
             {headerGroups.map((headerGroup, key) => (
