@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import CalendarWorkingTime from 'src/components/CalendarWorkingTime'
-import { CustomCard } from 'src/components/CustomCard'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import NormalHours from 'src/components/NormalHours'
 import { employeeHours } from 'src/db/db'
 
 const Fiche = () => {
-  const [activeTab, setActiveTab] = useState('profile') // Définissez l'onglet actif par défaut ici
+  const [activeTab, setActiveTab] = useState('profile')
   const [selectedEmployee, setSelectedEmployee] = useState(null)
   const params = useParams()
 
@@ -18,7 +16,6 @@ const Fiche = () => {
   const selectedEmpHours =
     employeeHours && employeeHours.filter((emH) => emH.employee.id === selectedEmployee)
   const heureNormalArray = selectedEmpHours && selectedEmpHours.map((heurs) => heurs.normalHours)
-  const heurNormlNumber = heureNormalArray.length > 0 ? heureNormalArray.reduce((a, b) => a + b) : 0
 
   React.useEffect(() => {
     let mount = true
@@ -69,25 +66,10 @@ const Fiche = () => {
               aria-selected={activeTab === 'dashboard'}
               onClick={() => handleTabClick('dashboard')}
             >
-              Heures normales
+              Heures travaillées
             </button>
           </li>
-          <li className="mr-2" role="presentation">
-            <button
-              className={`inline-block p-4 border-b-2 rounded-t-lg ${
-                activeTab === 'calendar' ? 'border-customRed-900' : ''
-              }`}
-              id="calendar-tab"
-              data-tabs-target="#calendar"
-              type="button"
-              role="tab"
-              aria-controls="calendar"
-              aria-selected={activeTab === 'calendar'}
-              onClick={() => handleTabClick('calendar')}
-            >
-              Calendrier
-            </button>
-          </li>
+
           <li role="presentation">
             <button
               className={`inline-block p-4 border-b-2 rounded-t-lg ${
@@ -101,7 +83,7 @@ const Fiche = () => {
               aria-selected={activeTab === 'settings'}
               onClick={() => handleTabClick('settings')}
             >
-              Heures supplémentaires
+              IRSA / OSTIE / CNAPS
             </button>
           </li>
         </ul>
@@ -128,19 +110,7 @@ const Fiche = () => {
         >
           {selectedEmployee !== null && <NormalHours id={selectedEmployee} />}
         </div>
-        <div
-          className={`p-4  bg-gray-50 dark:bg-gray-800 ${
-            activeTab === 'calendar' ? 'block' : 'hidden'
-          }`}
-          id="calendar"
-          role="tabpanel"
-          aria-labelledby="calendar-tab"
-        >
-          {selectedEmployee !== null && heurNormlNumber !== 0 && (
-            <CustomCard title="Heures normal" data={heurNormlNumber} icon="schedule" />
-          )}
-          {selectedEmployee !== null && <CalendarWorkingTime id={selectedEmployee} />}
-        </div>
+
         <div
           className={`p-4  bg-gray-50 dark:bg-gray-800 ${
             activeTab === 'settings' ? 'block' : 'hidden'
