@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useReactTable, createColumnHelper, getCoreRowModel } from '@tanstack/react-table'
 import { employeeHours } from 'src/db/db'
+import { format, parseISO } from 'date-fns'
 
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
@@ -11,7 +12,7 @@ const TimeSheetTable = (props) => {
   const columns = [
     // Colonne pour la date
     columnHelper.accessor('date', {
-      cell: (info) => info.getValue(),
+      cell: (info) => format(parseISO(info.getValue()), 'dd/MM/yyyy'),
       header: () => 'Date',
     }),
     // Colonne pour les heures normales
