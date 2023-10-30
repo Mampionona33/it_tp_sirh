@@ -106,7 +106,7 @@ function DataTable({
 
       <div className="overflow-x-auto">
         <table className="w-full table-auto bg-white text-gray-800 dark:text-gray-400">
-          <thead className="text-gray-700 dark:text-gray-400 bg-gray-100">
+          <thead className="text-sm uppercase text-gray-700 dark:text-gray-400 bg-gray-100">
             {headerGroups.map((headerGroup, key) => (
               <tr key={`headerRow_${key}`}>
                 {headerGroup.headers.map((header, headerIndex) => (

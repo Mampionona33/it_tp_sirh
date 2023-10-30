@@ -109,9 +109,14 @@ const TimeSheetTable = (props) => {
   return (
     <>
       <div className="border shadow-sm overflow-hidden">
+        <div className="flex flex-row flex-wrap bg-customRed-900 gap-4 px-4 py-2 text-white">
+          <div className="flex-grow">
+            <h5 className="text-2xl font-semibold mb-2">Heures travaillées</h5>
+          </div>
+        </div>
         <div className="overflow-x-auto">
           <table className="w-full table-auto bg-white text-gray-800 dark:text-gray-400">
-            <thead className=" text-gray-700 dark:text-gray-400 bg-gray-100">
+            <thead className="text-sm uppercase text-gray-700 dark:text-gray-400 bg-gray-100">
               {headerGroups.map((headerGroup, key) => (
                 <tr key={`headerRow_${key}`}>
                   {headerGroup.headers.map((header, headerIndex) => (
