@@ -26,6 +26,7 @@ function DataTable({
   const [globalFilter, setGlobalFilter] = useState('')
   const [rowSelection, setRowSelection] = React.useState({})
   const pageSizeOptions = [5, 10, 15, 20, 25, 30]
+
   const table = useReactTable({
     data,
     columns,
