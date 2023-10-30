@@ -67,28 +67,28 @@ const FormInfoGalEmployee = (props) => {
 
   return (
     <>
-      <div className="columns-lg">
-        <form action="" className="p-2 grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="form-group mb-3">
-            <label className="h6" htmlFor="nom">
+      <div className="container">
+        <form className="row g-3">
+          <div className="col-12 col-lg-6">
+            <label className="form-label" htmlFor="nom">
               Nom
             </label>
             <input
-              className="form-control rounded-0"
-              placeholder="Nom"
+              className="form-control"
               type="text"
               name="nom"
               id="nom"
+              placeholder="Nom"
               value={employee.name ? employee.nom : ''}
               onChange={handleChange}
             />
           </div>
-          <div className="form-group mb-3">
-            <label className="h6" htmlFor="prenom">
+          <div className="col-12 col-lg-6">
+            <label className="form-label" htmlFor="prenom">
               Prénom
             </label>
             <input
-              className="form-control rounded-0"
+              className="form-control"
               type="text"
               name="prenom"
               id="prenom"
@@ -97,12 +97,12 @@ const FormInfoGalEmployee = (props) => {
               onChange={handleChange}
             />
           </div>
-          <div className="form-group mb-3">
-            <label className="h6" htmlFor="dateEmbauche">
+          <div className="col-12 col-lg-6">
+            <label className="form-label" htmlFor="dateEmbauche">
               {`Date d'embauche`}
             </label>
             <input
-              className="form-control rounded-0"
+              className="form-control"
               type="date"
               name="dateEmbauche"
               id="dateEmbauche"
@@ -111,55 +111,66 @@ const FormInfoGalEmployee = (props) => {
               onChange={handleChange}
             />
           </div>
-          <div>
-            <div className="relative mb-3 col-span-2 lg:col-span-1">
-              <div className="form-group mb-3 clear-left fixed">
-                <label className="h6" htmlFor="cat">
-                  Catégorie
-                </label>
-                <Select
-                  {...props}
-                  menuPlacement="auto"
-                  onChange={handleSelectChange}
-                  options={employeesCategories}
-                  value={employeesCategories.find((cat) => cat.value === employee.cat)}
-                  styles={customStyles}
-                  className="max-w-md"
-                />
-              </div>
-            </div>
+          <div className="col-12 col-lg-6">
+            <label className="form-label" htmlFor="matricule">
+              Matricule
+            </label>
+            <input
+              className="form-control"
+              type="text"
+              name="matricule"
+              id="matricule"
+              placeholder="A01200"
+              value={employee.matricule ? employee.matricule : ''}
+              onChange={handleChange}
+            />
           </div>
-          <fieldset className="mb-3 col-span-2 lg:col-span-1">
-            <legend className="h6">Sexe</legend>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="sexe"
-                id="sexeHomme"
-                value="homme"
-                checked={employee.sexe === 'homme'}
-                onChange={handleChange}
-              />
-              <label className="form-check-label" htmlFor="sexeHomme">
-                Homme
-              </label>
-            </div>
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="radio"
-                name="sexe"
-                id="sexeFemme"
-                value="femme"
-                checked={employee.sexe === 'femme'}
-                onChange={handleChange}
-              />
-              <label className="form-check-label" htmlFor="sexeFemme">
-                Femme
-              </label>
-            </div>
-          </fieldset>
+          <div className="col-12 col-lg-6">
+            <label className="form-label" htmlFor="cat">
+              Catégorie
+            </label>
+            <Select
+              {...props}
+              menuPlacement="auto"
+              onChange={handleSelectChange}
+              options={employeesCategories}
+              value={employeesCategories.find((cat) => cat.value === employee.cat)}
+              styles={customStyles}
+            />
+          </div>
+          <div className="col-12 col-lg-6">
+            <fieldset className="form-group">
+              <legend className="form-label">Sexe</legend>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="sexe"
+                  id="sexeHomme"
+                  value="homme"
+                  checked={employee.sexe === 'homme'}
+                  onChange={handleChange}
+                />
+                <label className="form-check-label" htmlFor="sexeHomme">
+                  Homme
+                </label>
+              </div>
+              <div className="form-check">
+                <input
+                  className="form-check-input"
+                  type="radio"
+                  name="sexe"
+                  id="sexeFemme"
+                  value="femme"
+                  checked={employee.sexe === 'femme'}
+                  onChange={handleChange}
+                />
+                <label className="form-check-label" htmlFor="sexeFemme">
+                  Femme
+                </label>
+              </div>
+            </fieldset>
+          </div>
         </form>
       </div>
     </>
