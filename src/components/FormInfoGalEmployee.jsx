@@ -147,10 +147,10 @@ const FormInfoGalEmployee = (props) => {
           </div>
           <div className="col-12 col-lg-6">
             <fieldset className="form-group">
-              <legend className="form-label">Sexe</legend>
+              <legend className="form-label text-base">Sexe</legend>
               <div className="form-check">
                 <input
-                  className="form-check-input"
+                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
                   type="radio"
                   name="sexe"
                   id="sexeHomme"
@@ -164,7 +164,7 @@ const FormInfoGalEmployee = (props) => {
               </div>
               <div className="form-check">
                 <input
-                  className="form-check-input"
+                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
                   type="radio"
                   name="sexe"
                   id="sexeFemme"
