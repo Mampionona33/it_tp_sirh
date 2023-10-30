@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import NormalHours from 'src/components/NormalHours'
+import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
 import { employeeHours } from 'src/db/db'
 
 const Fiche = () => {
@@ -108,7 +109,8 @@ const Fiche = () => {
           role="tabpanel"
           aria-labelledby="dashboard-tab"
         >
-          {selectedEmployee !== null && <NormalHours id={selectedEmployee} />}
+          {/* {selectedEmployee !== null && <NormalHours id={selectedEmployee} />} */}
+          {selectedEmployee !== null && <TimeSheetTable id={selectedEmployee} />}
         </div>
 
         <div
