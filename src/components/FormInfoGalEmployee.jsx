@@ -54,6 +54,13 @@ const FormInfoGalEmployee = (props) => {
       ...provided,
       width: '100%',
     }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#da200d' : 'inherit',
+      ':hover': {
+        backgroundColor: '#e7b7b4',
+      },
+    }),
   }
 
   const handleSelectChange = (selectedOption) => {
