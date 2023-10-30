@@ -12,6 +12,7 @@ import {
 import { employeeHours } from 'src/db/db'
 import { format, parseISO } from 'date-fns'
 import CustomPagination from '../CustomPagination'
+import MonthYearPicker from './MonthYearPicker'
 
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
@@ -106,12 +107,28 @@ const TimeSheetTable = (props) => {
     }
   }, [props.id, employeeHours])
 
+  const handleFilterByMonth = () => {
+    // Implement filtering logic for filtering by month
+    // Update the data displayed in the table accordingly
+  }
+
+  const handleFilterByYear = () => {
+    // Implement filtering logic for filtering by year
+    // Update the data displayed in the table accordingly
+  }
+
+  const handleDateChange = () => {}
+
   return (
     <>
       <div className="border shadow-sm overflow-hidden">
         <div className="flex flex-row flex-wrap bg-customRed-900 gap-4 px-4 py-2 text-white">
           <div className="flex-grow">
             <h5 className="text-2xl font-semibold mb-2">Heures travaillées</h5>
+          </div>
+          <div>
+            {/* comment ajouter un date picker pour selectionner mois et année uniquement ici */}
+            <MonthYearPicker selectedDate={new Date()} onDateChange={handleDateChange} />
           </div>
         </div>
         <div className="overflow-x-auto">
