@@ -30,22 +30,22 @@ const TimeSheetTable = (props) => {
     // Colonne pour les heures normales
     columnHelper.accessor('normalHours', {
       cell: (info) => info.row.original.normalHours,
-      header: () => 'Normal Hours',
+      header: () => 'Heure normale',
     }),
     // Colonne pour les heures supplémentaires (overtimeHours)
     columnHelper.accessor('overtimeHours', {
       cell: (info) => info.row.original.overtimeHours,
-      header: () => 'Overtime Hours',
+      header: () => 'Heures supplémentaires',
     }),
     // Colonne pour les heures de nuit (nightShiftHours)
     columnHelper.accessor('nightShiftHours', {
       cell: (info) => info.row.original.nightShiftHours,
-      header: () => 'Night Shift Hours',
+      header: () => 'Travail de nuit',
     }),
     // Colonne pour les heures de jour férié (holidayHours)
     columnHelper.accessor('holidayHours', {
       cell: (info) => info.row.original.holidayHours,
-      header: () => 'Holiday Hours',
+      header: () => 'Travail de jour férié',
     }),
   ]
 
@@ -111,7 +111,7 @@ const TimeSheetTable = (props) => {
       <div className="border shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full table-auto bg-white text-gray-800 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase dark:text-gray-400 bg-gray-100">
+            <thead className=" text-gray-700 dark:text-gray-400 bg-gray-100">
               {headerGroups.map((headerGroup, key) => (
                 <tr key={`headerRow_${key}`}>
                   {headerGroup.headers.map((header, headerIndex) => (
