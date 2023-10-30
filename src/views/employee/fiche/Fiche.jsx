@@ -22,7 +22,7 @@ const Fiche = () => {
     let mount = true
     if (params) {
       if (mount) {
-        setSelectedEmployee(parseInt(params.id))
+        setSelectedEmployee(params.id)
       }
     }
     return () => {

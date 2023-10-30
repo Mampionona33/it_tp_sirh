@@ -24,7 +24,7 @@ const FormInfoGalEmployee = (props) => {
     let mount = true
     if (props.id && employees) {
       const emp = employees.find((empl) => empl.id === props.id)
-      console.log(emp)
+      // console.log(emp)
       if (emp && mount) {
         setEmployee({
           ...emp,
@@ -185,7 +185,7 @@ const FormInfoGalEmployee = (props) => {
 }
 
 FormInfoGalEmployee.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 }
 
 export default FormInfoGalEmployee

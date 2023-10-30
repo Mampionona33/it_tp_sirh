@@ -27,16 +27,11 @@ function CustomPagination({
   }
 
   const renderPageNumbers = () => {
-    const pageNumbers = []
-
-    for (let i = 1; i <= pageCount; i++) {
-      pageNumbers.push(i)
-    }
-
-    return pageNumbers.map((page, key) => (
-      <>
+    return Array.from({ length: pageCount }, (_, index) => {
+      const page = index + 1
+      return (
         <button
-          key={key}
+          key={page}
           onClick={() => goToPage(page - 1)}
           className={`rounded-full w-9 h-9 relative ${
             pageIndex === page - 1
@@ -46,8 +41,8 @@ function CustomPagination({
         >
           {page}
         </button>
-      </>
-    ))
+      )
+    })
   }
 
   return (

@@ -16,7 +16,8 @@ import CustomPagination from '../CustomPagination'
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
   const pageSizeOptions = [5, 10, 15, 20, 25, 30, 31]
-  const data = employeeHours ? employeeHours : []
+  // const data = employeeHours ? employeeHours : []
+  const [data, setData] = useState([])
   const [rowSelection, setRowSelection] = React.useState({})
   const [globalFilter, setGlobalFilter] = useState('')
 
@@ -87,6 +88,21 @@ const TimeSheetTable = (props) => {
       },
     }))
   }, [table])
+
+  React.useEffect(() => {
+    let mount = true
+
+    if (props.id) {
+      const employeHours = employeeHours.filter(
+        (employHours) => employHours.employee.id === props.id,
+      )
+      console.log(employeHours)
+    }
+
+    return () => {
+      mount = false
+    }
+  }, [props.id, employeeHours])
 
   return (
     <>
