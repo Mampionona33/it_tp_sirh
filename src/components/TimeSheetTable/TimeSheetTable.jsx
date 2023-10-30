@@ -84,7 +84,7 @@ const TimeSheetTable = (props) => {
       pagination: {
         ...prev.pagination,
         pageIndex: 0,
-        pageSize: 31,
+        pageSize: 5,
       },
     }))
   }, [table])
@@ -94,9 +94,11 @@ const TimeSheetTable = (props) => {
 
     if (props.id) {
       const employeHours = employeeHours.filter(
-        (employHours) => employHours.employee.id === props.id,
+        (employHours) => employHours.employee.id == props.id,
       )
-      console.log(employeHours)
+      if (mount) {
+        setData(employeHours)
+      }
     }
 
     return () => {
