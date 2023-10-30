@@ -1391,7 +1391,7 @@ export const employeeHours = [
     employee: {
       id: 12,
     },
-    date: '2023-01-26T05:35:43.355Z',
+    date: '2023-01-04T05:35:43.355Z',
     normalHours: 8,
     overtimeHours: 3,
     nightShiftHours: 2,
@@ -1765,7 +1765,7 @@ export const employeeHours = [
     employee: {
       id: 3,
     },
-    date: '2023-01-26T05:54:00.553Z',
+    date: '2023-01-05T05:54:00.553Z',
     normalHours: 8,
     overtimeHours: 3,
     nightShiftHours: 2,
@@ -1930,7 +1930,7 @@ export const employeeHours = [
     employee: {
       id: 27,
     },
-    date: '2023-01-10T17:51:56.548Z',
+    date: '2023-01-01T17:51:56.548Z',
     normalHours: 7,
     overtimeHours: 3,
     nightShiftHours: 2,
