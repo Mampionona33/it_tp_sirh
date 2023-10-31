@@ -119,6 +119,23 @@ const TimeSheetTable = (props) => {
 
   const handleDateChange = () => {}
 
+  const calculateColumnSum = (columnName) => {
+    let result = 0
+    // console.log(columnName)
+    if (columnName) {
+      result = data.length > 0 && data.reduce((total, item) => total + (item[columnName] || 0), 0)
+    }
+    return result
+  }
+
+  // Calculate sums for columns (excluding the "Date" column)
+  const columnSums = columns.map((column) => {
+    if (column.accessorKey !== 'date') {
+      return calculateColumnSum(column.accessorKey)
+    }
+    return null
+  })
+
   return (
     <>
       <div className="border shadow-sm overflow-hidden">
@@ -132,7 +149,7 @@ const TimeSheetTable = (props) => {
         </div>
         <div className="overflow-x-auto">
           <table className="w-full table-auto bg-white text-gray-800 dark:text-gray-400">
-            <thead className="text-sm uppercase text-gray-700 dark:text-gray-400 bg-gray-100">
+            <thead className="text-xs uppercase text-gray-700 dark:text-gray-400 bg-gray-100">
               {headerGroups.map((headerGroup, key) => (
                 <tr key={`headerRow_${key}`}>
                   {headerGroup.headers.map((header, headerIndex) => (
@@ -141,9 +158,16 @@ const TimeSheetTable = (props) => {
                       className="px-6 py-3"
                       key={`header_${header.id}_${headerIndex}`}
                     >
-                      {header.isPlaceholder
-                        ? null
-                        : header.column.columnDef.header(header.getContext())}
+                      {header.isPlaceholder ? null : (
+                        <>
+                          {header.column.columnDef.header(header.getContext())}
+                          {header.column.id !== 'date' && (
+                            <div className="text-right capitalize text-sm text-gray-400">
+                              {columnSums[headerIndex]} Heures
+                            </div>
+                          )}
+                        </>
+                      )}
                     </th>
                   ))}
                 </tr>
