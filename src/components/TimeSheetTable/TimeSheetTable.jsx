@@ -65,6 +65,34 @@ const TimeSheetTable = (props) => {
 
   const [sorting, setSorting] = useState(defaultSorting)
 
+  const filterDataByDate = () => {
+    const currentDate = new Date()
+    const filteredData = employeeHours.filter((employHours) => {
+      const employDate = new Date(employHours.date)
+      return (
+        employHours.employee.id == props.id &&
+        employDate.getMonth() === currentDate.getMonth() &&
+        employDate.getFullYear() === currentDate.getFullYear()
+      )
+    })
+    console.log(filteredData)
+    setData(filteredData)
+  }
+
+  React.useEffect(() => {
+    let mount = true
+
+    if (props.id && employeeHours) {
+      if (mount) {
+        filterDataByDate()
+      }
+    }
+
+    return () => {
+      mount = false
+    }
+  }, [employeeHours, props.id])
+
   const table = useReactTable({
     data,
     columns,
@@ -96,22 +124,22 @@ const TimeSheetTable = (props) => {
     }))
   }, [table])
 
-  React.useEffect(() => {
-    let mount = true
+  // React.useEffect(() => {
+  //   let mount = true
 
-    if (props.id) {
-      const employeHours = employeeHours.filter(
-        (employHours) => employHours.employee.id == props.id,
-      )
-      if (mount) {
-        setData(employeHours)
-      }
-    }
+  //   if (props.id) {
+  //     const employeHours = employeeHours.filter(
+  //       (employHours) => employHours.employee.id == props.id,
+  //     )
+  //     if (mount) {
+  //       setData(employeHours)
+  //     }
+  //   }
 
-    return () => {
-      mount = false
-    }
-  }, [props.id, employeeHours])
+  //   return () => {
+  //     mount = false
+  //   }
+  // }, [props.id, employeeHours])
 
   const handleFilterByMonth = () => {
     // Implement filtering logic for filtering by month
