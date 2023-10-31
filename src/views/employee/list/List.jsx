@@ -1,17 +1,7 @@
 import React from 'react'
-// import DataTable from '../../../components/DataTable'
 import DataTable from 'src/components/DataTable/DataTable'
-import { CRow, CCol, CDropdown, CDropdownToggle, CDropdownMenu, CDropdownItem } from '@coreui/react'
+import { CRow, CCol } from '@coreui/react'
 import { createColumnHelper } from '@tanstack/react-table'
-import CIcon from '@coreui/icons-react'
-import { cilOptions } from '@coreui/icons'
-import { Link } from 'react-router-dom'
-import {
-  ArrowLeftIcon,
-  EllipsisHorizontalIcon,
-  EllipsisVerticalIcon,
-} from '@heroicons/react/24/outline'
-
 import { employees } from 'src/db/db'
 import MoreButtonMenu from 'src/components/MoreButtonMenu'
 
