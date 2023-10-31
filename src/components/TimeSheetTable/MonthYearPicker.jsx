@@ -41,6 +41,7 @@ function MonthYearPicker({ selectedDate, onDateChange }) {
     option: (provided, state) => ({
       ...provided,
       backgroundColor: state.isSelected ? '#da200d' : 'inherit',
+      color: state.isSelected ? '#fff' : '#57534e',
       ':hover': {
         backgroundColor: '#e7b7b4',
       },
