@@ -127,7 +127,6 @@ const TimeSheetTable = (props) => {
 
   const calculateColumnSum = (columnName) => {
     let result = 0
-    // console.log(columnName)
     if (columnName) {
       result = data.length > 0 && data.reduce((total, item) => total + (item[columnName] || 0), 0)
     }
@@ -141,6 +140,25 @@ const TimeSheetTable = (props) => {
     }
     return null
   })
+
+  const calculateTotal = () => {
+    const total = {
+      normalHours: 0,
+      overtimeHours: 0,
+      nightShiftHours: 0,
+      holidayHours: 0,
+    }
+
+    data.forEach((item) => {
+      total.normalHours += item.normalHours || 0
+      total.overtimeHours += item.overtimeHours || 0
+      total.nightShiftHours += item.nightShiftHours || 0
+      total.holidayHours += item.holidayHours || 0
+    })
+
+    return total
+  }
+  const total = calculateTotal()
 
   return (
     <>
@@ -167,11 +185,11 @@ const TimeSheetTable = (props) => {
                       {header.isPlaceholder ? null : (
                         <>
                           {header.column.columnDef.header(header.getContext())}
-                          {header.column.id !== 'date' && (
+                          {/* {header.column.id !== 'date' && (
                             <div className="text-right capitalize text-sm text-customBlue-400">
                               {columnSums[headerIndex]} Heures
                             </div>
-                          )}
+                          )} */}
                         </>
                       )}
                     </th>
@@ -180,8 +198,22 @@ const TimeSheetTable = (props) => {
               ))}
             </thead>
             <tbody>
+              {rows.length > 0 && (
+                <tr className="font-medium border-b border-customRed-900">
+                  <td className="px-6 py-3">Total</td>
+                  <td className="px-6 py-3">{total.normalHours}</td>
+                  <td className="px-6 py-3">{total.overtimeHours}</td>
+                  <td className="px-6 py-3">{total.nightShiftHours}</td>
+                  <td className="px-6 py-3">{total.holidayHours}</td>
+                </tr>
+              )}
               {rows.map((row, rowIndex) => (
-                <tr key={`row_${rowIndex}`}>
+                <tr
+                  key={`row_${rowIndex}`}
+                  className={`border-y border-customRed-50 ${
+                    rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                  }`}
+                >
                   {row.getVisibleCells().map((cell, cellIndex) => (
                     <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
                       {cell.column.columnDef.cell(cell.getContext())}
