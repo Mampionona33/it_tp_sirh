@@ -46,6 +46,22 @@ function MonthYearPicker({ selectedDate, onDateChange }) {
         backgroundColor: '#e7b7b4',
       },
     }),
+    menuList: (base) => ({
+      ...base,
+
+      '::-webkit-scrollbar': {
+        width: '5px',
+      },
+      '::-webkit-scrollbar-track': {
+        background: '#bfc0d3',
+      },
+      '::-webkit-scrollbar-thumb': {
+        background: '#f19088',
+      },
+      '::-webkit-scrollbar-thumb:hover': {
+        background: '#f19088',
+      },
+    }),
   }
 
   // Generate an array of years, e.g., from 1901 to the current year
