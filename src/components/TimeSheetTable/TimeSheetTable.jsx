@@ -127,7 +127,6 @@ const TimeSheetTable = (props) => {
             <h5 className="text-2xl font-semibold mb-2">Heures travaillées</h5>
           </div>
           <div>
-            {/* comment ajouter un date picker pour selectionner mois et année uniquement ici */}
             <MonthYearPicker selectedDate={new Date()} onDateChange={handleDateChange} />
           </div>
         </div>
