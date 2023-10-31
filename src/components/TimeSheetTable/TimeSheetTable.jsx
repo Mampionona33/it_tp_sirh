@@ -30,22 +30,22 @@ const TimeSheetTable = (props) => {
     }),
     // Colonne pour les heures normales
     columnHelper.accessor('normalHours', {
-      cell: (info) => info.row.original.normalHours,
+      cell: (info) => info.row.original.normalHours.toString().padStart(2, '0'),
       header: () => 'Heure normale',
     }),
     // Colonne pour les heures supplémentaires (overtimeHours)
     columnHelper.accessor('overtimeHours', {
-      cell: (info) => info.row.original.overtimeHours,
+      cell: (info) => info.row.original.overtimeHours.toString().padStart(2, '0'),
       header: () => 'Heures supplémentaires',
     }),
     // Colonne pour les heures de nuit (nightShiftHours)
     columnHelper.accessor('nightShiftHours', {
-      cell: (info) => info.row.original.nightShiftHours,
+      cell: (info) => info.row.original.nightShiftHours.toString().padStart(2, '0'),
       header: () => 'Travail de nuit',
     }),
     // Colonne pour les heures de jour férié (holidayHours)
     columnHelper.accessor('holidayHours', {
-      cell: (info) => info.row.original.holidayHours,
+      cell: (info) => info.row.original.holidayHours.toString().padStart(2, '0'),
       header: () => 'Travail de jour férié',
     }),
   ]
@@ -162,7 +162,7 @@ const TimeSheetTable = (props) => {
                         <>
                           {header.column.columnDef.header(header.getContext())}
                           {header.column.id !== 'date' && (
-                            <div className="text-right capitalize text-sm text-gray-400">
+                            <div className="text-right capitalize text-sm text-customBlue-400">
                               {columnSums[headerIndex]} Heures
                             </div>
                           )}
