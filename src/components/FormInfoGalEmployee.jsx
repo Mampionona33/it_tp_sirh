@@ -23,8 +23,7 @@ const FormInfoGalEmployee = (props) => {
   useEffect(() => {
     let mount = true
     if (props.id && employees) {
-      const emp = employees.find((empl) => empl.id === props.id)
-      // console.log(emp)
+      const emp = employees.find((empl) => empl.id == props.id)
       if (emp && mount) {
         setEmployee({
           ...emp,
