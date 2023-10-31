@@ -17,7 +17,6 @@ import MonthYearPicker from './MonthYearPicker'
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
   const pageSizeOptions = [5, 10, 15, 20, 25, 30, 31]
-  // const data = employeeHours ? employeeHours : []
   const [data, setData] = useState([])
   const [rowSelection, setRowSelection] = React.useState({})
   const [globalFilter, setGlobalFilter] = useState('')
@@ -92,7 +91,7 @@ const TimeSheetTable = (props) => {
       pagination: {
         ...prev.pagination,
         pageIndex: 0,
-        pageSize: 5,
+        // pageSize: 5,
       },
     }))
   }, [table])
@@ -206,6 +205,7 @@ const TimeSheetTable = (props) => {
                 canPreviousPage={table.getCanPreviousPage()}
                 pageSizeOptions={pageSizeOptions}
                 setPageSize={table.setPageSize}
+                defaultPageSize={31}
               />
             </div>
           </div>

@@ -13,8 +13,9 @@ function CustomPagination({
   canPreviousPage,
   pageSizeOptions,
   setPageSize,
+  defaultPageSize,
 }) {
-  const [selectedPageSize, setSelectedPageSize] = useState(pageSizeOptions[0]) // Initialize with the first option
+  const [selectedPageSize, setSelectedPageSize] = useState(pageSizeOptions[0])
 
   const handlePageSizeChange = (e) => {
     const newSize = Number(e.target.value)
@@ -25,6 +26,16 @@ function CustomPagination({
       setPageSize(newSize)
     }
   }
+
+  React.useEffect(() => {
+    let mount = true
+    if (defaultPageSize) {
+      if (mount) {
+        setSelectedPageSize(defaultPageSize)
+        setPageSize(defaultPageSize)
+      }
+    }
+  }, [defaultPageSize])
 
   const renderPageNumbers = () => {
     return Array.from({ length: pageCount }, (_, index) => {
@@ -97,10 +108,12 @@ CustomPagination.propTypes = {
   canPreviousPage: PropTypes.bool.isRequired,
   pageSizeOptions: PropTypes.arrayOf(PropTypes.number),
   setPageSize: PropTypes.func,
+  defaultPageSize: PropTypes.number,
 }
 
 CustomPagination.defaultProps = {
   pageSizeOptions: [5], // Default to [5] if not provided
+  defaultPageSize: 5,
 }
 
 export default CustomPagination
