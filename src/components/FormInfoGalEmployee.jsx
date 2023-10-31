@@ -45,22 +45,22 @@ const FormInfoGalEmployee = (props) => {
       boxShadow: state.isFocused ? '0 0 0 0.25rem #e7b7b4' : null,
       borderRadius: 0,
     }),
-    menuList: (base) => ({
-      ...base,
+    // menuList: (base) => ({
+    //   ...base,
 
-      '::-webkit-scrollbar': {
-        width: '5px',
-      },
-      '::-webkit-scrollbar-track': {
-        background: '#bfc0d3',
-      },
-      '::-webkit-scrollbar-thumb': {
-        background: '#f19088',
-      },
-      '::-webkit-scrollbar-thumb:hover': {
-        background: '#f19088',
-      },
-    }),
+    //   '::-webkit-scrollbar': {
+    //     width: '5px',
+    //   },
+    //   '::-webkit-scrollbar-track': {
+    //     background: '#bfc0d3',
+    //   },
+    //   '::-webkit-scrollbar-thumb': {
+    //     background: '#f19088',
+    //   },
+    //   '::-webkit-scrollbar-thumb:hover': {
+    //     background: '#f19088',
+    //   },
+    // }),
     container: (provided) => ({
       ...provided,
       width: '100%',
