@@ -37,6 +37,7 @@ function MonthYearPicker({ selectedDate, onDateChange }) {
       '::-webkit-scrollbar': {
         display: 'none',
       },
+      width: '10rem',
     }),
     option: (provided, state) => ({
       ...provided,
@@ -72,8 +73,8 @@ function MonthYearPicker({ selectedDate, onDateChange }) {
   }))
 
   return (
-    <div className="flex columns-2 flex-wrap gap-2">
-      <div>
+    <div className="flex flex-wrap gap-2">
+      <div className="">
         <label className="form-label" htmlFor="month">
           Mois
         </label>
@@ -85,7 +86,7 @@ function MonthYearPicker({ selectedDate, onDateChange }) {
           styles={customStyles}
         />
       </div>
-      <div>
+      <div className="">
         <label className="form-label" htmlFor="year">
           Année
         </label>
