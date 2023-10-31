@@ -1,55 +1,85 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import Select from 'react-select'
 
 function MonthYearPicker({ selectedDate, onDateChange }) {
   const [selectedMonth, setSelectedMonth] = useState(selectedDate.getMonth())
   const [selectedYear, setSelectedYear] = useState(selectedDate.getFullYear())
 
-  const handleMonthChange = (event) => {
-    setSelectedMonth(parseInt(event.target.value, 10))
-    onDateChange(new Date(selectedYear, parseInt(event.target.value, 10), 1))
+  const handleMonthChange = (selectedOption) => {
+    setSelectedMonth(parseInt(selectedOption.value, 10))
+    onDateChange(new Date(selectedYear, parseInt(selectedOption.value, 10), 1))
   }
 
-  const handleYearChange = (event) => {
-    setSelectedYear(parseInt(event.target.value, 10))
-    onDateChange(new Date(parseInt(event.target.value, 10), selectedMonth, 1))
+  const handleYearChange = (selectedOption) => {
+    setSelectedYear(parseInt(selectedOption.value, 10))
+    onDateChange(new Date(parseInt(selectedOption.value, 10), selectedMonth, 1))
   }
 
   const months = [
-    'Janvier',
-    'Février',
-    'Mars',
-    'Avril',
-    'Mais',
-    'Juin',
-    'Juillet',
-    'Aout',
-    'Septembre',
-    'Octobre',
-    'Novembre',
-    'Décembre',
+    { label: 'Janvier', value: 0 },
+    { label: 'Février', value: 1 },
+    { label: 'Mars', value: 2 },
+    { label: 'Avril', value: 3 },
+    { label: 'Mai', value: 4 },
+    { label: 'Juin', value: 5 },
+    { label: 'Juillet', value: 6 },
+    { label: 'Aout', value: 7 },
+    { label: 'Septembre', value: 8 },
+    { label: 'Octobre', value: 9 },
+    { label: 'Novembre', value: 10 },
+    { label: 'Décembre', value: 11 },
   ]
+
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      '::-webkit-scrollbar': {
+        display: 'none',
+      },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#da200d' : 'inherit',
+      ':hover': {
+        backgroundColor: '#e7b7b4',
+      },
+    }),
+  }
 
   // Generate an array of years, e.g., from 1901 to the current year
   const currentYear = new Date().getFullYear()
-  const years = Array.from({ length: currentYear - 1900 }, (_, index) => 1901 + index)
+  const years = Array.from({ length: currentYear - 1900 }, (_, index) => ({
+    label: `${1901 + index}`,
+    value: 1901 + index,
+  }))
 
   return (
-    <div>
-      <select value={selectedMonth} onChange={handleMonthChange}>
-        {months.map((month, index) => (
-          <option key={index} value={index}>
-            {month}
-          </option>
-        ))}
-      </select>
-      <select value={selectedYear} onChange={handleYearChange}>
-        {years.map((year) => (
-          <option key={year} value={year}>
-            {year}
-          </option>
-        ))}
-      </select>
+    <div className="flex columns-2 flex-wrap gap-2">
+      <div>
+        <label className="form-label" htmlFor="month">
+          Mois
+        </label>
+        <Select
+          menuPlacement="auto"
+          value={months.find((m) => m.value === selectedMonth)} // Set the default value for the month
+          onChange={handleMonthChange}
+          options={months}
+          styles={customStyles}
+        />
+      </div>
+      <div>
+        <label className="form-label" htmlFor="year">
+          Année
+        </label>
+        <Select
+          menuPlacement="auto"
+          value={years.find((y) => y.value === selectedYear)} // Set the default value for the year
+          onChange={handleYearChange}
+          options={years}
+          styles={customStyles}
+        />
+      </div>
     </div>
   )
 }
