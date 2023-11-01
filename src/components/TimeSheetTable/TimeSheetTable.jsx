@@ -65,8 +65,8 @@ const TimeSheetTable = (props) => {
 
   const [sorting, setSorting] = useState(defaultSorting)
 
-  const filterDataByDate = () => {
-    const currentDate = new Date()
+  const filterDataByDate = (currentFilter) => {
+    const currentDate = currentFilter || new Date()
     const filteredData = employeeHours.filter((employHours) => {
       const employDate = new Date(employHours.date)
       return (
@@ -124,17 +124,10 @@ const TimeSheetTable = (props) => {
     }))
   }, [table])
 
-  const handleFilterByMonth = () => {
-    // Implement filtering logic for filtering by month
-    // Update the data displayed in the table accordingly
+  const handleDateChange = (newDate) => {
+    console.log(newDate)
+    filterDataByDate(newDate)
   }
-
-  const handleFilterByYear = () => {
-    // Implement filtering logic for filtering by year
-    // Update the data displayed in the table accordingly
-  }
-
-  const handleDateChange = () => {}
 
   const calculateColumnSum = (columnName) => {
     let result = 0
