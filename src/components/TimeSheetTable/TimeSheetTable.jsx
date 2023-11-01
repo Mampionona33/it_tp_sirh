@@ -200,14 +200,14 @@ const TimeSheetTable = (props) => {
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full table-auto bg-white text-gray-800 dark:text-gray-400">
+          <table className="w-full table-auto bg-white text-gray-800 dark:text-stone-200">
             <thead className="text-xs uppercase text-gray-700 dark:text-gray-400 bg-gray-100">
               {headerGroups.map((headerGroup, key) => (
                 <tr key={`headerRow_${key}`}>
                   {headerGroup.headers.map((header, headerIndex) => (
                     <th
                       scope="col"
-                      className="px-6 py-3"
+                      className="px-6 py-3 border-b border-customRed-900"
                       key={`header_${header.id}_${headerIndex}`}
                     >
                       {header.isPlaceholder ? null : (
@@ -226,7 +226,7 @@ const TimeSheetTable = (props) => {
               ))}
             </thead>
             <tbody>
-              {rows.length > 0 && (
+              {rows.length > 0 ? (
                 <tr className="font-medium border-b border-customRed-900">
                   <td className="px-6 py-3">Total</td>
                   <td className="px-6 py-3">{total.normalHours}</td>
@@ -234,11 +234,17 @@ const TimeSheetTable = (props) => {
                   <td className="px-6 py-3">{total.nightShiftHours}</td>
                   <td className="px-6 py-3">{total.holidayHours}</td>
                 </tr>
+              ) : (
+                <>
+                  <tr className="">
+                    <td className="text-lg font-semibold p-4">Aucune donnée trouvée</td>
+                  </tr>
+                </>
               )}
               {rows.map((row, rowIndex) => (
                 <tr
                   key={`row_${rowIndex}`}
-                  className={`border-y border-customRed-50 ${
+                  className={`border-y border-customRed-100 ${
                     rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
                   }`}
                 >

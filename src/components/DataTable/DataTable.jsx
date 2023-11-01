@@ -106,7 +106,7 @@ function DataTable({
 
       <div className="overflow-x-auto">
         <table className="w-full table-auto bg-white text-gray-800 dark:text-gray-400">
-          <thead className="text-sm uppercase text-gray-700 dark:text-gray-400 bg-gray-100">
+          <thead className="text-sm uppercase text-gray-700 dark:text-gray-400 bg-stone-200">
             {headerGroups.map((headerGroup, key) => (
               <tr key={`headerRow_${key}`}>
                 {headerGroup.headers.map((header, headerIndex) => (
@@ -121,7 +121,12 @@ function DataTable({
           </thead>
           <tbody>
             {rows.map((row, rowIndex) => (
-              <tr key={`row_${rowIndex}`}>
+              <tr
+                key={`row_${rowIndex}`}
+                className={`border-y border-customRed-100 ${
+                  rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-100'
+                }`}
+              >
                 {row.getVisibleCells().map((cell, cellIndex) => (
                   <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
                     {cell.column.columnDef.cell(cell.getContext())}
