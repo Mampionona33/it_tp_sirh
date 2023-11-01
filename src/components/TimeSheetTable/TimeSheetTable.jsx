@@ -124,23 +124,6 @@ const TimeSheetTable = (props) => {
     }))
   }, [table])
 
-  // React.useEffect(() => {
-  //   let mount = true
-
-  //   if (props.id) {
-  //     const employeHours = employeeHours.filter(
-  //       (employHours) => employHours.employee.id == props.id,
-  //     )
-  //     if (mount) {
-  //       setData(employeHours)
-  //     }
-  //   }
-
-  //   return () => {
-  //     mount = false
-  //   }
-  // }, [props.id, employeeHours])
-
   const handleFilterByMonth = () => {
     // Implement filtering logic for filtering by month
     // Update the data displayed in the table accordingly
@@ -211,14 +194,7 @@ const TimeSheetTable = (props) => {
                       key={`header_${header.id}_${headerIndex}`}
                     >
                       {header.isPlaceholder ? null : (
-                        <>
-                          {header.column.columnDef.header(header.getContext())}
-                          {/* {header.column.id !== 'date' && (
-                            <div className="text-right capitalize text-sm text-customBlue-400">
-                              {columnSums[headerIndex]} Heures
-                            </div>
-                          )} */}
-                        </>
+                        <>{header.column.columnDef.header(header.getContext())}</>
                       )}
                     </th>
                   ))}
