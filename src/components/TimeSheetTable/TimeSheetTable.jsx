@@ -117,17 +117,6 @@ const TimeSheetTable = (props) => {
   const headerGroups = table.getHeaderGroups()
   const rows = table.getRowModel().rows
 
-  React.useEffect(() => {
-    table.setState((prev) => ({
-      ...prev,
-      pagination: {
-        ...prev.pagination,
-        pageIndex: 0,
-        // pageSize: 5,
-      },
-    }))
-  }, [table])
-
   const handleDateChange = (newDate) => {
     filterDataByDate(newDate)
   }
@@ -235,7 +224,7 @@ const TimeSheetTable = (props) => {
                   {headerGroup.headers.map((header, headerIndex) => (
                     <th
                       scope="col"
-                      className="px-6 py-3 border-b border-customRed-900"
+                      className="px-6 py-3 border-b border-customRed-900 w-[25%]" // Ajoutez la classe w-[25%]
                       key={`header_${header.id}_${headerIndex}`}
                     >
                       {header.isPlaceholder ? null : (
@@ -247,21 +236,6 @@ const TimeSheetTable = (props) => {
               ))}
             </thead>
             <tbody>
-              {rows.length > 0 ? (
-                <tr className="font-medium border-b border-customRed-900">
-                  <td className="px-6 py-3">Total</td>
-                  <td className="px-6 py-3">{total.normalHours}</td>
-                  <td className="px-6 py-3">{total.overtimeHours}</td>
-                  <td className="px-6 py-3">{total.nightShiftHours}</td>
-                  <td className="px-6 py-3">{total.holidayHours}</td>
-                </tr>
-              ) : (
-                <>
-                  <tr className="">
-                    <td className="text-lg font-medium p-4">Aucune donnée trouvée</td>
-                  </tr>
-                </>
-              )}
               {rows.map((row, rowIndex) => {
                 const isSundayAndHasSubtotal =
                   isSunday(new Date(row.original.date)) && weeklyDetails.length > 0
@@ -283,6 +257,22 @@ const TimeSheetTable = (props) => {
                   </>
                 )
               })}
+              {/* Total */}
+              {rows.length > 0 ? (
+                <tr className="font-medium bg-customBlue-200 border-b border-customRed-900">
+                  <td className="px-6 py-3">Total</td>
+                  <td className="px-6 py-3">{total.normalHours}</td>
+                  <td className="px-6 py-3">{total.overtimeHours}</td>
+                  <td className="px-6 py-3">{total.nightShiftHours}</td>
+                  <td className="px-6 py-3">{total.holidayHours}</td>
+                </tr>
+              ) : (
+                <>
+                  <tr className="">
+                    <td className="text-lg font-medium p-4">Aucune donnée trouvée</td>
+                  </tr>
+                </>
+              )}
             </tbody>
           </table>
         </div>
