@@ -176,8 +176,12 @@ const TimeSheetTable = (props) => {
     let weeklyOvertimeHours = 0
     const weeklyHsDetails = []
 
-    data.forEach((element) => {
+    data.sort((a, b) => new Date(a.date) - new Date(b.date))
+
+    data.forEach((element, index) => {
       const currentDate = new Date(element.date)
+      const isLastDayOfMonth = index === data.length - 1
+      console.log(currentDate)
       const hsValue = element.overtimeHours || 0
 
       if (isMonday(currentDate)) {
@@ -188,8 +192,7 @@ const TimeSheetTable = (props) => {
       if (currentWeekStartDate) {
         weeklyOvertimeHours += hsValue
 
-        if (isSunday(currentDate)) {
-          // Ajoutez les totaux des heures supplémentaires au tableau weeklyHsDetails
+        if (isSunday(currentDate) || isLastDayOfMonth) {
           weeklyHsDetails.push({
             hs130: weeklyOvertimeHours <= 8 ? weeklyOvertimeHours : 8,
             hs150: weeklyOvertimeHours > 8 ? weeklyOvertimeHours - 8 : 0,
@@ -197,6 +200,7 @@ const TimeSheetTable = (props) => {
         }
       }
     })
+
     console.log(weeklyHsDetails)
     return { total: hs, weeklyDetails: weeklyHsDetails }
   }
