@@ -13,6 +13,7 @@ import { employeeHours } from 'src/db/db'
 import { format, parseISO, startOfWeek, endOfWeek, isMonday, isSunday, isSaturday } from 'date-fns'
 import CustomPagination from '../CustomPagination'
 import MonthYearPicker from './MonthYearPicker'
+import TimeSheetTablePagination from './TimeSheetTablePagination'
 
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
@@ -109,7 +110,7 @@ const TimeSheetTable = (props) => {
       globalFilter,
       rowSelection,
     },
-    getPaginationRowModel: getPaginationRowModel(),
+    // getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   })
 
@@ -337,24 +338,7 @@ const TimeSheetTable = (props) => {
             </tbody>
           </table>
         </div>
-        <div className="bg-gray-100 overflow-auto py-2 px-4">
-          <div className="flex justify-center  p-2 mt-2">
-            <div className="flex flex-wrap items-center gap-2">
-              <CustomPagination
-                pageIndex={table.getState().pagination.pageIndex}
-                pageCount={table.getPageCount()}
-                goToPage={table.setPageIndex}
-                nextPage={table.nextPage}
-                previousPage={table.previousPage}
-                canNextPage={table.getCanNextPage()}
-                canPreviousPage={table.getCanPreviousPage()}
-                pageSizeOptions={pageSizeOptions}
-                setPageSize={table.setPageSize}
-                defaultPageSize={31}
-              />
-            </div>
-          </div>
-        </div>
+        <>{/* <TimeSheetTablePagination table={table} pageSizeOptions={pageSizeOptions} /> */}</>
       </div>
     </>
   )
