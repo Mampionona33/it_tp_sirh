@@ -183,7 +183,6 @@ const TimeSheetTable = (props) => {
     data.forEach((element, index) => {
       const currentDate = new Date(element.date)
       const isLastDayOfMonth = index === data.length - 1
-      console.log(currentDate)
       const hsValue = element.overtimeHours || 0
 
       if (!isSundayStarted && currentDate.getDate() === 1) {
@@ -211,7 +210,6 @@ const TimeSheetTable = (props) => {
       }
     })
 
-    console.log(weeklyHsDetails)
     return { total: hs, weeklyDetails: weeklyHsDetails }
   }
 
