@@ -49,23 +49,37 @@ const TimeSheetTable = (props) => {
 
     // Colonne pour les heures supplémentaires (overtimeHours)
     columnHelper.accessor('overtimeHours', {
-      cell: (info) =>
-        info.row.original.overtimeHours &&
-        info.row.original.overtimeHours.toString().padStart(2, '0'),
+      cell: (info) => {
+        if (!isSunday(new Date(info.row.original.date))) {
+          return (
+            info.row.original.overtimeHours &&
+            info.row.original.overtimeHours.toString().padStart(2, '0')
+          )
+        }
+      },
 
       header: () => 'Heures supplémentaires',
     }),
     // Colonne pour les heures de nuit (nightShiftHours)
     columnHelper.accessor('nightShiftHours', {
-      cell: (info) =>
-        info.row.original.nightShiftHours &&
-        info.row.original.nightShiftHours.toString().padStart(2, '0'),
+      cell: (info) => {
+        if (!isSunday(new Date(info.row.original.date))) {
+          return (
+            info.row.original.nightShiftHours &&
+            info.row.original.nightShiftHours.toString().padStart(2, '0')
+          )
+        }
+      },
       header: () => 'Travail de nuit',
     }),
     columnHelper.accessor('date', {
       cell: (info) => {
         if (isSunday(new Date(info.getValue()))) {
-          return <>{info.row.original.normalHours}</>
+          const result =
+            info.row.original.normalHours +
+            info.row.original.overtimeHours +
+            info.row.original.nightShiftHours
+          return <>{result}</>
         }
       },
       header: () => 'Travail dimanche',
@@ -161,13 +175,19 @@ const TimeSheetTable = (props) => {
       overtimeHours: 0,
       nightShiftHours: 0,
       holidayHours: 0,
+      sundayHours: 0,
     }
 
     data.forEach((item) => {
-      total.normalHours += item.normalHours || 0
-      total.overtimeHours += item.overtimeHours || 0
-      total.nightShiftHours += item.nightShiftHours || 0
       total.holidayHours += item.holidayHours || 0
+
+      if (!isSunday(new Date(item.date))) {
+        total.nightShiftHours += item.nightShiftHours || 0
+        total.overtimeHours += item.overtimeHours || 0
+        total.normalHours += item.normalHours || 0
+      } else {
+        total.sundayHours += item.normalHours || 0
+      }
     })
 
     return total
@@ -282,6 +302,7 @@ const TimeSheetTable = (props) => {
                   <td className="px-6 py-3">{total.normalHours}</td>
                   <td className="px-6 py-3">{total.overtimeHours}</td>
                   <td className="px-6 py-3">{total.nightShiftHours}</td>
+                  <td className="px-6 py-3">{total.sundayHours}</td>
                   <td className="px-6 py-3">{total.holidayHours}</td>
                 </tr>
               ) : (
