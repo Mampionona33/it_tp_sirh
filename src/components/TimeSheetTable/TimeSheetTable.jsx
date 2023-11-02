@@ -178,11 +178,21 @@ const TimeSheetTable = (props) => {
 
     data.sort((a, b) => new Date(a.date) - new Date(b.date))
 
+    let isSundayStarted = false // Utilisé pour détecter le début du mois le dimanche
+
     data.forEach((element, index) => {
       const currentDate = new Date(element.date)
       const isLastDayOfMonth = index === data.length - 1
       console.log(currentDate)
       const hsValue = element.overtimeHours || 0
+
+      if (!isSundayStarted && currentDate.getDate() === 1) {
+        // Si le mois commence un jour autre que le dimanche, démarrez dès le dimanche précédent.
+        const previousSunday = new Date(currentDate)
+        previousSunday.setDate(currentDate.getDate() - 1)
+        currentWeekStartDate = previousSunday
+        isSundayStarted = true
+      }
 
       if (isMonday(currentDate)) {
         currentWeekStartDate = currentDate
