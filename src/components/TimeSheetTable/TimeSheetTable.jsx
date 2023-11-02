@@ -79,7 +79,6 @@ const TimeSheetTable = (props) => {
         employDate.getFullYear() === currentDate.getFullYear()
       )
     })
-    console.log(filteredData)
     setData(filteredData)
   }
 
@@ -168,29 +167,27 @@ const TimeSheetTable = (props) => {
   const total = calculateTotal()
 
   const calculateHSDetails = () => {
-    const hs130 = data.reduce((acc, item) => {
-      const itemDate = new Date(item.date)
-      if (itemDate >= startOfWeek && itemDate <= endOfWeek) {
-        if (item.overtimeHours && item.overtimeHours <= 8) {
-          acc += item.overtimeHours
+    const hs = {
+      hs130: 0,
+      hs150: 0,
+    }
+
+    data.forEach((element) => {
+      if (isSaturday(new Date(element.date))) {
+        console.log(element.date)
+        if (element.overtimeHours > 8) {
+          hs.hs130 += 8
+          hs.hs150 += element.overtimeHours - 8
+        } else {
+          hs.hs130 += element.overtimeHours
         }
       }
-      return acc
-    }, 0)
+    })
 
-    // Calcul du reste pour HS150
-    const hs150 = data.reduce((acc, item) => {
-      const itemDate = new Date(item.date)
-      if (itemDate >= startOfWeek && itemDate <= endOfWeek) {
-        if (item.overtimeHours && item.overtimeHours > 8) {
-          acc += item.overtimeHours - 8
-        }
-      }
-      return acc
-    }, 0)
-
-    return { hs130, hs150 }
+    return hs
   }
+
+  const detailHs = calculateHSDetails()
 
   return (
     <>
@@ -239,18 +236,33 @@ const TimeSheetTable = (props) => {
                 </>
               )}
               {rows.map((row, rowIndex) => (
-                <tr
-                  key={`row_${rowIndex}`}
-                  className={`border-y border-customRed-100 ${
-                    rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                  }`}
-                >
-                  {row.getVisibleCells().map((cell, cellIndex) => (
-                    <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
-                      {cell.column.columnDef.cell(cell.getContext())}
-                    </td>
-                  ))}
-                </tr>
+                <>
+                  <tr
+                    key={`row_${rowIndex}`}
+                    className={`border-y border-customRed-100 ${
+                      rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                    }`}
+                  >
+                    {row.getVisibleCells().map((cell, cellIndex) => (
+                      <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
+                        {cell.column.columnDef.cell(cell.getContext())}
+                      </td>
+                    ))}
+                  </tr>
+
+                  {isSunday(new Date(row.original.date)) && (
+                    <>
+                      <tr>
+                        <td>HS 130%</td>
+                        <td>{detailHs.hs130}</td>
+                      </tr>
+                      <tr>
+                        <td>HS 150%</td>
+                        <td>{detailHs.hs150}</td>
+                      </tr>
+                    </>
+                  )}
+                </>
               ))}
             </tbody>
           </table>
