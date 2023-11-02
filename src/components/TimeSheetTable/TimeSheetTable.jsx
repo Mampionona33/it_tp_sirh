@@ -263,35 +263,48 @@ const TimeSheetTable = (props) => {
                   </tr>
                 </>
               )}
-              {rows.map((row, rowIndex) => (
-                <>
-                  <tr
-                    key={`row_${rowIndex}`}
-                    className={`border-y border-customRed-100 ${
-                      rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                    }`}
-                  >
-                    {row.getVisibleCells().map((cell, cellIndex) => (
-                      <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
-                        {cell.column.columnDef.cell(cell.getContext())}
-                      </td>
-                    ))}
-                  </tr>
+              {rows.map((row, rowIndex) => {
+                const isSundayAndHasSubtotal =
+                  isSunday(new Date(row.original.date)) && weeklyDetails.length > 0
+                const weekIndex = Math.floor(rowIndex / 7)
+                return (
+                  <>
+                    <tr
+                      key={`row_${rowIndex}`}
+                      className={`border-y border-customRed-100 ${
+                        rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                      }`}
+                    >
+                      {row.getVisibleCells().map((cell, cellIndex) => (
+                        <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
+                          {cell.column.columnDef.cell(cell.getContext())}
+                        </td>
+                      ))}
+                    </tr>
 
-                  {isSunday(new Date(row.original.date)) && (
-                    <>
-                      <tr>
-                        <td>HS 130%</td>
-                        <td>{detailHs.hs130}</td>
-                      </tr>
-                      <tr>
-                        <td>HS 150%</td>
-                        <td>{detailHs.hs150}</td>
-                      </tr>
-                    </>
-                  )}
-                </>
-              ))}
+                    {isSundayAndHasSubtotal && (
+                      <>
+                        {isSundayAndHasSubtotal && (
+                          <>
+                            <tr key={`week_${weekIndex}`}>
+                              <td>HS 130% </td>
+                              <td></td>
+                              <td>{weeklyDetails[weekIndex].hs130}</td>
+                              <td></td>
+                            </tr>
+                            <tr>
+                              <td>HS 150% </td>
+                              <td></td>
+                              <td>{weeklyDetails[weekIndex].hs150}</td>
+                              <td></td>
+                            </tr>
+                          </>
+                        )}
+                      </>
+                    )}
+                  </>
+                )
+              })}
             </tbody>
           </table>
         </div>
