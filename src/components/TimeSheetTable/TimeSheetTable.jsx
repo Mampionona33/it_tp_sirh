@@ -284,16 +284,25 @@ const TimeSheetTable = (props) => {
                       <>
                         {isSundayAndHasSubtotal && (
                           <>
-                            <tr key={`week_${weekIndex}`}>
-                              <td>HS 130% </td>
+                            <tr
+                              className="italic bg-customBlue-200 border-customRed-200"
+                              key={`week_${weekIndex}`}
+                            >
+                              <td className="px-6 py-2 ">HS 130% </td>
                               <td></td>
-                              <td>{weeklyDetails[weekIndex].hs130}</td>
+                              <td className="px-6 py-2 font-medium">
+                                {weeklyDetails[weekIndex].hs130}
+                              </td>
+                              <td></td>
                               <td></td>
                             </tr>
-                            <tr>
-                              <td>HS 150% </td>
+                            <tr className="italic bg-customBlue-200 border-customRed-200">
+                              <td className="px-6 py-2">HS 150% </td>
                               <td></td>
-                              <td>{weeklyDetails[weekIndex].hs150}</td>
+                              <td className="px-6 py-2 font-medium">
+                                {weeklyDetails[weekIndex].hs150}
+                              </td>
+                              <td></td>
                               <td></td>
                             </tr>
                           </>
@@ -305,16 +314,22 @@ const TimeSheetTable = (props) => {
               })}
               {rows.length > 0 && weeklyDetails.length > 0 && (
                 <>
-                  <tr>
-                    <td>Total HS 130%</td>
+                  <tr className="italic bg-customBlue-200 border-customRed-200">
+                    <td className="px-6 py-2">HS 130%</td>
                     <td></td>
-                    <td>{weeklyDetails[weeklyDetails.length - 1].hs130}</td>
+                    <td className="px-6 py-2 font-medium">
+                      {weeklyDetails[weeklyDetails.length - 1].hs130.toString().padStart(2, '0')}
+                    </td>
+                    <td></td>
                     <td></td>
                   </tr>
-                  <tr>
-                    <td>Total HS 150%</td>
+                  <tr className="italic bg-customBlue-200 border-customRed-200">
+                    <td className="px-6 py-2">HS 150%</td>
                     <td></td>
-                    <td>{weeklyDetails[weeklyDetails.length - 1].hs150}</td>
+                    <td className="px-6 py-2 font-medium">
+                      {weeklyDetails[weeklyDetails.length - 1].hs150.toString().padStart(2, '0')}
+                    </td>
+                    <td></td>
                     <td></td>
                   </tr>
                 </>

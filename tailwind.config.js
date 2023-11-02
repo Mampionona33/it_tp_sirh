@@ -7,6 +7,7 @@ module.exports = {
         'regal-blue': '#243c5a',
         customBlue: {
           400: '#9091c1',
+          200: '#bfc0d3',
         },
         customRed: {
           900: '#da200d',
