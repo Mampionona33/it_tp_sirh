@@ -10,7 +10,7 @@ import {
   getFilteredRowModel,
 } from '@tanstack/react-table'
 import { employeeHours } from 'src/db/db'
-import { format, parseISO, startOfWeek, endOfWeek, isMonday, isSunday } from 'date-fns'
+import { format, parseISO, startOfWeek, endOfWeek, isMonday, isSunday, isSaturday } from 'date-fns'
 import CustomPagination from '../CustomPagination'
 import MonthYearPicker from './MonthYearPicker'
 
