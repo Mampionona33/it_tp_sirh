@@ -172,22 +172,36 @@ const TimeSheetTable = (props) => {
       hs150: 0,
     }
 
+    let currentWeekStartDate = null
+    let weeklyOvertimeHours = 0
+    const weeklyHsDetails = []
+
     data.forEach((element) => {
-      if (isSaturday(new Date(element.date))) {
-        console.log(element.date)
-        if (element.overtimeHours > 8) {
-          hs.hs130 += 8
-          hs.hs150 += element.overtimeHours - 8
-        } else {
-          hs.hs130 += element.overtimeHours
+      const currentDate = new Date(element.date)
+      const hsValue = element.overtimeHours || 0
+
+      if (isMonday(currentDate)) {
+        currentWeekStartDate = currentDate
+        weeklyOvertimeHours = 0
+      }
+
+      if (currentWeekStartDate) {
+        weeklyOvertimeHours += hsValue
+
+        if (isSunday(currentDate)) {
+          // Ajoutez les totaux des heures supplémentaires au tableau weeklyHsDetails
+          weeklyHsDetails.push({
+            hs130: weeklyOvertimeHours <= 8 ? weeklyOvertimeHours : 8,
+            hs150: weeklyOvertimeHours > 8 ? weeklyOvertimeHours - 8 : 0,
+          })
         }
       }
     })
-
-    return hs
+    console.log(weeklyHsDetails)
+    return { total: hs, weeklyDetails: weeklyHsDetails }
   }
 
-  const detailHs = calculateHSDetails()
+  const { total: detailHs, weeklyDetails } = calculateHSDetails()
 
   return (
     <>
