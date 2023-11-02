@@ -218,7 +218,7 @@ const TimeSheetTable = (props) => {
 
   return (
     <>
-      <div className="border shadow-sm overflow-hidden">
+      <div className="border shadow-sm ">
         <div className="flex flex-row flex-wrap bg-customRed-900 gap-4 px-4 py-2 text-white">
           <div className="flex-grow">
             <h5 className="text-2xl font-semibold mb-2">Heures travaillées</h5>
@@ -280,65 +280,12 @@ const TimeSheetTable = (props) => {
                         </td>
                       ))}
                     </tr>
-
-                    {isSundayAndHasSubtotal && (
-                      <>
-                        {isSundayAndHasSubtotal && (
-                          <>
-                            <tr
-                              className="italic bg-customBlue-200 border-customRed-200"
-                              key={`week_${weekIndex}`}
-                            >
-                              <td className="px-6 py-2 ">HS 130% </td>
-                              <td></td>
-                              <td className="px-6 py-2 font-medium">
-                                {weeklyDetails[weekIndex].hs130}
-                              </td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                            <tr className="italic bg-customBlue-200 border-customRed-200">
-                              <td className="px-6 py-2">HS 150% </td>
-                              <td></td>
-                              <td className="px-6 py-2 font-medium">
-                                {weeklyDetails[weekIndex].hs150}
-                              </td>
-                              <td></td>
-                              <td></td>
-                            </tr>
-                          </>
-                        )}
-                      </>
-                    )}
                   </>
                 )
               })}
-              {rows.length > 0 && weeklyDetails.length > 0 && (
-                <>
-                  <tr className="italic bg-customBlue-200 border-customRed-200">
-                    <td className="px-6 py-2">HS 130%</td>
-                    <td></td>
-                    <td className="px-6 py-2 font-medium">
-                      {weeklyDetails[weeklyDetails.length - 1].hs130.toString().padStart(2, '0')}
-                    </td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr className="italic bg-customBlue-200 border-customRed-200">
-                    <td className="px-6 py-2">HS 150%</td>
-                    <td></td>
-                    <td className="px-6 py-2 font-medium">
-                      {weeklyDetails[weeklyDetails.length - 1].hs150.toString().padStart(2, '0')}
-                    </td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </>
-              )}
             </tbody>
           </table>
         </div>
-        <>{/* <TimeSheetTablePagination table={table} pageSizeOptions={pageSizeOptions} /> */}</>
       </div>
     </>
   )

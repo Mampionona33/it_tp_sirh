@@ -46,6 +46,7 @@ function MonthYearPicker({ selectedDate, onDateChange }) {
       ':hover': {
         backgroundColor: '#e7b7b4',
       },
+      zIndex: '1000',
     }),
     // menuList: (base) => ({
     //   ...base,
