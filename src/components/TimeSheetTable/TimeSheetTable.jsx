@@ -10,7 +10,7 @@ import {
   getFilteredRowModel,
 } from '@tanstack/react-table'
 import { employeeHours } from 'src/db/db'
-import { format, parseISO } from 'date-fns'
+import { format, parseISO, startOfWeek, endOfWeek, isMonday, isSunday } from 'date-fns'
 import CustomPagination from '../CustomPagination'
 import MonthYearPicker from './MonthYearPicker'
 
@@ -20,6 +20,10 @@ const TimeSheetTable = (props) => {
   const [data, setData] = useState([])
   const [rowSelection, setRowSelection] = React.useState({})
   const [globalFilter, setGlobalFilter] = useState('')
+  const defaultStartDate = isMonday(new Date()) ? new Date() : startOfWeek(new Date())
+  const defaultEndDate = isSunday(new Date()) ? new Date() : endOfWeek(new Date())
+  const [startDate, setStartDate] = useState(defaultStartDate)
+  const [endDate, setEndDate] = useState(defaultEndDate)
 
   const columns = [
     // Colonne pour la date
@@ -162,6 +166,31 @@ const TimeSheetTable = (props) => {
     return total
   }
   const total = calculateTotal()
+
+  const calculateHSDetails = () => {
+    const hs130 = data.reduce((acc, item) => {
+      const itemDate = new Date(item.date)
+      if (itemDate >= startOfWeek && itemDate <= endOfWeek) {
+        if (item.overtimeHours && item.overtimeHours <= 8) {
+          acc += item.overtimeHours
+        }
+      }
+      return acc
+    }, 0)
+
+    // Calcul du reste pour HS150
+    const hs150 = data.reduce((acc, item) => {
+      const itemDate = new Date(item.date)
+      if (itemDate >= startOfWeek && itemDate <= endOfWeek) {
+        if (item.overtimeHours && item.overtimeHours > 8) {
+          acc += item.overtimeHours - 8
+        }
+      }
+      return acc
+    }, 0)
+
+    return { hs130, hs150 }
+  }
 
   return (
     <>
