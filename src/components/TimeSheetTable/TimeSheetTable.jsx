@@ -34,15 +34,25 @@ const TimeSheetTable = (props) => {
     }),
     // Colonne pour les heures normales
     columnHelper.accessor('normalHours', {
-      cell: (info) =>
-        info.row.original.normalHours && info.row.original.normalHours.toString().padStart(2, '0'),
+      cell: (info) => {
+        if (!isSunday(new Date(info.row.original.date))) {
+          return (
+            info.row.original.normalHours &&
+            info.row.original.normalHours.toString().padStart(2, '0')
+          )
+        } else {
+          return ''
+        }
+      },
       header: () => 'Heure normale',
     }),
+
     // Colonne pour les heures supplémentaires (overtimeHours)
     columnHelper.accessor('overtimeHours', {
       cell: (info) =>
         info.row.original.overtimeHours &&
         info.row.original.overtimeHours.toString().padStart(2, '0'),
+
       header: () => 'Heures supplémentaires',
     }),
     // Colonne pour les heures de nuit (nightShiftHours)
@@ -51,6 +61,14 @@ const TimeSheetTable = (props) => {
         info.row.original.nightShiftHours &&
         info.row.original.nightShiftHours.toString().padStart(2, '0'),
       header: () => 'Travail de nuit',
+    }),
+    columnHelper.accessor('date', {
+      cell: (info) => {
+        if (isSunday(new Date(info.getValue()))) {
+          return <>{info.row.original.normalHours}</>
+        }
+      },
+      header: () => 'Travail dimanche',
     }),
     // Colonne pour les heures de jour férié (holidayHours)
     columnHelper.accessor('holidayHours', {
