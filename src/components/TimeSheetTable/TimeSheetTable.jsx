@@ -305,6 +305,22 @@ const TimeSheetTable = (props) => {
                   </>
                 )
               })}
+              {rows.length > 0 && weeklyDetails.length > 0 && (
+                <>
+                  <tr>
+                    <td>Total HS 130%</td>
+                    <td></td>
+                    <td>{weeklyDetails[weeklyDetails.length - 1].hs130}</td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Total HS 150%</td>
+                    <td></td>
+                    <td>{weeklyDetails[weeklyDetails.length - 1].hs150}</td>
+                    <td></td>
+                  </tr>
+                </>
+              )}
             </tbody>
           </table>
         </div>
