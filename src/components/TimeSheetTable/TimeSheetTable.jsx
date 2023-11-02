@@ -125,7 +125,6 @@ const TimeSheetTable = (props) => {
   }, [table])
 
   const handleDateChange = (newDate) => {
-    console.log(newDate)
     filterDataByDate(newDate)
   }
 
