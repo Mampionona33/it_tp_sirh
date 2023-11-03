@@ -32,25 +32,25 @@ const TimeSheetTable = (props) => {
       cell: (info) => format(parseISO(info.getValue()), 'dd/MM/yyyy'),
       header: () => 'Date',
     }),
-    // Colonne pour les heures normales
+    // Colonne pour les heures normales jour
     columnHelper.accessor('normalHours', {
       cell: (info) => {
         if (!isSunday(new Date(info.row.original.date))) {
           return (
-            info.row.original.normalHours &&
-            info.row.original.normalHours.toString().padStart(2, '0')
+            info.row.original.regularHoursDay &&
+            info.row.original.regularHoursDay.toString().padStart(2, '0')
           )
         } else {
           return ''
         }
       },
-      header: () => 'Heure normale',
+      header: () => 'Heure normale jour',
     }),
 
-    // Colonne pour les heures supplémentaires (overtimeHoursDay)
+    // heures supplémentaires
     columnHelper.accessor('overtimeHoursDay', {
       cell: (info) => {
-        if (!isSunday(new Date(info.row.original.date))) {
+        if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
           return (
             info.row.original.overtimeHoursDay &&
             info.row.original.overtimeHoursDay.toString().padStart(2, '0')
@@ -58,27 +58,41 @@ const TimeSheetTable = (props) => {
         }
       },
 
-      header: () => 'Heures supplémentaires jour',
+      header: () => 'Heures supplémentaires',
     }),
-    // Colonne pour les heures de nuit (overtimeHoursNight)
-    columnHelper.accessor('overtimeHoursNight', {
+
+    // Colonne pour travail de nuit habituelles "agent de nuit" x30%
+    columnHelper.accessor('regularNightHours', {
       cell: (info) => {
-        if (!isSunday(new Date(info.row.original.date))) {
+        if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
           return (
-            info.row.original.overtimeHoursNight &&
-            info.row.original.overtimeHoursNight.toString().padStart(2, '0')
+            info.row.original.regularNightHours &&
+            info.row.original.regularNightHours.toString().padStart(2, '0')
           )
         }
       },
-      header: () => 'Heures supplémentaires Nuit',
+      header: () => 'Travail de nuit habituelles',
     }),
+
+    // Colonne pour travail de nuit occasionnelles x50%
+    columnHelper.accessor('date', {
+      cell: (info) => {
+        return (
+          info.row.original.occasionalNightHours &&
+          info.row.original.occasionalNightHours.toString().padStart(2, '0')
+        )
+      },
+      header: () => 'Travail de nuit occasionnelles',
+    }),
+
+    // Colonne pour travail dimanche
     columnHelper.accessor('date', {
       cell: (info) => {
         if (isSunday(new Date(info.getValue()))) {
           const result =
-            info.row.original.normalHours +
-            info.row.original.overtimeHoursDay +
-            info.row.original.overtimeHoursNight
+            info.row.original.regularHoursDay +
+            info.row.original.regularNightHours +
+            info.row.original.overtimeHoursDay
           return <>{result}</>
         }
       },
@@ -171,10 +185,11 @@ const TimeSheetTable = (props) => {
 
   const calculateTotal = () => {
     const total = {
-      normalHours: 0,
+      regularHoursDay: 0,
       overtimeHoursDay: 0,
-      overtimeHoursNight: 0,
+      regularNightHours: 0,
       holidayHours: 0,
+      occasionalNightHours: 0,
       sundayHours: 0,
     }
 
@@ -182,11 +197,12 @@ const TimeSheetTable = (props) => {
       total.holidayHours += item.holidayHours || 0
 
       if (!isSunday(new Date(item.date))) {
-        total.overtimeHoursNight += item.overtimeHoursNight || 0
+        total.regularNightHours += item.regularNightHours || 0
         total.overtimeHoursDay += item.overtimeHoursDay || 0
-        total.normalHours += item.normalHours || 0
+        total.regularHoursDay += item.regularHoursDay || 0
+        total.occasionalNightHours += item.occasionalNightHours || 0
       } else {
-        total.sundayHours += item.normalHours || 0
+        total.sundayHours += item.regularHoursDay || 0
       }
     })
 
@@ -296,9 +312,10 @@ const TimeSheetTable = (props) => {
               {rows.length > 0 ? (
                 <tr className="font-medium bg-customBlue-200 border-b border-customRed-900">
                   <td className="px-6 py-3">Total</td>
-                  <td className="px-6 py-3">{total.normalHours}</td>
+                  <td className="px-6 py-3">{total.regularHoursDay}</td>
                   <td className="px-6 py-3">{total.overtimeHoursDay}</td>
-                  <td className="px-6 py-3">{total.overtimeHoursNight}</td>
+                  <td className="px-6 py-3">{total.regularNightHours}</td>
+                  <td className="px-6 py-3">{total.occasionalNightHours}</td>
                   <td className="px-6 py-3">{total.sundayHours}</td>
                   <td className="px-6 py-3">{total.holidayHours}</td>
                 </tr>
