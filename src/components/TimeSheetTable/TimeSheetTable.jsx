@@ -10,7 +10,16 @@ import {
   getFilteredRowModel,
 } from '@tanstack/react-table'
 import { employeeHours } from 'src/db/db'
-import { format, parseISO, startOfWeek, endOfWeek, isMonday, isSunday, isSaturday } from 'date-fns'
+import {
+  format,
+  parseISO,
+  startOfWeek,
+  endOfWeek,
+  isMonday,
+  isSunday,
+  isSaturday,
+  isDate,
+} from 'date-fns'
 import CustomPagination from '../CustomPagination'
 import MonthYearPicker from './MonthYearPicker'
 import TimeSheetTablePagination from './TimeSheetTablePagination'
@@ -58,6 +67,36 @@ const TimeSheetTable = (props) => {
       },
 
       header: () => 'Heures supplémentaires',
+    }),
+
+    // colonne HS130
+    columnHelper.accessor('id', {
+      cell: (info) => {
+        if (isMonday(new Date(info.row.original.date))) {
+          // Create a new Date instance from the original date
+          const weekStartDate = new Date(info.row.original.date)
+
+          // Calculate the week's end date by adding 6 days to the start date
+          const weekEndDate = new Date(weekStartDate)
+          weekEndDate.setDate(weekEndDate.getDate() + 6)
+
+          // Now, you have the start and end dates for the week, and you can calculate the sum of overtimeHoursDay within this week
+          const weekStartISO = format(weekStartDate, 'yyyy-MM-dd')
+          const weekEndISO = format(weekEndDate, 'yyyy-MM-dd')
+
+          // Filter and sum the overtimeHoursDay for rows within the current week
+          const weekTotal = data.filter((row) => row.date >= weekStartISO && row.date <= weekEndISO)
+
+          // Calculate the sum of overtimeHoursDay for the current week
+          const hs130 = weekTotal.reduce((total, item) => {
+            return total + (item.overtimeHoursDay || 0)
+          }, 0)
+
+          return hs130.toString()
+        }
+        return
+      },
+      header: () => 'HS Non imposable',
     }),
 
     // Colonne pour travail de nuit habituelles "agent de nuit" x30%
@@ -304,19 +343,34 @@ const TimeSheetTable = (props) => {
                     rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
                   }`}
                 >
-                  {row.getVisibleCells().map((cell, cellIndex) => (
-                    <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
-                      {cell.column.columnDef.cell(cell.getContext())}
-                    </td>
-                  ))}
+                  {row.getVisibleCells().map((cell, cellIndex) => {
+                    const currentColumn = cell.column.id
+
+                    if (currentColumn === 'id' && isMonday(new Date(row.original.date))) {
+                      // Appliquez rowSpan à la cellule (colonne "HS Non imposable") de la semaine
+                      return (
+                        <td key={`cell_${rowIndex}_${cellIndex}`} rowSpan={6} className="px-6 py-2">
+                          {cell.column.columnDef.cell(cell.getContext())}
+                        </td>
+                      )
+                    } else {
+                      return (
+                        <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
+                          {cell.column.columnDef.cell(cell.getContext())}
+                        </td>
+                      )
+                    }
+                  })}
                 </tr>
               ))}
+
               {/* Total */}
               {rows.length > 0 ? (
                 <tr className="font-medium bg-customBlue-200 border-b border-customRed-900">
                   <td className="px-6 py-3">Total</td>
                   <td className="px-6 py-3">{total.regularHoursDay}</td>
                   <td className="px-6 py-3">{total.overtimeHoursDay}</td>
+                  <td className="px-6 py-3">00</td>
                   <td className="px-6 py-3">{total.regularNightHours}</td>
                   <td className="px-6 py-3">{total.occasionalNightHours}</td>
                   <td className="px-6 py-3">{total.sundayHours}</td>
