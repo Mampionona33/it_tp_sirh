@@ -109,7 +109,6 @@ const Fiche = () => {
           role="tabpanel"
           aria-labelledby="dashboard-tab"
         >
-          {/* {selectedEmployee !== null && <NormalHours id={selectedEmployee} />} */}
           {selectedEmployee !== null && <TimeSheetTable id={selectedEmployee} />}
         </div>
 

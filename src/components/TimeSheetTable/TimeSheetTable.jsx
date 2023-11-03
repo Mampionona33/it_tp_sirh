@@ -102,7 +102,7 @@ const TimeSheetTable = (props) => {
         info.row.original.holidayHours
           ? info.row.original.holidayHours.toString().padStart(2, '0')
           : '',
-      header: () => 'Travail de jour férié'
+      header: () => 'Travail de jour férié',
     }),
   ]
 
@@ -292,7 +292,7 @@ const TimeSheetTable = (props) => {
 
   return (
     <>
-      <div className="border shadow-sm ">
+      <div className="border shadow-sm  ">
         <div className="flex flex-row flex-wrap bg-customRed-900 gap-4 px-4 py-2 text-white">
           <div className="flex-grow">
             <h5 className="text-2xl font-semibold mb-2">Heures travaillées</h5>
@@ -302,14 +302,14 @@ const TimeSheetTable = (props) => {
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full table-fixed bg-white text-gray-800 dark:text-stone-200">
+          <table className="w-full max-h-full table-fixed bg-white text-gray-800 dark:text-stone-200 ">
             <thead className="text-xs uppercase text-gray-700 dark:text-gray-400 bg-gray-100">
               {headerGroups.map((headerGroup, key) => (
                 <tr key={`headerRow_${key}`} className="w-full">
                   {headerGroup.headers.map((header, headerIndex) => (
                     <th
                       scope="col"
-                      className="px-6 py-3 border-b border-customRed-900 w-1/6 min-w-1/6"
+                      className="px-6 py-3 border-b border-customRed-900 w-1/6 min-w-1/6 bg-white z-10"
                       key={`header_${header.id}_${headerIndex}`}
                     >
                       {header.isPlaceholder ? null : (
@@ -320,26 +320,21 @@ const TimeSheetTable = (props) => {
                 </tr>
               ))}
             </thead>
-
             <tbody>
-              {rows.map((row, rowIndex) => {
-                return (
-                  <>
-                    <tr
-                      key={`row_${rowIndex}`}
-                      className={`border-y border-customRed-100 ${
-                        rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                      }`}
-                    >
-                      {row.getVisibleCells().map((cell, cellIndex) => (
-                        <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
-                          {cell.column.columnDef.cell(cell.getContext())}
-                        </td>
-                      ))}
-                    </tr>
-                  </>
-                )
-              })}
+              {rows.map((row, rowIndex) => (
+                <tr
+                  key={`row_${rowIndex}`}
+                  className={`border-y border-customRed-100 ${
+                    rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                  }`}
+                >
+                  {row.getVisibleCells().map((cell, cellIndex) => (
+                    <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
+                      {cell.column.columnDef.cell(cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))}
               {/* Total */}
               {rows.length > 0 ? (
                 <tr className="font-medium bg-customBlue-200 border-b border-customRed-900">
@@ -352,11 +347,11 @@ const TimeSheetTable = (props) => {
                   <td className="px-6 py-3">{total.holidayHours}</td>
                 </tr>
               ) : (
-                <>
-                  <tr className="">
-                    <td className="text-lg font-medium p-4">Aucune donnée trouvée</td>
-                  </tr>
-                </>
+                <tr>
+                  <td colSpan="7" className="text-lg font-medium p-4">
+                    Aucune donnée trouvée
+                  </td>
+                </tr>
               )}
             </tbody>
           </table>
