@@ -41,7 +41,7 @@ const TimeSheetTable = (props) => {
             info.row.original.regularHoursDay.toString().padStart(2, '0')
           )
         } else {
-          return ''
+          return
         }
       },
       header: () => 'Heure normale jour',
@@ -53,7 +53,7 @@ const TimeSheetTable = (props) => {
         if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
           return info.row.original.overtimeHoursDay
             ? info.row.original.overtimeHoursDay.toString().padStart(2, '0')
-            : ''
+            : null
         }
       },
 
@@ -78,7 +78,7 @@ const TimeSheetTable = (props) => {
       cell: (info) => {
         return info.row.original.occasionalNightHours
           ? info.row.original.occasionalNightHours.toString().padStart(2, '0')
-          : ''
+          : null
       },
       header: () => 'Travail de nuit occasionnelles',
     }),
@@ -91,7 +91,9 @@ const TimeSheetTable = (props) => {
             info.row.original.regularHoursDay +
             info.row.original.regularNightHours +
             info.row.original.overtimeHoursDay
-          return <>{result}</>
+          return <>{result.toString().padStart(2, '0')}</>
+        } else {
+          return
         }
       },
       header: () => 'Travail dimanche',
@@ -181,32 +183,6 @@ const TimeSheetTable = (props) => {
     }
     return null
   })
-
-  // const calculateTotal = () => {
-  //   const total = {
-  //     regularHoursDay: 0,
-  //     overtimeHoursDay: 0,
-  //     regularNightHours: 0,
-  //     holidayHours: 0,
-  //     occasionalNightHours: 0,
-  //     sundayHours: 0,
-  //   }
-
-  //   data.forEach((item) => {
-  //     total.holidayHours += item.holidayHours || 0
-
-  //     if (!isSunday(new Date(item.date))) {
-  //       total.regularNightHours += item.regularNightHours || 0
-  //       total.overtimeHoursDay += item.overtimeHoursDay || 0
-  //       total.regularHoursDay += item.regularHoursDay || 0
-  //       total.occasionalNightHours += item.occasionalNightHours || 0
-  //     } else {
-  //       total.sundayHours += item.regularHoursDay || item.regularNightHours || 0
-  //     }
-  //   })
-
-  //   return total
-  // }
 
   const calculateTotal = () => {
     const total = {
