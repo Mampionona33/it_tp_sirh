@@ -102,7 +102,7 @@ const TimeSheetTable = (props) => {
         info.row.original.holidayHours
           ? info.row.original.holidayHours.toString().padStart(2, '0')
           : '',
-      header: () => <p>Travail de jour férié</p>,
+      header: () => 'Travail de jour férié'
     }),
   ]
 
