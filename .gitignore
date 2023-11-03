@@ -11,6 +11,9 @@ yarn.lock
 # production
 /build
 
+# gitpod env
+.gitpod.yml
+
 # misc
 .eslintcache
 .DS_Store
