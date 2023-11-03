@@ -886,10 +886,10 @@ export const employeeHours = [
       id: 1,
     },
     date: '2023-05-05T13:58:52.529Z',
-    normalHours: 8,
-    overtimeHoursDay: 2,
-    overtimeHoursNight: 4,
-    holidayHours: null,
+    normalHours: 8, // Heures normal
+    overtimeHoursDay: 2, // Sup heures normal jour
+    overtimeHoursNight: 4, // Sup heures normal nuit
+    holidayHours: null, // férié
   },
   {
     id: 2,
