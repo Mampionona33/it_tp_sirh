@@ -275,9 +275,6 @@ const TimeSheetTable = (props) => {
             </thead>
             <tbody>
               {rows.map((row, rowIndex) => {
-                const isSundayAndHasSubtotal =
-                  isSunday(new Date(row.original.date)) && weeklyDetails.length > 0
-                const weekIndex = Math.floor(rowIndex / 7)
                 return (
                   <>
                     <tr
