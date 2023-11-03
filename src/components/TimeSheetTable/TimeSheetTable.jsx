@@ -302,14 +302,14 @@ const TimeSheetTable = (props) => {
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full max-h-full table-fixed bg-white text-gray-800 dark:text-stone-200 ">
+          <table className="w-full max-h-full md:table-fixed sm:table-auto bg-white text-gray-800 dark:text-stone-200 ">
             <thead className="text-xs uppercase text-gray-700 dark:text-gray-400 bg-gray-100">
               {headerGroups.map((headerGroup, key) => (
                 <tr key={`headerRow_${key}`} className="w-full">
                   {headerGroup.headers.map((header, headerIndex) => (
                     <th
                       scope="col"
-                      className="px-6 py-3 border-b border-customRed-900 w-1/6 min-w-1/6 bg-white z-10"
+                      className="px-6 py-3 md:break-words border-b border-customRed-900 w-1/6 min-w-1/6 bg-white z-10"
                       key={`header_${header.id}_${headerIndex}`}
                     >
                       {header.isPlaceholder ? null : (
