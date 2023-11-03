@@ -53,7 +53,7 @@ const TimeSheetTable = (props) => {
         if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
           return info.row.original.overtimeHoursDay
             ? info.row.original.overtimeHoursDay.toString().padStart(2, '0')
-            : null
+            : ''
         }
       },
 
@@ -78,7 +78,7 @@ const TimeSheetTable = (props) => {
       cell: (info) => {
         return info.row.original.occasionalNightHours
           ? info.row.original.occasionalNightHours.toString().padStart(2, '0')
-          : null
+          : ''
       },
       header: () => 'Travail de nuit occasionnelles',
     }),
@@ -99,9 +99,10 @@ const TimeSheetTable = (props) => {
     // Colonne pour les heures de jour férié (holidayHours)
     columnHelper.accessor('holidayHours', {
       cell: (info) =>
-        info.row.original.holidayHours &&
-        info.row.original.holidayHours.toString().padStart(2, '0'),
-      header: () => 'Travail de jour férié',
+        info.row.original.holidayHours
+          ? info.row.original.holidayHours.toString().padStart(2, '0')
+          : '',
+      header: () => <p>Travail de jour férié</p>,
     }),
   ]
 
@@ -301,14 +302,14 @@ const TimeSheetTable = (props) => {
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full table-auto bg-white text-gray-800 dark:text-stone-200">
+          <table className="w-full table-fixed bg-white text-gray-800 dark:text-stone-200">
             <thead className="text-xs uppercase text-gray-700 dark:text-gray-400 bg-gray-100">
               {headerGroups.map((headerGroup, key) => (
-                <tr key={`headerRow_${key}`}>
+                <tr key={`headerRow_${key}`} className="w-full">
                   {headerGroup.headers.map((header, headerIndex) => (
                     <th
                       scope="col"
-                      className="px-6 py-3 border-b border-customRed-900 w-[25%]" // Ajoutez la classe w-[25%]
+                      className="px-6 py-3 border-b border-customRed-900 w-1/6 min-w-1/6"
                       key={`header_${header.id}_${headerIndex}`}
                     >
                       {header.isPlaceholder ? null : (
@@ -319,6 +320,7 @@ const TimeSheetTable = (props) => {
                 </tr>
               ))}
             </thead>
+
             <tbody>
               {rows.map((row, rowIndex) => {
                 return (
