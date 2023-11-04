@@ -44,6 +44,8 @@ const TimeSheetTable = (props) => {
       cell: (info) => format(parseISO(info.getValue()), 'dd/MM/yyyy'),
       header: () => 'Date',
     }),
+
+    // colonne pour afficher le jour
     columnHelper.accessor('date', {
       cell: (info) => (
         <span className="capitalize">{format(parseISO(info.getValue()), 'EEEE')}</span>
