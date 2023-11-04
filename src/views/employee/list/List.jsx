@@ -37,7 +37,9 @@ const List = () => {
                 checked={info.row.getIsSelected()}
                 onChange={info.row.getToggleSelectedHandler()}
               />
-              <label htmlFor="id">{info.getValue()}</label>
+              <label className="visually-hidden" htmlFor="id">
+                {info.getValue()}
+              </label>
             </div>
           )
         },
