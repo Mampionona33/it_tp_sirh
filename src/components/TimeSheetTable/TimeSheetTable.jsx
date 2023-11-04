@@ -19,10 +19,12 @@ import {
   isSunday,
   isSaturday,
   isDate,
+  setDefaultOptions,
 } from 'date-fns'
 import CustomPagination from '../CustomPagination'
 import MonthYearPicker from './MonthYearPicker'
 import TimeSheetTablePagination from './TimeSheetTablePagination'
+import { fr } from 'date-fns/locale'
 
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
@@ -34,6 +36,7 @@ const TimeSheetTable = (props) => {
   const defaultEndDate = isSunday(new Date()) ? new Date() : endOfWeek(new Date())
   const [startDate, setStartDate] = useState(defaultStartDate)
   const [endDate, setEndDate] = useState(defaultEndDate)
+  setDefaultOptions({ locale: fr })
 
   const columns = [
     // Colonne pour la date
@@ -41,6 +44,13 @@ const TimeSheetTable = (props) => {
       cell: (info) => format(parseISO(info.getValue()), 'dd/MM/yyyy'),
       header: () => 'Date',
     }),
+    columnHelper.accessor('date', {
+      cell: (info) => (
+        <span className="capitalize">{format(parseISO(info.getValue()), 'EEEE')}</span>
+      ),
+      header: () => 'Jour',
+    }),
+
     // Colonne pour les heures normales jour
     columnHelper.accessor('normalHours', {
       cell: (info) => {
@@ -53,7 +63,7 @@ const TimeSheetTable = (props) => {
           return
         }
       },
-      header: () => 'Heure normale jour',
+      header: () => 'HN',
     }),
 
     // heures supplémentaires
@@ -66,7 +76,7 @@ const TimeSheetTable = (props) => {
         }
       },
 
-      header: () => 'Heures supplémentaires',
+      header: () => 'HS',
     }),
 
     // colonne HS130
@@ -92,11 +102,41 @@ const TimeSheetTable = (props) => {
             return total + (item.overtimeHoursDay || 0)
           }, 0)
 
-          return hs130.toString()
+          return hs130 >= 8 ? 8 : hs130.toString()
         }
         return
       },
-      header: () => 'HS Non imposable',
+      header: () => 'HS 130%',
+    }),
+
+    // colonne HS150
+    columnHelper.accessor('id', {
+      cell: (info) => {
+        if (isMonday(new Date(info.row.original.date))) {
+          // Create a new Date instance from the original date
+          const weekStartDate = new Date(info.row.original.date)
+
+          // Calculate the week's end date by adding 6 days to the start date
+          const weekEndDate = new Date(weekStartDate)
+          weekEndDate.setDate(weekEndDate.getDate() + 6)
+
+          // Now, you have the start and end dates for the week, and you can calculate the sum of overtimeHoursDay within this week
+          const weekStartISO = format(weekStartDate, 'yyyy-MM-dd')
+          const weekEndISO = format(weekEndDate, 'yyyy-MM-dd')
+
+          // Filter and sum the overtimeHoursDay for rows within the current week
+          const weekTotal = data.filter((row) => row.date >= weekStartISO && row.date <= weekEndISO)
+
+          // Calculate the sum of overtimeHoursDay for the current week
+          const hs150 = weekTotal.reduce((total, item) => {
+            return total + (item.overtimeHoursDay || 0)
+          }, 0)
+
+          return hs150 >= 8 ? hs150 - 8 : hs150.toString()
+        }
+        return
+      },
+      header: () => 'HS 150%',
     }),
 
     // Colonne pour travail de nuit habituelles "agent de nuit" x30%
@@ -305,6 +345,22 @@ const TimeSheetTable = (props) => {
 
   const { total: detailHs, weeklyDetails } = calculateHSDetails()
 
+  const Total = () => {
+    return (
+      <tr className="font-medium bg-customBlue-200 border-b border-customRed-900">
+        <td className="px-6 py-3">Total</td>
+        <td className="px-6 py-3"></td>
+        <td className="px-6 py-3">{total.regularHoursDay}</td>
+        <td className="px-6 py-3">{total.overtimeHoursDay}</td>
+        <td className="px-6 py-3">00</td>
+        <td className="px-6 py-3">{total.regularNightHours}</td>
+        <td className="px-6 py-3">{total.occasionalNightHours}</td>
+        <td className="px-6 py-3">{total.sundayHours}</td>
+        <td className="px-6 py-3">{total.holidayHours}</td>
+      </tr>
+    )
+  }
+
   return (
     <>
       <div className="border shadow-sm  ">
@@ -366,16 +422,7 @@ const TimeSheetTable = (props) => {
 
               {/* Total */}
               {rows.length > 0 ? (
-                <tr className="font-medium bg-customBlue-200 border-b border-customRed-900">
-                  <td className="px-6 py-3">Total</td>
-                  <td className="px-6 py-3">{total.regularHoursDay}</td>
-                  <td className="px-6 py-3">{total.overtimeHoursDay}</td>
-                  <td className="px-6 py-3">00</td>
-                  <td className="px-6 py-3">{total.regularNightHours}</td>
-                  <td className="px-6 py-3">{total.occasionalNightHours}</td>
-                  <td className="px-6 py-3">{total.sundayHours}</td>
-                  <td className="px-6 py-3">{total.holidayHours}</td>
-                </tr>
+                <Total />
               ) : (
                 <tr>
                   <td colSpan="7" className="text-lg font-medium p-4">
