@@ -45,22 +45,7 @@ const FormInfoGalEmployee = (props) => {
       boxShadow: state.isFocused ? '0 0 0 0.25rem #e7b7b4' : null,
       borderRadius: 0,
     }),
-    // menuList: (base) => ({
-    //   ...base,
 
-    //   '::-webkit-scrollbar': {
-    //     width: '5px',
-    //   },
-    //   '::-webkit-scrollbar-track': {
-    //     background: '#bfc0d3',
-    //   },
-    //   '::-webkit-scrollbar-thumb': {
-    //     background: '#f19088',
-    //   },
-    //   '::-webkit-scrollbar-thumb:hover': {
-    //     background: '#f19088',
-    //   },
-    // }),
     container: (provided) => ({
       ...provided,
       width: '100%',
@@ -144,6 +129,20 @@ const FormInfoGalEmployee = (props) => {
               id="matricule"
               placeholder="A01200"
               value={employee.matricule ? employee.matricule : ''}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-12 col-lg-6">
+            <label className="form-label" htmlFor="matricule">
+              Poste
+            </label>
+            <input
+              className="form-control"
+              type="text"
+              name="post"
+              id="poste"
+              placeholder="Directeur"
+              value={employee.poste ? employee.poste : ''}
               onChange={handleChange}
             />
           </div>
