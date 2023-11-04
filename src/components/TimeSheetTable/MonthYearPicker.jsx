@@ -76,24 +76,24 @@ function MonthYearPicker({ selectedDate, onDateChange }) {
   return (
     <div className="flex flex-wrap gap-2">
       <div className="">
-        <label className="form-label" htmlFor="month">
+        <label className="form-label visually-hidden" htmlFor="month">
           Mois
         </label>
         <Select
           menuPlacement="auto"
-          value={months.find((m) => m.value === selectedMonth)} // Set the default value for the month
+          value={months.find((m) => m.value === selectedMonth)}
           onChange={handleMonthChange}
           options={months}
           styles={customStyles}
         />
       </div>
       <div className="">
-        <label className="form-label" htmlFor="year">
+        <label className="form-label visually-hidden" htmlFor="year">
           Année
         </label>
         <Select
           menuPlacement="auto"
-          value={years.find((y) => y.value === selectedYear)} // Set the default value for the year
+          value={years.find((y) => y.value === selectedYear)}
           onChange={handleYearChange}
           options={years}
           styles={customStyles}
