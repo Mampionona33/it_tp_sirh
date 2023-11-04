@@ -353,6 +353,7 @@ const TimeSheetTable = (props) => {
         <td className="px-6 py-3">{total.regularHoursDay}</td>
         <td className="px-6 py-3">{total.overtimeHoursDay}</td>
         <td className="px-6 py-3">00</td>
+        <td className="px-6 py-3">00</td>
         <td className="px-6 py-3">{total.regularNightHours}</td>
         <td className="px-6 py-3">{total.occasionalNightHours}</td>
         <td className="px-6 py-3">{total.sundayHours}</td>
