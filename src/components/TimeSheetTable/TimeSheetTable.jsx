@@ -149,7 +149,7 @@ const TimeSheetTable = (props) => {
           )
         }
       },
-      header: () => 'Travail de nuit habituelles',
+      header: () => 'HSN 30%',
     }),
 
     // Colonne pour travail de nuit occasionnelles x50%
@@ -159,7 +159,7 @@ const TimeSheetTable = (props) => {
           ? info.row.original.occasionalNightHours.toString().padStart(2, '0')
           : null
       },
-      header: () => 'Travail de nuit occasionnelles',
+      header: () => 'HSN 50%',
     }),
 
     // Colonne pour travail dimanche
@@ -175,7 +175,7 @@ const TimeSheetTable = (props) => {
           return
         }
       },
-      header: () => 'Travail dimanche',
+      header: () => 'Hdim',
     }),
     // Colonne pour les heures de jour férié (holidayHours)
     columnHelper.accessor('holidayHours', {
@@ -183,7 +183,7 @@ const TimeSheetTable = (props) => {
         info.row.original.holidayHours
           ? info.row.original.holidayHours.toString().padStart(2, '0')
           : '',
-      header: () => 'Travail de jour férié',
+      header: () => 'Hférié',
     }),
   ]
 
@@ -373,14 +373,14 @@ const TimeSheetTable = (props) => {
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full max-h-full md:table-fixed sm:table-auto bg-white text-gray-800 dark:text-stone-200 ">
-            <thead className="text-xs uppercase text-gray-700 dark:text-gray-400 bg-gray-100">
+          <table className="w-full max-h-full xl:table-fixed lg:table-auto bg-white text-gray-800 dark:text-stone-200 ">
+            <thead className="text-xs  text-gray-700 dark:text-gray-400 bg-gray-100">
               {headerGroups.map((headerGroup, key) => (
                 <tr key={`headerRow_${key}`} className="w-full">
                   {headerGroup.headers.map((header, headerIndex) => (
                     <th
                       scope="col"
-                      className="px-6 py-3 md:break-words border-b border-customRed-900 w-1/6 min-w-1/6 bg-white z-10"
+                      className="px-6 py-3 border-x border-x-customRed-100 w-1/6 min-w-1/6"
                       key={`header_${header.id}_${headerIndex}`}
                     >
                       {header.isPlaceholder ? null : (
@@ -405,13 +405,20 @@ const TimeSheetTable = (props) => {
                     if (currentColumn === 'id' && isMonday(new Date(row.original.date))) {
                       // Appliquez rowSpan à la cellule (colonne "HS Non imposable") de la semaine
                       return (
-                        <td key={`cell_${rowIndex}_${cellIndex}`} rowSpan={6} className="px-6 py-2">
+                        <td
+                          key={`cell_${rowIndex}_${cellIndex}`}
+                          rowSpan={6}
+                          className="px-6 py-2 border-x border-customRed-100 "
+                        >
                           {cell.column.columnDef.cell(cell.getContext())}
                         </td>
                       )
                     } else {
                       return (
-                        <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
+                        <td
+                          key={`cell_${rowIndex}_${cellIndex}`}
+                          className="px-6 py-2 border-x border-customRed-100"
+                        >
                           {cell.column.columnDef.cell(cell.getContext())}
                         </td>
                       )
