@@ -82,7 +82,7 @@ const TimeSheetTable = (props) => {
     }),
 
     // colonne HS130
-    columnHelper.accessor('id', {
+    columnHelper.accessor('hs130', {
       cell: (info) => {
         if (isMonday(new Date(info.row.original.date))) {
           // Create a new Date instance from the original date
@@ -112,7 +112,7 @@ const TimeSheetTable = (props) => {
     }),
 
     // colonne HS150
-    columnHelper.accessor('id', {
+    columnHelper.accessor('hs150', {
       cell: (info) => {
         if (isMonday(new Date(info.row.original.date))) {
           // Create a new Date instance from the original date
