@@ -427,6 +427,16 @@ const TimeSheetTable = (props) => {
                           </td>
                         )
                       }
+                      if (isSunday(new Date(row.original.date))) {
+                        return (
+                          <td
+                            key={`cell_${rowIndex}_${cellIndex}`}
+                            className="px-6 py-2 border-x border-customRed-100 "
+                          >
+                            {cell.column.columnDef.cell(cell.getContext())}
+                          </td>
+                        )
+                      }
                     }
                   })}
                 </tr>
