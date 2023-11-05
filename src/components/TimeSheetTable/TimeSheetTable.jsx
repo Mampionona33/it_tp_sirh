@@ -20,6 +20,7 @@ import {
   isSaturday,
   isDate,
   setDefaultOptions,
+  isThursday,
 } from 'date-fns'
 import CustomPagination from '../CustomPagination'
 import MonthYearPicker from './MonthYearPicker'
@@ -101,12 +102,12 @@ const TimeSheetTable = (props) => {
 
           // Calculate the sum of overtimeHoursDay for the current week
           const hs130 = weekTotal.reduce((total, item) => {
-            return total + (item.overtimeHoursDay || 0)
+            return total + item.overtimeHoursDay
           }, 0)
 
-          return hs130 >= 8 ? 8 : hs130.toString()
+          return hs130 >= 8 ? (8).toString().padStart(2, '0') : hs130.toString()
         }
-        return
+        return null
       },
       header: () => 'HS 130%',
     }),
@@ -131,12 +132,12 @@ const TimeSheetTable = (props) => {
 
           // Calculate the sum of overtimeHoursDay for the current week
           const hs150 = weekTotal.reduce((total, item) => {
-            return total + (item.overtimeHoursDay || 0)
+            return total + item.overtimeHoursDay
           }, 0)
 
-          return hs150 >= 8 ? hs150 - 8 : hs150.toString()
+          return hs150 >= 8 ? (hs150 - 8).toString().padStart(2, '0') : hs150.toString()
         }
-        return
+        return null
       },
       header: () => 'HS 150%',
     }),
@@ -405,26 +406,27 @@ const TimeSheetTable = (props) => {
                   {row.getVisibleCells().map((cell, cellIndex) => {
                     const currentColumn = cell.column.id
 
-                    if (currentColumn === 'id' && isMonday(new Date(row.original.date))) {
-                      // Appliquez rowSpan à la cellule (colonne "HS Non imposable") de la semaine
+                    if (!(currentColumn === 'hs130' || currentColumn === 'hs150')) {
                       return (
                         <td
                           key={`cell_${rowIndex}_${cellIndex}`}
-                          rowSpan={6}
                           className="px-6 py-2 border-x border-customRed-100 "
                         >
                           {cell.column.columnDef.cell(cell.getContext())}
                         </td>
                       )
                     } else {
-                      return (
-                        <td
-                          key={`cell_${rowIndex}_${cellIndex}`}
-                          className="px-6 py-2 border-x border-customRed-100"
-                        >
-                          {cell.column.columnDef.cell(cell.getContext())}
-                        </td>
-                      )
+                      if (isMonday(new Date(row.original.date))) {
+                        return (
+                          <td
+                            rowSpan={6}
+                            key={`cell_${rowIndex}_${cellIndex}`}
+                            className="px-6 py-2 border-x border-customRed-100 "
+                          >
+                            {cell.column.columnDef.cell(cell.getContext())}
+                          </td>
+                        )
+                      }
                     }
                   })}
                 </tr>
