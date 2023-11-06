@@ -48,9 +48,9 @@ const TimeSheetTable = (props) => {
     }),
 
     // colonne pour afficher le jour
-    columnHelper.accessor('date', {
+    columnHelper.accessor('jour', {
       cell: (info) => (
-        <span className="capitalize">{format(parseISO(info.getValue()), 'EEEE')}</span>
+        <span className="capitalize">{format(parseISO(info.row.original.date), 'EEEE')}</span>
       ),
       header: () => 'Jour',
     }),
@@ -59,12 +59,7 @@ const TimeSheetTable = (props) => {
     columnHelper.accessor('normalHours', {
       cell: (info) => {
         if (!isSunday(new Date(info.row.original.date))) {
-          return (
-            info.row.original.regularHoursDay &&
-            info.row.original.regularHoursDay.toString().padStart(2, '0')
-          )
-        } else {
-          return
+          return info.row.original.regularHoursDay && info.row.original.regularHoursDay
         }
       },
       header: () => 'HN',
@@ -87,7 +82,7 @@ const TimeSheetTable = (props) => {
               (info.row.original.occasionalNightHours || 0)
           }
 
-          return hs.toString().padStart(2, '0')
+          return hs
         }
       },
 
@@ -114,7 +109,7 @@ const TimeSheetTable = (props) => {
             )
           }, 0)
 
-          return hs130 >= 8 ? (8).toString().padStart(2, '0') : hs130.toString()
+          return hs130 >= 8 ? 8 : hs130
         }
         return null
       },
@@ -146,7 +141,7 @@ const TimeSheetTable = (props) => {
             )
           }, 0)
 
-          return hs150 >= 8 ? (hs150 - 8).toString().padStart(2, '0') : 0
+          return hs150 >= 8 ? hs150 - 8 : 0
         }
         return null
       },
@@ -157,10 +152,7 @@ const TimeSheetTable = (props) => {
     columnHelper.accessor('hsn30', {
       cell: (info) => {
         if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
-          return (
-            info.row.original.regularNightHours &&
-            info.row.original.regularNightHours.toString().padStart(2, '0')
-          )
+          return info.row.original.regularNightHours && info.row.original.regularNightHours
         }
       },
       header: () => 'HSN 30%',
@@ -185,9 +177,7 @@ const TimeSheetTable = (props) => {
             info.row.original.regularNightHours +
             info.row.original.overtimeHoursDay +
             info.row.original.occasionalNightHours
-          return <>{result.toString().padStart(2, '0')}</>
-        } else {
-          return
+          return result
         }
       },
       header: () => 'Hdim',
@@ -314,10 +304,6 @@ const TimeSheetTable = (props) => {
           item.overtimeHoursDay +
           item.regularNightHours +
           item.occasionalNightHours
-        // console.log(item.date, total.sundayHours)
-        console.log('overtimeHoursDay', item.date, total.overtimeHoursDay)
-        console.log('regularNightHours', item.date, total.regularNightHours)
-        console.log('occasionalNightHours', item.date, total.occasionalNightHours)
       }
     })
 
@@ -338,7 +324,7 @@ const TimeSheetTable = (props) => {
 
     data.sort((a, b) => new Date(a.date) - new Date(b.date))
 
-    let isSundayStarted = false // Utilisé pour détecter le début du mois le dimanche
+    let isSundayStarted = false
 
     data.forEach((element, index) => {
       const currentDate = new Date(element.date)
@@ -346,7 +332,6 @@ const TimeSheetTable = (props) => {
       const hsValue = element.overtimeHoursDay || 0
 
       if (!isSundayStarted && currentDate.getDate() === 1) {
-        // Si le mois commence un jour autre que le dimanche, démarrez dès le dimanche précédent.
         const previousSunday = new Date(currentDate)
         previousSunday.setDate(currentDate.getDate() - 1)
         currentWeekStartDate = previousSunday
@@ -380,14 +365,14 @@ const TimeSheetTable = (props) => {
       <tr className="font-medium bg-customBlue-200 border-b border-customRed-900">
         <td className="px-6 py-3">Total</td>
         <td className="px-6 py-3"></td>
-        <td className="px-6 py-3">{total.regularHoursDay}</td>
-        <td className="px-6 py-3">{total.overtimeHoursDay}</td>
-        <td className="px-6 py-3">{total.hs130}</td>
-        <td className="px-6 py-3">{total.hs150}</td>
-        <td className="px-6 py-3">{total.regularNightHours}</td>
-        <td className="px-6 py-3">{total.occasionalNightHours}</td>
-        <td className="px-6 py-3">{total.sundayHours}</td>
-        <td className="px-6 py-3">{total.holidayHours}</td>
+        <td className="px-6 py-3">{total.regularHoursDay.toString().padStart(2, '0')}</td>
+        <td className="px-6 py-3">{total.overtimeHoursDay.toString().padStart(2, '0')}</td>
+        <td className="px-6 py-3">{total.hs130.toString().padStart(2, '0')}</td>
+        <td className="px-6 py-3">{total.hs150.toString().padStart(2, '0')}</td>
+        <td className="px-6 py-3">{total.regularNightHours.toString().padStart(2, '0')}</td>
+        <td className="px-6 py-3">{total.occasionalNightHours.toString().padStart(2, '0')}</td>
+        <td className="px-6 py-3">{total.sundayHours.toString().padStart(2, '0')}</td>
+        <td className="px-6 py-3">{total.holidayHours.toString().padStart(2, '0')}</td>
       </tr>
     )
   }
@@ -433,34 +418,49 @@ const TimeSheetTable = (props) => {
                   {row.getVisibleCells().map((cell, cellIndex) => {
                     const currentColumn = cell.column.id
 
-                    if (!(currentColumn === 'hs130' || currentColumn === 'hs150')) {
+                    if (
+                      !(currentColumn === 'hs130' || currentColumn === 'hs150') &&
+                      currentColumn !== 'jour'
+                    ) {
                       return (
                         <td
                           key={`cell_${rowIndex}_${cellIndex}`}
                           className="px-6 py-2 border-x border-customRed-100 "
                         >
-                          {cell.column.columnDef.cell(cell.getContext())}
+                          {cell.column.columnDef.cell(cell.getContext()) &&
+                            cell.column.columnDef
+                              .cell(cell.getContext())
+                              .toString()
+                              .padStart(2, '0')}
                         </td>
                       )
                     } else {
-                      if (isMonday(new Date(row.original.date))) {
+                      if (isMonday(new Date(row.original.date)) && currentColumn !== 'jour') {
                         return (
                           <td
                             rowSpan={6}
                             key={`cell_${rowIndex}_${cellIndex}`}
                             className="px-6 py-2 border-x border-customRed-100 "
                           >
-                            {cell.column.columnDef.cell(cell.getContext())}
+                            {cell.column.columnDef.cell(cell.getContext()) &&
+                              cell.column.columnDef
+                                .cell(cell.getContext())
+                                .toString()
+                                .padStart(2, '0')}
                           </td>
                         )
                       }
-                      if (isSunday(new Date(row.original.date))) {
+                      if (isSunday(new Date(row.original.date)) && currentColumn !== 'jour') {
                         return (
                           <td
                             key={`cell_${rowIndex}_${cellIndex}`}
                             className="px-6 py-2 border-x border-customRed-100 "
                           >
-                            {cell.column.columnDef.cell(cell.getContext())}
+                            {cell.column.columnDef.cell(cell.getContext()) &&
+                              cell.column.columnDef
+                                .cell(cell.getContext())
+                                .toString()
+                                .padStart(2, '0')}
                           </td>
                         )
                       }
