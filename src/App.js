@@ -2,7 +2,7 @@ import React, { Component, Suspense } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import './scss/style.scss'
-import store from './store'
+import store from './redux/store'
 
 const loading = (
   <div className="pt-3 text-center">
