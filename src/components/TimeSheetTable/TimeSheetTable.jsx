@@ -507,7 +507,7 @@ const TimeSheetTable = (props) => {
                 <Total />
               ) : (
                 <tr>
-                  <td colSpan="7" className="text-lg font-medium p-4">
+                  <td colSpan="10" className="text-lg font-medium p-4">
                     Aucune donnée trouvée
                   </td>
                 </tr>
