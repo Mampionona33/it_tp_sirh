@@ -1116,7 +1116,7 @@ export const employeeHours = [
     date: '2023-10-03T05:13:19.364Z',
     regularHoursDay: 8,
     regularNightHours: null,
-    occasionalNightHours: 4,
+    occasionalNightHours: 2,
     overtimeHoursDay: 2,
     holidayHours: null,
   },
