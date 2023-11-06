@@ -139,7 +139,7 @@ const TimeSheetTable = (props) => {
     }),
 
     // Colonne pour travail de nuit habituelles "agent de nuit" x30%
-    columnHelper.accessor('regularNightHours', {
+    columnHelper.accessor('hsn30', {
       cell: (info) => {
         if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
           return (
@@ -152,19 +152,19 @@ const TimeSheetTable = (props) => {
     }),
 
     // Colonne pour travail de nuit occasionnelles x50%
-    columnHelper.accessor('date', {
+    columnHelper.accessor('hs50', {
       cell: (info) => {
-        return info.row.original.occasionalNightHours
+        return info.row.original.occasionalNightHours && !isSunday(new Date(info.row.original.date))
           ? info.row.original.occasionalNightHours.toString().padStart(2, '0')
           : null
       },
-      header: () => 'HSN 50%',
+      header: () => 'HS 50%',
     }),
 
     // Colonne pour travail dimanche
-    columnHelper.accessor('date', {
+    columnHelper.accessor('hdim', {
       cell: (info) => {
-        if (isSunday(new Date(info.getValue()))) {
+        if (isSunday(new Date(info.row.original.date))) {
           const result =
             info.row.original.regularHoursDay +
             info.row.original.regularNightHours +
@@ -254,57 +254,6 @@ const TimeSheetTable = (props) => {
     return result
   }
 
-  // Calculate sums for columns (excluding the "Date" column)
-  const columnSums = columns.map((column) => {
-    if (column.accessorKey !== 'date') {
-      return calculateColumnSum(column.accessorKey)
-    }
-    return null
-  })
-
-  // const calculateTotal = () => {
-  //   const total = {
-  //     regularHoursDay: 0,
-  //     overtimeHoursDay: 0,
-  //     regularNightHours: 0,
-  //     holidayHours: 0,
-  //     occasionalNightHours: 0,
-  //     sundayHours: 0,
-  //   }
-
-  //   data.forEach((item) => {
-  //     if (item.holidayHours) {
-  //       total.holidayHours += item.holidayHours
-  //     } else if (!isSunday(new Date(item.date))) {
-  //       total.regularNightHours += item.regularNightHours || 0
-  //       total.overtimeHoursDay += item.overtimeHoursDay || 0
-  //       total.regularHoursDay += item.regularHoursDay || 0
-  //       total.occasionalNightHours += item.occasionalNightHours || 0
-
-  //       /**
-  //        * Créez le code pour calculer la total de
-  //        * hs130 pour chaque semaine
-  //        * le semaine commence par le lundi
-  //        * et se termine par samedi
-  //        */
-  //       if (isMonday(new Date(item.date))) {
-  //         const weekStartDate = new Date(item.date)
-  //         const weekEndDate = new Date(weekStartDate)
-  //         weekEndDate.setDate(weekEndDate.getDate() + 6)
-  //       }
-  //     } else {
-  //       // Calcul des heures du dimanche
-  //       if (item.regularHoursDay) {
-  //         total.sundayHours += (item.regularHoursDay || 0) + (item.overtimeHoursDay || 0)
-  //       } else if (item.regularNightHours) {
-  //         total.sundayHours += (item.regularNightHours || 0) + (item.overtimeHoursDay || 0)
-  //       }
-  //     }
-  //   })
-
-  //   return total
-  // }
-
   const calculateTotal = () => {
     const total = {
       regularHoursDay: 0,
@@ -313,11 +262,11 @@ const TimeSheetTable = (props) => {
       holidayHours: 0,
       occasionalNightHours: 0,
       sundayHours: 0,
-      hs130: 0, // Ajoutez la propriété hs130
-      hs150: 0, // Ajoutez la propriété hs150
+      hs130: 0,
+      hs150: 0,
     }
 
-    let weeklyOvertimeHours = 0 // Initialisez le total des heures supplémentaires de la semaine
+    let weeklyOvertimeHours = 0
 
     data.forEach((item, index) => {
       if (item.holidayHours) {
@@ -328,15 +277,12 @@ const TimeSheetTable = (props) => {
         total.regularHoursDay += item.regularHoursDay || 0
         total.occasionalNightHours += item.occasionalNightHours || 0
 
-        // Calcul des heures supplémentaires de la semaine
         if (isMonday(new Date(item.date)) || index === 0) {
-          weeklyOvertimeHours = 0 // Réinitialisez le total hebdomadaire
+          weeklyOvertimeHours = 0
         }
 
         weeklyOvertimeHours += item.overtimeHoursDay || 0
-
         if (isSaturday(new Date(item.date)) || index === data.length - 1) {
-          // Fin de la semaine, calculez les heures supplémentaires
           total.hs130 += Math.min(weeklyOvertimeHours, 8)
           total.hs150 += Math.max(weeklyOvertimeHours - 8, 0)
         }
