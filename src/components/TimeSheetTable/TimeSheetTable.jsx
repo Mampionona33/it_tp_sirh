@@ -169,8 +169,10 @@ const TimeSheetTable = (props) => {
     // Colonne pour travail de nuit occasionnelles x50%
     columnHelper.accessor('hs50', {
       cell: (info) => {
-        return info.row.original.occasionalNightHours && !isSunday(new Date(info.row.original.date))
-          ? info.row.original.occasionalNightHours.toString().padStart(2, '0')
+        return info.row.original.occasionalNightHours &&
+          !isSunday(new Date(info.row.original.date)) &&
+          !info.row.original.holidayHours
+          ? info.row.original.occasionalNightHours
           : null
       },
       header: () => 'HS 50%',
@@ -292,7 +294,11 @@ const TimeSheetTable = (props) => {
 
     data.forEach((item, index) => {
       if (item.holidayHours) {
-        total.holidayHours += item.holidayHours
+        total.holidayHours +=
+          item.holidayHours +
+          item.overtimeHoursDay +
+          item.regularNightHours +
+          item.occasionalNightHours
       } else if (!isSunday(new Date(item.date))) {
         total.regularNightHours += item.regularNightHours || 0
         total.overtimeHoursDay += item.overtimeHoursDay
