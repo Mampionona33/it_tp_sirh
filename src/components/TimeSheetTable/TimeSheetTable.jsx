@@ -109,9 +109,16 @@ const TimeSheetTable = (props) => {
           const weekTotal = data.filter((row) => row.date >= weekStartISO && row.date <= weekEndISO)
 
           const hs130 = weekTotal.reduce((total, item) => {
-            return (
-              total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
-            )
+            // Vérifier si l'heure de vacances est nulle avant de l'inclure dans le calcul
+            if (!item.holidayHours) {
+              return (
+                total +
+                (item.overtimeHoursDay || 0) +
+                (item.occasionalNightHours || 0) +
+                (item.regularNightHours || 0)
+              )
+            }
+            return total
           }, 0)
 
           return hs130 >= 8 ? (8).toString().padStart(2, '0') : hs130.toString()
@@ -125,28 +132,31 @@ const TimeSheetTable = (props) => {
     columnHelper.accessor('hs150', {
       cell: (info) => {
         if (isMonday(new Date(info.row.original.date))) {
-          // Create a new Date instance from the original date
           const weekStartDate = new Date(info.row.original.date)
 
-          // Calculate the week's end date by adding 6 days to the start date
           const weekEndDate = new Date(weekStartDate)
           weekEndDate.setDate(weekEndDate.getDate() + 6)
 
-          // Now, you have the start and end dates for the week, and you can calculate the sum of overtimeHoursDay within this week
           const weekStartISO = format(weekStartDate, 'yyyy-MM-dd')
           const weekEndISO = format(weekEndDate, 'yyyy-MM-dd')
 
-          // Filter and sum the overtimeHoursDay for rows within the current week
-          const weekTotal = data.filter((row) => row.date >= weekStartISO && row.date <= weekEndISO)
+          // Filter and sum the overtimeHoursDay for rows within the current week, excluding hours for holidays
+          const hs150 = data
+            .filter((row) => row.date >= weekStartISO && row.date <= weekEndISO)
+            .reduce((total, item) => {
+              // Vérifier si l'heure de vacances est nulle avant de l'inclure dans le calcul
+              if (!item.holidayHours) {
+                return (
+                  total +
+                  (item.overtimeHoursDay || 0) +
+                  (item.occasionalNightHours || 0) +
+                  (item.regularNightHours || 0)
+                )
+              }
+              return total
+            }, 0)
 
-          // Calculate the sum of overtimeHoursDay for the current week
-          const hs150 = weekTotal.reduce((total, item) => {
-            return (
-              total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
-            )
-          }, 0)
-
-          return hs150 >= 8 ? (hs150 - 8).toString().padStart(2, '0') : 0
+          return hs150 >= 8 ? (hs150 - 8).toString().padStart(2, '0') : '00'
         }
         return null
       },
