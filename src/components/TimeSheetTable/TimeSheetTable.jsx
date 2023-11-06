@@ -59,12 +59,7 @@ const TimeSheetTable = (props) => {
     columnHelper.accessor('normalHours', {
       cell: (info) => {
         if (!isSunday(new Date(info.row.original.date))) {
-          return (
-            info.row.original.regularHoursDay &&
-            info.row.original.regularHoursDay.toString().padStart(2, '0')
-          )
-        } else {
-          return
+          return info.row.original.regularHoursDay && info.row.original.regularHoursDay
         }
       },
       header: () => 'HN',
@@ -112,16 +107,13 @@ const TimeSheetTable = (props) => {
             // Vérifier si l'heure de vacances est nulle avant de l'inclure dans le calcul
             if (!item.holidayHours) {
               return (
-                total +
-                (item.overtimeHoursDay || 0) +
-                (item.occasionalNightHours || 0) +
-                (item.regularNightHours || 0)
+                total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
               )
             }
             return total
           }, 0)
 
-          return hs130 >= 8 ? (8).toString().padStart(2, '0') : hs130.toString()
+          return hs130 >= 8 ? 8 : hs130
         }
         return null
       },
@@ -147,16 +139,13 @@ const TimeSheetTable = (props) => {
               // Vérifier si l'heure de vacances est nulle avant de l'inclure dans le calcul
               if (!item.holidayHours) {
                 return (
-                  total +
-                  (item.overtimeHoursDay || 0) +
-                  (item.occasionalNightHours || 0) +
-                  (item.regularNightHours || 0)
+                  total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
                 )
               }
               return total
             }, 0)
 
-          return hs150 >= 8 ? (hs150 - 8).toString().padStart(2, '0') : '00'
+          return hs150 >= 8 ? hs150 - 8 : null
         }
         return null
       },
@@ -167,10 +156,7 @@ const TimeSheetTable = (props) => {
     columnHelper.accessor('hsn30', {
       cell: (info) => {
         if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
-          return (
-            info.row.original.regularNightHours &&
-            info.row.original.regularNightHours.toString().padStart(2, '0')
-          )
+          return info.row.original.regularNightHours && info.row.original.regularNightHours
         }
       },
       header: () => 'HSN 30%',
@@ -197,9 +183,7 @@ const TimeSheetTable = (props) => {
             info.row.original.regularNightHours +
             info.row.original.overtimeHoursDay +
             info.row.original.occasionalNightHours
-          return <>{result.toString().padStart(2, '0')}</>
-        } else {
-          return
+          return result
         }
       },
       header: () => 'Hdim',
