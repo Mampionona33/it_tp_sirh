@@ -109,7 +109,9 @@ const TimeSheetTable = (props) => {
           const weekTotal = data.filter((row) => row.date >= weekStartISO && row.date <= weekEndISO)
 
           const hs130 = weekTotal.reduce((total, item) => {
-            return total + item.overtimeHoursDay
+            return (
+              total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
+            )
           }, 0)
 
           return hs130 >= 8 ? (8).toString().padStart(2, '0') : hs130.toString()
@@ -139,10 +141,12 @@ const TimeSheetTable = (props) => {
 
           // Calculate the sum of overtimeHoursDay for the current week
           const hs150 = weekTotal.reduce((total, item) => {
-            return total + item.overtimeHoursDay
+            return (
+              total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
+            )
           }, 0)
 
-          return hs150 >= 8 ? (hs150 - 8).toString().padStart(2, '0') : hs150.toString()
+          return hs150 >= 8 ? (hs150 - 8).toString().padStart(2, '0') : 0
         }
         return null
       },
@@ -300,9 +304,11 @@ const TimeSheetTable = (props) => {
       } else {
         // Calcul des heures du dimanche
         if (item.regularHoursDay) {
-          total.sundayHours += (item.regularHoursDay || 0) + (item.overtimeHoursDay || 0)
-        } else if (item.regularNightHours) {
-          total.sundayHours += (item.regularNightHours || 0) + (item.overtimeHoursDay || 0)
+          total.sundayHours +=
+            (item.regularHoursDay || 0) +
+            (item.overtimeHoursDay || 0) +
+            (item.regularNightHours || 0) +
+            item.occasionalNightHours
         }
       }
     })
