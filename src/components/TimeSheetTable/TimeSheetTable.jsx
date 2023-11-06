@@ -388,11 +388,11 @@ const TimeSheetTable = (props) => {
     ]
     return (
       <>
-        <tr className="px-6 py-3 border-x border-x-customRed-100 w-1/6 min-w-1/6">
+        <tr className="px-6 py-3 border-x border-x-customRed-100 w-1/6 min-w-1/6 bg-gray-200">
           {header.map((item, key) => {
             return (
               <>
-                <td className="px-6 py-1 border-x border-x-customRed-100 font-medium" key={key}>
+                <td className="px-6 py-2 border-x border-x-customRed-100 font-medium" key={key}>
                   {item}
                 </td>
               </>
@@ -402,14 +402,31 @@ const TimeSheetTable = (props) => {
         <tr className="font-medium bg-customBlue-200 border-b border-customRed-900">
           <td className="px-6 py-3">Total</td>
           <td className="px-6 py-3"></td>
-          <td className="px-6 py-3">{total.regularHoursDay}</td>
-          <td className="px-6 py-3">{total.overtimeHoursDay}</td>
-          <td className="px-6 py-3">{total.hs130}</td>
-          <td className="px-6 py-3">{total.hs150}</td>
-          <td className="px-6 py-3">{total.regularNightHours}</td>
-          <td className="px-6 py-3">{total.occasionalNightHours}</td>
-          <td className="px-6 py-3">{total.sundayHours}</td>
-          <td className="px-6 py-3">{total.holidayHours}</td>
+          <td className="px-6 py-3">
+            {total.regularHoursDay !== 0 && total.regularHoursDay.toString().padStart(2, '0')}
+          </td>
+          <td className="px-6 py-3">
+            {total.overtimeHoursDay !== 0 && total.overtimeHoursDay.toString().padStart(2, '0')}
+          </td>
+          <td className="px-6 py-3">
+            {total.hs130 !== 0 && total.hs130.toString().padStart(2, '0')}
+          </td>
+          <td className="px-6 py-3">
+            {total.hs150 !== 0 && total.hs150.toString().padStart(2, '0')}
+          </td>
+          <td className="px-6 py-3">
+            {total.regularNightHours !== 0 && total.regularNightHours.toString().padStart(2, '0')}
+          </td>
+          <td className="px-6 py-3">
+            {total.occasionalNightHours !== 0 &&
+              total.occasionalNightHours.toString().padStart(2, '0')}
+          </td>
+          <td className="px-6 py-3">
+            {total.sundayHours !== 0 && total.sundayHours.toString().padStart(2, '0')}
+          </td>
+          <td className="px-6 py-3">
+            {total.holidayHours !== 0 && total.holidayHours.toString().padStart(2, '0')}
+          </td>
         </tr>
       </>
     )
