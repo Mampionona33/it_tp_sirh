@@ -82,12 +82,12 @@ const TimeSheetTable = (props) => {
             info.row.original.occasionalNightHours
           ) {
             hs =
-              (info.row.original.overtimeHoursDay || 0) +
-              (info.row.original.regularNightHours || 0) +
-              (info.row.original.occasionalNightHours || 0)
+              info.row.original.overtimeHoursDay +
+              info.row.original.regularNightHours +
+              info.row.original.occasionalNightHours
           }
 
-          return hs.toString().padStart(2, '0')
+          return hs
         }
       },
 
@@ -194,10 +194,16 @@ const TimeSheetTable = (props) => {
     }),
     // Colonne pour les heures de jour férié (holidayHours)
     columnHelper.accessor('holidayHours', {
-      cell: (info) =>
-        info.row.original.holidayHours
-          ? info.row.original.holidayHours.toString().padStart(2, '0')
-          : '',
+      cell: (info) => {
+        if (info.getValue() && !isSunday(new Date(info.row.original.date))) {
+          const hferier =
+            info.row.original.holidayHours +
+            info.row.original.regularNightHours +
+            info.row.original.overtimeHoursDay +
+            info.row.original.occasionalNightHours
+          return hferier
+        }
+      },
       header: () => 'Hférié',
     }),
   ]
