@@ -19,6 +19,7 @@ import { cilBell, cilEnvelopeOpen, cilList, cilMenu } from '@coreui/icons'
 import { AppBreadcrumb } from './index'
 import { AppHeaderDropdown } from './header/index'
 import { logo } from 'src/assets/brand/logo'
+import { toggleSidebar } from 'src/redux/sidebar/sidebarReducer'
 
 const AppHeader = () => {
   const dispatch = useDispatch()
@@ -29,7 +30,8 @@ const AppHeader = () => {
       <CContainer fluid>
         <CHeaderToggler
           className="ps-1"
-          onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
+          // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
+          onClick={() => dispatch(toggleSidebar())}
         >
           <CIcon icon={cilMenu} size="lg" />
         </CHeaderToggler>
