@@ -69,20 +69,17 @@ const TimeSheetTable = (props) => {
     columnHelper.accessor('overtimeHoursDay', {
       cell: (info) => {
         if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
-          let hs = 0
-
           if (
             info.row.original.overtimeHoursDay ||
             info.row.original.regularNightHours ||
             info.row.original.occasionalNightHours
           ) {
-            hs =
+            return (
               info.row.original.overtimeHoursDay +
               info.row.original.regularNightHours +
               info.row.original.occasionalNightHours
+            )
           }
-
-          return hs
         }
       },
 
@@ -433,6 +430,7 @@ const TimeSheetTable = (props) => {
                 >
                   {row.getVisibleCells().map((cell, cellIndex) => {
                     const currentColumn = cell.column.id
+                    const cellValue = cell.column.columnDef.cell(cell.getContext())
 
                     if (!(currentColumn === 'hs130' || currentColumn === 'hs150')) {
                       return (
@@ -440,7 +438,12 @@ const TimeSheetTable = (props) => {
                           key={`cell_${rowIndex}_${cellIndex}`}
                           className="px-6 py-2 border-x border-customRed-100 "
                         >
-                          {cell.column.columnDef.cell(cell.getContext())}
+                          {cellValue && currentColumn !== 'jour'
+                            ? cell.column.columnDef
+                                .cell(cell.getContext())
+                                .toString()
+                                .padStart(2, '0')
+                            : cellValue}
                         </td>
                       )
                     } else {
@@ -451,7 +454,11 @@ const TimeSheetTable = (props) => {
                             key={`cell_${rowIndex}_${cellIndex}`}
                             className="px-6 py-2 border-x border-customRed-100 "
                           >
-                            {cell.column.columnDef.cell(cell.getContext())}
+                            {cell.column.columnDef.cell(cell.getContext()) &&
+                              cell.column.columnDef
+                                .cell(cell.getContext())
+                                .toString()
+                                .padStart(2, '0')}
                           </td>
                         )
                       }
