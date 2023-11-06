@@ -26,6 +26,7 @@ import CustomPagination from '../CustomPagination'
 import MonthYearPicker from './MonthYearPicker'
 import TimeSheetTablePagination from './TimeSheetTablePagination'
 import { fr } from 'date-fns/locale'
+import { info } from 'autoprefixer'
 
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
@@ -86,21 +87,16 @@ const TimeSheetTable = (props) => {
     columnHelper.accessor('hs130', {
       cell: (info) => {
         if (isMonday(new Date(info.row.original.date))) {
-          // Create a new Date instance from the original date
           const weekStartDate = new Date(info.row.original.date)
 
-          // Calculate the week's end date by adding 6 days to the start date
           const weekEndDate = new Date(weekStartDate)
           weekEndDate.setDate(weekEndDate.getDate() + 6)
 
-          // Now, you have the start and end dates for the week, and you can calculate the sum of overtimeHoursDay within this week
           const weekStartISO = format(weekStartDate, 'yyyy-MM-dd')
           const weekEndISO = format(weekEndDate, 'yyyy-MM-dd')
 
-          // Filter and sum the overtimeHoursDay for rows within the current week
           const weekTotal = data.filter((row) => row.date >= weekStartISO && row.date <= weekEndISO)
 
-          // Calculate the sum of overtimeHoursDay for the current week
           const hs130 = weekTotal.reduce((total, item) => {
             return total + item.overtimeHoursDay
           }, 0)
@@ -266,6 +262,49 @@ const TimeSheetTable = (props) => {
     return null
   })
 
+  // const calculateTotal = () => {
+  //   const total = {
+  //     regularHoursDay: 0,
+  //     overtimeHoursDay: 0,
+  //     regularNightHours: 0,
+  //     holidayHours: 0,
+  //     occasionalNightHours: 0,
+  //     sundayHours: 0,
+  //   }
+
+  //   data.forEach((item) => {
+  //     if (item.holidayHours) {
+  //       total.holidayHours += item.holidayHours
+  //     } else if (!isSunday(new Date(item.date))) {
+  //       total.regularNightHours += item.regularNightHours || 0
+  //       total.overtimeHoursDay += item.overtimeHoursDay || 0
+  //       total.regularHoursDay += item.regularHoursDay || 0
+  //       total.occasionalNightHours += item.occasionalNightHours || 0
+
+  //       /**
+  //        * Créez le code pour calculer la total de
+  //        * hs130 pour chaque semaine
+  //        * le semaine commence par le lundi
+  //        * et se termine par samedi
+  //        */
+  //       if (isMonday(new Date(item.date))) {
+  //         const weekStartDate = new Date(item.date)
+  //         const weekEndDate = new Date(weekStartDate)
+  //         weekEndDate.setDate(weekEndDate.getDate() + 6)
+  //       }
+  //     } else {
+  //       // Calcul des heures du dimanche
+  //       if (item.regularHoursDay) {
+  //         total.sundayHours += (item.regularHoursDay || 0) + (item.overtimeHoursDay || 0)
+  //       } else if (item.regularNightHours) {
+  //         total.sundayHours += (item.regularNightHours || 0) + (item.overtimeHoursDay || 0)
+  //       }
+  //     }
+  //   })
+
+  //   return total
+  // }
+
   const calculateTotal = () => {
     const total = {
       regularHoursDay: 0,
@@ -274,9 +313,13 @@ const TimeSheetTable = (props) => {
       holidayHours: 0,
       occasionalNightHours: 0,
       sundayHours: 0,
+      hs130: 0, // Ajoutez la propriété hs130
+      hs150: 0, // Ajoutez la propriété hs150
     }
 
-    data.forEach((item) => {
+    let weeklyOvertimeHours = 0 // Initialisez le total des heures supplémentaires de la semaine
+
+    data.forEach((item, index) => {
       if (item.holidayHours) {
         total.holidayHours += item.holidayHours
       } else if (!isSunday(new Date(item.date))) {
@@ -284,6 +327,19 @@ const TimeSheetTable = (props) => {
         total.overtimeHoursDay += item.overtimeHoursDay || 0
         total.regularHoursDay += item.regularHoursDay || 0
         total.occasionalNightHours += item.occasionalNightHours || 0
+
+        // Calcul des heures supplémentaires de la semaine
+        if (isMonday(new Date(item.date)) || index === 0) {
+          weeklyOvertimeHours = 0 // Réinitialisez le total hebdomadaire
+        }
+
+        weeklyOvertimeHours += item.overtimeHoursDay || 0
+
+        if (isSaturday(new Date(item.date)) || index === data.length - 1) {
+          // Fin de la semaine, calculez les heures supplémentaires
+          total.hs130 += Math.min(weeklyOvertimeHours, 8)
+          total.hs150 += Math.max(weeklyOvertimeHours - 8, 0)
+        }
       } else {
         // Calcul des heures du dimanche
         if (item.regularHoursDay) {
@@ -355,8 +411,8 @@ const TimeSheetTable = (props) => {
         <td className="px-6 py-3"></td>
         <td className="px-6 py-3">{total.regularHoursDay}</td>
         <td className="px-6 py-3">{total.overtimeHoursDay}</td>
-        <td className="px-6 py-3">00</td>
-        <td className="px-6 py-3">00</td>
+        <td className="px-6 py-3">{total.hs130}</td>
+        <td className="px-6 py-3">{total.hs150}</td>
         <td className="px-6 py-3">{total.regularNightHours}</td>
         <td className="px-6 py-3">{total.occasionalNightHours}</td>
         <td className="px-6 py-3">{total.sundayHours}</td>
