@@ -374,19 +374,44 @@ const TimeSheetTable = (props) => {
   const { total: detailHs, weeklyDetails } = calculateHSDetails()
 
   const Total = () => {
+    const header = [
+      'Date',
+      '',
+      'HN',
+      'HS',
+      'HS 130%',
+      'HS 150%',
+      'HS 30%',
+      'HS 50%',
+      'Hdim',
+      'Hférié',
+    ]
     return (
-      <tr className="font-medium bg-customBlue-200 border-b border-customRed-900">
-        <td className="px-6 py-3">Total</td>
-        <td className="px-6 py-3"></td>
-        <td className="px-6 py-3">{total.regularHoursDay}</td>
-        <td className="px-6 py-3">{total.overtimeHoursDay}</td>
-        <td className="px-6 py-3">{total.hs130}</td>
-        <td className="px-6 py-3">{total.hs150}</td>
-        <td className="px-6 py-3">{total.regularNightHours}</td>
-        <td className="px-6 py-3">{total.occasionalNightHours}</td>
-        <td className="px-6 py-3">{total.sundayHours}</td>
-        <td className="px-6 py-3">{total.holidayHours}</td>
-      </tr>
+      <>
+        <tr className="px-6 py-3 border-x border-x-customRed-100 w-1/6 min-w-1/6">
+          {header.map((item, key) => {
+            return (
+              <>
+                <td className="px-6 py-1 border-x border-x-customRed-100 font-medium" key={key}>
+                  {item}
+                </td>
+              </>
+            )
+          })}
+        </tr>
+        <tr className="font-medium bg-customBlue-200 border-b border-customRed-900">
+          <td className="px-6 py-3">Total</td>
+          <td className="px-6 py-3"></td>
+          <td className="px-6 py-3">{total.regularHoursDay}</td>
+          <td className="px-6 py-3">{total.overtimeHoursDay}</td>
+          <td className="px-6 py-3">{total.hs130}</td>
+          <td className="px-6 py-3">{total.hs150}</td>
+          <td className="px-6 py-3">{total.regularNightHours}</td>
+          <td className="px-6 py-3">{total.occasionalNightHours}</td>
+          <td className="px-6 py-3">{total.sundayHours}</td>
+          <td className="px-6 py-3">{total.holidayHours}</td>
+        </tr>
+      </>
     )
   }
 
