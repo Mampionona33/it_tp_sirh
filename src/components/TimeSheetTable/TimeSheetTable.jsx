@@ -183,7 +183,8 @@ const TimeSheetTable = (props) => {
           const result =
             info.row.original.regularHoursDay +
             info.row.original.regularNightHours +
-            info.row.original.overtimeHoursDay
+            info.row.original.overtimeHoursDay +
+            info.row.original.occasionalNightHours
           return <>{result.toString().padStart(2, '0')}</>
         } else {
           return
@@ -288,7 +289,9 @@ const TimeSheetTable = (props) => {
         total.holidayHours += item.holidayHours
       } else if (!isSunday(new Date(item.date))) {
         total.regularNightHours += item.regularNightHours || 0
-        total.overtimeHoursDay += item.overtimeHoursDay || 0
+        total.overtimeHoursDay += item.overtimeHoursDay
+        total.overtimeHoursDay += item.occasionalNightHours
+        total.overtimeHoursDay += item.regularNightHours
         total.regularHoursDay += item.regularHoursDay || 0
         total.occasionalNightHours += item.occasionalNightHours || 0
 
@@ -296,20 +299,25 @@ const TimeSheetTable = (props) => {
           weeklyOvertimeHours = 0
         }
 
-        weeklyOvertimeHours += item.overtimeHoursDay || 0
+        weeklyOvertimeHours += item.overtimeHoursDay
+        weeklyOvertimeHours += item.occasionalNightHours
+        weeklyOvertimeHours += item.regularNightHours
+
         if (isSaturday(new Date(item.date)) || index === data.length - 1) {
           total.hs130 += Math.min(weeklyOvertimeHours, 8)
           total.hs150 += Math.max(weeklyOvertimeHours - 8, 0)
         }
       } else {
         // Calcul des heures du dimanche
-        if (item.regularHoursDay) {
-          total.sundayHours +=
-            (item.regularHoursDay || 0) +
-            (item.overtimeHoursDay || 0) +
-            (item.regularNightHours || 0) +
-            item.occasionalNightHours
-        }
+        total.sundayHours +=
+          item.regularHoursDay +
+          item.overtimeHoursDay +
+          item.regularNightHours +
+          item.occasionalNightHours
+        // console.log(item.date, total.sundayHours)
+        console.log('overtimeHoursDay', item.date, total.overtimeHoursDay)
+        console.log('regularNightHours', item.date, total.regularNightHours)
+        console.log('occasionalNightHours', item.date, total.occasionalNightHours)
       }
     })
 
