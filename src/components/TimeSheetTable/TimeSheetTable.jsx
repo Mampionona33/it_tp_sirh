@@ -74,9 +74,20 @@ const TimeSheetTable = (props) => {
     columnHelper.accessor('overtimeHoursDay', {
       cell: (info) => {
         if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
-          return info.row.original.overtimeHoursDay
-            ? info.row.original.overtimeHoursDay.toString().padStart(2, '0')
-            : null
+          let hs = 0
+
+          if (
+            info.row.original.overtimeHoursDay ||
+            info.row.original.regularNightHours ||
+            info.row.original.occasionalNightHours
+          ) {
+            hs =
+              (info.row.original.overtimeHoursDay || 0) +
+              (info.row.original.regularNightHours || 0) +
+              (info.row.original.occasionalNightHours || 0)
+          }
+
+          return hs.toString().padStart(2, '0')
         }
       },
 
