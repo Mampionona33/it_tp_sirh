@@ -306,12 +306,12 @@ const TimeSheetTable = (props) => {
           item.regularNightHours +
           item.occasionalNightHours
       } else if (!isSunday(new Date(item.date))) {
-        total.regularNightHours += item.regularNightHours || 0
+        total.regularNightHours += item.regularNightHours
         total.overtimeHoursDay += item.overtimeHoursDay
         total.overtimeHoursDay += item.occasionalNightHours
         total.overtimeHoursDay += item.regularNightHours
-        total.regularHoursDay += item.regularHoursDay || 0
-        total.occasionalNightHours += item.occasionalNightHours || 0
+        total.regularHoursDay += item.regularHoursDay
+        total.occasionalNightHours += item.occasionalNightHours
 
         if (isMonday(new Date(item.date)) || index === 0) {
           weeklyOvertimeHours = 0

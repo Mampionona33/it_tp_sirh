@@ -1,16 +1,16 @@
 const { createSlice } = require('@reduxjs/toolkit')
 
 const initialState = {
-  totalHNormal: 0,
-  totalHsJour: 0,
-  totalHs130: 0,
-  totalHs150: 0,
-  totalHs30: 0,
-  totalHs50: 0,
-  totalHdim: 0,
-  totalHferier: 0,
-  hsni130: 0,
-  hsni150: 0,
+  totalHNormal: null,
+  totalHsJour: null,
+  totalHs130: null,
+  totalHs150: null,
+  totalHs30: null,
+  totalHs50: null,
+  totalHdim: null,
+  totalHferier: null,
+  hsni130: null,
+  hsni150: null,
 }
 
 const employeeHoursSlice = createSlice({
