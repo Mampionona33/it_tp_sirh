@@ -121,7 +121,6 @@ const Fiche = () => {
           aria-labelledby="settings-tab"
         >
           {selectedEmployee !== null && <SalaryCalculation />}
-          Heures supplémentaires {selectedEmployee}
         </div>
       </div>
     </div>

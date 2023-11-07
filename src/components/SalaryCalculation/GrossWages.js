@@ -1,9 +1,11 @@
 import React from 'react'
-
+import CustomSection from 'src/components/CustomSection'
 const GrossWages = () => {
   return (
     <>
-      <div>Gross wages</div>
+      <div>
+        <CustomSection />
+      </div>
     </>
   )
 }
