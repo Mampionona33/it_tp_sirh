@@ -5,12 +5,12 @@ import { useSelector } from 'react-redux'
 const GrossWages = () => {
   const employeeTotalHours = useSelector((state) => state.employeHours)
   const title = 'Salaire brute'
-  const body
+  const body = 'body'
 
   return (
     <>
       <div>
-        <CustomSection title={title} body={'test'} />
+        <CustomSection title={title} body={body} />
       </div>
     </>
   )
