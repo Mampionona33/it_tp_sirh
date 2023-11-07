@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
+import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
 import { employeeHours } from 'src/db/db'
 
@@ -119,6 +120,7 @@ const Fiche = () => {
           role="tabpanel"
           aria-labelledby="settings-tab"
         >
+          {selectedEmployee !== null && <SalaryCalculation />}
           Heures supplémentaires {selectedEmployee}
         </div>
       </div>

@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import sidebarReducer from './sidebar/sidebarReducer'
+import employeHoursReducer from './employeHours/employeHoursReducer'
 
 const rootReducer = combineReducers({
   sidebar: sidebarReducer,
+  employeHours: employeHoursReducer,
 })
 
 const configStore = configureStore({

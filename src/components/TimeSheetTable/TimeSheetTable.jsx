@@ -27,6 +27,17 @@ import MonthYearPicker from './MonthYearPicker'
 import TimeSheetTablePagination from './TimeSheetTablePagination'
 import { fr } from 'date-fns/locale'
 import { info } from 'autoprefixer'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  setTotalHNormal,
+  setTotalHdim,
+  setTotalHferier,
+  setTotalHs130,
+  setTotalHs150,
+  setTotalHs30,
+  setTotalHs50,
+  setTotalHsJour,
+} from 'src/redux/employeHours/employeHoursReducer'
 
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
@@ -38,6 +49,8 @@ const TimeSheetTable = (props) => {
   const defaultEndDate = isSunday(new Date()) ? new Date() : endOfWeek(new Date())
   const [startDate, setStartDate] = useState(defaultStartDate)
   const [endDate, setEndDate] = useState(defaultEndDate)
+  const dispatch = useDispatch()
+
   setDefaultOptions({ locale: fr })
 
   const columns = [
@@ -372,6 +385,27 @@ const TimeSheetTable = (props) => {
   }
 
   const { total: detailHs, weeklyDetails } = calculateHSDetails()
+
+  React.useEffect(() => {
+    let mount = true
+
+    if (data.length > 0) {
+      if (mount) {
+        const newTotal = calculateTotal()
+        dispatch(setTotalHNormal(newTotal.regularHoursDay))
+        dispatch(setTotalHs130(newTotal.hs130))
+        dispatch(setTotalHs150(newTotal.hs150))
+        dispatch(setTotalHs50(newTotal.occasionalNightHours))
+        dispatch(setTotalHs30(newTotal.regularNightHours))
+        dispatch(setTotalHdim(newTotal.sundayHours))
+        dispatch(setTotalHferier(newTotal.holidayHours))
+      }
+    }
+
+    return () => {
+      mount = false
+    }
+  }, [data])
 
   const Total = () => {
     const header = [
