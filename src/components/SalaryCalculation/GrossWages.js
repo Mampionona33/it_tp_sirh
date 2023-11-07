@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux'
 const GrossWages = () => {
   const employeeTotalHours = useSelector((state) => state.employeHours)
   const title = 'Salaire brute'
+  const body
 
   return (
     <>
