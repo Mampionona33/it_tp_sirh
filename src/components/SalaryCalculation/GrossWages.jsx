@@ -55,7 +55,7 @@ const GrossWages = () => {
             <td colSpan="2" className="text-left py-3 pl-4 font-medium">
               Salaire de base
             </td>
-            <td className="text-right py-3 pr-4 font-medium">10000 Ar</td>
+            <td className="text-right py-3 pr-4 font-medium">{selecteEmploy.salaireBase} Ar</td>
           </tr>
           {data.map((item, index) => (
             <tr className="border-b border-customRed-100" key={index}>
