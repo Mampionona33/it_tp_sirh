@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import sidebarReducer from './sidebar/sidebarReducer'
 import employeHoursReducer from './employeHours/employeHoursReducer'
+import selectedEmployeReducer from './selectedEmploye/selectedEmployeReducer'
 
 const rootReducer = combineReducers({
   sidebar: sidebarReducer,
   employeHours: employeHoursReducer,
+  selectedEmploye: selectedEmployeReducer,
 })
 
 const configStore = configureStore({
@@ -14,21 +16,3 @@ const configStore = configureStore({
 const store = configStore
 
 export default store
-
-// import { createStore } from 'redux'
-
-// const initialState = {
-//   sidebarShow: true,
-// }
-
-// const changeState = (state = initialState, { type, ...rest }) => {
-//   switch (type) {
-//     case 'set':
-//       return { ...state, ...rest }
-//     default:
-//       return state
-//   }
-// }
-
-// const store = createStore(changeState)
-// export default store
