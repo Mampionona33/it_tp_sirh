@@ -1,11 +1,13 @@
 import React from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector } from 'react-redux'
-import PropTypes from 'prop-types'
 
 const GrossWages = () => {
   const employeeTotalHours = useSelector((state) => state.employeHours)
   const title = 'Salaire brute'
+  const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
+
+  console.log(selecteEmploy)
 
   const data = [
     {

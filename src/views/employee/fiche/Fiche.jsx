@@ -1,14 +1,18 @@
+import { format, parseISO } from 'date-fns'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
-import { employeeHours } from 'src/db/db'
+import { employeeHours, employees } from 'src/db/db'
+import { setSelectedEmploye } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('profile')
   const [selectedEmployee, setSelectedEmployee] = useState(null)
   const params = useParams()
+  const dispatch = useDispatch()
 
   const handleTabClick = (eventKey) => {
     setActiveTab(eventKey)
@@ -29,6 +33,28 @@ const Fiche = () => {
       mount = false
     }
   }, [params])
+
+  React.useEffect(() => {
+    let mount = true
+
+    if (params && params.id && employees) {
+      const emp = employees.find((empl) => empl.id == params.id)
+      if (emp && mount) {
+        dispatch(
+          setSelectedEmploye({
+            ...emp,
+            nom: emp.name.nom ? emp.name.nom : '',
+            prenom: emp.name.prenom ? emp.name.prenom : '',
+            dateEmbauche: emp.dateEmbauche ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd') : '',
+          }),
+        )
+      }
+    }
+
+    return () => {
+      mount = false
+    }
+  }, [params, employees])
 
   return (
     <div className="bg-white dark:bg-gray-800 p-4 shadow">
