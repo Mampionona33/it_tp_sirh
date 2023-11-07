@@ -1,13 +1,10 @@
 import React from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector } from 'react-redux'
-import CardInfo from 'src/components/CardInfo'
 
 const GrossWages = () => {
   const employeeTotalHours = useSelector((state) => state.employeHours)
   const title = 'Salaire brute'
-
-  console.log(employeeTotalHours.totalHs30)
 
   const data = [
     {
