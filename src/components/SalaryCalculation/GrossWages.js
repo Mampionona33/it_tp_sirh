@@ -9,7 +9,7 @@ const GrossWages = () => {
   return (
     <>
       <div>
-        <CustomSection title={title} />
+        <CustomSection title={title} body={'test'} />
       </div>
     </>
   )
