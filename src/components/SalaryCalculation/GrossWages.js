@@ -10,22 +10,22 @@ const GrossWages = () => {
   const data = [
     {
       title: 'HSNI 130%:',
-      hours: `${employeeTotalHours.totalHs130} Heures`,
+      hours: `${employeeTotalHours.hsni130} Heures`,
       value: `100000 Ar`,
     },
     {
       title: 'HSNI 150%:',
-      hours: `${employeeTotalHours.totalHs150} Heures`,
+      hours: `${employeeTotalHours.hsni150} Heures`,
       value: `100000 Ar`,
     },
     {
       title: 'HSI 130%:',
-      hours: `${employeeTotalHours.totalHs150} Heures`,
+      hours: `${employeeTotalHours.totalHs130 - employeeTotalHours.hsni130} Heures`,
       value: `100000 Ar`,
     },
     {
       title: 'HSI 150%:',
-      hours: `${employeeTotalHours.totalHs150} Heures`,
+      hours: `${employeeTotalHours.totalHs150 - employeeTotalHours.hsni150} Heures`,
       value: `100000 Ar`,
     },
     {

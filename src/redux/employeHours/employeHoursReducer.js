@@ -9,6 +9,8 @@ const initialState = {
   totalHs50: 0,
   totalHdim: 0,
   totalHferier: 0,
+  hsni130: 0,
+  hsni150: 0,
 }
 
 const employeeHoursSlice = createSlice({
@@ -39,6 +41,12 @@ const employeeHoursSlice = createSlice({
     setTotalHferier: (state, action) => {
       state.totalHferier = action.payload
     },
+    setTotalHsni130: (state, action) => {
+      state.hsni130 = action.payload
+    },
+    setTotalHsni150: (state, action) => {
+      state.hsni150 = action.payload
+    },
   },
 })
 
@@ -51,6 +59,8 @@ export const {
   setTotalHs50,
   setTotalHdim,
   setTotalHferier,
+  setTotalHsni130,
+  setTotalHsni150,
 } = employeeHoursSlice.actions
 
 export default employeeHoursSlice.reducer

@@ -37,6 +37,8 @@ import {
   setTotalHs30,
   setTotalHs50,
   setTotalHsJour,
+  setTotalHsni130,
+  setTotalHsni150,
 } from 'src/redux/employeHours/employeHoursReducer'
 
 const TimeSheetTable = (props) => {
@@ -384,6 +386,28 @@ const TimeSheetTable = (props) => {
     return { total: hs, weeklyDetails: weeklyHsDetails }
   }
 
+  const calculateHSNI = (data) => {
+    let hsni130 = 0
+    let hsni150 = 0
+    let totalHS = 0
+    let hsni = 0
+
+    for (const entry of data) {
+      totalHS += entry.regularNightHours + entry.occasionalNightHours + entry.overtimeHoursDay
+    }
+
+    hsni = totalHS - 20
+
+    if (hsni >= 20) {
+      hsni130 = 18
+      hsni150 = 2
+    } else {
+      hsni130 = hsni
+    }
+
+    return { hsni130, hsni150 }
+  }
+
   const { total: detailHs, weeklyDetails } = calculateHSDetails()
 
   React.useEffect(() => {
@@ -399,6 +423,10 @@ const TimeSheetTable = (props) => {
         dispatch(setTotalHs30(newTotal.regularNightHours))
         dispatch(setTotalHdim(newTotal.sundayHours))
         dispatch(setTotalHferier(newTotal.holidayHours))
+
+        const newTotalHsni = calculateHSNI(data)
+        dispatch(setTotalHsni130(newTotalHsni.hsni130))
+        dispatch(setTotalHsni150(newTotalHsni.hsni150))
       }
     }
 
@@ -425,11 +453,9 @@ const TimeSheetTable = (props) => {
         <tr className="px-6 py-3 border-x border-x-customRed-100 w-1/6 min-w-1/6 bg-gray-200">
           {header.map((item, key) => {
             return (
-              <>
-                <td className="px-6 py-2 border-x border-x-customRed-100 font-medium" key={key}>
-                  {item}
-                </td>
-              </>
+              <td className="px-6 py-2 border-x border-x-customRed-100 font-medium" key={key}>
+                {item}
+              </td>
             )
           })}
         </tr>
