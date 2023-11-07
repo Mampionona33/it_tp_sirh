@@ -344,7 +344,7 @@ const _nav = [
     items: [
       {
         component: CNavItem,
-        name: 'List',
+        name: 'Liste',
         to: '/employee/list',
       },
     ],

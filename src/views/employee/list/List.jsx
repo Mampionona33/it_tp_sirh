@@ -113,7 +113,7 @@ const List = () => {
     <CRow>
       <CCol xs={12}>
         <DataTable
-          title="List employés"
+          title="Liste employés"
           data={employes}
           columns={columns}
           exportCsvBtn
