@@ -1,13 +1,15 @@
 import React from 'react'
 import CustomSection from 'src/components/CustomSection'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 const GrossWages = () => {
+  const dispatch = useDispatch()
   const employeeTotalHours = useSelector((state) => state.employeHours)
-  const title = 'Salaire brute'
+  const title = 'Salaire brut'
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
 
   const tauxHoraire = selecteEmploy.salaireBase / 173.33
+  const salaireDeBase = selecteEmploy.salaireBase
 
   const calculHs = (heures, majoration) => {
     let valeur = 0
@@ -48,7 +50,7 @@ const GrossWages = () => {
   const formatedHn50Value = formatToMoney(hn50Value)
   const formatedHdimValue = formatToMoney(hdimValue)
   const formatedSlaireBruteValue = formatToMoney(salaireBruteVal)
-  const formatedSalaireBase = formatToMoney(selecteEmploy.salaireBase)
+  const formatedSalaireBase = formatToMoney(salaireDeBase)
 
   const data = [
     {
@@ -119,6 +121,15 @@ const GrossWages = () => {
       </table>
     )
   }
+
+  React.useEffect(() => {
+    let mount = true
+    if (salaireDeBase) {
+    }
+    return () => {
+      mount = false
+    }
+  }, [salaireDeBase])
 
   return (
     <div>

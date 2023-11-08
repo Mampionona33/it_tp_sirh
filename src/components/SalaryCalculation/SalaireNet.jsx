@@ -1,5 +1,6 @@
 import React from 'react'
 import CustomSection from 'src/components/CustomSection'
+import { useDispatch, useSelector } from 'react-redux'
 
 const SalaireNet = () => {
   const title = 'Salaire net'
