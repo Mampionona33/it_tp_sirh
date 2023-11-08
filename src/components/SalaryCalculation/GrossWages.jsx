@@ -1,6 +1,7 @@
 import React from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector, useDispatch } from 'react-redux'
+import { setSelectedEmployeSalaireBrut } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 
 const GrossWages = () => {
   const dispatch = useDispatch()
@@ -124,12 +125,15 @@ const GrossWages = () => {
 
   React.useEffect(() => {
     let mount = true
-    if (salaireDeBase) {
+    if (salaireBruteVal) {
+      if (mount) {
+        dispatch(setSelectedEmployeSalaireBrut(salaireBruteVal))
+      }
     }
     return () => {
       mount = false
     }
-  }, [salaireDeBase])
+  }, [salaireBruteVal])
 
   return (
     <div>

@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const SalaireNet = () => {
   const title = 'Salaire net'
+  const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
+
+  console.log(salaireBrut)
 
   const Body = () => {
     return (

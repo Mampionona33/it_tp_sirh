@@ -18,7 +18,7 @@ const initialState = {
     salaireBase: null,
     cat: null,
   },
-  salaireBrute: 0,
+  salaireBrut: 0,
 }
 
 const selectedEmployeSlice = createSlice({
@@ -29,7 +29,7 @@ const selectedEmployeSlice = createSlice({
       state.employe = action.payload
     },
     setSelectedEmployeSalaireBrut: (state, action) => {
-      state.salaireBrute = action.payload
+      state.salaireBrut = action.payload
     },
   },
 })
