@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 const SalaryCalculation = () => {
   return (
     <>
-      <div className="columns-2">
+      <div className="flex justify-evenly columns-2">
         <GrossWages />
         <SalaireNet />
       </div>

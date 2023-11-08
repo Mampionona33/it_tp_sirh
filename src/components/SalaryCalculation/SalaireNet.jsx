@@ -7,14 +7,14 @@ import { cotisastions } from 'src/db/db'
 const SalaireNet = () => {
   const title = 'Salaire net'
   const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
-  const employeeTotalHours = useSelector((state) => state.employeHours)
+  const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
   const cnaps = cotisastions.filter((item) => item.id === 1)
   const ostie = cotisastions.filter((item) => item.id === 2)
-  // const hsni130 = employeeTotalHours.
+  const hsni130Value = selectedEmployeHours.hsni130Value
 
   const soustotal1 = salaireBrut - (cnaps[0].value + ostie[0].value)
 
-  console.log(cnaps)
+  // console.log(selectedEmployeHours)
 
   const data = [
     {
@@ -35,7 +35,7 @@ const SalaireNet = () => {
     },
     {
       title: 'HSNI 130',
-      value: `${formatAriaryMga(soustotal1)}`,
+      value: `${formatAriaryMga(hsni130Value)}`,
     },
   ]
 
