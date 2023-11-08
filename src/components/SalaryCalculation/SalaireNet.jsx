@@ -16,7 +16,7 @@ const SalaireNet = () => {
   const soustotal1 = salaireBrut - (cnaps[0].value + ostie[0].value)
 
   const baseIrsa = soustotal1 - (hsni130Value + hsni150Value)
-  // console.log(selectedEmployeHours)
+  const irsaArrondi = Math.floor(baseIrsa / 100) * 100
 
   const data = [
     {
@@ -46,6 +46,10 @@ const SalaireNet = () => {
     {
       title: 'Base IRSA',
       value: `${formatAriaryMga(baseIrsa)}`,
+    },
+    {
+      title: 'Imposable arrondi',
+      value: `${formatAriaryMga(irsaArrondi)}`,
     },
   ]
 
