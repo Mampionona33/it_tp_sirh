@@ -1,3 +1,16 @@
+export const cotisastions = [
+  {
+    id: 1,
+    name: 'CNAPS',
+    value: 4256.56,
+  },
+  {
+    id: 2,
+    name: 'OSTIE',
+    value: 4256.56,
+  },
+]
+
 export const employees = [
   {
     id: 1,
