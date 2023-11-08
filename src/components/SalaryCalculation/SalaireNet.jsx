@@ -8,10 +8,26 @@ const SalaireNet = () => {
 
   console.log(salaireBrut)
 
+  const data = [
+    {
+      title: 'Salaire brut :',
+      value: `${salaireBrut}`,
+    },
+  ]
+
   const Body = () => {
     return (
       <>
-        <div>Body</div>
+        <table>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.title}</td>
+                <td>{item.value}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </>
     )
   }
