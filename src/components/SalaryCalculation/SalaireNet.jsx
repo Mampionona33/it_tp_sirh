@@ -1,6 +1,7 @@
 import React from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useDispatch, useSelector } from 'react-redux'
+import formatAriaryMga from 'src/utils/formatAriaryMga'
 
 const SalaireNet = () => {
   const title = 'Salaire net'
@@ -11,7 +12,7 @@ const SalaireNet = () => {
   const data = [
     {
       title: 'Salaire brut :',
-      value: `${salaireBrut}`,
+      value: `${formatAriaryMga(salaireBrut)}`,
     },
   ]
 

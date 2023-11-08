@@ -2,6 +2,7 @@ import React from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector, useDispatch } from 'react-redux'
 import { setSelectedEmployeSalaireBrut } from 'src/redux/selectedEmploye/selectedEmployeReducer'
+import formatAriaryMga from 'src/utils/formatAriaryMga'
 
 const GrossWages = () => {
   const dispatch = useDispatch()
@@ -35,23 +36,15 @@ const GrossWages = () => {
     hdimValue +
     selecteEmploy.salaireBase
 
-  const formatToMoney = (number) => {
-    return new Intl.NumberFormat('fr', {
-      style: 'currency',
-      currency: 'MGA',
-      currencyDisplay: 'narrowSymbol',
-    }).format(number)
-  }
-
-  const formatedHsni130Value = formatToMoney(hsni130Value)
-  const formatedHsni150Value = formatToMoney(hsni150Value)
-  const formatedHsi130Value = formatToMoney(hsi130Value)
-  const formatedHsi150Value = formatToMoney(hsi150Value)
-  const formatedHn30Value = formatToMoney(hn30Value)
-  const formatedHn50Value = formatToMoney(hn50Value)
-  const formatedHdimValue = formatToMoney(hdimValue)
-  const formatedSlaireBruteValue = formatToMoney(salaireBruteVal)
-  const formatedSalaireBase = formatToMoney(salaireDeBase)
+  const formatedHsni130Value = formatAriaryMga(hsni130Value)
+  const formatedHsni150Value = formatAriaryMga(hsni150Value)
+  const formatedHsi130Value = formatAriaryMga(hsi130Value)
+  const formatedHsi150Value = formatAriaryMga(hsi150Value)
+  const formatedHn30Value = formatAriaryMga(hn30Value)
+  const formatedHn50Value = formatAriaryMga(hn50Value)
+  const formatedHdimValue = formatAriaryMga(hdimValue)
+  const formatedSlaireBruteValue = formatAriaryMga(salaireBruteVal)
+  const formatedSalaireBase = formatAriaryMga(salaireDeBase)
 
   const data = [
     {
