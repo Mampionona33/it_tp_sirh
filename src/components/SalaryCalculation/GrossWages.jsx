@@ -41,6 +41,7 @@ const GrossWages = () => {
   const formatedHn50Value = formatToMoney(hn50Value)
   const formatedHdimValue = formatToMoney(hdimValue)
   const formatedSlaireBruteValue = formatToMoney(salaireBruteVal)
+  const formatedSalaireBase = formatToMoney(selecteEmploy.salaireBase)
 
   const data = [
     {
@@ -88,7 +89,7 @@ const GrossWages = () => {
             <td colSpan="2" className="text-left py-3 pl-4 font-medium">
               Salaire de base
             </td>
-            <td className="text-right py-3 pr-4 font-medium">{selecteEmploy.salaireBase} Ar</td>
+            <td className="text-right py-3 pr-4 font-medium">{formatedSalaireBase}</td>
           </tr>
           {data.map((item, index) => (
             <tr className="border-b border-customRed-100" key={index}>
