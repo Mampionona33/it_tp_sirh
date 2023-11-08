@@ -15,6 +15,7 @@ const SalaireNet = () => {
 
   const soustotal1 = salaireBrut - (cnaps[0].value + ostie[0].value)
 
+  const baseIrsa = soustotal1 - (hsni130Value + hsni150Value)
   // console.log(selectedEmployeHours)
 
   const data = [
@@ -41,6 +42,10 @@ const SalaireNet = () => {
     {
       title: 'HSNI 150',
       value: `${formatAriaryMga(hsni150Value)}`,
+    },
+    {
+      title: 'Base IRSA',
+      value: `${formatAriaryMga(baseIrsa)}`,
     },
   ]
 
