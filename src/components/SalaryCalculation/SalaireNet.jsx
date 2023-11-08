@@ -15,7 +15,9 @@ const SalaireNet = () => {
 
   return (
     <>
-      <CustomSection title={title} body={<Body />} />
+      <div>
+        <CustomSection title={title} body={<Body />} />
+      </div>
     </>
   )
 }
