@@ -7,7 +7,7 @@ const GrossWages = () => {
   const title = 'Salaire brute'
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
 
-  console.log(selecteEmploy)
+  console.log(employeeTotalHours)
 
   const data = [
     {
