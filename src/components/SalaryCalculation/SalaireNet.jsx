@@ -3,6 +3,7 @@ import CustomSection from 'src/components/CustomSection'
 import { useDispatch, useSelector } from 'react-redux'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 import { cotisastions } from 'src/db/db'
+import IrsaAPayer from 'src/utils/calculIrsaAPayer'
 
 const SalaireNet = () => {
   const title = 'Salaire net'
@@ -18,43 +19,10 @@ const SalaireNet = () => {
   const baseIrsa = soustotal1 - (hsni130Value + hsni150Value)
   const imposableArrondi = Math.floor(baseIrsa / 100) * 100
 
-  const irsaParTranche = soustotal1 - imposableArrondi
+  const irsaCalculate = new IrsaAPayer(imposableArrondi)
+  const irsaApayer = irsaCalculate.irsaValue
 
-  const isTranche0 = (imposableArrondi) => {
-    return imposableArrondi <= 350000
-  }
-
-  const isTranche1 = (imposableArrondi) => {
-    return imposableArrondi >= 350001 && imposableArrondi <= 400000
-  }
-
-  const isTranche2 = (imposableArrondi) => {
-    return imposableArrondi >= 400001 && imposableArrondi <= 500000
-  }
-
-  const isTranche3 = (imposableArrondi) => {
-    return imposableArrondi >= 500001 && imposableArrondi <= 600000
-  }
-
-  const calculIrsaTranche = (irsaArrondi) => {
-    let irsa = 0
-
-    if (isTranche0(irsaArrondi)) {
-      irsa = 0
-    } else if (isTranche1(irsaArrondi)) {
-      irsa = (irsaArrondi - 350000) * 0.05
-    } else if (isTranche2(irsaArrondi)) {
-      irsa = 50000 * 0.05 + (irsaArrondi - 400000) * 0.1
-    } else if (isTranche3(irsaArrondi)) {
-      irsa = 50000 * 0.05 + 100000 * 0.1 + (irsaArrondi - 500000) * 0.15
-    } else {
-      irsa = 50000 * 0.05 + 100000 * 0.1 + 100000 * 0.15 + (irsaArrondi - 600000) * 0.2
-    }
-
-    return irsa >= 2000 ? irsa : 2000
-  }
-
-  const irsaAPayer = calculIrsaTranche(imposableArrondi)
+  const salaireNet = imposableArrondi - irsaApayer
 
   const data = [
     {
@@ -90,8 +58,12 @@ const SalaireNet = () => {
       value: `${formatAriaryMga(imposableArrondi)}`,
     },
     {
-      title: 'IRSA par tranche',
-      value: `${formatAriaryMga(irsaParTranche)}`,
+      title: 'IRSA à payer',
+      value: `${formatAriaryMga(irsaApayer)}`,
+    },
+    {
+      title: 'Salaire net',
+      value: <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNet)}</span>,
     },
   ]
 
