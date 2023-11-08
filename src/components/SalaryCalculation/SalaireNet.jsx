@@ -11,6 +11,7 @@ const SalaireNet = () => {
   const cnaps = cotisastions.filter((item) => item.id === 1)
   const ostie = cotisastions.filter((item) => item.id === 2)
   const hsni130Value = selectedEmployeHours.hsni130Value
+  const hsni150Value = selectedEmployeHours.hsni150Value
 
   const soustotal1 = salaireBrut - (cnaps[0].value + ostie[0].value)
 
@@ -36,6 +37,10 @@ const SalaireNet = () => {
     {
       title: 'HSNI 130',
       value: `${formatAriaryMga(hsni130Value)}`,
+    },
+    {
+      title: 'HSNI 150',
+      value: `${formatAriaryMga(hsni150Value)}`,
     },
   ]
 

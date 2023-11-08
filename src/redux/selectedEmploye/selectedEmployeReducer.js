@@ -20,6 +20,7 @@ const initialState = {
   },
   salaireBrut: 0,
   hsni130Value: 0,
+  hsni150Value: 0,
 }
 
 const selectedEmployeSlice = createSlice({
@@ -35,10 +36,17 @@ const selectedEmployeSlice = createSlice({
     setHsni130Value: (state, action) => {
       state.hsni130Value = action.payload
     },
+    setHsni150Value: (state, action) => {
+      state.hsni150Value = action.payload
+    },
   },
 })
 
-export const { setSelectedEmploye, setSelectedEmployeSalaireBrut, setHsni130Value } =
-  selectedEmployeSlice.actions
+export const {
+  setSelectedEmploye,
+  setSelectedEmployeSalaireBrut,
+  setHsni130Value,
+  setHsni150Value,
+} = selectedEmployeSlice.actions
 
 export default selectedEmployeSlice.reducer

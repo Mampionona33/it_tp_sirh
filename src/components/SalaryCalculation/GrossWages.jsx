@@ -3,6 +3,7 @@ import CustomSection from 'src/components/CustomSection'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   setHsni130Value,
+  setHsni150Value,
   setSelectedEmployeSalaireBrut,
 } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
@@ -131,10 +132,15 @@ const GrossWages = () => {
         dispatch(setHsni130Value(hsni130Value))
       }
     }
+    if (hsni150Value) {
+      if (mount) {
+        dispatch(setHsni150Value(hsni150Value))
+      }
+    }
     return () => {
       mount = false
     }
-  }, [salaireBruteVal, hsni130Value])
+  }, [salaireBruteVal, hsni130Value, hsni150Value])
 
   return (
     <div>
