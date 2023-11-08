@@ -23,7 +23,14 @@ const GrossWages = () => {
   const hdimValue = calculHs(employeeTotalHours.totalHdim, 100)
 
   const salaireBruteVal =
-    hsni130Value + hsni150Value + hsi130Value + hsi150Value + hn30Value + hn50Value + hdimValue
+    hsni130Value +
+    hsni150Value +
+    hsi130Value +
+    hsi150Value +
+    hn30Value +
+    hn50Value +
+    hdimValue +
+    selecteEmploy.salaireBase
 
   const formatToMoney = (number) => {
     return new Intl.NumberFormat('fr', {
