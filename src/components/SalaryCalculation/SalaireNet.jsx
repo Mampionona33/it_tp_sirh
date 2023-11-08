@@ -19,7 +19,7 @@ const SalaireNet = () => {
   const data = [
     {
       title: 'Salaire brut :',
-      value: `${formatAriaryMga(salaireBrut)}`,
+      value: <span className="font-medium">{formatAriaryMga(salaireBrut)}</span>,
     },
     {
       title: 'CNAPS :',
