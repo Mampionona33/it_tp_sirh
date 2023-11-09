@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 import { cotisastions } from 'src/db/db'
 import IrsaAPayer from 'src/utils/calculIrsaAPayer'
+import { setIrsaValue } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 
 const SalaireNet = () => {
+  const dispatch = useDispatch()
   const title = 'Salaire net'
   const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
   const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
@@ -23,6 +25,18 @@ const SalaireNet = () => {
   const irsaApayer = irsaCalculate.irsaValue
 
   const salaireNet = imposableArrondi - irsaApayer
+
+  React.useEffect(() => {
+    let mount = true
+    if (irsaApayer) {
+      if (mount) {
+        dispatch(setIrsaValue(irsaApayer))
+      }
+    }
+    return () => {
+      mount = false
+    }
+  }, [irsaApayer])
 
   const data = [
     {
