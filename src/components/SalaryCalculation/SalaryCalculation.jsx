@@ -6,8 +6,8 @@ import PrimeEtAvantage from './PrimeEtAvantage'
 const SalaryCalculation = () => {
   return (
     <>
-      <div className="flex flex-col">
-        <div className="flex flex-wrap justify-evenly columns-2">
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-wrap justify-evenly columns-2 gap-4">
           <GrossWages />
           <SalaireNet />
         </div>
