@@ -11,7 +11,7 @@ import { setSelectedEmploye } from 'src/redux/selectedEmploye/selectedEmployeRed
 import EmployeeService from 'src/services/EmployeeService'
 
 const Fiche = () => {
-  const [activeTab, setActiveTab] = useState('profile')
+  const [activeTab, setActiveTab] = useState('info-perso')
   const [selectedEmployee, setSelectedEmployee] = useState(null)
   const { id, activeTabParam } = useParams()
   const dispatch = useDispatch()
@@ -23,7 +23,7 @@ const Fiche = () => {
     const pathParts = location.pathname.split('/')
     const lastPathPart = pathParts[pathParts.length - 1]
 
-    if (['profile', 'dashboard', 'settings'].includes(lastPathPart)) {
+    if (['info-perso', 'heures-travailles', 'bulletin-de-paie'].includes(lastPathPart)) {
       setActiveTab(lastPathPart)
     } else if (activeTabParam) {
       setActiveTab(activeTabParam)
@@ -99,15 +99,15 @@ const Fiche = () => {
           <li className="mr-2" role="presentation">
             <button
               className={`inline-block p-4 border-b-2 rounded-t-lg ${
-                activeTab === 'profile' ? 'border-customRed-900' : ''
+                activeTab === 'info-perso' ? 'border-customRed-900' : ''
               }`}
-              id="profile-tab"
-              data-tabs-target="#profile"
+              id="info-perso-tab"
+              data-tabs-target="#info-perso"
               type="button"
               role="tab"
-              aria-controls="profile"
-              aria-selected={activeTab === 'profile'}
-              onClick={() => handleTabClick('profile')}
+              aria-controls="info-perso"
+              aria-selected={activeTab === 'info-perso'}
+              onClick={() => handleTabClick('info-perso')}
             >
               Information générale
             </button>
@@ -115,15 +115,15 @@ const Fiche = () => {
           <li className="mr-2" role="presentation">
             <button
               className={`inline-block p-4 border-b-2 rounded-t-lg ${
-                activeTab === 'dashboard' ? 'border-customRed-900' : ''
+                activeTab === 'heures-travailles' ? 'border-customRed-900' : ''
               }`}
-              id="dashboard-tab"
-              data-tabs-target="#dashboard"
+              id="heures-travailles-tab"
+              data-tabs-target="#heures-travailles"
               type="button"
               role="tab"
-              aria-controls="dashboard"
-              aria-selected={activeTab === 'dashboard'}
-              onClick={() => handleTabClick('dashboard')}
+              aria-controls="heures-travailles"
+              aria-selected={activeTab === 'heures-travailles'}
+              onClick={() => handleTabClick('heures-travailles')}
             >
               Heures travaillées
             </button>
@@ -132,15 +132,15 @@ const Fiche = () => {
           <li role="presentation">
             <button
               className={`inline-block p-4 border-b-2 rounded-t-lg ${
-                activeTab === 'settings' ? 'border-customRed-900' : ''
+                activeTab === 'bulletin-de-paie' ? 'border-customRed-900' : ''
               }`}
-              id="settings-tab"
-              data-tabs-target="#settings"
+              id="bulletin-de-paie-tab"
+              data-tabs-target="#bulletin-de-paie"
               type="button"
               role="tab"
-              aria-controls="settings"
-              aria-selected={activeTab === 'settings'}
-              onClick={() => handleTabClick('settings')}
+              aria-controls="bulletin-de-paie"
+              aria-selected={activeTab === 'bulletin-de-paie'}
+              onClick={() => handleTabClick('bulletin-de-paie')}
             >
               Bulletin de paie
             </button>
@@ -151,32 +151,32 @@ const Fiche = () => {
       <div id="myTabContent">
         <div
           className={`p-4  bg-gray-50 dark:bg-gray-800 ${
-            activeTab === 'profile' ? 'block' : 'hidden'
+            activeTab === 'info-perso' ? 'block' : 'hidden'
           }`}
-          id="profile"
+          id="info-perso"
           role="tabpanel"
-          aria-labelledby="profile-tab"
+          aria-labelledby="info-perso-tab"
         >
           {selectedEmployee !== null && <FormInfoGalEmployee id={selectedEmployee} />}
         </div>
         <div
           className={`p-4  bg-gray-50 dark:bg-gray-800 ${
-            activeTab === 'dashboard' ? 'block' : 'hidden'
+            activeTab === 'heures-travailles' ? 'block' : 'hidden'
           }`}
-          id="dashboard"
+          id="heures-travailles"
           role="tabpanel"
-          aria-labelledby="dashboard-tab"
+          aria-labelledby="heures-travailles-tab"
         >
           {selectedEmployee !== null && <TimeSheetTable id={selectedEmployee} />}
         </div>
 
         <div
           className={`p-4  bg-gray-50 dark:bg-gray-800 ${
-            activeTab === 'settings' ? 'block' : 'hidden'
+            activeTab === 'bulletin-de-paie' ? 'block' : 'hidden'
           }`}
-          id="settings"
+          id="bulletin-de-paie"
           role="tabpanel"
-          aria-labelledby="settings-tab"
+          aria-labelledby="bulletin-de-paie-tab"
         >
           {selectedEmployee !== null && <SalaryCalculation />}
         </div>
