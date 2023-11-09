@@ -1,4 +1,4 @@
-export default class IrsaAPayer {
+export default class CalculIrsaAPayer {
   constructor(imposableArrondi) {
     this.imposableArrondi = imposableArrondi
     this.value = 0

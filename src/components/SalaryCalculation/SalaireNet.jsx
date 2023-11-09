@@ -3,7 +3,7 @@ import CustomSection from 'src/components/CustomSection'
 import { useDispatch, useSelector } from 'react-redux'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 import { cotisastions } from 'src/db/db'
-import IrsaAPayer from 'src/utils/calculIrsaAPayer'
+import CalculIrsaAPayer from 'src/utils/CalculIrsaAPayer'
 import { setIrsaValue } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 
 const SalaireNet = () => {
@@ -21,7 +21,7 @@ const SalaireNet = () => {
   const baseIrsa = soustotal1 - (hsni130Value + hsni150Value)
   const imposableArrondi = Math.floor(baseIrsa / 100) * 100
 
-  const irsaCalculate = new IrsaAPayer(imposableArrondi)
+  const irsaCalculate = new CalculIrsaAPayer(imposableArrondi)
   const irsaApayer = irsaCalculate.irsaValue
 
   const salaireNet = imposableArrondi - irsaApayer
