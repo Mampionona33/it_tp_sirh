@@ -37,7 +37,7 @@ export default function PrimeEtAvantage() {
                     min="0"
                     name={item.id}
                     id={item.id}
-                    placeholder="0"
+                    placeholder="0 Ar"
                   />
                 </div>
               ))}
@@ -51,7 +51,7 @@ export default function PrimeEtAvantage() {
                   <input
                     className="form-control"
                     type="number"
-                    min="0"
+                    min="0 Ar"
                     name={item.id}
                     id={item.id}
                     placeholder="0"
@@ -65,7 +65,7 @@ export default function PrimeEtAvantage() {
                 <button type="reset" className="btn btn-secondary">
                   Annuler
                 </button>
-                <button type="submit" className="btn btn-danger">
+                <button type="submit" className="btn btn-danger hover:bg-customRed-200">
                   Enregistrer
                 </button>
               </div>
