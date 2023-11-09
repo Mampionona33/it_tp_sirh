@@ -24,7 +24,7 @@ export default function PrimeEtAvantage() {
     return (
       <>
         <form action="" method="post">
-          <div className="row g-3 m-2">
+          <div className="row g-3 mx-4 my-2">
             <div className="col-12 col-lg-6">
               {firstHalf.map((item, index) => (
                 <div key={item.id} className="mb-3">
@@ -61,7 +61,7 @@ export default function PrimeEtAvantage() {
             </div>
             <hr />
             <div className="col-12">
-              <div className="d-flex gap-2 justify-end">
+              <div className="d-flex gap-2 justify-end pb-2">
                 <button type="reset" className="btn btn-secondary">
                   Annuler
                 </button>
