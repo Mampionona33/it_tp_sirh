@@ -34,7 +34,7 @@ const Fiche = () => {
     if (mount) {
       EmployeeService.getAll()
         .then((resp) => {
-          console.log(resp.data)
+          // console.log(resp.data)
           setEmployees(resp.data)
         })
         .catch((err) => console.log(err))
