@@ -1,8 +1,11 @@
 import React, { useState, useCallback } from 'react'
 import CustomSection from 'src/components/CustomSection'
+import { useDispatch } from 'react-redux'
+import { setPrimeEtAvantage } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 
 export default function PrimeEtAvantage() {
   const title = 'Primes et avantages'
+  const dispatch = useDispatch()
 
   const Body = () => {
     const fields = [
@@ -42,7 +45,7 @@ export default function PrimeEtAvantage() {
           }
         }
       }
-
+      dispatch(setPrimeEtAvantage(primeEtAvantage))
       console.log('Prime et Avantage:', primeEtAvantage)
     }
 

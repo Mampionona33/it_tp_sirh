@@ -1,6 +1,6 @@
 import React from 'react'
-import CustomSection from 'src/components/CustomSection'
 import { useSelector } from 'react-redux'
+import CustomSection from 'src/components/CustomSection'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 import { cotisastions } from 'src/db/db'
 
@@ -8,9 +8,11 @@ const SalaireNetAPayer = () => {
   const title = 'Salaire net à payer'
   const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
   const irsaValue = useSelector((state) => state.selectedEmploye.irsaValue)
-  const cnaps = cotisastions.filter((item) => item.id === 1)[0].value
-  const ostie = cotisastions.filter((item) => item.id === 2)[0].value
-  const salaireNetAPayer = salaireBrut + irsaValue + cnaps + ostie
+  const primeEtAvantage = useSelector((state) => state.selectedEmploye.primeEtAvantage)
+  const cnaps = cotisastions.find((item) => item.id === 1)?.value || 0
+  const ostie = cotisastions.find((item) => item.id === 2)?.value || 0
+
+  const salaireNetAPayer = salaireBrut + irsaValue + cnaps + ostie + (primeEtAvantage || 0)
 
   const data = [
     {
@@ -37,29 +39,23 @@ const SalaireNetAPayer = () => {
     },
   ]
 
-  const Body = () => {
-    return (
-      <>
-        <table className="table-auto">
-          <tbody>
-            {data.map((item, index) => (
-              <tr className="border-b border-customRed-100" key={index}>
-                <td className="text-left py-3 pl-4 font-medium">{item.title}</td>
-                <td className="py-3 pl-8 pr-4 text-right">{item.value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </>
-    )
-  }
+  const Body = () => (
+    <table className="table-auto">
+      <tbody>
+        {data.map((item, index) => (
+          <tr className="border-b border-customRed-100" key={index}>
+            <td className="text-left py-3 pl-4 font-medium">{item.title}</td>
+            <td className="py-3 pl-8 pr-4 text-right">{item.value}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
 
   return (
-    <>
-      <div>
-        <CustomSection title={title} body={<Body />} />
-      </div>
-    </>
+    <div>
+      <CustomSection title={title} body={<Body />} />
+    </div>
   )
 }
 
