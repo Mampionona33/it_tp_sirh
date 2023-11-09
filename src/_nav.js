@@ -315,22 +315,6 @@ const _nav = [
       text: 'NEW',
     },
   },
-  // {
-  //   component: CNavTitle,
-  //   name: 'Theme',
-  // },
-  // {
-  //   component: CNavItem,
-  //   name: 'Colors',
-  //   to: '/theme/colors',
-  //   icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
-  // },
-  // {
-  //   component: CNavItem,
-  //   name: 'Typography',
-  //   to: '/theme/typography',
-  //   icon: <CIcon icon={cilPencil} customClassName="nav-icon" />,
-  // },
 
   {
     component: CNavTitle,
@@ -339,13 +323,13 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Employés',
-    to: '/employee',
+    to: '/employees',
     icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
     items: [
       {
         component: CNavItem,
         name: 'Liste',
-        to: '/employee/list',
+        to: '/employees/list',
       },
     ],
   },

@@ -61,9 +61,9 @@ const routes = [
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
 
-  { path: '/employee', name: 'Employés', element: Cards, exact: true },
-  { path: '/employee/list', name: 'List', element: ListEmployes, exact: true },
-  { path: '/employee/fiche/:id', name: 'Fiche', element: FicheEmploye, exact: true },
+  { path: '/employees', name: 'Employés', element: Cards, exact: true },
+  { path: '/employees/list', name: 'List', element: ListEmployes, exact: true },
+  { path: '/employees/fiche/:id', name: 'Fiche', element: FicheEmploye, exact: true },
 
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },
