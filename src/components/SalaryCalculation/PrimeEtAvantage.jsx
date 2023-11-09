@@ -67,7 +67,7 @@ export default function PrimeEtAvantage() {
 
   return (
     <>
-      <CustomSection title={title} body={<Body />} />
+      <CustomSection fullWidth title={title} body={<Body />} />
     </>
   )
 }

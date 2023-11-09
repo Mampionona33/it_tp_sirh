@@ -7,7 +7,7 @@ const SalaryCalculation = () => {
   return (
     <>
       <div className="flex flex-col gap-4">
-        <div className="flex">
+        <div className="container mx-auto">
           <PrimeEtAvantage />
         </div>
         <div className="flex flex-wrap justify-evenly columns-3 gap-4">
