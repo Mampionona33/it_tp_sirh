@@ -112,7 +112,7 @@ const List = () => {
               items={[
                 { path: `/employee/modifier/${info.getValue()}`, label: 'Modifier' },
                 { path: `/employee/supprimer/${info.getValue()}`, label: 'Supprimer' },
-                { path: `/employee/fiche/${info.getValue()}`, label: 'Fiche employé' },
+                { path: `/employees/fiche/${info.getValue()}`, label: 'Fiche employé' },
               ]}
             />
           </div>
