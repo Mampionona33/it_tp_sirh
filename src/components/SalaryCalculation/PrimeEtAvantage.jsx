@@ -51,10 +51,10 @@ export default function PrimeEtAvantage() {
                   <input
                     className="form-control"
                     type="number"
-                    min="0 Ar"
+                    min="0"
                     name={item.id}
                     id={item.id}
-                    placeholder="0"
+                    placeholder="0 Ar"
                   />
                 </div>
               ))}
