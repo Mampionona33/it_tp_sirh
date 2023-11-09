@@ -10,6 +10,7 @@ const SalaireNetAPayer = () => {
   const irsaValue = useSelector((state) => state.selectedEmploye.irsaValue)
   const cnaps = cotisastions.filter((item) => item.id === 1)[0].value
   const ostie = cotisastions.filter((item) => item.id === 2)[0].value
+  const salaireNetAPayer = salaireBrut + irsaValue + cnaps + ostie
 
   const data = [
     {
@@ -30,7 +31,9 @@ const SalaireNetAPayer = () => {
     },
     {
       title: 'Salaire net à payer :',
-      value: `${formatAriaryMga(salaireBrut)}`,
+      value: (
+        <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNetAPayer)}</span>
+      ),
     },
   ]
 
