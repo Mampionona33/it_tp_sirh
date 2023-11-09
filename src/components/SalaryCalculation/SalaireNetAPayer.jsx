@@ -7,8 +7,8 @@ import { cotisastions } from 'src/db/db'
 const SalaireNetAPayer = () => {
   const title = 'Salaire net à payer'
   const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
-  const cnaps = cotisastions.filter((item) => item.id === 1)
-  const ostie = cotisastions.filter((item) => item.id === 2)
+  const cnaps = cotisastions.filter((item) => item.id === 1)[0].value
+  const ostie = cotisastions.filter((item) => item.id === 2)[0].value
 
   const data = [
     {
