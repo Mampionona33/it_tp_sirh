@@ -59,6 +59,17 @@ export default function PrimeEtAvantage() {
                 </div>
               ))}
             </div>
+            <hr />
+            <div className="col-12">
+              <div className="d-flex gap-2 justify-end">
+                <button type="reset" className="btn btn-secondary">
+                  Annuler
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Enregistrer
+                </button>
+              </div>
+            </div>
           </div>
         </form>
       </>
