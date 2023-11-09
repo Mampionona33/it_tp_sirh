@@ -65,7 +65,7 @@ export default function PrimeEtAvantage() {
                 <button type="reset" className="btn btn-secondary">
                   Annuler
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-danger">
                   Enregistrer
                 </button>
               </div>
