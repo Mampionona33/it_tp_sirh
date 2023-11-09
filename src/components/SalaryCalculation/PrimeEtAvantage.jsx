@@ -6,15 +6,15 @@ export default function PrimeEtAvantage() {
 
   const Body = () => {
     const fields = [
-      { id: 'primeAssuidite', label: "Prime d'assuicidité" },
-      { id: 'primeExcellence', label: "Prime d'excellence" },
-      { id: 'absenceRetard', label: 'Absence / Retard à déduire' },
-      { id: 'indemniteTransport', label: 'Indemnité de transport' },
-      { id: 'avantageNature', label: 'Avantages en nature (Logement)' },
-      { id: 'avantageVehicule', label: 'Avantages en nature (Véhicule)' },
-      { id: 'autresIndemnite', label: 'Autres indemnités' },
-      { id: 'autresAvantage', label: 'Autres avantages' },
-      { id: 'rappel', label: 'Rappel' },
+      { id: 'primeAssuidite', label: "Prime d'assuicidité", action: 'addition' },
+      { id: 'primeExcellence', label: "Prime d'excellence", action: 'addition' },
+      { id: 'absenceRetard', label: 'Absence / Retard à déduire', action: 'deduction' },
+      { id: 'indemniteTransport', label: 'Indemnité de transport', action: 'addition' },
+      { id: 'avantageNature', label: 'Avantages en nature (Logement)', action: 'addition' },
+      { id: 'avantageVehicule', label: 'Avantages en nature (Véhicule)', action: 'addition' },
+      { id: 'autresIndemnite', label: 'Autres indemnités', action: 'addition' },
+      { id: 'autresAvantage', label: 'Autres avantages', action: 'addition' },
+      { id: 'rappel', label: 'Rappel', action: 'addition' },
     ]
 
     const [formValues, setFormValues] = useState({})
@@ -25,7 +25,25 @@ export default function PrimeEtAvantage() {
 
     const handleSubmit = (e) => {
       e.preventDefault()
-      console.log(formValues)
+      // console.log(formValues)
+      let primeEtAvantage = 0
+      for (const key in formValues) {
+        if (formValues.hasOwnProperty(key)) {
+          const value = parseFloat(formValues[key])
+          const field = fields.find((item) => item.id === key)
+
+          if (field) {
+            // Vérifier si l'action est 'addition' ou 'deduction'
+            if (field.action === 'addition') {
+              primeEtAvantage += value
+            } else if (field.action === 'deduction') {
+              primeEtAvantage -= value
+            }
+          }
+        }
+      }
+
+      console.log('Prime et Avantage:', primeEtAvantage)
     }
 
     const handleInputChange = useCallback(
@@ -51,6 +69,7 @@ export default function PrimeEtAvantage() {
                   <input
                     className="form-control"
                     type="number"
+                    data-action={item.action}
                     min="0"
                     name={item.id}
                     id={item.id}
