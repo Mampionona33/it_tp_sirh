@@ -5,14 +5,29 @@ import { useParams } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
-import { employeeHours, employees } from 'src/db/db'
+// import { employeeHours, employees } from 'src/db/db'
+import { employeeHours } from 'src/db/db'
 import { setSelectedEmploye } from 'src/redux/selectedEmploye/selectedEmployeReducer'
+import EmployeeService from 'src/services/EmployeeService'
 
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('profile')
   const [selectedEmployee, setSelectedEmployee] = useState(null)
   const params = useParams()
   const dispatch = useDispatch()
+  const [employees, setEmployees] = useState([])
+
+  React.useEffect(() => {
+    let mount = true
+    if (mount) {
+      EmployeeService.getAll()
+        .then((resp) => setEmployees(resp.data))
+        .catch((err) => console.log(err))
+    }
+    return () => {
+      mount = false
+    }
+  }, [])
 
   const handleTabClick = (eventKey) => {
     setActiveTab(eventKey)
