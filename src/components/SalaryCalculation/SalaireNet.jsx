@@ -75,7 +75,7 @@ const SalaireNet = () => {
             {data.map((item, index) => (
               <tr className="border-b border-customRed-100" key={index}>
                 <td className="text-left py-3 pl-4 font-medium">{item.title}</td>
-                <td className="text-left py-3 pl-8 pr-8 text-right">{item.value}</td>
+                <td className="py-3 pl-8 pr-4 text-right">{item.value}</td>
               </tr>
             ))}
           </tbody>

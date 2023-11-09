@@ -4,6 +4,8 @@ import CustomSection from 'src/components/CustomSection'
 const SalaireNetAPayer = () => {
   const title = 'Salaire net à payer'
 
+  const data = []
+
   const Body = () => {
     return (
       <>
