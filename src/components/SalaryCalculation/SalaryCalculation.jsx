@@ -1,6 +1,7 @@
 import React from 'react'
 import GrossWages from 'src/components/SalaryCalculation/GrossWages'
 import SalaireNet from 'src/components/SalaryCalculation/SalaireNet'
+import SalaireNetAPayer from 'src/components/SalaryCalculation/SalaireNetAPayer'
 import PrimeEtAvantage from './PrimeEtAvantage'
 
 const SalaryCalculation = () => {
@@ -13,6 +14,7 @@ const SalaryCalculation = () => {
         <div className="flex flex-wrap justify-evenly columns-3 gap-4">
           <GrossWages />
           <SalaireNet />
+          <SalaireNetAPayer />
         </div>
       </div>
     </>
