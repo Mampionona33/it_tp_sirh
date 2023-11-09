@@ -18,7 +18,7 @@ const SalaryCalculation = () => {
           <SalaireNetAPayer />
         </div>
         <div className="inline-flex justify-end fixed top-[25%] p-1 right-0 ">
-          <Link to="/bulletinDePaiement" className="btn btn-primary">
+          <Link to="/bulletin-de-paiement" className="btn btn-primary">
             Voir le bulletin de paie
           </Link>
         </div>
