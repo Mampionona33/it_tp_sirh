@@ -110,7 +110,7 @@ const Fiche = () => {
               aria-selected={activeTab === 'settings'}
               onClick={() => handleTabClick('settings')}
             >
-              IRSA / OSTIE / CNAPS
+              Bulletin de paie
             </button>
           </li>
         </ul>
