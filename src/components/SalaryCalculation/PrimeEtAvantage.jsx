@@ -67,7 +67,7 @@ export default function PrimeEtAvantage() {
                 </button>
                 <button
                   type="submit"
-                  className="bg-customRed-900 text-white hover:bg-customRed-200 px-3 hover:text-slate-200"
+                  className="bg-customRed-900 text-white hover:bg-customRed-200 py-2 px-3 hover:text-slate-200"
                 >
                   Enregistrer
                 </button>
