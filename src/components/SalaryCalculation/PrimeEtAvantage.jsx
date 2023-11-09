@@ -61,11 +61,14 @@ export default function PrimeEtAvantage() {
             </div>
             <hr />
             <div className="col-12">
-              <div className="d-flex gap-2 justify-end pb-2">
+              <div className="d-flex flex-wrap gap-2 justify-end pb-2">
                 <button type="reset" className="btn btn-secondary">
                   Annuler
                 </button>
-                <button type="submit" className="btn btn-danger hover:bg-customRed-200">
+                <button
+                  type="submit"
+                  className="bg-customRed-900 text-white hover:bg-customRed-200 px-3 hover:text-slate-200"
+                >
                   Enregistrer
                 </button>
               </div>
