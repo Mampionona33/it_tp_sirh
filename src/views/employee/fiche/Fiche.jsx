@@ -13,7 +13,7 @@ import EmployeeService from 'src/services/EmployeeService'
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('profile')
   const [selectedEmployee, setSelectedEmployee] = useState(null)
-  const params = useParams()
+  const { id } = useParams()
   const dispatch = useDispatch()
   const [employees, setEmployees] = useState([])
 
@@ -42,21 +42,21 @@ const Fiche = () => {
 
   React.useEffect(() => {
     let mount = true
-    if (params) {
+    if (id) {
       if (mount) {
-        setSelectedEmployee(params.id)
+        setSelectedEmployee(id)
       }
     }
     return () => {
       mount = false
     }
-  }, [params])
+  }, [id])
 
   React.useEffect(() => {
     let mount = true
 
-    if (params && params.id && employees) {
-      const emp = employees.find((empl) => empl.id == params.id)
+    if (id && employees) {
+      const emp = employees.find((empl) => empl.id == id)
       if (emp && mount) {
         dispatch(
           setSelectedEmploye({
@@ -72,7 +72,7 @@ const Fiche = () => {
     return () => {
       mount = false
     }
-  }, [params, employees])
+  }, [id, employees])
 
   return (
     <div className="bg-white dark:bg-gray-800 p-4 shadow">
