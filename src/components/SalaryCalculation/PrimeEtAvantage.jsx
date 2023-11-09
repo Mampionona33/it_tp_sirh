@@ -21,6 +21,8 @@ export default function PrimeEtAvantage() {
     const firstHalf = fields.slice(0, halfLength)
     const secondHalf = fields.slice(halfLength)
 
+    const handleSubmit = () => {}
+
     return (
       <>
         <form action="" method="post">
