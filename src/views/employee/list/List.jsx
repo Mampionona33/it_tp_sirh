@@ -1,13 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DataTable from 'src/components/DataTable/DataTable'
 import { CRow, CCol } from '@coreui/react'
 import { createColumnHelper } from '@tanstack/react-table'
-import { employees } from 'src/db/db'
+// import { employees } from 'src/db/db'
 import MoreButtonMenu from 'src/components/MoreButtonMenu'
+import EmployeeService from 'src/services/EmployeeService'
 
 const List = () => {
-  const employes = employees
   const columnHelper = createColumnHelper()
+  const [employees, setEmployees] = useState([])
 
   const modalImportCsvField = [
     {
@@ -17,6 +18,18 @@ const List = () => {
       accept: '.csv',
     },
   ]
+
+  React.useEffect(() => {
+    let mount = true
+    if (mount) {
+      EmployeeService.getAll()
+        .then((resp) => setEmployees(resp.data))
+        .catch((err) => console.log(err))
+    }
+    return () => {
+      mount = false
+    }
+  }, [])
 
   const modalAddFields = [
     {
@@ -114,7 +127,7 @@ const List = () => {
       <CCol xs={12}>
         <DataTable
           title="Liste employés"
-          data={employes}
+          data={employees}
           columns={columns}
           exportCsvBtn
           importCsvBtn

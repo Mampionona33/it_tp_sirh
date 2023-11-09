@@ -21,7 +21,10 @@ const Fiche = () => {
     let mount = true
     if (mount) {
       EmployeeService.getAll()
-        .then((resp) => setEmployees(resp.data))
+        .then((resp) => {
+          console.log(resp.data)
+          setEmployees(resp.data)
+        })
         .catch((err) => console.log(err))
     }
     return () => {
