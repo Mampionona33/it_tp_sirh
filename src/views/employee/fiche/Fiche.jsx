@@ -1,11 +1,10 @@
 import { format, parseISO } from 'date-fns'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
-// import { employeeHours, employees } from 'src/db/db'
 import { employeeHours } from 'src/db/db'
 import { setSelectedEmploye } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import EmployeeService from 'src/services/EmployeeService'
@@ -19,7 +18,7 @@ const Fiche = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
-  React.useEffect(() => {
+  useEffect(() => {
     const pathParts = location.pathname.split('/')
     const lastPathPart = pathParts[pathParts.length - 1]
 
@@ -30,7 +29,7 @@ const Fiche = () => {
     }
   }, [location.pathname, activeTabParam])
 
-  React.useEffect(() => {
+  useEffect(() => {
     let mount = true
     if (mount) {
       EmployeeService.getAll()
@@ -50,23 +49,23 @@ const Fiche = () => {
     navigate(`/employees/fiche/${id}/${eventKey}`)
   }
 
-  const selectedEmpHours =
-    employeeHours && employeeHours.filter((emH) => emH.employee.id === selectedEmployee)
-  const heureNormalArray = selectedEmpHours && selectedEmpHours.map((heurs) => heurs.normalHours)
+  const tabList = [
+    { key: 'info-perso', label: 'Information générale' },
+    { key: 'heures-travailles', label: 'Heures travaillées' },
+    { key: 'bulletin-de-paie', label: 'Bulletin de paie' },
+  ]
 
-  React.useEffect(() => {
+  useEffect(() => {
     let mount = true
-    if (id) {
-      if (mount) {
-        setSelectedEmployee(id)
-      }
+    if (id && mount) {
+      setSelectedEmployee(id)
     }
     return () => {
       mount = false
     }
   }, [id])
 
-  React.useEffect(() => {
+  useEffect(() => {
     let mount = true
 
     if (id && employees) {
@@ -88,6 +87,25 @@ const Fiche = () => {
     }
   }, [id, employees])
 
+  const renderTab = (tab) => (
+    <li key={tab.key} className="mr-2" role="presentation">
+      <button
+        className={`inline-block p-4 border-b-2 rounded-t-lg ${
+          activeTab === tab.key ? 'border-customRed-900' : ''
+        }`}
+        id={`${tab.key}-tab`}
+        data-tabs-target={`#${tab.key}`}
+        type="button"
+        role="tab"
+        aria-controls={tab.key}
+        aria-selected={activeTab === tab.key}
+        onClick={() => handleTabClick(tab.key)}
+      >
+        {tab.label}
+      </button>
+    </li>
+  )
+
   return (
     <div className="bg-white dark:bg-gray-800 p-4 shadow">
       <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
@@ -96,93 +114,40 @@ const Fiche = () => {
           id="myTab"
           role="tablist"
         >
-          <li className="mr-2" role="presentation">
-            <button
-              className={`inline-block p-4 border-b-2 rounded-t-lg ${
-                activeTab === 'info-perso' ? 'border-customRed-900' : ''
-              }`}
-              id="info-perso-tab"
-              data-tabs-target="#info-perso"
-              type="button"
-              role="tab"
-              aria-controls="info-perso"
-              aria-selected={activeTab === 'info-perso'}
-              onClick={() => handleTabClick('info-perso')}
-            >
-              Information générale
-            </button>
-          </li>
-          <li className="mr-2" role="presentation">
-            <button
-              className={`inline-block p-4 border-b-2 rounded-t-lg ${
-                activeTab === 'heures-travailles' ? 'border-customRed-900' : ''
-              }`}
-              id="heures-travailles-tab"
-              data-tabs-target="#heures-travailles"
-              type="button"
-              role="tab"
-              aria-controls="heures-travailles"
-              aria-selected={activeTab === 'heures-travailles'}
-              onClick={() => handleTabClick('heures-travailles')}
-            >
-              Heures travaillées
-            </button>
-          </li>
-
-          <li role="presentation">
-            <button
-              className={`inline-block p-4 border-b-2 rounded-t-lg ${
-                activeTab === 'bulletin-de-paie' ? 'border-customRed-900' : ''
-              }`}
-              id="bulletin-de-paie-tab"
-              data-tabs-target="#bulletin-de-paie"
-              type="button"
-              role="tab"
-              aria-controls="bulletin-de-paie"
-              aria-selected={activeTab === 'bulletin-de-paie'}
-              onClick={() => handleTabClick('bulletin-de-paie')}
-            >
-              Bulletin de paie
-            </button>
-          </li>
+          {tabList.map(renderTab)}
         </ul>
       </div>
       {/* Tab contents */}
       <div id="myTabContent">
-        <div
-          className={`p-4  bg-gray-50 dark:bg-gray-800 ${
-            activeTab === 'info-perso' ? 'block' : 'hidden'
-          }`}
-          id="info-perso"
-          role="tabpanel"
-          aria-labelledby="info-perso-tab"
-        >
-          {selectedEmployee !== null && <FormInfoGalEmployee id={selectedEmployee} />}
-        </div>
-        <div
-          className={`p-4  bg-gray-50 dark:bg-gray-800 ${
-            activeTab === 'heures-travailles' ? 'block' : 'hidden'
-          }`}
-          id="heures-travailles"
-          role="tabpanel"
-          aria-labelledby="heures-travailles-tab"
-        >
-          {selectedEmployee !== null && <TimeSheetTable id={selectedEmployee} />}
-        </div>
-
-        <div
-          className={`p-4  bg-gray-50 dark:bg-gray-800 ${
-            activeTab === 'bulletin-de-paie' ? 'block' : 'hidden'
-          }`}
-          id="bulletin-de-paie"
-          role="tabpanel"
-          aria-labelledby="bulletin-de-paie-tab"
-        >
-          {selectedEmployee !== null && <SalaryCalculation />}
-        </div>
+        {tabList.map((tab) => (
+          <div
+            key={tab.key}
+            className={`p-4 bg-gray-50 dark:bg-gray-800 ${
+              activeTab === tab.key ? 'block' : 'hidden'
+            }`}
+            id={tab.key}
+            role="tabpanel"
+            aria-labelledby={`${tab.key}-tab`}
+          >
+            {selectedEmployee !== null && renderTabContent(tab.key)}
+          </div>
+        ))}
       </div>
     </div>
   )
+
+  function renderTabContent(tabKey) {
+    switch (tabKey) {
+      case 'info-perso':
+        return <FormInfoGalEmployee id={selectedEmployee} />
+      case 'heures-travailles':
+        return <TimeSheetTable id={selectedEmployee} />
+      case 'bulletin-de-paie':
+        return <SalaryCalculation />
+      default:
+        return null
+    }
+  }
 }
 
 export default Fiche
