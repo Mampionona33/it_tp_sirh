@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import CustomSection from 'src/components/CustomSection'
 
 export default function PrimeEtAvantage() {
@@ -17,15 +17,30 @@ export default function PrimeEtAvantage() {
       { id: 'rappel', label: 'Rappel' },
     ]
 
+    const [formValues, setFormValues] = useState({})
+
     const halfLength = Math.ceil(fields.length / 2)
     const firstHalf = fields.slice(0, halfLength)
     const secondHalf = fields.slice(halfLength)
 
-    const handleSubmit = () => {}
+    const handleSubmit = (e) => {
+      e.preventDefault()
+      console.log(formValues)
+    }
+
+    const handleInputChange = useCallback(
+      (e) => {
+        setFormValues((prevFormValues) => ({
+          ...prevFormValues,
+          [e.target.name]: e.target.value,
+        }))
+      },
+      [setFormValues],
+    )
 
     return (
       <>
-        <form action="" method="post">
+        <form action="" onSubmit={handleSubmit} method="post">
           <div className="row g-3 mx-4 my-2">
             <div className="col-12 col-lg-6">
               {firstHalf.map((item, index) => (
@@ -39,7 +54,9 @@ export default function PrimeEtAvantage() {
                     min="0"
                     name={item.id}
                     id={item.id}
+                    value={formValues[item.id] || ''}
                     placeholder="0 Ar"
+                    onChange={handleInputChange}
                   />
                 </div>
               ))}
@@ -56,7 +73,9 @@ export default function PrimeEtAvantage() {
                     min="0"
                     name={item.id}
                     id={item.id}
+                    value={formValues[item.id] || ''}
                     placeholder="0 Ar"
+                    onChange={handleInputChange}
                   />
                 </div>
               ))}
