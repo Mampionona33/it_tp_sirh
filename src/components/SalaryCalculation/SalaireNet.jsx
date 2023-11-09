@@ -59,7 +59,7 @@ const SalaireNet = () => {
     },
     {
       title: 'IRSA à payer',
-      value: `${formatAriaryMga(irsaApayer)}`,
+      value: <span className="font-medium">{formatAriaryMga(irsaApayer)}</span>,
     },
     {
       title: 'Salaire net',
