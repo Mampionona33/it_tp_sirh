@@ -64,6 +64,12 @@ const routes = [
   { path: '/employees', name: 'Employés', element: Cards, exact: true },
   { path: '/employees/list', name: 'List', element: ListEmployes, exact: true },
   { path: '/employees/fiche/:id', name: 'Fiche', element: FicheEmploye, exact: true },
+  {
+    path: '/employees/fiche/:id/:activeTabParam',
+    name: 'Fiche',
+    element: FicheEmploye,
+    exact: true,
+  },
 
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },

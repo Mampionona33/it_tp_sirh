@@ -1,7 +1,7 @@
 import { format, parseISO } from 'date-fns'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
@@ -13,9 +13,22 @@ import EmployeeService from 'src/services/EmployeeService'
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('profile')
   const [selectedEmployee, setSelectedEmployee] = useState(null)
-  const { id } = useParams()
+  const { id, activeTabParam } = useParams()
   const dispatch = useDispatch()
   const [employees, setEmployees] = useState([])
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  React.useEffect(() => {
+    const pathParts = location.pathname.split('/')
+    const lastPathPart = pathParts[pathParts.length - 1]
+
+    if (['profile', 'dashboard', 'settings'].includes(lastPathPart)) {
+      setActiveTab(lastPathPart)
+    } else if (activeTabParam) {
+      setActiveTab(activeTabParam)
+    }
+  }, [location.pathname, activeTabParam])
 
   React.useEffect(() => {
     let mount = true
@@ -34,6 +47,7 @@ const Fiche = () => {
 
   const handleTabClick = (eventKey) => {
     setActiveTab(eventKey)
+    navigate(`/employees/fiche/${id}/${eventKey}`)
   }
 
   const selectedEmpHours =
