@@ -2,7 +2,7 @@ const db = require('../src/db/db.json')
 const express = require('express')
 const app = express()
 const cors = require('cors')
-
+app.use(express.json())
 app.use(cors())
 
 app.get('/employees/list', (req, res) => {
