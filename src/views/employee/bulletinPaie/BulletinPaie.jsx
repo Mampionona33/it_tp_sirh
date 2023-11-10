@@ -11,14 +11,24 @@ import ReactPDF, {
 } from '@react-pdf/renderer'
 import RobotoItalic from 'src/assets/fonts/Roboto/Roboto-Italic.ttf'
 import RobotoBoldItalic from 'src/assets/fonts/Roboto/Roboto-BoldItalic.ttf'
+import RobotoBold from 'src/assets/fonts/Roboto/Roboto-Bold.ttf'
+import RobotoRegular from 'src/assets/fonts/Roboto/Roboto-Regular.ttf'
 import { PropTypes } from 'prop-types'
 
 Font.register({
   family: 'Roboto',
   fonts: [
     {
+      src: RobotoRegular,
+    },
+    {
       src: RobotoItalic,
       fontStyle: 'italic',
+    },
+    {
+      src: RobotoBold,
+      fontWeight: 'bold',
+      fontStyle: 'normal',
     },
     {
       src: RobotoBoldItalic,
@@ -43,31 +53,37 @@ const styles = StyleSheet.create({
   tableRow: {
     flexDirection: 'row',
   },
-  cellBorderLeft: {
+  cellBorderLeft2: {
     borderStyle: 'solid',
-    borderLeft: 1,
-  },
-  cellBorderRight: {
-    borderStyle: 'solid',
-    borderRight: 1,
-  },
-  cellBorderTop: {
-    borderStyle: 'solid',
-    borderTop: 1,
-  },
-  cellBorderBottom: {
-    borderStyle: 'solid',
-    borderBottom: 1,
+    borderLeftWidth: 2,
   },
 
-  bordered: {
+  cellBorderRight2: {
     borderStyle: 'solid',
-    borderWidth: 1,
+    borderRight: 2,
   },
+  cellBorderTop2: {
+    borderStyle: 'solid',
+    borderTop: 2,
+  },
+  cellBorderBottom2: {
+    borderStyle: 'solid',
+    borderBottom: 2,
+  },
+
+  bordered2: {
+    borderStyle: 'solid',
+    borderWidth: 2,
+  },
+
   tableCol: {
     width: '50%',
     borderLeftWidth: 0,
     borderTopWidth: 0,
+  },
+  textBold: {
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
   },
   textItalic: {
     fontFamily: 'Roboto',
@@ -87,6 +103,8 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     padding: 2,
     paddingTop: 1,
+    marginTop: 2,
+    marginBottom: 2,
   },
 })
 
@@ -98,39 +116,106 @@ const MyDocument = (props) => {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <Text>BULLETIN DE PAIE </Text>
+          <Text style={[styles.textBold, { margin: 5 }]}>BULLETIN DE PAIE </Text>
         </View>
+
         <View style={styles.table}>
           <View style={styles.tableRow}>
-            <View style={[styles.tableCol, styles.cellBorderTop, styles.cellBorderBottom]}>
-              <Text style={styles.tableCell}>EMPLOYEUR: </Text>
+            <View style={[styles.tableCol, styles.cellBorderTop2, styles.cellBorderBottom2]}>
+              <Text style={[styles.tableCell, styles.textBold]}>EMPLOYEUR: </Text>
             </View>
-            <View style={[styles.tableCol, styles.bordered]}>
-              <Text style={styles.tableCell}>SALARIE: </Text>
+            <View style={[styles.tableCol, styles.bordered2]}>
+              <Text style={[styles.tableCell, styles.textBold]}>SALARIE: </Text>
             </View>
           </View>
+
           <View style={styles.tableRow}>
             <View style={[styles.tableCol]}>
               <Text style={[styles.textItalic, styles.textBoldItalic]}>Nom:</Text>
             </View>
-            <View style={[styles.tableCol, styles.cellBorderLeft]}>
+            <View style={[styles.tableCol, styles.cellBorderLeft2]}>
               <Text style={styles.tableCell}>
                 <Text style={[styles.textItalic, styles.textBoldItalic]}>Nom et Prénom: </Text>
                 {salarie.name.nom} {salarie.name.prenom}
               </Text>
             </View>
           </View>
+
           <View style={styles.tableRow}>
             <View style={styles.tableCol}>
               <Text style={[styles.tableCell, styles.textBoldItalic]}>Adresse:</Text>
             </View>
-            <View style={[styles.tableCol, styles.cellBorderLeft]}>
-              <Text style={styles.tableCell}>
+            <View style={[styles.tableCol, styles.cellBorderLeft2, { paddingBottom: 2 }]}>
+              <Text style={[styles.tableCell, { height: 18 }]}>
                 <Text style={[styles.textItalic, styles.textBoldItalic]}>Fonction: </Text>
                 {salarie.poste}
               </Text>
             </View>
           </View>
+
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={[styles.tableCell, styles.textBoldItalic]}>CP et Ville: </Text>
+            </View>
+            <View style={[styles.tableCol, styles.cellBorderLeft2]}>
+              <Text style={styles.tableCell}>
+                <Text style={[styles.textItalic, styles.textBoldItalic]}>Numéro Matricule: </Text>
+                {salarie.matricule}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={[styles.tableCell, styles.textBoldItalic]}>Numéro NIF: </Text>
+            </View>
+            <View style={[styles.tableCol, styles.cellBorderLeft2]}>
+              <Text style={styles.tableCell}>
+                <Text style={[styles.textItalic, styles.textBoldItalic]}>Catégorie: </Text>
+                {salarie.cat}
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={[styles.tableCell, styles.textBoldItalic]}>Numéro STAT: </Text>
+            </View>
+            <View style={[styles.tableCol, styles.cellBorderLeft2]}>
+              <Text style={styles.tableCell}>
+                <Text style={[styles.textItalic, styles.textBoldItalic]}>Mois: </Text>
+              </Text>
+            </View>
+          </View>
+
+          <View style={styles.tableRow}>
+            <View style={[styles.tableCol]}>
+              <Text
+                style={[
+                  styles.tableCell,
+                  styles.textBoldItalic,
+                  styles.cellBorderBottom2,
+                  { marginTop: 0 },
+                ]}
+              >
+                RCS:{' '}
+              </Text>
+            </View>
+            <View style={[styles.tableCol]}>
+              <Text
+                style={[
+                  styles.tableCell,
+                  styles.cellBorderLeft2,
+                  styles.cellBorderBottom2,
+                  styles.textBoldItalic,
+                  { marginTop: 0 },
+                ]}
+              >
+                {' '}
+              </Text>
+            </View>
+          </View>
+          {/*  */}
         </View>
       </Page>
     </Document>
