@@ -10,6 +10,7 @@ import ReactPDF, {
   Font,
 } from '@react-pdf/renderer'
 import RobotoItalic from 'src/assets/fonts/Roboto/Roboto-Italic.ttf'
+import { PropTypes } from 'prop-types'
 
 Font.register({
   src: RobotoItalic,
@@ -75,7 +76,9 @@ const styles = StyleSheet.create({
 })
 
 // Create Document Component
-const MyDocument = () => {
+const MyDocument = (props) => {
+  const { salarie } = props
+  console.log(salarie)
   return (
     <Document>
       <Page size="A4" style={styles.page}>
@@ -96,7 +99,9 @@ const MyDocument = () => {
               <Text style={[styles.italicTableCell]}>Nom:</Text>
             </View>
             <View style={[styles.tableCol, styles.cellBorderLeft]}>
-              <Text style={styles.tableCell}>Nom et Prénom:</Text>
+              <Text style={styles.tableCell}>
+                Nom et Prénom: {salarie.name.nom} {salarie.name.prenom}
+              </Text>
             </View>
           </View>
           <View style={styles.tableRow}>
@@ -113,13 +118,17 @@ const MyDocument = () => {
   )
 }
 
+MyDocument.propTypes = {
+  salarie: PropTypes.object,
+}
+
 const BulletinPaie = () => {
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
   return (
     <>
       <div className="h-screen">
         <PDFViewer width="100%" height="100%">
-          <MyDocument />
+          <MyDocument salarie={selecteEmploy} />
         </PDFViewer>
       </div>
     </>
