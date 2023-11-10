@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 app.use(express.json())
+
 app.use(cors())
 
 app.get('/employees/list', (req, res) => {
@@ -21,9 +22,7 @@ app.get('/employees/id=:id', (req, res) => {
 })
 
 const PORT = process.env.PORT || 8000
-const HOST =
-  process.env.HOST || 'https://8000-debug-mampionona33-ittpsirh-gj6n9pwkp7z.ws-eu106.gitpod.io'
 
 app.listen(PORT, () => {
-  console.log(`Server started at ${HOST}:${PORT}`)
+  console.log(`Server started at port : ${PORT}`)
 })
