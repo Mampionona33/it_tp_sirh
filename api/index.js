@@ -11,17 +11,13 @@ app.get('/employees/list', (req, res) => {
 })
 
 app.get('/employees/id=:id', (req, res) => {
-  const id = parseInt(req.params.id)
-  console.log('Requested ID:', id)
+  const { id } = req.params
+  const employee = db['/employees'].find((emp) => emp.id === parseInt(id))
 
-  const key = `/employees.id:${id}`
-
-  if (db.hasOwnProperty(key)) {
-    console.log('Data for ID:', db[key])
-    res.status(200).json(db[key])
+  if (employee) {
+    res.status(200).json(employee)
   } else {
-    console.log('Data not found for ID:', id)
-    res.status(404).json({ error: 'Data not found' })
+    res.status(404).send('Employee not found')
   }
 })
 
