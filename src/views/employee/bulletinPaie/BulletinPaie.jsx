@@ -5,6 +5,8 @@ import ReactPDF, { Page, Text, View, Document, StyleSheet, PDFViewer } from '@re
 // Create styles
 const styles = StyleSheet.create({
   page: {
+    width: '100%',
+    height: '100%',
     flexDirection: 'row',
     backgroundColor: '#E4E4E4',
   },
@@ -20,10 +22,7 @@ const MyDocument = () => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
-        <Text>Section #1</Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Section #2</Text>
+        <Text>BULLETIN DE PAIE</Text>
       </View>
     </Page>
   </Document>
@@ -33,9 +32,11 @@ const BulletinPaie = () => {
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
   return (
     <>
-      <PDFViewer>
-        <MyDocument />
-      </PDFViewer>
+      <div className="h-screen">
+        <PDFViewer width="100%" height="100%">
+          <MyDocument />
+        </PDFViewer>
+      </div>
     </>
   )
 }
