@@ -9,12 +9,13 @@ import ReactPDF, {
   PDFViewer,
   Font,
 } from '@react-pdf/renderer'
+import RobotoItalic from 'src/assets/fonts/Roboto/Roboto-Italic.ttf'
 
-// Font.register({
-//   src: 'https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap',
-//   fontStyle: 'italic',
-//   family: 'Roboto',
-// })
+Font.register({
+  src: RobotoItalic,
+  fontStyle: 'italic',
+  family: 'Roboto-Italic',
+})
 
 // Create styles
 const styles = StyleSheet.create({
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
     padding: 2,
     paddingTop: 1,
     fontSize: 10,
-    // fontFamily: 'Roboto',
+    fontFamily: 'Roboto-Italic',
     fontStyle: 'italic',
   },
   tableCell: {
