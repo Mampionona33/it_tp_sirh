@@ -4,29 +4,32 @@ import ReactPDF, { Page, Text, View, Document, StyleSheet, PDFViewer } from '@re
 
 // Create styles
 const styles = StyleSheet.create({
-  page: {
-    flexDirection: 'column',
-    padding: 10,
-  },
-  section: {
-    margin: 10,
-    padding: 10,
-  },
   header: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 10,
+    textAlign: 'center',
   },
   table: {
-    flexDirection: 'row',
+    display: 'table',
+    width: 'auto',
     borderStyle: 'solid',
     borderWidth: 1,
+    borderRightWidth: 0,
+    borderBottomWidth: 0,
+  },
+  tableRow: {
+    flexDirection: 'row',
+  },
+  tableCol: {
+    width: '50%',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderLeftWidth: 0,
+    borderTopWidth: 0,
   },
   tableCell: {
-    borderStyle: 'solid',
-    borderWidth: 1,
-    flexGrow: 1,
-    padding: 5,
+    textAlign: 'left',
+    padding: 2,
+    paddingTop: 1,
+    fontSize: 10,
   },
 })
 
@@ -35,44 +38,17 @@ const MyDocument = () => {
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <View style={styles.section}>
-          <Text style={styles.header}>Informations personnelles</Text>
-          <View style={styles.table}>
-            <Text style={styles.tableCell}>Nom:</Text>
-            <Text style={styles.tableCell}>Nom et Prénom:</Text>
-          </View>
-          {/* Ajoutez d'autres informations personnelles de la même manière */}
+        <View style={styles.header}>
+          <Text>BULLETIN DE PAIE </Text>
         </View>
-
-        <View style={styles.section}>
-          <Text style={styles.header}>Salaire</Text>
-          <View style={styles.table}>
-            <Text style={styles.tableCell}>Salaire de base</Text>
-            {/* Ajoutez d'autres lignes de salaire de la même manière */}
-          </View>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.header}>Cotisations</Text>
-          <View style={styles.table}>
-            <Text style={styles.tableCell}>Cnaps</Text>
-            {/* Ajoutez d'autres lignes de cotisations de la même manière */}
-          </View>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.header}>Retenue et avantages</Text>
-          <View style={styles.table}>
-            <Text style={styles.tableCell}>Retenue sur organisme sanitaire</Text>
-            {/* Ajoutez d'autres lignes de retenue et avantages de la même manière */}
-          </View>
-        </View>
-
-        <View style={styles.section}>
-          <Text style={styles.header}>Récapitulatif</Text>
-          <View style={styles.table}>
-            <Text style={styles.tableCell}>Salaire Net</Text>
-            {/* Ajoutez d'autres lignes de récapitulatif de la même manière */}
+        <View style={styles.table}>
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>EMPLOYEUR: </Text>
+            </View>
+            <View style={styles.tableCol}>
+              <Text style={styles.tableCell}>SALARIE: </Text>
+            </View>
           </View>
         </View>
       </Page>
