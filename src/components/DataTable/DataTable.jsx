@@ -120,20 +120,28 @@ function DataTable({
             ))}
           </thead>
           <tbody>
-            {rows.map((row, rowIndex) => (
-              <tr
-                key={`row_${rowIndex}`}
-                className={`border-y border-customRed-100 ${
-                  rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-100'
-                }`}
-              >
-                {row.getVisibleCells().map((cell, cellIndex) => (
-                  <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
-                    {cell.column.columnDef.cell(cell.getContext())}
-                  </td>
-                ))}
+            {rows.length > 0 ? (
+              rows.map((row, rowIndex) => (
+                <tr
+                  key={`row_${rowIndex}`}
+                  className={`border-y border-customRed-100 ${
+                    rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-100'
+                  }`}
+                >
+                  {row.getVisibleCells().map((cell, cellIndex) => (
+                    <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2">
+                      {cell.column.columnDef.cell(cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="10" className="text-lg font-medium p-4">
+                  Aucune donnée trouvée
+                </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
