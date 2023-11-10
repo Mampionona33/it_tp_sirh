@@ -46,7 +46,7 @@ const FormInfoGalEmployee = (props) => {
         .then((response) => {
           const emp = response.data
 
-          console.log(emp)
+          // console.log(emp)
           if (emp && mount) {
             setEmployee({
               ...emp,

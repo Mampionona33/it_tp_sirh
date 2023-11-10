@@ -10,12 +10,22 @@ import ReactPDF, {
   Font,
 } from '@react-pdf/renderer'
 import RobotoItalic from 'src/assets/fonts/Roboto/Roboto-Italic.ttf'
+import RobotoBoldItalic from 'src/assets/fonts/Roboto/Roboto-BoldItalic.ttf'
 import { PropTypes } from 'prop-types'
 
 Font.register({
-  src: RobotoItalic,
-  fontStyle: 'italic',
-  family: 'Roboto-Italic',
+  family: 'Roboto',
+  fonts: [
+    {
+      src: RobotoItalic,
+      fontStyle: 'italic',
+    },
+    {
+      src: RobotoBoldItalic,
+      fontStyle: 'italic',
+      fontWeight: 'bold',
+    },
+  ],
 })
 
 // Create styles
@@ -59,19 +69,24 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0,
     borderTopWidth: 0,
   },
-  italicTableCell: {
-    textAlign: 'left',
-    padding: 2,
-    paddingTop: 1,
-    fontSize: 10,
-    fontFamily: 'Roboto-Italic',
+  textItalic: {
+    fontFamily: 'Roboto',
     fontStyle: 'italic',
+    fontSize: 10,
   },
+  textBoldItalic: {
+    fontFamily: 'Roboto',
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+    fontSize: 10,
+    padding: 2,
+  },
+
   tableCell: {
+    fontSize: 10,
     textAlign: 'left',
     padding: 2,
     paddingTop: 1,
-    fontSize: 10,
   },
 })
 
@@ -95,21 +110,25 @@ const MyDocument = (props) => {
             </View>
           </View>
           <View style={styles.tableRow}>
-            <View style={[styles.tableCol, styles.italicTableCell]}>
-              <Text style={[styles.italicTableCell]}>Nom:</Text>
+            <View style={[styles.tableCol]}>
+              <Text style={[styles.textItalic, styles.textBoldItalic]}>Nom:</Text>
             </View>
             <View style={[styles.tableCol, styles.cellBorderLeft]}>
               <Text style={styles.tableCell}>
-                Nom et Prénom: {salarie.name.nom} {salarie.name.prenom}
+                <Text style={[styles.textItalic, styles.textBoldItalic]}>Nom et Prénom: </Text>
+                {salarie.name.nom} {salarie.name.prenom}
               </Text>
             </View>
           </View>
           <View style={styles.tableRow}>
             <View style={styles.tableCol}>
-              <Text style={styles.tableCell}>Adresse:</Text>
+              <Text style={[styles.tableCell, styles.textBoldItalic]}>Adresse:</Text>
             </View>
             <View style={[styles.tableCol, styles.cellBorderLeft]}>
-              <Text style={styles.tableCell}>Fonction:</Text>
+              <Text style={styles.tableCell}>
+                <Text style={[styles.textItalic, styles.textBoldItalic]}>Fonction: </Text>
+                {salarie.poste}
+              </Text>
             </View>
           </View>
         </View>

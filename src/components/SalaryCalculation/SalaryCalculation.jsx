@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 const SalaryCalculation = () => {
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
   const id = selecteEmploy.id
-  console.log(id)
+  // console.log(id)
   return (
     <>
       <div className="d-flex flex-column gap-4">
