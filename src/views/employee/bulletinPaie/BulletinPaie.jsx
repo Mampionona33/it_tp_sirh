@@ -1,14 +1,6 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useSelector } from 'react-redux'
-import ReactPDF, {
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-  PDFViewer,
-  Font,
-} from '@react-pdf/renderer'
+import { Page, Text, View, Document, StyleSheet, PDFViewer, Font, pdf } from '@react-pdf/renderer'
 import RobotoItalic from 'src/assets/fonts/Roboto/Roboto-Italic.ttf'
 import RobotoBoldItalic from 'src/assets/fonts/Roboto/Roboto-BoldItalic.ttf'
 import RobotoBold from 'src/assets/fonts/Roboto/Roboto-Bold.ttf'
@@ -228,6 +220,9 @@ MyDocument.propTypes = {
 
 const BulletinPaie = () => {
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
+
+  const blob = pdf(MyDocument).toBlob()
+
   return (
     <>
       <div className="h-screen">
