@@ -7,7 +7,7 @@ app.use(cors())
 
 app.get('/employees/list', (req, res) => {
   console.log(req.body)
-  res.status(200).json(db['/employees'])
+  res.status(200).send(db['/employees'])
 })
 
 app.get('/employees/id=:id', (req, res) => {
