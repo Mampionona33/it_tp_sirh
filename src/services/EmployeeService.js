@@ -1,13 +1,14 @@
 import axios from 'axios'
 
-const API_BASE_URL = process.env.API_BASE_URL || 'http://localhost:8000'
+const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
+console.log(process.env.GITPOD_WORKSPACE_URL)
 
 class EmployeeService {
   getAll() {
-    return axios.get(`${API_BASE_URL}/employees/list`)
+    return axios.get(`${REACT_APP_API_BASE_URL}/employees/list`)
   }
   getById(id) {
-    return axios.get(`${API_BASE_URL}/employees/id=${id}`)
+    return axios.get(`${REACT_APP_API_BASE_URL}/employees/id=${id}`)
   }
 }
 
