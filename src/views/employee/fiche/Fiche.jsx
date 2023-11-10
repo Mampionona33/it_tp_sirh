@@ -52,7 +52,7 @@ const Fiche = () => {
   const tabList = [
     { key: 'info-perso', label: 'Information générale' },
     { key: 'heures-travailles', label: 'Heures travaillées' },
-    { key: 'bulletin-de-paie', label: 'Bulletin de paie' },
+    { key: 'bulletin-de-paie', label: 'Calcul paie' },
   ]
 
   useEffect(() => {
