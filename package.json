@@ -42,6 +42,7 @@
     "core-js": "^3.31.0",
     "cors": "^2.8.5",
     "date-fns": "^2.30.0",
+    "google-fonts": "^1.0.0",
     "material-icons": "^1.13.12",
     "moment": "^2.29.4",
     "package.json": "^2.0.1",
