@@ -213,6 +213,13 @@ const MyDocument = (props) => {
               </Text>
             </View>
           </View>
+
+          <View style={styles.tableRow}>
+            <View style={styles.tableCol}>
+              <Text style={[styles.tableCell]}>Salaire de base</Text>
+            </View>
+          </View>
+
           {/*  */}
         </View>
       </Page>
