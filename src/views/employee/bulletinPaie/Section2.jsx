@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   tableCell50: {
     width: '50%',
   },
-  tableCell10: {
+  tableCell15: {
     width: '15%',
   },
   bordered: {
@@ -38,31 +38,75 @@ const Section2 = ({ salarie }) => {
   const salaireBase = formatAriaryMga(salarie.salaireBase)
 
   return (
-    <View style={styles.table}>
+    <View style={[styles.table, { borderBottom: 2, paddingBottom: 20 }]}>
       <View style={styles.tableRow}>
         <View style={[styles.tableCell50]}>
-          <Text style={{ paddingTop: 15, paddingLeft: 2, fontSize: 10 }}>Salaire de base</Text>
+          <Text style={{ paddingTop: 20, paddingLeft: 2, fontSize: 10 }}>Salaire de base</Text>
         </View>
         <View
           style={[
-            styles.tableCell10,
+            styles.tableCell15,
             styles.bordered,
-            { marginTop: 15, fontSize: 10, textAlign: 'left', paddingLeft: 2 },
+            { marginTop: 20, fontSize: 10, textAlign: 'right', paddingLeft: 2, paddingRight: 3 },
           ]}
         >
           <Text>{formatNumberWithSpaces(salarie.salaireBase)} Ar </Text>
         </View>
-        <View style={[styles.tableCell10, { paddingLeft: 2, marginTop: 15, fontSize: 10 }]}>
+        <View style={[styles.tableCell15, { paddingLeft: 2, marginTop: 20, fontSize: 10 }]}>
           <Text>Plafond SME :</Text>
         </View>
         <View
           style={[
-            styles.tableCell10,
+            styles.tableCell15,
             styles.bordered,
-            { paddingLeft: 2, marginTop: 15, fontSize: 10 },
+            { paddingLeft: 2, marginTop: 20, fontSize: 10, paddingRight: 3 },
           ]}
         >
-          <Text> 1904000,00 </Text>
+          <Text style={[{ textAlign: 'right', fontSize: 10 }]}> 1904000,00 </Text>
+        </View>
+      </View>
+
+      <View style={styles.tableRow}>
+        <View style={styles.tableCell50}>
+          <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 30%</Text>
+        </View>
+        <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>-</Text>
+        </View>
+      </View>
+
+      <View style={styles.tableRow}>
+        <View style={styles.tableCell50}>
+          <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 50%</Text>
+        </View>
+        <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>-</Text>
+        </View>
+      </View>
+
+      <View style={styles.tableRow}>
+        <View style={[styles.tableCell50, { paddingRight: 3 }]}>
+          <Text style={{ fontSize: 10, paddingLeft: 2, fontWeight: 'bold', fontFamily: 'Roboto' }}>
+            SALAIRE BRUT
+          </Text>
+        </View>
+        <View
+          style={[
+            styles.bordered,
+            styles.tableCell15,
+            {
+              padding: 1,
+              paddingRight: 3,
+              fontSize: 10,
+              paddingLeft: 2,
+            },
+          ]}
+        >
+          <Text
+            style={{ textAlign: 'right', fontSize: 10, fontWeight: 'bold', fontFamily: 'Roboto' }}
+          >
+            -
+          </Text>
         </View>
       </View>
     </View>
