@@ -38,7 +38,7 @@ const Section2 = ({ salarie }) => {
   const salaireBase = formatAriaryMga(salarie.salaireBase)
 
   return (
-    <View style={[styles.table, { borderBottom: 2, paddingBottom: 20 }]}>
+    <View style={[styles.table]}>
       <View style={styles.tableRow}>
         <View style={[styles.tableCell50]}>
           <Text style={{ paddingTop: 20, paddingLeft: 2, fontSize: 10 }}>Salaire de base</Text>
@@ -108,6 +108,12 @@ const Section2 = ({ salarie }) => {
             -
           </Text>
         </View>
+      </View>
+
+      <View style={[styles.tableRow, { borderBottom: 2, marginTop: 15 }]}></View>
+      <View style={[styles.tableRow, { marginTop: 15 }]}>
+        <View style={[{ width: '45%' }]}></View>
+        <View style={[{ width: '10%', borderBottom: 2 }]}></View>
       </View>
     </View>
   )
