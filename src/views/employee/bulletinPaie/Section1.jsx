@@ -1,33 +1,9 @@
 import React from 'react'
-import { Page, Text, View, Document, StyleSheet, PDFViewer, Font, pdf } from '@react-pdf/renderer'
+import { Page, Text, View, Document, StyleSheet, PDFViewer, pdf } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
-import RobotoItalic from 'src/assets/fonts/Roboto/Roboto-Italic.ttf'
-import RobotoBoldItalic from 'src/assets/fonts/Roboto/Roboto-BoldItalic.ttf'
-import RobotoBold from 'src/assets/fonts/Roboto/Roboto-Bold.ttf'
-import RobotoRegular from 'src/assets/fonts/Roboto/Roboto-Regular.ttf'
+import registerFonts from './font'
 
-Font.register({
-  family: 'Roboto',
-  fonts: [
-    {
-      src: RobotoRegular,
-    },
-    {
-      src: RobotoItalic,
-      fontStyle: 'italic',
-    },
-    {
-      src: RobotoBold,
-      fontWeight: 'bold',
-      fontStyle: 'normal',
-    },
-    {
-      src: RobotoBoldItalic,
-      fontStyle: 'italic',
-      fontWeight: 'bold',
-    },
-  ],
-})
+registerFonts()
 
 // Create styles
 const styles = StyleSheet.create({
