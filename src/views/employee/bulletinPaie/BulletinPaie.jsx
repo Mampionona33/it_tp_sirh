@@ -95,9 +95,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     textAlign: 'left',
     padding: 2,
-    paddingTop: 1,
-    marginTop: 2,
-    marginBottom: 2,
+    paddingTop: 2,
   },
 })
 
@@ -117,7 +115,14 @@ const MyDocument = (props) => {
             <View style={[styles.tableCol, styles.cellBorderTop2, styles.cellBorderBottom2]}>
               <Text style={[styles.tableCell, styles.textBold]}>EMPLOYEUR: </Text>
             </View>
-            <View style={[styles.tableCol, styles.bordered2]}>
+            <View
+              style={[
+                styles.tableCol,
+                styles.cellBorderBottom2,
+                styles.cellBorderTop2,
+                styles.cellBorderLeft2,
+              ]}
+            >
               <Text style={[styles.tableCell, styles.textBold]}>SALARIE: </Text>
             </View>
           </View>
