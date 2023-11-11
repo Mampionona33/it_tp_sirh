@@ -220,8 +220,7 @@ MyDocument.propTypes = {
 
 const BulletinPaie = () => {
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
-
-  const blob = pdf(MyDocument).toBlob()
+  const pdfBlob = pdf(<MyDocument salarie={selecteEmploy} />).toBlob()
 
   return (
     <>
