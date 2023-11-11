@@ -4,7 +4,16 @@ const app = express()
 const cors = require('cors')
 app.use(express.json())
 
-app.use(cors())
+const corsOptions = {
+  origin: [
+    'https://3000-mampionona33-ittpsirh-w8k12dobh7e.ws-eu106.gitpod.io',
+    'http://localhost:3000',
+  ],
+  credentials: true,
+  optionsSuccessStatus: 200, // Fix the typo here
+}
+
+app.use(cors(corsOptions))
 
 app.get('/employees/list', (req, res) => {
   res.status(200).send(db['/employees'])
@@ -24,5 +33,5 @@ app.get('/employees/id=:id', (req, res) => {
 const PORT = process.env.PORT || 8000
 
 app.listen(PORT, () => {
-  console.log(`Server started at port : ${PORT}`)
+  console.log(`Server started at port: ${PORT}`)
 })
