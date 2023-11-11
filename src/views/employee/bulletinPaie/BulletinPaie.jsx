@@ -9,7 +9,7 @@ import Section2 from './Section2'
 // Create Document Component
 const MyDocument = (props) => {
   const { salarie } = props
-  console.log(salarie)
+  // console.log(salarie)
   return (
     <Document title={`Bulletin de paie ${salarie.name.nom}`}>
       <Page size="A4">

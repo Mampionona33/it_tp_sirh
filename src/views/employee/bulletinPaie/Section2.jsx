@@ -3,6 +3,7 @@ import { Page, Text, View, Document, StyleSheet, PDFViewer, pdf } from '@react-p
 import { PropTypes } from 'prop-types'
 import registerFonts from './font'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
+import formatNumberWithSpaces from 'src/utils/formatNumberWithSpaces'
 
 registerFonts()
 
@@ -35,19 +36,6 @@ const styles = StyleSheet.create({
 
 const Section2 = ({ salarie }) => {
   const salaireBase = formatAriaryMga(salarie.salaireBase)
-
-  // Fonction utilisée dans une composante pour formater un nombre avec des espaces.
-  // À utiliser uniquement pour la création de documents PDF.
-  // Utilisez plutôt formatAriaryMga pour la monnaie malgache dans l'affichage au sein de composants du DOM.
-  function formatNumberWithSpaces(number) {
-    // Vérifie si le nombre est défini (non null et non undefined)
-    const formattedNumber = number
-      ? number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-      : '0,00'
-
-    // Remplace le point par une virgule pour la partie décimale
-    return formattedNumber.replace('.', ',')
-  }
 
   return (
     <View style={styles.table}>
