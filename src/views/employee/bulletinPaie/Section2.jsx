@@ -36,9 +36,17 @@ const styles = StyleSheet.create({
 const Section2 = ({ salarie }) => {
   const salaireBase = formatAriaryMga(salarie.salaireBase)
 
-  //   A utiliser dans une composante pour génerer des pdf
+  // Fonction utilisée dans une composante pour formater un nombre avec des espaces.
+  // À utiliser uniquement pour la création de documents PDF.
+  // Utilisez plutôt formatAriaryMga pour la monnaie malgache dans l'affichage au sein de composants du DOM.
   function formatNumberWithSpaces(number) {
-    return number ? number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : '0, 00'
+    // Vérifie si le nombre est défini (non null et non undefined)
+    const formattedNumber = number
+      ? number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+      : '0,00'
+
+    // Remplace le point par une virgule pour la partie décimale
+    return formattedNumber.replace('.', ',')
   }
 
   return (
