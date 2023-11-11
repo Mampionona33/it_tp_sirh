@@ -6,6 +6,7 @@ import RobotoBoldItalic from 'src/assets/fonts/Roboto/Roboto-BoldItalic.ttf'
 import RobotoBold from 'src/assets/fonts/Roboto/Roboto-Bold.ttf'
 import RobotoRegular from 'src/assets/fonts/Roboto/Roboto-Regular.ttf'
 import { PropTypes } from 'prop-types'
+import { saveAs } from 'file-saver'
 
 Font.register({
   family: 'Roboto',
@@ -105,7 +106,7 @@ const MyDocument = (props) => {
   const { salarie } = props
   console.log(salarie)
   return (
-    <Document>
+    <Document title={`Bulletin de paie ${salarie.name.nom}`}>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <Text style={[styles.textBold, { margin: 5 }]}>BULLETIN DE PAIE </Text>
@@ -220,7 +221,11 @@ MyDocument.propTypes = {
 
 const BulletinPaie = () => {
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
-  const pdfBlob = pdf(<MyDocument salarie={selecteEmploy} />).toBlob()
+
+  // decommenter pour activer le telechargement personnalisé
+  // const pdfBlob = pdf(<MyDocument salarie={selecteEmploy} />)
+  //   .toBlob()
+  //   .then((blob) => saveAs(blob, 'test.pdf'))
 
   return (
     <>
