@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
 const Section2 = ({ salarie }) => {
   const salaireBase = formatAriaryMga(salarie.salaireBase)
 
+  //   A utiliser dans une composante pour génerer des pdf
   function formatNumberWithSpaces(number) {
     return number ? number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : '0, 00'
   }
