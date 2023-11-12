@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
 const Section3 = ({ salarie }) => {
   const bulletinDePaieData = [
     {
-      nom: 'Cotisation 1',
+      label: 'Cotisation 1',
       type: 'retenue',
       base: 100,
       taux: 0.5,
       montant: 50,
     },
     {
-      nom: 'Cotisation 2',
+      label: 'Cotisation 2',
       type: 'indemnite',
       base: 200,
       taux: 0.3,
@@ -108,10 +108,10 @@ const Section3 = ({ salarie }) => {
         {/* Données du tableau */}
         {bulletinDePaieData.map((item, index) => (
           <React.Fragment key={index}>
-            {/* Colonne cotisation qui contient le nom de la cotisation */}
+            {/* Colonne cotisation qui contient le label de la cotisation */}
             <View style={[styles.tableRow, { fontSize: 10 }]}>
               <Text style={[styles.tableCell, { width: '33%', backgroundColor: 'red' }]}>
-                {item.nom}
+                {item.label}
               </Text>
               {/* Colonnes pour la base, le taux et le montant en fonction du type */}
               <View style={[styles.tableRow, { backgroundColor: 'yellow', width: '68%' }]}>

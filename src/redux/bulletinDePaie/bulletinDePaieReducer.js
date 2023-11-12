@@ -26,34 +26,32 @@ const initialState = {
   salaireBrute: null,
   salaireNet: null,
   salaireNetAPayer: null,
-  cotisation: {
-    prime: {
-      assuidite: null,
-      excellence: null,
-    },
-    indemnite: {
-      transport: null,
-      autres: null,
-    },
-    avantages: {
-      nature: {
-        vehicule: null,
-        logement: null,
-      },
-      autres: null,
-    },
-    rappel: null,
-    aide: {
+  prime: {
+    assuidite: null,
+    excellence: null,
+  },
+  indemnite: {
+    transport: null,
+    autres: null,
+  },
+  avantages: {
+    nature: {
+      vehicule: null,
       logement: null,
     },
-    aDeduire: {
-      abscence: null,
-      retard: null,
-    },
-    sociale: null,
-    cnaps: null,
-    irsa: null,
+    autres: null,
   },
+  rappel: null,
+  aide: {
+    logement: null,
+  },
+  aDeduire: {
+    abscence: null,
+    retard: null,
+  },
+  sociale: null,
+  cnaps: null,
+  irsa: null,
 }
 
 const bulletinDePaieSlice = createSlice({
