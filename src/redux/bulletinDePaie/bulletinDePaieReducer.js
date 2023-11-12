@@ -19,39 +19,16 @@ const initialState = {
     mois: null,
   },
   dateDeVirement: null,
-  sommeEnLettre: null,
   salaireDeBase: null,
   hs30: null,
   hs50: null,
   salaireBrute: null,
   salaireNet: null,
   salaireNetAPayer: null,
-  prime: {
-    assuidite: null,
-    excellence: null,
-  },
-  indemnite: {
-    transport: null,
-    autres: null,
-  },
-  avantages: {
-    nature: {
-      vehicule: null,
-      logement: null,
-    },
-    autres: null,
-  },
-  rappel: null,
-  aide: {
-    logement: null,
-  },
-  aDeduire: {
-    abscence: null,
-    retard: null,
-  },
-  sociale: null,
   cnaps: null,
   irsa: null,
+  retenue: [],
+  indemnite: [],
 }
 
 const bulletinDePaieSlice = createSlice({

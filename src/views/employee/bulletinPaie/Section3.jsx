@@ -102,6 +102,19 @@ const Section3 = ({ salarie }) => {
     },
   ]
 
+  const retenu = [
+    {
+      label: 'Absence/Retard',
+      base: 1000,
+      taux: 1,
+    },
+  ]
+
+  const indemnite = [
+    { label: "Prime d'assuidité", base: 20000, taux: 1 },
+    { label: "Prime d'excellence", base: 400000, taux: 1 },
+  ]
+
   const renderRows = () => {
     return (
       <>
