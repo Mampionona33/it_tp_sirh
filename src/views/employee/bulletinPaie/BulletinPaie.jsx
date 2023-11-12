@@ -5,6 +5,7 @@ import { PropTypes } from 'prop-types'
 import { saveAs } from 'file-saver'
 import Section1 from './Section1'
 import Section2 from './Section2'
+import Section3 from './Section3'
 
 // Create Document Component
 const MyDocument = (props) => {
@@ -15,6 +16,7 @@ const MyDocument = (props) => {
       <Page size="A4">
         <Section1 salarie={salarie} />
         <Section2 salarie={salarie} />
+        <Section3 salarie={salarie} />
       </Page>
     </Document>
   )

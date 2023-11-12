@@ -156,14 +156,14 @@ const Section1 = ({ salarie }) => {
           </View>
         </View>
 
-        <View style={styles.tableRow}>
+        <View style={[styles.tableRow]}>
           <View style={[styles.tableCol]}>
             <Text
               style={[
                 styles.tableCell,
                 styles.textBoldItalic,
                 styles.cellBorderBottom2,
-                { marginTop: 0 },
+                { marginTop: 0, paddingBottom: 15 },
               ]}
             >
               RCS:{' '}
@@ -176,7 +176,7 @@ const Section1 = ({ salarie }) => {
                 styles.cellBorderLeft2,
                 styles.cellBorderBottom2,
                 styles.textBoldItalic,
-                { marginTop: 0 },
+                { marginTop: 0, paddingBottom: 15 },
               ]}
             >
               {' '}
