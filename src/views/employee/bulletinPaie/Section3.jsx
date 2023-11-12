@@ -85,88 +85,83 @@ const styles = StyleSheet.create({
 })
 
 const Section3 = ({ salarie }) => {
-  const bulletinDePaieData = [
-    {
-      label: 'Cotisation 1',
-      type: 'retenue',
-      base: 100,
-      taux: 0.5,
-      montant: 50,
-    },
-    {
-      label: 'Cotisation 2',
-      type: 'indemnite',
-      base: 200,
-      taux: 0.3,
-      montant: 60,
-    },
-  ]
-
-  const retenu = [
+  const retenues = [
     {
       label: 'Absence/Retard',
       base: 1000,
       taux: 1,
     },
+    {
+      label: 'CNAPS',
+      base: 1000,
+      taux: 1,
+    },
+    {
+      label: 'Retenue sur organisation sanitaire',
+      base: 1000,
+      taux: 1,
+    },
+    {
+      label: 'IRSA',
+      base: 1000,
+      taux: 1,
+    },
   ]
 
-  const indemnite = [
+  const indemnites = [
     { label: "Prime d'assuidité", base: 20000, taux: 1 },
     { label: "Prime d'excellence", base: 400000, taux: 1 },
+    { label: 'Indemnité de transport', base: 400000, taux: 1 },
+    { label: 'Autres indemnités', base: 400000, taux: 1 },
+    { label: 'Avantages en nature (Véhicule)', base: 400000, taux: 1 },
+    { label: 'Avantages en nature (Logement)', base: 400000, taux: 1 },
+    { label: 'Autres avantages', base: 400000, taux: 1 },
+    { label: 'Rappel', base: 400000, taux: 1 },
+    { label: 'Aide au logement', base: 400000, taux: 1 },
   ]
 
   const renderRows = () => {
     return (
       <>
-        {/* Données du tableau */}
-        {bulletinDePaieData.map((item, index) => (
+        {/* Données du tableau d'indemnités */}
+        {indemnites.map((item, index) => (
           <React.Fragment key={index}>
             {/* Colonne cotisation qui contient le label de la cotisation */}
             <View style={[styles.tableRow, { fontSize: 10 }]}>
-              <Text style={[styles.tableCell, { width: '33%', backgroundColor: 'red' }]}>
-                {item.label}
-              </Text>
+              <Text style={[styles.tableCell, { width: '33%' }]}>{item.label}</Text>
               {/* Colonnes pour la base, le taux et le montant en fonction du type */}
-              <View style={[styles.tableRow, { backgroundColor: 'yellow', width: '68%' }]}>
-                {item.type === 'retenue' && (
-                  <React.Fragment>
-                    {/* Colonnes de retenue */}
-                    <Text style={[styles.tableCell, { backgroundColor: 'green', width: '31%' }]}>
-                      {item.base}
-                    </Text>
-                    <Text style={[styles.tableCell, { backgroundColor: 'blue', width: '32%' }]}>
-                      {item.taux}
-                    </Text>
-                    <Text style={[styles.tableCell, { backgroundColor: 'green', width: '33%' }]}>
-                      {item.montant}
-                    </Text>
+              <View style={[styles.tableRow, { width: '68%' }]}>
+                {/* Colonnes vides pour retenue */}
+                <Text style={[styles.tableCell, { width: '31%' }]}></Text>
+                <Text style={[styles.tableCell, { width: '32%' }]}></Text>
+                <Text style={[styles.tableCell, { width: '33%' }]}></Text>
 
-                    {/* Colonnes vides pour indemnité */}
-                    <Text
-                      style={[styles.tableCell, { width: '34%', backgroundColor: 'blue' }]}
-                    ></Text>
-                    <Text
-                      style={[styles.tableCell, { backgroundColor: 'green', width: '35%' }]}
-                    ></Text>
-                    <Text
-                      style={[styles.tableCell, { backgroundColor: 'blue', width: '36%' }]}
-                    ></Text>
-                  </React.Fragment>
-                )}
+                {/* Colonnes d'indemnité */}
+                <Text style={[styles.tableCell, { width: '34%' }]}>{item.base}</Text>
+                <Text style={[styles.tableCell, { width: '35%' }]}>{item.taux}</Text>
+                <Text style={[styles.tableCell, { width: '36%' }]}>{item.montant}</Text>
+              </View>
+            </View>
+          </React.Fragment>
+        ))}
 
-                {item.type === 'indemnite' && (
-                  <React.Fragment>
-                    {/* Colonnes vides pour retenue */}
-                    <Text style={[styles.tableCell, { width: '31%' }]}></Text>
-                    <Text style={[styles.tableCell, { width: '32%' }]}></Text>
-                    <Text style={[styles.tableCell, { width: '33%' }]}></Text>
+        {/* Données du tableau */}
+        {retenues.map((item, index) => (
+          <React.Fragment key={index}>
+            {/* Colonne cotisation qui contient le label de la cotisation */}
+            <View style={[styles.tableRow, { fontSize: 10 }]}>
+              <Text style={[styles.tableCell, { width: '33%' }]}>{item.label}</Text>
+              {/* Colonnes pour la base, le taux et le montant en fonction du type */}
+              <View style={[styles.tableRow, { width: '68%' }]}>
+                {/* Colonnes de retenue */}
+                <Text style={[styles.tableCell, { width: '31%' }]}>{item.base}</Text>
+                <Text style={[styles.tableCell, { width: '32%' }]}>{item.taux}</Text>
+                <Text style={[styles.tableCell, { width: '33%' }]}>{item.montant}</Text>
 
-                    {/* Colonnes d'indemnité */}
-                    <Text style={[styles.tableCell, { width: '34%' }]}>{item.base}</Text>
-                    <Text style={[styles.tableCell, { width: '35%' }]}>{item.taux}</Text>
-                    <Text style={[styles.tableCell, { width: '36%' }]}>{item.montant}</Text>
-                  </React.Fragment>
-                )}
+                {/* Colonnes vides pour indemnité */}
+                <Text style={[styles.tableCell, { width: '34%' }]}></Text>
+                <Text style={[styles.tableCell, { width: '35%' }]}></Text>
+                <Text style={[styles.tableCell, { width: '36%' }]}></Text>
               </View>
             </View>
           </React.Fragment>
