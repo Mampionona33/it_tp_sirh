@@ -155,10 +155,57 @@ const Section3 = ({ salarie }) => {
             </View>
           </View>
 
-          <View style={[styles.tableCell, styles.col1]}>
+          <View style={[styles.tableCell, { width: '35%' }]}>
             <Text style={[styles.textBold, { textAlign: 'center', borderBottom: 2 }]}>
               INDEMNITE ET AVANTAGES
             </Text>
+            <View style={[styles.tableRow]}>
+              <Text
+                style={[
+                  styles.textBold,
+                  styles.col1,
+                  {
+                    textAlign: 'left',
+                    paddingLeft: 2,
+                    borderBottom: 2,
+                    borderRight: 2,
+                    paddingTop: 4,
+                  },
+                ]}
+              >
+                Base
+              </Text>
+              <Text
+                style={[
+                  styles.textBold,
+                  styles.col1,
+                  {
+                    textAlign: 'left',
+                    paddingLeft: 2,
+                    borderBottom: 2,
+                    borderRight: 2,
+                    paddingTop: 4,
+                  },
+                ]}
+              >
+                Taux
+              </Text>
+              <Text
+                style={[
+                  styles.textBold,
+                  styles.col1,
+                  {
+                    textAlign: 'left',
+                    borderBottom: 2,
+                    paddingTop: 4,
+                    paddingLeft: 2,
+                    width: '35%',
+                  },
+                ]}
+              >
+                Montant
+              </Text>
+            </View>
           </View>
         </View>
       </View>
