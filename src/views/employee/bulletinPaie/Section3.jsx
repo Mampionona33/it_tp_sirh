@@ -70,8 +70,14 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     paddingTop: 4,
   },
-  col1: {
+  col33: {
     width: '33%',
+  },
+  col30: {
+    width: '30%',
+  },
+  col35: {
+    width: '35%',
   },
   col2: {
     width: '10%',
@@ -79,6 +85,91 @@ const styles = StyleSheet.create({
 })
 
 const Section3 = ({ salarie }) => {
+  const retenues = [
+    {
+      label: 'Absence/Retard',
+      base: 1000,
+      taux: 1,
+    },
+    {
+      label: 'CNAPS',
+      base: 1000,
+      taux: 1,
+    },
+    {
+      label: 'Retenue sur organisation sanitaire',
+      base: 1000,
+      taux: 1,
+    },
+    {
+      label: 'IRSA',
+      base: 1000,
+      taux: 1,
+    },
+  ]
+
+  const indemnites = [
+    { label: "Prime d'assuidité", base: 20000, taux: 1 },
+    { label: "Prime d'excellence", base: 400000, taux: 1 },
+    { label: 'Indemnité de transport', base: 400000, taux: 1 },
+    { label: 'Autres indemnités', base: 400000, taux: 1 },
+    { label: 'Avantages en nature (Véhicule)', base: 400000, taux: 1 },
+    { label: 'Avantages en nature (Logement)', base: 400000, taux: 1 },
+    { label: 'Autres avantages', base: 400000, taux: 1 },
+    { label: 'Rappel', base: 400000, taux: 1 },
+    { label: 'Aide au logement', base: 400000, taux: 1 },
+  ]
+
+  const renderRows = () => {
+    return (
+      <>
+        {/* Données du tableau d'indemnités */}
+        {indemnites.map((item, index) => (
+          <React.Fragment key={index}>
+            {/* Colonne cotisation qui contient le label de la cotisation */}
+            <View style={[styles.tableRow, { fontSize: 10 }]}>
+              <Text style={[styles.tableCell, { width: '33%' }]}>{item.label}</Text>
+              {/* Colonnes pour la base, le taux et le montant en fonction du type */}
+              <View style={[styles.tableRow, { width: '68%' }]}>
+                {/* Colonnes vides pour retenue */}
+                <Text style={[styles.tableCell, { width: '31%' }]}></Text>
+                <Text style={[styles.tableCell, { width: '32%' }]}></Text>
+                <Text style={[styles.tableCell, { width: '33%' }]}></Text>
+
+                {/* Colonnes d'indemnité */}
+                <Text style={[styles.tableCell, { width: '34%' }]}>{item.base}</Text>
+                <Text style={[styles.tableCell, { width: '35%' }]}>{item.taux}</Text>
+                <Text style={[styles.tableCell, { width: '36%' }]}>{item.montant}</Text>
+              </View>
+            </View>
+          </React.Fragment>
+        ))}
+
+        {/* Données du tableau */}
+        {retenues.map((item, index) => (
+          <React.Fragment key={index}>
+            {/* Colonne cotisation qui contient le label de la cotisation */}
+            <View style={[styles.tableRow, { fontSize: 10 }]}>
+              <Text style={[styles.tableCell, { width: '33%' }]}>{item.label}</Text>
+              {/* Colonnes pour la base, le taux et le montant en fonction du type */}
+              <View style={[styles.tableRow, { width: '68%' }]}>
+                {/* Colonnes de retenue */}
+                <Text style={[styles.tableCell, { width: '31%' }]}>{item.base}</Text>
+                <Text style={[styles.tableCell, { width: '32%' }]}>{item.taux}</Text>
+                <Text style={[styles.tableCell, { width: '33%' }]}>{item.montant}</Text>
+
+                {/* Colonnes vides pour indemnité */}
+                <Text style={[styles.tableCell, { width: '34%' }]}></Text>
+                <Text style={[styles.tableCell, { width: '35%' }]}></Text>
+                <Text style={[styles.tableCell, { width: '36%' }]}></Text>
+              </View>
+            </View>
+          </React.Fragment>
+        ))}
+      </>
+    )
+  }
+
   return (
     <>
       <View style={[styles.table, { marginTop: 15, borderTop: 2 }]}>
@@ -86,7 +177,7 @@ const Section3 = ({ salarie }) => {
           <View
             style={[
               styles.tableCell,
-              styles.col1,
+              styles.col33,
               { paddingBottom: 0, borderRight: 2, borderBottom: 2 },
             ]}
           >
@@ -104,13 +195,13 @@ const Section3 = ({ salarie }) => {
             </Text>
           </View>
 
-          <View style={[styles.tableCell, styles.col1, { borderRight: 2 }]}>
+          <View style={[styles.tableCell, styles.col33, { borderRight: 2 }]}>
             <Text style={[styles.textBold, { textAlign: 'center', borderBottom: 2 }]}>RETENUE</Text>
             <View style={[styles.tableRow]}>
               <Text
                 style={[
                   styles.textBold,
-                  styles.col1,
+                  styles.col33,
                   {
                     textAlign: 'left',
                     paddingLeft: 2,
@@ -125,7 +216,7 @@ const Section3 = ({ salarie }) => {
               <Text
                 style={[
                   styles.textBold,
-                  styles.col1,
+                  styles.col33,
                   {
                     textAlign: 'left',
                     paddingLeft: 2,
@@ -140,7 +231,7 @@ const Section3 = ({ salarie }) => {
               <Text
                 style={[
                   styles.textBold,
-                  styles.col1,
+                  styles.col33,
                   {
                     textAlign: 'left',
                     borderBottom: 2,
@@ -163,7 +254,7 @@ const Section3 = ({ salarie }) => {
               <Text
                 style={[
                   styles.textBold,
-                  styles.col1,
+                  styles.col33,
                   {
                     textAlign: 'left',
                     paddingLeft: 2,
@@ -178,7 +269,7 @@ const Section3 = ({ salarie }) => {
               <Text
                 style={[
                   styles.textBold,
-                  styles.col1,
+                  styles.col33,
                   {
                     textAlign: 'left',
                     paddingLeft: 2,
@@ -193,7 +284,7 @@ const Section3 = ({ salarie }) => {
               <Text
                 style={[
                   styles.textBold,
-                  styles.col1,
+                  styles.col33,
                   {
                     textAlign: 'left',
                     borderBottom: 2,
@@ -208,6 +299,7 @@ const Section3 = ({ salarie }) => {
             </View>
           </View>
         </View>
+        {renderRows()}
       </View>
     </>
   )
