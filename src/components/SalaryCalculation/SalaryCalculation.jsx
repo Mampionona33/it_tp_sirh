@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import GrossWages from 'src/components/SalaryCalculation/GrossWages'
+import SalaireBrut from 'src/components/SalaryCalculation/SalaireBrut'
 import SalaireNet from 'src/components/SalaryCalculation/SalaireNet'
 import SalaireNetAPayer from 'src/components/SalaryCalculation/SalaireNetAPayer'
 import PrimeEtAvantage from './PrimeEtAvantage'
@@ -18,7 +18,7 @@ const SalaryCalculation = () => {
           <PrimeEtAvantage />
         </div>
         <div className="d-flex justify-content-between flex-wrap columns-3 gap-4">
-          <GrossWages />
+          <SalaireBrut />
           <SalaireNet />
           <SalaireNetAPayer />
         </div>

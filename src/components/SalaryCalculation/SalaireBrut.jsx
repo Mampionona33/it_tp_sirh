@@ -9,7 +9,7 @@ import {
 } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 
-const GrossWages = () => {
+const SalaireBrut = () => {
   const dispatch = useDispatch()
   const employeeTotalHours = useSelector((state) => state.employeHours)
   const title = 'Salaire brut'
@@ -153,4 +153,4 @@ const GrossWages = () => {
   )
 }
 
-export default GrossWages
+export default SalaireBrut
