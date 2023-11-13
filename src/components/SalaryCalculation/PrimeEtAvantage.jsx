@@ -2,22 +2,35 @@ import React, { useState, useCallback } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useDispatch } from 'react-redux'
 import { setPrimeEtAvantage } from 'src/redux/selectedEmploye/selectedEmployeReducer'
+import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
+import { useSelector } from 'react-redux'
 
 export default function PrimeEtAvantage() {
   const title = 'Primes et avantages'
+  const indemnite = useSelector((state) => state.bulletinDePaie.indemnite)
   const dispatch = useDispatch()
 
   const Body = () => {
     const fields = [
-      { id: 'primeAssuidite', label: "Prime d'assuicidité", action: 'addition' },
-      { id: 'primeExcellence', label: "Prime d'excellence", action: 'addition' },
-      { id: 'absenceRetard', label: 'Absence / Retard à déduire', action: 'deduction' },
-      { id: 'indemniteTransport', label: 'Indemnité de transport', action: 'addition' },
-      { id: 'avantageNature', label: 'Avantages en nature (Logement)', action: 'addition' },
-      { id: 'avantageVehicule', label: 'Avantages en nature (Véhicule)', action: 'addition' },
-      { id: 'autresIndemnite', label: 'Autres indemnités', action: 'addition' },
-      { id: 'autresAvantage', label: 'Autres avantages', action: 'addition' },
-      { id: 'rappel', label: 'Rappel', action: 'addition' },
+      { id: 'primeAssuidite', label: "Prime d'assuicidité", action: 'indemnite', base: 0 },
+      { id: 'primeExcellence', label: "Prime d'excellence", action: 'indemnite', base: 0 },
+      { id: 'absenceRetard', label: 'Absence / Retard à déduire', action: 'retenue', base: 0 },
+      { id: 'indemniteTransport', label: 'Indemnité de transport', action: 'indemnite', base: 0 },
+      {
+        id: 'avantageNature',
+        label: 'Avantages en nature (Logement)',
+        action: 'indemnite',
+        base: 0,
+      },
+      {
+        id: 'avantageVehicule',
+        label: 'Avantages en nature (Véhicule)',
+        action: 'indemnite',
+        base: 0,
+      },
+      { id: 'autresIndemnite', label: 'Autres indemnités', action: 'indemnite', base: 0 },
+      { id: 'autresAvantage', label: 'Autres avantages', action: 'indemnite', base: 0 },
+      { id: 'rappel', label: 'Rappel', action: 'indemnite', base: 0 },
     ]
 
     const [formValues, setFormValues] = useState({})
@@ -30,21 +43,25 @@ export default function PrimeEtAvantage() {
       e.preventDefault()
       // console.log(formValues)
       let primeEtAvantage = 0
+      const updatedIndemnite = []
       for (const key in formValues) {
         if (formValues.hasOwnProperty(key)) {
           const value = parseFloat(formValues[key])
           const field = fields.find((item) => item.id === key)
 
           if (field) {
-            // Vérifier si l'action est 'addition' ou 'deduction'
-            if (field.action === 'addition') {
+            // Vérifier si l'action est 'indemnite' ou 'retenue'
+
+            if (field.action === 'indemnite') {
+              updatedIndemnite.push({ label: field.label, base: value, taux: field.taux })
               primeEtAvantage += value
-            } else if (field.action === 'deduction') {
+            } else if (field.action === 'retenue') {
               primeEtAvantage -= value
             }
           }
         }
       }
+      dispatch(setBulletinDePaie({ indemnite: [...indemnite, ...updatedIndemnite] }))
       dispatch(setPrimeEtAvantage(primeEtAvantage))
       console.log('Prime et Avantage:', primeEtAvantage)
     }

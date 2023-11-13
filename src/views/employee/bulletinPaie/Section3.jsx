@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const Section3 = ({ salarie }) => {
+const Section3 = (props) => {
   const retenues = [
     {
       label: 'Absence/Retard',
@@ -119,7 +119,7 @@ const Section3 = ({ salarie }) => {
     { label: 'Rappel', base: 400000, taux: 1 },
     { label: 'Aide au logement', base: 400000, taux: 1 },
   ]
-
+  console.log(props.data)
   const renderRows = () => {
     return (
       <>
@@ -319,6 +319,7 @@ const Section3 = ({ salarie }) => {
 
 Section3.propTypes = {
   salarie: PropTypes.object,
+  data: PropTypes.object,
 }
 
 export default Section3

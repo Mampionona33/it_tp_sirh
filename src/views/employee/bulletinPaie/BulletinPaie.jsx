@@ -16,7 +16,7 @@ const MyDocument = (props) => {
       <Page size="A4">
         <Section1 data={data} />
         <Section2 data={data} />
-        <Section3 salarie={salarie} />
+        <Section3 salarie={salarie} data={data} />
       </Page>
     </Document>
   )
