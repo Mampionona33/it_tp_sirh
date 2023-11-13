@@ -15,7 +15,7 @@ const MyDocument = (props) => {
     <Document title={`Bulletin de paie ${salarie.name.nom}`}>
       <Page size="A4">
         <Section1 data={data} />
-        <Section2 salarie={salarie} data={data} />
+        <Section2 data={data} />
         <Section3 salarie={salarie} />
       </Page>
     </Document>

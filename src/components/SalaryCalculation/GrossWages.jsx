@@ -1,6 +1,7 @@
 import React from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector, useDispatch } from 'react-redux'
+import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import {
   setHsni130Value,
   setHsni150Value,
