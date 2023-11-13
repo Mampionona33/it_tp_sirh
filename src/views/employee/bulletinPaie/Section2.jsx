@@ -39,6 +39,7 @@ const Section2 = (props) => {
     ? formatNumberWithSpaces(props.data.salarie.salaireBase) + ' Ar'
     : '-'
   const hs30 = props.data.hs30 ? formatNumberWithSpaces(props.data.hs30) + ' Ar' : '-'
+  const hs50 = props.data.hs50 ? formatNumberWithSpaces(props.data.hs50) + ' Ar' : '-'
 
   return (
     <View style={[styles.table]}>
@@ -83,7 +84,7 @@ const Section2 = (props) => {
           <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 50%</Text>
         </View>
         <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
-          <Text style={{ textAlign: 'right', fontSize: 10 }}>-</Text>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>{hs50}</Text>
         </View>
       </View>
 

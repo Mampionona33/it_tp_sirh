@@ -140,11 +140,14 @@ const SalaireBrut = () => {
     if (hn30Value && mount) {
       dispatch(setBulletinDePaie({ hs30: hn30Value }))
     }
+    if (hn50Value && mount) {
+      dispatch(setBulletinDePaie({ hs50: hn50Value }))
+    }
 
     return () => {
       mount = false
     }
-  }, [salaireBruteVal, hsni130Value, hsni150Value, hn30Value])
+  }, [salaireBruteVal, hsni130Value, hsni150Value, hn30Value, hn50Value])
 
   return (
     <div>
