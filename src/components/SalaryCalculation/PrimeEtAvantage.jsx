@@ -81,6 +81,26 @@ export default function PrimeEtAvantage() {
       [setFormValues],
     )
 
+    React.useEffect(() => {
+      let mount = true
+
+      if (mount && fields.length > 0) {
+        const initialIndmnite = fields.filter((field) => field.action === 'indemnite')
+        const initialRetenue = fields.filter((field) => field.action === 'retenue')
+
+        if (indemnite.length === 0) {
+          dispatch(setBulletinDePaie({ indemnite: [...indemnite, ...initialIndmnite] }))
+        }
+        if (retenue.length === 0) {
+          dispatch(setBulletinDePaie({ retenue: [...retenue, ...initialRetenue] }))
+        }
+      }
+
+      return () => {
+        mount = false
+      }
+    }, [fields, indemnite, retenue])
+
     return (
       <>
         <form action="" onSubmit={handleSubmit} method="post">
