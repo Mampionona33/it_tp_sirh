@@ -1,5 +1,5 @@
 import React from 'react'
-import { Page, Text, View, Document, StyleSheet, PDFViewer, pdf } from '@react-pdf/renderer'
+import { Text, View, StyleSheet, pdf } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import registerFonts from './font'
 
@@ -85,29 +85,6 @@ const styles = StyleSheet.create({
 })
 
 const Section3 = (props) => {
-  // const retenues = [
-  //   {
-  //     label: 'Absence/Retard',
-  //     base: 1000,
-  //     taux: 1,
-  //   },
-  //   {
-  //     label: 'CNAPS',
-  //     base: 1000,
-  //     taux: 1,
-  //   },
-  //   {
-  //     label: 'Retenue sur organisation sanitaire',
-  //     base: 1000,
-  //     taux: 1,
-  //   },
-  //   {
-  //     label: 'IRSA',
-  //     base: 1000,
-  //     taux: 1,
-  //   },
-  // ]
-
   const retenues = props.data.retenue ? props.data.retenue : []
   const indemnites = props.data.indemnite ? props.data.indemnite : []
 
