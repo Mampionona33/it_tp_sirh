@@ -18,8 +18,6 @@ const Fiche = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
-  console.log('id', id)
-
   useEffect(() => {
     const pathParts = location.pathname.split('/')
     const lastPathPart = pathParts[pathParts.length - 1]
