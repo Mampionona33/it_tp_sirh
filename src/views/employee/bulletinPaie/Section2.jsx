@@ -34,8 +34,15 @@ const styles = StyleSheet.create({
   },
 })
 
-const Section2 = ({ salarie }) => {
-  const salaireBase = formatAriaryMga(salarie.salaireBase)
+const Section2 = (props) => {
+  const salaireBase = props.data.salarie.salaireBase
+    ? formatNumberWithSpaces(props.data.salarie.salaireBase) + ' Ar'
+    : '-'
+  const hs30 = props.data.hs30 ? formatNumberWithSpaces(props.data.hs30) + ' Ar' : '-'
+  const hs50 = props.data.hs50 ? formatNumberWithSpaces(props.data.hs50) + ' Ar' : '-'
+  const salaireBrute = props.data.salaireBrute
+    ? formatNumberWithSpaces(props.data.salaireBrute) + ' Ar'
+    : '-'
 
   return (
     <View style={[styles.table]}>
@@ -50,7 +57,7 @@ const Section2 = ({ salarie }) => {
             { marginTop: 20, fontSize: 10, textAlign: 'right', paddingLeft: 2, paddingRight: 3 },
           ]}
         >
-          <Text>{formatNumberWithSpaces(salarie.salaireBase)} Ar </Text>
+          <Text>{salaireBase}</Text>
         </View>
         <View style={[styles.tableCell15, { paddingLeft: 2, marginTop: 20, fontSize: 10 }]}>
           <Text>Plafond SME :</Text>
@@ -71,7 +78,7 @@ const Section2 = ({ salarie }) => {
           <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 30%</Text>
         </View>
         <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
-          <Text style={{ textAlign: 'right', fontSize: 10 }}>-</Text>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>{hs30}</Text>
         </View>
       </View>
 
@@ -80,7 +87,7 @@ const Section2 = ({ salarie }) => {
           <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 50%</Text>
         </View>
         <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
-          <Text style={{ textAlign: 'right', fontSize: 10 }}>-</Text>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>{hs50}</Text>
         </View>
       </View>
 
@@ -105,7 +112,7 @@ const Section2 = ({ salarie }) => {
           <Text
             style={{ textAlign: 'right', fontSize: 10, fontWeight: 'bold', fontFamily: 'Roboto' }}
           >
-            -
+            {salaireBrute}
           </Text>
         </View>
       </View>
@@ -120,7 +127,7 @@ const Section2 = ({ salarie }) => {
 }
 
 Section2.propTypes = {
-  salarie: PropTypes.object,
+  data: PropTypes.object,
 }
 
 export default Section2

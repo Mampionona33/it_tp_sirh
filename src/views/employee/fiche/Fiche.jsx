@@ -7,6 +7,7 @@ import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculatio
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
 import { employeeHours } from 'src/db/db'
 import { setSelectedEmploye } from 'src/redux/selectedEmploye/selectedEmployeReducer'
+import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import EmployeeService from 'src/services/EmployeeService'
 
 const Fiche = () => {
@@ -17,8 +18,6 @@ const Fiche = () => {
   const [employees, setEmployees] = useState([])
   const location = useLocation()
   const navigate = useNavigate()
-
-  console.log('id', id)
 
   useEffect(() => {
     const pathParts = location.pathname.split('/')
@@ -79,6 +78,17 @@ const Fiche = () => {
             nom: emp.name.nom ? emp.name.nom : '',
             prenom: emp.name.prenom ? emp.name.prenom : '',
             dateEmbauche: emp.dateEmbauche ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd') : '',
+          }),
+        )
+      }
+      if (emp && mount) {
+        dispatch(
+          setBulletinDePaie({
+            salarie: {
+              ...emp,
+              nom: emp.name && emp.name.nom ? emp.name.nom : '',
+              prenom: emp.name && emp.name.prenom ? emp.name.prenom : '',
+            },
           }),
         )
       }

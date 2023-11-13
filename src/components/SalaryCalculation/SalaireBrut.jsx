@@ -1,6 +1,7 @@
 import React from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector, useDispatch } from 'react-redux'
+import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import {
   setHsni130Value,
   setHsni150Value,
@@ -8,7 +9,7 @@ import {
 } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 
-const GrossWages = () => {
+const SalaireBrut = () => {
   const dispatch = useDispatch()
   const employeeTotalHours = useSelector((state) => state.employeHours)
   const title = 'Salaire brut'
@@ -122,25 +123,30 @@ const GrossWages = () => {
 
   React.useEffect(() => {
     let mount = true
-    if (salaireBruteVal) {
-      if (mount) {
-        dispatch(setSelectedEmployeSalaireBrut(salaireBruteVal))
-      }
+    if (salaireBruteVal && mount) {
+      dispatch(setSelectedEmployeSalaireBrut(salaireBruteVal))
+      dispatch(setBulletinDePaie({ salaireBrute: salaireBruteVal }))
     }
     if (hsni130Value) {
       if (mount) {
         dispatch(setHsni130Value(hsni130Value))
       }
     }
-    if (hsni150Value) {
-      if (mount) {
-        dispatch(setHsni150Value(hsni150Value))
-      }
+    if (hsni150Value && mount) {
+      dispatch(setHsni150Value(hsni150Value))
     }
+
+    if (hn30Value && mount) {
+      dispatch(setBulletinDePaie({ hs30: hn30Value }))
+    }
+    if (hn50Value && mount) {
+      dispatch(setBulletinDePaie({ hs50: hn50Value }))
+    }
+
     return () => {
       mount = false
     }
-  }, [salaireBruteVal, hsni130Value, hsni150Value])
+  }, [salaireBruteVal, hsni130Value, hsni150Value, hn30Value, hn50Value])
 
   return (
     <div>
@@ -149,4 +155,4 @@ const GrossWages = () => {
   )
 }
 
-export default GrossWages
+export default SalaireBrut
