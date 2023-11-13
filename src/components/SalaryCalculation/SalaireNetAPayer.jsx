@@ -43,9 +43,9 @@ const SalaireNetAPayer = () => {
     <table className="table-auto">
       <tbody>
         {data.map((item, index) => (
-          <tr className="border-b border-customRed-100" key={index}>
-            <td className="text-left py-3 pl-4 font-medium">{item.title}</td>
-            <td className="py-3 pl-8 pr-4 text-right">{item.value}</td>
+          <tr className="flex flex-wrap justify-between border-b border-customRed-100" key={index}>
+            <td className="text-left py-3 px-4 font-medium">{item.title}</td>
+            <td className="py-3 px-4 text-right">{item.value}</td>
           </tr>
         ))}
       </tbody>
