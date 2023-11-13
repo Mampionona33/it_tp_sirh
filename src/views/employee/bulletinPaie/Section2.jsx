@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
   },
 })
 
-const Section2 = ({ salarie }) => {
-  const salaireBase = formatAriaryMga(salarie.salaireBase)
+const Section2 = (props) => {
+  const salaireBase = formatAriaryMga(props.salarie.salaireBase)
 
   return (
     <View style={[styles.table]}>
@@ -50,7 +50,7 @@ const Section2 = ({ salarie }) => {
             { marginTop: 20, fontSize: 10, textAlign: 'right', paddingLeft: 2, paddingRight: 3 },
           ]}
         >
-          <Text>{formatNumberWithSpaces(salarie.salaireBase)} Ar </Text>
+          <Text>{formatNumberWithSpaces(props.salarie.salaireBase)} Ar </Text>
         </View>
         <View style={[styles.tableCell15, { paddingLeft: 2, marginTop: 20, fontSize: 10 }]}>
           <Text>Plafond SME :</Text>
