@@ -27,8 +27,8 @@ const initialState = {
   salaireNetAPayer: null,
   cnaps: null,
   irsa: null,
-  retenue: [],
   indemnite: [],
+  retenue: [],
 }
 
 const bulletinDePaieSlice = createSlice({

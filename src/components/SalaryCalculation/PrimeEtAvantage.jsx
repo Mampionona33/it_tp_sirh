@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 export default function PrimeEtAvantage() {
   const title = 'Primes et avantages'
   const indemnite = useSelector((state) => state.bulletinDePaie.indemnite)
+  const retenue = useSelector((state) => state.bulletinDePaie.retenue)
   const dispatch = useDispatch()
 
   const Body = () => {
@@ -44,6 +45,8 @@ export default function PrimeEtAvantage() {
       // console.log(formValues)
       let primeEtAvantage = 0
       const updatedIndemnite = []
+      const updatedRetenue = []
+
       for (const key in formValues) {
         if (formValues.hasOwnProperty(key)) {
           const value = parseFloat(formValues[key])
@@ -56,12 +59,14 @@ export default function PrimeEtAvantage() {
               updatedIndemnite.push({ label: field.label, base: value, taux: field.taux })
               primeEtAvantage += value
             } else if (field.action === 'retenue') {
+              updatedRetenue.push({ label: field.label, base: value, taux: field.taux })
               primeEtAvantage -= value
             }
           }
         }
       }
       dispatch(setBulletinDePaie({ indemnite: [...indemnite, ...updatedIndemnite] }))
+      dispatch(setBulletinDePaie({ retenue: [...retenue, ...updatedRetenue] }))
       dispatch(setPrimeEtAvantage(primeEtAvantage))
       console.log('Prime et Avantage:', primeEtAvantage)
     }
