@@ -24,11 +24,13 @@ const MyDocument = (props) => {
 
 MyDocument.propTypes = {
   salarie: PropTypes.object,
+  data: PropTypes.object,
 }
 
 const BulletinPaie = () => {
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
-
+  const bulletinDePaie = useSelector((state) => state.bulletinDePaie)
+  console.log(bulletinDePaie)
   // decommenter pour activer le telechargement personnalisé
   // const pdfBlob = pdf(<MyDocument salarie={selecteEmploy} />)
   //   .toBlob()
@@ -38,7 +40,7 @@ const BulletinPaie = () => {
     <>
       <div className="h-screen">
         <PDFViewer width="100%" height="100%">
-          <MyDocument salarie={selecteEmploy} />
+          <MyDocument salarie={selecteEmploy} data={bulletinDePaie} />
         </PDFViewer>
       </div>
     </>

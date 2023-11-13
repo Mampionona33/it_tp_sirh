@@ -13,7 +13,6 @@ import EmployeeService from 'src/services/EmployeeService'
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('info-perso')
   const [selectedEmployee, setSelectedEmployee] = useState(null)
-  const [bulletinDePaie, setBulletinDePaie] = useState(null)
   const { id, activeTabParam } = useParams()
   const dispatch = useDispatch()
   const [employees, setEmployees] = useState([])
@@ -81,25 +80,24 @@ const Fiche = () => {
             dateEmbauche: emp.dateEmbauche ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd') : '',
           }),
         )
-        if (bulletinDePaie) {
-          dispatch(
-            setBulletinDePaie({
-              ...bulletinDePaie,
-              salarie: {
-                ...bulletinDePaie.salarie,
-                nom: emp.name && emp.name.nom ? emp.name.nom : '',
-                prenom: emp.name && emp.name.prenom ? emp.name.prenom : '',
-              },
-            }),
-          )
-        }
+      }
+      if (emp && mount) {
+        dispatch(
+          setBulletinDePaie({
+            salarie: {
+              ...emp,
+              nom: emp.name && emp.name.nom ? emp.name.nom : '',
+              prenom: emp.name && emp.name.prenom ? emp.name.prenom : '',
+            },
+          }),
+        )
       }
     }
 
     return () => {
       mount = false
     }
-  }, [id, employees, bulletinDePaie])
+  }, [id, employees])
 
   const renderTab = (tab) => (
     <li key={tab.key} className="mr-2" role="presentation">
