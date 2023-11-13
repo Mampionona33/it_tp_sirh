@@ -133,15 +133,18 @@ const GrossWages = () => {
         dispatch(setHsni130Value(hsni130Value))
       }
     }
-    if (hsni150Value) {
-      if (mount) {
-        dispatch(setHsni150Value(hsni150Value))
-      }
+    if (hsni150Value && mount) {
+      dispatch(setHsni150Value(hsni150Value))
     }
+
+    if (hn30Value && mount) {
+      dispatch(setBulletinDePaie({ hs30: hn30Value }))
+    }
+
     return () => {
       mount = false
     }
-  }, [salaireBruteVal, hsni130Value, hsni150Value])
+  }, [salaireBruteVal, hsni130Value, hsni150Value, hn30Value])
 
   return (
     <div>

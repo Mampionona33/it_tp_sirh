@@ -3,7 +3,8 @@
 // Utilisez plutôt formatAriaryMga pour la monnaie malgache dans l'affichage au sein de composants du DOM.
 
 function formatNumberWithSpaces(number) {
-  const formattedNumber = number ? number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') : '0,00'
+  const roundedNumber = Number(number).toFixed(2)
+  const formattedNumber = roundedNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 
   return formattedNumber.replace('.', ',')
 }
