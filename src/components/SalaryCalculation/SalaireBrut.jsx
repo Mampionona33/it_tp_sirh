@@ -123,6 +123,18 @@ const SalaireBrut = () => {
 
   React.useEffect(() => {
     let mount = true
+
+    if (mount) {
+      dispatch(setBulletinDePaie({ indemnite: [] }))
+    }
+
+    return () => {
+      mount = false
+    }
+  }, [])
+
+  React.useEffect(() => {
+    let mount = true
     if (salaireBruteVal && mount) {
       dispatch(setSelectedEmployeSalaireBrut(salaireBruteVal))
       dispatch(setBulletinDePaie({ salaireBrute: salaireBruteVal }))
