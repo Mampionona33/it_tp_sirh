@@ -25,10 +25,19 @@ const initialState = {
   salaireBrute: null,
   salaireNet: null,
   salaireNetAPayer: null,
-  cnaps: null,
   irsa: null,
+
   indemnite: [],
-  retenue: [],
+  retenue: [
+    {
+      label: 'cnaps',
+      base: 0,
+    },
+    {
+      label: 'organisationSanit',
+      base: 0,
+    },
+  ],
 }
 
 const bulletinDePaieSlice = createSlice({

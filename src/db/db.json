@@ -2828,5 +2828,28 @@
       "overtimeHoursDay": 2,
       "holidayHours": null
     }
+  ],
+
+  "/cotisations": [
+    {
+      "id": 1,
+      "label": "cnaps",
+      "value": 100000
+    },
+    {
+      "id": 2,
+      "label": "organisation sanitaire",
+      "value": 1000
+    },
+    {
+      "id": 3,
+      "label": "Cotisation sociale",
+      "value": 3000
+    },
+    {
+      "id": 4,
+      "label": "IRSA",
+      "value": 5000
+    }
   ]
 }

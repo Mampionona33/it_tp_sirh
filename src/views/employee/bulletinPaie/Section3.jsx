@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View, StyleSheet, pdf } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import registerFonts from './font'
+import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 registerFonts()
 
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   tableCell: {
     fontSize: 10,
     textAlign: 'left',
-    paddingTop: 4,
+    paddingTop: 10,
   },
   col33: {
     width: '33%',
@@ -88,7 +89,7 @@ const Section3 = (props) => {
   const retenues = props.data.retenue ? props.data.retenue : []
   const indemnites = props.data.indemnite ? props.data.indemnite : []
 
-  console.log(props.data)
+  // console.log(props.data)
 
   const renderRows = () => {
     return (
