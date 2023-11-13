@@ -40,6 +40,9 @@ const Section2 = (props) => {
     : '-'
   const hs30 = props.data.hs30 ? formatNumberWithSpaces(props.data.hs30) + ' Ar' : '-'
   const hs50 = props.data.hs50 ? formatNumberWithSpaces(props.data.hs50) + ' Ar' : '-'
+  const salaireBrute = props.data.salaireBrute
+    ? formatNumberWithSpaces(props.data.salaireBrute) + ' Ar'
+    : '-'
 
   return (
     <View style={[styles.table]}>
@@ -109,7 +112,7 @@ const Section2 = (props) => {
           <Text
             style={{ textAlign: 'right', fontSize: 10, fontWeight: 'bold', fontFamily: 'Roboto' }}
           >
-            -
+            {salaireBrute}
           </Text>
         </View>
       </View>

@@ -123,10 +123,9 @@ const SalaireBrut = () => {
 
   React.useEffect(() => {
     let mount = true
-    if (salaireBruteVal) {
-      if (mount) {
-        dispatch(setSelectedEmployeSalaireBrut(salaireBruteVal))
-      }
+    if (salaireBruteVal && mount) {
+      dispatch(setSelectedEmployeSalaireBrut(salaireBruteVal))
+      dispatch(setBulletinDePaie({ salaireBrute: salaireBruteVal }))
     }
     if (hsni130Value) {
       if (mount) {
