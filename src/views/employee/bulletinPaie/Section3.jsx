@@ -128,18 +128,24 @@ const Section3 = ({ salarie }) => {
           <React.Fragment key={index}>
             {/* Colonne cotisation qui contient le label de la cotisation */}
             <View style={[styles.tableRow, { fontSize: 10 }]}>
-              <Text style={[styles.tableCell, { width: '33%' }]}>{item.label}</Text>
+              <Text style={[styles.tableCell, { width: '33%', paddingLeft: 4 }]}>{item.label}</Text>
               {/* Colonnes pour la base, le taux et le montant en fonction du type */}
               <View style={[styles.tableRow, { width: '68%' }]}>
                 {/* Colonnes vides pour retenue */}
-                <Text style={[styles.tableCell, { width: '31%' }]}></Text>
-                <Text style={[styles.tableCell, { width: '32%' }]}></Text>
-                <Text style={[styles.tableCell, { width: '33%' }]}></Text>
+                <Text style={[styles.tableCell, { width: '31%', paddingLeft: 4 }]}></Text>
+                <Text style={[styles.tableCell, { width: '32%', paddingLeft: 4 }]}></Text>
+                <Text style={[styles.tableCell, { width: '33%', paddingLeft: 4 }]}></Text>
 
                 {/* Colonnes d'indemnité */}
-                <Text style={[styles.tableCell, { width: '34%' }]}>{item.base}</Text>
-                <Text style={[styles.tableCell, { width: '35%' }]}>{item.taux}</Text>
-                <Text style={[styles.tableCell, { width: '36%' }]}>{item.montant}</Text>
+                <Text style={[styles.tableCell, { width: '34%', paddingLeft: 4 }]}>
+                  {item.base}
+                </Text>
+                <Text style={[styles.tableCell, { width: '35%', paddingLeft: 4 }]}>
+                  {item.taux}
+                </Text>
+                <Text style={[styles.tableCell, { width: '36%', paddingLeft: 4 }]}>
+                  {item.montant}
+                </Text>
               </View>
             </View>
           </React.Fragment>
@@ -150,18 +156,29 @@ const Section3 = ({ salarie }) => {
           <React.Fragment key={index}>
             {/* Colonne cotisation qui contient le label de la cotisation */}
             <View style={[styles.tableRow, { fontSize: 10 }]}>
-              <Text style={[styles.tableCell, { width: '33%' }]}>{item.label}</Text>
+              <Text style={[styles.tableCell, { width: '33%', paddingLeft: 4 }]}>{item.label}</Text>
               {/* Colonnes pour la base, le taux et le montant en fonction du type */}
               <View style={[styles.tableRow, { width: '68%' }]}>
                 {/* Colonnes de retenue */}
-                <Text style={[styles.tableCell, { width: '31%' }]}>{item.base}</Text>
-                <Text style={[styles.tableCell, { width: '32%' }]}>{item.taux}</Text>
-                <Text style={[styles.tableCell, { width: '33%' }]}>{item.montant}</Text>
+                <Text style={[styles.tableCell, { width: '31%', paddingLeft: 4 }]}>
+                  {item.base}
+                </Text>
+                <Text style={[styles.tableCell, { width: '32%', paddingLeft: 4 }]}>
+                  {item.taux}
+                </Text>
+                <Text style={[styles.tableCell, { width: '33%', paddingLeft: 4 }]}>
+                  {item.montant}
+                </Text>
 
                 {/* Colonnes vides pour indemnité */}
-                <Text style={[styles.tableCell, { width: '34%' }]}></Text>
-                <Text style={[styles.tableCell, { width: '35%' }]}></Text>
-                <Text style={[styles.tableCell, { width: '36%' }]}></Text>
+                <Text
+                  style={[
+                    styles.tableCell,
+                    { width: '34%', paddingLeft: 4, backgroundColor: 'tomato' },
+                  ]}
+                ></Text>
+                <Text style={[styles.tableCell, { width: '35%', paddingLeft: 4 }]}></Text>
+                <Text style={[styles.tableCell, { width: '36%', paddingLeft: 4 }]}></Text>
               </View>
             </View>
           </React.Fragment>
@@ -204,7 +221,7 @@ const Section3 = ({ salarie }) => {
                   styles.col33,
                   {
                     textAlign: 'left',
-                    paddingLeft: 2,
+                    paddingLeft: 4,
                     borderBottom: 2,
                     borderRight: 2,
                     paddingTop: 4,
@@ -219,7 +236,7 @@ const Section3 = ({ salarie }) => {
                   styles.col33,
                   {
                     textAlign: 'left',
-                    paddingLeft: 2,
+                    paddingLeft: 4,
                     borderBottom: 2,
                     borderRight: 2,
                     paddingTop: 4,
@@ -236,7 +253,7 @@ const Section3 = ({ salarie }) => {
                     textAlign: 'left',
                     borderBottom: 2,
                     paddingTop: 4,
-                    paddingLeft: 2,
+                    paddingLeft: 4,
                     width: '35%',
                   },
                 ]}
@@ -257,7 +274,7 @@ const Section3 = ({ salarie }) => {
                   styles.col33,
                   {
                     textAlign: 'left',
-                    paddingLeft: 2,
+                    paddingLeft: 4,
                     borderBottom: 2,
                     borderRight: 2,
                     paddingTop: 4,
@@ -272,7 +289,7 @@ const Section3 = ({ salarie }) => {
                   styles.col33,
                   {
                     textAlign: 'left',
-                    paddingLeft: 2,
+                    paddingLeft: 4,
                     borderBottom: 2,
                     borderRight: 2,
                     paddingTop: 4,
@@ -289,7 +306,7 @@ const Section3 = ({ salarie }) => {
                     textAlign: 'left',
                     borderBottom: 2,
                     paddingTop: 4,
-                    paddingLeft: 2,
+                    paddingLeft: 4,
                     width: '35%',
                   },
                 ]}
