@@ -5,6 +5,7 @@ import formatAriaryMga from 'src/utils/formatAriaryMga'
 import { cotisastions } from 'src/db/db'
 import CalculIrsaAPayer from 'src/utils/CalculIrsaAPayer'
 import { setIrsaValue } from 'src/redux/selectedEmploye/selectedEmployeReducer'
+import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const SalaireNet = () => {
   const dispatch = useDispatch()
@@ -33,10 +34,13 @@ const SalaireNet = () => {
         dispatch(setIrsaValue(irsaApayer))
       }
     }
+    if (salaireNet && mount) {
+      dispatch(setBulletinDePaie(salaireNet))
+    }
     return () => {
       mount = false
     }
-  }, [irsaApayer])
+  }, [irsaApayer, salaireNet])
 
   const data = [
     {
