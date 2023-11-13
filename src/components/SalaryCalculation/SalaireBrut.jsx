@@ -93,26 +93,29 @@ const SalaireBrut = () => {
     return (
       <table className="table-auto">
         <tbody>
-          <tr className="border-b border-customRed-100">
+          <tr className="flex flex-wrap justify-between border-b border-customRed-100">
             <td colSpan="2" className="text-left py-3 pl-4 font-medium">
               Salaire de base
             </td>
-            <td className="text-right py-3 pr-4 font-medium">{formatedSalaireBase}</td>
+            <td className="text-right py-3 px-4 font-medium">{formatedSalaireBase}</td>
           </tr>
           {data.map((item, index) => (
-            <tr className="border-b border-customRed-100" key={index}>
+            <tr
+              className="flex flex-wrap justify-between border-b border-customRed-100"
+              key={index}
+            >
               <td className="text-left py-3 pl-4 font-medium">{item.title}</td>
               <td className="text-left py-3 pl-8 pr-8">
                 {item.hours.toString().padStart(2, '0')} H
               </td>
-              <td className="text-right py-3 pr-4">{item.value}</td>
+              <td className="text-right py-3 px-4">{item.value}</td>
             </tr>
           ))}
-          <tr className="border-b border-customRed-100">
+          <tr className="flex flex-wrap justify-between border-b border-customRed-100">
             <td colSpan="2" className="text-left py-3 pl-4 font-medium">
               Salaire brute
             </td>
-            <td className="text-right py-3 pr-4 font-medium text-customRed-900">
+            <td className="text-right py-3 px-4 font-medium text-customRed-900">
               {formatedSlaireBruteValue}
             </td>
           </tr>
