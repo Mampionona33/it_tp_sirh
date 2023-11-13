@@ -108,18 +108,22 @@ const Section3 = (props) => {
     },
   ]
 
-  const indemnites = [
-    { label: "Prime d'assuidité", base: 20000, taux: 1 },
-    { label: "Prime d'excellence", base: 400000, taux: 1 },
-    { label: 'Indemnité de transport', base: 400000, taux: 1 },
-    { label: 'Autres indemnités', base: 400000, taux: 1 },
-    { label: 'Avantages en nature (Véhicule)', base: 400000, taux: 1 },
-    { label: 'Avantages en nature (Logement)', base: 400000, taux: 1 },
-    { label: 'Autres avantages', base: 400000, taux: 1 },
-    { label: 'Rappel', base: 400000, taux: 1 },
-    { label: 'Aide au logement', base: 400000, taux: 1 },
-  ]
+  // const indemnites = [
+  //   { label: "Prime d'assuidité", base: 20000, taux: 1 },
+  //   { label: "Prime d'excellence", base: 400000, taux: 1 },
+  //   { label: 'Indemnité de transport', base: 400000, taux: 1 },
+  //   { label: 'Autres indemnités', base: 400000, taux: 1 },
+  //   { label: 'Avantages en nature (Véhicule)', base: 400000, taux: 1 },
+  //   { label: 'Avantages en nature (Logement)', base: 400000, taux: 1 },
+  //   { label: 'Autres avantages', base: 400000, taux: 1 },
+  //   { label: 'Rappel', base: 400000, taux: 1 },
+  //   { label: 'Aide au logement', base: 400000, taux: 1 },
+  // ]
+
+  const indemnites = props.data.indemnite ? props.data.indemnite : []
+
   console.log(props.data)
+
   const renderRows = () => {
     return (
       <>
