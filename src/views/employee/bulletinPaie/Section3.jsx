@@ -171,12 +171,7 @@ const Section3 = ({ salarie }) => {
                 </Text>
 
                 {/* Colonnes vides pour indemnité */}
-                <Text
-                  style={[
-                    styles.tableCell,
-                    { width: '34%', paddingLeft: 4, backgroundColor: 'tomato' },
-                  ]}
-                ></Text>
+                <Text style={[styles.tableCell, { width: '34%', paddingLeft: 4 }]}></Text>
                 <Text style={[styles.tableCell, { width: '35%', paddingLeft: 4 }]}></Text>
                 <Text style={[styles.tableCell, { width: '36%', paddingLeft: 4 }]}></Text>
               </View>
