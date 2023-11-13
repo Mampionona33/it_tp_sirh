@@ -9,12 +9,12 @@ import Section3 from './Section3'
 
 // Create Document Component
 const MyDocument = (props) => {
-  const { salarie } = props
+  const { salarie, data } = props
   // console.log(salarie)
   return (
     <Document title={`Bulletin de paie ${salarie.name.nom}`}>
       <Page size="A4">
-        <Section1 salarie={salarie} />
+        <Section1 salarie={salarie} data={data} />
         <Section2 salarie={salarie} />
         <Section3 salarie={salarie} />
       </Page>
@@ -30,7 +30,6 @@ MyDocument.propTypes = {
 const BulletinPaie = () => {
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
   const bulletinDePaie = useSelector((state) => state.bulletinDePaie)
-  console.log(bulletinDePaie)
   // decommenter pour activer le telechargement personnalisé
   // const pdfBlob = pdf(<MyDocument salarie={selecteEmploy} />)
   //   .toBlob()

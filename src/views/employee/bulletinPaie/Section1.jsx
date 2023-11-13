@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const Section1 = ({ salarie }) => {
+const Section1 = (props) => {
   return (
     <View>
       <View style={styles.header}>
@@ -93,7 +93,7 @@ const Section1 = ({ salarie }) => {
               styles.cellBorderLeft2,
             ]}
           >
-            <Text style={[styles.tableCell, styles.textBold]}>SALARIE: </Text>
+            <Text style={[styles.tableCell, styles.textBold]}>props.data.SALARIE: </Text>
           </View>
         </View>
 
@@ -104,7 +104,7 @@ const Section1 = ({ salarie }) => {
           <View style={[styles.tableCol, styles.cellBorderLeft2]}>
             <Text style={styles.tableCell}>
               <Text style={[styles.textItalic, styles.textBoldItalic]}>Nom et Prénom: </Text>
-              {salarie.name.nom} {salarie.name.prenom}
+              {props.data.salarie.nom} {props.data.salarie.prenom}
             </Text>
           </View>
         </View>
@@ -116,7 +116,7 @@ const Section1 = ({ salarie }) => {
           <View style={[styles.tableCol, styles.cellBorderLeft2, { paddingBottom: 2 }]}>
             <Text style={[styles.tableCell, { height: 18 }]}>
               <Text style={[styles.textItalic, styles.textBoldItalic]}>Fonction: </Text>
-              {salarie.poste}
+              {props.data.salarie.poste}
             </Text>
           </View>
         </View>
@@ -128,7 +128,7 @@ const Section1 = ({ salarie }) => {
           <View style={[styles.tableCol, styles.cellBorderLeft2]}>
             <Text style={styles.tableCell}>
               <Text style={[styles.textItalic, styles.textBoldItalic]}>Numéro Matricule: </Text>
-              {salarie.matricule}
+              {props.data.salarie.matricule}
             </Text>
           </View>
         </View>
@@ -140,7 +140,7 @@ const Section1 = ({ salarie }) => {
           <View style={[styles.tableCol, styles.cellBorderLeft2]}>
             <Text style={styles.tableCell}>
               <Text style={[styles.textItalic, styles.textBoldItalic]}>Catégorie: </Text>
-              {salarie.cat}
+              {props.data.salarie.cat}
             </Text>
           </View>
         </View>
@@ -191,7 +191,7 @@ const Section1 = ({ salarie }) => {
 }
 
 Section1.propTypes = {
-  salarie: PropTypes.object,
+  data: PropTypes.object,
 }
 
 export default Section1
