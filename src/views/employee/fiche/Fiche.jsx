@@ -70,13 +70,13 @@ const Fiche = () => {
     let mount = true
 
     if (id && employees) {
-      const emp = employees.find((empl) => empl.id == id)
+      const emp = employees.find((empl) => empl.id === id)
       if (emp && mount) {
         dispatch(
           setSelectedEmploye({
             ...emp,
-            nom: emp.name.nom ? emp.name.nom : '',
-            prenom: emp.name.prenom ? emp.name.prenom : '',
+            nom: emp.nom ? emp.nom : '',
+            prenom: emp.prenom ? emp.prenom : '',
             dateEmbauche: emp.dateEmbauche ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd') : '',
           }),
         )
@@ -86,8 +86,8 @@ const Fiche = () => {
           setBulletinDePaie({
             salarie: {
               ...emp,
-              nom: emp.name && emp.name.nom ? emp.name.nom : '',
-              prenom: emp.name && emp.name.prenom ? emp.name.prenom : '',
+              nom: emp && emp.nom ? emp.nom : '',
+              prenom: emp && emp.prenom ? emp.prenom : '',
             },
           }),
         )
