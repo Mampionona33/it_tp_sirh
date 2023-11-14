@@ -19,7 +19,7 @@ const MoreButtonMenu = (props) => {
         <MenuList className="p-0">
           {props.items &&
             props.items.map((item, key) => (
-              <MenuItem className="p-0 border-0 hover:bg-customRed-100 hover:border-0" key={key}>
+              <MenuItem className="p-0 border-0 hover:bg-customRed-100 " key={key}>
                 <Link className="btn " to={item.path}>
                   {item.label}
                 </Link>
