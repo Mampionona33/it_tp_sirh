@@ -46,7 +46,6 @@ const FormInfoGalEmployee = (props) => {
       //   })
       //   .catch((error) => console.error(error))
       const emp = employeesList.filter((employee) => employee.id == props.id)
-      console.log(emp)
       if (emp.length > 0) {
         setEmployee(emp[0])
       }
