@@ -48,6 +48,7 @@ const TimeSheetTable = (props) => {
   const [startDate, setStartDate] = useState(defaultStartDate)
   const [endDate, setEndDate] = useState(defaultEndDate)
   const dispatch = useDispatch()
+  const salarie = useSelector((state) => state.bulletinDePaie.salarie)
 
   setDefaultOptions({ locale: fr })
 
@@ -226,7 +227,7 @@ const TimeSheetTable = (props) => {
     const filteredData = employeeHours.filter((employHours) => {
       const employDate = new Date(employHours.date)
       return (
-        employHours.employee.id == props.id &&
+        employHours.employee.id == salarie.id &&
         employDate.getMonth() === currentDate.getMonth() &&
         employDate.getFullYear() === currentDate.getFullYear()
       )
@@ -237,7 +238,7 @@ const TimeSheetTable = (props) => {
   React.useEffect(() => {
     let mount = true
 
-    if (props.id && employeeHours) {
+    if (salarie && employeeHours) {
       if (mount) {
         filterDataByDate()
       }
@@ -246,7 +247,7 @@ const TimeSheetTable = (props) => {
     return () => {
       mount = false
     }
-  }, [employeeHours, props.id])
+  }, [employeeHours, salarie])
 
   const table = useReactTable({
     data,
