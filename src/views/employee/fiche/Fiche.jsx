@@ -1,6 +1,6 @@
 import { format, parseISO } from 'date-fns'
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
@@ -18,6 +18,9 @@ const Fiche = () => {
   const [employees, setEmployees] = useState([])
   const location = useLocation()
   const navigate = useNavigate()
+  const employeesList = useSelector((state) => state)
+
+  console.log(employeesList)
 
   useEffect(() => {
     const pathParts = location.pathname.split('/')
@@ -97,7 +100,7 @@ const Fiche = () => {
     return () => {
       mount = false
     }
-  }, [id, employees])
+  }, [id, employees, dispatch])
 
   const renderTab = (tab) => (
     <li key={tab.key} className="mr-2" role="presentation">

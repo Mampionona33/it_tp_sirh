@@ -68,7 +68,6 @@ export default function PrimeEtAvantage() {
       dispatch(setBulletinDePaie({ indemnite: [...indemnite, ...updatedIndemnite] }))
       dispatch(setBulletinDePaie({ retenue: [...retenue, ...updatedRetenue] }))
       dispatch(setPrimeEtAvantage(primeEtAvantage))
-
     }
 
     const handleInputChange = useCallback(

@@ -4,8 +4,11 @@ import { CRow, CCol } from '@coreui/react'
 import { createColumnHelper } from '@tanstack/react-table'
 import MoreButtonMenu from 'src/components/MoreButtonMenu'
 import EmployeeService from 'src/services/EmployeeService'
+import { useDispatch } from 'react-redux'
+import { fetchAllUsers } from 'src/redux/employees/employeesAction'
 
 const List = () => {
+  const dispatch = useDispatch()
   const columnHelper = createColumnHelper()
   const [employees, setEmployees] = useState([])
 
@@ -24,11 +27,12 @@ const List = () => {
       EmployeeService.getAll()
         .then((resp) => setEmployees(resp.data))
         .catch((err) => console.log(err))
+      dispatch(fetchAllUsers())
     }
     return () => {
       mount = false
     }
-  }, [])
+  }, [dispatch])
 
   const modalAddFields = [
     {
