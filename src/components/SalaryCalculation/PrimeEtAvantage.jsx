@@ -82,7 +82,7 @@ export default function PrimeEtAvantage() {
 
     React.useEffect(() => {
       let mount = true
-      console.log(retenue)
+      // console.log(retenue)
       if (mount && fields.length > 0) {
         const initialIndmnite = fields.filter((field) => field.action === 'indemnite')
         const initialRetenue = fields.filter((field) => field.action === 'retenue')

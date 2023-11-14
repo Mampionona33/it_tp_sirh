@@ -9,7 +9,7 @@ const employeesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
-      return [...state, ...action.payload]
+      state = action.payload
     })
   },
 })

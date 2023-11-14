@@ -18,7 +18,7 @@ const Fiche = () => {
   const [employees, setEmployees] = useState([])
   const location = useLocation()
   const navigate = useNavigate()
-  const employeesList = useSelector((state) => state)
+  const employeesList = useSelector((state) => state.employeesList)
 
   console.log(employeesList)
 

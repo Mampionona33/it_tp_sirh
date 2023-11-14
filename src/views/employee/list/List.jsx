@@ -25,7 +25,7 @@ const List = () => {
     let mount = true
     if (mount) {
       EmployeeService.getAll()
-        .then((resp) => setEmployees(resp.data))
+        .then((resp) => setEmployees(resp))
         .catch((err) => console.log(err))
       dispatch(fetchAllUsers())
     }
