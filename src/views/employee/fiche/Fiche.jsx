@@ -1,22 +1,24 @@
 import { format, parseISO } from 'date-fns'
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
 import { setSelectedEmploye } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
-import EmployeeService from 'src/services/EmployeeService'
+// import EmployeeService from 'src/services/EmployeeService'
 
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('info-perso')
-  const [selectedEmployee, setSelectedEmployee] = useState(null)
+  // const [selectedEmployee, setSelectedEmployee] = useState(null)
   const { id, activeTabParam } = useParams()
   const dispatch = useDispatch()
-  const [employees, setEmployees] = useState([])
+  // const [employees, setEmployees] = useState([])
+  const employees = useSelector((state) => state.employeesList.list)
   const location = useLocation()
   const navigate = useNavigate()
+  const selectedEmployee = useSelector((state) => state.bulletinDePaie.salarie)
 
   useEffect(() => {
     const pathParts = location.pathname.split('/')
@@ -28,21 +30,6 @@ const Fiche = () => {
       setActiveTab(activeTabParam)
     }
   }, [location.pathname, activeTabParam])
-
-  useEffect(() => {
-    let mount = true
-    if (mount) {
-      EmployeeService.getAll()
-        .then((resp) => {
-          // console.log(resp.data)
-          setEmployees(resp.data)
-        })
-        .catch((err) => console.log(err))
-    }
-    return () => {
-      mount = false
-    }
-  }, [])
 
   const handleTabClick = (eventKey) => {
     setActiveTab(eventKey)
@@ -57,37 +44,13 @@ const Fiche = () => {
 
   useEffect(() => {
     let mount = true
-    if (id && mount) {
-      setSelectedEmployee(id)
-    }
-    return () => {
-      mount = false
-    }
-  }, [id])
 
-  useEffect(() => {
-    let mount = true
-
-    if (id && employees) {
+    if (id && employees && mount) {
       const emp = employees.find((empl) => empl.id == id)
-      if (emp && mount) {
-        dispatch(
-          setSelectedEmploye({
-            ...emp,
-            nom: emp.nom ? emp.nom : '',
-            prenom: emp.prenom ? emp.prenom : '',
-            dateEmbauche: emp.dateEmbauche ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd') : '',
-          }),
-        )
-      }
-      if (emp && mount) {
-        dispatch(
-          setBulletinDePaie({
-            salarie: {
-              ...emp,
-            },
-          }),
-        )
+
+      if (emp) {
+        console.log(emp)
+        dispatch(setBulletinDePaie({ salarie: { ...emp } }))
       }
     }
 
@@ -148,7 +111,7 @@ const Fiche = () => {
   function renderTabContent(tabKey) {
     switch (tabKey) {
       case 'info-perso':
-        return <FormInfoGalEmployee id={selectedEmployee} />
+        return <FormInfoGalEmployee />
       case 'heures-travailles':
         return <TimeSheetTable id={selectedEmployee} />
       case 'bulletin-de-paie':

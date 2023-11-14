@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
-import { employeesCategories, employees } from 'src/db/db'
-import PropTypes from 'prop-types'
+import { employeesCategories } from 'src/db/db'
 import { format, parseISO } from 'date-fns'
-import EmployeeService from 'src/services/EmployeeService'
 import { useSelector } from 'react-redux'
 import Loading from './Loading'
 
@@ -22,38 +20,18 @@ const FormInfoGalEmployee = (props) => {
     cat: '',
     dateEmbauche: '1990-01-01',
   })
-  const employeesList = useSelector((state) => state.employeesList.list)
   const loadList = useSelector((state) => state.employeesList.loading)
+  const salarie = useSelector((state) => state.bulletinDePaie.salarie)
 
   useEffect(() => {
     let mount = true
-    if (mount && props.id && employeesList.length > 0) {
-      // EmployeeService.getById(props.id)
-      //   .then((response) => {
-      //     const emp = response.data
-
-      //     // console.log(emp)
-      //     if (emp && mount) {
-      //       setEmployee({
-      //         ...emp,
-      //         nom: emp.name.nom ? emp.name.nom : '',
-      //         prenom: emp.name.prenom ? emp.name.prenom : '',
-      //         dateEmbauche: emp.dateEmbauche
-      //           ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd')
-      //           : '',
-      //       })
-      //     }
-      //   })
-      //   .catch((error) => console.error(error))
-      const emp = employeesList.filter((employee) => employee.id == props.id)
-      if (emp.length > 0) {
-        setEmployee(emp[0])
-      }
-      return () => {
-        mount = false
-      }
+    if (mount && salarie) {
+      setEmployee(salarie)
     }
-  }, [props.id, employeesList])
+    return () => {
+      mount = false
+    }
+  }, [salarie])
 
   const customStyles = {
     control: (provided, state) => ({
@@ -132,7 +110,9 @@ const FormInfoGalEmployee = (props) => {
               name="dateEmbauche"
               id="dateEmbauche"
               placeholder="Date d'embauche"
-              value={employee.dateEmbauche}
+              value={
+                employee.dateEmbauche ? format(new Date(employee.dateEmbauche), 'yyyy-MM-dd') : ''
+              }
               onChange={handleChange}
             />
           </div>
@@ -187,7 +167,7 @@ const FormInfoGalEmployee = (props) => {
                   name="sexe"
                   id="sexeHomme"
                   value="homme"
-                  checked={employee.sexe === 'Homme'}
+                  checked={employee.sexe.match(/homme/gi)}
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="sexeHomme">
@@ -201,7 +181,7 @@ const FormInfoGalEmployee = (props) => {
                   name="sexe"
                   id="sexeFemme"
                   value="femme"
-                  checked={employee.sexe === 'Femme'}
+                  checked={employee.sexe.match(/femme/gi)}
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="sexeFemme">
@@ -214,10 +194,6 @@ const FormInfoGalEmployee = (props) => {
       </div>
     </>
   )
-}
-
-FormInfoGalEmployee.propTypes = {
-  id: PropTypes.string.isRequired,
 }
 
 export default FormInfoGalEmployee
