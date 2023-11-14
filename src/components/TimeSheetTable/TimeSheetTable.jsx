@@ -511,7 +511,7 @@ const TimeSheetTable = (props) => {
                   {headerGroup.headers.map((header, headerIndex) => (
                     <th
                       scope="col"
-                      className="px-6 py-3 border-x border-x-customRed-100 w-1/6 min-w-1/6"
+                      className="px-3 py-3 border-x border-x-customRed-100 w-2/12"
                       key={`header_${header.id}_${headerIndex}`}
                     >
                       {header.isPlaceholder ? null : (
@@ -554,7 +554,7 @@ const TimeSheetTable = (props) => {
                           <td
                             rowSpan={6}
                             key={`cell_${rowIndex}_${cellIndex}`}
-                            className="px-6 py-2 border-x border-customRed-100 "
+                            className="px-3 py-2 border-x border-customRed-100 "
                           >
                             {cell.column.columnDef.cell(cell.getContext()) &&
                               cell.column.columnDef
@@ -568,7 +568,7 @@ const TimeSheetTable = (props) => {
                         return (
                           <td
                             key={`cell_${rowIndex}_${cellIndex}`}
-                            className="px-6 py-2 border-x border-customRed-100 "
+                            className="px-3 py-2 border-x border-customRed-100 "
                           >
                             {cell.column.columnDef.cell(cell.getContext())}
                           </td>
