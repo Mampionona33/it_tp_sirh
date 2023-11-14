@@ -1,7 +1,8 @@
 import React from 'react'
-import { Page, Text, View, Document, StyleSheet, PDFViewer, pdf } from '@react-pdf/renderer'
+import { Text, View, StyleSheet, pdf } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import registerFonts from './font'
+import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 registerFonts()
 
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
   tableCell: {
     fontSize: 10,
     textAlign: 'left',
-    paddingTop: 4,
+    paddingTop: 10,
   },
   col33: {
     width: '33%',
@@ -85,44 +86,10 @@ const styles = StyleSheet.create({
 })
 
 const Section3 = (props) => {
-  const retenues = [
-    {
-      label: 'Absence/Retard',
-      base: 1000,
-      taux: 1,
-    },
-    {
-      label: 'CNAPS',
-      base: 1000,
-      taux: 1,
-    },
-    {
-      label: 'Retenue sur organisation sanitaire',
-      base: 1000,
-      taux: 1,
-    },
-    {
-      label: 'IRSA',
-      base: 1000,
-      taux: 1,
-    },
-  ]
-
-  // const indemnites = [
-  //   { label: "Prime d'assuidité", base: 20000, taux: 1 },
-  //   { label: "Prime d'excellence", base: 400000, taux: 1 },
-  //   { label: 'Indemnité de transport', base: 400000, taux: 1 },
-  //   { label: 'Autres indemnités', base: 400000, taux: 1 },
-  //   { label: 'Avantages en nature (Véhicule)', base: 400000, taux: 1 },
-  //   { label: 'Avantages en nature (Logement)', base: 400000, taux: 1 },
-  //   { label: 'Autres avantages', base: 400000, taux: 1 },
-  //   { label: 'Rappel', base: 400000, taux: 1 },
-  //   { label: 'Aide au logement', base: 400000, taux: 1 },
-  // ]
-
+  const retenues = props.data.retenue ? props.data.retenue : []
   const indemnites = props.data.indemnite ? props.data.indemnite : []
 
-  console.log(props.data)
+  // console.log(props.data)
 
   const renderRows = () => {
     return (

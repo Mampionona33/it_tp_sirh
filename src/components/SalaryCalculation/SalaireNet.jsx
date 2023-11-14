@@ -1,22 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useDispatch, useSelector } from 'react-redux'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 import { cotisastions } from 'src/db/db'
 import CalculIrsaAPayer from 'src/utils/CalculIrsaAPayer'
 import { setIrsaValue } from 'src/redux/selectedEmploye/selectedEmployeReducer'
+import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const SalaireNet = () => {
   const dispatch = useDispatch()
   const title = 'Salaire net'
+  const retenue = useSelector((state) => state.bulletinDePaie.retenue)
   const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
   const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
-  const cnaps = cotisastions.filter((item) => item.id === 1)
-  const ostie = cotisastions.filter((item) => item.id === 2)
+  // const cnaps = cotisastions.filter((item) => item.id === 1)
+  // const ostie = cotisastions.filter((item) => item.id === 2)
+  const cnaps = salaireBrut / 100
+  const ostie = salaireBrut / 100
   const hsni130Value = selectedEmployeHours.hsni130Value
   const hsni150Value = selectedEmployeHours.hsni150Value
 
-  const soustotal1 = salaireBrut - (cnaps[0].value + ostie[0].value)
+  const soustotal1 = salaireBrut - (cnaps + ostie)
 
   const baseIrsa = soustotal1 - (hsni130Value + hsni150Value)
   const imposableArrondi = Math.floor(baseIrsa / 100) * 100
@@ -26,6 +30,38 @@ const SalaireNet = () => {
 
   const salaireNet = imposableArrondi - irsaApayer
 
+  useEffect(() => {
+    let mount = true
+    if (mount && salaireBrut && retenue) {
+      const updatedRetenue = retenue.map((item) =>
+        item.label === 'cnaps' && item.base !== salaireBrut / 100
+          ? { ...item, base: salaireBrut / 100 }
+          : item,
+      )
+
+      // Check if retenue has changed before dispatching the action
+      if (!arraysAreEqual(retenue, updatedRetenue)) {
+        dispatch(setBulletinDePaie({ retenue: updatedRetenue }))
+      }
+    }
+    return () => {
+      mount = false
+    }
+  }, []) // Empty dependency array to run only once on mount
+
+  // Add a function to check if arrays are equal
+  function arraysAreEqual(arr1, arr2) {
+    if (arr1.length !== arr2.length) {
+      return false
+    }
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) {
+        return false
+      }
+    }
+    return true
+  }
+
   React.useEffect(() => {
     let mount = true
     if (irsaApayer) {
@@ -33,10 +69,13 @@ const SalaireNet = () => {
         dispatch(setIrsaValue(irsaApayer))
       }
     }
+    if (salaireNet && mount) {
+      dispatch(setBulletinDePaie(salaireNet))
+    }
     return () => {
       mount = false
     }
-  }, [irsaApayer])
+  }, [irsaApayer, salaireNet])
 
   const data = [
     {
@@ -45,11 +84,11 @@ const SalaireNet = () => {
     },
     {
       title: 'CNAPS :',
-      value: `${formatAriaryMga(cnaps[0].value)}`,
+      value: `${formatAriaryMga(cnaps)}`,
     },
     {
       title: 'OSTIE :',
-      value: `${formatAriaryMga(ostie[0].value)}`,
+      value: `${formatAriaryMga(ostie)}`,
     },
     {
       title: '',
@@ -87,9 +126,12 @@ const SalaireNet = () => {
         <table className="table-auto">
           <tbody>
             {data.map((item, index) => (
-              <tr className="border-b border-customRed-100" key={index}>
-                <td className="text-left py-3 pl-4 font-medium">{item.title}</td>
-                <td className="py-3 pl-8 pr-4 text-right">{item.value}</td>
+              <tr
+                className="flex flex-wrap justify-between border-b border-customRed-100"
+                key={index}
+              >
+                <td className="text-left py-3 px-4 font-medium">{item.title}</td>
+                <td className="py-3 pl-8 px-4 text-right">{item.value}</td>
               </tr>
             ))}
           </tbody>

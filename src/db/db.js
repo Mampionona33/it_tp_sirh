@@ -2,12 +2,12 @@ export const cotisastions = [
   {
     id: 1,
     name: 'CNAPS',
-    value: 4256.56,
+    value: 0.01,
   },
   {
     id: 2,
     name: 'OSTIE',
-    value: 4256.56,
+    value: 0.01,
   },
 ]
 

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
+// const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
+const REACT_APP_API_BASE_URL = 'http://localhost:8000'
 console.log(process.env.REACT_APP_API_BASE_URL)
 
 class EmployeeService {

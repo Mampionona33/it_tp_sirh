@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 export default function PrimeEtAvantage() {
   const title = 'Primes et avantages'
   const indemnite = useSelector((state) => state.bulletinDePaie.indemnite)
+  const retenue = useSelector((state) => state.bulletinDePaie.retenue)
   const dispatch = useDispatch()
 
   const Body = () => {
@@ -44,6 +45,8 @@ export default function PrimeEtAvantage() {
       // console.log(formValues)
       let primeEtAvantage = 0
       const updatedIndemnite = []
+      const updatedRetenue = []
+
       for (const key in formValues) {
         if (formValues.hasOwnProperty(key)) {
           const value = parseFloat(formValues[key])
@@ -56,13 +59,16 @@ export default function PrimeEtAvantage() {
               updatedIndemnite.push({ label: field.label, base: value, taux: field.taux })
               primeEtAvantage += value
             } else if (field.action === 'retenue') {
+              updatedRetenue.push({ label: field.label, base: value, taux: field.taux })
               primeEtAvantage -= value
             }
           }
         }
       }
       dispatch(setBulletinDePaie({ indemnite: [...indemnite, ...updatedIndemnite] }))
+      dispatch(setBulletinDePaie({ retenue: [...retenue, ...updatedRetenue] }))
       dispatch(setPrimeEtAvantage(primeEtAvantage))
+
       console.log('Prime et Avantage:', primeEtAvantage)
     }
 
@@ -75,6 +81,26 @@ export default function PrimeEtAvantage() {
       },
       [setFormValues],
     )
+
+    React.useEffect(() => {
+      let mount = true
+      console.log(retenue)
+      if (mount && fields.length > 0) {
+        const initialIndmnite = fields.filter((field) => field.action === 'indemnite')
+        const initialRetenue = fields.filter((field) => field.action === 'retenue')
+
+        if (indemnite.length === 0) {
+          dispatch(setBulletinDePaie({ indemnite: [...indemnite, ...initialIndmnite] }))
+        }
+        if (retenue.length === 0) {
+          dispatch(setBulletinDePaie({ retenue: [...retenue, ...initialRetenue] }))
+        }
+      }
+
+      return () => {
+        mount = false
+      }
+    }, [fields, indemnite, retenue])
 
     return (
       <>
