@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchAllUsers } from './employeesAction'
 
-const initialState = []
+const initialState = {
+  list: [],
+  loading: 'idle', // Vous pouvez initialiser loading avec la valeur appropriée
+}
 
 const employeesSlice = createSlice({
   name: 'employees',
@@ -9,8 +12,8 @@ const employeesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
-      state.length = 0
-      state.push(...action.payload)
+      state.list = action.payload
+      state.loading = 'succeeded'
     })
   },
 })

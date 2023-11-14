@@ -21,24 +21,7 @@ const FormInfoGalEmployee = (props) => {
     cat: '',
     dateEmbauche: '1990-01-01',
   })
-  const employeesList = useSelector((state) => state.employeesList)
-  // useEffect(() => {
-  //   let mount = true
-  //   if (props.id && employees) {
-  //     const emp = employees.find((empl) => empl.id == props.id)
-  //     if (emp && mount) {
-  //       setEmployee({
-  //         ...emp,
-  //         nom: emp.name.nom ? emp.name.nom : '',
-  //         prenom: emp.name.prenom ? emp.name.prenom : '',
-  //         dateEmbauche: emp.dateEmbauche ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd') : '',
-  //       })
-  //     }
-  //   }
-  //   return () => {
-  //     mount = false
-  //   }
-  // }, [props.id])
+  const employeesList = useSelector((state) => state.employeesList.list)
 
   useEffect(() => {
     let mount = true
