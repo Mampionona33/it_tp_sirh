@@ -15,7 +15,6 @@ class EmployeeService {
           password: this.pass,
         },
       })
-      // console.log(response)
       return response
     } catch (error) {
       console.error("Une erreur s'est produite lors de la requête :", error)

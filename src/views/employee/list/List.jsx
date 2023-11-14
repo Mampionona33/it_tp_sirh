@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import DataTable from 'src/components/DataTable/DataTable'
 import { CRow, CCol } from '@coreui/react'
 import { createColumnHelper } from '@tanstack/react-table'
-// import { employees } from 'src/db/db'
 import MoreButtonMenu from 'src/components/MoreButtonMenu'
 import EmployeeService from 'src/services/EmployeeService'
 
