@@ -79,7 +79,8 @@ const List = () => {
       }),
       columnHelper.accessor('name', {
         cell: (info) => {
-          const { prenom, nom } = info.getValue()
+          const nom = info.row.original.nom
+          const prenom = info.row.original.prenom
           return `${prenom} ${nom}`
         },
         header: () => 'Nom et Prénom',
