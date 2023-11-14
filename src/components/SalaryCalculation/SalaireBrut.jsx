@@ -14,7 +14,7 @@ const SalaireBrut = () => {
   const employeeTotalHours = useSelector((state) => state.employeHours)
   const title = 'Salaire brut'
   const selecteEmploy = useSelector((state) => state.bulletinDePaie.salarie)
- 
+
   console.log(selecteEmploy)
 
   const tauxHoraire = selecteEmploy.salaireBase / 173.33
