@@ -14,9 +14,9 @@ const corsOptions = {
   optionsSuccessStatus: 200,
 }
 
-app.use(cors(corsOptions))
+app.use(cors())
 
-app.get('/employees/list', (req, res) => {
+app.get('/listeemployes', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*') // Allow any origin during development
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
 

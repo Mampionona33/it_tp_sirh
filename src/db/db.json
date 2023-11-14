@@ -4,10 +4,8 @@
       "id": 1,
       "matricule": 345,
       "cin": "109.113.118.790",
-      "name": {
-        "nom": "Puckett",
-        "prenom": "Howard"
-      },
+      "nom": "Puckett",
+      "prenom": "Howard",
       "poste": "Ouvrier",
       "telephone": "034 12 327 34",
       "manager": "Eric",
@@ -21,10 +19,8 @@
       "id": 2,
       "matricule": 362,
       "cin": "108.795.336.183",
-      "name": {
-        "nom": "Walsh",
-        "prenom": "Rocha"
-      },
+      "nom": "Walsh",
+      "prenom": "Rocha",
       "poste": "Manœuvre",
       "telephone": "034 74 864 85",
       "manager": "Eric",
@@ -38,10 +34,8 @@
       "id": 3,
       "matricule": 619,
       "cin": "107.479.223.386",
-      "name": {
-        "nom": "Blanchard",
-        "prenom": "Frye"
-      },
+      "nom": "Blanchard",
+      "prenom": "Frye",
       "poste": "Manœuvre",
       "telephone": "034 48 724 74",
       "manager": "Tahina",
@@ -55,10 +49,8 @@
       "id": 4,
       "matricule": 869,
       "cin": "102.649.862.061",
-      "name": {
-        "nom": "Sasha",
-        "prenom": "Bullock"
-      },
+      "nom": "Sasha",
+      "prenom": "Bullock",
       "poste": "Manœuvre",
       "telephone": "034 71 280 75",
       "manager": "Tahina",
@@ -72,10 +64,8 @@
       "id": 5,
       "matricule": 191,
       "cin": "103.990.788.429",
-      "name": {
-        "nom": "Lillian",
-        "prenom": "Vance"
-      },
+      "nom": "Lillian",
+      "prenom": "Vance",
       "poste": "Manœuvre",
       "telephone": "034 29 123 24",
       "manager": "Tahina",
@@ -89,10 +79,8 @@
       "id": 6,
       "matricule": 366,
       "cin": "109.097.270.006",
-      "name": {
-        "nom": "Graciela",
-        "prenom": "Holt"
-      },
+      "nom": "Graciela",
+      "prenom": "Holt",
       "poste": "Ouvrier",
       "telephone": "034 86 240 02",
       "manager": "Eric",
@@ -106,10 +94,8 @@
       "id": 7,
       "matricule": 157,
       "cin": "107.598.497.135",
-      "name": {
-        "nom": "Holder",
-        "prenom": "Grimes"
-      },
+      "nom": "Holder",
+      "prenom": "Grimes",
       "poste": "Manœuvre",
       "telephone": "034 91 935 83",
       "manager": "Tahina",
@@ -123,10 +109,8 @@
       "id": 8,
       "matricule": 482,
       "cin": "109.617.518.853",
-      "name": {
-        "nom": "Raquel",
-        "prenom": "Ortega"
-      },
+      "nom": "Raquel",
+      "prenom": "Ortega",
       "poste": "Manœuvre",
       "telephone": "034 26 574 34",
       "manager": "Eric",
@@ -140,10 +124,8 @@
       "id": 9,
       "matricule": 454,
       "cin": "109.761.125.986",
-      "name": {
-        "nom": "Kinney",
-        "prenom": "Herman"
-      },
+      "nom": "Kinney",
+      "prenom": "Herman",
       "poste": "Manœuvre",
       "telephone": "034 86 577 68",
       "manager": "Tahina",
@@ -157,10 +139,8 @@
       "id": 10,
       "matricule": 948,
       "cin": "108.336.660.182",
-      "name": {
-        "nom": "Margo",
-        "prenom": "Chavez"
-      },
+      "nom": "Margo",
+      "prenom": "Chavez",
       "poste": "Manœuvre",
       "telephone": "034 62 290 84",
       "manager": "Eric",
@@ -174,10 +154,8 @@
       "id": 11,
       "matricule": 711,
       "cin": "103.698.567.890",
-      "name": {
-        "nom": "Eugenia",
-        "prenom": "Mccoy"
-      },
+      "nom": "Eugenia",
+      "prenom": "Mccoy",
       "poste": "Manœuvre",
       "telephone": "034 75 300 99",
       "manager": "Eric",
@@ -191,10 +169,8 @@
       "id": 12,
       "matricule": 207,
       "cin": "104.719.434.842",
-      "name": {
-        "nom": "Gutierrez",
-        "prenom": "Hebert"
-      },
+      "nom": "Gutierrez",
+      "prenom": "Hebert",
       "poste": "Manœuvre",
       "telephone": "034 97 432 70",
       "manager": "Eric",
@@ -208,10 +184,8 @@
       "id": 13,
       "matricule": 289,
       "cin": "110.386.559.409",
-      "name": {
-        "nom": "Winnie",
-        "prenom": "Aguilar"
-      },
+      "nom": "Winnie",
+      "prenom": "Aguilar",
       "poste": "Ouvrier",
       "telephone": "034 56 569 37",
       "manager": "Tahina",
@@ -225,10 +199,8 @@
       "id": 14,
       "matricule": 236,
       "cin": "109.052.382.141",
-      "name": {
-        "nom": "Yesenia",
-        "prenom": "Matthews"
-      },
+      "nom": "Yesenia",
+      "prenom": "Matthews",
       "poste": "Manœuvre",
       "telephone": "034 14 987 87",
       "manager": "Tahina",
@@ -242,10 +214,8 @@
       "id": 15,
       "matricule": 286,
       "cin": "106.215.116.690",
-      "name": {
-        "nom": "Hall",
-        "prenom": "Berger"
-      },
+      "nom": "Hall",
+      "prenom": "Berger",
       "poste": "Ouvrier",
       "telephone": "034 67 212 31",
       "manager": "Eric",
@@ -259,10 +229,8 @@
       "id": 16,
       "matricule": 236,
       "cin": "107.083.303.496",
-      "name": {
-        "nom": "Phillips",
-        "prenom": "Holland"
-      },
+      "nom": "Phillips",
+      "prenom": "Holland",
       "poste": "Manœuvre",
       "telephone": "034 64 060 83",
       "manager": "Tahina",
@@ -276,10 +244,8 @@
       "id": 17,
       "matricule": 103,
       "cin": "102.308.411.660",
-      "name": {
-        "nom": "Hahn",
-        "prenom": "Booker"
-      },
+      "nom": "Hahn",
+      "prenom": "Booker",
       "poste": "Ouvrier",
       "telephone": "034 14 171 84",
       "manager": "Eric",
@@ -293,10 +259,8 @@
       "id": 18,
       "matricule": 392,
       "cin": "106.972.760.447",
-      "name": {
-        "nom": "Mccarthy",
-        "prenom": "Hayden"
-      },
+      "nom": "Mccarthy",
+      "prenom": "Hayden",
       "poste": "Ouvrier",
       "telephone": "034 68 824 04",
       "manager": "Eric",
@@ -310,10 +274,8 @@
       "id": 19,
       "matricule": 854,
       "cin": "107.460.852.829",
-      "name": {
-        "nom": "Karina",
-        "prenom": "Snyder"
-      },
+      "nom": "Karina",
+      "prenom": "Snyder",
       "poste": "Manœuvre",
       "telephone": "034 66 275 78",
       "manager": "Eric",
@@ -327,10 +289,8 @@
       "id": 20,
       "matricule": 578,
       "cin": "106.687.565.344",
-      "name": {
-        "nom": "Araceli",
-        "prenom": "Owen"
-      },
+      "nom": "Araceli",
+      "prenom": "Owen",
       "poste": "Manœuvre",
       "telephone": "034 85 494 53",
       "manager": "Tahina",
@@ -344,10 +304,8 @@
       "id": 21,
       "matricule": 860,
       "cin": "103.479.447.097",
-      "name": {
-        "nom": "Schroeder",
-        "prenom": "Mccormick"
-      },
+      "nom": "Schroeder",
+      "prenom": "Mccormick",
       "poste": "Ouvrier",
       "telephone": "034 50 467 04",
       "manager": "Eric",
@@ -361,10 +319,8 @@
       "id": 22,
       "matricule": 143,
       "cin": "109.163.776.379",
-      "name": {
-        "nom": "Brigitte",
-        "prenom": "Weber"
-      },
+      "nom": "Brigitte",
+      "prenom": "Weber",
       "poste": "Manœuvre",
       "telephone": "034 97 699 74",
       "manager": "Eric",
@@ -378,10 +334,8 @@
       "id": 23,
       "matricule": 923,
       "cin": "106.060.362.129",
-      "name": {
-        "nom": "Nona",
-        "prenom": "Patrick"
-      },
+      "nom": "Nona",
+      "prenom": "Patrick",
       "poste": "Manœuvre",
       "telephone": "034 21 026 70",
       "manager": "Eric",
@@ -395,10 +349,8 @@
       "id": 24,
       "matricule": 143,
       "cin": "109.382.926.764",
-      "name": {
-        "nom": "Sheppard",
-        "prenom": "Whitley"
-      },
+      "nom": "Sheppard",
+      "prenom": "Whitley",
       "poste": "Ouvrier",
       "telephone": "034 50 305 22",
       "manager": "Tahina",
@@ -412,10 +364,8 @@
       "id": 25,
       "matricule": 746,
       "cin": "109.468.876.726",
-      "name": {
-        "nom": "Tanner",
-        "prenom": "Cameron"
-      },
+      "nom": "Tanner",
+      "prenom": "Cameron",
       "poste": "Manœuvre",
       "telephone": "034 36 040 04",
       "manager": "Eric",
@@ -429,10 +379,8 @@
       "id": 26,
       "matricule": 155,
       "cin": "108.650.422.097",
-      "name": {
-        "nom": "Mccormick",
-        "prenom": "Sullivan"
-      },
+      "nom": "Mccormick",
+      "prenom": "Sullivan",
       "poste": "Manœuvre",
       "telephone": "034 19 054 24",
       "manager": "Eric",
@@ -446,10 +394,8 @@
       "id": 27,
       "matricule": 736,
       "cin": "106.746.949.969",
-      "name": {
-        "nom": "Blair",
-        "prenom": "Hayes"
-      },
+      "nom": "Blair",
+      "prenom": "Hayes",
       "poste": "Ouvrier",
       "telephone": "034 38 196 18",
       "manager": "Tahina",
@@ -463,10 +409,8 @@
       "id": 28,
       "matricule": 691,
       "cin": "106.747.936.827",
-      "name": {
-        "nom": "Simon",
-        "prenom": "Gallegos"
-      },
+      "nom": "Simon",
+      "prenom": "Gallegos",
       "poste": "Ouvrier",
       "telephone": "034 74 321 68",
       "manager": "Tahina",
@@ -480,10 +424,8 @@
       "id": 29,
       "matricule": 140,
       "cin": "105.375.695.927",
-      "name": {
-        "nom": "Valentine",
-        "prenom": "Barber"
-      },
+      "nom": "Valentine",
+      "prenom": "Barber",
       "poste": "Manœuvre",
       "telephone": "034 23 776 15",
       "manager": "Tahina",
@@ -497,10 +439,8 @@
       "id": 30,
       "matricule": 423,
       "cin": "108.557.097.332",
-      "name": {
-        "nom": "Michael",
-        "prenom": "Reyes"
-      },
+      "nom": "Michael",
+      "prenom": "Reyes",
       "poste": "Manœuvre",
       "telephone": "034 49 978 90",
       "manager": "Tahina",
@@ -514,10 +454,8 @@
       "id": 31,
       "matricule": 763,
       "cin": "103.935.659.790",
-      "name": {
-        "nom": "Tisha",
-        "prenom": "Carey"
-      },
+      "nom": "Tisha",
+      "prenom": "Carey",
       "poste": "Ouvrier",
       "telephone": "034 42 820 33",
       "manager": "Eric",
@@ -531,10 +469,8 @@
       "id": 32,
       "matricule": 981,
       "cin": "103.866.372.634",
-      "name": {
-        "nom": "Bobbi",
-        "prenom": "Maynard"
-      },
+      "nom": "Bobbi",
+      "prenom": "Maynard",
       "poste": "Ouvrier",
       "telephone": "034 44 669 09",
       "manager": "Tahina",
@@ -548,10 +484,8 @@
       "id": 33,
       "matricule": 321,
       "cin": "101.726.319.550",
-      "name": {
-        "nom": "Dyer",
-        "prenom": "Sykes"
-      },
+      "nom": "Dyer",
+      "prenom": "Sykes",
       "poste": "Ouvrier",
       "telephone": "034 12 396 01",
       "manager": "Eric",
@@ -565,10 +499,8 @@
       "id": 34,
       "matricule": 209,
       "cin": "104.023.749.945",
-      "name": {
-        "nom": "Garcia",
-        "prenom": "Blevins"
-      },
+      "nom": "Garcia",
+      "prenom": "Blevins",
       "poste": "Ouvrier",
       "telephone": "034 94 650 53",
       "manager": "Tahina",
@@ -582,10 +514,8 @@
       "id": 35,
       "matricule": 811,
       "cin": "105.740.665.904",
-      "name": {
-        "nom": "Teri",
-        "prenom": "Morse"
-      },
+      "nom": "Teri",
+      "prenom": "Morse",
       "poste": "Manœuvre",
       "telephone": "034 56 619 64",
       "manager": "Tahina",
@@ -599,10 +529,8 @@
       "id": 36,
       "matricule": 615,
       "cin": "104.652.629.752",
-      "name": {
-        "nom": "Jordan",
-        "prenom": "Bennett"
-      },
+      "nom": "Jordan",
+      "prenom": "Bennett",
       "poste": "Ouvrier",
       "telephone": "034 87 888 37",
       "manager": "Tahina",
@@ -616,10 +544,8 @@
       "id": 37,
       "matricule": 532,
       "cin": "104.662.651.788",
-      "name": {
-        "nom": "Edwards",
-        "prenom": "Frazier"
-      },
+      "nom": "Edwards",
+      "prenom": "Frazier",
       "poste": "Ouvrier",
       "telephone": "034 52 694 53",
       "manager": "Tahina",
@@ -633,10 +559,8 @@
       "id": 38,
       "matricule": 975,
       "cin": "109.332.667.130",
-      "name": {
-        "nom": "Richard",
-        "prenom": "Gibbs"
-      },
+      "nom": "Richard",
+      "prenom": "Gibbs",
       "poste": "Ouvrier",
       "telephone": "034 91 113 50",
       "manager": "Tahina",
@@ -650,10 +574,8 @@
       "id": 39,
       "matricule": 509,
       "cin": "104.998.703.295",
-      "name": {
-        "nom": "Gardner",
-        "prenom": "Ellison"
-      },
+      "nom": "Gardner",
+      "prenom": "Ellison",
       "poste": "Ouvrier",
       "telephone": "034 27 206 87",
       "manager": "Tahina",
@@ -667,10 +589,8 @@
       "id": 40,
       "matricule": 218,
       "cin": "100.824.431.604",
-      "name": {
-        "nom": "Juliet",
-        "prenom": "Kirk"
-      },
+      "nom": "Juliet",
+      "prenom": "Kirk",
       "poste": "Ouvrier",
       "telephone": "034 69 840 10",
       "manager": "Tahina",
@@ -684,10 +604,8 @@
       "id": 41,
       "matricule": 654,
       "cin": "100.501.331.991",
-      "name": {
-        "nom": "Jayne",
-        "prenom": "Mays"
-      },
+      "nom": "Jayne",
+      "prenom": "Mays",
       "poste": "Ouvrier",
       "telephone": "034 12 258 03",
       "manager": "Eric",
@@ -701,10 +619,8 @@
       "id": 42,
       "matricule": 448,
       "cin": "100.696.801.991",
-      "name": {
-        "nom": "Mamie",
-        "prenom": "Simon"
-      },
+      "nom": "Mamie",
+      "prenom": "Simon",
       "poste": "Ouvrier",
       "telephone": "034 66 726 88",
       "manager": "Tahina",
@@ -718,10 +634,8 @@
       "id": 43,
       "matricule": 802,
       "cin": "104.461.307.526",
-      "name": {
-        "nom": "Rosalinda",
-        "prenom": "Holman"
-      },
+      "nom": "Rosalinda",
+      "prenom": "Holman",
       "poste": "Manœuvre",
       "telephone": "034 76 803 85",
       "manager": "Eric",
@@ -735,10 +649,8 @@
       "id": 44,
       "matricule": 582,
       "cin": "102.772.426.457",
-      "name": {
-        "nom": "Hughes",
-        "prenom": "Conrad"
-      },
+      "nom": "Hughes",
+      "prenom": "Conrad",
       "poste": "Ouvrier",
       "telephone": "034 58 834 30",
       "manager": "Eric",
@@ -752,10 +664,8 @@
       "id": 45,
       "matricule": 467,
       "cin": "108.714.519.926",
-      "name": {
-        "nom": "Carol",
-        "prenom": "Mcclure"
-      },
+      "nom": "Carol",
+      "prenom": "Mcclure",
       "poste": "Ouvrier",
       "telephone": "034 38 619 54",
       "manager": "Tahina",
@@ -769,10 +679,8 @@
       "id": 46,
       "matricule": 932,
       "cin": "109.808.122.977",
-      "name": {
-        "nom": "Estelle",
-        "prenom": "Eaton"
-      },
+      "nom": "Estelle",
+      "prenom": "Eaton",
       "poste": "Ouvrier",
       "telephone": "034 13 939 57",
       "manager": "Tahina",
@@ -786,10 +694,8 @@
       "id": 47,
       "matricule": 436,
       "cin": "105.008.993.762",
-      "name": {
-        "nom": "Brandi",
-        "prenom": "Wong"
-      },
+      "nom": "Brandi",
+      "prenom": "Wong",
       "poste": "Ouvrier",
       "telephone": "034 47 908 59",
       "manager": "Tahina",
@@ -803,10 +709,8 @@
       "id": 48,
       "matricule": 313,
       "cin": "106.343.508.591",
-      "name": {
-        "nom": "Erica",
-        "prenom": "Harvey"
-      },
+      "nom": "Erica",
+      "prenom": "Harvey",
       "poste": "Manœuvre",
       "telephone": "034 74 764 46",
       "manager": "Tahina",
@@ -820,10 +724,8 @@
       "id": 49,
       "matricule": 124,
       "cin": "108.573.814.766",
-      "name": {
-        "nom": "Hilda",
-        "prenom": "Johns"
-      },
+      "nom": "Hilda",
+      "prenom": "Johns",
       "poste": "Ouvrier",
       "telephone": "034 95 181 15",
       "manager": "Tahina",
@@ -837,10 +739,8 @@
       "id": 50,
       "matricule": 104,
       "cin": "100.056.060.008",
-      "name": {
-        "nom": "Lelia",
-        "prenom": "Copeland"
-      },
+      "nom": "Lelia",
+      "prenom": "Copeland",
       "poste": "Ouvrier",
       "telephone": "034 71 577 33",
       "manager": "Eric",
