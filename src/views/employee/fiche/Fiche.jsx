@@ -1,11 +1,10 @@
 import { format, parseISO } from 'date-fns'
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
-import { employeeHours } from 'src/db/db'
 import { setSelectedEmploye } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import EmployeeService from 'src/services/EmployeeService'
@@ -18,9 +17,6 @@ const Fiche = () => {
   const [employees, setEmployees] = useState([])
   const location = useLocation()
   const navigate = useNavigate()
-  const employeesList = useSelector((state) => state.employeesList)
-
-  console.log(employeesList)
 
   useEffect(() => {
     const pathParts = location.pathname.split('/')
