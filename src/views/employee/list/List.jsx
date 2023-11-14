@@ -11,6 +11,8 @@ const List = () => {
   const columnHelper = createColumnHelper()
   const employees = useSelector((state) => state.employeesList.list)
 
+  // console.log(employees)
+
   const modalImportCsvField = [
     {
       type: 'file',

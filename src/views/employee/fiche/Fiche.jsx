@@ -69,7 +69,7 @@ const Fiche = () => {
     let mount = true
 
     if (id && employees) {
-      const emp = employees.find((empl) => empl.id === id)
+      const emp = employees.find((empl) => empl.id == id)
       if (emp && mount) {
         dispatch(
           setSelectedEmploye({
@@ -85,8 +85,6 @@ const Fiche = () => {
           setBulletinDePaie({
             salarie: {
               ...emp,
-              nom: emp && emp.nom ? emp.nom : '',
-              prenom: emp && emp.prenom ? emp.prenom : '',
             },
           }),
         )
