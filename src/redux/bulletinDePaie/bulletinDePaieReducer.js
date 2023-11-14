@@ -12,14 +12,54 @@ const initialState = {
   salaireNetAPayer: null,
   irsa: null,
 
-  indemnite: [],
+  indemnite: [
+    {
+      label: "Prime d'assuicidité",
+      base: 0,
+    },
+    {
+      label: "Prime d'excellence",
+      base: 0,
+    },
+    {
+      label: 'Indemnité de transport',
+      base: 0,
+    },
+    {
+      label: 'Avantages en nature (Logement)',
+      base: 0,
+    },
+    {
+      label: 'Avantages en nature (Véhicule)',
+      base: 0,
+    },
+    {
+      label: 'Autres indemnités',
+      base: 0,
+    },
+    {
+      label: 'Autres avantages',
+      base: 0,
+    },
+    {
+      label: 'Rappel',
+      base: 0,
+    },
+  ],
   retenue: [
     {
+      id: 1,
       label: 'cnaps',
       base: 0,
     },
     {
-      label: 'organisationSanit',
+      id: 3,
+      label: 'Absence / Retard',
+      base: 0,
+    },
+    {
+      id: 2,
+      label: 'Organisation sanitaire',
       base: 0,
     },
   ],
