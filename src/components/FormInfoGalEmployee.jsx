@@ -111,7 +111,9 @@ const FormInfoGalEmployee = (props) => {
               id="dateEmbauche"
               placeholder="Date d'embauche"
               value={
-                employee.dateEmbauche ? format(new Date(employee.dateEmbauche), 'yyyy-MM-dd') : ''
+                employee.dateEmbauche
+                  ? format(new Date(employee.dateEmbauche), 'yyyy-MM-dd')
+                  : '1991-01-01'
               }
               onChange={handleChange}
             />
@@ -167,7 +169,7 @@ const FormInfoGalEmployee = (props) => {
                   name="sexe"
                   id="sexeHomme"
                   value="homme"
-                  checked={employee.sexe.match(/homme/gi)}
+                  checked={employee.sexe && employee.sexe.match(/homme/gi)}
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="sexeHomme">
@@ -181,7 +183,7 @@ const FormInfoGalEmployee = (props) => {
                   name="sexe"
                   id="sexeFemme"
                   value="femme"
-                  checked={employee.sexe.match(/femme/gi)}
+                  checked={employee.sexe && employee.sexe.match(/femme/gi)}
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="sexeFemme">

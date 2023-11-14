@@ -49,7 +49,6 @@ const Fiche = () => {
       const emp = employees.find((empl) => empl.id == id)
 
       if (emp) {
-        console.log(emp)
         dispatch(setBulletinDePaie({ salarie: { ...emp } }))
       }
     }
