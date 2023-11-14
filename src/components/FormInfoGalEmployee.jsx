@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { format, parseISO } from 'date-fns'
 import EmployeeService from 'src/services/EmployeeService'
 import { useSelector } from 'react-redux'
+import Loading from './Loading'
 
 const FormInfoGalEmployee = (props) => {
   const [employee, setEmployee] = useState({
@@ -91,6 +92,7 @@ const FormInfoGalEmployee = (props) => {
 
   return (
     <>
+      {loadList === 'loading' ? <Loading /> : null}
       <div className="container">
         <form className="row g-3">
           <div className="col-12 col-lg-6">

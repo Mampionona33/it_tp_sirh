@@ -11,10 +11,17 @@ const employeesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
-      state.list = action.payload
-      state.loading = 'succeeded'
-    })
+    builder
+      .addCase(fetchAllUsers.fulfilled, (state, action) => {
+        state.list = action.payload
+        state.loading = 'succeeded'
+      })
+      .addCase(fetchAllUsers.pending, (state, action) => {
+        state.loading = 'loading'
+      })
+      .addCase(fetchAllUsers.rejected, (state, action) => {
+        state.loading = 'reject'
+      })
   },
 })
 
