@@ -22,6 +22,7 @@ const FormInfoGalEmployee = (props) => {
     dateEmbauche: '1990-01-01',
   })
   const employeesList = useSelector((state) => state.employeesList.list)
+  const loadList = useSelector((state) => state.employeesList.loading)
 
   useEffect(() => {
     let mount = true
