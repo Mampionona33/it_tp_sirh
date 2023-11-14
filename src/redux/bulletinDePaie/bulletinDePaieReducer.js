@@ -62,6 +62,11 @@ const initialState = {
       label: 'Organisation sanitaire',
       base: 0,
     },
+    {
+      id: 2,
+      label: 'IRSA',
+      base: 0,
+    },
   ],
 }
 

@@ -112,7 +112,7 @@ const Fiche = () => {
       case 'info-perso':
         return <FormInfoGalEmployee />
       case 'heures-travailles':
-        return <TimeSheetTable id={selectedEmployee} />
+        return <TimeSheetTable />
       case 'bulletin-de-paie':
         return <SalaryCalculation />
       default:

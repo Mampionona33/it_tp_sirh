@@ -594,8 +594,4 @@ const TimeSheetTable = (props) => {
   )
 }
 
-TimeSheetTable.propTypes = {
-  id: PropTypes.string,
-}
-
 export default TimeSheetTable
