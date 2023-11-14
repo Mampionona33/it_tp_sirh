@@ -5,8 +5,6 @@ import {
   createColumnHelper,
   getCoreRowModel,
   getSortedRowModel,
-  SortingState,
-  getPaginationRowModel,
   getFilteredRowModel,
 } from '@tanstack/react-table'
 import { employeeHours } from 'src/db/db'
@@ -18,9 +16,7 @@ import {
   isMonday,
   isSunday,
   isSaturday,
-  isDate,
   setDefaultOptions,
-  isThursday,
 } from 'date-fns'
 import CustomPagination from '../CustomPagination'
 import MonthYearPicker from './MonthYearPicker'
@@ -504,14 +500,14 @@ const TimeSheetTable = (props) => {
           </div>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full max-h-full xl:table-fixed lg:table-auto bg-white text-gray-800 dark:text-stone-200 ">
+          <table className="w-full max-h-full table-fixe bg-white text-gray-800 dark:text-stone-200 ">
             <thead className="text-xs  text-gray-700 dark:text-gray-400 bg-gray-100">
               {headerGroups.map((headerGroup, key) => (
                 <tr key={`headerRow_${key}`} className="w-full">
                   {headerGroup.headers.map((header, headerIndex) => (
                     <th
                       scope="col"
-                      className="px-3 py-3 border-x border-x-customRed-100 w-2/12"
+                      className="px-1 py-3 border-x border-x-customRed-100 w-10/100"
                       key={`header_${header.id}_${headerIndex}`}
                     >
                       {header.isPlaceholder ? null : (
@@ -538,7 +534,7 @@ const TimeSheetTable = (props) => {
                       return (
                         <td
                           key={`cell_${rowIndex}_${cellIndex}`}
-                          className="px-6 py-2 border-x border-customRed-100 "
+                          className="px-1 py-2 border-x border-customRed-100 "
                         >
                           {cellValue && currentColumn !== 'jour'
                             ? cell.column.columnDef
@@ -554,7 +550,7 @@ const TimeSheetTable = (props) => {
                           <td
                             rowSpan={6}
                             key={`cell_${rowIndex}_${cellIndex}`}
-                            className="px-3 py-2 border-x border-customRed-100 "
+                            className="px-1 py-2 border-x border-customRed-100 "
                           >
                             {cell.column.columnDef.cell(cell.getContext()) &&
                               cell.column.columnDef
@@ -568,7 +564,7 @@ const TimeSheetTable = (props) => {
                         return (
                           <td
                             key={`cell_${rowIndex}_${cellIndex}`}
-                            className="px-3 py-2 border-x border-customRed-100 "
+                            className="px-1 py-2 border-x border-customRed-100 "
                           >
                             {cell.column.columnDef.cell(cell.getContext())}
                           </td>
