@@ -4,15 +4,15 @@ const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://loc
 console.log(process.env.REACT_APP_API_BASE_URL)
 
 class EmployeeService {
-  async getAll() {
-    const login = 'lslisteemployes'
-    const pass = '20lsliste23'
+  login = 'lslisteemployes'
+  pass = '20lsliste23'
 
+  async getAll() {
     try {
       const response = await axios.get(`${REACT_APP_API_BASE_URL}/listeemployes`, {
         auth: {
-          username: login,
-          password: pass,
+          username: this.login,
+          password: this.pass,
         },
       })
 
