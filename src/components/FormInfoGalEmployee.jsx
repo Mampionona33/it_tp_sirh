@@ -42,7 +42,7 @@ const FormInfoGalEmployee = (props) => {
 
   useEffect(() => {
     let mount = true
-    if (props.id && employeesList.length > 0) {
+    if (mount && props.id && employeesList.length > 0) {
       // EmployeeService.getById(props.id)
       //   .then((response) => {
       //     const emp = response.data
