@@ -4,6 +4,7 @@ import { employeesCategories, employees } from 'src/db/db'
 import PropTypes from 'prop-types'
 import { format, parseISO } from 'date-fns'
 import EmployeeService from 'src/services/EmployeeService'
+import { useSelector } from 'react-redux'
 
 const FormInfoGalEmployee = (props) => {
   const [employee, setEmployee] = useState({
@@ -20,7 +21,7 @@ const FormInfoGalEmployee = (props) => {
     cat: '',
     dateEmbauche: '1990-01-01',
   })
-
+  const employeesList = useSelector((state) => state.employeesList)
   // useEffect(() => {
   //   let mount = true
   //   if (props.id && employees) {
@@ -41,30 +42,34 @@ const FormInfoGalEmployee = (props) => {
 
   useEffect(() => {
     let mount = true
-    if (props.id) {
-      EmployeeService.getById(props.id)
-        .then((response) => {
-          const emp = response.data
+    if (props.id && employeesList.length > 0) {
+      // EmployeeService.getById(props.id)
+      //   .then((response) => {
+      //     const emp = response.data
 
-          // console.log(emp)
-          if (emp && mount) {
-            setEmployee({
-              ...emp,
-              nom: emp.name.nom ? emp.name.nom : '',
-              prenom: emp.name.prenom ? emp.name.prenom : '',
-              dateEmbauche: emp.dateEmbauche
-                ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd')
-                : '',
-            })
-          }
-        })
-        .catch((error) => console.error(error))
-
+      //     // console.log(emp)
+      //     if (emp && mount) {
+      //       setEmployee({
+      //         ...emp,
+      //         nom: emp.name.nom ? emp.name.nom : '',
+      //         prenom: emp.name.prenom ? emp.name.prenom : '',
+      //         dateEmbauche: emp.dateEmbauche
+      //           ? format(parseISO(emp.dateEmbauche), 'yyyy-MM-dd')
+      //           : '',
+      //       })
+      //     }
+      //   })
+      //   .catch((error) => console.error(error))
+      const emp = employeesList.filter((employee) => employee.id == props.id)
+      console.log(emp)
+      if (emp.length > 0) {
+        setEmployee(emp[0])
+      }
       return () => {
         mount = false
       }
     }
-  }, [props.id])
+  }, [props.id, employeesList])
 
   const customStyles = {
     control: (provided, state) => ({
@@ -114,7 +119,7 @@ const FormInfoGalEmployee = (props) => {
               name="nom"
               id="nom"
               placeholder="Nom"
-              value={employee.name ? employee.nom : ''}
+              value={employee.nom ? employee.nom : ''}
               onChange={handleChange}
             />
           </div>
@@ -128,7 +133,7 @@ const FormInfoGalEmployee = (props) => {
               name="prenom"
               id="prenom"
               placeholder="Prénom"
-              value={employee.name ? employee.prenom : ''}
+              value={employee.prenom ? employee.prenom : ''}
               onChange={handleChange}
             />
           </div>
@@ -197,7 +202,7 @@ const FormInfoGalEmployee = (props) => {
                   name="sexe"
                   id="sexeHomme"
                   value="homme"
-                  checked={employee.sexe === 'homme'}
+                  checked={employee.sexe === 'Homme'}
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="sexeHomme">
@@ -211,7 +216,7 @@ const FormInfoGalEmployee = (props) => {
                   name="sexe"
                   id="sexeFemme"
                   value="femme"
-                  checked={employee.sexe === 'femme'}
+                  checked={employee.sexe === 'Femme'}
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="sexeFemme">
