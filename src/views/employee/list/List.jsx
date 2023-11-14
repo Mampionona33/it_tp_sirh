@@ -1,18 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import DataTable from 'src/components/DataTable/DataTable'
 import { CRow, CCol } from '@coreui/react'
 import { createColumnHelper } from '@tanstack/react-table'
 import MoreButtonMenu from 'src/components/MoreButtonMenu'
-import EmployeeService from 'src/services/EmployeeService'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllUsers } from 'src/redux/employees/employeesAction'
 
 const List = () => {
   const dispatch = useDispatch()
   const columnHelper = createColumnHelper()
-  // const [employees, setEmployees] = useState([])
   const employees = useSelector((state) => state.employeesList.list)
-  console.log(employees)
 
   const modalImportCsvField = [
     {
@@ -26,9 +23,6 @@ const List = () => {
   React.useEffect(() => {
     let mount = true
     if (mount && dispatch) {
-      // EmployeeService.getAll()
-      //   .then((resp) => setEmployees(resp))
-      //   .catch((err) => console.log(err))
       dispatch(fetchAllUsers())
     }
     return () => {
@@ -131,8 +125,7 @@ const List = () => {
   return (
     <CRow>
       <CCol xs={12}>
-        TEst
-        {/* <DataTable
+        <DataTable
           title="Liste employés"
           data={employees}
           columns={columns}
@@ -141,7 +134,7 @@ const List = () => {
           modalAddFields={modalAddFields}
           colorButtonShowModalImport="success"
           modalImportCsvField={modalImportCsvField}
-        /> */}
+        />
       </CCol>
     </CRow>
   )
