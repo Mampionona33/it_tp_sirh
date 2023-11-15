@@ -55,7 +55,7 @@ const initialState = {
     {
       id: 3,
       label: 'Absence / Retard',
-      base: 0,
+      base: 0.1,
     },
     {
       id: 2,
@@ -65,7 +65,7 @@ const initialState = {
     {
       id: 2,
       label: 'IRSA',
-      base: 0,
+      base: 0.5,
     },
   ],
 }
