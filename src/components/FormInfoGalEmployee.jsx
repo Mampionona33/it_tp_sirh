@@ -12,7 +12,7 @@ const FormInfoGalEmployee = (props) => {
     cin: '',
     nom: '',
     prenom: '',
-    post: '',
+    poste: '',
     telephone: '',
     manager: '',
     email: '',
@@ -165,7 +165,7 @@ const FormInfoGalEmployee = (props) => {
                   name="sexe"
                   id="sexeHomme"
                   value="homme"
-                  checked={employee.sexe && employee.sexe.match(/homme/gi)}
+                  checked={employee.sexe === 'homme' || employee.sexe === 'Homme'}
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="sexeHomme">
@@ -179,7 +179,7 @@ const FormInfoGalEmployee = (props) => {
                   name="sexe"
                   id="sexeFemme"
                   value="femme"
-                  checked={employee.sexe && employee.sexe.match(/femme/gi)}
+                  checked={employee.sexe === 'femme' || employee.sexe === 'Femme'}
                   onChange={handleChange}
                 />
                 <label className="form-check-label" htmlFor="sexeFemme">
