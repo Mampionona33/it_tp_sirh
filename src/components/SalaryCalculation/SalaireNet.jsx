@@ -28,28 +28,29 @@ const SalaireNet = () => {
 
   const salaireNet = imposableArrondi - irsaApayer
 
-  useEffect(() => {
-    let isMounted = true
+  // useEffect(() => {
+  //   let isMounted = true
 
-    if (isMounted && salaireBrut && retenue) {
-      const updatedRetenue = retenue.map((item) =>
-        (item.label === 'cnaps' || item.label === 'ostie') && item.base !== salaireBrut / 100
-          ? { ...item, base: salaireBrut * item.base }
-          : item,
-      )
+  //   if (isMounted && salaireBrut && retenue) {
+  //     const updatedRetenue = retenue.map((item) =>
+  //       (item.label === 'cnaps' || item.label === 'ostie') && item.base !== salaireBrut / 100
+  //         ? { ...item, base: salaireBrut * item.base }
+  //         : item,
+  //     )
 
-      // Vérifiez si retenue a changé avant de déclencher l'action
-      if (!arraysAreEqual(retenue, updatedRetenue)) {
-        dispatch(setBulletinDePaie({ retenue: updatedRetenue }))
-      }
-    }
+  //     // Vérifiez si retenue a changé avant de déclencher l'action
+  //     if (!arraysAreEqual(retenue, updatedRetenue)) {
+  //       dispatch(setBulletinDePaie({ retenue: updatedRetenue }))
+  //     }
+  //   }
 
-    return () => {
-      isMounted = false
-    }
-  }, [dispatch, retenue, salaireBrut])
+  //   return () => {
+  //     isMounted = false
+  //   }
+  // }, [dispatch, retenue, salaireBrut])
 
   // Add a function to check if arrays are equal
+
   function arraysAreEqual(arr1, arr2) {
     if (arr1.length !== arr2.length) {
       return false

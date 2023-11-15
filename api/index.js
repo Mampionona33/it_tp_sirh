@@ -23,6 +23,13 @@ app.get('/listeemployes', (req, res) => {
   res.status(200).send(db['/employees'])
 })
 
+app.get('/cotisation/cnaps', (req, res) => {
+  res
+    .status(200)
+    .send(db['/cotisations'])
+    .find((cot) => cot.label === 'cnaps')
+})
+
 app.get('/employees/id=:id', (req, res) => {
   const { id } = req.params
   const employee = db['/employees'].find((emp) => emp.id === parseInt(id))

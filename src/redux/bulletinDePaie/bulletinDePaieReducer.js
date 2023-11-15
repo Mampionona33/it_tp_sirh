@@ -50,22 +50,22 @@ const initialState = {
     {
       id: 1,
       label: 'cnaps',
-      base: 0.1,
+      base: 0,
     },
     {
       id: 3,
       label: 'Absence / Retard',
-      base: 0.1,
+      base: 0,
     },
     {
       id: 2,
       label: 'ostie',
-      base: 0.1,
+      base: 0,
     },
     {
       id: 2,
       label: 'IRSA',
-      base: 0.5,
+      base: 0,
     },
   ],
 }

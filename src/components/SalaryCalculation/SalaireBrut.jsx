@@ -136,7 +136,7 @@ const SalaireBrut = () => {
     return () => {
       mount = false
     }
-  }, [])
+  }, [dispatch])
 
   React.useEffect(() => {
     let mount = true
@@ -163,7 +163,7 @@ const SalaireBrut = () => {
     return () => {
       mount = false
     }
-  }, [salaireBruteVal, hsni130Value, hsni150Value, hn30Value, hn50Value])
+  }, [salaireBruteVal, hsni130Value, hsni150Value, hn30Value, hn50Value, dispatch])
 
   return (
     <div>
