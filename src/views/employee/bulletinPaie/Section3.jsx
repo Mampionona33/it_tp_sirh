@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, pdf } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import registerFonts from './font'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
+import formatNumberWithSpaces from 'src/utils/formatNumberWithSpaces'
 
 registerFonts()
 
@@ -109,7 +110,7 @@ const Section3 = (props) => {
 
                 {/* Colonnes d'indemnité */}
                 <Text style={[styles.tableCell, { width: '34%', paddingLeft: 4 }]}>
-                  {item.base}
+                  {item.base ? formatNumberWithSpaces(item.base) + ' Ar' : '-'}
                 </Text>
                 <Text style={[styles.tableCell, { width: '35%', paddingLeft: 4 }]}>
                   {item.taux}
@@ -132,7 +133,7 @@ const Section3 = (props) => {
               <View style={[styles.tableRow, { width: '68%' }]}>
                 {/* Colonnes de retenue */}
                 <Text style={[styles.tableCell, { width: '31%', paddingLeft: 4 }]}>
-                  {item.base}
+                  {item.base ? formatNumberWithSpaces(item.base) + ' Ar' : '-'}
                 </Text>
                 <Text style={[styles.tableCell, { width: '32%', paddingLeft: 4 }]}>
                   {item.taux}
