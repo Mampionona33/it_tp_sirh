@@ -13,8 +13,6 @@ const SalaireNet = () => {
   const retenue = useSelector((state) => state.bulletinDePaie.retenue)
   const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
   const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
-  // const cnaps = cotisastions.filter((item) => item.id === 1)
-  // const ostie = cotisastions.filter((item) => item.id === 2)
   const cnaps = salaireBrut / 100
   const ostie = salaireBrut / 100
   const hsni130Value = selectedEmployeHours.hsni130Value
