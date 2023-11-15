@@ -8,7 +8,7 @@ import Loading from './Loading'
 const FormInfoGalEmployee = (props) => {
   const [employee, setEmployee] = useState({
     id: null,
-    matricule: null,
+    matricule: '',
     cin: '',
     nom: '',
     prenom: '',
@@ -18,7 +18,7 @@ const FormInfoGalEmployee = (props) => {
     email: '',
     sexe: 'homme',
     cat: '',
-    dateEmbauche: '1990-01-01',
+    dateEmbauche: '1991-01-01',
   })
   const loadList = useSelector((state) => state.employeesList.loading)
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
@@ -82,7 +82,7 @@ const FormInfoGalEmployee = (props) => {
               name="nom"
               id="nom"
               placeholder="Nom"
-              value={employee.nom ? employee.nom : ''}
+              value={employee.nom}
               onChange={handleChange}
             />
           </div>
@@ -96,7 +96,7 @@ const FormInfoGalEmployee = (props) => {
               name="prenom"
               id="prenom"
               placeholder="Prénom"
-              value={employee.prenom ? employee.prenom : ''}
+              value={employee.prenom}
               onChange={handleChange}
             />
           </div>
@@ -110,11 +110,7 @@ const FormInfoGalEmployee = (props) => {
               name="dateEmbauche"
               id="dateEmbauche"
               placeholder="Date d'embauche"
-              value={
-                employee.dateEmbauche
-                  ? format(new Date(employee.dateEmbauche), 'yyyy-MM-dd')
-                  : '1991-01-01'
-              }
+              value={format(new Date(employee.dateEmbauche), 'yyyy-MM-dd')}
               onChange={handleChange}
             />
           </div>
@@ -128,7 +124,7 @@ const FormInfoGalEmployee = (props) => {
               name="matricule"
               id="matricule"
               placeholder="A01200"
-              value={employee.matricule ? employee.matricule : ''}
+              value={employee.matricule}
               onChange={handleChange}
             />
           </div>
@@ -142,7 +138,7 @@ const FormInfoGalEmployee = (props) => {
               name="post"
               id="poste"
               placeholder="Directeur"
-              value={employee.poste ? employee.poste : ''}
+              value={employee.poste}
               onChange={handleChange}
             />
           </div>
