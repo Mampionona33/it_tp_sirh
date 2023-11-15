@@ -28,7 +28,6 @@ const SalaireNet = () => {
 
   const salaireNet = imposableArrondi - irsaApayer
 
-
   useEffect(() => {
     let isMounted = true
 
