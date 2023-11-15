@@ -1,48 +1,68 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useDispatch, useSelector } from 'react-redux'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
-// import { cotisastions } from 'src/db/db'
 import CalculIrsaAPayer from 'src/utils/CalculIrsaAPayer'
 import { setIrsaValue } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
+import useFetchCotisations from 'src/assets/hooks/useFetchCotisations'
 
 const SalaireNet = () => {
+  useFetchCotisations()
   const dispatch = useDispatch()
   const title = 'Salaire net'
   const retenue = useSelector((state) => state.bulletinDePaie.retenue)
   const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
   const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
   const cotisations = useSelector((state) => state.cotisations.liste)
+
+  // Calcul cnaps
   const cnapsVal = retenue.filter((ret) => ret.label === 'cnaps')
   const cnapsMontant = cnapsVal.length > 0 ? cnapsVal[0].montant : 0
-
-  console.log(cnapsMontant)
-
   const cnapsData = cotisations.length > 0 ? cotisations.filter((cot) => cot.label === 'cnaps') : []
-  const cnapsTaux = cnapsData.length > 0 ? cnapsData[0].taux : 1
+  // calcul ostie
+  const ostieVal = retenue.filter((ret) => ret.label === 'ostie')
+  const ostieMontant = ostieVal.length > 0 ? ostieVal[0].montant : 0
+  const ostieData = cotisations.length > 0 ? cotisations.filter((cot) => cot.label === 'ostie') : []
+
+  const calculateAndDispatch = useCallback(() => {
+    const updatedRetenue = []
+
+    cotisations.forEach((cot) => {
+      const tauxVal = cot.taux
+      const calculateMontant = salaireBrut * tauxVal
+      const label = cot.label
+
+      // Check if label is not already in the updatedRetenue array
+      if (!updatedRetenue.some((ret) => ret.label === label)) {
+        updatedRetenue.push({ label, taux: tauxVal, montant: calculateMontant })
+      }
+    })
+
+    const modif = { retenue: updatedRetenue }
+    dispatch(setBulletinDePaie(modif))
+  }, [dispatch, retenue, cotisations, salaireBrut])
+
+  const loadCotisationLables = useCallback(() =>
+    cotisations.map((cot) => cot.label).map((item) => item),
+  )
 
   useEffect(() => {
     let mount = true
-    if (mount && cnapsTaux && salaireBrut) {
-      const cnaps = salaireBrut * cnapsTaux
-      const modif = { retenue: [{ label: 'cnaps', montant: cnaps }] }
 
-      dispatch(setBulletinDePaie(modif))
+    if (mount && salaireBrut) {
+      calculateAndDispatch()
     }
 
     return () => {
       mount = false
     }
-  }, [cnapsTaux, salaireBrut, dispatch])
+  }, [salaireBrut])
 
-  const cnaps = salaireBrut / 100
-
-  const ostie = salaireBrut / 100
   const hsni130Value = selectedEmployeHours.hsni130Value
   const hsni150Value = selectedEmployeHours.hsni150Value
 
-  const soustotal1 = salaireBrut - (cnaps + ostie)
+  const soustotal1 = salaireBrut - (cnapsMontant + ostieMontant)
 
   const baseIrsa = soustotal1 - (hsni130Value + hsni150Value)
   const imposableArrondi = Math.floor(baseIrsa / 100) * 100
@@ -51,29 +71,6 @@ const SalaireNet = () => {
   const irsaApayer = irsaCalculate.irsaValue
 
   const salaireNet = imposableArrondi - irsaApayer
-
-  // useEffect(() => {
-  //   let isMounted = true
-
-  //   if (isMounted && salaireBrut && retenue) {
-  //     const updatedRetenue = retenue.map((item) =>
-  //       (item.label === 'cnaps' || item.label === 'ostie') && item.base !== salaireBrut / 100
-  //         ? { ...item, base: salaireBrut * item.base }
-  //         : item,
-  //     )
-
-  //     // Vérifiez si retenue a changé avant de déclencher l'action
-  //     if (!arraysAreEqual(retenue, updatedRetenue)) {
-  //       dispatch(setBulletinDePaie({ retenue: updatedRetenue }))
-  //     }
-  //   }
-
-  //   return () => {
-  //     isMounted = false
-  //   }
-  // }, [dispatch, retenue, salaireBrut])
-
-  // Add a function to check if arrays are equal
 
   function arraysAreEqual(arr1, arr2) {
     if (arr1.length !== arr2.length) {
@@ -109,11 +106,11 @@ const SalaireNet = () => {
     },
     {
       title: 'CNAPS :',
-      value: `${formatAriaryMga(cnaps)}`,
+      value: `${formatAriaryMga(cnapsMontant)}`,
     },
     {
       title: 'OSTIE :',
-      value: `${formatAriaryMga(ostie)}`,
+      value: `${formatAriaryMga(ostieMontant)}`,
     },
     {
       title: '',

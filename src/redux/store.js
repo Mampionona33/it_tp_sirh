@@ -11,7 +11,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['employeesList'],
+  blacklist: ['employeesList', 'cotisations'],
 }
 
 const rootReducer = combineReducers({

@@ -46,28 +46,7 @@ const initialState = {
       base: 0,
     },
   ],
-  retenue: [
-    {
-      id: 1,
-      label: 'cnaps',
-      montant: 0,
-    },
-    {
-      id: 3,
-      label: 'Absence / Retard',
-      montant: 0,
-    },
-    {
-      id: 2,
-      label: 'ostie',
-      montant: 0,
-    },
-    {
-      id: 2,
-      label: 'IRSA',
-      montant: 0,
-    },
-  ],
+  retenue: [],
 }
 
 const bulletinDePaieSlice = createSlice({

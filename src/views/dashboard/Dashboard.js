@@ -56,6 +56,7 @@ import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllCotisations } from 'src/redux/cotisations/cotisationsActions'
 import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
+import useFetchCotisations from 'src/assets/hooks/useFetchCotisations'
 
 const Dashboard = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
@@ -180,21 +181,6 @@ const Dashboard = () => {
       activity: 'Last week',
     },
   ]
-
-  const cotisations = useSelector((state) => state.cotisations)
-
-  console.log(cotisations)
-
-  const dispatch = useDispatch()
-  useEffect(() => {
-    let mount = true
-    if (mount && dispatch) {
-      dispatch(fetchAllCotisations())
-    }
-    return () => {
-      mount = false
-    }
-  }, [dispatch])
 
   return (
     <>

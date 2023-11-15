@@ -116,7 +116,7 @@ const Section3 = (props) => {
                   {item.taux}
                 </Text>
                 <Text style={[styles.tableCell, { width: '36%', paddingLeft: 4 }]}>
-                  {item.montant}
+                  {item.montant ? formatNumberWithSpaces(item.montant) + ' Ar' : '-'}
                 </Text>
               </View>
             </View>
@@ -139,7 +139,7 @@ const Section3 = (props) => {
                   {item.taux}
                 </Text>
                 <Text style={[styles.tableCell, { width: '33%', paddingLeft: 4 }]}>
-                  {item.montant}
+                  {item.montant ? formatNumberWithSpaces(item.montant) + ' Ar' : '-'}
                 </Text>
 
                 {/* Colonnes vides pour indemnité */}
