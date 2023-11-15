@@ -4,7 +4,7 @@ import { CRow, CCol } from '@coreui/react'
 import { createColumnHelper } from '@tanstack/react-table'
 import MoreButtonMenu from 'src/components/MoreButtonMenu'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllUsers } from 'src/redux/employees/employeesAction'
+import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
 
 const List = () => {
   const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const List = () => {
   React.useEffect(() => {
     let mount = true
     if (mount && dispatch) {
-      dispatch(fetchAllUsers())
+      dispatch(fetchAllEmployees())
     }
     return () => {
       mount = false

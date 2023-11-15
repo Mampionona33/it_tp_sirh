@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchAllUsers } from './employeesAction'
+import { fetchAllEmployees } from './employeesAction'
 
 const initialState = {
   list: [],
@@ -12,14 +12,14 @@ const employeesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAllUsers.fulfilled, (state, action) => {
+      .addCase(fetchAllEmployees.fulfilled, (state, action) => {
         state.list = action.payload
         state.loading = 'succeeded'
       })
-      .addCase(fetchAllUsers.pending, (state, action) => {
+      .addCase(fetchAllEmployees.pending, (state, action) => {
         state.loading = 'loading'
       })
-      .addCase(fetchAllUsers.rejected, (state, action) => {
+      .addCase(fetchAllEmployees.rejected, (state, action) => {
         state.loading = 'reject'
       })
   },

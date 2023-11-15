@@ -55,6 +55,7 @@ import WidgetsBrand from '../widgets/WidgetsBrand'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllCotisations } from 'src/redux/cotisations/cotisationsActions'
+import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
 
 const Dashboard = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
