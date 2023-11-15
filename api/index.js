@@ -24,7 +24,7 @@ app.get('/listeemployes', (req, res) => {
 })
 
 app.get('/cotisation/', (req, res) => {
-  res.status(200).send(db['/cotisations'])
+  res.status(200).send(db['/cotisations/all'])
 })
 
 app.get('/employees/id=:id', (req, res) => {

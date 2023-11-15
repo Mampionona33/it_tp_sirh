@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import {
   CAvatar,
@@ -53,6 +53,8 @@ import avatar6 from 'src/assets/images/avatars/6.jpg'
 
 import WidgetsBrand from '../widgets/WidgetsBrand'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchAllCotisations } from 'src/redux/cotisations/cotisationsActions'
 
 const Dashboard = () => {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
@@ -177,6 +179,21 @@ const Dashboard = () => {
       activity: 'Last week',
     },
   ]
+
+  const cotisations = useSelector((state) => state.cotisations)
+
+  console.log(cotisations)
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    let mount = true
+    if (mount && dispatch) {
+      dispatch(fetchAllCotisations())
+    }
+    return () => {
+      mount = false
+    }
+  }, [dispatch])
 
   return (
     <>
