@@ -45,7 +45,7 @@ const SalaireNet = () => {
     return () => {
       mount = false
     }
-  }, []) // Empty dependency array to run only once on mount
+  }, [dispatch, retenue, salaireBrut])
 
   // Add a function to check if arrays are equal
   function arraysAreEqual(arr1, arr2) {
@@ -73,7 +73,7 @@ const SalaireNet = () => {
     return () => {
       mount = false
     }
-  }, [irsaApayer, salaireNet])
+  }, [irsaApayer, salaireNet, dispatch])
 
   const data = [
     {
