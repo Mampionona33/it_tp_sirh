@@ -26,5 +26,6 @@ class EmployeeService {
     return axios.get(`${REACT_APP_API_BASE_URL}/employees/id=${id}`)
   }
 }
+const newEmployeeService = new EmployeeService()
 
-export default new EmployeeService()
+export default newEmployeeService
