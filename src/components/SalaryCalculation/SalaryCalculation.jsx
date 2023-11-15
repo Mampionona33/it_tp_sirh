@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux'
 
 const SalaryCalculation = () => {
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
-  const id = selecteEmploy.id
+  const salarie = useSelector((state) => state.bulletinDePaie.salarie)
+  const id = salarie.id
   // console.log(id)
   return (
     <>
