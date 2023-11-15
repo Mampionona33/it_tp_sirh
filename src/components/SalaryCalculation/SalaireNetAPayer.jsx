@@ -9,10 +9,13 @@ const SalaireNetAPayer = () => {
   const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
   const irsaValue = useSelector((state) => state.selectedEmploye.irsaValue)
   const primeEtAvantage = useSelector((state) => state.selectedEmploye.primeEtAvantage)
-  const cnaps = cotisastions.find((item) => item.id === 1)?.value || 0
-  const ostie = cotisastions.find((item) => item.id === 2)?.value || 0
+  const retenue = useSelector((state) => state.bulletinDePaie.retenue)
+  const cnaps = retenue.find((ret) => ret.label === 'cnaps')
+  const ostie = retenue.find((ret) => ret.label === 'ostie')
+  const cnapsBase = cnaps && cnaps.base
+  const ostieBase = ostie && ostie.base
 
-  const salaireNetAPayer = salaireBrut + irsaValue + cnaps + ostie + (primeEtAvantage || 0)
+  const salaireNetAPayer = salaireBrut + irsaValue + cnapsBase + ostieBase + (primeEtAvantage || 0)
 
   const data = [
     {
@@ -21,11 +24,11 @@ const SalaireNetAPayer = () => {
     },
     {
       title: 'CNAPS :',
-      value: `${formatAriaryMga(cnaps)}`,
+      value: `${formatAriaryMga(cnapsBase)}`,
     },
     {
       title: 'OSTIE :',
-      value: `${formatAriaryMga(ostie)}`,
+      value: `${formatAriaryMga(ostieBase)}`,
     },
     {
       title: 'IRSA :',

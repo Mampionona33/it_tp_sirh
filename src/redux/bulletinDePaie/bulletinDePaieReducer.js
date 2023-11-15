@@ -50,7 +50,7 @@ const initialState = {
     {
       id: 1,
       label: 'cnaps',
-      base: 0,
+      base: 0.1,
     },
     {
       id: 3,
@@ -59,8 +59,8 @@ const initialState = {
     },
     {
       id: 2,
-      label: 'Organisation sanitaire',
-      base: 0,
+      label: 'ostie',
+      base: 0.1,
     },
     {
       id: 2,

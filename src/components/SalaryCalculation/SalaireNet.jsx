@@ -28,22 +28,25 @@ const SalaireNet = () => {
 
   const salaireNet = imposableArrondi - irsaApayer
 
+
   useEffect(() => {
-    let mount = true
-    if (mount && salaireBrut && retenue) {
+    let isMounted = true
+
+    if (isMounted && salaireBrut && retenue) {
       const updatedRetenue = retenue.map((item) =>
-        item.label === 'cnaps' && item.base !== salaireBrut / 100
-          ? { ...item, base: salaireBrut / 100 }
+        (item.label === 'cnaps' || item.label === 'ostie') && item.base !== salaireBrut / 100
+          ? { ...item, base: salaireBrut * item.base }
           : item,
       )
 
-      // Check if retenue has changed before dispatching the action
+      // Vérifiez si retenue a changé avant de déclencher l'action
       if (!arraysAreEqual(retenue, updatedRetenue)) {
         dispatch(setBulletinDePaie({ retenue: updatedRetenue }))
       }
     }
+
     return () => {
-      mount = false
+      isMounted = false
     }
   }, [dispatch, retenue, salaireBrut])
 
