@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useDispatch, useSelector } from 'react-redux'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
-import { cotisastions } from 'src/db/db'
+// import { cotisastions } from 'src/db/db'
 import CalculIrsaAPayer from 'src/utils/CalculIrsaAPayer'
 import { setIrsaValue } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
@@ -13,7 +13,31 @@ const SalaireNet = () => {
   const retenue = useSelector((state) => state.bulletinDePaie.retenue)
   const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
   const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
+  const cotisations = useSelector((state) => state.cotisations.liste)
+  const cnapsVal = retenue.filter((ret) => ret.label === 'cnaps')
+  const cnapsMontant = cnapsVal.length > 0 ? cnapsVal[0].montant : 0
+
+  console.log(cnapsMontant)
+
+  const cnapsData = cotisations.length > 0 ? cotisations.filter((cot) => cot.label === 'cnaps') : []
+  const cnapsTaux = cnapsData.length > 0 ? cnapsData[0].taux : 1
+
+  useEffect(() => {
+    let mount = true
+    if (mount && cnapsTaux && salaireBrut) {
+      const cnaps = salaireBrut * cnapsTaux
+      const modif = { retenue: [{ label: 'cnaps', montant: cnaps }] }
+
+      dispatch(setBulletinDePaie(modif))
+    }
+
+    return () => {
+      mount = false
+    }
+  }, [cnapsTaux, salaireBrut, dispatch])
+
   const cnaps = salaireBrut / 100
+
   const ostie = salaireBrut / 100
   const hsni130Value = selectedEmployeHours.hsni130Value
   const hsni150Value = selectedEmployeHours.hsni150Value
