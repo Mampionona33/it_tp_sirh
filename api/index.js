@@ -23,11 +23,8 @@ app.get('/listeemployes', (req, res) => {
   res.status(200).send(db['/employees'])
 })
 
-app.get('/cotisation/cnaps', (req, res) => {
-  res
-    .status(200)
-    .send(db['/cotisations'])
-    .find((cot) => cot.label === 'cnaps')
+app.get('/cotisation/', (req, res) => {
+  res.status(200).send(db['/cotisations'])
 })
 
 app.get('/employees/id=:id', (req, res) => {
