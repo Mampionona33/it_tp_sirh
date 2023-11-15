@@ -3,7 +3,7 @@ import { fetchAllUsers } from './employeesAction'
 
 const initialState = {
   list: [],
-  loading: 'idle', // Vous pouvez initialiser loading avec la valeur appropriée
+  loading: 'idle',
 }
 
 const employeesSlice = createSlice({

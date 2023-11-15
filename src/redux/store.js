@@ -4,6 +4,7 @@ import employeHoursReducer from './employeHours/employeHoursReducer'
 import selectedEmployeReducer from './selectedEmploye/selectedEmployeReducer'
 import bulletinDePaieReducer from './bulletinDePaie/bulletinDePaieReducer'
 import employeesReducer from './employees/employeesReducer'
+import cotisationReducer from 'src/redux/cotisations/cotisationsReducer'
 import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer } from 'redux-persist'
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   selectedEmploye: selectedEmployeReducer,
   bulletinDePaie: bulletinDePaieReducer,
   employeesList: employeesReducer,
+  cotisations: cotisationReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
