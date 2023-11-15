@@ -23,8 +23,10 @@ app.get('/listeemployes', (req, res) => {
   res.status(200).send(db['/employees'])
 })
 
-app.get('/cotisation/', (req, res) => {
-  res.status(200).send(db['/cotisations/all'])
+app.get('/cotisations/all', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*') // Allow any origin during development
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  res.status(200).send(db['/cotisations'])
 })
 
 app.get('/employees/id=:id', (req, res) => {
