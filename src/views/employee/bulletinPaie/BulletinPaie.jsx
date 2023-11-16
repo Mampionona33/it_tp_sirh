@@ -30,6 +30,7 @@ MyDocument.propTypes = {
 const BulletinPaie = () => {
   const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
   const bulletinDePaie = useSelector((state) => state.bulletinDePaie)
+  // const baseCnaps =
   // decommenter pour activer le telechargement personnalisé
   // const pdfBlob = pdf(<MyDocument salarie={selecteEmploy} />)
   //   .toBlob()

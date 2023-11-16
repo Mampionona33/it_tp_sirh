@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
 
   tableCell: {
-    fontSize: 10,
+    fontSize: 9,
     textAlign: 'left',
     paddingTop: 10,
   },
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
 const Section3 = (props) => {
   const retenues = props.data.retenuSalaire ? props.data.retenuSalaire : []
   const indemnites = props.data.ajoutSalaire ? props.data.ajoutSalaire : []
+  const cotisations = props.data.cotisations ? props.data.cotisations : []
 
   const rendueTaux = (val) => {
     return val * 100 + '%'
@@ -127,6 +128,32 @@ const Section3 = (props) => {
 
         {/* Données du tableau */}
         {retenues.map((item, index) => (
+          <React.Fragment key={index}>
+            {/* Colonne cotisation qui contient le label de la cotisation */}
+            <View style={[styles.tableRow, { fontSize: 10 }]}>
+              <Text style={[styles.tableCell, { width: '33%', paddingLeft: 4 }]}>{item.label}</Text>
+              {/* Colonnes pour la base, le taux et le montant en fonction du type */}
+              <View style={[styles.tableRow, { width: '68%' }]}>
+                {/* Colonnes de retenue */}
+                <Text style={[styles.tableCell, { width: '31%', paddingLeft: 4 }]}>
+                  {item.base ? formatNumberWithSpaces(item.base) + ' Ar' : '-'}
+                </Text>
+                <Text style={[styles.tableCell, { width: '32%', paddingLeft: 4 }]}>
+                  {item.taux && rendueTaux(item.taux)}
+                </Text>
+                <Text style={[styles.tableCell, { width: '33%', paddingLeft: 4 }]}>
+                  {item.montant ? formatNumberWithSpaces(item.montant) + ' Ar' : '-'}
+                </Text>
+
+                {/* Colonnes vides pour indemnité */}
+                <Text style={[styles.tableCell, { width: '34%', paddingLeft: 4 }]}></Text>
+                <Text style={[styles.tableCell, { width: '35%', paddingLeft: 4 }]}></Text>
+                <Text style={[styles.tableCell, { width: '36%', paddingLeft: 4 }]}></Text>
+              </View>
+            </View>
+          </React.Fragment>
+        ))}
+        {cotisations.map((item, index) => (
           <React.Fragment key={index}>
             {/* Colonne cotisation qui contient le label de la cotisation */}
             <View style={[styles.tableRow, { fontSize: 10 }]}>

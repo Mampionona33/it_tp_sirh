@@ -17,6 +17,8 @@ export default class CalculPai {
   salaireBase = 0
   primeEtAvantage = 0
   totalAjoutSalaire = 0
+  totalRetenuSalarie = 0
+  baseCnaps = 0
 
   constructor(salaireBase) {
     this.salaireBase = salaireBase
@@ -24,6 +26,13 @@ export default class CalculPai {
   }
 
   // Setter
+  setTotalRetenuSalarie(totalRetenuSalarie) {
+    this.totalRetenuSalarie = totalRetenuSalarie
+  }
+
+  setBaseCnaps(baseCnaps) {
+    this.baseCnaps = baseCnaps
+  }
 
   setTotalAjoutSalaire(totalAjoutSalaire) {
     this.totalAjoutSalaire = totalAjoutSalaire
@@ -76,6 +85,9 @@ export default class CalculPai {
   }
 
   // getter
+  getTotalRetenuSalarie() {
+    return this.totalRetenuSalarie
+  }
   getTotalAjoutSalaire() {
     return this.totalAjoutSalaire
   }
@@ -110,14 +122,16 @@ export default class CalculPai {
     return this.primeEtAvantage
   }
 
-  getPlafondSME() {
-    return this.plafondSME
+  getTauxCnaps() {
+    return this.tauxCnaps
   }
 
-  getBaseCnaps() {
-    return this.getSalaireBrut() >= this.getPlafondSME()
-      ? this.getPlafondSME()
-      : this.getSalaireBrut()
+  getTauxOmsi() {
+    return this.tauxOmsi
+  }
+
+  getPlafondSME() {
+    return this.plafondSME
   }
 
   getCnaps() {
@@ -127,9 +141,8 @@ export default class CalculPai {
   }
 
   getSalaireBrut() {
-    console.log(this.getTotalAjoutSalaire())
     return this.isCadre
-      ? this.salaireBase + this.getTotalAjoutSalaire()
+      ? this.salaireBase + this.getTotalAjoutSalaire() - this.getTotalRetenuSalarie()
       : this.getHsni130() +
           this.getTotalAjoutSalaire() +
           this.getHsni150() +
@@ -139,7 +152,17 @@ export default class CalculPai {
           this.getHsi130() +
           this.getHsi150() +
           this.salaireBase +
-          this.getPrimeEtAvantage()
+          this.getPrimeEtAvantage() -
+          this.getTotalRetenuSalarie()
+  }
+
+  getBaseCnaps() {
+    if (this.getSalaireBrut() >= this.getPlafondSME()) {
+      this.setBaseCnaps(this.getPlafondSME())
+    } else {
+      this.setBaseCnaps(this.getSalaireBrut())
+    }
+    return this.baseCnaps
   }
 
   getOmsi() {
