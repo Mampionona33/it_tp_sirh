@@ -20,7 +20,16 @@ const SalaireBrut = () => {
   const salaireDeBase = selecteEmploy.salaireBase
   const isCadre = selecteEmploy.cadre
 
-  // console.log(ajoutSalaire)
+  const totalAjoutSalaire =
+    ajoutSalaire.length > 0 &&
+    ajoutSalaire.reduce((acc, cur) => {
+      if (cur && cur.hasOwnProperty('montant')) {
+        return acc + cur['montant']
+      }
+      return acc
+    }, 0)
+
+  console.log(totalAjoutSalaire)
   // console.log(retenuSalaire)
 
   // ------------------------------
@@ -34,6 +43,7 @@ const SalaireBrut = () => {
   calculPaie.setTotalHn50(employeeTotalHours.totalHs50)
   calculPaie.setTotalHDim(employeeTotalHours.totalHdim)
   calculPaie.setIsCadre(isCadre)
+  calculPaie.setTotalAjoutSalaire(totalAjoutSalaire)
   // calculPaie.setMoutvement()
 
   const hsni130_ = calculPaie.getHsni130()
@@ -56,7 +66,7 @@ const SalaireBrut = () => {
   // console.log(`hn30: ${hn30}`)
   // console.log(`hn50: ${hn50}`)
   // console.log(`hdim: ${hdim}`)
-  // console.log(`salaireBrute_: ${salaireBrute_}`)
+  console.log(`salaireBrute_: ${salaireBrute_}`)
   // console.log(`cnaps_: ${cnaps_}`)
   // console.log(`omsi_: ${omsi_}`)
   // console.log(`baseIrsa: ${baseIrsa}`)

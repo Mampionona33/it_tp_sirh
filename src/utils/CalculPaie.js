@@ -16,6 +16,7 @@ export default class CalculPai {
   tauxOmsi = 0.01
   salaireBase = 0
   primeEtAvantage = 0
+  totalAjoutSalaire = 0
 
   constructor(salaireBase) {
     this.salaireBase = salaireBase
@@ -23,6 +24,10 @@ export default class CalculPai {
   }
 
   // Setter
+
+  setTotalAjoutSalaire(totalAjoutSalaire) {
+    this.totalAjoutSalaire = totalAjoutSalaire
+  }
   setTauxHoraire(tauxHoraire) {
     this.tauxHoraire = this.salaireBase / tauxHoraire
   }
@@ -71,6 +76,9 @@ export default class CalculPai {
   }
 
   // getter
+  getTotalAjoutSalaire() {
+    return this.totalAjoutSalaire
+  }
   getHsni130() {
     return this.isCadre ? 0 : (this.tauxHoraire * this.hsni130 * 130) / 100
   }
@@ -102,20 +110,6 @@ export default class CalculPai {
     return this.primeEtAvantage
   }
 
-  getSalaireBrut() {
-    return this.isCadre
-      ? this.salaireBase
-      : this.getHsni130() +
-          this.getHsni150() +
-          this.getHn30() +
-          this.getHn50() +
-          this.getHDim() +
-          this.getHsi130() +
-          this.getHsi150() +
-          this.salaireBase +
-          this.getPrimeEtAvantage()
-  }
-
   getPlafondSME() {
     return this.plafondSME
   }
@@ -130,6 +124,22 @@ export default class CalculPai {
     return this.getSalaireBrut() >= this.getPlafondSME()
       ? this.getPlafondSME() * this.tauxCnaps
       : this.getSalaireBrut() * this.tauxCnaps
+  }
+
+  getSalaireBrut() {
+    console.log(this.getTotalAjoutSalaire())
+    return this.isCadre
+      ? this.salaireBase + this.getTotalAjoutSalaire()
+      : this.getHsni130() +
+          this.getTotalAjoutSalaire() +
+          this.getHsni150() +
+          this.getHn30() +
+          this.getHn50() +
+          this.getHDim() +
+          this.getHsi130() +
+          this.getHsi150() +
+          this.salaireBase +
+          this.getPrimeEtAvantage()
   }
 
   getOmsi() {
