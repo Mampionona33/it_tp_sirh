@@ -12,7 +12,7 @@ import mouvementSalaireReducer from './mouvementSalaire/mouvementSalaireReducer'
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['employeesList', 'cotisations', 'mouvementSalaire'],
+  blacklist: ['employeesList', 'cotisations'],
 }
 
 const rootReducer = combineReducers({
