@@ -94,17 +94,17 @@ const List = () => {
         cell: (info) => info.getValue(),
         header: () => 'email',
       }),
-      columnHelper.accessor('post', {
+      columnHelper.accessor('poste', {
         cell: (info) => info.getValue(),
-        header: () => 'post',
+        header: () => 'poste',
       }),
       columnHelper.accessor('telephone', {
         cell: (info) => info.getValue(),
         header: () => 'telephone',
       }),
-      columnHelper.accessor('manager', {
-        cell: (info) => info.getValue(),
-        header: () => 'manager',
+      columnHelper.accessor('responsable', {
+        cell: (info) => (info.getValue() ? 'Oui' : ''),
+        header: () => 'Est responsable',
       }),
       columnHelper.accessor('id', {
         header: () => 'action',

@@ -19,11 +19,9 @@ const SalaireNet = () => {
   // Calcul cnaps
   const cnapsVal = retenue.filter((ret) => ret.label === 'cnaps')
   const cnapsMontant = cnapsVal.length > 0 ? cnapsVal[0].montant : 0
-  const cnapsData = cotisations.length > 0 ? cotisations.filter((cot) => cot.label === 'cnaps') : []
   // calcul ostie
-  const ostieVal = retenue.filter((ret) => ret.label === 'ostie')
+  const ostieVal = retenue.filter((ret) => ret.label === 'Retenue sur organisme sanitaire')
   const ostieMontant = ostieVal.length > 0 ? ostieVal[0].montant : 0
-  const ostieData = cotisations.length > 0 ? cotisations.filter((cot) => cot.label === 'ostie') : []
 
   const calculateAndDispatch = useCallback(() => {
     const updatedRetenue = []
@@ -32,7 +30,7 @@ const SalaireNet = () => {
       const tauxVal = cot.taux
       const calculateMontant = salaireBrut * tauxVal
       const label = cot.label
-      console.log(label)
+      // console.log(label)
 
       // Check if label is not already in the updatedRetenue array
       if (!updatedRetenue.some((ret) => ret.label === label)) {

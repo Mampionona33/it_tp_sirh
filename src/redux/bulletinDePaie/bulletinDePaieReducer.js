@@ -11,6 +11,7 @@ const initialState = {
   salaireNet: null,
   salaireNetAPayer: null,
   irsa: null,
+  plafondSME: null,
 
   indemnite: [
     {

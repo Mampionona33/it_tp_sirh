@@ -8,17 +8,44 @@ import {
   setSelectedEmployeSalaireBrut,
 } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
+import CalculPai from 'src/utils/CalculPaie'
 
 const SalaireBrut = () => {
   const dispatch = useDispatch()
   const employeeTotalHours = useSelector((state) => state.employeHours)
   const title = 'Salaire brut'
   const selecteEmploy = useSelector((state) => state.bulletinDePaie.salarie)
+  const salaireDeBase = selecteEmploy.salaireBase
 
-  // console.log(selecteEmploy)
+  // ------------------------------
+  const calculPaie = new CalculPai(salaireDeBase)
+  calculPaie.setTauxHoraire(173.33)
+  calculPaie.setHsni130(employeeTotalHours.hsni130)
+  calculPaie.setHsni150(employeeTotalHours.hsni150)
+  calculPaie.setTotalHs130(employeeTotalHours.totalHs130)
+  calculPaie.setTotalHs150(employeeTotalHours.totalHs150)
+  calculPaie.setTotalHn30(employeeTotalHours.totalHs30)
+  calculPaie.setTotalHn50(employeeTotalHours.totalHs50)
+  calculPaie.setTotalHDim(employeeTotalHours.totalHdim)
+
+  const hsni130_ = calculPaie.getHsni130Value()
+  const hsni150_ = calculPaie.getHsni150Value()
+  const hsi130_ = calculPaie.getHsi130()
+  const hsi150_ = calculPaie.getHsi150()
+  const hn30 = calculPaie.getHn30()
+  const hn50 = calculPaie.getHn50()
+  const hdim = calculPaie.getHDim()
+
+  console.log(`hsni130_: ${hsni130_}`)
+  console.log(`hsni150_: ${hsni150_}`)
+  console.log(`hsi130_: ${hsi130_}`)
+  console.log(`hsi150_: ${hsi150_}`)
+  console.log(`hn30: ${hn30}`)
+  console.log(`hn50: ${hn50}`)
+  console.log(`hdim: ${hdim}`)
+  // ------------------------------
 
   const tauxHoraire = selecteEmploy.salaireBase / 173.33
-  const salaireDeBase = selecteEmploy.salaireBase
 
   const calculHs = (heures, majoration) => {
     let valeur = 0
