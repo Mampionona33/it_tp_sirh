@@ -16,28 +16,6 @@ export default function PrimeEtAvantage() {
   console.log(mouvementSalaire)
 
   const Body = () => {
-    const fields = [
-      { id: 'primeAssuidite', label: "Prime d'assuicidité", action: 'indemnite', base: 0 },
-      { id: 'primeExcellence', label: "Prime d'excellence", action: 'indemnite', base: 0 },
-      { id: 'absenceRetard', label: 'Absence / Retard à déduire', action: 'retenue', base: 0 },
-      { id: 'indemniteTransport', label: 'Indemnité de transport', action: 'indemnite', base: 0 },
-      {
-        id: 'avantageNature',
-        label: 'Avantages en nature (Logement)',
-        action: 'indemnite',
-        base: 0,
-      },
-      {
-        id: 'avantageVehicule',
-        label: 'Avantages en nature (Véhicule)',
-        action: 'indemnite',
-        base: 0,
-      },
-      { id: 'autresIndemnite', label: 'Autres indemnités', action: 'indemnite', base: 0 },
-      { id: 'autresAvantage', label: 'Autres avantages', action: 'indemnite', base: 0 },
-      { id: 'rappel', label: 'Rappel', action: 'indemnite', base: 0 },
-    ]
-
     const [formValues, setFormValues] = useState({})
 
     const halfLength = Math.ceil(mouvementSalaire.length / 2)
@@ -54,7 +32,7 @@ export default function PrimeEtAvantage() {
       for (const key in formValues) {
         if (formValues.hasOwnProperty(key)) {
           const value = parseFloat(formValues[key])
-          const field = fields.find((item) => item.id === key)
+          const field = mouvementSalaire.find((item) => item.id === key)
 
           if (field) {
             // Vérifier si l'action est 'indemnite' ou 'retenue'
@@ -106,7 +84,7 @@ export default function PrimeEtAvantage() {
       return () => {
         mount = false
       }
-    }, [fields, indemnite, retenue, dispatch, mouvementSalaire])
+    }, [indemnite, retenue, dispatch, mouvementSalaire])
 
     return (
       <>
