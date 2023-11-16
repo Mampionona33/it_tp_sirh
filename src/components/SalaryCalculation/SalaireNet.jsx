@@ -11,61 +11,48 @@ const SalaireNet = () => {
   useFetchCotisations()
   const dispatch = useDispatch()
   const title = 'Salaire net'
-  const retenue = useSelector((state) => state.bulletinDePaie.retenue)
-  const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
-  const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
-  const cotisations = useSelector((state) => state.cotisations.liste)
+  // const retenue = useSelector((state) => state.bulletinDePaie.retenue)
+  // const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
+  // const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
+  // const cotisations = useSelector((state) => state.cotisations.liste)
 
-  // Calcul cnaps
-  const cnapsVal = retenue.filter((ret) => ret.label === 'cnaps')
-  const cnapsMontant = cnapsVal.length > 0 ? cnapsVal[0].montant : 0
-  // calcul ostie
-  const ostieVal = retenue.filter((ret) => ret.label === 'Retenue sur organisme sanitaire')
-  const ostieMontant = ostieVal.length > 0 ? ostieVal[0].montant : 0
+  // // Calcul cnaps
+  // const cnapsVal = retenue.filter((ret) => ret.label === 'cnaps')
+  // const cnapsMontant = cnapsVal.length > 0 ? cnapsVal[0].montant : 0
+  // // calcul ostie
+  // const ostieVal = retenue.filter((ret) => ret.label === 'Retenue sur organisme sanitaire')
+  // const ostieMontant = ostieVal.length > 0 ? ostieVal[0].montant : 0
 
-  const calculateAndDispatch = useCallback(() => {
-    const updatedRetenue = []
+  // const calculateAndDispatch = useCallback(() => {
+  //   const updatedRetenue = []
 
-    cotisations.forEach((cot) => {
-      const tauxVal = cot.taux
-      const calculateMontant = salaireBrut * tauxVal
-      const label = cot.label
-      // console.log(label)
+  //   cotisations.forEach((cot) => {
+  //     const tauxVal = cot.taux
+  //     const calculateMontant = salaireBrut * tauxVal
+  //     const label = cot.label
+  //     // console.log(label)
 
-      // Check if label is not already in the updatedRetenue array
-      if (!updatedRetenue.some((ret) => ret.label === label)) {
-        updatedRetenue.push({ label, taux: tauxVal, montant: calculateMontant })
-      }
-    })
+  //     // Check if label is not already in the updatedRetenue array
+  //     if (!updatedRetenue.some((ret) => ret.label === label)) {
+  //       updatedRetenue.push({ label, taux: tauxVal, montant: calculateMontant })
+  //     }
+  //   })
 
-    const modif = { retenue: updatedRetenue }
-    dispatch(setBulletinDePaie(modif))
-  }, [dispatch, retenue, cotisations, salaireBrut])
+  //   const modif = { retenue: updatedRetenue }
+  //   dispatch(setBulletinDePaie(modif))
+  // }, [dispatch, retenue, cotisations, salaireBrut])
 
-  useEffect(() => {
-    let mount = true
+  // useEffect(() => {
+  //   let mount = true
 
-    if (mount && salaireBrut) {
-      calculateAndDispatch()
-    }
+  //   if (mount && salaireBrut) {
+  //     calculateAndDispatch()
+  //   }
 
-    return () => {
-      mount = false
-    }
-  }, [salaireBrut])
-
-  const hsni130Value = selectedEmployeHours.hsni130Value
-  const hsni150Value = selectedEmployeHours.hsni150Value
-
-  const soustotal1 = salaireBrut - (cnapsMontant + ostieMontant)
-
-  const baseIrsa = soustotal1 - (hsni130Value + hsni150Value)
-  const imposableArrondi = Math.floor(baseIrsa / 100) * 100
-
-  const irsaCalculate = new CalculIrsaAPayer(imposableArrondi)
-  const irsaApayer = irsaCalculate.irsaValue
-
-  const salaireNet = imposableArrondi - irsaApayer
+  //   return () => {
+  //     mount = false
+  //   }
+  // }, [salaireBrut])
 
   function arraysAreEqual(arr1, arr2) {
     if (arr1.length !== arr2.length) {
@@ -79,20 +66,20 @@ const SalaireNet = () => {
     return true
   }
 
-  React.useEffect(() => {
-    let mount = true
-    if (irsaApayer) {
-      if (mount) {
-        dispatch(setIrsaValue(irsaApayer))
-      }
-    }
-    if (salaireNet && mount) {
-      dispatch(setBulletinDePaie(salaireNet))
-    }
-    return () => {
-      mount = false
-    }
-  }, [irsaApayer, salaireNet, dispatch])
+  // React.useEffect(() => {
+  //   let mount = true
+  //   if (irsaApayer) {
+  //     if (mount) {
+  //       dispatch(setIrsaValue(irsaApayer))
+  //     }
+  //   }
+  //   if (salaireNet && mount) {
+  //     dispatch(setBulletinDePaie(salaireNet))
+  //   }
+  //   return () => {
+  //     mount = false
+  //   }
+  // }, [irsaApayer, salaireNet, dispatch])
 
   const data = [
     {
@@ -140,7 +127,8 @@ const SalaireNet = () => {
   const Body = () => {
     return (
       <>
-        <table className="table-auto">
+        <div>Test</div>
+        {/* <table className="table-auto">
           <tbody>
             {data.map((item, index) => (
               <tr
@@ -152,7 +140,7 @@ const SalaireNet = () => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
       </>
     )
   }

@@ -32,7 +32,7 @@ export default class CalculPai {
   setPlafondSME(plafondSME) {
     this.plafondSME = plafondSME
   }
-  setCnpas(tauxCnaps) {
+  setTauxCnaps(tauxCnaps) {
     this.tauxCnaps = tauxCnaps
   }
   setHsni130(hsni130) {

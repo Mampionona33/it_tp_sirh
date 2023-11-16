@@ -15,9 +15,13 @@ const SalaireBrut = () => {
   const employeeTotalHours = useSelector((state) => state.employeHours)
   const title = 'Salaire brut'
   const selecteEmploy = useSelector((state) => state.bulletinDePaie.salarie)
-  const indemnite = useSelector((state) => state.bulletinDePaie.indemnite)
+  const ajoutSalaire = useSelector((state) => state.bulletinDePaie.ajoutSalaire)
+  const retenuSalaire = useSelector((state) => state.bulletinDePaie.retenuSalaire)
   const salaireDeBase = selecteEmploy.salaireBase
   const isCadre = selecteEmploy.cadre
+
+  // console.log(ajoutSalaire)
+  // console.log(retenuSalaire)
 
   // ------------------------------
   const calculPaie = new CalculPai(salaireDeBase)
@@ -30,7 +34,7 @@ const SalaireBrut = () => {
   calculPaie.setTotalHn50(employeeTotalHours.totalHs50)
   calculPaie.setTotalHDim(employeeTotalHours.totalHdim)
   calculPaie.setIsCadre(isCadre)
-  // calculPaie.setPrimeEtAvantage()
+  // calculPaie.setMoutvement()
 
   const hsni130_ = calculPaie.getHsni130()
   const hsni150_ = calculPaie.getHsni150()

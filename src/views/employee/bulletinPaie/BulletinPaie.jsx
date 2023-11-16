@@ -35,6 +35,8 @@ const BulletinPaie = () => {
   //   .toBlob()
   //   .then((blob) => saveAs(blob, 'test.pdf'))
 
+  console.log(bulletinDePaie)
+
   return (
     <>
       <div className="h-screen">

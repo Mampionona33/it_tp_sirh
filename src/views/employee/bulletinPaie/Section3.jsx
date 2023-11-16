@@ -87,8 +87,8 @@ const styles = StyleSheet.create({
 })
 
 const Section3 = (props) => {
-  const retenues = props.data.retenue ? props.data.retenue : []
-  const indemnites = props.data.indemnite ? props.data.indemnite : []
+  const retenues = props.data.retenuSalaire ? props.data.retenuSalaire : []
+  const indemnites = props.data.ajoutSalaire ? props.data.ajoutSalaire : []
 
   const rendueTaux = (val) => {
     return val * 100 + '%'
@@ -115,7 +115,7 @@ const Section3 = (props) => {
                   {item.base ? formatNumberWithSpaces(item.base) + ' Ar' : '-'}
                 </Text>
                 <Text style={[styles.tableCell, { width: '35%', paddingLeft: 4 }]}>
-                  {item.taux}
+                  {item.taux ? rendueTaux(item.taux) : '-'}
                 </Text>
                 <Text style={[styles.tableCell, { width: '36%', paddingLeft: 4 }]}>
                   {item.montant ? formatNumberWithSpaces(item.montant) + ' Ar' : '-'}
@@ -138,7 +138,7 @@ const Section3 = (props) => {
                   {item.base ? formatNumberWithSpaces(item.base) + ' Ar' : '-'}
                 </Text>
                 <Text style={[styles.tableCell, { width: '32%', paddingLeft: 4 }]}>
-                  {rendueTaux(item.taux)}
+                  {item.taux && rendueTaux(item.taux)}
                 </Text>
                 <Text style={[styles.tableCell, { width: '33%', paddingLeft: 4 }]}>
                   {item.montant ? formatNumberWithSpaces(item.montant) + ' Ar' : '-'}

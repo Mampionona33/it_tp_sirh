@@ -7,7 +7,6 @@ import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculatio
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
 import { setSelectedEmploye } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
-// import EmployeeService from 'src/services/EmployeeService'
 
 const Fiche = () => {
   const [activeTab, setActiveTab] = useState('info-perso')

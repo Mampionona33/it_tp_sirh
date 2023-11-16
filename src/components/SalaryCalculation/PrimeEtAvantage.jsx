@@ -1,19 +1,27 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useDispatch } from 'react-redux'
 import { setPrimeEtAvantage } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { useSelector } from 'react-redux'
 import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
+import mergeArraysByReferenceValue from 'src/utils/mergeArraysByReferenceValue'
 
 export default function PrimeEtAvantage() {
   const title = 'Primes et avantages'
-  const indemnite = useSelector((state) => state.bulletinDePaie.indemnite)
-  const retenue = useSelector((state) => state.bulletinDePaie.retenue)
+  const ajoutSalaire = useSelector((state) => state.bulletinDePaie.ajoutSalaire)
+  const retenuSalaire = useSelector((state) => state.bulletinDePaie.retenuSalaire)
   const mouvementSalaire = useSelector((state) => state.mouvementSalaire.list)
   const dispatch = useDispatch()
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false)
 
-  console.log(mouvementSalaire)
+  useEffect(() => {
+    if (!isFormSubmitted && dispatch) {
+      dispatch(setBulletinDePaie({ ajoutSalaire: [] }))
+      dispatch(setBulletinDePaie({ retenuSalaire: [] }))
+      dispatch(fetchAllMouvementSalaire())
+    }
+  }, [dispatch, isFormSubmitted])
 
   const Body = () => {
     const [formValues, setFormValues] = useState({})
@@ -24,32 +32,40 @@ export default function PrimeEtAvantage() {
 
     const handleSubmit = (e) => {
       e.preventDefault()
-      // console.log(formValues)
+
       let primeEtAvantage = 0
-      const updatedIndemnite = []
+      const updatedAjoutSalaire = []
       const updatedRetenue = []
 
       for (const key in formValues) {
         if (formValues.hasOwnProperty(key)) {
           const value = parseFloat(formValues[key])
-          const field = mouvementSalaire.find((item) => item.id === key)
+          // Use the current key directly in the loop
+          const field =
+            mouvementSalaire.length > 0 &&
+            mouvementSalaire.find((item) => item.id === parseInt(key))
+
+          console.log(field)
 
           if (field) {
-            // Vérifier si l'action est 'indemnite' ou 'retenue'
-
-            if (field.action === 'indemnite') {
-              updatedIndemnite.push({ label: field.label, base: value, taux: field.taux })
+            if (field.action === 'ajout') {
+              updatedAjoutSalaire.push({ label: field.label, montant: value })
               primeEtAvantage += value
-            } else if (field.action === 'retenue') {
-              updatedRetenue.push({ label: field.label, base: value, taux: field.taux })
+            } else if (field.action === 'deduction') {
+              updatedRetenue.push({ label: field.label, montant: value })
               primeEtAvantage -= value
             }
           }
         }
       }
-      dispatch(setBulletinDePaie({ indemnite: [...indemnite, ...updatedIndemnite] }))
-      dispatch(setBulletinDePaie({ retenue: [...retenue, ...updatedRetenue] }))
+
+      const ajoutSalaireUp = mergeArraysByReferenceValue(ajoutSalaire, updatedAjoutSalaire, 'label')
+      const retenuSalaireUp = mergeArraysByReferenceValue(retenuSalaire, updatedRetenue, 'label')
+
+      dispatch(setBulletinDePaie({ ajoutSalaire: ajoutSalaireUp }))
+      dispatch(setBulletinDePaie({ retenuSalaire: retenuSalaireUp }))
       dispatch(setPrimeEtAvantage(primeEtAvantage))
+      setIsFormSubmitted(true)
     }
 
     const handleInputChange = useCallback(
@@ -69,22 +85,18 @@ export default function PrimeEtAvantage() {
         const initialIndmnite = mouvementSalaire.filter((field) => field.action === 'ajout')
         const initialRetenue = mouvementSalaire.filter((field) => field.action === 'deduction')
 
-        if (indemnite.length === 0) {
-          dispatch(setBulletinDePaie({ indemnite: [...indemnite, ...initialIndmnite] }))
+        if (ajoutSalaire.length === 0) {
+          dispatch(setBulletinDePaie({ ajoutSalaire: [...initialIndmnite] }))
         }
-        if (retenue.length === 0) {
-          dispatch(setBulletinDePaie({ retenue: [...retenue, ...initialRetenue] }))
+        if (retenuSalaire.length === 0) {
+          dispatch(setBulletinDePaie({ retenuSalaire: [...initialRetenue] }))
         }
-      }
-
-      if (mount && mouvementSalaire.length === 0) {
-        dispatch(fetchAllMouvementSalaire())
       }
 
       return () => {
         mount = false
       }
-    }, [indemnite, retenue, dispatch, mouvementSalaire])
+    }, [ajoutSalaire, retenuSalaire, dispatch, mouvementSalaire])
 
     return (
       <>
@@ -121,6 +133,7 @@ export default function PrimeEtAvantage() {
                     type="number"
                     min="0"
                     name={item.id}
+                    data-action={item.action}
                     id={item.id}
                     value={formValues[item.id] || ''}
                     placeholder="0 Ar"
