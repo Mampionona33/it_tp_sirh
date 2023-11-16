@@ -16,6 +16,7 @@ const SalaireBrut = () => {
   const title = 'Salaire brut'
   const selecteEmploy = useSelector((state) => state.bulletinDePaie.salarie)
   const salaireDeBase = selecteEmploy.salaireBase
+  const isCadre = selecteEmploy.cadre
 
   // ------------------------------
   const calculPaie = new CalculPai(salaireDeBase)
@@ -27,6 +28,7 @@ const SalaireBrut = () => {
   calculPaie.setTotalHn30(employeeTotalHours.totalHs30)
   calculPaie.setTotalHn50(employeeTotalHours.totalHs50)
   calculPaie.setTotalHDim(employeeTotalHours.totalHdim)
+  calculPaie.setIsCadre(isCadre)
 
   const hsni130_ = calculPaie.getHsni130Value()
   const hsni150_ = calculPaie.getHsni150Value()
@@ -35,6 +37,9 @@ const SalaireBrut = () => {
   const hn30 = calculPaie.getHn30()
   const hn50 = calculPaie.getHn50()
   const hdim = calculPaie.getHDim()
+  const salaireBrute_ = calculPaie.getSalaireBrut()
+  const cnaps_ = calculPaie.getCnaps()
+  const omsi_ = calculPaie.getOmsi()
 
   console.log(`hsni130_: ${hsni130_}`)
   console.log(`hsni150_: ${hsni150_}`)
@@ -43,6 +48,9 @@ const SalaireBrut = () => {
   console.log(`hn30: ${hn30}`)
   console.log(`hn50: ${hn50}`)
   console.log(`hdim: ${hdim}`)
+  console.log(`salaireBrute_: ${salaireBrute_}`)
+  console.log(`cnaps_: ${cnaps_}`)
+  console.log(`omsi_: ${omsi_}`)
   // ------------------------------
 
   const tauxHoraire = selecteEmploy.salaireBase / 173.33

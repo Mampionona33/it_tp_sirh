@@ -102,9 +102,9 @@ const List = () => {
         cell: (info) => info.getValue(),
         header: () => 'telephone',
       }),
-      columnHelper.accessor('responsable', {
+      columnHelper.accessor('cadre', {
         cell: (info) => (info.getValue() ? 'Oui' : ''),
-        header: () => 'Est responsable',
+        header: () => 'cadre',
       }),
       columnHelper.accessor('id', {
         header: () => 'action',
