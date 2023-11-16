@@ -174,20 +174,12 @@ export default class CalculPai {
   }
 
   getBaseIrsa() {
-    console.log(
-      this.getSalaireBrut(),
-      this.getCnaps(),
-      this.getOmsi(),
-      this.getHsni130(),
-      this.getHsni150(),
-    )
+    const cnaps = this.getCnaps()
+    const omsi = this.getOmsi()
+    const hsni130 = this.getHsni130()
+    const hsni150 = this.getHsni150()
 
-    this.irsa =
-      this.getSalaireBrut() -
-      this.getCnaps() -
-      this.getOmsi() -
-      this.getHsni130() -
-      this.getHsni150()
+    this.irsa = this.getSalaireBrut() - cnaps - omsi - hsni130 - hsni150
 
     return this.irsa
   }

@@ -264,33 +264,38 @@ const SalaireBrut = () => {
     omsi_,
   ])
 
+  useEffect(() => {
+    let mount = true
+    if (baseIrsa && mount && salaireBrute_ && omsi_ && cnaps_ && hsni130_ && hsi150_) {
+      const irsaObject = retenuSalaire.findIndex((ret) => ret.label === 'irsa')
+
+      if (irsaObject === -1) {
+        // Si l'objet 'cnaps' n'existe pas encore dans le tableau, ajoutez-le
+        dispatch(
+          setBulletinDePaie({
+            retenuSalaire: [...retenuSalaire, { label: 'irsa', montant: baseIrsa }],
+          }),
+        )
+      } else {
+        // Si l'objet 'cnaps' existe déjà, mettez à jour ses propriétés
+        dispatch(
+          setBulletinDePaie({
+            retenuSalaire: retenuSalaire.map((ret, index) =>
+              index === irsaObject ? { ...ret, montant: baseIrsa } : ret,
+            ),
+          }),
+        )
+      }
+    }
+
+    return () => {
+      mount = false
+    }
+  }, [dispatch, baseIrsa, retenuSalaire, cnaps_, omsi_, hsni130_, hsni150_, salaireBrute_])
+
   // useEffect(() => {
-  //   let mount = true
-  //   if (baseIrsa && mount) {
-  //     const irsaObject = retenuSalaire.findIndex((ret) => ret.label === 'irsa')
-
-  //     if (irsaObject === -1) {
-  //       // Si l'objet 'cnaps' n'existe pas encore dans le tableau, ajoutez-le
-  //       dispatch(
-  //         setBulletinDePaie({
-  //           retenuSalaire: [...retenuSalaire, { label: 'irsa', montant: baseIrsa }],
-  //         }),
-  //       )
-  //     } else {
-  //       // Si l'objet 'cnaps' existe déjà, mettez à jour ses propriétés
-  //       dispatch(
-  //         setBulletinDePaie({
-  //           retenuSalaire: retenuSalaire.map((ret, index) =>
-  //             index === irsaObject ? { ...ret, montant: baseIrsa } : ret,
-  //           ),
-  //         }),
-  //       )
-  //     }
-  //   }
-
-  //   return () => {
-  //     mount = false
-  //   }
+  //   console.log('baseIrsa:', baseIrsa)
+  //   // ... rest of the code
   // }, [dispatch, baseIrsa, retenuSalaire])
 
   return (
