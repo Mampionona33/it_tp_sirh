@@ -32,6 +32,7 @@ const SalaireNet = () => {
       const tauxVal = cot.taux
       const calculateMontant = salaireBrut * tauxVal
       const label = cot.label
+      console.log(label)
 
       // Check if label is not already in the updatedRetenue array
       if (!updatedRetenue.some((ret) => ret.label === label)) {
@@ -42,10 +43,6 @@ const SalaireNet = () => {
     const modif = { retenue: updatedRetenue }
     dispatch(setBulletinDePaie(modif))
   }, [dispatch, retenue, cotisations, salaireBrut])
-
-  const loadCotisationLables = useCallback(() =>
-    cotisations.map((cot) => cot.label).map((item) => item),
-  )
 
   useEffect(() => {
     let mount = true

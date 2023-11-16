@@ -90,7 +90,9 @@ const Section3 = (props) => {
   const retenues = props.data.retenue ? props.data.retenue : []
   const indemnites = props.data.indemnite ? props.data.indemnite : []
 
-  // console.log(props.data)
+  const rendueTaux = (val) => {
+    return val * 100 + '%'
+  }
 
   const renderRows = () => {
     return (
@@ -136,7 +138,7 @@ const Section3 = (props) => {
                   {item.base ? formatNumberWithSpaces(item.base) + ' Ar' : '-'}
                 </Text>
                 <Text style={[styles.tableCell, { width: '32%', paddingLeft: 4 }]}>
-                  {item.taux}
+                  {rendueTaux(item.taux)}
                 </Text>
                 <Text style={[styles.tableCell, { width: '33%', paddingLeft: 4 }]}>
                   {item.montant ? formatNumberWithSpaces(item.montant) + ' Ar' : '-'}

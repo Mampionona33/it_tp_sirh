@@ -1,4 +1,4 @@
-const db = require('../src/db/db.json')
+const db = require('./db/db.json')
 const express = require('express')
 const app = express()
 const cors = require('cors')
