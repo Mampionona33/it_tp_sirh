@@ -26,6 +26,10 @@ export default class CalculPai {
   }
 
   // Setter
+  setIrsa(irsa) {
+    this.irsa = irsa
+  }
+
   setTotalRetenuSalarie(totalRetenuSalarie) {
     this.totalRetenuSalarie = totalRetenuSalarie
   }
@@ -170,12 +174,21 @@ export default class CalculPai {
   }
 
   getBaseIrsa() {
-    return (
+    console.log(
+      this.getSalaireBrut(),
+      this.getCnaps(),
+      this.getOmsi(),
+      this.getHsni130(),
+      this.getHsni150(),
+    )
+
+    this.irsa =
       this.getSalaireBrut() -
       this.getCnaps() -
       this.getOmsi() -
       this.getHsni130() -
       this.getHsni150()
-    )
+
+    return this.irsa
   }
 }

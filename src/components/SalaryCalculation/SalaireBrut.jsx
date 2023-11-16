@@ -39,22 +39,22 @@ const SalaireBrut = () => {
       return acc
     }, 0)
 
-  // console.log(totalAjoutSalaire)
-  // console.log(retenuSalaire)
+  console.log(totalAjoutSalaire)
+  console.log(totalRetenuSalarie)
 
   // ------------------------------
   const calculPaie = new CalculPai(salaireDeBase)
   calculPaie.setTauxHoraire(173.33)
-  calculPaie.setHsni130(employeeTotalHours.hsni130)
-  calculPaie.setHsni150(employeeTotalHours.hsni150)
-  calculPaie.setTotalHs130(employeeTotalHours.totalHs130)
-  calculPaie.setTotalHs150(employeeTotalHours.totalHs150)
-  calculPaie.setTotalHn30(employeeTotalHours.totalHs30)
-  calculPaie.setTotalHn50(employeeTotalHours.totalHs50)
-  calculPaie.setTotalHDim(employeeTotalHours.totalHdim)
-  calculPaie.setIsCadre(isCadre)
-  calculPaie.setTotalAjoutSalaire(totalAjoutSalaire)
-  calculPaie.setTotalRetenuSalarie(totalRetenuSalarie)
+  calculPaie.setHsni130(employeeTotalHours.hsni130 ? employeeTotalHours.hsni130 : 0)
+  calculPaie.setHsni150(employeeTotalHours.hsni150 ? employeeTotalHours.hsni150 : 0)
+  calculPaie.setTotalHs130(employeeTotalHours.totalHs130 ? employeeTotalHours.totalHs130 : 0)
+  calculPaie.setTotalHs150(employeeTotalHours.totalHs150 ? employeeTotalHours.totalHs150 : 0)
+  calculPaie.setTotalHn30(employeeTotalHours.totalHs30 ? employeeTotalHours.totalHs30 : 0)
+  calculPaie.setTotalHn50(employeeTotalHours.totalHs50 ? employeeTotalHours.totalHs50 : 0)
+  calculPaie.setTotalHDim(employeeTotalHours.totalHdim ? employeeTotalHours.totalHdim : 0)
+  calculPaie.setIsCadre(isCadre ? isCadre : 0)
+  calculPaie.setTotalAjoutSalaire(totalAjoutSalaire ? totalAjoutSalaire : 0)
+  calculPaie.setTotalRetenuSalarie(totalRetenuSalarie ? totalRetenuSalarie : 0)
 
   const hsni130_ = calculPaie.getHsni130()
   const hsni150_ = calculPaie.getHsni150()
@@ -66,7 +66,10 @@ const SalaireBrut = () => {
   const salaireBrute_ = calculPaie.getSalaireBrut()
   const cnaps_ = calculPaie.getCnaps()
   const omsi_ = calculPaie.getOmsi()
-  const baseIrsa = calculPaie.getBaseIrsa()
+
+  const baseIrsa = useMemo(() => {
+    return calculPaie.getBaseIrsa()
+  }, [calculPaie])
 
   const baseCnaps = useMemo(() => {
     return calculPaie.getBaseCnaps()
@@ -86,7 +89,7 @@ const SalaireBrut = () => {
   // console.log(`salaireBrute_: ${salaireBrute_}`)
   // console.log(`cnaps_: ${cnaps_}`)
   // console.log(`omsi_: ${omsi_}`)
-  // console.log(`baseIrsa: ${baseIrsa}`)
+  console.log(`baseIrsa: ${baseIrsa}`)
   // console.log(`baseCnaps: ${baseCnaps}`)
   // console.log(indemnite)
   // ------------------------------
@@ -203,26 +206,18 @@ const SalaireBrut = () => {
     if (hn50 && mount) {
       dispatch(setBulletinDePaie({ hs50: hn50 }))
     }
-    // if (baseCnaps && mount) {
-    //   console.log(baseCnaps)
-    //   dispatch(setBulletinDePaie({ baseCnaps: baseCnaps }))
-    // }
+
     if (baseIrsa && mount) {
       dispatch(setBulletinDePaie({ baseIrsa: baseIrsa }))
     }
     if (omsi_ && mount) {
       dispatch(setBulletinDePaie({ omsi: omsi_ }))
     }
-    // if (cnaps_ && mount) {
-    //   dispatch(setBulletinDePaie({ cnaps: cnaps_ }))
-    // }
+
     if (plafondSME && mount) {
       dispatch(setBulletinDePaie({ plafondSME: plafondSME }))
     }
 
-    // if (tauxCnaps && mount) {
-    //   dispatch(setBulletinDePaie({ tauxCnaps: tauxCnaps }))
-    // }
     if (tauxCnaps && mount && cnaps_ && baseCnaps) {
       const cnapsObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'cnaps')
 
@@ -268,6 +263,35 @@ const SalaireBrut = () => {
     baseCnaps,
     omsi_,
   ])
+
+  // useEffect(() => {
+  //   let mount = true
+  //   if (baseIrsa && mount) {
+  //     const irsaObject = retenuSalaire.findIndex((ret) => ret.label === 'irsa')
+
+  //     if (irsaObject === -1) {
+  //       // Si l'objet 'cnaps' n'existe pas encore dans le tableau, ajoutez-le
+  //       dispatch(
+  //         setBulletinDePaie({
+  //           retenuSalaire: [...retenuSalaire, { label: 'irsa', montant: baseIrsa }],
+  //         }),
+  //       )
+  //     } else {
+  //       // Si l'objet 'cnaps' existe déjà, mettez à jour ses propriétés
+  //       dispatch(
+  //         setBulletinDePaie({
+  //           retenuSalaire: retenuSalaire.map((ret, index) =>
+  //             index === irsaObject ? { ...ret, montant: baseIrsa } : ret,
+  //           ),
+  //         }),
+  //       )
+  //     }
+  //   }
+
+  //   return () => {
+  //     mount = false
+  //   }
+  // }, [dispatch, baseIrsa, retenuSalaire])
 
   return (
     <div>
