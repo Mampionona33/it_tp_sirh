@@ -15,6 +15,7 @@ export default class CalculPai {
   irsa = 0
   tauxOmsi = 0.01
   salaireBase = 0
+  primeEtAvantage = 0
 
   constructor(salaireBase) {
     this.salaireBase = salaireBase
@@ -24,6 +25,9 @@ export default class CalculPai {
   // Setter
   setTauxHoraire(tauxHoraire) {
     this.tauxHoraire = this.salaireBase / tauxHoraire
+  }
+  setPrimeEtAvantage() {
+    return 0
   }
   setPlafondSME(plafondSME) {
     this.plafondSME = plafondSME
@@ -67,11 +71,11 @@ export default class CalculPai {
   }
 
   // getter
-  getHsni130Value() {
+  getHsni130() {
     return this.isCadre ? 0 : (this.tauxHoraire * this.hsni130 * 130) / 100
   }
 
-  getHsni150Value() {
+  getHsni150() {
     return this.isCadre ? 0 : (this.tauxHoraire * this.hsni150 * 150) / 100
   }
 
@@ -94,26 +98,51 @@ export default class CalculPai {
     return this.isCadre ? 0 : (this.tauxHoraire * this.totalHdim * 100) / 100
   }
 
+  getPrimeEtAvantage() {
+    return this.primeEtAvantage
+  }
+
   getSalaireBrut() {
     return this.isCadre
       ? this.salaireBase
-      : this.getHsni130Value() +
-          this.getHsni150Value() +
+      : this.getHsni130() +
+          this.getHsni150() +
           this.getHn30() +
           this.getHn50() +
           this.getHDim() +
           this.getHsi130() +
           this.getHsi150() +
-          this.salaireBase
+          this.salaireBase +
+          this.getPrimeEtAvantage()
+  }
+
+  getPlafondSME() {
+    return this.plafondSME
+  }
+
+  getBaseCnaps() {
+    return this.getSalaireBrut() >= this.getPlafondSME()
+      ? this.getPlafondSME()
+      : this.getSalaireBrut()
   }
 
   getCnaps() {
-    return this.getSalaireBrut() >= this.plafondSME
-      ? this.plafondSME * this.tauxCnaps
+    return this.getSalaireBrut() >= this.getPlafondSME()
+      ? this.getPlafondSME() * this.tauxCnaps
       : this.getSalaireBrut() * this.tauxCnaps
   }
 
   getOmsi() {
     return this.getSalaireBrut() * this.tauxOmsi
+  }
+
+  getBaseIrsa() {
+    return (
+      this.getSalaireBrut() -
+      this.getCnaps() -
+      this.getOmsi() -
+      this.getHsni130() -
+      this.getHsni150()
+    )
   }
 }
