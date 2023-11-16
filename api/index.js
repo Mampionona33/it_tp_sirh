@@ -29,6 +29,21 @@ app.get('/cotisations/all', (req, res) => {
   res.status(200).send(db['/cotisations'])
 })
 
+app.get('/avances/id=:id&&dateDebut=:dateDebut&&dateFin=:dateFin', (req, res) => {
+  const avances = db['avances'].filter((av) => {
+    const avDate = parseISO(av.date)
+    const startDate = parseISO(req.params.dateDebut)
+    const endDate = parseISO(req.params.dateFin)
+
+    return (
+      av.id === parseInt(req.params.id) &&
+      isWithinInterval(avDate, { start: startDate, end: endDate })
+    )
+  })
+
+  res.status(200).send(avances)
+})
+
 app.get('/employees/id=:id', (req, res) => {
   const { id } = req.params
   const employee = db['/employees'].find((emp) => emp.id === parseInt(id))

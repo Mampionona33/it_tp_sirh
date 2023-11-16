@@ -2745,11 +2745,25 @@
       "id": 3,
       "label": "Cotisation sociale",
       "taux": 0.01
+    }
+  ],
+
+  "avances": [
+    {
+      "id": 1,
+      "employee": {
+        "id": 1
+      },
+      "date": "2023-01-15T05:14:08.190Z",
+      "montant": 100000
     },
     {
-      "id": 4,
-      "label": "IRSA",
-      "taux": 0.05
+      "id": 2,
+      "employee": {
+        "id": 2
+      },
+      "date": "2023-01-15T05:14:08.190Z",
+      "montant": 30000
     }
   ]
 }
