@@ -1,10 +1,11 @@
 import axios from 'axios'
-const REACT_APP_API_DEV_BASE_URL = process.env.REACT_APP_API_DEV_BASE_URL || 'http://localhost:8000'
 
 class CotisationService {
+  REACT_APP_API_DEV_BASE_URL = process.env.REACT_APP_API_DEV_BASE_URL || 'http://localhost:8000'
+
   async getAll() {
     try {
-      const resp = await axios.get(`${REACT_APP_API_DEV_BASE_URL}/cotisations/all`)
+      const resp = await axios.get(`${this.REACT_APP_API_DEV_BASE_URL}/cotisations/all`)
       return resp.data
     } catch (error) {
       console.log(error)

@@ -2765,5 +2765,16 @@
       "date": "2023-01-15T05:14:08.190Z",
       "montant": 30000
     }
+  ],
+
+  "mouvementSalaire": [
+    { "id": 1, "label": "Prime d'assuicidité", "action": "ajout" },
+    { "id": 2, "label": "Prime d'excellence", "action": "ajout" },
+    { "id": 3, "label": "Indemnité de transport", "action": "ajout" },
+    { "id": 4, "label": "Avantages en nature (Logement)", "action": "ajout" },
+    { "id": 5, "label": "Avantages en nature (Véhicule)", "action": "ajout" },
+    { "id": 6, "label": "Autres indemnités", "action": "ajout" },
+    { "id": 7, "label": "Autres avantages", "action": "ajout" },
+    { "id": 8, "label": "Absence / Retard à déduire", "action": "deduction" }
   ]
 }

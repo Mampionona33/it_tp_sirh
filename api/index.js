@@ -59,6 +59,10 @@ app.get('/employees/id=:id', (req, res) => {
   }
 })
 
+app.get('/mouvement-salaire', (req, res) => {
+  return res.status(200).send(db['mouvementSalaire'])
+})
+
 const PORT = process.env.PORT || 8000
 
 app.listen(PORT, () => {

@@ -4,12 +4,16 @@ import { useDispatch } from 'react-redux'
 import { setPrimeEtAvantage } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { useSelector } from 'react-redux'
+import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
 
 export default function PrimeEtAvantage() {
   const title = 'Primes et avantages'
   const indemnite = useSelector((state) => state.bulletinDePaie.indemnite)
   const retenue = useSelector((state) => state.bulletinDePaie.retenue)
+  const mouvementSalaire = useSelector((state) => state.mouvementSalaire.list)
   const dispatch = useDispatch()
+
+  console.log(mouvementSalaire)
 
   const Body = () => {
     const fields = [
@@ -36,9 +40,9 @@ export default function PrimeEtAvantage() {
 
     const [formValues, setFormValues] = useState({})
 
-    const halfLength = Math.ceil(fields.length / 2)
-    const firstHalf = fields.slice(0, halfLength)
-    const secondHalf = fields.slice(halfLength)
+    const halfLength = Math.ceil(mouvementSalaire.length / 2)
+    const firstHalf = mouvementSalaire.slice(0, halfLength)
+    const secondHalf = mouvementSalaire.slice(halfLength)
 
     const handleSubmit = (e) => {
       e.preventDefault()
@@ -83,9 +87,9 @@ export default function PrimeEtAvantage() {
     React.useEffect(() => {
       let mount = true
       // console.log(retenue)
-      if (mount && fields.length > 0) {
-        const initialIndmnite = fields.filter((field) => field.action === 'indemnite')
-        const initialRetenue = fields.filter((field) => field.action === 'retenue')
+      if (mount && mouvementSalaire.length > 0) {
+        const initialIndmnite = mouvementSalaire.filter((field) => field.action === 'ajout')
+        const initialRetenue = mouvementSalaire.filter((field) => field.action === 'deduction')
 
         if (indemnite.length === 0) {
           dispatch(setBulletinDePaie({ indemnite: [...indemnite, ...initialIndmnite] }))
@@ -95,10 +99,14 @@ export default function PrimeEtAvantage() {
         }
       }
 
+      if (mount && mouvementSalaire.length === 0) {
+        dispatch(fetchAllMouvementSalaire())
+      }
+
       return () => {
         mount = false
       }
-    }, [fields, indemnite, retenue])
+    }, [fields, indemnite, retenue, dispatch, mouvementSalaire])
 
     return (
       <>

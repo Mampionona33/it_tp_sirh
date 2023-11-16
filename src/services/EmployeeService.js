@@ -1,14 +1,14 @@
 import axios from 'axios'
 
-const REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
-
 class EmployeeService {
+  REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
+
   login = 'lslisteemployes'
   pass = '20lsliste23'
 
   async getAll() {
     try {
-      const response = await axios.get(`${REACT_APP_API_BASE_URL}/listeemployes`, {
+      const response = await axios.get(`${this.REACT_APP_API_BASE_URL}/listeemployes`, {
         auth: {
           username: this.login,
           password: this.pass,
@@ -22,7 +22,7 @@ class EmployeeService {
   }
 
   getById(id) {
-    return axios.get(`${REACT_APP_API_BASE_URL}/employees/id=${id}`)
+    return axios.get(`${this.REACT_APP_API_BASE_URL}/employees/id=${id}`)
   }
 }
 const newEmployeeService = new EmployeeService()
