@@ -50,6 +50,7 @@ const TimeSheetTable = (props) => {
   const [endDate, setEndDate] = useState(defaultEndDate)
   const dispatch = useDispatch()
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
+  const isCadre = salarie.cadre || false
 
   setDefaultOptions({ locale: fr })
 
@@ -422,14 +423,14 @@ const TimeSheetTable = (props) => {
         dispatch(setTotalHdim(newTotal.sundayHours))
         dispatch(setTotalHferier(newTotal.holidayHours))
 
-        dispatch(setBulletinDePaie({ totalHn: newTotal.regularHoursDay }))
-        dispatch(setBulletinDePaie({ totalHs: newTotal.overtimeHoursDay }))
-        dispatch(setBulletinDePaie({ totalHs130: newTotal.hs130 }))
-        dispatch(setBulletinDePaie({ totalHs150: newTotal.hs150 }))
-        dispatch(setBulletinDePaie({ totalHs30: newTotal.regularNightHours }))
-        dispatch(setBulletinDePaie({ totalHs50: newTotal.occasionalNightHours }))
-        dispatch(setBulletinDePaie({ totalHDim: newTotal.sundayHours }))
-        dispatch(setBulletinDePaie({ totalHFerier: newTotal.holidayHours }))
+        dispatch(setBulletinDePaie({ totalHn: isCadre ? 0 : newTotal.regularHoursDay }))
+        dispatch(setBulletinDePaie({ totalHs: isCadre ? 0 : newTotal.overtimeHoursDay }))
+        dispatch(setBulletinDePaie({ totalHs130: isCadre ? 0 : newTotal.hs130 }))
+        dispatch(setBulletinDePaie({ totalHs150: isCadre ? 0 : newTotal.hs150 }))
+        dispatch(setBulletinDePaie({ totalHs30: isCadre ? 0 : newTotal.regularNightHours }))
+        dispatch(setBulletinDePaie({ totalHs50: isCadre ? 0 : newTotal.occasionalNightHours }))
+        dispatch(setBulletinDePaie({ totalHDim: isCadre ? 0 : newTotal.sundayHours }))
+        dispatch(setBulletinDePaie({ totalHFerier: isCadre ? 0 : newTotal.holidayHours }))
         console.log(newTotal.regularHoursDay)
         console.log(newTotal.hs130)
         console.log(newTotal.hs150)
@@ -443,8 +444,8 @@ const TimeSheetTable = (props) => {
         dispatch(setTotalHsni130(newTotalHsni.hsni130))
         dispatch(setTotalHsni150(newTotalHsni.hsni150))
 
-        dispatch(setBulletinDePaie({ hsni130: newTotalHsni.hsni130 }))
-        dispatch(setBulletinDePaie({ hsni150: newTotalHsni.hsni150 }))
+        dispatch(setBulletinDePaie({ hsni130: isCadre ? 0 : newTotalHsni.hsni130 }))
+        dispatch(setBulletinDePaie({ hsni150: isCadre ? 0 : newTotalHsni.hsni150 }))
       }
     }
 

@@ -211,84 +211,84 @@ const SalaireBrut = () => {
     )
   }
 
-  // React.useEffect(() => {
-  //   let mount = true
-  //   if (salaireBrute_ && mount) {
-  //     // dispatch(setSelectedEmployeSalaireBrut(salaireBrute_))
-  //     dispatch(setBulletinDePaie({ salaireBrute: salaireBrute_ }))
-  //   }
-  //   if (hsni130_) {
-  //     if (mount) {
-  //       dispatch(setBulletinDePaie({ hsni130: hsni130_ }))
-  //     }
-  //   }
-  //   if (hsni150_ && mount) {
-  //     dispatch(setBulletinDePaie({ hsni150_: hsni150_ }))
-  //   }
+  React.useEffect(() => {
+    let mount = true
+    if (salaireBrute_ && mount) {
+      // dispatch(setSelectedEmployeSalaireBrut(salaireBrute_))
+      dispatch(setBulletinDePaie({ salaireBrute: salaireBrute_ }))
+    }
+    if (hsni130_) {
+      if (mount) {
+        dispatch(setBulletinDePaie({ valeurHsni130: hsni130_ }))
+      }
+    }
+    if (hsni150_ && mount) {
+      dispatch(setBulletinDePaie({ valeurHsni150: hsni150_ }))
+    }
 
-  //   if (hn30 && mount) {
-  //     dispatch(setBulletinDePaie({ hs30: hn30 }))
-  //   }
-  //   if (hn50 && mount) {
-  //     dispatch(setBulletinDePaie({ hs50: hn50 }))
-  //   }
+    if (hn30 && mount) {
+      dispatch(setBulletinDePaie({ valeurHs30: hn30 }))
+    }
+    if (hn50 && mount) {
+      dispatch(setBulletinDePaie({ valeurHs50: hn50 }))
+    }
 
-  //   if (baseIrsa && mount) {
-  //     dispatch(setBulletinDePaie({ baseIrsa: baseIrsa }))
-  //   }
-  //   if (omsi_ && mount) {
-  //     dispatch(setBulletinDePaie({ omsi: omsi_ }))
-  //   }
+    if (baseIrsa && mount) {
+      dispatch(setBulletinDePaie({ baseIrsa: baseIrsa }))
+    }
+    if (omsi_ && mount) {
+      dispatch(setBulletinDePaie({ omsi: omsi_ }))
+    }
 
-  //   if (plafondSME && mount) {
-  //     dispatch(setBulletinDePaie({ plafondSME: plafondSME }))
-  //   }
+    if (plafondSME && mount) {
+      dispatch(setBulletinDePaie({ plafondSME: plafondSME }))
+    }
 
-  //   if (tauxCnaps && mount && cnaps_ && baseCnaps) {
-  //     const cnapsObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'cnaps')
+    // if (tauxCnaps && mount && cnaps_ && baseCnaps) {
+    //   const cnapsObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'cnaps')
 
-  //     if (cnapsObjectIndex === -1) {
-  //       // Si l'objet 'cnaps' n'existe pas encore dans le tableau, ajoutez-le
-  //       dispatch(
-  //         setBulletinDePaie({
-  //           retenuSalaire: [
-  //             ...retenuSalaire,
-  //             { label: 'cnaps', base: baseCnaps, taux: tauxCnaps, montant: cnaps_ },
-  //           ],
-  //         }),
-  //       )
-  //     } else {
-  //       // Si l'objet 'cnaps' existe déjà, mettez à jour ses propriétés
-  //       dispatch(
-  //         setBulletinDePaie({
-  //           retenuSalaire: retenuSalaire.map((ret, index) =>
-  //             index === cnapsObjectIndex
-  //               ? { ...ret, base: baseCnaps, taux: tauxCnaps, montant: cnaps_ }
-  //               : ret,
-  //           ),
-  //         }),
-  //       )
-  //     }
-  //   }
+    //   if (cnapsObjectIndex === -1) {
+    //     // Si l'objet 'cnaps' n'existe pas encore dans le tableau, ajoutez-le
+    //     dispatch(
+    //       setBulletinDePaie({
+    //         retenuSalaire: [
+    //           ...retenuSalaire,
+    //           { label: 'cnaps', base: baseCnaps, taux: tauxCnaps, montant: cnaps_ },
+    //         ],
+    //       }),
+    //     )
+    //   } else {
+    //     // Si l'objet 'cnaps' existe déjà, mettez à jour ses propriétés
+    //     dispatch(
+    //       setBulletinDePaie({
+    //         retenuSalaire: retenuSalaire.map((ret, index) =>
+    //           index === cnapsObjectIndex
+    //             ? { ...ret, base: baseCnaps, taux: tauxCnaps, montant: cnaps_ }
+    //             : ret,
+    //         ),
+    //       }),
+    //     )
+    //   }
+    // }
 
-  //   return () => {
-  //     mount = false
-  //   }
-  // }, [
-  //   salaireBrute_,
-  //   tauxCnaps,
-  //   tauxOmsi,
-  //   hsni130_,
-  //   plafondSME,
-  //   hsni150_,
-  //   hn30,
-  //   hn50,
-  //   dispatch,
-  //   cnaps_,
-  //   baseIrsa,
-  //   baseCnaps,
-  //   omsi_,
-  // ])
+    return () => {
+      mount = false
+    }
+  }, [
+    salaireBrute_,
+    tauxCnaps,
+    tauxOmsi,
+    hsni130_,
+    plafondSME,
+    hsni150_,
+    hn30,
+    hn50,
+    dispatch,
+    cnaps_,
+    baseIrsa,
+    baseCnaps,
+    omsi_,
+  ])
 
   return (
     <div>

@@ -144,9 +144,13 @@ export default class CalculPai {
       : this.getSalaireBrut() * this.tauxCnaps
   }
 
+  getSalaireDeBase() {
+    return this.salaireBase
+  }
+
   getSalaireBrut() {
     return this.isCadre
-      ? this.salaireBase + this.getTotalAjoutSalaire() - this.getTotalRetenuSalarie()
+      ? this.getSalaireDeBase() + this.getTotalAjoutSalaire() - this.getTotalRetenuSalarie()
       : this.getHsni130() +
           this.getTotalAjoutSalaire() +
           this.getHsni150() +
@@ -155,7 +159,7 @@ export default class CalculPai {
           this.getHDim() +
           this.getHsi130() +
           this.getHsi150() +
-          this.salaireBase +
+          this.getSalaireDeBase() +
           this.getPrimeEtAvantage() -
           this.getTotalRetenuSalarie()
   }
