@@ -79,19 +79,6 @@ const SalaireBrut = () => {
     totalPrimeEtAvantage,
   ])
 
-  // const calculPaie = new CalculPai(salaireDeBase)
-  // calculPaie.setTauxHoraire(173.33)
-  // calculPaie.setHsni130(employeeTotalHours.hsni130 ? employeeTotalHours.hsni130 : 0)
-  // calculPaie.setHsni150(employeeTotalHours.hsni150 ? employeeTotalHours.hsni150 : 0)
-  // calculPaie.setTotalHs130(employeeTotalHours.totalHs130 ? employeeTotalHours.totalHs130 : 0)
-  // calculPaie.setTotalHs150(employeeTotalHours.totalHs150 ? employeeTotalHours.totalHs150 : 0)
-  // calculPaie.setTotalHn30(employeeTotalHours.totalHs30 ? employeeTotalHours.totalHs30 : 0)
-  // calculPaie.setTotalHn50(employeeTotalHours.totalHs50 ? employeeTotalHours.totalHs50 : 0)
-  // calculPaie.setTotalHDim(employeeTotalHours.totalHdim ? employeeTotalHours.totalHdim : 0)
-  // calculPaie.setIsCadre(isCadre ? isCadre : 0)
-  // calculPaie.setTotalAjoutSalaire(totalAjoutSalaire ? totalAjoutSalaire : 0)
-  // calculPaie.setTotalRetenuSalarie(totalRetenuSalarie ? totalRetenuSalarie : 0)
-
   const hsni130_ = calculPaie.getHsni130()
   const hsni150_ = calculPaie.getHsni150()
   const hsi130_ = calculPaie.getHsi130()
@@ -185,21 +172,21 @@ const SalaireBrut = () => {
         <table className="table-auto">
           <tbody>
             <tr className="flex flex-wrap justify-between border-b border-customRed-100">
-              <td colSpan="2" className="text-left py-3 pl-4 font-medium">
+              <td colSpan="2" className="text-left py-3 pl-3 font-medium">
                 Salaire de base
               </td>
-              <td className="text-right py-3 px-4 font-medium">{formatedSalaireBase}</td>
+              <td className="text-right py-3 pr-3 font-medium">{formatedSalaireBase}</td>
             </tr>
             {data.map((item, index) => (
               <tr
-                className="flex flex-wrap justify-between border-b border-customRed-100"
+                className="flex flex-wrap sm:justify-between border-b border-customRed-100"
                 key={index}
               >
-                <td className="text-left py-3 pl-4 font-medium">{item.title}</td>
-                <td className="text-left py-3 pl-8 pr-8">
+                <td className="text-left py-3 pl-3 pr-0 font-medium sm:w-1/3">{item.title}</td>
+                <td className="flex justify-center text-left py-3 sm:w-1/3">
                   {item.hours.toString().padStart(2, '0')} H
                 </td>
-                <td className="text-right py-3 px-4">{item.value}</td>
+                <td className="text-right py-3 pr-3 sm:w-1/3">{item.value}</td>
               </tr>
             ))}
 
