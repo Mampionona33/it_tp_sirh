@@ -81,48 +81,48 @@ const SalaireNet = () => {
   //   }
   // }, [irsaApayer, salaireNet, dispatch])
 
-  const data = [
-    {
-      title: 'Salaire brut :',
-      value: <span className="font-medium">{formatAriaryMga(salaireBrut)}</span>,
-    },
-    {
-      title: 'CNAPS :',
-      value: `${formatAriaryMga(cnapsMontant)}`,
-    },
-    {
-      title: 'OSTIE :',
-      value: `${formatAriaryMga(ostieMontant)}`,
-    },
-    {
-      title: '',
-      value: `${formatAriaryMga(soustotal1)}`,
-    },
-    {
-      title: 'HSNI 130',
-      value: `${formatAriaryMga(hsni130Value)}`,
-    },
-    {
-      title: 'HSNI 150',
-      value: `${formatAriaryMga(hsni150Value)}`,
-    },
-    {
-      title: 'Base IRSA',
-      value: `${formatAriaryMga(baseIrsa)}`,
-    },
-    {
-      title: 'Imposable arrondi',
-      value: `${formatAriaryMga(imposableArrondi)}`,
-    },
-    {
-      title: 'IRSA à payer',
-      value: <span className="font-medium">{formatAriaryMga(irsaApayer)}</span>,
-    },
-    {
-      title: 'Salaire net',
-      value: <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNet)}</span>,
-    },
-  ]
+  // const data = [
+  //   {
+  //     title: 'Salaire brut :',
+  //     value: <span className="font-medium">{formatAriaryMga(salaireBrut)}</span>,
+  //   },
+  //   {
+  //     title: 'CNAPS :',
+  //     value: `${formatAriaryMga(cnapsMontant)}`,
+  //   },
+  //   {
+  //     title: 'OSTIE :',
+  //     value: `${formatAriaryMga(ostieMontant)}`,
+  //   },
+  //   {
+  //     title: '',
+  //     value: `${formatAriaryMga(soustotal1)}`,
+  //   },
+  //   {
+  //     title: 'HSNI 130',
+  //     value: `${formatAriaryMga(hsni130Value)}`,
+  //   },
+  //   {
+  //     title: 'HSNI 150',
+  //     value: `${formatAriaryMga(hsni150Value)}`,
+  //   },
+  //   {
+  //     title: 'Base IRSA',
+  //     value: `${formatAriaryMga(baseIrsa)}`,
+  //   },
+  //   {
+  //     title: 'Imposable arrondi',
+  //     value: `${formatAriaryMga(imposableArrondi)}`,
+  //   },
+  //   {
+  //     title: 'IRSA à payer',
+  //     value: <span className="font-medium">{formatAriaryMga(irsaApayer)}</span>,
+  //   },
+  //   {
+  //     title: 'Salaire net',
+  //     value: <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNet)}</span>,
+  //   },
+  // ]
 
   const Body = () => {
     return (

@@ -19,7 +19,6 @@ const initialState = {
   plafondSME: null,
   irsa: null,
   cnaps: null,
-  plafondSME: null,
   ajoutSalaire: [],
   retenuSalaire: [],
   cotisations: [],
