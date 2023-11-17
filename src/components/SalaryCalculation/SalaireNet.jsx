@@ -14,7 +14,9 @@ const SalaireNet = () => {
   const salaireBrut = useSelector((state) => state.bulletinDePaie.salaireBrut)
   const cnaps = useSelector((state) => state.bulletinDePaie.cnaps)
   const omsi = useSelector((state) => state.bulletinDePaie.omsi)
-  // const retenue = useSelector((state) => state.bulletinDePaie.retenue)
+  const valeurHsni130 = useSelector((state) => state.bulletinDePaie.valeurHsni130)
+  const valeurHsni150 = useSelector((state) => state.bulletinDePaie.valeurHsni150)
+  const baseIrsa = useSelector((state) => state.bulletinDePaie.baseIrsa)
   // const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
   // const cotisations = useSelector((state) => state.cotisations.liste)
 
@@ -99,19 +101,19 @@ const SalaireNet = () => {
       },
       {
         title: '',
-        // value: `${formatAriaryMga(soustotal1)}`,
+        value: `${formatAriaryMga(salaireBrut - cnaps - omsi)}`,
       },
       {
         title: 'HSNI 130',
-        // value: `${formatAriaryMga(hsni130Value)}`,
+        value: `${formatAriaryMga(valeurHsni130)}`,
       },
       {
         title: 'HSNI 150',
-        // value: `${formatAriaryMga(hsni150Value)}`,
+        value: `${formatAriaryMga(valeurHsni150)}`,
       },
       {
         title: 'Base IRSA',
-        // value: `${formatAriaryMga(baseIrsa)}`,
+        value: `${formatAriaryMga(baseIrsa)}`,
       },
       {
         title: 'Imposable arrondi',
