@@ -18,6 +18,7 @@ const SalaireNet = () => {
   const valeurHsni150 = useSelector((state) => state.bulletinDePaie.valeurHsni150)
   const baseIrsa = useSelector((state) => state.bulletinDePaie.baseIrsa)
   const irsaArrondi = useSelector((state) => state.bulletinDePaie.irsaArrondi)
+  const irsaAPayer = useSelector((state) => state.bulletinDePaie.irsaAPayer)
   // const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
   // const cotisations = useSelector((state) => state.cotisations.liste)
 
@@ -122,7 +123,7 @@ const SalaireNet = () => {
       },
       {
         title: 'IRSA à payer',
-        // value: <span className="font-medium">{formatAriaryMga(irsaApayer)}</span>,
+        value: <span className="font-medium">{formatAriaryMga(irsaAPayer)}</span>,
       },
       {
         title: 'Salaire net',

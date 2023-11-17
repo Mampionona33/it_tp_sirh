@@ -102,6 +102,7 @@ const SalaireBrut = () => {
   const plafondSME = calculPaie.getPlafondSME()
   const tauxCnaps = calculPaie.getTauxCnaps()
   const tauxOmsi = calculPaie.getTauxOmsi()
+  const irsaAPayer = calculPaie.getIrsaAPayer()
 
   // console.log(`hsni130_: ${hsni130_}`)
   // console.log(`hsni150_: ${hsni150_}`)
@@ -258,6 +259,9 @@ const SalaireBrut = () => {
     if (irsaArrondi && mount) {
       dispatch(setBulletinDePaie({ irsaArrondi: irsaArrondi }))
     }
+    if (irsaAPayer && mount) {
+      dispatch(setBulletinDePaie({ irsaAPayer: irsaAPayer }))
+    }
 
     // if (tauxCnaps && mount && cnaps_ && baseCnaps) {
     //   const cnapsObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'cnaps')
@@ -302,7 +306,9 @@ const SalaireBrut = () => {
     cnaps_,
     baseIrsa,
     baseCnaps,
+    irsaAPayer,
     omsi_,
+    irsaArrondi,
   ])
 
   return (

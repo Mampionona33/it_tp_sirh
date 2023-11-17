@@ -30,7 +30,7 @@ const initialState = {
   omsi: null,
   salaireNetAPayer: null,
   plafondSME: null,
-  irsa: null,
+  irsaAPayer: null,
   cnaps: null,
   ajoutSalaire: [],
   retenuSalaire: [],

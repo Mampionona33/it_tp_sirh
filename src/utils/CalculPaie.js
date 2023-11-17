@@ -12,7 +12,7 @@ export default class CalculPai {
   hsi130 = 0
   hsi150 = 0
   tauxCnaps = 0.01
-  irsa = 0
+  irsaAPayer = 0
   tauxOmsi = 0.01
   salaireBase = 0
   primeEtAvantage = 0
@@ -26,8 +26,8 @@ export default class CalculPai {
   }
 
   // Setter
-  setIrsa(irsa) {
-    this.irsa = irsa
+  setIrsa(irsaAPayer) {
+    this.irsaAPayer = irsaAPayer
   }
 
   setTotalRetenuSalarie(totalRetenuSalarie) {
@@ -191,7 +191,47 @@ export default class CalculPai {
   getBaseIrsaArrondi() {
     const baseIrsa = this.getBaseIrsa()
     const result = Math.floor(baseIrsa / 100) * 100
-    console.log(result)
     return result
   }
+
+  // Calcul Irsa a payer
+  // ---------------------------------------------
+
+  isTranche0() {
+    return this.getBaseIrsaArrondi() <= 350000
+  }
+  isTranche1() {
+    return this.getBaseIrsaArrondi() >= 350001 && this.getBaseIrsaArrondi() <= 400000
+  }
+  isTranche2() {
+    return this.getBaseIrsaArrondi() >= 400001 && this.getBaseIrsaArrondi() <= 500000
+  }
+  isTranche3() {
+    return this.getBaseIrsaArrondi() >= 500001 && this.getBaseIrsaArrondi() <= 600000
+  }
+
+  calculIrsaTranche() {
+    if (this.isTranche0()) {
+      this.irsaAPayer = 0
+    } else if (this.isTranche1()) {
+      this.irsaAPayer = (this.getBaseIrsaArrondi() - 350000) * 0.05
+    } else if (this.isTranche2()) {
+      this.irsaAPayer = 50000 * 0.05 + (this.getBaseIrsaArrondi() - 400000) * 0.1
+    } else if (this.isTranche3()) {
+      this.irsaAPayer = 50000 * 0.05 + 100000 * 0.1 + (this.getBaseIrsaArrondi() - 500000) * 0.15
+    } else {
+      this.irsaAPayer =
+        50000 * 0.05 + 100000 * 0.1 + 100000 * 0.15 + (this.getBaseIrsaArrondi() - 600000) * 0.2
+    }
+
+    if (this.irsaAPayer < 2000) {
+      this.irsaAPayer = 2000
+    }
+  }
+
+  getIrsaAPayer() {
+    this.calculIrsaTranche()
+    return this.irsaAPayer
+  }
+  // -----------------------------------
 }
