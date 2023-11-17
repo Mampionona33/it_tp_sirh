@@ -9,13 +9,13 @@ const SalaireNetAPayer = () => {
   const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
   const irsaValue = useSelector((state) => state.selectedEmploye.irsaValue)
   const primeEtAvantage = useSelector((state) => state.selectedEmploye.primeEtAvantage)
-  const retenue = useSelector((state) => state.bulletinDePaie.retenue)
-  const cnaps = retenue.find((ret) => ret.label === 'cnaps')
-  const ostie = retenue.find((ret) => ret.label === 'ostie')
-  const cnapsBase = cnaps && cnaps.base
-  const ostieBase = ostie && ostie.base
+  // // const retenue = useSelector((state) => state.bulletinDePaie.retenue)
+  // const cnaps = retenue.find((ret) => ret.label === 'cnaps')
+  // const ostie = retenue.find((ret) => ret.label === 'ostie')
+  // const cnapsBase = cnaps && cnaps.base
+  // const ostieBase = ostie && ostie.base
 
-  const salaireNetAPayer = salaireBrut + irsaValue + cnapsBase + ostieBase + (primeEtAvantage || 0)
+  // const salaireNetAPayer = salaireBrut + irsaValue + cnapsBase + ostieBase + (primeEtAvantage || 0)
 
   const data = [
     {
@@ -24,11 +24,11 @@ const SalaireNetAPayer = () => {
     },
     {
       title: 'CNAPS :',
-      value: `${formatAriaryMga(cnapsBase)}`,
+      // value: `${formatAriaryMga(cnapsBase)}`,
     },
     {
       title: 'OSTIE :',
-      value: `${formatAriaryMga(ostieBase)}`,
+      // value: `${formatAriaryMga(ostieBase)}`,
     },
     {
       title: 'IRSA :',
@@ -36,9 +36,9 @@ const SalaireNetAPayer = () => {
     },
     {
       title: 'Salaire net à payer :',
-      value: (
-        <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNetAPayer)}</span>
-      ),
+      // value: (
+      //   // <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNetAPayer)}</span>
+      // ),
     },
   ]
 

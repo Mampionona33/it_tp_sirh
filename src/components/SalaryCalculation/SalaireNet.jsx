@@ -1,15 +1,11 @@
 import React, { useCallback, useEffect } from 'react'
 import CustomSection from 'src/components/CustomSection'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
-import CalculIrsaAPayer from 'src/utils/CalculIrsaAPayer'
-import { setIrsaValue } from 'src/redux/selectedEmploye/selectedEmployeReducer'
-import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import useFetchCotisations from 'src/assets/hooks/useFetchCotisations'
 
 const SalaireNet = () => {
   useFetchCotisations()
-  const dispatch = useDispatch()
   const title = 'Salaire net'
   const salaireBrut = useSelector((state) => state.bulletinDePaie.salaireBrut)
   const cnaps = useSelector((state) => state.bulletinDePaie.cnaps)
@@ -19,73 +15,18 @@ const SalaireNet = () => {
   const baseIrsa = useSelector((state) => state.bulletinDePaie.baseIrsa)
   const irsaArrondi = useSelector((state) => state.bulletinDePaie.irsaArrondi)
   const irsaAPayer = useSelector((state) => state.bulletinDePaie.irsaAPayer)
-  // const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
-  // const cotisations = useSelector((state) => state.cotisations.liste)
 
-  // // Calcul cnaps
-  // const cnapsVal = retenue.filter((ret) => ret.label === 'cnaps')
-  // const cnapsMontant = cnapsVal.length > 0 ? cnapsVal[0].montant : 0
-  // // calcul ostie
-  // const ostieVal = retenue.filter((ret) => ret.label === 'Retenue sur organisme sanitaire')
-  // const ostieMontant = ostieVal.length > 0 ? ostieVal[0].montant : 0
-
-  // const calculateAndDispatch = useCallback(() => {
-  //   const updatedRetenue = []
-
-  //   cotisations.forEach((cot) => {
-  //     const tauxVal = cot.taux
-  //     const calculateMontant = salaireBrut * tauxVal
-  //     const label = cot.label
-  //     // console.log(label)
-
-  //     // Check if label is not already in the updatedRetenue array
-  //     if (!updatedRetenue.some((ret) => ret.label === label)) {
-  //       updatedRetenue.push({ label, taux: tauxVal, montant: calculateMontant })
-  //     }
-  //   })
-
-  //   const modif = { retenue: updatedRetenue }
-  //   dispatch(setBulletinDePaie(modif))
-  // }, [dispatch, retenue, cotisations, salaireBrut])
-
-  // useEffect(() => {
-  //   let mount = true
-
-  //   if (mount && salaireBrut) {
-  //     calculateAndDispatch()
+  // function arraysAreEqual(arr1, arr2) {
+  //   if (arr1.length !== arr2.length) {
+  //     return false
   //   }
-
-  //   return () => {
-  //     mount = false
-  //   }
-  // }, [salaireBrut])
-
-  function arraysAreEqual(arr1, arr2) {
-    if (arr1.length !== arr2.length) {
-      return false
-    }
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) {
-        return false
-      }
-    }
-    return true
-  }
-
-  // React.useEffect(() => {
-  //   let mount = true
-  //   if (irsaApayer) {
-  //     if (mount) {
-  //       dispatch(setIrsaValue(irsaApayer))
+  //   for (let i = 0; i < arr1.length; i++) {
+  //     if (arr1[i] !== arr2[i]) {
+  //       return false
   //     }
   //   }
-  //   if (salaireNet && mount) {
-  //     dispatch(setBulletinDePaie(salaireNet))
-  //   }
-  //   return () => {
-  //     mount = false
-  //   }
-  // }, [irsaApayer, salaireNet, dispatch])
+  //   return true
+  // }
 
   const data =
     [

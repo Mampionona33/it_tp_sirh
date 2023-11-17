@@ -8,7 +8,6 @@ import { DocumentTextIcon } from '@heroicons/react/24/outline'
 import { useSelector } from 'react-redux'
 
 const SalaryCalculation = () => {
-  const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
   const id = salarie.id
   // console.log(id)
@@ -21,7 +20,7 @@ const SalaryCalculation = () => {
         <div className="d-flex justify-content-between flex-wrap columns-3 gap-4">
           <SalaireBrut />
           <SalaireNet />
-          {/* <SalaireNetAPayer /> */}
+          <SalaireNetAPayer />
         </div>
         <div className="flex justify-end fixed top-[25%] p-1 right-0">
           <Link to={`/bulletin-de-paie/${id}`} className="btn btn-primary">

@@ -1,11 +1,9 @@
-import { format, parseISO } from 'date-fns'
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
-import { setSelectedEmploye } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const Fiche = () => {

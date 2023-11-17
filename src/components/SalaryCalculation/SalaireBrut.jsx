@@ -1,24 +1,19 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector, useDispatch } from 'react-redux'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
-import {
-  setHsni130Value,
-  setHsni150Value,
-  setSelectedEmployeSalaireBrut,
-} from 'src/redux/selectedEmploye/selectedEmployeReducer'
+// import {
+//   setHsni130Value,
+//   setHsni150Value,
+//   setSelectedEmployeSalaireBrut,
+// } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 import CalculPai from 'src/utils/CalculPaie'
 
 const SalaireBrut = () => {
   const dispatch = useDispatch()
-  const employeeTotalHours = useSelector((state) => state.employeHours)
   const title = 'Salaire brut'
   const selecteEmploy = useSelector((state) => state.bulletinDePaie.salarie)
-  const ajoutSalaire = useSelector((state) => state.bulletinDePaie.ajoutSalaire)
-  const retenuSalaire = useSelector((state) => state.bulletinDePaie.retenuSalaire)
-  const cotisations = useSelector((state) => state.bulletinDePaie.cotisations)
-  // const salaireDeBase = selecteEmploy.salaireBase
   const isCadre = selecteEmploy.cadre
   const salaireDeBase = useSelector((state) => state.bulletinDePaie.salaireDeBase)
   const hsni130 = useSelector((state) => state.bulletinDePaie.hsni130)
@@ -66,8 +61,12 @@ const SalaireBrut = () => {
     calc.setTotalHn50(totalHs50)
     calc.setTotalHDim(totalHDim)
     calc.setTotalAjoutSalaire(totalPrimeEtAvantage)
+    calc.setIsCadre(isCadre)
+    calc.setTotalRetenuSalarie(totalDeduction)
     return calc
   }, [
+    totalDeduction,
+    isCadre,
     salaireDeBase,
     hsni130,
     hsni150,
@@ -129,6 +128,7 @@ const SalaireBrut = () => {
   const formatedSlaireBruteValue = formatAriaryMga(salaireBrut_)
   const formatedSalaireBase = formatAriaryMga(salaireDeBase)
   const formatedPrimeEtAvantage = formatAriaryMga(totalPrimeEtAvantage)
+  const formatedRetenue = formatAriaryMga(totalDeduction)
 
   const data = [
     {
@@ -204,6 +204,17 @@ const SalaireBrut = () => {
               </div>
               <div className="text-right  p-3 border-b align-middle border-customRed-100">
                 {formatedPrimeEtAvantage}
+              </div>
+            </div>
+          </div>
+
+          <div className="col-span-2">
+            <div className="grid grid-cols-2">
+              <div className="font-medium p-3 border-b  align-middle border-customRed-100">
+                Retenues:
+              </div>
+              <div className="text-right  p-3 border-b align-middle border-customRed-100">
+                {formatedRetenue}
               </div>
             </div>
           </div>

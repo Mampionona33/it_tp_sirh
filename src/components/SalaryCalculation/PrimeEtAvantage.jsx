@@ -62,7 +62,7 @@ export default function PrimeEtAvantage() {
 
       const ajoutSalaireUp = mergeArraysByReferenceValue(ajoutSalaire, updatedAjoutSalaire, 'label')
       const retenuSalaireUp = mergeArraysByReferenceValue(retenuSalaire, updatedRetenue, 'label')
-      console.log('ajoutSalaireUp', ajoutSalaireUp)
+      // console.log('ajoutSalaireUp', ajoutSalaireUp)
       console.log('retenuSalaireUp', retenuSalaireUp)
       dispatch(setBulletinDePaie({ ajoutSalaire: ajoutSalaireUp }))
       dispatch(setBulletinDePaie({ totalPrimeEtAvantage: primeEtAvantage }))
