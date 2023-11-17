@@ -89,6 +89,7 @@ const SalaireBrut = () => {
   const cnaps_ = calculPaie.getCnaps()
   const omsi_ = calculPaie.getOmsi()
   const irsaArrondi = calculPaie.getBaseIrsaArrondi()
+  const salaireNet = calculPaie.getSalaireNet()
 
   const baseIrsa = useMemo(() => {
     return calculPaie.getBaseIrsa()
@@ -273,6 +274,9 @@ const SalaireBrut = () => {
     if (irsaAPayer && mount) {
       dispatch(setBulletinDePaie({ irsaAPayer: irsaAPayer }))
     }
+    if (salaireNet && salaireNet) {
+      dispatch(setBulletinDePaie({ salaireNet: salaireNet }))
+    }
 
     // if (tauxCnaps && mount && cnaps_ && baseCnaps) {
     //   const cnapsObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'cnaps')
@@ -305,6 +309,7 @@ const SalaireBrut = () => {
       mount = false
     }
   }, [
+    salaireNet,
     salaireBrut_,
     tauxCnaps,
     tauxOmsi,

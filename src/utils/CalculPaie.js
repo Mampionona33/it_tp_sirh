@@ -234,4 +234,8 @@ export default class CalculPai {
     return this.irsaAPayer
   }
   // -----------------------------------
+
+  getSalaireNet() {
+    return this.getBaseIrsaArrondi() - this.getIrsaAPayer()
+  }
 }

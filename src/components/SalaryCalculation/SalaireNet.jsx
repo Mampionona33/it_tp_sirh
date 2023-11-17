@@ -15,6 +15,7 @@ const SalaireNet = () => {
   const baseIrsa = useSelector((state) => state.bulletinDePaie.baseIrsa)
   const irsaArrondi = useSelector((state) => state.bulletinDePaie.irsaArrondi)
   const irsaAPayer = useSelector((state) => state.bulletinDePaie.irsaAPayer)
+  const salaireNet = useSelector((state) => state.bulletinDePaie.salaireNet)
 
   // function arraysAreEqual(arr1, arr2) {
   //   if (arr1.length !== arr2.length) {
@@ -68,9 +69,9 @@ const SalaireNet = () => {
       },
       {
         title: 'Salaire net',
-        // value: (
-        //   <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNet)}</span>
-        // ),
+        value: (
+          <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNet)}</span>
+        ),
       },
     ] || []
 
