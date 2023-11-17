@@ -45,10 +45,12 @@ const Fiche = () => {
     let mount = true
 
     if (id && employees && mount) {
-      const emp = employees.find((empl) => empl.id == id)
+      const emp = employees.find((empl) => empl.id === parseInt(id))
 
       if (emp) {
+        const salaireBase = emp.salaireBase
         dispatch(setBulletinDePaie({ salarie: { ...emp } }))
+        dispatch(setBulletinDePaie({ salaireDeBase: salaireBase }))
       }
     }
 

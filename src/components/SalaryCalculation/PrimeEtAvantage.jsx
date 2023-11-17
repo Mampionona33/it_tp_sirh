@@ -164,7 +164,8 @@ export default function PrimeEtAvantage() {
 
   return (
     <>
-      <CustomSection fullWidth title={title} body={<Body />} />
+      <div>Primes et avantages</div>
+      {/* <CustomSection fullWidth title={title} body={<Body />} /> */}
     </>
   )
 }

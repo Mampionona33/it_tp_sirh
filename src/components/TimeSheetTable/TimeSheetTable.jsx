@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import {
   useReactTable,
   createColumnHelper,
@@ -421,6 +422,24 @@ const TimeSheetTable = (props) => {
         dispatch(setTotalHdim(newTotal.sundayHours))
         dispatch(setTotalHferier(newTotal.holidayHours))
 
+        dispatch(setBulletinDePaie({ totalHTravail: newTotal.regularHoursDay }))
+        dispatch(setBulletinDePaie({ hsni130: newTotal.hs130 }))
+        dispatch(setBulletinDePaie({ hsni150: newTotal.hs150 }))
+        dispatch(setBulletinDePaie({ hs30: newTotal.regularNightHours }))
+        dispatch(setBulletinDePaie({ hs50: newTotal.occasionalNightHours }))
+        dispatch(setBulletinDePaie({ hs50: newTotal.occasionalNightHours }))
+        dispatch(setBulletinDePaie({ hDim: newTotal.sundayHours }))
+        dispatch(setBulletinDePaie({ hFerier: newTotal.holidayHours }))
+        dispatch(setBulletinDePaie({ totalHs: newTotal.overtimeHoursDay }))
+        console.log(newTotal.regularHoursDay)
+        console.log(newTotal.hs130)
+        console.log(newTotal.hs150)
+        console.log(newTotal.occasionalNightHours)
+        console.log(newTotal.regularNightHours)
+        console.log(newTotal.sundayHours)
+        console.log(newTotal.holidayHours)
+        console.log(newTotal.overtimeHoursDay)
+
         const newTotalHsni = calculateHSNI(data)
         dispatch(setTotalHsni130(newTotalHsni.hsni130))
         dispatch(setTotalHsni150(newTotalHsni.hsni150))
@@ -430,7 +449,7 @@ const TimeSheetTable = (props) => {
     return () => {
       mount = false
     }
-  }, [data])
+  }, [data, calculateTotal, dispatch])
 
   const Total = () => {
     const header = [

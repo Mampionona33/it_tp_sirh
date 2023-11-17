@@ -7,10 +7,14 @@ const initialState = {
   salaireDeBase: null,
   hs30: null,
   hs50: null,
+  totalHTravail: null,
+  totalHs: null,
   hsni130: null,
   hsni150: null,
   tauxCnaps: null,
   baseCnaps: null,
+  hDim: null,
+  hFerier: null,
   baseIrsa: null,
   salaireBrute: null,
   salaireNet: null,
@@ -31,9 +35,12 @@ const bulletinDePaieSlice = createSlice({
     setBulletinDePaie: (state, action) => {
       return { ...state, ...action.payload }
     },
+    resetBulletinDePaie: (state) => {
+      return initialState
+    },
   },
 })
 
-export const { setBulletinDePaie } = bulletinDePaieSlice.actions
+export const { setBulletinDePaie, resetBulletinDePaie } = bulletinDePaieSlice.actions
 
 export default bulletinDePaieSlice.reducer

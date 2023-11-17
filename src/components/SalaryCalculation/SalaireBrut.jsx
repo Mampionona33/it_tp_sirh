@@ -43,41 +43,41 @@ const SalaireBrut = () => {
   console.log(totalRetenuSalarie)
 
   // ------------------------------
-  const calculPaie = new CalculPai(salaireDeBase)
-  calculPaie.setTauxHoraire(173.33)
-  calculPaie.setHsni130(employeeTotalHours.hsni130 ? employeeTotalHours.hsni130 : 0)
-  calculPaie.setHsni150(employeeTotalHours.hsni150 ? employeeTotalHours.hsni150 : 0)
-  calculPaie.setTotalHs130(employeeTotalHours.totalHs130 ? employeeTotalHours.totalHs130 : 0)
-  calculPaie.setTotalHs150(employeeTotalHours.totalHs150 ? employeeTotalHours.totalHs150 : 0)
-  calculPaie.setTotalHn30(employeeTotalHours.totalHs30 ? employeeTotalHours.totalHs30 : 0)
-  calculPaie.setTotalHn50(employeeTotalHours.totalHs50 ? employeeTotalHours.totalHs50 : 0)
-  calculPaie.setTotalHDim(employeeTotalHours.totalHdim ? employeeTotalHours.totalHdim : 0)
-  calculPaie.setIsCadre(isCadre ? isCadre : 0)
-  calculPaie.setTotalAjoutSalaire(totalAjoutSalaire ? totalAjoutSalaire : 0)
-  calculPaie.setTotalRetenuSalarie(totalRetenuSalarie ? totalRetenuSalarie : 0)
+  // const calculPaie = new CalculPai(salaireDeBase)
+  // calculPaie.setTauxHoraire(173.33)
+  // calculPaie.setHsni130(employeeTotalHours.hsni130 ? employeeTotalHours.hsni130 : 0)
+  // calculPaie.setHsni150(employeeTotalHours.hsni150 ? employeeTotalHours.hsni150 : 0)
+  // calculPaie.setTotalHs130(employeeTotalHours.totalHs130 ? employeeTotalHours.totalHs130 : 0)
+  // calculPaie.setTotalHs150(employeeTotalHours.totalHs150 ? employeeTotalHours.totalHs150 : 0)
+  // calculPaie.setTotalHn30(employeeTotalHours.totalHs30 ? employeeTotalHours.totalHs30 : 0)
+  // calculPaie.setTotalHn50(employeeTotalHours.totalHs50 ? employeeTotalHours.totalHs50 : 0)
+  // calculPaie.setTotalHDim(employeeTotalHours.totalHdim ? employeeTotalHours.totalHdim : 0)
+  // calculPaie.setIsCadre(isCadre ? isCadre : 0)
+  // calculPaie.setTotalAjoutSalaire(totalAjoutSalaire ? totalAjoutSalaire : 0)
+  // calculPaie.setTotalRetenuSalarie(totalRetenuSalarie ? totalRetenuSalarie : 0)
 
-  const hsni130_ = calculPaie.getHsni130()
-  const hsni150_ = calculPaie.getHsni150()
-  const hsi130_ = calculPaie.getHsi130()
-  const hsi150_ = calculPaie.getHsi150()
-  const hn30 = calculPaie.getHn30()
-  const hn50 = calculPaie.getHn50()
-  const hdim = calculPaie.getHDim()
-  const salaireBrute_ = calculPaie.getSalaireBrut()
-  const cnaps_ = calculPaie.getCnaps()
-  const omsi_ = calculPaie.getOmsi()
+  // const hsni130_ = calculPaie.getHsni130()
+  // const hsni150_ = calculPaie.getHsni150()
+  // const hsi130_ = calculPaie.getHsi130()
+  // const hsi150_ = calculPaie.getHsi150()
+  // const hn30 = calculPaie.getHn30()
+  // const hn50 = calculPaie.getHn50()
+  // const hdim = calculPaie.getHDim()
+  // const salaireBrute_ = calculPaie.getSalaireBrut()
+  // const cnaps_ = calculPaie.getCnaps()
+  // const omsi_ = calculPaie.getOmsi()
 
-  const baseIrsa = useMemo(() => {
-    return calculPaie.getBaseIrsa()
-  }, [calculPaie])
+  // const baseIrsa = useMemo(() => {
+  //   return calculPaie.getBaseIrsa()
+  // }, [calculPaie])
 
-  const baseCnaps = useMemo(() => {
-    return calculPaie.getBaseCnaps()
-  }, [calculPaie])
+  // const baseCnaps = useMemo(() => {
+  //   return calculPaie.getBaseCnaps()
+  // }, [calculPaie])
 
-  const plafondSME = calculPaie.getPlafondSME()
-  const tauxCnaps = calculPaie.getTauxCnaps()
-  const tauxOmsi = calculPaie.getTauxOmsi()
+  // const plafondSME = calculPaie.getPlafondSME()
+  // const tauxCnaps = calculPaie.getTauxCnaps()
+  // const tauxOmsi = calculPaie.getTauxOmsi()
 
   // console.log(`hsni130_: ${hsni130_}`)
   // console.log(`hsni150_: ${hsni150_}`)
@@ -89,99 +89,104 @@ const SalaireBrut = () => {
   // console.log(`salaireBrute_: ${salaireBrute_}`)
   // console.log(`cnaps_: ${cnaps_}`)
   // console.log(`omsi_: ${omsi_}`)
-  console.log(`baseIrsa: ${baseIrsa}`)
+  // console.log(`baseIrsa: ${baseIrsa}`)
   // console.log(`baseCnaps: ${baseCnaps}`)
   // console.log(indemnite)
   // ------------------------------
 
-  const formatedHsni130Value = formatAriaryMga(hsni130_)
-  const formatedHsni150Value = formatAriaryMga(hsni150_)
-  const formatedHsi130Value = formatAriaryMga(hsi130_)
-  const formatedHsi150Value = formatAriaryMga(hsi150_)
-  const formatedHn30Value = formatAriaryMga(hn30)
-  const formatedHn50Value = formatAriaryMga(hn50)
-  const formatedHdimValue = formatAriaryMga(hdim)
-  const formatedSlaireBruteValue = formatAriaryMga(salaireBrute_)
-  const formatedSalaireBase = formatAriaryMga(salaireDeBase)
-  const formatedPrimeEtAvantage = formatAriaryMga(totalAjoutSalaire)
+  // const formatedHsni130Value = formatAriaryMga(hsni130_)
+  // const formatedHsni150Value = formatAriaryMga(hsni150_)
+  // const formatedHsi130Value = formatAriaryMga(hsi130_)
+  // const formatedHsi150Value = formatAriaryMga(hsi150_)
+  // const formatedHn30Value = formatAriaryMga(hn30)
+  // const formatedHn50Value = formatAriaryMga(hn50)
+  // const formatedHdimValue = formatAriaryMga(hdim)
+  // const formatedSlaireBruteValue = formatAriaryMga(salaireBrute_)
+  // const formatedSalaireBase = formatAriaryMga(salaireDeBase)
+  // const formatedPrimeEtAvantage = formatAriaryMga(totalAjoutSalaire)
 
-  const data = [
-    {
-      title: 'HSNI 130% :',
-      hours: `${employeeTotalHours.hsni130}`,
-      value: `${formatedHsni130Value}`,
-    },
-    {
-      title: 'HSNI 150% :',
-      hours: `${employeeTotalHours.hsni150}`,
-      value: `${formatedHsni150Value}`,
-    },
-    {
-      title: 'HSI 130% :',
-      hours: `${employeeTotalHours.totalHs130 - employeeTotalHours.hsni130}`,
-      value: `${formatedHsi130Value}`,
-    },
-    {
-      title: 'HSI 150% :',
-      hours: `${employeeTotalHours.totalHs150 - employeeTotalHours.hsni150}`,
-      value: `${formatedHsi150Value}`,
-    },
-    {
-      title: 'HN 30% :',
-      hours: `${employeeTotalHours.totalHs30}`,
-      value: `${formatedHn30Value}`,
-    },
-    {
-      title: 'HN 50% :',
-      hours: `${employeeTotalHours.totalHs50}`,
-      value: `${formatedHn50Value}`,
-    },
-    {
-      title: 'Hdim% :',
-      hours: `${employeeTotalHours.totalHdim}`,
-      value: `${formatedHdimValue}`,
-    },
-  ]
+  // const data = [
+  //   {
+  //     title: 'HSNI 130% :',
+  //     hours: `${employeeTotalHours.hsni130}`,
+  //     value: `${formatedHsni130Value}`,
+  //   },
+  //   {
+  //     title: 'HSNI 150% :',
+  //     hours: `${employeeTotalHours.hsni150}`,
+  //     value: `${formatedHsni150Value}`,
+  //   },
+  //   {
+  //     title: 'HSI 130% :',
+  //     hours: `${employeeTotalHours.totalHs130 - employeeTotalHours.hsni130}`,
+  //     value: `${formatedHsi130Value}`,
+  //   },
+  //   {
+  //     title: 'HSI 150% :',
+  //     hours: `${employeeTotalHours.totalHs150 - employeeTotalHours.hsni150}`,
+  //     value: `${formatedHsi150Value}`,
+  //   },
+  //   {
+  //     title: 'HN 30% :',
+  //     hours: `${employeeTotalHours.totalHs30}`,
+  //     value: `${formatedHn30Value}`,
+  //   },
+  //   {
+  //     title: 'HN 50% :',
+  //     hours: `${employeeTotalHours.totalHs50}`,
+  //     value: `${formatedHn50Value}`,
+  //   },
+  //   {
+  //     title: 'Hdim% :',
+  //     hours: `${employeeTotalHours.totalHdim}`,
+  //     value: `${formatedHdimValue}`,
+  //   },
+  // ]
 
   const Body = () => {
     return (
-      <table className="table-auto">
-        <tbody>
-          <tr className="flex flex-wrap justify-between border-b border-customRed-100">
-            <td colSpan="2" className="text-left py-3 pl-4 font-medium">
-              Salaire de base
-            </td>
-            <td className="text-right py-3 px-4 font-medium">{formatedSalaireBase}</td>
-          </tr>
-          {data.map((item, index) => (
-            <tr
-              className="flex flex-wrap justify-between border-b border-customRed-100"
-              key={index}
-            >
-              <td className="text-left py-3 pl-4 font-medium">{item.title}</td>
-              <td className="text-left py-3 pl-8 pr-8">
-                {item.hours.toString().padStart(2, '0')} H
+      <>
+        <div>Salaire brut</div>
+        {/* <table className="table-auto">
+          <tbody>
+            <tr className="flex flex-wrap justify-between border-b border-customRed-100">
+              <td colSpan="2" className="text-left py-3 pl-4 font-medium">
+                Salaire de base
               </td>
-              <td className="text-right py-3 px-4">{item.value}</td>
+              <td className="text-right py-3 px-4 font-medium">{formatedSalaireBase}</td>
             </tr>
-          ))}
+            {data.map((item, index) => (
+              <tr
+                className="flex flex-wrap justify-between border-b border-customRed-100"
+                key={index}
+              >
+                <td className="text-left py-3 pl-4 font-medium">{item.title}</td>
+                <td className="text-left py-3 pl-8 pr-8">
+                  {item.hours.toString().padStart(2, '0')} H
+                </td>
+                <td className="text-right py-3 px-4">{item.value}</td>
+              </tr>
+            ))}
 
-          <tr className="flex flex-wrap justify-between border-b border-customRed-100">
-            <td colSpan="2" className="text-left py-3 pl-4 font-medium">
-              Primes et avantages:
-            </td>
-            <td className="text-right py-3 px-4  text-customRed-900">{formatedPrimeEtAvantage}</td>
-          </tr>
-          <tr className="flex flex-wrap justify-between border-b border-customRed-100">
-            <td colSpan="2" className="text-left py-3 pl-4 font-medium">
-              Salaire brute
-            </td>
-            <td className="text-right py-3 px-4 font-medium text-customRed-900">
-              {formatedSlaireBruteValue}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            <tr className="flex flex-wrap justify-between border-b border-customRed-100">
+              <td colSpan="2" className="text-left py-3 pl-4 font-medium">
+                Primes et avantages:
+              </td>
+              <td className="text-right py-3 px-4  text-customRed-900">
+                {formatedPrimeEtAvantage}
+              </td>
+            </tr>
+            <tr className="flex flex-wrap justify-between border-b border-customRed-100">
+              <td colSpan="2" className="text-left py-3 pl-4 font-medium">
+                Salaire brute
+              </td>
+              <td className="text-right py-3 px-4 font-medium text-customRed-900">
+                {formatedSlaireBruteValue}
+              </td>
+            </tr>
+          </tbody>
+        </table> */}
+      </>
     )
   }
 
