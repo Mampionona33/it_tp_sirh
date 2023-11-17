@@ -6,6 +6,7 @@ import SalaireNetAPayer from 'src/components/SalaryCalculation/SalaireNetAPayer'
 import PrimeEtAvantage from './PrimeEtAvantage'
 import { DocumentTextIcon } from '@heroicons/react/24/outline'
 import { useSelector } from 'react-redux'
+import FaireAvance from './FaireAvance'
 
 const SalaryCalculation = () => {
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
@@ -14,8 +15,14 @@ const SalaryCalculation = () => {
   return (
     <>
       <div className="d-flex flex-column gap-4">
-        <div className="d-flex columns-2">
-          <PrimeEtAvantage />
+        <div className="flex d-flex columns-4 gap-4 justify-content-between">
+          <div className="columns-1">
+            <PrimeEtAvantage />
+          </div>
+          <div className="flex flex-col justify-between gap-4 columns-2">
+            <FaireAvance />
+            <FaireAvance />
+          </div>
         </div>
         <div className="d-flex justify-content-between flex-wrap columns-3 gap-4">
           <SalaireBrut />

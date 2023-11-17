@@ -173,8 +173,7 @@ export default function PrimeEtAvantage() {
 
   return (
     <>
-      {/* <div>Primes et avantages</div> */}
-      <CustomSection fullWidth title={title} body={<Body />} />
+      <CustomSection title={title} body={<Body />} />
     </>
   )
 }
