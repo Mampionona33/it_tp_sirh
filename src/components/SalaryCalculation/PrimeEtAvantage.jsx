@@ -109,7 +109,7 @@ export default function PrimeEtAvantage() {
 
     return (
       <>
-        <form action="" onSubmit={handleSubmit} method="post">
+        <form action="" className="w-full" onSubmit={handleSubmit} method="post">
           <div className="row g-3 mx-4 my-2">
             <div className="col-12 col-lg-6">
               {firstHalf.map((item, index) => (

@@ -170,45 +170,51 @@ const SalaireBrut = () => {
   const Body = () => {
     return (
       <>
-        <div className="flex flex-col">
-          <table className="table-auto w-full">
-            <tbody>
-              <tr className="flex justify-between border-b border-customRed-100">
-                <td className="text-left py-3 pl-3 font-medium">Salaire de base</td>
-                <td className="text-right py-3 pr-3 font-medium">{formatedSalaireBase}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="grid grid-cols-2   ">
+          <div className="col-span-2">
+            <div className="grid grid-cols-3  ">
+              <div className="font-medium p-3 border-b align-middle border-customRed-100">
+                Salaire de base:
+              </div>
+              <div className="col-span-2 text-right p-3 border-b align-middle border-customRed-100">
+                {formatedSalaireBase}
+              </div>
 
-          <table className="table-auto w-full">
-            <tbody>
               {data.map((item, index) => (
-                <tr className="flex justify-between border-b border-customRed-100" key={index}>
-                  <td className="text-left py-3 pl-3 font-medium">{item.title}</td>
-                  <td className="text-center py-3">{item.hours.toString().padStart(2, '0')} H</td>
-                  <td className="text-right py-3 pr-3">{item.value}</td>
-                </tr>
+                <React.Fragment key={index}>
+                  <div className="font-medium p-3   border-b align-middle border-customRed-100">
+                    {item.title}
+                  </div>
+                  <div className="text-center p-3   border-b align-middle border-customRed-100">
+                    {item.hours.toString().padStart(2, '0')} H
+                  </div>
+                  <div className="text-right p-3  border-b align-middle border-customRed-100">
+                    {item.value}
+                  </div>
+                </React.Fragment>
               ))}
-            </tbody>
-          </table>
+            </div>
+          </div>
 
-          <table className="table-auto w-full">
-            <tbody>
-              <tr className="flex justify-between border-b border-customRed-100">
-                <td className="text-left py-3 pl-4 font-medium">Primes et avantages:</td>
-                <td className="text-right py-3 px-4 text-customRed-900">
-                  {formatedPrimeEtAvantage}
-                </td>
-              </tr>
+          <div className="col-span-2">
+            <div className="grid grid-cols-2">
+              <div className="font-medium p-3 border-b  align-middle border-customRed-100">
+                Primes et avantages:
+              </div>
+              <div className="text-right  p-3 border-b align-middle border-customRed-100">
+                {formatedPrimeEtAvantage}
+              </div>
+            </div>
+          </div>
 
-              <tr className="flex justify-between border-b border-customRed-100">
-                <td className="text-left py-3 pl-4 font-medium">Salaire brute</td>
-                <td className="text-right py-3 px-4 font-medium text-customRed-900">
-                  {formatedSlaireBruteValue}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="col-span-2">
+            <div className="grid grid-cols-2">
+              <div className="font-medium p-3 align-middle">Salaire brute:</div>
+              <div className="text-right font-medium p-3 align-middle text-customRed-900">
+                {formatedSlaireBruteValue}
+              </div>
+            </div>
+          </div>
         </div>
       </>
     )
