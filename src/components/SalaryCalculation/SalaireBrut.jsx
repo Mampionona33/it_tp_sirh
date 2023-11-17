@@ -18,8 +18,11 @@ const SalaireBrut = () => {
   const ajoutSalaire = useSelector((state) => state.bulletinDePaie.ajoutSalaire)
   const retenuSalaire = useSelector((state) => state.bulletinDePaie.retenuSalaire)
   const cotisations = useSelector((state) => state.bulletinDePaie.cotisations)
-  const salaireDeBase = selecteEmploy.salaireBase
+  // const salaireDeBase = selecteEmploy.salaireBase
   const isCadre = selecteEmploy.cadre
+  const salaireDeBase = useSelector((state) => state.bulletinDePaie.salaireDeBase)
+  const hsni130 = useSelector((state) => state.bulletinDePaie.hsni130)
+  const hsni150 = useSelector((state) => state.bulletinDePaie.hsni150)
 
   const totalAjoutSalaire =
     ajoutSalaire.length > 0 &&
@@ -43,6 +46,16 @@ const SalaireBrut = () => {
   console.log(totalRetenuSalarie)
 
   // ------------------------------
+
+  const calculPaie = useMemo(() => {
+    const calc = new CalculPai(salaireDeBase)
+    calc.setTauxHoraire(173.33)
+    calc.setHsni130(hsni130)
+    calc.setHsni150(hsni150)
+
+    return calc
+  }, [salaireDeBase, hsni130, hsni150])
+
   // const calculPaie = new CalculPai(salaireDeBase)
   // calculPaie.setTauxHoraire(173.33)
   // calculPaie.setHsni130(employeeTotalHours.hsni130 ? employeeTotalHours.hsni130 : 0)

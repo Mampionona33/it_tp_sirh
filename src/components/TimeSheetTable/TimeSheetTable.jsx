@@ -422,15 +422,14 @@ const TimeSheetTable = (props) => {
         dispatch(setTotalHdim(newTotal.sundayHours))
         dispatch(setTotalHferier(newTotal.holidayHours))
 
-        dispatch(setBulletinDePaie({ totalHTravail: newTotal.regularHoursDay }))
-        dispatch(setBulletinDePaie({ hsni130: newTotal.hs130 }))
-        dispatch(setBulletinDePaie({ hsni150: newTotal.hs150 }))
-        dispatch(setBulletinDePaie({ hs30: newTotal.regularNightHours }))
-        dispatch(setBulletinDePaie({ hs50: newTotal.occasionalNightHours }))
-        dispatch(setBulletinDePaie({ hs50: newTotal.occasionalNightHours }))
-        dispatch(setBulletinDePaie({ hDim: newTotal.sundayHours }))
-        dispatch(setBulletinDePaie({ hFerier: newTotal.holidayHours }))
+        dispatch(setBulletinDePaie({ totalHn: newTotal.regularHoursDay }))
         dispatch(setBulletinDePaie({ totalHs: newTotal.overtimeHoursDay }))
+        dispatch(setBulletinDePaie({ totalHs130: newTotal.hs130 }))
+        dispatch(setBulletinDePaie({ totalHs150: newTotal.hs150 }))
+        dispatch(setBulletinDePaie({ totalHsn30: newTotal.regularNightHours }))
+        dispatch(setBulletinDePaie({ totalHsn50: newTotal.occasionalNightHours }))
+        dispatch(setBulletinDePaie({ totalHDim: newTotal.sundayHours }))
+        dispatch(setBulletinDePaie({ totalHFerier: newTotal.holidayHours }))
         console.log(newTotal.regularHoursDay)
         console.log(newTotal.hs130)
         console.log(newTotal.hs150)
@@ -443,6 +442,9 @@ const TimeSheetTable = (props) => {
         const newTotalHsni = calculateHSNI(data)
         dispatch(setTotalHsni130(newTotalHsni.hsni130))
         dispatch(setTotalHsni150(newTotalHsni.hsni150))
+
+        dispatch(setBulletinDePaie({ hsni130: newTotalHsni.hsni130 }))
+        dispatch(setBulletinDePaie({ hsni150: newTotalHsni.hsni150 }))
       }
     }
 
