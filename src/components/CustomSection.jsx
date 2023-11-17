@@ -12,7 +12,7 @@ const CustomSection = (props) => {
         <div className="flex flex-row flex-wrap gap-4 px-4 py-2 text-white bg-customRed-900">
           <h2 className="text-2xl font-semibold mb-2">{props.title}</h2>
         </div>
-        <div className="bg-white">{props.body}</div>
+        <div className="bg-white flex w-full">{props.body}</div>
       </div>
     </>
   )

@@ -169,10 +169,13 @@ const SalaireBrut = () => {
   const Body = () => {
     return (
       <>
-        <table className="table-auto">
+        <table className="table-auto w-full">
           <tbody>
             <tr className="flex flex-wrap justify-between border-b border-customRed-100">
-              <td colSpan="2" className="text-left py-3 pl-3 font-medium">
+              <td
+                colSpan="2"
+                className="text-left py-3 pl-3 font-medium overflow-hidden whitespace-no-wrap"
+              >
                 Salaire de base
               </td>
               <td className="text-right py-3 pr-3 font-medium">{formatedSalaireBase}</td>
@@ -182,27 +185,37 @@ const SalaireBrut = () => {
                 className="flex flex-wrap sm:justify-between border-b border-customRed-100"
                 key={index}
               >
-                <td className="text-left py-3 pl-3 pr-0 font-medium sm:w-1/3">{item.title}</td>
+                <td className="text-left w-full py-3 pl-3 pr-0 font-medium sm:w-1/3 overflow-hidden whitespace-nowrap">
+                  {item.title}
+                </td>
                 <td className="flex justify-center text-left py-3 sm:w-1/3">
                   {item.hours.toString().padStart(2, '0')} H
                 </td>
-                <td className="text-right py-3 pr-3 sm:w-1/3">{item.value}</td>
+                <td className="text-right py-3 pr-3 sm:w-1/3 overflow-hidden whitespace-nowrap">
+                  {item.value}
+                </td>
               </tr>
             ))}
 
             <tr className="flex flex-wrap justify-between border-b border-customRed-100">
-              <td colSpan="2" className="text-left py-3 pl-4 font-medium">
+              <td
+                colSpan="2"
+                className="text-left py-3 pl-4 font-medium overflow-hidden whitespace-no-wrap"
+              >
                 Primes et avantages:
               </td>
-              <td className="text-right py-3 px-4  text-customRed-900">
+              <td className="text-right py-3 px-4  text-customRed-900 overflow-hidden whitespace-no-wrap">
                 {formatedPrimeEtAvantage}
               </td>
             </tr>
             <tr className="flex flex-wrap justify-between border-b border-customRed-100">
-              <td colSpan="2" className="text-left py-3 pl-4 font-medium">
+              <td
+                colSpan="2"
+                className="text-left py-3 pl-4 font-medium overflow-hidden whitespace-no-wrap"
+              >
                 Salaire brute
               </td>
-              <td className="text-right py-3 px-4 font-medium text-customRed-900">
+              <td className="text-right py-3 px-4 font-medium text-customRed-900 overflow-hidden whitespace-no-wrap">
                 {formatedSlaireBruteValue}
               </td>
             </tr>
