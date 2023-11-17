@@ -5,13 +5,12 @@ import { createColumnHelper } from '@tanstack/react-table'
 import MoreButtonMenu from 'src/components/MoreButtonMenu'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
+import { resetBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const List = () => {
   const dispatch = useDispatch()
   const columnHelper = createColumnHelper()
   const employees = useSelector((state) => state.employeesList.list)
-
-  // console.log(employees)
 
   const modalImportCsvField = [
     {
@@ -26,6 +25,7 @@ const List = () => {
     let mount = true
     if (mount && dispatch) {
       dispatch(fetchAllEmployees())
+      dispatch(resetBulletinDePaie())
     }
     return () => {
       mount = false
