@@ -81,6 +81,12 @@ export default function PrimeEtAvantage() {
       [setFormValues],
     )
 
+    const handleReset = () => {
+      dispatch(setBulletinDePaie({ totalPrimeEtAvantage: null }))
+      dispatch(setBulletinDePaie({ totalDeduction: null }))
+      setIsFormSubmitted(false)
+    }
+
     React.useEffect(() => {
       let mount = true
       // console.log(retenue)
@@ -148,8 +154,8 @@ export default function PrimeEtAvantage() {
             <hr />
             <div className="col-12">
               <div className="d-flex flex-wrap gap-2 justify-end pb-2">
-                <button type="reset" className="btn btn-secondary">
-                  Annuler
+                <button type="reset" className="btn btn-secondary" onClick={handleReset}>
+                  Corriger
                 </button>
                 <button
                   type="submit"
