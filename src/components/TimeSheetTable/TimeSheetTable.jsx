@@ -320,7 +320,7 @@ const TimeSheetTable = (props) => {
       total.hs150 = 0
       total.occasionalNightHours = 0
       total.overtimeHoursDay = 0
-      total.regularHoursDay = 0
+      // total.regularHoursDay = 0
       total.regularNightHours = 0
       total.sundayHours = 0
     }
@@ -414,7 +414,7 @@ const TimeSheetTable = (props) => {
         dispatch(setTotalHdim(newTotal.sundayHours))
         dispatch(setTotalHferier(newTotal.holidayHours))
 
-        dispatch(setBulletinDePaie({ totalHn: isCadre ? 0 : newTotal.regularHoursDay }))
+        dispatch(setBulletinDePaie({ totalHn: newTotal.regularHoursDay }))
         dispatch(setBulletinDePaie({ totalHs: isCadre ? 0 : newTotal.overtimeHoursDay }))
         dispatch(setBulletinDePaie({ totalHs130: isCadre ? 0 : newTotal.hs130 }))
         dispatch(setBulletinDePaie({ totalHs150: isCadre ? 0 : newTotal.hs150 }))

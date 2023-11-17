@@ -83,9 +83,9 @@ const SalaireBrut = () => {
   const hsni150_ = calculPaie.getHsni150()
   const hsi130_ = calculPaie.getHsi130()
   const hsi150_ = calculPaie.getHsi150()
-  const hn30 = calculPaie.getHn30()
-  const hn50 = calculPaie.getHn50()
-  const hdim = calculPaie.getHDim()
+  const hn30_ = calculPaie.getHn30()
+  const hn50_ = calculPaie.getHn50()
+  const hdim_ = calculPaie.getHDim()
   const salaireBrut_ = calculPaie.getSalaireBrut()
   const cnaps_ = calculPaie.getCnaps()
   const omsi_ = calculPaie.getOmsi()
@@ -123,9 +123,9 @@ const SalaireBrut = () => {
   const formatedHsni150Value = formatAriaryMga(hsni150_)
   const formatedHsi130Value = formatAriaryMga(hsi130_)
   const formatedHsi150Value = formatAriaryMga(hsi150_)
-  const formatedHn30Value = formatAriaryMga(hn30)
-  const formatedHn50Value = formatAriaryMga(hn50)
-  const formatedHdimValue = formatAriaryMga(hdim)
+  const formatedHn30Value = formatAriaryMga(hn30_)
+  const formatedHn50Value = formatAriaryMga(hn50_)
+  const formatedHdimValue = formatAriaryMga(hdim_)
   const formatedSlaireBruteValue = formatAriaryMga(salaireBrut_)
   const formatedSalaireBase = formatAriaryMga(salaireDeBase)
   const formatedPrimeEtAvantage = formatAriaryMga(totalPrimeEtAvantage)
@@ -133,37 +133,37 @@ const SalaireBrut = () => {
   const data = [
     {
       title: 'HSNI 130% :',
-      hours: `${employeeTotalHours.hsni130}`,
+      hours: `${hsni130}`,
       value: `${formatedHsni130Value}`,
     },
     {
       title: 'HSNI 150% :',
-      hours: `${employeeTotalHours.hsni150}`,
+      hours: `${hsni150}`,
       value: `${formatedHsni150Value}`,
     },
     {
       title: 'HSI 130% :',
-      hours: `${employeeTotalHours.totalHs130 - employeeTotalHours.hsni130}`,
+      hours: `${totalHs130 - hsni130}`,
       value: `${formatedHsi130Value}`,
     },
     {
       title: 'HSI 150% :',
-      hours: `${employeeTotalHours.totalHs150 - employeeTotalHours.hsni150}`,
+      hours: `${totalHs150 - hsni150}`,
       value: `${formatedHsi150Value}`,
     },
     {
       title: 'HN 30% :',
-      hours: `${employeeTotalHours.totalHs30}`,
+      hours: `${totalHs30}`,
       value: `${formatedHn30Value}`,
     },
     {
       title: 'HN 50% :',
-      hours: `${employeeTotalHours.totalHs50}`,
+      hours: `${totalHs50}`,
       value: `${formatedHn50Value}`,
     },
     {
       title: 'Hdim% :',
-      hours: `${employeeTotalHours.totalHdim}`,
+      hours: `${totalHDim}`,
       value: `${formatedHdimValue}`,
     },
   ]
@@ -235,11 +235,11 @@ const SalaireBrut = () => {
       dispatch(setBulletinDePaie({ valeurHsni150: hsni150_ }))
     }
 
-    if (hn30 && mount) {
-      dispatch(setBulletinDePaie({ valeurHs30: hn30 }))
+    if (hn30_ && mount) {
+      dispatch(setBulletinDePaie({ valeurHs30: hn30_ }))
     }
-    if (hn50 && mount) {
-      dispatch(setBulletinDePaie({ valeurHs50: hn50 }))
+    if (hn50_ && mount) {
+      dispatch(setBulletinDePaie({ valeurHs50: hn50_ }))
     }
 
     if (baseIrsa && mount) {
@@ -300,8 +300,8 @@ const SalaireBrut = () => {
     hsni130_,
     plafondSME,
     hsni150_,
-    hn30,
-    hn50,
+    hn30_,
+    hn50_,
     dispatch,
     cnaps_,
     baseIrsa,
