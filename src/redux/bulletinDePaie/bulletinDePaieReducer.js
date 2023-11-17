@@ -19,6 +19,8 @@ const initialState = {
   valeurHsni150: null,
   valeurHs30: null,
   valeurHs50: null,
+  totalPrimeEtAvantage: null,
+  totalDeduction: null,
   tauxCnaps: null,
   baseCnaps: null,
   baseIrsa: null,

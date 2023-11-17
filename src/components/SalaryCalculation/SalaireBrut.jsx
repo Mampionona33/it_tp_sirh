@@ -29,26 +29,29 @@ const SalaireBrut = () => {
   const totalHs50 = useSelector((state) => state.bulletinDePaie.totalHs50)
   const totalHDim = useSelector((state) => state.bulletinDePaie.totalHDim)
 
-  const totalAjoutSalaire =
-    ajoutSalaire.length > 0 &&
-    ajoutSalaire.reduce((acc, cur) => {
-      if (cur && cur.hasOwnProperty('montant')) {
-        return acc + cur['montant']
-      }
-      return acc
-    }, 0)
+  const totalPrimeEtAvantage = useSelector((state) => state.bulletinDePaie.totalPrimeEtAvantage)
+  const totalDeduction = useSelector((state) => state.bulletinDePaie.totalDeduction)
 
-  const totalRetenuSalarie =
-    retenuSalaire.length > 0 &&
-    retenuSalaire.reduce((acc, cur) => {
-      if (cur && cur.hasOwnProperty('montant')) {
-        return acc + cur['montant']
-      }
-      return acc
-    }, 0)
+  // const totalAjoutSalaire =
+  //   ajoutSalaire.length > 0 &&
+  //   ajoutSalaire.reduce((acc, cur) => {
+  //     if (cur && cur.hasOwnProperty('montant')) {
+  //       return acc + cur['montant']
+  //     }
+  //     return acc
+  //   }, 0)
 
-  console.log(totalAjoutSalaire)
-  console.log(totalRetenuSalarie)
+  // const totalRetenuSalarie =
+  //   retenuSalaire.length > 0 &&
+  //   retenuSalaire.reduce((acc, cur) => {
+  //     if (cur && cur.hasOwnProperty('montant')) {
+  //       return acc + cur['montant']
+  //     }
+  //     return acc
+  //   }, 0)
+
+  console.log(totalPrimeEtAvantage)
+  console.log(totalDeduction)
 
   // ------------------------------
 
@@ -62,8 +65,19 @@ const SalaireBrut = () => {
     calc.setTotalHn30(totalHs30)
     calc.setTotalHn50(totalHs50)
     calc.setTotalHDim(totalHDim)
+    calc.setTotalAjoutSalaire(totalPrimeEtAvantage)
     return calc
-  }, [salaireDeBase, hsni130, hsni150, totalHDim, totalHs130, totalHs150, totalHs30, totalHs50])
+  }, [
+    salaireDeBase,
+    hsni130,
+    hsni150,
+    totalHDim,
+    totalHs130,
+    totalHs150,
+    totalHs30,
+    totalHs50,
+    totalPrimeEtAvantage,
+  ])
 
   // const calculPaie = new CalculPai(salaireDeBase)
   // calculPaie.setTauxHoraire(173.33)
@@ -101,18 +115,18 @@ const SalaireBrut = () => {
   const tauxCnaps = calculPaie.getTauxCnaps()
   const tauxOmsi = calculPaie.getTauxOmsi()
 
-  console.log(`hsni130_: ${hsni130_}`)
-  console.log(`hsni150_: ${hsni150_}`)
-  console.log(`hsi130_: ${hsi130_}`)
-  console.log(`hsi150_: ${hsi150_}`)
-  console.log(`hn30: ${hn30}`)
-  console.log(`hn50: ${hn50}`)
-  console.log(`hdim: ${hdim}`)
-  console.log(`salaireBrute_: ${salaireBrute_}`)
-  console.log(`cnaps_: ${cnaps_}`)
-  console.log(`omsi_: ${omsi_}`)
-  console.log(`baseIrsa: ${baseIrsa}`)
-  console.log(`baseCnaps: ${baseCnaps}`)
+  // console.log(`hsni130_: ${hsni130_}`)
+  // console.log(`hsni150_: ${hsni150_}`)
+  // console.log(`hsi130_: ${hsi130_}`)
+  // console.log(`hsi150_: ${hsi150_}`)
+  // console.log(`hn30: ${hn30}`)
+  // console.log(`hn50: ${hn50}`)
+  // console.log(`hdim: ${hdim}`)
+  // console.log(`salaireBrute_: ${salaireBrute_}`)
+  // console.log(`cnaps_: ${cnaps_}`)
+  // console.log(`omsi_: ${omsi_}`)
+  // console.log(`baseIrsa: ${baseIrsa}`)
+  // console.log(`baseCnaps: ${baseCnaps}`)
   // console.log(indemnite)
   // ------------------------------
 
@@ -125,7 +139,7 @@ const SalaireBrut = () => {
   const formatedHdimValue = formatAriaryMga(hdim)
   const formatedSlaireBruteValue = formatAriaryMga(salaireBrute_)
   const formatedSalaireBase = formatAriaryMga(salaireDeBase)
-  const formatedPrimeEtAvantage = formatAriaryMga(totalAjoutSalaire)
+  const formatedPrimeEtAvantage = formatAriaryMga(totalPrimeEtAvantage)
 
   const data = [
     {

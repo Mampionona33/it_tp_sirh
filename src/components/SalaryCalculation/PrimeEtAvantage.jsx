@@ -34,6 +34,7 @@ export default function PrimeEtAvantage() {
       e.preventDefault()
 
       let primeEtAvantage = 0
+      let deduction = 0
       const updatedAjoutSalaire = []
       const updatedRetenue = []
 
@@ -53,7 +54,7 @@ export default function PrimeEtAvantage() {
               primeEtAvantage += value
             } else if (field.action === 'deduction') {
               updatedRetenue.push({ label: field.label, montant: value })
-              primeEtAvantage -= value
+              deduction += value
             }
           }
         }
@@ -61,10 +62,12 @@ export default function PrimeEtAvantage() {
 
       const ajoutSalaireUp = mergeArraysByReferenceValue(ajoutSalaire, updatedAjoutSalaire, 'label')
       const retenuSalaireUp = mergeArraysByReferenceValue(retenuSalaire, updatedRetenue, 'label')
-
+      console.log('ajoutSalaireUp', ajoutSalaireUp)
+      console.log('retenuSalaireUp', retenuSalaireUp)
       dispatch(setBulletinDePaie({ ajoutSalaire: ajoutSalaireUp }))
-      dispatch(setBulletinDePaie({ retenuSalaire: retenuSalaireUp }))
-      dispatch(setPrimeEtAvantage(primeEtAvantage))
+      dispatch(setBulletinDePaie({ totalPrimeEtAvantage: primeEtAvantage }))
+      dispatch(setBulletinDePaie({ totalDeduction: deduction }))
+      // dispatch(setPrimeEtAvantage(primeEtAvantage))
       setIsFormSubmitted(true)
     }
 
@@ -164,8 +167,8 @@ export default function PrimeEtAvantage() {
 
   return (
     <>
-      <div>Primes et avantages</div>
-      {/* <CustomSection fullWidth title={title} body={<Body />} /> */}
+      {/* <div>Primes et avantages</div> */}
+      <CustomSection fullWidth title={title} body={<Body />} />
     </>
   )
 }
