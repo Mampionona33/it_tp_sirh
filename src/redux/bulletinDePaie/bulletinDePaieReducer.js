@@ -23,6 +23,8 @@ const initialState = {
   totalDeduction: null,
   tauxCnaps: null,
   baseCnaps: null,
+  avance: null,
+  reduChargeFamil: null,
   baseIrsa: null,
   irsaArrondi: null,
   salaireBrut: null,

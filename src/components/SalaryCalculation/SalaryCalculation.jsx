@@ -7,6 +7,7 @@ import PrimeEtAvantage from './PrimeEtAvantage'
 import { DocumentTextIcon } from '@heroicons/react/24/outline'
 import { useSelector } from 'react-redux'
 import FaireAvance from './FaireAvance'
+import ReductionChargeFamill from './ReductionChargeFamill'
 
 const SalaryCalculation = () => {
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
@@ -19,9 +20,9 @@ const SalaryCalculation = () => {
           <div className="columns-1">
             <PrimeEtAvantage />
           </div>
-          <div className="flex flex-col justify-between gap-4 columns-2">
+          <div className="flex flex-col justify-start gap-4 columns-2">
             <FaireAvance />
-            <FaireAvance />
+            <ReductionChargeFamill />
           </div>
         </div>
         <div className="d-flex justify-content-between flex-wrap columns-3 gap-4">
