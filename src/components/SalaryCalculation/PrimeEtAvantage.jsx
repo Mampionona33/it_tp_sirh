@@ -96,7 +96,7 @@ export default function PrimeEtAvantage() {
       return () => {
         mount = false
       }
-    }, [ajoutSalaire, retenuSalaire, dispatch, mouvementSalaire])
+    }, [])
 
     return (
       <>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import {
@@ -54,187 +54,6 @@ const TimeSheetTable = (props) => {
 
   setDefaultOptions({ locale: fr })
 
-  // const columns = [
-  //   // Colonne pour la date
-  //   columnHelper.accessor('date', {
-  //     cell: (info) => format(parseISO(info.getValue()), 'dd/MM/yyyy'),
-  //     header: () => 'Date',
-  //   }),
-
-  //   // colonne pour afficher le jour
-  //   columnHelper.accessor('jour', {
-  //     cell: (info) => (
-  //       <span className="capitalize">{format(parseISO(info.row.original.date), 'EEEE')}</span>
-  //     ),
-  //     header: () => 'Jour',
-  //   }),
-
-  //   // Colonne pour les heures normales jour
-  //   columnHelper.accessor('normalHours', {
-  //     cell: (info) => {
-  //       if (!isSunday(new Date(info.row.original.date))) {
-  //         return info.row.original.regularHoursDay && info.row.original.regularHoursDay
-  //       }
-  //     },
-  //     header: () => 'HN',
-  //   }),
-
-  //   // heures supplémentaires
-  //   columnHelper.accessor('overtimeHoursDay', {
-  //     cell: (info) => {
-  //       if (isCadre) {
-  //         return 0
-  //       }
-  //       if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
-  //         if (
-  //           info.row.original.overtimeHoursDay ||
-  //           info.row.original.regularNightHours ||
-  //           info.row.original.occasionalNightHours
-  //         ) {
-  //           return (
-  //             info.row.original.overtimeHoursDay +
-  //             info.row.original.regularNightHours +
-  //             info.row.original.occasionalNightHours
-  //           )
-  //         }
-  //       }
-  //     },
-
-  //     header: () => 'HS',
-  //   }),
-
-  //   // colonne HS130
-  //   columnHelper.accessor('hs130', {
-  //     cell: (info) => {
-  //       if (isCadre) {
-  //         return 0
-  //       }
-  //       if (isMonday(new Date(info.row.original.date))) {
-  //         const weekStartDate = new Date(info.row.original.date)
-
-  //         const weekEndDate = new Date(weekStartDate)
-  //         weekEndDate.setDate(weekEndDate.getDate() + 6)
-
-  //         const weekStartISO = format(weekStartDate, 'yyyy-MM-dd')
-  //         const weekEndISO = format(weekEndDate, 'yyyy-MM-dd')
-
-  //         const weekTotal = data.filter((row) => row.date >= weekStartISO && row.date <= weekEndISO)
-
-  //         const hs130 = weekTotal.reduce((total, item) => {
-  //           // Vérifier si l'heure de vacances est nulle avant de l'inclure dans le calcul
-  //           if (!item.holidayHours) {
-  //             return (
-  //               total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
-  //             )
-  //           }
-  //           return total
-  //         }, 0)
-
-  //         return hs130 >= 8 ? 8 : hs130
-  //       }
-  //       return null
-  //     },
-  //     header: () => 'HS 130%',
-  //   }),
-
-  //   // colonne HS150
-  //   columnHelper.accessor('hs150', {
-  //     cell: (info) => {
-  //       if (isCadre) {
-  //         return 0
-  //       }
-  //       if (isMonday(new Date(info.row.original.date))) {
-  //         const weekStartDate = new Date(info.row.original.date)
-
-  //         const weekEndDate = new Date(weekStartDate)
-  //         weekEndDate.setDate(weekEndDate.getDate() + 6)
-
-  //         const weekStartISO = format(weekStartDate, 'yyyy-MM-dd')
-  //         const weekEndISO = format(weekEndDate, 'yyyy-MM-dd')
-
-  //         // Filter and sum the overtimeHoursDay for rows within the current week, excluding hours for holidays
-  //         const hs150 = data
-  //           .filter((row) => row.date >= weekStartISO && row.date <= weekEndISO)
-  //           .reduce((total, item) => {
-  //             // Vérifier si l'heure de vacances est nulle avant de l'inclure dans le calcul
-  //             if (!item.holidayHours) {
-  //               return (
-  //                 total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
-  //               )
-  //             }
-  //             return total
-  //           }, 0)
-
-  //         return hs150 >= 8 ? hs150 - 8 : null
-  //       }
-  //       return null
-  //     },
-  //     header: () => 'HS 150%',
-  //   }),
-
-  //   // Colonne pour travail de nuit habituelles "agent de nuit" x30%
-  //   columnHelper.accessor('hsn30', {
-  //     cell: (info) => {
-  //       if (isCadre) {
-  //         return 0
-  //       }
-  //       if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
-  //         return info.row.original.regularNightHours && info.row.original.regularNightHours
-  //       }
-  //     },
-  //     header: () => 'HSN 30%',
-  //   }),
-
-  //   // Colonne pour travail de nuit occasionnelles x50%
-  //   columnHelper.accessor('hs50', {
-  //     cell: (info) => {
-  //       if (isCadre) {
-  //         return 0
-  //       }
-  //       return info.row.original.occasionalNightHours &&
-  //         !isSunday(new Date(info.row.original.date)) &&
-  //         !info.row.original.holidayHours
-  //         ? info.row.original.occasionalNightHours
-  //         : null
-  //     },
-  //     header: () => 'HS 50%',
-  //   }),
-
-  //   // Colonne pour travail dimanche
-  //   columnHelper.accessor('hdim', {
-  //     cell: (info) => {
-  //       if (isCadre) {
-  //         return 0
-  //       }
-  //       if (isSunday(new Date(info.row.original.date))) {
-  //         const result =
-  //           info.row.original.regularHoursDay +
-  //           info.row.original.regularNightHours +
-  //           info.row.original.overtimeHoursDay +
-  //           info.row.original.occasionalNightHours
-  //         return result
-  //       }
-  //     },
-  //     header: () => 'Hdim',
-  //   }),
-  //   // Colonne pour les heures de jour férié (holidayHours)
-  //   columnHelper.accessor('holidayHours', {
-  //     cell: (info) => {
-  //       if (isCadre) {
-  //         return 0
-  //       }
-  //       if (info.getValue() && !isSunday(new Date(info.row.original.date))) {
-  //         const hferier =
-  //           info.row.original.holidayHours +
-  //           info.row.original.regularNightHours +
-  //           info.row.original.overtimeHoursDay +
-  //           info.row.original.occasionalNightHours
-  //         return hferier
-  //       }
-  //     },
-  //     header: () => 'Hférié',
-  //   }),
-  // ]
   const columns = [
     // Colonne pour la date
     columnHelper.accessor('date', {
@@ -444,7 +263,7 @@ const TimeSheetTable = (props) => {
     return result
   }
 
-  const calculateTotal = () => {
+  const calculateTotal = useCallback(() => {
     const total = {
       regularHoursDay: 0,
       overtimeHoursDay: 0,
@@ -495,8 +314,19 @@ const TimeSheetTable = (props) => {
       }
     })
 
+    if (isCadre) {
+      total.holidayHours = 0
+      total.hs130 = 0
+      total.hs150 = 0
+      total.occasionalNightHours = 0
+      total.overtimeHoursDay = 0
+      total.regularHoursDay = 0
+      total.regularNightHours = 0
+      total.sundayHours = 0
+    }
+
     return total
-  }
+  }, [data, isCadre])
 
   const total = calculateTotal()
 
@@ -584,21 +414,21 @@ const TimeSheetTable = (props) => {
         dispatch(setTotalHdim(newTotal.sundayHours))
         dispatch(setTotalHferier(newTotal.holidayHours))
 
-        dispatch(setBulletinDePaie({ totalHn: newTotal.regularHoursDay }))
-        dispatch(setBulletinDePaie({ totalHs: newTotal.overtimeHoursDay }))
-        dispatch(setBulletinDePaie({ totalHs130: newTotal.hs130 }))
-        dispatch(setBulletinDePaie({ totalHs150: newTotal.hs150 }))
-        dispatch(setBulletinDePaie({ totalHs30: newTotal.regularNightHours }))
-        dispatch(setBulletinDePaie({ totalHs50: newTotal.occasionalNightHours }))
-        dispatch(setBulletinDePaie({ totalHDim: newTotal.sundayHours }))
-        dispatch(setBulletinDePaie({ totalHFerier: newTotal.holidayHours }))
+        dispatch(setBulletinDePaie({ totalHn: isCadre ? 0 : newTotal.regularHoursDay }))
+        dispatch(setBulletinDePaie({ totalHs: isCadre ? 0 : newTotal.overtimeHoursDay }))
+        dispatch(setBulletinDePaie({ totalHs130: isCadre ? 0 : newTotal.hs130 }))
+        dispatch(setBulletinDePaie({ totalHs150: isCadre ? 0 : newTotal.hs150 }))
+        dispatch(setBulletinDePaie({ totalHs30: isCadre ? 0 : newTotal.regularNightHours }))
+        dispatch(setBulletinDePaie({ totalHs50: isCadre ? 0 : newTotal.occasionalNightHours }))
+        dispatch(setBulletinDePaie({ totalHDim: isCadre ? 0 : newTotal.sundayHours }))
+        dispatch(setBulletinDePaie({ totalHFerier: isCadre ? 0 : newTotal.holidayHours }))
 
         const newTotalHsni = calculateHSNI(data)
         dispatch(setTotalHsni130(newTotalHsni.hsni130))
         dispatch(setTotalHsni150(newTotalHsni.hsni150))
 
-        dispatch(setBulletinDePaie({ hsni130: newTotalHsni.hsni130 }))
-        dispatch(setBulletinDePaie({ hsni150: newTotalHsni.hsni150 }))
+        dispatch(setBulletinDePaie({ hsni130: isCadre ? 0 : newTotalHsni.hsni130 }))
+        dispatch(setBulletinDePaie({ hsni150: isCadre ? 0 : newTotalHsni.hsni150 }))
       }
     }
 
