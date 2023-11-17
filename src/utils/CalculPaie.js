@@ -187,4 +187,11 @@ export default class CalculPai {
 
     return this.irsa
   }
+
+  getBaseIrsaArrondi() {
+    const baseIrsa = this.getBaseIrsa()
+    const result = Math.floor(baseIrsa / 100) * 100
+    console.log(result)
+    return result
+  }
 }

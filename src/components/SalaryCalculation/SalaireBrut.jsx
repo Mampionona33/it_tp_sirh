@@ -50,8 +50,8 @@ const SalaireBrut = () => {
   //     return acc
   //   }, 0)
 
-  console.log(totalPrimeEtAvantage)
-  console.log(totalDeduction)
+  // console.log(totalPrimeEtAvantage)
+  // console.log(totalDeduction)
 
   // ------------------------------
 
@@ -89,6 +89,7 @@ const SalaireBrut = () => {
   const salaireBrut_ = calculPaie.getSalaireBrut()
   const cnaps_ = calculPaie.getCnaps()
   const omsi_ = calculPaie.getOmsi()
+  const irsaArrondi = calculPaie.getBaseIrsaArrondi()
 
   const baseIrsa = useMemo(() => {
     return calculPaie.getBaseIrsa()
@@ -247,6 +248,9 @@ const SalaireBrut = () => {
 
     if (cnaps_ && mount) {
       dispatch(setBulletinDePaie({ cnaps: cnaps_ }))
+    }
+    if (irsaArrondi && mount) {
+      dispatch(setBulletinDePaie({ irsaArrondi: irsaArrondi }))
     }
 
     // if (tauxCnaps && mount && cnaps_ && baseCnaps) {

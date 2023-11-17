@@ -17,6 +17,7 @@ const SalaireNet = () => {
   const valeurHsni130 = useSelector((state) => state.bulletinDePaie.valeurHsni130)
   const valeurHsni150 = useSelector((state) => state.bulletinDePaie.valeurHsni150)
   const baseIrsa = useSelector((state) => state.bulletinDePaie.baseIrsa)
+  const irsaArrondi = useSelector((state) => state.bulletinDePaie.irsaArrondi)
   // const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
   // const cotisations = useSelector((state) => state.cotisations.liste)
 
@@ -117,7 +118,7 @@ const SalaireNet = () => {
       },
       {
         title: 'Imposable arrondi',
-        // value: `${formatAriaryMga(imposableArrondi)}`,
+        value: `${formatAriaryMga(irsaArrondi)}`,
       },
       {
         title: 'IRSA à payer',
