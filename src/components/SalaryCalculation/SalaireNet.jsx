@@ -11,8 +11,10 @@ const SalaireNet = () => {
   useFetchCotisations()
   const dispatch = useDispatch()
   const title = 'Salaire net'
+  const salaireBrut = useSelector((state) => state.bulletinDePaie.salaireBrut)
+  const cnaps = useSelector((state) => state.bulletinDePaie.cnaps)
+  const omsi = useSelector((state) => state.bulletinDePaie.omsi)
   // const retenue = useSelector((state) => state.bulletinDePaie.retenue)
-  // const salaireBrut = useSelector((state) => state.selectedEmploye.salaireBrut)
   // const selectedEmployeHours = useSelector((state) => state.selectedEmploye)
   // const cotisations = useSelector((state) => state.cotisations.liste)
 
@@ -81,54 +83,56 @@ const SalaireNet = () => {
   //   }
   // }, [irsaApayer, salaireNet, dispatch])
 
-  // const data = [
-  //   {
-  //     title: 'Salaire brut :',
-  //     value: <span className="font-medium">{formatAriaryMga(salaireBrut)}</span>,
-  //   },
-  //   {
-  //     title: 'CNAPS :',
-  //     value: `${formatAriaryMga(cnapsMontant)}`,
-  //   },
-  //   {
-  //     title: 'OSTIE :',
-  //     value: `${formatAriaryMga(ostieMontant)}`,
-  //   },
-  //   {
-  //     title: '',
-  //     value: `${formatAriaryMga(soustotal1)}`,
-  //   },
-  //   {
-  //     title: 'HSNI 130',
-  //     value: `${formatAriaryMga(hsni130Value)}`,
-  //   },
-  //   {
-  //     title: 'HSNI 150',
-  //     value: `${formatAriaryMga(hsni150Value)}`,
-  //   },
-  //   {
-  //     title: 'Base IRSA',
-  //     value: `${formatAriaryMga(baseIrsa)}`,
-  //   },
-  //   {
-  //     title: 'Imposable arrondi',
-  //     value: `${formatAriaryMga(imposableArrondi)}`,
-  //   },
-  //   {
-  //     title: 'IRSA à payer',
-  //     value: <span className="font-medium">{formatAriaryMga(irsaApayer)}</span>,
-  //   },
-  //   {
-  //     title: 'Salaire net',
-  //     value: <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNet)}</span>,
-  //   },
-  // ]
+  const data =
+    [
+      {
+        title: 'Salaire brut :',
+        value: <span className="font-medium">{formatAriaryMga(salaireBrut)}</span>,
+      },
+      {
+        title: 'CNAPS :',
+        value: `${formatAriaryMga(cnaps)}`,
+      },
+      {
+        title: 'OMSI :',
+        value: `${formatAriaryMga(omsi)}`,
+      },
+      {
+        title: '',
+        // value: `${formatAriaryMga(soustotal1)}`,
+      },
+      {
+        title: 'HSNI 130',
+        // value: `${formatAriaryMga(hsni130Value)}`,
+      },
+      {
+        title: 'HSNI 150',
+        // value: `${formatAriaryMga(hsni150Value)}`,
+      },
+      {
+        title: 'Base IRSA',
+        // value: `${formatAriaryMga(baseIrsa)}`,
+      },
+      {
+        title: 'Imposable arrondi',
+        // value: `${formatAriaryMga(imposableArrondi)}`,
+      },
+      {
+        title: 'IRSA à payer',
+        // value: <span className="font-medium">{formatAriaryMga(irsaApayer)}</span>,
+      },
+      {
+        title: 'Salaire net',
+        // value: (
+        //   <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNet)}</span>
+        // ),
+      },
+    ] || []
 
   const Body = () => {
     return (
       <>
-        <div>Test</div>
-        {/* <table className="table-auto">
+        <table className="table-auto">
           <tbody>
             {data.map((item, index) => (
               <tr
@@ -140,7 +144,7 @@ const SalaireNet = () => {
               </tr>
             ))}
           </tbody>
-        </table> */}
+        </table>
       </>
     )
   }
@@ -148,8 +152,7 @@ const SalaireNet = () => {
   return (
     <>
       <div>
-        <div>salaire net</div>
-        {/* <CustomSection title={title} body={<Body />} /> */}
+        <CustomSection title={title} body={<Body />} />
       </div>
     </>
   )

@@ -24,7 +24,7 @@ const initialState = {
   tauxCnaps: null,
   baseCnaps: null,
   baseIrsa: null,
-  salaireBrute: null,
+  salaireBrut: null,
   salaireNet: null,
   omsi: null,
   salaireNetAPayer: null,

@@ -20,8 +20,8 @@ const SalaryCalculation = () => {
         </div>
         <div className="d-flex justify-content-between flex-wrap columns-3 gap-4">
           <SalaireBrut />
-          {/* <SalaireNet />
-          <SalaireNetAPayer /> */}
+          <SalaireNet />
+          {/* <SalaireNetAPayer /> */}
         </div>
         <div className="flex justify-end fixed top-[25%] p-1 right-0">
           <Link to={`/bulletin-de-paie/${id}`} className="btn btn-primary">

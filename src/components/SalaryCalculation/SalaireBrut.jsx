@@ -86,7 +86,7 @@ const SalaireBrut = () => {
   const hn30 = calculPaie.getHn30()
   const hn50 = calculPaie.getHn50()
   const hdim = calculPaie.getHDim()
-  const salaireBrute_ = calculPaie.getSalaireBrut()
+  const salaireBrut_ = calculPaie.getSalaireBrut()
   const cnaps_ = calculPaie.getCnaps()
   const omsi_ = calculPaie.getOmsi()
 
@@ -109,7 +109,7 @@ const SalaireBrut = () => {
   // console.log(`hn30: ${hn30}`)
   // console.log(`hn50: ${hn50}`)
   // console.log(`hdim: ${hdim}`)
-  // console.log(`salaireBrute_: ${salaireBrute_}`)
+  // console.log(`salaireBrut_: ${salaireBrut_}`)
   // console.log(`cnaps_: ${cnaps_}`)
   // console.log(`omsi_: ${omsi_}`)
   // console.log(`baseIrsa: ${baseIrsa}`)
@@ -124,7 +124,7 @@ const SalaireBrut = () => {
   const formatedHn30Value = formatAriaryMga(hn30)
   const formatedHn50Value = formatAriaryMga(hn50)
   const formatedHdimValue = formatAriaryMga(hdim)
-  const formatedSlaireBruteValue = formatAriaryMga(salaireBrute_)
+  const formatedSlaireBruteValue = formatAriaryMga(salaireBrut_)
   const formatedSalaireBase = formatAriaryMga(salaireDeBase)
   const formatedPrimeEtAvantage = formatAriaryMga(totalPrimeEtAvantage)
 
@@ -227,9 +227,8 @@ const SalaireBrut = () => {
 
   React.useEffect(() => {
     let mount = true
-    if (salaireBrute_ && mount) {
-      // dispatch(setSelectedEmployeSalaireBrut(salaireBrute_))
-      dispatch(setBulletinDePaie({ salaireBrute: salaireBrute_ }))
+    if (salaireBrut_ && mount) {
+      dispatch(setBulletinDePaie({ salaireBrut: salaireBrut_ }))
     }
     if (hsni130_) {
       if (mount) {
@@ -256,6 +255,10 @@ const SalaireBrut = () => {
 
     if (plafondSME && mount) {
       dispatch(setBulletinDePaie({ plafondSME: plafondSME }))
+    }
+
+    if (cnaps_ && mount) {
+      dispatch(setBulletinDePaie({ cnaps: cnaps_ }))
     }
 
     // if (tauxCnaps && mount && cnaps_ && baseCnaps) {
@@ -289,7 +292,7 @@ const SalaireBrut = () => {
       mount = false
     }
   }, [
-    salaireBrute_,
+    salaireBrut_,
     tauxCnaps,
     tauxOmsi,
     hsni130_,
