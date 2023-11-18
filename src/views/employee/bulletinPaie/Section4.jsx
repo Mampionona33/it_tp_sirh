@@ -22,6 +22,32 @@ const styles = StyleSheet.create({
   borderRight: {
     borderRight: 2,
   },
+  borderBottom: {
+    borderBottom: 2,
+  },
+  header: {
+    fontSize: 12,
+    justifyContent: 'center',
+    textTransform: 'uppercase',
+    alignItems: 'center',
+    paddingTop: 3,
+    paddingBottom: 3,
+    borderTop: 2,
+  },
+  subTitle: {
+    textAlign: 'left',
+    paddingLeft: 3,
+    textTransform: 'capitalize',
+  },
+  cell: {
+    paddingTop: 4,
+    paddingBottom: 4,
+    fontSize: 10,
+  },
+  textRight: {
+    textAlign: 'right',
+    paddingRight: 3,
+  },
 })
 
 export default function Section4(props) {
@@ -45,7 +71,7 @@ export default function Section4(props) {
                         { width: '35%', backgroundColor: 'green' },
                       ]}
                     >
-                      <Text style={[{ fontSize: 10, backgroundColor: 'red' }]}>{item.label}</Text>
+                      <Text style={[styles.cell, { backgroundColor: 'red' }]}>{item.label}</Text>
                     </View>
 
                     <View style={[styles.row, { width: '65%' }]}>
@@ -56,12 +82,28 @@ export default function Section4(props) {
                       </View>
                       <View style={[styles.row, { width: '50%' }]}>
                         <Text
-                          style={[styles.borderRight, { width: '33.33%', fontSize: 10 }]}
-                        ></Text>
+                          style={[
+                            styles.borderRight,
+                            styles.textRight,
+                            { width: '33.33%' },
+                            styles.cell,
+                          ]}
+                        >
+                          {item.base}
+                        </Text>
                         <Text
-                          style={[styles.borderRight, { width: '33.33%', fontSize: 10 }]}
-                        ></Text>
-                        <Text style={[{ width: '33%', fontSize: 10 }]}>{item.montant}</Text>
+                          style={[
+                            styles.borderRight,
+                            styles.textRight,
+                            { width: '33.33%' },
+                            styles.cell,
+                          ]}
+                        >
+                          {item.taux}
+                        </Text>
+                        <Text style={[{ width: '33%' }, styles.cell, styles.textRight]}>
+                          {item.montant}
+                        </Text>
                       </View>
                     </View>
                   </View>
@@ -91,18 +133,39 @@ export default function Section4(props) {
                         { width: '35%', backgroundColor: 'green' },
                       ]}
                     >
-                      <Text style={{ fontSize: 10, backgroundColor: 'red' }}>{item.label}</Text>
+                      <Text style={[styles.cell, { backgroundColor: 'red' }]}>{item.label}</Text>
                     </View>
 
                     <View style={[styles.row, { width: '65%' }]}>
                       <View style={[styles.row, { width: '50%' }]}>
-                        <Text style={[styles.borderRight, { width: '33.33%', fontSize: 10 }]}>
+                        <Text
+                          style={[
+                            styles.borderRight,
+                            styles.cell,
+                            styles.textRight,
+                            { width: '33.33%' },
+                          ]}
+                        >
                           {item.base}
                         </Text>
-                        <Text style={[styles.borderRight, { width: '33.33%', fontSize: 10 }]}>
+                        <Text
+                          style={[
+                            styles.borderRight,
+                            styles.cell,
+                            styles.textRight,
+                            { width: '33.33%' },
+                          ]}
+                        >
                           {item.taux}
                         </Text>
-                        <Text style={[styles.borderRight, { width: '33%', fontSize: 10 }]}>
+                        <Text
+                          style={[
+                            styles.borderRight,
+                            styles.cell,
+                            styles.textRight,
+                            { width: '33%' },
+                          ]}
+                        >
                           {item.montant}
                         </Text>
                       </View>
@@ -124,28 +187,96 @@ export default function Section4(props) {
   const Header = () => {
     return (
       <View style={[styles.row, { width: '100%', marginTop: '5mm' }]}>
-        <View style={[styles.borderRight, { backgroundColor: 'green', width: '35%' }]}>
+        <View
+          style={[
+            styles.borderRight,
+            styles.borderBottom,
+            styles.header,
+            { backgroundColor: 'green', width: '35%' },
+          ]}
+        >
           <Text style={[{ backgroundColor: 'blue' }]}>cotisation</Text>
         </View>
         <View style={[{ width: '65%' }]}>
           <View style={[styles.row]}>
-            <Text
-              style={[styles.row, styles.borderRight, { backgroundColor: 'red', width: '50%' }]}
+            <View
+              style={[
+                styles.row,
+                styles.borderRight,
+                styles.borderBottom,
+                styles.header,
+                { backgroundColor: 'red', width: '50%' },
+              ]}
             >
-              retenue
-            </Text>
-            <Text style={[styles.row, { backgroundColor: 'yellow' }]}>indemnités et avantages</Text>
+              <Text>retenue</Text>
+            </View>
+            <View
+              style={[
+                styles.row,
+                styles.borderBottom,
+                styles.header,
+                { backgroundColor: 'yellow', width: '50%' },
+              ]}
+            >
+              <Text>indemnités et avantages</Text>
+            </View>
           </View>
+
           <View style={[styles.row, { width: '100%' }]}>
             <View style={[styles.row, { width: '50%' }]}>
-              <Text style={[styles.borderRight, { fontSize: 10, width: '33.33%' }]}>base</Text>
-              <Text style={[styles.borderRight, { fontSize: 10, width: '33.33%' }]}>taux</Text>
-              <Text style={[styles.borderRight, { fontSize: 10, width: '33%' }]}>montant</Text>
+              <Text
+                style={[
+                  styles.borderRight,
+                  styles.borderBottom,
+                  styles.subTitle,
+                  { fontSize: 10, width: '33.33%' },
+                ]}
+              >
+                base
+              </Text>
+              <Text
+                style={[
+                  styles.borderRight,
+                  styles.borderBottom,
+                  styles.subTitle,
+                  { fontSize: 10, width: '33.33%' },
+                ]}
+              >
+                taux
+              </Text>
+              <Text
+                style={[
+                  styles.borderRight,
+                  styles.borderBottom,
+                  styles.subTitle,
+                  { fontSize: 10, width: '33%' },
+                ]}
+              >
+                montant
+              </Text>
             </View>
             <View style={[styles.row, { width: '50%' }]}>
-              <Text style={[styles.borderRight, { fontSize: 10, width: '33.33%' }]}>base</Text>
-              <Text style={[styles.borderRight, { fontSize: 10, width: '33.33%' }]}>taux</Text>
-              <Text style={[{ fontSize: 10, width: '33.33%' }]}>montant</Text>
+              <Text
+                style={[
+                  styles.borderRight,
+                  styles.borderBottom,
+                  styles.subTitle,
+                  { fontSize: 10, width: '33.33%' },
+                ]}
+              >
+                base
+              </Text>
+              <Text
+                style={[
+                  styles.borderRight,
+                  styles.borderBottom,
+                  styles.subTitle,
+                  { fontSize: 10, width: '33.33%' },
+                ]}
+              >
+                taux
+              </Text>
+              <Text style={[styles.borderBottom, { fontSize: 10, width: '33.33%' }]}>montant</Text>
             </View>
           </View>
         </View>
