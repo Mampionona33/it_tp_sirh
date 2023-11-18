@@ -119,21 +119,21 @@ const Section3 = (props) => {
                     styles.tableCell,
                     styles.cellBorderRight2,
 
-                    { width: '31%', paddingLeft: 4, margin: 0 },
+                    { width: '31%', paddingRight: 4, textAlign: 'right', margin: 0 },
                   ]}
                 ></Text>
                 <Text
                   style={[
                     styles.tableCell,
                     styles.cellBorderRight2,
-                    { width: '32%', paddingLeft: 4, margin: 0 },
+                    { width: '32%', paddingRight: 4, textAlign: 'right', margin: 0 },
                   ]}
                 ></Text>
                 <Text
                   style={[
                     styles.tableCell,
                     styles.cellBorderRight2,
-                    { width: '35%', paddingLeft: 4, margin: 0 },
+                    { width: '35%', paddingRight: 4, textAlign: 'right', margin: 0 },
                   ]}
                 ></Text>
 
@@ -142,22 +142,24 @@ const Section3 = (props) => {
                   style={[
                     styles.tableCell,
                     styles.cellBorderRight2,
-                    { width: '34%', paddingLeft: 4 },
+                    { width: '34%', paddingRight: 4, textAlign: 'right' },
                   ]}
                 >
-                  {item.base ? formatNumberWithSpaces(item.base) + ' Ar' : '-'}
+                  {item.base ? formatNumberWithSpaces(item.base) : '-'}
                 </Text>
                 <Text
                   style={[
                     styles.tableCell,
                     styles.cellBorderRight2,
-                    { width: '35%', paddingLeft: 4 },
+                    { width: '35%', paddingRight: 4, textAlign: 'right' },
                   ]}
                 >
                   {item.taux ? rendueTaux(item.taux) : '-'}
                 </Text>
-                <Text style={[styles.tableCell, { width: '35%', paddingLeft: 4 }]}>
-                  {item.montant ? formatNumberWithSpaces(item.montant) + ' Ar' : '-'}
+                <Text
+                  style={[styles.tableCell, { width: '35%', paddingRight: 4, textAlign: 'right' }]}
+                >
+                  {item.montant ? formatNumberWithSpaces(item.montant) : '-'}
                 </Text>
               </View>
             </View>
@@ -185,16 +187,16 @@ const Section3 = (props) => {
                   style={[
                     styles.tableCell,
                     styles.cellBorderRight2,
-                    { width: '31%', paddingLeft: 4 },
+                    { width: '31%', paddingRight: 4, textAlign: 'right' },
                   ]}
                 >
-                  {item.base ? formatNumberWithSpaces(item.base) + ' Ar' : '-'}
+                  {item.base ? formatNumberWithSpaces(item.base) : '-'}
                 </Text>
                 <Text
                   style={[
                     styles.tableCell,
                     styles.cellBorderRight2,
-                    { width: '32%', paddingLeft: 4 },
+                    { width: '32%', paddingRight: 4, textAlign: 'right' },
                   ]}
                 >
                   {item.taux && rendueTaux(item.taux)}
@@ -203,10 +205,10 @@ const Section3 = (props) => {
                   style={[
                     styles.tableCell,
                     styles.cellBorderRight2,
-                    { width: '36%', paddingLeft: 4 },
+                    { width: '36%', paddingRight: 4, textAlign: 'right' },
                   ]}
                 >
-                  {item.montant ? formatNumberWithSpaces(item.montant) + ' Ar' : '-'}
+                  {item.montant ? formatNumberWithSpaces(item.montant) : '-'}
                 </Text>
 
                 {/* Colonnes vides pour indemnité */}
@@ -214,7 +216,7 @@ const Section3 = (props) => {
                   style={[
                     styles.tableCell,
                     styles.cellBorderRight2,
-                    { width: '35%', paddingLeft: 4 },
+                    { width: '35%', paddingRight: 4, textAlign: 'right' },
                   ]}
                 >
                   {''}
@@ -223,12 +225,16 @@ const Section3 = (props) => {
                   style={[
                     styles.tableCell,
                     styles.cellBorderRight2,
-                    { width: '35%', paddingLeft: 4 },
+                    { width: '35%', paddingRight: 4, textAlign: 'right' },
                   ]}
                 >
                   {''}
                 </Text>
-                <Text style={[styles.tableCell, { width: '36%', paddingLeft: 4 }]}>{''}</Text>
+                <Text
+                  style={[styles.tableCell, { width: '36%', paddingRight: 4, textAlign: 'right' }]}
+                >
+                  {''}
+                </Text>
               </View>
             </View>
           </React.Fragment>
