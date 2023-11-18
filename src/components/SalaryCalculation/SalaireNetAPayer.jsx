@@ -7,13 +7,6 @@ const SalaireNetAPayer = () => {
   const title = 'Salaire net à payer'
   const salaireNet = useSelector((state) => state.bulletinDePaie.salaireNet)
   const irsaValue = useSelector((state) => state.selectedEmploye.irsaValue)
-  // // const retenue = useSelector((state) => state.bulletinDePaie.retenue)
-  // const cnaps = retenue.find((ret) => ret.label === 'cnaps')
-  // const ostie = retenue.find((ret) => ret.label === 'ostie')
-  // const cnapsBase = cnaps && cnaps.base
-  // const ostieBase = ostie && ostie.base
-
-  // const salaireNetAPayer = salaireNet + irsaValue + cnapsBase + ostieBase + (primeEtAvantage || 0)
 
   const data = [
     {
