@@ -2,9 +2,9 @@ import React from 'react'
 import { Text, View, StyleSheet } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import registerFonts from './font'
-import formatAriaryMga from 'src/utils/formatAriaryMga'
 import formatNumberWithSpaces from 'src/utils/formatNumberWithSpaces'
 
+// Chager les fontes personnalisées
 registerFonts()
 
 const styles = StyleSheet.create({
@@ -38,8 +38,12 @@ const Section2 = (props) => {
   const salaireBase = props.data.salarie.salaireBase
     ? formatNumberWithSpaces(props.data.salarie.salaireBase) + ' Ar'
     : '-'
-  const hs30 = props.data.hs30 ? formatNumberWithSpaces(props.data.hs30) + ' Ar' : '-'
-  const hs50 = props.data.hs50 ? formatNumberWithSpaces(props.data.hs50) + ' Ar' : '-'
+  const valeurHs30 = props.data.valeurHs30
+    ? formatNumberWithSpaces(props.data.valeurHs30) + ' Ar'
+    : '-'
+  const valeurHs50 = props.data.valeurHs50
+    ? formatNumberWithSpaces(props.data.valeurHs50) + ' Ar'
+    : '-'
   const salaireBrute = props.data.salaireBrute
     ? formatNumberWithSpaces(props.data.salaireBrute) + ' Ar'
     : '-'
@@ -69,7 +73,7 @@ const Section2 = (props) => {
             { paddingLeft: 2, marginTop: 20, fontSize: 10, paddingRight: 3 },
           ]}
         >
-          <Text style={[{ textAlign: 'right', fontSize: 10 }]}> 1904000,00 </Text>
+          <Text style={[{ textAlign: 'right', fontSize: 10 }]}> {props.data.plafondSME} </Text>
         </View>
       </View>
 
@@ -78,7 +82,7 @@ const Section2 = (props) => {
           <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 30%</Text>
         </View>
         <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
-          <Text style={{ textAlign: 'right', fontSize: 10 }}>{hs30}</Text>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>{valeurHs30}</Text>
         </View>
       </View>
 
@@ -87,7 +91,7 @@ const Section2 = (props) => {
           <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 50%</Text>
         </View>
         <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
-          <Text style={{ textAlign: 'right', fontSize: 10 }}>{hs50}</Text>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>{valeurHs50}</Text>
         </View>
       </View>
 
