@@ -6,6 +6,7 @@ import { saveAs } from 'file-saver'
 import Section1 from './Section1'
 import Section2 from './Section2'
 import Section3 from './Section3'
+import Section4 from './Section4'
 
 // Create Document Component
 const MyDocument = (props) => {
@@ -16,7 +17,8 @@ const MyDocument = (props) => {
       <Page size="A4">
         <Section1 data={data} />
         <Section2 data={data} />
-        <Section3 salarie={salarie} data={data} />
+        <Section4 data={data} />
+        {/* <Section3 salarie={salarie} data={data} /> */}
       </Page>
     </Document>
   )

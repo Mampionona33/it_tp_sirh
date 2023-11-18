@@ -84,6 +84,16 @@ const styles = StyleSheet.create({
   col2: {
     width: '10%',
   },
+
+  row: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+
+  col: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
 })
 
 const Section3 = (props) => {
@@ -245,137 +255,147 @@ const Section3 = (props) => {
 
   return (
     <>
-      <View style={[styles.table, { marginTop: 15, borderTop: 2 }]}>
-        <View style={[styles.tableRow]}>
-          <View
-            style={[
-              styles.tableCell,
-              styles.col33,
-              { paddingBottom: 0, borderRight: 2, borderBottom: 2 },
-            ]}
-          >
-            <Text
-              style={[
-                styles.textBold,
-                {
-                  textAlign: 'center',
-                  marginTop: 5,
-                  marginBottom: 2,
-                },
-              ]}
-            >
-              COTISATIONS
-            </Text>
-          </View>
-
-          <View style={[styles.tableCell, styles.col33, { borderRight: 2 }]}>
-            <Text style={[styles.textBold, { textAlign: 'center', borderBottom: 2 }]}>RETENUE</Text>
-            <View style={[styles.tableRow]}>
-              <Text
-                style={[
-                  styles.textBold,
-                  styles.col33,
-                  {
-                    textAlign: 'left',
-                    paddingLeft: 4,
-                    borderBottom: 2,
-                    borderRight: 2,
-                    paddingTop: 4,
-                  },
-                ]}
-              >
-                Base
-              </Text>
-              <Text
-                style={[
-                  styles.textBold,
-                  styles.col33,
-                  {
-                    textAlign: 'left',
-                    paddingLeft: 4,
-                    borderBottom: 2,
-                    borderRight: 2,
-                    paddingTop: 4,
-                  },
-                ]}
-              >
-                Taux
-              </Text>
-              <Text
-                style={[
-                  styles.textBold,
-                  styles.col33,
-                  {
-                    textAlign: 'left',
-                    borderBottom: 2,
-                    paddingTop: 4,
-                    paddingLeft: 4,
-                    width: '35%',
-                  },
-                ]}
-              >
-                Montant
-              </Text>
-            </View>
-          </View>
-
-          <View style={[styles.tableCell, { width: '35%' }]}>
-            <Text style={[styles.textBold, { textAlign: 'center', borderBottom: 2 }]}>
-              INDEMNITE ET AVANTAGES
-            </Text>
-            <View style={[styles.tableRow]}>
-              <Text
-                style={[
-                  styles.textBold,
-                  styles.col33,
-                  {
-                    textAlign: 'left',
-                    paddingLeft: 4,
-                    borderBottom: 2,
-                    borderRight: 2,
-                    paddingTop: 4,
-                  },
-                ]}
-              >
-                Base
-              </Text>
-              <Text
-                style={[
-                  styles.textBold,
-                  styles.col33,
-                  {
-                    textAlign: 'left',
-                    paddingLeft: 4,
-                    borderBottom: 2,
-                    borderRight: 2,
-                    paddingTop: 4,
-                  },
-                ]}
-              >
-                Taux
-              </Text>
-              <Text
-                style={[
-                  styles.textBold,
-                  styles.col33,
-                  {
-                    textAlign: 'left',
-                    borderBottom: 2,
-                    paddingTop: 4,
-                    paddingLeft: 4,
-                    width: '35%',
-                  },
-                ]}
-              >
-                Montant
-              </Text>
-            </View>
-          </View>
-        </View>
-        {renderRows()}
+      <View style={[styles.row, { width: 'auto' }]}>
+        <View style={[{ width: '33.33%' }]}>cotisation</View>
+        <View style={[{ width: '33.33%' }]}>retenue</View>
+        <View style={[{ width: '33.33%' }]}>indemnités et avantages</View>
       </View>
     </>
   )
+
+  // return (
+  //   <>
+  //     <View style={[styles.table, { marginTop: 15, borderTop: 2 }]}>
+  //       <View style={[styles.tableRow]}>
+  //         <View
+  //           style={[
+  //             styles.tableCell,
+  //             styles.col33,
+  //             { paddingBottom: 0, borderRight: 2, borderBottom: 2 },
+  //           ]}
+  //         >
+  //           <Text
+  //             style={[
+  //               styles.textBold,
+  //               {
+  //                 textAlign: 'center',
+  //                 marginTop: 5,
+  //                 marginBottom: 2,
+  //               },
+  //             ]}
+  //           >
+  //             COTISATIONS
+  //           </Text>
+  //         </View>
+
+  //         <View style={[styles.tableCell, styles.col33, { borderRight: 2 }]}>
+  //           <Text style={[styles.textBold, { textAlign: 'center', borderBottom: 2 }]}>RETENUE</Text>
+  //           <View style={[styles.tableRow]}>
+  //             <Text
+  //               style={[
+  //                 styles.textBold,
+  //                 styles.col33,
+  //                 {
+  //                   textAlign: 'left',
+  //                   paddingLeft: 4,
+  //                   borderBottom: 2,
+  //                   borderRight: 2,
+  //                   paddingTop: 4,
+  //                 },
+  //               ]}
+  //             >
+  //               Base
+  //             </Text>
+  //             <Text
+  //               style={[
+  //                 styles.textBold,
+  //                 styles.col33,
+  //                 {
+  //                   textAlign: 'left',
+  //                   paddingLeft: 4,
+  //                   borderBottom: 2,
+  //                   borderRight: 2,
+  //                   paddingTop: 4,
+  //                 },
+  //               ]}
+  //             >
+  //               Taux
+  //             </Text>
+  //             <Text
+  //               style={[
+  //                 styles.textBold,
+  //                 styles.col33,
+  //                 {
+  //                   textAlign: 'left',
+  //                   borderBottom: 2,
+  //                   paddingTop: 4,
+  //                   paddingLeft: 4,
+  //                   width: '35%',
+  //                 },
+  //               ]}
+  //             >
+  //               Montant
+  //             </Text>
+  //           </View>
+  //         </View>
+
+  //         <View style={[styles.tableCell, { width: '35%' }]}>
+  //           <Text style={[styles.textBold, { textAlign: 'center', borderBottom: 2 }]}>
+  //             INDEMNITE ET AVANTAGES
+  //           </Text>
+  //           <View style={[styles.tableRow]}>
+  //             <Text
+  //               style={[
+  //                 styles.textBold,
+  //                 styles.col33,
+  //                 {
+  //                   textAlign: 'left',
+  //                   paddingLeft: 4,
+  //                   borderBottom: 2,
+  //                   borderRight: 2,
+  //                   paddingTop: 4,
+  //                 },
+  //               ]}
+  //             >
+  //               Base
+  //             </Text>
+  //             <Text
+  //               style={[
+  //                 styles.textBold,
+  //                 styles.col33,
+  //                 {
+  //                   textAlign: 'left',
+  //                   paddingLeft: 4,
+  //                   borderBottom: 2,
+  //                   borderRight: 2,
+  //                   paddingTop: 4,
+  //                 },
+  //               ]}
+  //             >
+  //               Taux
+  //             </Text>
+  //             <Text
+  //               style={[
+  //                 styles.textBold,
+  //                 styles.col33,
+  //                 {
+  //                   textAlign: 'left',
+  //                   borderBottom: 2,
+  //                   paddingTop: 4,
+  //                   paddingLeft: 4,
+  //                   width: '35%',
+  //                 },
+  //               ]}
+  //             >
+  //               Montant
+  //             </Text>
+  //           </View>
+  //         </View>
+  //       </View>
+  //       {renderRows()}
+  //     </View>
+  //   </>
+  // )
 }
 
 Section3.propTypes = {
