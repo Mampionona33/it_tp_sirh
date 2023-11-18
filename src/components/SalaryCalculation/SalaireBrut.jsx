@@ -237,9 +237,6 @@ const SalaireBrut = () => {
       dispatch(setBulletinDePaie({ valeurHs50: hn50_ }))
     }
 
-    if (baseIrsa && mount) {
-      dispatch(setBulletinDePaie({ baseIrsa: baseIrsa }))
-    }
     if (omsi_ && mount) {
       dispatch(setBulletinDePaie({ omsi: omsi_ }))
     }
@@ -260,6 +257,23 @@ const SalaireBrut = () => {
     if (salaireNet && salaireNet) {
       dispatch(setBulletinDePaie({ salaireNet: salaireNet }))
     }
+
+    if (baseIrsa && mount) {
+      dispatch(setBulletinDePaie({ baseIrsa: baseIrsa }))
+    }
+
+    if (irsaArrondi && mount) {
+      const baseIrsaObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'irsa')
+
+      if (baseIrsaObjectIndex === -1) {
+        dispatch(
+          setBulletinDePaie({
+            retenuSalaire: [...retenuSalaire, { label: 'irsa', montant: irsaArrondi }],
+          }),
+        )
+      }
+    }
+
     if (mount && cnaps_ && baseCnaps && tauxCnaps) {
       const cnapsObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'cnaps')
 
