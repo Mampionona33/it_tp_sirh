@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useDispatch } from 'react-redux'
-import { setPrimeEtAvantage } from 'src/redux/selectedEmploye/selectedEmployeReducer'
+// import { setPrimeEtAvantage } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { useSelector } from 'react-redux'
 import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'

@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
 const Section3 = (props) => {
   const retenues = props.data.retenuSalaire ? props.data.retenuSalaire : []
   const indemnites = props.data.ajoutSalaire ? props.data.ajoutSalaire : []
-  const cotisations = props.data.cotisations ? props.data.cotisations : []
 
   const rendueTaux = (val) => {
     return val * 100 + '%'

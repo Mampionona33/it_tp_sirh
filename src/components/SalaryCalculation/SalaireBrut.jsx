@@ -23,27 +23,10 @@ const SalaireBrut = () => {
   const totalHs30 = useSelector((state) => state.bulletinDePaie.totalHs30)
   const totalHs50 = useSelector((state) => state.bulletinDePaie.totalHs50)
   const totalHDim = useSelector((state) => state.bulletinDePaie.totalHDim)
+  const retenuSalaire = useSelector((state) => state.bulletinDePaie.retenuSalaire)
 
   const totalPrimeEtAvantage = useSelector((state) => state.bulletinDePaie.totalPrimeEtAvantage)
   const totalDeduction = useSelector((state) => state.bulletinDePaie.totalDeduction)
-
-  // const totalAjoutSalaire =
-  //   ajoutSalaire.length > 0 &&
-  //   ajoutSalaire.reduce((acc, cur) => {
-  //     if (cur && cur.hasOwnProperty('montant')) {
-  //       return acc + cur['montant']
-  //     }
-  //     return acc
-  //   }, 0)
-
-  // const totalRetenuSalarie =
-  //   retenuSalaire.length > 0 &&
-  //   retenuSalaire.reduce((acc, cur) => {
-  //     if (cur && cur.hasOwnProperty('montant')) {
-  //       return acc + cur['montant']
-  //     }
-  //     return acc
-  //   }, 0)
 
   // console.log(totalPrimeEtAvantage)
   // console.log(totalDeduction)
@@ -277,38 +260,26 @@ const SalaireBrut = () => {
     if (salaireNet && salaireNet) {
       dispatch(setBulletinDePaie({ salaireNet: salaireNet }))
     }
+    if (mount && cnaps_ && baseCnaps && tauxCnaps) {
+      const cnapsObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'cnaps')
 
-    // if (tauxCnaps && mount && cnaps_ && baseCnaps) {
-    //   const cnapsObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'cnaps')
-
-    //   if (cnapsObjectIndex === -1) {
-    //     // Si l'objet 'cnaps' n'existe pas encore dans le tableau, ajoutez-le
-    //     dispatch(
-    //       setBulletinDePaie({
-    //         retenuSalaire: [
-    //           ...retenuSalaire,
-    //           { label: 'cnaps', base: baseCnaps, taux: tauxCnaps, montant: cnaps_ },
-    //         ],
-    //       }),
-    //     )
-    //   } else {
-    //     // Si l'objet 'cnaps' existe déjà, mettez à jour ses propriétés
-    //     dispatch(
-    //       setBulletinDePaie({
-    //         retenuSalaire: retenuSalaire.map((ret, index) =>
-    //           index === cnapsObjectIndex
-    //             ? { ...ret, base: baseCnaps, taux: tauxCnaps, montant: cnaps_ }
-    //             : ret,
-    //         ),
-    //       }),
-    //     )
-    //   }
-    // }
+      if (cnapsObjectIndex === -1) {
+        dispatch(
+          setBulletinDePaie({
+            retenuSalaire: [
+              ...retenuSalaire,
+              { base: baseCnaps, taux: tauxCnaps, label: 'cnaps', montant: cnaps_ },
+            ],
+          }),
+        )
+      }
+    }
 
     return () => {
       mount = false
     }
   }, [
+    retenuSalaire,
     salaireNet,
     salaireBrut_,
     tauxCnaps,
