@@ -62,13 +62,14 @@ export default function PrimeEtAvantage() {
 
       const ajoutSalaireUp = mergeArraysByReferenceValue(ajoutSalaire, updatedAjoutSalaire, 'label')
       const retenuSalaireUp = mergeArraysByReferenceValue(retenuSalaire, updatedRetenue, 'label')
-      // console.log('ajoutSalaireUp', ajoutSalaireUp)
-      console.log('retenuSalaireUp', retenuSalaireUp)
-      dispatch(setBulletinDePaie({ ajoutSalaire: ajoutSalaireUp }))
+      console.log('primeEtAvantage', primeEtAvantage)
+      console.log('deduction', deduction)
       dispatch(setBulletinDePaie({ totalPrimeEtAvantage: primeEtAvantage }))
       dispatch(setBulletinDePaie({ totalDeduction: deduction }))
+      dispatch(setBulletinDePaie({ ajoutSalaire: ajoutSalaireUp }))
+      dispatch(setBulletinDePaie({ retenuSalaire: retenuSalaireUp }))
       // dispatch(setPrimeEtAvantage(primeEtAvantage))
-      setIsFormSubmitted(true)
+      // setIsFormSubmitted(true)
     }
 
     const handleInputChange = useCallback(
