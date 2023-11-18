@@ -55,9 +55,13 @@ export default function Section4(props) {
                         <Text style={[styles.borderRight, { width: '33%' }]}></Text>
                       </View>
                       <View style={[styles.row, { width: '50%' }]}>
-                        <Text style={{ width: '33.33%', fontSize: 10 }}></Text>
-                        <Text style={{ width: '33.33%', fontSize: 10 }}></Text>
-                        <Text style={{ width: '33.33%', fontSize: 10 }}>{item.montant}</Text>
+                        <Text
+                          style={[styles.borderRight, { width: '33.33%', fontSize: 10 }]}
+                        ></Text>
+                        <Text
+                          style={[styles.borderRight, { width: '33.33%', fontSize: 10 }]}
+                        ></Text>
+                        <Text style={[{ width: '33%', fontSize: 10 }]}>{item.montant}</Text>
                       </View>
                     </View>
                   </View>
@@ -80,20 +84,32 @@ export default function Section4(props) {
               return (
                 <React.Fragment key={key}>
                   <View style={[styles.row, { width: '100%' }]}>
-                    <View style={[styles.row, { width: '35%', backgroundColor: 'green' }]}>
+                    <View
+                      style={[
+                        styles.row,
+                        styles.borderRight,
+                        { width: '35%', backgroundColor: 'green' },
+                      ]}
+                    >
                       <Text style={{ fontSize: 10, backgroundColor: 'red' }}>{item.label}</Text>
                     </View>
 
                     <View style={[styles.row, { width: '65%' }]}>
                       <View style={[styles.row, { width: '50%' }]}>
-                        <Text style={{ width: '33.33%', fontSize: 10 }}>{item.base}</Text>
-                        <Text style={{ width: '33.33%', fontSize: 10 }}>{item.taux}</Text>
-                        <Text style={{ width: '33.33%', fontSize: 10 }}>{item.montant}</Text>
+                        <Text style={[styles.borderRight, { width: '33.33%', fontSize: 10 }]}>
+                          {item.base}
+                        </Text>
+                        <Text style={[styles.borderRight, { width: '33.33%', fontSize: 10 }]}>
+                          {item.taux}
+                        </Text>
+                        <Text style={[styles.borderRight, { width: '33%', fontSize: 10 }]}>
+                          {item.montant}
+                        </Text>
                       </View>
                       <View style={[styles.row, { width: '50%' }]}>
-                        <Text style={{ width: '33.33%' }}></Text>
-                        <Text style={{ width: '33.33%' }}></Text>
-                        <Text style={{ width: '33.33%' }}></Text>
+                        <Text style={[styles.borderRight, { width: '33.33%' }]}></Text>
+                        <Text style={[styles.borderRight, { width: '33.33%' }]}></Text>
+                        <Text style={[{ width: '33.33%' }]}></Text>
                       </View>
                     </View>
                   </View>
