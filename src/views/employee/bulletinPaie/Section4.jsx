@@ -121,8 +121,8 @@ export default function Section4(props) {
     )
   }
 
-  return (
-    <>
+  const Header = () => {
+    return (
       <View style={[styles.row, { width: '100%', marginTop: '5mm' }]}>
         <View style={[styles.borderRight, { backgroundColor: 'green', width: '35%' }]}>
           <Text style={[{ backgroundColor: 'blue' }]}>cotisation</Text>
@@ -150,7 +150,13 @@ export default function Section4(props) {
           </View>
         </View>
       </View>
+    )
+  }
+
+  return (
+    <>
       <View>
+        <Header />
         <Indemnites />
         <Retenues />
       </View>
