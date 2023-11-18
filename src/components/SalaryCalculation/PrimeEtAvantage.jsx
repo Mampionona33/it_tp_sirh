@@ -26,9 +26,9 @@ export default function PrimeEtAvantage() {
   const Body = () => {
     const [formValues, setFormValues] = useState({})
 
-    const halfLength = Math.ceil(mouvementSalaire.length / 2)
-    const firstHalf = mouvementSalaire.slice(0, halfLength)
-    const secondHalf = mouvementSalaire.slice(halfLength)
+    const halfLength = mouvementSalaire && Math.ceil(mouvementSalaire.length / 2)
+    const firstHalf = mouvementSalaire && mouvementSalaire.slice(0, halfLength)
+    const secondHalf = mouvementSalaire && mouvementSalaire.slice(halfLength)
 
     const handleSubmit = (e) => {
       e.preventDefault()
@@ -113,44 +113,46 @@ export default function PrimeEtAvantage() {
         <form action="" className="w-full" onSubmit={handleSubmit} method="post">
           <div className="row g-3 mx-4 my-2">
             <div className="col-12 col-lg-6">
-              {firstHalf.map((item, index) => (
-                <div key={item.id} className="mb-3">
-                  <label className="form-label" htmlFor={item.id}>
-                    {item.label}
-                  </label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    data-action={item.action}
-                    min="0"
-                    name={item.id}
-                    id={item.id}
-                    value={formValues[item.id] || ''}
-                    placeholder="0 Ar"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              ))}
+              {firstHalf &&
+                firstHalf.map((item, index) => (
+                  <div key={item.id} className="mb-3">
+                    <label className="form-label" htmlFor={item.id}>
+                      {item.label}
+                    </label>
+                    <input
+                      className="form-control"
+                      type="number"
+                      data-action={item.action}
+                      min="0"
+                      name={item.id}
+                      id={item.id}
+                      value={formValues[item.id] || ''}
+                      placeholder="0 Ar"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                ))}
             </div>
             <div className="col-12 col-lg-6">
-              {secondHalf.map((item, index) => (
-                <div key={item.id} className="mb-3">
-                  <label className="form-label" htmlFor={item.id}>
-                    {item.label}
-                  </label>
-                  <input
-                    className="form-control"
-                    type="number"
-                    min="0"
-                    name={item.id}
-                    data-action={item.action}
-                    id={item.id}
-                    value={formValues[item.id] || ''}
-                    placeholder="0 Ar"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              ))}
+              {secondHalf &&
+                secondHalf.map((item, index) => (
+                  <div key={item.id} className="mb-3">
+                    <label className="form-label" htmlFor={item.id}>
+                      {item.label}
+                    </label>
+                    <input
+                      className="form-control"
+                      type="number"
+                      min="0"
+                      name={item.id}
+                      data-action={item.action}
+                      id={item.id}
+                      value={formValues[item.id] || ''}
+                      placeholder="0 Ar"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                ))}
             </div>
             <hr />
             <div className="col-12">
@@ -172,9 +174,5 @@ export default function PrimeEtAvantage() {
     )
   }
 
-  return (
-    <>
-      <CustomSection title={title} body={<Body />} />
-    </>
-  )
+  return <>{mouvementSalaire && <CustomSection title={title} body={<Body />} />}</>
 }
