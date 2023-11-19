@@ -241,6 +241,7 @@ const TimeSheetTable = (props) => {
         holidayHours: item.hs_de_dimanche,
       }
     })
+    console.log('transFormedData', transFormedData)
     return transFormedData
   }
 
