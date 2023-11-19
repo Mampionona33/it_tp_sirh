@@ -25,8 +25,11 @@ const styles = StyleSheet.create({
   borderBottom: {
     borderBottom: 2,
   },
+  borderTop: {
+    borderTop: 2,
+  },
   header: {
-    fontSize: 12,
+    fontSize: 11,
     justifyContent: 'center',
     textTransform: 'uppercase',
     alignItems: 'center',
@@ -150,7 +153,12 @@ export default function Section3(props) {
                 base
               </Text>
               <Text
-                style={[styles.borderRight, styles.borderBottom, { fontSize: 10, width: '33.33%' }]}
+                style={[
+                  styles.borderRight,
+                  styles.borderBottom,
+                  styles.subTitle,
+                  { fontSize: 10, width: '33.33%' },
+                ]}
               >
                 taux
               </Text>
@@ -439,6 +447,17 @@ export default function Section3(props) {
       </>
     )
   }
+
+  const Divider = () => {
+    return (
+      <>
+        <View
+          style={[styles.row, styles.borderTop, styles.cell, { width: '100%', marginTop: 5 }]}
+        ></View>
+      </>
+    )
+  }
+
   return (
     <>
       <View>
@@ -446,6 +465,11 @@ export default function Section3(props) {
         <Indemnites />
         <Retenues />
         <Total />
+        <View style={[{ marginTop: 5 }]}>
+          <Divider />
+        </View>
+        <Divider />
+        <Divider />
       </View>
     </>
   )
