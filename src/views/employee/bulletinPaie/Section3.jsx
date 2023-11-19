@@ -502,14 +502,19 @@ export default function Section3(props) {
               Payé par virement bancaire le : {dateVirement}
             </Text>
           </View>
-          <View style={[styles.row, styles.justifyBetween, { width: '43.44%' }]}>
+          <View
+            style={[
+              styles.row,
+              styles.justifyBetween,
+              styles.textBold,
+              { width: '43.44%', fontSize: 12 },
+            ]}
+          >
             <View style={[{ width: '50%' }]}>
-              <Text style={[styles.cell, styles.textMedium, { paddingLeft: 4, fontSize: 11 }]}>
-                Net à payer
-              </Text>
+              <Text style={[styles.cell, { paddingLeft: 4 }]}>Net à payer</Text>
             </View>
             <View style={[{ width: '50%', fontSize: 11 }]}>
-              <Text style={[styles.cell, styles.textRight, styles.textMedium, {}]}>
+              <Text style={[styles.cell, styles.textRight, {}]}>
                 {salaireNetAPayer && formatNumberWithSpaces(salaireNetAPayer)}
               </Text>
             </View>

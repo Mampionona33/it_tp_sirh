@@ -7,6 +7,7 @@ const SalaireNetAPayer = () => {
   const title = 'Salaire net à payer'
   const salaireNet = useSelector((state) => state.bulletinDePaie.salaireNet)
   const irsaValue = useSelector((state) => state.selectedEmploye.irsaValue)
+  const salaireNetAPayer = useSelector((state) => state.bulletinDePaie.salaireNetAPayer)
 
   const data = [
     {
@@ -23,9 +24,9 @@ const SalaireNetAPayer = () => {
     },
     {
       title: 'Salaire net à payer :',
-      // value: (
-      //   // <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNetAPayer)}</span>
-      // ),
+      value: (
+        <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNetAPayer)}</span>
+      ),
     },
   ]
 

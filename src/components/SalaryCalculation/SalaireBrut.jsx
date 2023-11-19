@@ -74,6 +74,7 @@ const SalaireBrut = () => {
   const omsi_ = calculPaie.getOmsi()
   const irsaArrondi = calculPaie.getBaseIrsaArrondi()
   const salaireNet_ = calculPaie.getSalaireNet()
+  const salaireNetAPayer_ = calculPaie.getSalaireNetAPayer()
 
   const baseIrsa = useMemo(() => {
     return calculPaie.getBaseIrsa()
@@ -292,10 +293,15 @@ const SalaireBrut = () => {
       }
     }
 
+    if (mount && salaireNetAPayer_) {
+      dispatch(setBulletinDePaie({ salaireNetAPayer: salaireNetAPayer_ }))
+    }
+
     return () => {
       mount = false
     }
   }, [
+    salaireNetAPayer_,
     retenuSalaire,
     salaireNet_,
     salaireBrut_,
