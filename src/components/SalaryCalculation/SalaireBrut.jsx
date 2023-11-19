@@ -158,7 +158,7 @@ const SalaireBrut = () => {
       <>
         <div className="flex flex-col">
           {/* First Element */}
-          <div className="md:grid md:grid-cols-2">
+          <div className="sm:grid sm:grid-cols-2">
             <div className="font-medium p-3 border-b align-middle border-customRed-100">
               Salaire de base:
             </div>
@@ -172,14 +172,14 @@ const SalaireBrut = () => {
             <React.Fragment key={index}>
               {/* Alternating background colors in mobile mode */}
               <div
-                className={`md:grid md:bg-transparent md:grid-cols-3 ${
+                className={`sm:grid sm:bg-transparent sm:grid-cols-3 ${
                   index % 2 === 0 ? 'mobile:bg-gray-100' : 'mobile:bg-white'
                 }`}
               >
                 <div className="font-medium p-3 border-b align-middle border-customRed-100">
                   {item.title}
                 </div>
-                <div className="md:text-center text-right p-3 border-b align-middle border-customRed-100">
+                <div className="sm:text-center text-right p-3 border-b align-middle border-customRed-100">
                   {item.hours.toString().padStart(2, '0')} H
                 </div>
                 <div className="text-right p-3 border-b align-middle border-customRed-100">
@@ -188,7 +188,7 @@ const SalaireBrut = () => {
               </div>
             </React.Fragment>
           ))}
-          <div className="md:grid md:grid-cols-2">
+          <div className="sm:grid sm:grid-cols-2">
             <div className="font-medium p-3 border-b align-middle border-customRed-100">
               Primes et avantages:
             </div>
@@ -197,7 +197,7 @@ const SalaireBrut = () => {
             </div>
           </div>
 
-          <div className="md:grid md:grid-cols-2">
+          <div className="sm:grid sm:grid-cols-2">
             <div className="font-medium p-3 border-b align-middle border-customRed-100">
               Retenues:
             </div>
@@ -206,7 +206,7 @@ const SalaireBrut = () => {
             </div>
           </div>
 
-          <div className="md:grid md:grid-cols-2">
+          <div className="sm:grid sm:grid-cols-2">
             <div className="font-medium p-3 border-b align-middle border-customRed-100">
               Salaire brute:
             </div>

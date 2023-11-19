@@ -21,7 +21,7 @@ module.exports = {
         '10/100': '10%',
       },
       screens: {
-        mobile: '400px',
+        mobile: '320px',
       },
     },
   },
