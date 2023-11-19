@@ -225,17 +225,21 @@ const TimeSheetTable = (props) => {
   // )
 
   const formatDataFromBackend = (bakendData, id) => {
-    const transFormedData = Array.from(bakendData).map((item) => ({
-      employee: {
-        id: id,
-      },
-      date: new Date(item.date).toISOString(),
-      regularHoursDay: item.heure_de_travail,
-      regularNightHours: item.hs_de_nuit,
-      occasionalNightHours: item.hs_normale,
-      overtimeHoursDay: item.hs_jours_feries,
-      holidayHours: item.hs_de_dimanche,
-    }))
+    const transFormedData = Array.from(bakendData).map((item) => {
+      const parsedDate = parse(item.date, 'dd/MM/yyyy', new Date())
+
+      return {
+        employee: {
+          id: id,
+        },
+        date: format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
+        regularHoursDay: item.heure_de_travail,
+        regularNightHours: item.hs_de_nuit,
+        occasionalNightHours: item.hs_normale,
+        overtimeHoursDay: item.hs_jours_feries,
+        holidayHours: item.hs_de_dimanche,
+      }
+    })
     return transFormedData
   }
 
@@ -276,9 +280,11 @@ const TimeSheetTable = (props) => {
 
       const heureService = new HeureService()
       try {
-        const resp = heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
-        const transFormedData = formatDataFromBackend(resp, salarie.id)
-        console.log(transFormedData)
+        if (matricul && salarie && salarie.id) {
+          const resp = heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
+          const transFormedData = formatDataFromBackend(resp, salarie.id)
+          console.log(transFormedData)
+        }
         // setData(resp)
       } catch (error) {
         console.log(error)
