@@ -27,6 +27,7 @@ const SalaireBrut = () => {
 
   const totalPrimeEtAvantage = useSelector((state) => state.bulletinDePaie.totalPrimeEtAvantage)
   const totalDeduction = useSelector((state) => state.bulletinDePaie.totalDeduction)
+  // const salaireNet = useSelector((state) => state.bulletinDePaie.salaireNet)
 
   // console.log(totalPrimeEtAvantage)
   // console.log(totalDeduction)
@@ -72,7 +73,7 @@ const SalaireBrut = () => {
   const cnaps_ = calculPaie.getCnaps()
   const omsi_ = calculPaie.getOmsi()
   const irsaArrondi = calculPaie.getBaseIrsaArrondi()
-  const salaireNet = calculPaie.getSalaireNet()
+  const salaireNet_ = calculPaie.getSalaireNet()
 
   const baseIrsa = useMemo(() => {
     return calculPaie.getBaseIrsa()
@@ -254,8 +255,8 @@ const SalaireBrut = () => {
     if (irsaAPayer && mount) {
       dispatch(setBulletinDePaie({ irsaAPayer: irsaAPayer }))
     }
-    if (salaireNet && salaireNet) {
-      dispatch(setBulletinDePaie({ salaireNet: salaireNet }))
+    if (mount && salaireNet_) {
+      dispatch(setBulletinDePaie({ salaireNet: salaireNet_ }))
     }
 
     if (baseIrsa && mount) {
@@ -294,7 +295,7 @@ const SalaireBrut = () => {
     }
   }, [
     retenuSalaire,
-    salaireNet,
+    salaireNet_,
     salaireBrut_,
     tauxCnaps,
     tauxOmsi,
