@@ -225,7 +225,7 @@ const TimeSheetTable = (props) => {
   // )
 
   const filterDataByDate = useCallback(
-    (currentFilter) => {
+    async (currentFilter) => {
       const matricul = salarie.matricule
       const currentDate = currentFilter || new Date()
       const currentMonth = new Date(currentDate).getMonth() + 1
@@ -258,19 +258,14 @@ const TimeSheetTable = (props) => {
 
       const startDate = new Date(dateDebutFormatted)
       const endDate = new Date(dateFinFormatted)
-      // console.log('dateDebutFormatted', dateDebutFormatted)
-
-      // Utiliser ces dates pour filtrer les données
-      // const filteredData = employeeHours.filter((employHours) => {
-      //   const employDate = new Date(employHours.date)
-      //   return (
-      //     employHours.employee.id === salarie.id && employDate >= startDate && employDate <= endDate
-      //   )
-      // })
 
       const heureService = new HeureService()
-      const data = heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
-      console.log(data)
+      try {
+        const resp = heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
+        // setData(resp)
+      } catch (error) {
+        console.log(error)
+      }
 
       const filteredData = employeeHours.filter((employHours) => {
         const employDate = new Date(employHours.date)
@@ -281,7 +276,7 @@ const TimeSheetTable = (props) => {
         )
       })
 
-      setData(filteredData)
+      // setData(filteredData)
     },
     [salarie, setData, listDateDebutDateFin],
   )
