@@ -265,16 +265,18 @@ const TimeSheetTable = (props) => {
         listDateDebutDateFin[selectedMonth]
 
       // Construire les dates de début et de fin en utilisant les informations récupérées
-      const dateDebutFormatted = `${dateDebut}/${prevMonth}/${
+      const dateDebutFormatted = `${dateDebut}/${prevMonth.toString().padStart(2, '0')}/${
         currentYear - (currentMonth === 1 ? 1 : 0)
       }`
-      const dateFinFormatted = `${dateFin}/${currentMonth}/${currentYear}`
+      const dateFinFormatted = `${dateFin}/${currentMonth
+        .toString()
+        .padStart(2, '0')}/${currentYear}`
 
       console.log(dateDebutFormatted)
       console.log(dateFinFormatted)
 
-      const startDate = new Date(dateDebutFormatted)
-      const endDate = new Date(dateFinFormatted)
+      const startDate = '01/01/2023'
+      const endDate = '06/01/2023'
 
       const heureService = new HeureService()
       try {
