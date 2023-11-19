@@ -6,6 +6,7 @@ import MoreButtonMenu from 'src/components/MoreButtonMenu'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
 import { resetBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
+import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametreCalendrierReducer'
 
 const List = () => {
   const dispatch = useDispatch()
@@ -26,6 +27,7 @@ const List = () => {
     if (mount && dispatch) {
       dispatch(fetchAllEmployees())
       dispatch(resetBulletinDePaie())
+      dispatch(resetParametreCalendrier())
     }
     return () => {
       mount = false

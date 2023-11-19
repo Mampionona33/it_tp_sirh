@@ -19,7 +19,7 @@ import {
   setDefaultOptions,
 } from 'date-fns'
 import MonthYearPicker from './MonthYearPicker'
-import { fr } from 'date-fns/locale'
+import { fr, enUS } from 'date-fns/locale'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   setTotalHNormal,
@@ -32,6 +32,7 @@ import {
   setTotalHsni130,
   setTotalHsni150,
 } from 'src/redux/employeHours/employeHoursReducer'
+import HeureService from 'src/services/HeureService'
 
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
@@ -39,12 +40,16 @@ const TimeSheetTable = (props) => {
   const dispatch = useDispatch()
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
   const isCadre = salarie.cadre || false
+  const listDateDebutDateFin = useSelector(
+    (state) => state.parametreCalendrier.listDateDebutDateFin,
+  )
   const [data, setData] = useState([])
   const [rowSelection, setRowSelection] = React.useState({})
   const [globalFilter, setGlobalFilter] = useState('')
   const defaultStartDate = isMonday(new Date()) ? new Date() : startOfWeek(new Date())
   const defaultEndDate = isSunday(new Date()) ? new Date() : endOfWeek(new Date())
 
+  // Définir la langue de date-fns en français
   setDefaultOptions({ locale: fr })
 
   const columns = [
@@ -199,10 +204,69 @@ const TimeSheetTable = (props) => {
 
   const [sorting, setSorting] = useState(defaultSorting)
 
+  // const filterDataByDate = useCallback(
+  //   (currentFilter) => {
+  //     const currentDate = currentFilter || new Date()
+  //     console.log(currentDate)
+  //     console.log(listDateDebutDateFin)
+
+  //     const filteredData = employeeHours.filter((employHours) => {
+  //       const employDate = new Date(employHours.date)
+  //       return (
+  //         employHours.employee.id === salarie.id &&
+  //         employDate.getMonth() === currentDate.getMonth() &&
+  //         employDate.getFullYear() === currentDate.getFullYear()
+  //       )
+  //     })
+
+  //     setData(filteredData)
+  //   },
+  //   [salarie, setData, listDateDebutDateFin],
+  // )
+
   const filterDataByDate = useCallback(
     (currentFilter) => {
+      const matricul = salarie.matricule
       const currentDate = currentFilter || new Date()
       console.log(currentDate)
+
+      // Récupérer le mois et l'année
+      const selectedMonth = format(currentDate, 'MMM', { locale: enUS })
+        .toLowerCase()
+        .replace(/\./gi, '')
+
+      // console.log(selectedMonth)
+      // console.log(listDateDebutDateFin[selectedMonth])
+
+      const selectedYear = format(currentDate, 'yyyy')
+
+      // Récupérer les dates de début et de fin du mois sélectionné
+      const { dateDebut, dateFin } =
+        listDateDebutDateFin &&
+        listDateDebutDateFin[selectedMonth] &&
+        listDateDebutDateFin[selectedMonth]
+
+      // Construire les dates de début et de fin en utilisant les informations récupérées
+      const dateDebutFormatted = `${dateDebut}/${selectedMonth - 1} /${
+        selectedMonth === 'jan' ? selectedYear - 1 : selectedYear
+      }`
+      const dateFinFormatted = `${dateFin}/${selectedMonth}/${selectedYear}`
+
+      const startDate = new Date(dateDebutFormatted)
+      const endDate = new Date(dateFinFormatted)
+      // console.log('dateDebutFormatted', dateDebutFormatted)
+
+      // Utiliser ces dates pour filtrer les données
+      // const filteredData = employeeHours.filter((employHours) => {
+      //   const employDate = new Date(employHours.date)
+      //   return (
+      //     employHours.employee.id === salarie.id && employDate >= startDate && employDate <= endDate
+      //   )
+      // })
+
+      const heureService = new HeureService()
+      const data = heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
+      console.log(data)
 
       const filteredData = employeeHours.filter((employHours) => {
         const employDate = new Date(employHours.date)
@@ -215,7 +279,7 @@ const TimeSheetTable = (props) => {
 
       setData(filteredData)
     },
-    [salarie, setData],
+    [salarie, setData, listDateDebutDateFin],
   )
 
   React.useEffect(() => {
@@ -254,13 +318,13 @@ const TimeSheetTable = (props) => {
     filterDataByDate(newDate)
   }
 
-  const calculateColumnSum = (columnName) => {
-    let result = 0
-    if (columnName) {
-      result = data.length > 0 && data.reduce((total, item) => total + (item[columnName] || 0), 0)
-    }
-    return result
-  }
+  // const calculateColumnSum = (columnName) => {
+  //   let result = 0
+  //   if (columnName) {
+  //     result = data.length > 0 && data.reduce((total, item) => total + (item[columnName] || 0), 0)
+  //   }
+  //   return result
+  // }
 
   const calculateTotal = useCallback(() => {
     const total = {
@@ -329,51 +393,51 @@ const TimeSheetTable = (props) => {
 
   const total = calculateTotal()
 
-  const calculateHSDetails = () => {
-    const hs = {
-      hs130: 0,
-      hs150: 0,
-    }
+  // const calculateHSDetails = () => {
+  //   const hs = {
+  //     hs130: 0,
+  //     hs150: 0,
+  //   }
 
-    let currentWeekStartDate = null
-    let weeklyOvertimeHours = 0
-    const weeklyHsDetails = []
+  //   let currentWeekStartDate = null
+  //   let weeklyOvertimeHours = 0
+  //   const weeklyHsDetails = []
 
-    data.sort((a, b) => new Date(a.date) - new Date(b.date))
+  //   data.sort((a, b) => new Date(a.date) - new Date(b.date))
 
-    let isSundayStarted = false
+  //   let isSundayStarted = false
 
-    data.forEach((element, index) => {
-      const currentDate = new Date(element.date)
-      const isLastDayOfMonth = index === data.length - 1
-      const hsValue = element.overtimeHoursDay || 0
+  //   data.forEach((element, index) => {
+  //     const currentDate = new Date(element.date)
+  //     const isLastDayOfMonth = index === data.length - 1
+  //     const hsValue = element.overtimeHoursDay || 0
 
-      if (!isSundayStarted && currentDate.getDate() === 1) {
-        const previousSunday = new Date(currentDate)
-        previousSunday.setDate(currentDate.getDate() - 1)
-        currentWeekStartDate = previousSunday
-        isSundayStarted = true
-      }
+  //     if (!isSundayStarted && currentDate.getDate() === 1) {
+  //       const previousSunday = new Date(currentDate)
+  //       previousSunday.setDate(currentDate.getDate() - 1)
+  //       currentWeekStartDate = previousSunday
+  //       isSundayStarted = true
+  //     }
 
-      if (isMonday(currentDate)) {
-        currentWeekStartDate = currentDate
-        weeklyOvertimeHours = 0
-      }
+  //     if (isMonday(currentDate)) {
+  //       currentWeekStartDate = currentDate
+  //       weeklyOvertimeHours = 0
+  //     }
 
-      if (currentWeekStartDate) {
-        weeklyOvertimeHours += hsValue
+  //     if (currentWeekStartDate) {
+  //       weeklyOvertimeHours += hsValue
 
-        if (isSunday(currentDate) || isLastDayOfMonth) {
-          weeklyHsDetails.push({
-            hs130: weeklyOvertimeHours <= 8 ? weeklyOvertimeHours : 8,
-            hs150: weeklyOvertimeHours > 8 ? weeklyOvertimeHours - 8 : 0,
-          })
-        }
-      }
-    })
+  //       if (isSunday(currentDate) || isLastDayOfMonth) {
+  //         weeklyHsDetails.push({
+  //           hs130: weeklyOvertimeHours <= 8 ? weeklyOvertimeHours : 8,
+  //           hs150: weeklyOvertimeHours > 8 ? weeklyOvertimeHours - 8 : 0,
+  //         })
+  //       }
+  //     }
+  //   })
 
-    return { total: hs, weeklyDetails: weeklyHsDetails }
-  }
+  //   return { total: hs, weeklyDetails: weeklyHsDetails }
+  // }
 
   const calculateHSNI = (data) => {
     let hsni130 = 0

@@ -3,47 +3,51 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   listJourFerier: [],
   listDateDebutDateFin: {
-    janvier: {
+    jan: {
       dateDebut: '22',
       dateFin: '22',
     },
-    fevrier: {
+    feb: {
       dateDebut: '22',
       dateFin: '22',
     },
-    avril: {
+    mar: {
       dateDebut: '22',
       dateFin: '22',
     },
-    mais: {
+    apr: {
       dateDebut: '22',
       dateFin: '22',
     },
-    juin: {
+    may: {
       dateDebut: '22',
       dateFin: '22',
     },
-    juillet: {
+    jun: {
       dateDebut: '22',
       dateFin: '22',
     },
-    aout: {
+    jul: {
       dateDebut: '22',
       dateFin: '22',
     },
-    septembre: {
+    aug: {
       dateDebut: '22',
       dateFin: '22',
     },
-    octobre: {
+    sep: {
       dateDebut: '22',
       dateFin: '22',
     },
-    novembre: {
+    oct: {
       dateDebut: '22',
       dateFin: '22',
     },
-    decembre: {
+    nov: {
+      dateDebut: '22',
+      dateFin: '22',
+    },
+    dec: {
       dateDebut: '22',
       dateFin: '22',
     },

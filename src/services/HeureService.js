@@ -25,5 +25,4 @@ class HeureService {
   }
 }
 
-const newHeureService = new HeureService()
-export default newHeureService
+export default HeureService
