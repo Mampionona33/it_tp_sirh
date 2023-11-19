@@ -1,6 +1,6 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import { Document, StyleSheet, PDFViewer, Font, pdf, Page } from '@react-pdf/renderer'
+import { Document, PDFViewer, Font, pdf, Page } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import { saveAs } from 'file-saver'
 import Section1 from './Section1'

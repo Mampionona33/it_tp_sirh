@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector } from 'react-redux'
 import formatAriaryMga from 'src/utils/formatAriaryMga'

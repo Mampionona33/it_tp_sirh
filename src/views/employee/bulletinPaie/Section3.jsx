@@ -1,8 +1,10 @@
 import React from 'react'
 import { Text, View, StyleSheet, pdf } from '@react-pdf/renderer'
-import { PropTypes, array } from 'prop-types'
+import { PropTypes } from 'prop-types'
 import registerFonts from './font'
 import formatNumberWithSpaces from 'src/utils/formatNumberWithSpaces'
+import { format, setDefaultOptions } from 'date-fns'
+import { fr } from 'date-fns/locale'
 
 registerFonts()
 
@@ -68,6 +70,10 @@ const styles = StyleSheet.create({
   justifyBetween: {
     justifyContent: 'space-between',
   },
+  textBoldItalic: {
+    fontFamily: 'Roboto',
+    fontStyle: 'italic',
+  },
 })
 
 export default function Section3(props) {
@@ -80,21 +86,17 @@ export default function Section3(props) {
   const totalIndemnite = props.data.totalPrimeEtAvantage
   const salaireNet = props.data.salaireNet
   const avance = props.data.avance
+  const salaireNetAPayer = props.data.salaireNetAPayer
+  const dateVirement = format(new Date(), 'cccc ee MMMM uuuu')
 
-  console.log(totalRetenues)
+  // Définr la langue du date en français
+  setDefaultOptions({ locale: fr })
 
   const Header = () => {
     return (
-      <View style={[styles.row, { width: '100%', marginTop: '5mm' }]}>
-        <View
-          style={[
-            styles.borderRight,
-            styles.borderBottom,
-            styles.header,
-            { backgroundColor: 'green', width: '35%' },
-          ]}
-        >
-          <Text style={[{ backgroundColor: 'blue' }]}>cotisation</Text>
+      <View style={[styles.row, styles.textBold, { width: '100%', marginTop: '5mm' }]}>
+        <View style={[styles.borderRight, styles.borderBottom, styles.header, { width: '35%' }]}>
+          <Text style={[{}]}>cotisation</Text>
         </View>
         <View style={[{ width: '65%' }]}>
           <View style={[styles.row]}>
@@ -104,20 +106,13 @@ export default function Section3(props) {
                 styles.borderRight,
                 styles.borderBottom,
                 styles.header,
-                { backgroundColor: 'red', width: '50%' },
+                { width: '50%' },
               ]}
             >
               <Text>retenue</Text>
             </View>
-            <View
-              style={[
-                styles.row,
-                styles.borderBottom,
-                styles.header,
-                { backgroundColor: 'yellow', width: '50%' },
-              ]}
-            >
-              <Text>indemnités et avantages</Text>
+            <View style={[styles.row, styles.borderBottom, styles.header, { width: '50%' }]}>
+              <Text style={[]}>indemnités et avantages</Text>
             </View>
           </View>
 
@@ -196,14 +191,8 @@ export default function Section3(props) {
               return (
                 <React.Fragment key={key}>
                   <View style={[styles.row, { width: '100%' }]}>
-                    <View
-                      style={[
-                        styles.row,
-                        styles.borderRight,
-                        { width: '35%', backgroundColor: 'green' },
-                      ]}
-                    >
-                      <Text style={[styles.cell, { backgroundColor: 'red' }]}>{item.label}</Text>
+                    <View style={[styles.row, styles.borderRight, { width: '35%' }]}>
+                      <Text style={[styles.cell, { paddingLeft: 2 }]}>{item.label}</Text>
                     </View>
 
                     <View style={[styles.row, { width: '65%' }]}>
@@ -261,10 +250,10 @@ export default function Section3(props) {
                         styles.row,
                         styles.borderRight,
                         styles.borderBottom,
-                        { width: '35%', backgroundColor: 'green' },
+                        { width: '35%' },
                       ]}
                     >
-                      <Text style={[styles.cell, { backgroundColor: 'red', paddingBottom: 20 }]}>
+                      <Text style={[styles.cell, { paddingBottom: 20, paddingLeft: 2 }]}>
                         {item.label}
                       </Text>
                     </View>
@@ -330,14 +319,8 @@ export default function Section3(props) {
               ) : (
                 <React.Fragment key={key}>
                   <View style={[styles.row, { width: '100%' }]}>
-                    <View
-                      style={[
-                        styles.row,
-                        styles.borderRight,
-                        { width: '35%', backgroundColor: 'green' },
-                      ]}
-                    >
-                      <Text style={[styles.cell, { backgroundColor: 'red' }]}>{item.label}</Text>
+                    <View style={[styles.row, styles.borderRight, { width: '35%' }]}>
+                      <Text style={[styles.cell, { paddingLeft: 2 }]}>{item.label}</Text>
                     </View>
 
                     <View style={[styles.row, { width: '65%' }]}>
@@ -394,57 +377,25 @@ export default function Section3(props) {
           <View
             style={[styles.borderRight, styles.row, styles.borderBottom, { width: '35%' }]}
           ></View>
-          <View style={[styles.row, { width: '65%', backgroundColor: 'red' }]}>
+          <View style={[styles.row, { width: '65%' }]}>
             <View style={[styles.row, { width: '50%' }]}>
-              <View style={[styles.col, { width: '33.33%', backgroundColor: 'green' }]}></View>
-              <View
-                style={[
-                  styles.col,
-                  styles.borderRight,
-                  { width: '33.33%', backgroundColor: 'green' },
-                ]}
-              ></View>
-              <View
-                style={[
-                  styles.col,
-                  styles.borderBottom,
-                  styles.borderRight,
-                  { width: '33%', backgroundColor: 'red' },
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.textRight,
-                    styles.cell,
-                    styles.row,
-                    styles.sousTotal,
-                    {
-                      backgroundColor: 'blue',
-                    },
-                  ]}
-                >
+              <View style={[styles.col, { width: '33.33%' }]}></View>
+              <View style={[styles.col, styles.borderRight, { width: '33.33%' }]}></View>
+              <View style={[styles.col, styles.borderBottom, styles.borderRight, { width: '33%' }]}>
+                <Text style={[styles.textRight, styles.cell, styles.row, styles.sousTotal, {}]}>
                   {totalRetenues && formatNumberWithSpaces(totalRetenues)}
                 </Text>
               </View>
             </View>
             <View style={[styles.row, { width: '50%' }]}>
-              <View style={[styles.col, { width: '33.33%', backgroundColor: 'blue' }]}></View>
-              <View
-                style={[
-                  styles.col,
-                  styles.borderRight,
-                  { width: '33.33%', backgroundColor: 'blue' },
-                ]}
-              ></View>
-              <View
-                style={[styles.col, styles.borderBottom, { width: '33%', backgroundColor: 'red' }]}
-              >
+              <View style={[styles.col, { width: '33.33%' }]}></View>
+              <View style={[styles.col, styles.borderRight, { width: '33.33%' }]}></View>
+              <View style={[styles.col, styles.borderBottom, { width: '33%' }]}>
                 <Text
                   style={[
                     styles.textRight,
                     styles.cell,
                     {
-                      backgroundColor: 'green',
                       fontSize: 9,
                       fontFamily: 'Roboto',
                       fontWeight: 'bold',
@@ -475,16 +426,9 @@ export default function Section3(props) {
     return (
       <>
         <View style={[styles.row, styles.borderTop, { width: '100%' }]}>
+          <View style={[styles.row, styles.borderRight, { width: '56.66%' }]}></View>
           <View
-            style={[styles.row, styles.borderRight, { width: '56.66%', backgroundColor: 'red' }]}
-          ></View>
-          <View
-            style={[
-              styles.row,
-              styles.justifyBetween,
-              styles.borderBottom,
-              { width: '43.44%', backgroundColor: 'green' },
-            ]}
+            style={[styles.row, styles.justifyBetween, styles.borderBottom, { width: '43.44%' }]}
           >
             <View style={[{ width: '50%' }]}>
               <Text
@@ -519,14 +463,8 @@ export default function Section3(props) {
     return (
       <>
         <View style={[styles.row, { width: '100%' }]}>
-          <View style={[styles.row, { width: '56.66%', backgroundColor: 'red' }]}></View>
-          <View
-            style={[
-              styles.row,
-              styles.justifyBetween,
-              { width: '43.44%', backgroundColor: 'green' },
-            ]}
-          >
+          <View style={[styles.row, { width: '56.66%' }]}></View>
+          <View style={[styles.row, styles.justifyBetween, { width: '43.44%' }]}>
             <View style={[{ width: '50%' }]}>
               <Text style={[styles.cell, styles.textMedium, { paddingLeft: 4, fontSize: 11 }]}>
                 Avance sur salaire
@@ -538,6 +476,56 @@ export default function Section3(props) {
               </Text>
             </View>
           </View>
+        </View>
+      </>
+    )
+  }
+
+  const FooterNetAPayer = () => {
+    return (
+      <>
+        <View style={[styles.row, { width: '100%' }]}>
+          <View style={[styles.row, { width: '56.66%' }]}>
+            <Text
+              style={[
+                styles.cell,
+                styles.textBoldItalic,
+                {
+                  paddingLeft: 2,
+                  fontSize: 9,
+
+                  paddingBottom: 2,
+                  alignItems: 'baseline',
+                },
+              ]}
+            >
+              Payé par virement bancaire le : {dateVirement}
+            </Text>
+          </View>
+          <View style={[styles.row, styles.justifyBetween, { width: '43.44%' }]}>
+            <View style={[{ width: '50%' }]}>
+              <Text style={[styles.cell, styles.textMedium, { paddingLeft: 4, fontSize: 11 }]}>
+                Net à payer
+              </Text>
+            </View>
+            <View style={[{ width: '50%', fontSize: 11 }]}>
+              <Text style={[styles.cell, styles.textRight, styles.textMedium, {}]}>
+                {salaireNetAPayer && formatNumberWithSpaces(salaireNetAPayer)}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </>
+    )
+  }
+
+  const Avertisement = () => {
+    return (
+      <>
+        <View style={[styles.borderBottom, styles.borderTop, { width: '100%', marginTop: 40 }]}>
+          <Text style={[styles.textBoldItalic, { textAlign: 'center', fontSize: 12 }]}>
+            A CONSERVER SANS LIMITATION DE DUREE
+          </Text>
         </View>
       </>
     )
@@ -556,6 +544,8 @@ export default function Section3(props) {
         <Divider />
         <FooterSalaireNet />
         <FooterAvance />
+        <FooterNetAPayer />
+        <Avertisement />
       </View>
     </>
   )

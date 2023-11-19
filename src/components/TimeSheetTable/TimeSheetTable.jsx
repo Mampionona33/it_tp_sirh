@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import PropTypes from 'prop-types'
+import React, { useState, useCallback } from 'react'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import {
   useReactTable,
@@ -19,11 +18,8 @@ import {
   isSaturday,
   setDefaultOptions,
 } from 'date-fns'
-import CustomPagination from '../CustomPagination'
 import MonthYearPicker from './MonthYearPicker'
-import TimeSheetTablePagination from './TimeSheetTablePagination'
 import { fr } from 'date-fns/locale'
-import { info } from 'autoprefixer'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   setTotalHNormal,
@@ -33,14 +29,13 @@ import {
   setTotalHs150,
   setTotalHs30,
   setTotalHs50,
-  setTotalHsJour,
   setTotalHsni130,
   setTotalHsni150,
 } from 'src/redux/employeHours/employeHoursReducer'
 
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
-  const pageSizeOptions = [5, 10, 15, 20, 25, 30, 31]
+  // const pageSizeOptions = [5, 10, 15, 20, 25, 30, 31]
   const [data, setData] = useState([])
   const [rowSelection, setRowSelection] = React.useState({})
   const [globalFilter, setGlobalFilter] = useState('')
@@ -398,7 +393,7 @@ const TimeSheetTable = (props) => {
     return { hsni130, hsni150 }
   }
 
-  const { total: detailHs, weeklyDetails } = calculateHSDetails()
+  // const { totals } = calculateHSDetails()
 
   React.useEffect(() => {
     let mount = true
