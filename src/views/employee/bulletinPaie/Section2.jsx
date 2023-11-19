@@ -48,6 +48,10 @@ const Section2 = (props) => {
     ? formatNumberWithSpaces(props.data.salaireBrut) + ' Ar'
     : '-'
 
+  const plafondSME = props.data.plafondSME
+    ? formatNumberWithSpaces(props.data.plafondSME) + ' Ar'
+    : '-'
+
   return (
     <View style={[styles.table]}>
       <View style={styles.tableRow}>
@@ -73,7 +77,7 @@ const Section2 = (props) => {
             { paddingLeft: 2, marginTop: 20, fontSize: 10, paddingRight: 3 },
           ]}
         >
-          <Text style={[{ textAlign: 'right', fontSize: 10 }]}> {props.data.plafondSME} </Text>
+          <Text style={[{ textAlign: 'right', fontSize: 10 }]}> {plafondSME} </Text>
         </View>
       </View>
 
