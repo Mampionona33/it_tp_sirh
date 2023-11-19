@@ -2860,5 +2860,17 @@
     { "id": 6, "label": "Autres indemnités", "action": "ajout", "nature": true },
     { "id": 7, "label": "Autres avantages", "action": "ajout" },
     { "id": 8, "label": "Absence / Retard à déduire", "action": "deduction" }
+  ],
+
+  "employeur": [
+    {
+      "id": 1,
+      "nom": "LA LIGNE SCANDINAVE",
+      "adresse": "2 RUE LIEUTNANT BERARD",
+      "Cp_ville": "501 - TOAMASINA",
+      "nif": "3000000581",
+      "stat": "50121 11 2003 0 00475",
+      "rcs": "2002B00608"
+    }
   ]
 }

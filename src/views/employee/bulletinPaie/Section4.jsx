@@ -121,7 +121,6 @@ export default function Section4(props) {
         <View>
           {retenues.length > 0 &&
             retenues.map((item, key) => {
-
               return key === retenues.length - 1 ? (
                 <React.Fragment key={key}>
                   <View style={[styles.row, { width: '100%' }]}>
