@@ -17,6 +17,7 @@ import {
   isSunday,
   isSaturday,
   setDefaultOptions,
+  parse,
 } from 'date-fns'
 import MonthYearPicker from './MonthYearPicker'
 import { fr, enUS } from 'date-fns/locale'
