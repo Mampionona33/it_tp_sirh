@@ -2,7 +2,7 @@ import React from 'react'
 import CustomSection from '../CustomSection'
 
 export default function FaireAvance() {
-  const title = 'Faire une avance'
+  const title = 'Valider une avance'
 
   const Body = () => {
     return (
