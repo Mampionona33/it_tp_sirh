@@ -40,20 +40,131 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   cell: {
-    paddingTop: 4,
+    paddingRight: 3,
     paddingBottom: 4,
+    paddingTop: 4,
     fontSize: 10,
   },
   textRight: {
     textAlign: 'right',
     paddingRight: 3,
   },
+  sousTotal: {
+    fontSize: 9,
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
+  },
 })
 
 export default function Section3(props) {
   const indemnites = props.data.ajoutSalaire ? [props.data.ajoutSalaire].flat() : []
   const retenues = props.data.retenuSalaire ? [props.data.retenuSalaire].flat() : []
+  const sousTotal = props.data.totalDeduction
+  const irsa = props.data.irsaArrondi
+  const cnaps = props.data.cnaps
+  const totalRetenues = sousTotal + irsa + cnaps
+  const totalIndemnite = props.data.totalPrimeEtAvantage
 
+  console.log(totalRetenues)
+
+  const Header = () => {
+    return (
+      <View style={[styles.row, { width: '100%', marginTop: '5mm' }]}>
+        <View
+          style={[
+            styles.borderRight,
+            styles.borderBottom,
+            styles.header,
+            { backgroundColor: 'green', width: '35%' },
+          ]}
+        >
+          <Text style={[{ backgroundColor: 'blue' }]}>cotisation</Text>
+        </View>
+        <View style={[{ width: '65%' }]}>
+          <View style={[styles.row]}>
+            <View
+              style={[
+                styles.row,
+                styles.borderRight,
+                styles.borderBottom,
+                styles.header,
+                { backgroundColor: 'red', width: '50%' },
+              ]}
+            >
+              <Text>retenue</Text>
+            </View>
+            <View
+              style={[
+                styles.row,
+                styles.borderBottom,
+                styles.header,
+                { backgroundColor: 'yellow', width: '50%' },
+              ]}
+            >
+              <Text>indemnités et avantages</Text>
+            </View>
+          </View>
+
+          <View style={[styles.row, { width: '100%' }]}>
+            <View style={[styles.row, { width: '50%' }]}>
+              <Text
+                style={[
+                  styles.borderRight,
+                  styles.borderBottom,
+                  styles.subTitle,
+                  { fontSize: 10, width: '33.33%' },
+                ]}
+              >
+                base
+              </Text>
+              <Text
+                style={[
+                  styles.borderRight,
+                  styles.borderBottom,
+                  styles.subTitle,
+                  { fontSize: 10, width: '33.33%' },
+                ]}
+              >
+                taux
+              </Text>
+              <Text
+                style={[
+                  styles.borderRight,
+                  styles.borderBottom,
+                  styles.subTitle,
+                  { fontSize: 10, width: '33%' },
+                ]}
+              >
+                montant
+              </Text>
+            </View>
+            <View style={[styles.row, { width: '50%' }]}>
+              <Text
+                style={[
+                  styles.borderRight,
+                  styles.borderBottom,
+                  styles.subTitle,
+                  { fontSize: 10, width: '33.33%' },
+                ]}
+              >
+                base
+              </Text>
+              <Text
+                style={[styles.borderRight, styles.borderBottom, { fontSize: 10, width: '33.33%' }]}
+              >
+                taux
+              </Text>
+              <Text
+                style={[styles.borderBottom, styles.subTitle, { fontSize: 10, width: '33.33%' }]}
+              >
+                montant
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    )
+  }
   const Indemnites = () => {
     return (
       <>
@@ -255,112 +366,86 @@ export default function Section3(props) {
       </>
     )
   }
-
-  const Header = () => {
+  const Total = () => {
     return (
-      <View style={[styles.row, { width: '100%', marginTop: '5mm' }]}>
-        <View
-          style={[
-            styles.borderRight,
-            styles.borderBottom,
-            styles.header,
-            { backgroundColor: 'green', width: '35%' },
-          ]}
-        >
-          <Text style={[{ backgroundColor: 'blue' }]}>cotisation</Text>
-        </View>
-        <View style={[{ width: '65%' }]}>
-          <View style={[styles.row]}>
-            <View
-              style={[
-                styles.row,
-                styles.borderRight,
-                styles.borderBottom,
-                styles.header,
-                { backgroundColor: 'red', width: '50%' },
-              ]}
-            >
-              <Text>retenue</Text>
-            </View>
-            <View
-              style={[
-                styles.row,
-                styles.borderBottom,
-                styles.header,
-                { backgroundColor: 'yellow', width: '50%' },
-              ]}
-            >
-              <Text>indemnités et avantages</Text>
-            </View>
-          </View>
-
-          <View style={[styles.row, { width: '100%' }]}>
+      <>
+        <View style={[styles.row, { width: '100%' }]}>
+          <View
+            style={[styles.borderRight, styles.row, styles.borderBottom, { width: '35%' }]}
+          ></View>
+          <View style={[styles.row, { width: '65%', backgroundColor: 'red' }]}>
             <View style={[styles.row, { width: '50%' }]}>
-              <Text
+              <View style={[styles.col, { width: '33.33%', backgroundColor: 'green' }]}></View>
+              <View
                 style={[
+                  styles.col,
                   styles.borderRight,
+                  { width: '33.33%', backgroundColor: 'green' },
+                ]}
+              ></View>
+              <View
+                style={[
+                  styles.col,
                   styles.borderBottom,
-                  styles.subTitle,
-                  { fontSize: 10, width: '33.33%' },
+                  styles.borderRight,
+                  { width: '33%', backgroundColor: 'red' },
                 ]}
               >
-                base
-              </Text>
-              <Text
-                style={[
-                  styles.borderRight,
-                  styles.borderBottom,
-                  styles.subTitle,
-                  { fontSize: 10, width: '33.33%' },
-                ]}
-              >
-                taux
-              </Text>
-              <Text
-                style={[
-                  styles.borderRight,
-                  styles.borderBottom,
-                  styles.subTitle,
-                  { fontSize: 10, width: '33%' },
-                ]}
-              >
-                montant
-              </Text>
+                <Text
+                  style={[
+                    styles.textRight,
+                    styles.cell,
+                    styles.row,
+                    styles.sousTotal,
+                    {
+                      backgroundColor: 'blue',
+                    },
+                  ]}
+                >
+                  {totalRetenues && formatNumberWithSpaces(totalRetenues)}
+                </Text>
+              </View>
             </View>
             <View style={[styles.row, { width: '50%' }]}>
-              <Text
+              <View style={[styles.col, { width: '33.33%', backgroundColor: 'blue' }]}></View>
+              <View
                 style={[
+                  styles.col,
                   styles.borderRight,
-                  styles.borderBottom,
-                  styles.subTitle,
-                  { fontSize: 10, width: '33.33%' },
+                  { width: '33.33%', backgroundColor: 'blue' },
                 ]}
+              ></View>
+              <View
+                style={[styles.col, styles.borderBottom, { width: '33%', backgroundColor: 'red' }]}
               >
-                base
-              </Text>
-              <Text
-                style={[styles.borderRight, styles.borderBottom, { fontSize: 10, width: '33.33%' }]}
-              >
-                taux
-              </Text>
-              <Text
-                style={[styles.borderBottom, styles.subTitle, { fontSize: 10, width: '33.33%' }]}
-              >
-                montant
-              </Text>
+                <Text
+                  style={[
+                    styles.textRight,
+                    styles.cell,
+                    {
+                      backgroundColor: 'green',
+                      fontSize: 9,
+                      fontFamily: 'Roboto',
+                      fontWeight: 'bold',
+                    },
+                  ]}
+                >
+                  {totalIndemnite && formatNumberWithSpaces(totalIndemnite)}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
-      </View>
+      </>
     )
   }
-
   return (
     <>
       <View>
         <Header />
         <Indemnites />
         <Retenues />
+        <Total />
       </View>
     </>
   )
