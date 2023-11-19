@@ -121,9 +121,82 @@ export default function Section4(props) {
         <View>
           {retenues.length > 0 &&
             retenues.map((item, key) => {
-              console.log(item)
 
-              return (
+              return key === retenues.length - 1 ? (
+                <React.Fragment key={key}>
+                  <View style={[styles.row, { width: '100%' }]}>
+                    <View
+                      style={[
+                        styles.row,
+                        styles.borderRight,
+                        styles.borderBottom,
+                        { width: '35%', backgroundColor: 'green' },
+                      ]}
+                    >
+                      <Text style={[styles.cell, { backgroundColor: 'red', paddingBottom: 20 }]}>
+                        {item.label}
+                      </Text>
+                    </View>
+
+                    <View style={[styles.row, { width: '65%' }]}>
+                      <View style={[styles.row, { width: '50%' }]}>
+                        <Text
+                          style={[
+                            styles.borderRight,
+                            styles.cell,
+                            styles.textRight,
+                            styles.borderBottom,
+                            { width: '33.33%', paddingBottom: 20 },
+                          ]}
+                        >
+                          {item.base}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.borderRight,
+                            styles.cell,
+                            styles.textRight,
+                            styles.borderBottom,
+                            { width: '33.33%', paddingBottom: 20 },
+                          ]}
+                        >
+                          {item.taux}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.borderRight,
+                            styles.cell,
+                            styles.textRight,
+                            styles.borderBottom,
+                            { width: '33%', paddingBottom: 20 },
+                          ]}
+                        >
+                          {item.montant}
+                        </Text>
+                      </View>
+                      <View style={[styles.row, { width: '50%' }]}>
+                        <Text
+                          style={[
+                            styles.borderRight,
+                            styles.borderBottom,
+                            { width: '33.33%', paddingBottom: 20 },
+                          ]}
+                        ></Text>
+                        <Text
+                          style={[
+                            styles.borderRight,
+                            styles.borderBottom,
+                            { width: '33.33%', paddingBottom: 20 },
+                          ]}
+                        ></Text>
+                        <Text
+                          style={[styles.borderBottom, { width: '33.33%', paddingBottom: 20 }]}
+                        ></Text>
+                      </View>
+                    </View>
+                  </View>
+                </React.Fragment>
+              ) : (
                 <React.Fragment key={key}>
                   <View style={[styles.row, { width: '100%' }]}>
                     <View
@@ -267,16 +340,15 @@ export default function Section4(props) {
                 base
               </Text>
               <Text
-                style={[
-                  styles.borderRight,
-                  styles.borderBottom,
-                  styles.subTitle,
-                  { fontSize: 10, width: '33.33%' },
-                ]}
+                style={[styles.borderRight, styles.borderBottom, { fontSize: 10, width: '33.33%' }]}
               >
                 taux
               </Text>
-              <Text style={[styles.borderBottom, { fontSize: 10, width: '33.33%' }]}>montant</Text>
+              <Text
+                style={[styles.borderBottom, styles.subTitle, { fontSize: 10, width: '33.33%' }]}
+              >
+                montant
+              </Text>
             </View>
           </View>
         </View>
