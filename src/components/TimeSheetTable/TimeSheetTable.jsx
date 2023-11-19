@@ -224,6 +224,21 @@ const TimeSheetTable = (props) => {
   //   [salarie, setData, listDateDebutDateFin],
   // )
 
+  const formatDataFromBackend = (bakendData, id) => {
+    const transFormedData = Array.from(bakendData).map((item) => ({
+      employee: {
+        id: id,
+      },
+      date: new Date(item.date).toISOString(),
+      regularHoursDay: item.heure_de_travail,
+      regularNightHours: item.hs_de_nuit,
+      occasionalNightHours: item.hs_normale,
+      overtimeHoursDay: item.hs_jours_feries,
+      holidayHours: item.hs_de_dimanche,
+    }))
+    return transFormedData
+  }
+
   const filterDataByDate = useCallback(
     async (currentFilter) => {
       const matricul = salarie.matricule
@@ -262,6 +277,8 @@ const TimeSheetTable = (props) => {
       const heureService = new HeureService()
       try {
         const resp = heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
+        const transFormedData = formatDataFromBackend(resp)
+        console.log(transFormedData)
         // setData(resp)
       } catch (error) {
         console.log(error)
@@ -276,7 +293,7 @@ const TimeSheetTable = (props) => {
         )
       })
 
-      // setData(filteredData)
+      setData(filteredData)
     },
     [salarie, setData, listDateDebutDateFin],
   )
