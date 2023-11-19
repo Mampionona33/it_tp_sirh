@@ -2,7 +2,6 @@ import React from 'react'
 import { Text, View, StyleSheet, pdf } from '@react-pdf/renderer'
 import { PropTypes, array } from 'prop-types'
 import registerFonts from './font'
-import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import formatNumberWithSpaces from 'src/utils/formatNumberWithSpaces'
 
 registerFonts()
@@ -57,6 +56,18 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontWeight: 'bold',
   },
+
+  textBold: {
+    fontFamily: 'Roboto',
+    fontWeight: 'bold',
+  },
+  textMedium: {
+    fontFamily: 'Roboto',
+    fontWeight: 'medium',
+  },
+  justifyBetween: {
+    justifyContent: 'space-between',
+  },
 })
 
 export default function Section3(props) {
@@ -67,6 +78,8 @@ export default function Section3(props) {
   const cnaps = props.data.cnaps
   const totalRetenues = sousTotal + irsa + cnaps
   const totalIndemnite = props.data.totalPrimeEtAvantage
+  const salaireNet = props.data.salaireNet
+  const avance = props.data.avance
 
   console.log(totalRetenues)
 
@@ -458,6 +471,78 @@ export default function Section3(props) {
     )
   }
 
+  const FooterSalaireNet = () => {
+    return (
+      <>
+        <View style={[styles.row, styles.borderTop, { width: '100%' }]}>
+          <View
+            style={[styles.row, styles.borderRight, { width: '56.66%', backgroundColor: 'red' }]}
+          ></View>
+          <View
+            style={[
+              styles.row,
+              styles.justifyBetween,
+              styles.borderBottom,
+              { width: '43.44%', backgroundColor: 'green' },
+            ]}
+          >
+            <View style={[{ width: '50%' }]}>
+              <Text
+                style={[
+                  styles.cell,
+                  styles.textMedium,
+                  { paddingLeft: 4, paddingBottom: 1, fontSize: 11 },
+                ]}
+              >
+                Salaire net
+              </Text>
+            </View>
+            <View style={[{ width: '50%' }]}>
+              <Text
+                style={[
+                  styles.cell,
+                  styles.textRight,
+                  styles.textMedium,
+                  { paddingBottom: 1, fontSize: 11 },
+                ]}
+              >
+                {salaireNet && formatNumberWithSpaces(salaireNet)}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </>
+    )
+  }
+
+  const FooterAvance = () => {
+    return (
+      <>
+        <View style={[styles.row, { width: '100%' }]}>
+          <View style={[styles.row, { width: '56.66%', backgroundColor: 'red' }]}></View>
+          <View
+            style={[
+              styles.row,
+              styles.justifyBetween,
+              { width: '43.44%', backgroundColor: 'green' },
+            ]}
+          >
+            <View style={[{ width: '50%' }]}>
+              <Text style={[styles.cell, styles.textMedium, { paddingLeft: 4, fontSize: 11 }]}>
+                Avance sur salaire
+              </Text>
+            </View>
+            <View style={[{ width: '50%', fontSize: 11 }]}>
+              <Text style={[styles.cell, styles.textRight, styles.textMedium, {}]}>
+                {avance && formatNumberWithSpaces(avance)}
+              </Text>
+            </View>
+          </View>
+        </View>
+      </>
+    )
+  }
+
   return (
     <>
       <View>
@@ -469,7 +554,8 @@ export default function Section3(props) {
           <Divider />
         </View>
         <Divider />
-        <Divider />
+        <FooterSalaireNet />
+        <FooterAvance />
       </View>
     </>
   )
