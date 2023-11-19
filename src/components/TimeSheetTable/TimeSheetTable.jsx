@@ -228,7 +228,8 @@ const TimeSheetTable = (props) => {
     (currentFilter) => {
       const matricul = salarie.matricule
       const currentDate = currentFilter || new Date()
-      console.log(currentDate)
+      const currentMonth = new Date(currentDate).getMonth() + 1
+      const prevMonth = currentMonth - 1
 
       // Récupérer le mois et l'année
       const selectedMonth = format(currentDate, 'MMM', { locale: enUS })
@@ -247,10 +248,13 @@ const TimeSheetTable = (props) => {
         listDateDebutDateFin[selectedMonth]
 
       // Construire les dates de début et de fin en utilisant les informations récupérées
-      const dateDebutFormatted = `${dateDebut}/${selectedMonth - 1} /${
+      const dateDebutFormatted = `${dateDebut}/${prevMonth} /${
         selectedMonth === 'jan' ? selectedYear - 1 : selectedYear
       }`
-      const dateFinFormatted = `${dateFin}/${selectedMonth}/${selectedYear}`
+      const dateFinFormatted = `${dateFin}/${currentMonth}/${selectedYear}`
+
+      console.log(dateDebutFormatted)
+      console.log(dateFinFormatted)
 
       const startDate = new Date(dateDebutFormatted)
       const endDate = new Date(dateFinFormatted)
