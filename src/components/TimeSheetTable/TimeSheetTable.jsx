@@ -36,16 +36,14 @@ import {
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
   // const pageSizeOptions = [5, 10, 15, 20, 25, 30, 31]
+  const dispatch = useDispatch()
+  const salarie = useSelector((state) => state.bulletinDePaie.salarie)
+  const isCadre = salarie.cadre || false
   const [data, setData] = useState([])
   const [rowSelection, setRowSelection] = React.useState({})
   const [globalFilter, setGlobalFilter] = useState('')
   const defaultStartDate = isMonday(new Date()) ? new Date() : startOfWeek(new Date())
   const defaultEndDate = isSunday(new Date()) ? new Date() : endOfWeek(new Date())
-  const [startDate, setStartDate] = useState(defaultStartDate)
-  const [endDate, setEndDate] = useState(defaultEndDate)
-  const dispatch = useDispatch()
-  const salarie = useSelector((state) => state.bulletinDePaie.salarie)
-  const isCadre = salarie.cadre || false
 
   setDefaultOptions({ locale: fr })
 
@@ -201,18 +199,24 @@ const TimeSheetTable = (props) => {
 
   const [sorting, setSorting] = useState(defaultSorting)
 
-  const filterDataByDate = (currentFilter) => {
-    const currentDate = currentFilter || new Date()
-    const filteredData = employeeHours.filter((employHours) => {
-      const employDate = new Date(employHours.date)
-      return (
-        employHours.employee.id == salarie.id &&
-        employDate.getMonth() === currentDate.getMonth() &&
-        employDate.getFullYear() === currentDate.getFullYear()
-      )
-    })
-    setData(filteredData)
-  }
+  const filterDataByDate = useCallback(
+    (currentFilter) => {
+      const currentDate = currentFilter || new Date()
+      console.log(currentDate)
+
+      const filteredData = employeeHours.filter((employHours) => {
+        const employDate = new Date(employHours.date)
+        return (
+          employHours.employee.id === salarie.id &&
+          employDate.getMonth() === currentDate.getMonth() &&
+          employDate.getFullYear() === currentDate.getFullYear()
+        )
+      })
+
+      setData(filteredData)
+    },
+    [salarie, setData],
+  )
 
   React.useEffect(() => {
     let mount = true
@@ -224,7 +228,7 @@ const TimeSheetTable = (props) => {
     return () => {
       mount = false
     }
-  }, [salarie, employeeHours])
+  }, [salarie, filterDataByDate])
 
   const table = useReactTable({
     data,

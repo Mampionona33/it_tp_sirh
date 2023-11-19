@@ -8,6 +8,7 @@ import cotisationReducer from 'src/redux/cotisations/cotisationsReducer'
 import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer } from 'redux-persist'
 import mouvementSalaireReducer from './mouvementSalaire/mouvementSalaireReducer'
+import parametreCalendrierReducer from './parametreCalendrier/parametreCalendrierReducer'
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   employeesList: employeesReducer,
   cotisations: cotisationReducer,
   mouvementSalaire: mouvementSalaireReducer,
+  parametreCalendrier: parametreCalendrierReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
