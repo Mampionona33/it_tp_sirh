@@ -248,7 +248,7 @@ const TimeSheetTable = (props) => {
         listDateDebutDateFin[selectedMonth]
 
       // Construire les dates de début et de fin en utilisant les informations récupérées
-      const dateDebutFormatted = `${dateDebut}/${prevMonth} /${
+      const dateDebutFormatted = `${dateDebut}/${prevMonth}/${
         selectedMonth === 'jan' ? selectedYear - 1 : selectedYear
       }`
       const dateFinFormatted = `${dateFin}/${currentMonth}/${selectedYear}`
