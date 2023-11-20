@@ -18,6 +18,78 @@ import {
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
+const _nav = [
+  {
+    component: CNavItem,
+    name: 'Dashboard',
+    to: '/dashboard',
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
+    badge: {
+      color: 'info',
+      text: 'NEW',
+    },
+  },
+
+  {
+    component: CNavTitle,
+    name: 'Components',
+  },
+  {
+    component: CNavGroup,
+    name: 'Employés',
+    to: '/employees',
+    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Liste',
+        to: '/employees/list',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Etats divers',
+    to: '/etatDivers',
+    icon: <CIcon icon={cilShieldAlt} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'CNAPS',
+        to: '/etatDivers/cnaps',
+      },
+      {
+        component: CNavItem,
+        name: 'IRSA',
+        to: '/etatDivers/irsa',
+      },
+      {
+        component: CNavItem,
+        name: 'OSTIE',
+        to: '/etatDivers/ostie',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Administration',
+    to: '/admin',
+    icon: <CIcon icon={cilLockLocked} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Utilisateur',
+        to: '/admin/utilisateur',
+      },
+      {
+        component: CNavItem,
+        name: 'Importer Heures',
+        to: '/admin/import-heures',
+      },
+    ],
+  },
+]
+
 // const _nav = [
 //   {
 //     component: CNavItem,
@@ -304,71 +376,5 @@ import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 //     icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
 //   },
 // ]
-const _nav = [
-  {
-    component: CNavItem,
-    name: 'Dashboard',
-    to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
-  },
-
-  {
-    component: CNavTitle,
-    name: 'Components',
-  },
-  {
-    component: CNavGroup,
-    name: 'Employés',
-    to: '/employees',
-    icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Liste',
-        to: '/employees/list',
-      },
-    ],
-  },
-  {
-    component: CNavGroup,
-    name: 'Etats divers',
-    to: '/etatDivers',
-    icon: <CIcon icon={cilShieldAlt} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'CNAPS',
-        to: '/etatDivers/cnaps',
-      },
-      {
-        component: CNavItem,
-        name: 'IRSA',
-        to: '/etatDivers/irsa',
-      },
-      {
-        component: CNavItem,
-        name: 'OSTIE',
-        to: '/etatDivers/ostie',
-      },
-    ],
-  },
-  {
-    component: CNavGroup,
-    name: 'Administration',
-    to: '/admin',
-    icon: <CIcon icon={cilLockLocked} customClassName="nav-icon" />,
-    items: [
-      {
-        component: CNavItem,
-        name: 'Utilisateur',
-        to: '/admin/utilisateur',
-      },
-    ],
-  },
-]
 
 export default _nav
