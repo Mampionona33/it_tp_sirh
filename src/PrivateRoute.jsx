@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Navigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import isAuthenticated from './auth'
 import PropTypes from 'prop-types'
 
