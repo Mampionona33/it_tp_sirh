@@ -50,7 +50,7 @@ class CalculHeures {
         this.hs = null
       }
 
-      if (this.hn === 0) {
+      if (this.hn <= 0) {
         this.hn = null
       }
       if (this.hs === 0) {
@@ -64,7 +64,7 @@ class CalculHeures {
         date: item.date,
         jour: item.jour,
         hn: this.hn,
-        hs: this.hs,
+        hs: this.hs && this.hs.toFixed(1),
         hs130: null,
         hs150: null,
         hsn30: null,
