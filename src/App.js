@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react'
-import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 
 import { Provider } from 'react-redux'
