@@ -9,6 +9,9 @@ const ListEmployes = React.lazy(() => import('./views/employee/list/List'))
 const FicheEmploye = React.lazy(() => import('src/views/employee/fiche/Fiche'))
 const BulletinPaie = React.lazy(() => import('src/views/employee/bulletinPaie/BulletinPaie'))
 
+// Administration
+const ImportHeures = React.lazy(() => import('src/views/administration/ImportHeures/ImportHeures'))
+
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -72,6 +75,9 @@ const routes = [
     exact: true,
   },
   { path: '/bulletin-de-paie/:id', name: 'Bulletin de paie', element: BulletinPaie, exact: true },
+
+  // Administration path def
+  { path: '/admin/import-heures', name: 'Importer heures', element: ImportHeures, exact: true },
 
   { path: '/base', name: 'Base', element: Cards, exact: true },
   { path: '/base/accordion', name: 'Accordion', element: Accordion },
