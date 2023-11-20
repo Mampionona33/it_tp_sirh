@@ -643,6 +643,10 @@ const TimeSheetTable = (props) => {
                         <td>{item.hs}</td>
                         <td>{item.hs130}</td>
                         <td>{item.hs150}</td>
+                        <td>{item.hsn30}</td>
+                        <td>{item.hsn50}</td>
+                        <td>{item.hdim}</td>
+                        <td>{item.hferie}</td>
                       </tr>
                     </>
                   )
