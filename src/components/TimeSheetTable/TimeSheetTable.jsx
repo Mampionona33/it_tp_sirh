@@ -34,6 +34,8 @@ import {
   setTotalHsni150,
 } from 'src/redux/employeHours/employeHoursReducer'
 import HeureService from 'src/services/HeureService'
+import CalculHeures from 'src/utils/CalculHeures'
+import PropTypes from 'prop-types'
 
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
@@ -241,7 +243,7 @@ const TimeSheetTable = (props) => {
         holidayHours: item.hs_de_dimanche,
       }
     })
-    console.log('transFormedData', transFormedData)
+    // console.log('transFormedData', transFormedData)
     return transFormedData
   }
 
@@ -283,8 +285,13 @@ const TimeSheetTable = (props) => {
         if (matricul && salarie && salarie.id) {
           const resp = await heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
           const transFormedData = formatDataFromBackend(resp, salarie.id)
-          console.log(transFormedData)
-          setData(transFormedData)
+          // console.log(transFormedData)
+          const calculHeures = new CalculHeures(resp)
+          const formatedData = calculHeures.formatDataForDisplay()
+
+          console.log(formatedData)
+
+          setData(formatedData)
         }
       } catch (error) {
         console.log(error)
@@ -299,7 +306,7 @@ const TimeSheetTable = (props) => {
         )
       })
 
-      setData(filteredData)
+      // setData(filteredData)
     },
     [salarie, setData, listDateDebutDateFin],
   )
@@ -579,6 +586,37 @@ const TimeSheetTable = (props) => {
     )
   }
 
+  const headerData = [
+    'date',
+    'jour',
+    'HN',
+    'Hs',
+    'hs130%',
+    'hs150%',
+    'hsn 30%',
+    'hsn 50%',
+    'hdim',
+    'hferié',
+  ]
+
+  const TableHeaders = ({ data }) => {
+    return (
+      <thead>
+        <tr className="capitalize">
+          {data &&
+            data.map((item, key) => (
+              <th key={key} className={`p-3 w-10/100 bg-gray-100 border-x border-x-customRed-100`}>
+                {item}
+              </th>
+            ))}
+        </tr>
+      </thead>
+    )
+  }
+  TableHeaders.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
+  }
+
   return (
     <>
       <div className="border shadow-sm  ">
@@ -590,7 +628,35 @@ const TimeSheetTable = (props) => {
             <MonthYearPicker selectedDate={new Date()} onDateChange={handleDateChange} />
           </div>
         </div>
-        <div className="overflow-x-auto">
+        <div className="flex w-full overflow-auto">
+          <table className="table-auto lg:table-fixed w-full">
+            <TableHeaders data={headerData} />
+            <tbody>
+              {data.length > 0 ? (
+                data.map((item, key) => {
+                  return (
+                    <>
+                      <tr key={key}>
+                        <td>{item.date}</td>
+                        <td>{item.jour}</td>
+                        <td>{item.heure_normale}</td>
+                        <td>{item.hs}</td>
+                        <td>{item.hs130}</td>
+                        <td>{item.hs150}</td>
+                      </tr>
+                    </>
+                  )
+                })
+              ) : (
+                <tr>
+                  <td>Pas de donnée</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+
+        {/* <div className="overflow-x-auto">
           <table className="w-full max-h-full table-fixe bg-white text-gray-800 dark:text-stone-200 ">
             <thead className="text-xs  text-gray-700 dark:text-gray-400 bg-gray-100">
               {headerGroups.map((headerGroup, key) => (
@@ -666,7 +732,6 @@ const TimeSheetTable = (props) => {
                 </tr>
               ))}
 
-              {/* Total */}
               {rows.length > 0 ? (
                 <Total />
               ) : (
@@ -678,7 +743,7 @@ const TimeSheetTable = (props) => {
               )}
             </tbody>
           </table>
-        </div>
+        </div> */}
       </div>
     </>
   )
