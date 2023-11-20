@@ -629,7 +629,7 @@ const TimeSheetTable = (props) => {
           </div>
         </div>
         <div className="flex w-full overflow-auto">
-          <table className="table-auto lg:table-fixed w-full">
+          <table className="table-auto xl:table-fixed w-full">
             <TableHeaders data={headerData} />
             <tbody>
               {data.length > 0 ? (
