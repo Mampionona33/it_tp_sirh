@@ -285,7 +285,7 @@ const TimeSheetTable = (props) => {
         if (matricul && salarie && salarie.id) {
           const resp = await heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
           const transFormedData = formatDataFromBackend(resp, salarie.id)
-          // console.log(resp)
+          console.log(resp)
           const calculHeures = new CalculHeures(resp)
           const formatedData = calculHeures.formatDataForDisplay()
 
@@ -617,6 +617,12 @@ const TimeSheetTable = (props) => {
     data: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }
 
+  const cellNumberFormatter = (number) => {
+    return (number !== null || number !== 0) && typeof number === 'number'
+      ? number.toString().padStart(2, '0')
+      : ''
+  }
+
   return (
     <>
       <div className="border shadow-sm  ">
@@ -639,14 +645,14 @@ const TimeSheetTable = (props) => {
                       <tr key={item.date}>
                         <td>{item.date}</td>
                         <td>{item.jour}</td>
-                        <td>{item.hn}</td>
+                        <td>{cellNumberFormatter(item.hn)}</td>
                         <td>{item.hs}</td>
-                        <td>{item.hs130}</td>
-                        <td>{item.hs150}</td>
-                        <td>{item.hsn30}</td>
-                        <td>{item.hsn50}</td>
-                        <td>{item.hdim}</td>
-                        <td>{item.hferie}</td>
+                        <td>{cellNumberFormatter(item.hs130)}</td>
+                        <td>{cellNumberFormatter(item.hs150)}</td>
+                        <td>{cellNumberFormatter(item.hsn30)}</td>
+                        <td>{cellNumberFormatter(item.hsn50)}</td>
+                        <td>{cellNumberFormatter(item.hdim)}</td>
+                        <td>{cellNumberFormatter(item.hferie)}</td>
                       </tr>
                     </>
                   )
