@@ -5,6 +5,7 @@ class CalculHeures {
     this.totalHs150 = this.calculTotalHs150()
     this.dataWithTotals = this.ajouterTotalsAuLundi()
     this.formatedData = this.formatDataForDisplay()
+    this.totalHn = 0
   }
 
   calculTotalHs130() {
@@ -28,14 +29,22 @@ class CalculHeures {
   formatDataForDisplay() {
     return this.dataWithTotals.map((item) => {
       const shouldDisplayColumn = item.jour !== 'Dimanche' || item.hs_jours_feries !== 0
+      console.log(item)
+
+      const hs =
+        item.heure_de_travail >= item.heure_normale
+          ? item.heure_de_travail - item.heure_normale
+          : null
+
+      const hn = item.heure_de_travail >= item.heure_normale ? 8 : item.heure_de_travail
+
       return {
         date: item.date,
         jour: item.jour,
-        Hn: item.heure_de_travail,
-        Hs: item.hs,
-        hs130: shouldDisplayColumn ? (item.jour === 'Lundi' ? this.totalHs130 : '') : '',
-        hs150: shouldDisplayColumn ? (item.jour === 'Lundi' ? this.totalHs150 : '') : '',
-        // ... (ajoutez d'autres colonnes au besoin)
+        hn: hn,
+        hs: hs,
+        hs130: null,
+        hs150: null,
       }
     })
   }

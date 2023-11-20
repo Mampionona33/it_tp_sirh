@@ -285,11 +285,11 @@ const TimeSheetTable = (props) => {
         if (matricul && salarie && salarie.id) {
           const resp = await heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
           const transFormedData = formatDataFromBackend(resp, salarie.id)
-          // console.log(transFormedData)
+          // console.log(resp)
           const calculHeures = new CalculHeures(resp)
           const formatedData = calculHeures.formatDataForDisplay()
 
-          console.log(formatedData)
+          // console.log(formatedData)
 
           setData(formatedData)
         }
@@ -639,7 +639,7 @@ const TimeSheetTable = (props) => {
                       <tr key={item.date}>
                         <td>{item.date}</td>
                         <td>{item.jour}</td>
-                        <td>{item.hn !== 0 && item.hn}</td>
+                        <td>{item.hn}</td>
                         <td>{item.hs}</td>
                         <td>{item.hs130}</td>
                         <td>{item.hs150}</td>
