@@ -32,6 +32,7 @@ const Login = () => {
         alert('Vous ete connecté')
       }
     } catch (error) {
+      alert(error.message)
       console.log(error)
     }
 
