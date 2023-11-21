@@ -641,7 +641,6 @@ const TimeSheetTable = (props) => {
             <tbody>
               {rows.map((row, rowIndex) => {
                 const remainingRows = rows.length - rowIndex
-                const firstDay = rows[0].original.date
 
                 return (
                   <tr
