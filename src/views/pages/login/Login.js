@@ -29,7 +29,7 @@ const Login = () => {
     try {
       const resp = authService.login(username, password)
       if (resp === 'Connecté') {
-        alert('Vous ete connecté')
+        alert('Vous êtes connecté.')
       } else {
         alert('Mots de passe ou identifiant incorrect')
       }
