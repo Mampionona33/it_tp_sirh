@@ -28,9 +28,15 @@ const Login = () => {
     console.log('Password:', password)
     try {
       const resp = authService.login(username, password)
+      if (resp === 'Connecté') {
+        alert('Vous ete connecté')
+      }
     } catch (error) {
       console.log(error)
     }
+
+    setUsername('')
+    setPassword('')
   }
 
   return (
