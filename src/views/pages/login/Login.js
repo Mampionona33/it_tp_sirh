@@ -16,11 +16,14 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import AuthService from 'src/services/AuthService'
+import { useDispatch } from 'react-redux'
+import { setUserLoggedIn } from 'src/redux/user/authReducer'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const authService = new AuthService()
+  const dispatch = useDispatch()
 
   const handleSubmit = async (ev) => {
     ev.preventDefault()
@@ -29,10 +32,12 @@ const Login = () => {
     try {
       const resp = authService.login(username, password)
       if (resp === 'Connecté') {
-        alert('Vous êtes connecté.')
-      } else {
-        alert('Mots de passe ou identifiant incorrect')
+        dispatch(setUserLoggedIn({ username: username }))
       }
+
+      // else {
+      //   alert('Mots de passe ou identifiant incorrect')
+      // }
     } catch (error) {
       console.log(error)
     }
