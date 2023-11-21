@@ -225,26 +225,6 @@ const TimeSheetTable = (props) => {
 
   const [sorting, setSorting] = useState(defaultSorting)
 
-  // const filterDataByDate = useCallback(
-  //   (currentFilter) => {
-  //     const currentDate = currentFilter || new Date()
-  //     console.log(currentDate)
-  //     console.log(listDateDebutDateFin)
-
-  //     const filteredData = employeeHours.filter((employHours) => {
-  //       const employDate = new Date(employHours.date)
-  //       return (
-  //         employHours.employee.id === salarie.id &&
-  //         employDate.getMonth() === currentDate.getMonth() &&
-  //         employDate.getFullYear() === currentDate.getFullYear()
-  //       )
-  //     })
-
-  //     setData(filteredData)
-  //   },
-  //   [salarie, setData, listDateDebutDateFin],
-  // )
-
   const formatDataFromBackend = (bakendData, id) => {
     const transFormedData = Array.from(bakendData).map((item) => {
       const parsedDate = parse(item.date, 'dd/MM/yyyy', new Date())
@@ -303,9 +283,6 @@ const TimeSheetTable = (props) => {
         .toString()
         .padStart(2, '0')}/${currentYear}`
 
-      console.log(dateDebutFormatted)
-      console.log(dateFinFormatted)
-
       const startDate = '01/01/2023'
       const endDate = '06/01/2023'
 
@@ -313,6 +290,7 @@ const TimeSheetTable = (props) => {
       try {
         if (matricul && salarie && salarie.id) {
           const resp = await heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
+          console.log(resp)
           const transFormedData = formatDataFromBackend(resp, salarie.id)
           console.log(transFormedData)
           setData(transFormedData)
@@ -370,14 +348,6 @@ const TimeSheetTable = (props) => {
   const handleDateChange = (newDate) => {
     filterDataByDate(newDate)
   }
-
-  // const calculateColumnSum = (columnName) => {
-  //   let result = 0
-  //   if (columnName) {
-  //     result = data.length > 0 && data.reduce((total, item) => total + (item[columnName] || 0), 0)
-  //   }
-  //   return result
-  // }
 
   const calculateTotal = useCallback(() => {
     const total = {
@@ -452,52 +422,6 @@ const TimeSheetTable = (props) => {
   }, [data, isCadre])
 
   const total = calculateTotal()
-
-  // const calculateHSDetails = () => {
-  //   const hs = {
-  //     hs130: 0,
-  //     hs150: 0,
-  //   }
-
-  //   let currentWeekStartDate = null
-  //   let weeklyOvertimeHours = 0
-  //   const weeklyHsDetails = []
-
-  //   data.sort((a, b) => new Date(a.date) - new Date(b.date))
-
-  //   let isSundayStarted = false
-
-  //   data.forEach((element, index) => {
-  //     const currentDate = new Date(element.date)
-  //     const isLastDayOfMonth = index === data.length - 1
-  //     const hsValue = element.overtimeHoursDay || 0
-
-  //     if (!isSundayStarted && currentDate.getDate() === 1) {
-  //       const previousSunday = new Date(currentDate)
-  //       previousSunday.setDate(currentDate.getDate() - 1)
-  //       currentWeekStartDate = previousSunday
-  //       isSundayStarted = true
-  //     }
-
-  //     if (isMonday(currentDate)) {
-  //       currentWeekStartDate = currentDate
-  //       weeklyOvertimeHours = 0
-  //     }
-
-  //     if (currentWeekStartDate) {
-  //       weeklyOvertimeHours += hsValue
-
-  //       if (isSunday(currentDate) || isLastDayOfMonth) {
-  //         weeklyHsDetails.push({
-  //           hs130: weeklyOvertimeHours <= 8 ? weeklyOvertimeHours : 8,
-  //           hs150: weeklyOvertimeHours > 8 ? weeklyOvertimeHours - 8 : 0,
-  //         })
-  //       }
-  //     }
-  //   })
-
-  //   return { total: hs, weeklyDetails: weeklyHsDetails }
-  // }
 
   const calculateHSNI = (data) => {
     let hsni130 = 0
