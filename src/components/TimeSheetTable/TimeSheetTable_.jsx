@@ -56,7 +56,7 @@ const TimeSheetTable = (props) => {
   const columns = [
     // Colonne pour la date
     columnHelper.accessor('date', {
-      cell: (info) => (info.getValue() ? format(parseISO(info.getValue()), 'dd/MM/yyyy') : null),
+      cell: (info) => format(parseISO(info.getValue()), 'dd/MM/yyyy'),
       header: () => 'Date',
     }),
 
@@ -69,18 +69,24 @@ const TimeSheetTable = (props) => {
     }),
 
     // Colonne pour les heures normales jour
-    columnHelper.accessor('normalHours', {
-      cell: (info) =>
-        !isSunday(new Date(info.row.original.date)) ? info.row.original.regularHoursDay : null,
+    columnHelper.accessor('regularHoursDay', {
+      cell: (info) => {
+        return info.getValue() !== 0 ? info.getValue() : null
+      },
       header: () => 'HN',
     }),
 
     // heures supplémentaires
     columnHelper.accessor('overtimeHoursDay', {
       cell: (info) => {
+        if (info.getValue() === 0) {
+          return null
+        }
+
         if (!isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours) {
           return isCadre ? null : info.getValue()
         }
+
         return null
       },
       header: () => 'HS',
