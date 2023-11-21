@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLocation, useParams, useNavigate } from 'react-router-dom'
 import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
 import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
-import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
+// import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable'
+import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable_'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const Fiche = () => {
