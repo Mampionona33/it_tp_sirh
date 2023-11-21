@@ -119,10 +119,9 @@ const TimeSheetTable = (props) => {
           return total
         }, null)
 
-        const result = hs130 >= 8 ? 8 : Math.round(hs130 * 100) / 100 || null
+        const result = hs130 >= 8 ? 8 : hs130 || null
 
-        console.log(`Date: ${info.row.original.date}, HS130: ${result}`)
-        return result
+        return Math.round(result * 100) / 100
       },
       header: () => 'HS 130%',
     }),
@@ -427,6 +426,13 @@ const TimeSheetTable = (props) => {
           item.occasionalNightHours
       }
     })
+
+    total.hs130 = Math.round(total.hs130 * 100) / 100
+    total.hs150 = Math.round(total.hs150 * 100) / 100
+    total.occasionalNightHours = Math.round(total.occasionalNightHours * 100) / 100
+    total.overtimeHoursDay = Math.round(total.overtimeHoursDay * 100) / 100
+    total.regularNightHours = Math.round(total.regularNightHours * 100) / 100
+    total.sundayHours = Math.round(total.sundayHours * 100) / 100
 
     if (isCadre) {
       total.holidayHours = 0
