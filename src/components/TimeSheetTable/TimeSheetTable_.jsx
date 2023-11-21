@@ -118,7 +118,7 @@ const TimeSheetTable = (props) => {
           return total
         }, 0)
 
-        const result = hs130 >= 8 ? 8 : isNaN(hs130) ? 0 : hs130
+        const result = hs130 >= 8 ? 8 : hs130 || null
 
         console.log(`Date: ${info.row.original.date}, HS130: ${result}`)
 
@@ -247,8 +247,10 @@ const TimeSheetTable = (props) => {
       if (hs < 0) {
         hs = null
       } else {
-        hs = Math.round((hs * 100) / 100)
+        hs = Math.round(hs * 100) / 100
       }
+
+      console.log(hs)
 
       return {
         employee: {
