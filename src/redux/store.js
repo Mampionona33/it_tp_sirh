@@ -9,6 +9,7 @@ import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer } from 'redux-persist'
 import mouvementSalaireReducer from './mouvementSalaire/mouvementSalaireReducer'
 import parametreCalendrierReducer from './parametreCalendrier/parametreCalendrierReducer'
+import authReducer from 'src/redux/user/authReducer'
 
 const persistConfig = {
   key: 'root',
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   cotisations: cotisationReducer,
   mouvementSalaire: mouvementSalaireReducer,
   parametreCalendrier: parametreCalendrierReducer,
+  auth: authReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
