@@ -15,6 +15,10 @@ import {
   endOfWeek,
   isMonday,
   isSunday,
+  isTuesday,
+  isWednesday,
+  isThursday,
+  isFriday,
   isSaturday,
   setDefaultOptions,
   parse,
@@ -259,14 +263,14 @@ const TimeSheetTable = (props) => {
           id: id,
         },
         date: format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
-        regularHoursDay: item.heure_normale,
-        regularNightHours: item.hs_de_nuit,
-        occasionalNightHours: item.hs_de_nuit,
+        regularHoursDay: item.heure_normale && Math.round(item.heure_normale * 100) / 100,
+        regularNightHours: item.hs_de_nuit && Math.round(item.hs_de_nuit * 100) / 100,
+        occasionalNightHours: item.hs_de_nuit && Math.round(item.hs_de_nuit * 100) / 100,
         overtimeHoursDay: hs,
-        holidayHours: item.hs_jours_feries,
+        holidayHours: item.hs_jours_feries && Math.round(item.hs_jours_feries * 100) / 100,
       }
     })
-    console.log('transFormedData', transFormedData)
+
     return transFormedData
   }
 
@@ -604,6 +608,39 @@ const TimeSheetTable = (props) => {
     )
   }
 
+  const isFirstDayMonday = (firstDay) => {
+    return new Date(firstDay).getDay() === 1
+  }
+  const isFirstDayTuesday = (firstDay) => {
+    return new Date(firstDay).getDay() === 2
+  }
+  const isFirstDayWednesday = (firstDay) => {
+    return new Date(firstDay).getDay() === 3
+  }
+  const isFirstDayThursday = (firstDay) => {
+    return new Date(firstDay).getDay() === 4
+  }
+  const isFirstDayFriday = (firstDay) => {
+    return new Date(firstDay).getDay() === 5
+  }
+
+  const getRowspan = (firstDay, remainingRows) => {
+    if (isFirstDayMonday(firstDay)) {
+      return Math.min(remainingRows, 6)
+    } else if (isFirstDayTuesday(firstDay)) {
+      return Math.min(remainingRows, 5)
+    } else if (isFirstDayWednesday(firstDay)) {
+      return Math.min(remainingRows, 4)
+    } else if (isFirstDayThursday(firstDay)) {
+      return Math.min(remainingRows, 3)
+    } else if (isFirstDayFriday(firstDay)) {
+      return Math.min(remainingRows, 2)
+    } else {
+      // Default case, for Saturday and Sunday
+      return 1
+    }
+  }
+
   return (
     <>
       <div className="border shadow-sm  ">
@@ -637,6 +674,8 @@ const TimeSheetTable = (props) => {
             <tbody>
               {rows.map((row, rowIndex) => {
                 const remainingRows = rows.length - rowIndex
+                const firstDay = rows[0].original.date
+
                 return (
                   <tr
                     key={`row_${rowIndex}`}
@@ -663,6 +702,68 @@ const TimeSheetTable = (props) => {
                           </td>
                         )
                       } else {
+                        // il faut verifier si la premiere ligne n'est pas lundi
+                        // donc on fait la fusion des lignes suivant le jour
+                        if (isTuesday(new Date(row.original.date)) && rowIndex === 0) {
+                          return (
+                            <td
+                              rowSpan={5}
+                              key={`cell_${rowIndex}_${cellIndex}`}
+                              className="px-1 py-2 border-x border-customRed-100"
+                            >
+                              {cell.column.columnDef.cell(cell.getContext()) &&
+                                cell.column.columnDef
+                                  .cell(cell.getContext())
+                                  .toString()
+                                  .padStart(2, '0')}
+                            </td>
+                          )
+                        }
+                        if (isWednesday(new Date(row.original.date)) && rowIndex === 0) {
+                          return (
+                            <td
+                              rowSpan={4}
+                              key={`cell_${rowIndex}_${cellIndex}`}
+                              className="px-1 py-2 border-x border-customRed-100"
+                            >
+                              {cell.column.columnDef.cell(cell.getContext()) &&
+                                cell.column.columnDef
+                                  .cell(cell.getContext())
+                                  .toString()
+                                  .padStart(2, '0')}
+                            </td>
+                          )
+                        }
+                        if (isThursday(new Date(row.original.date)) && rowIndex === 0) {
+                          return (
+                            <td
+                              rowSpan={3}
+                              key={`cell_${rowIndex}_${cellIndex}`}
+                              className="px-1 py-2 border-x border-customRed-100"
+                            >
+                              {cell.column.columnDef.cell(cell.getContext()) &&
+                                cell.column.columnDef
+                                  .cell(cell.getContext())
+                                  .toString()
+                                  .padStart(2, '0')}
+                            </td>
+                          )
+                        }
+                        if (isFriday(new Date(row.original.date)) && rowIndex === 0) {
+                          return (
+                            <td
+                              rowSpan={2}
+                              key={`cell_${rowIndex}_${cellIndex}`}
+                              className="px-1 py-2 border-x border-customRed-100"
+                            >
+                              {cell.column.columnDef.cell(cell.getContext()) &&
+                                cell.column.columnDef
+                                  .cell(cell.getContext())
+                                  .toString()
+                                  .padStart(2, '0')}
+                            </td>
+                          )
+                        }
                         if (isMonday(new Date(row.original.date))) {
                           const rowspan = Math.min(remainingRows, 6)
                           return (
@@ -679,6 +780,7 @@ const TimeSheetTable = (props) => {
                             </td>
                           )
                         }
+
                         if (isSunday(new Date(row.original.date))) {
                           return (
                             <td
