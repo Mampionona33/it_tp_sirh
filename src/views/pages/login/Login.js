@@ -30,9 +30,10 @@ const Login = () => {
       const resp = authService.login(username, password)
       if (resp === 'Connecté') {
         alert('Vous ete connecté')
+      } else {
+        alert(resp.message)
       }
     } catch (error) {
-      alert(error.message)
       console.log(error)
     }
 
