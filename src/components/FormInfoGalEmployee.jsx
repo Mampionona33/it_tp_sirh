@@ -26,7 +26,7 @@ const FormInfoGalEmployee = (props) => {
   useEffect(() => {
     let mount = true
     if (mount && salarie) {
-      setEmployee(salarie)
+      setEmployee(...salarie)
     }
     return () => {
       mount = false
