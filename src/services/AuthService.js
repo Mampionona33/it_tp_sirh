@@ -1,18 +1,19 @@
 import axios from 'axios'
 
 class AuthService {
-  REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
-  email = null
-  password = null
+  constructor() {
+    this.REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
+    this.email = null
+    this.password = null
+  }
+
   async login(email, password) {
     this.email = email
     this.password = password
     try {
       const resp = await axios.post(`${this.REACT_APP_API_BASE_URL}/login`, {
-        auth: {
-          username: this.email,
-          password: this.password,
-        },
+        email: this.email,
+        password: this.password,
       })
       return resp.data
     } catch (error) {

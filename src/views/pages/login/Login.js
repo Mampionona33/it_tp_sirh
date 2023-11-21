@@ -18,29 +18,25 @@ import { cilLockLocked, cilUser } from '@coreui/icons'
 import AuthService from 'src/services/AuthService'
 import { useDispatch } from 'react-redux'
 import { setUserLoggedIn } from 'src/redux/user/authReducer'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const authService = new AuthService()
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = async (ev) => {
     ev.preventDefault()
-    console.log('Username:', username)
-    console.log('Password:', password)
+
     try {
       const resp = await authService.login(username, password)
-      console.log(resp.status)
-
-      if (resp.status === 200) {
+      if (resp && resp === 'Connecté') {
         dispatch(setUserLoggedIn({ username: username }))
+        navigate('/dashboard')
       }
-      //  else {
-      //   alert('Mots de passe ou identifiant incorrect')
-      // }
     } catch (error) {
-      // Gestion des erreurs de requête
       console.log(error)
     }
 
