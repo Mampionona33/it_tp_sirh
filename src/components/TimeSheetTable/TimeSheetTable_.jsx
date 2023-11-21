@@ -635,61 +635,67 @@ const TimeSheetTable = (props) => {
               ))}
             </thead>
             <tbody>
-              {rows.map((row, rowIndex) => (
-                <tr
-                  key={`row_${rowIndex}`}
-                  className={`border-y border-customRed-100 ${
-                    rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                  }`}
-                >
-                  {row.getVisibleCells().map((cell, cellIndex) => {
-                    const currentColumn = cell.column.id
-                    const cellValue = cell.column.columnDef.cell(cell.getContext())
+              {rows.map((row, rowIndex) => {
+                const remainingRows = rows.length - rowIndex
+                return (
+                  <tr
+                    key={`row_${rowIndex}`}
+                    className={`border-y border-customRed-100 ${
+                      rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-50'
+                    }`}
+                  >
+                    {row.getVisibleCells().map((cell, cellIndex) => {
+                      const currentColumn = cell.column.id
+                      const cellValue = cell.column.columnDef.cell(cell.getContext())
 
-                    if (!(currentColumn === 'hs130' || currentColumn === 'hs150')) {
-                      return (
-                        <td
-                          key={`cell_${rowIndex}_${cellIndex}`}
-                          className="px-1 py-2 border-x border-customRed-100 "
-                        >
-                          {cellValue && currentColumn !== 'jour'
-                            ? cell.column.columnDef
-                                .cell(cell.getContext())
-                                .toString()
-                                .padStart(2, '0')
-                            : cellValue}
-                        </td>
-                      )
-                    } else {
-                      if (isMonday(new Date(row.original.date))) {
-                        return (
-                          <td
-                            rowSpan={6}
-                            key={`cell_${rowIndex}_${cellIndex}`}
-                            className="px-1 py-2 border-x border-customRed-100 "
-                          >
-                            {cell.column.columnDef.cell(cell.getContext()) &&
-                              cell.column.columnDef
-                                .cell(cell.getContext())
-                                .toString()
-                                .padStart(2, '0')}
-                          </td>
-                        )
-                      }
-                      if (isSunday(new Date(row.original.date))) {
+                      if (!(currentColumn === 'hs130' || currentColumn === 'hs150')) {
                         return (
                           <td
                             key={`cell_${rowIndex}_${cellIndex}`}
-                            className="px-1 py-2 border-x border-customRed-100 "
+                            className="px-1 py-2 border-x border-customRed-100"
                           >
-                            {cell.column.columnDef.cell(cell.getContext())}
+                            {cellValue && currentColumn !== 'jour'
+                              ? cell.column.columnDef
+                                  .cell(cell.getContext())
+                                  .toString()
+                                  .padStart(2, '0')
+                              : cellValue}
                           </td>
                         )
+                      } else {
+                        if (isMonday(new Date(row.original.date))) {
+                          const rowspan = Math.min(remainingRows, 6)
+                          return (
+                            <td
+                              rowSpan={rowspan}
+                              key={`cell_${rowIndex}_${cellIndex}`}
+                              className="px-1 py-2 border-x border-customRed-100"
+                            >
+                              {cell.column.columnDef.cell(cell.getContext()) &&
+                                cell.column.columnDef
+                                  .cell(cell.getContext())
+                                  .toString()
+                                  .padStart(2, '0')}
+                            </td>
+                          )
+                        }
+                        if (isSunday(new Date(row.original.date))) {
+                          return (
+                            <td
+                              key={`cell_${rowIndex}_${cellIndex}`}
+                              className="px-1 py-2 border-x border-customRed-100"
+                            >
+                              {cell.column.columnDef.cell(cell.getContext())}
+                            </td>
+                          )
+                        }
+                        // Handle other days where you don't want to render cells for 'hs130' and 'hs150'
+                        // return null
                       }
-                    }
-                  })}
-                </tr>
-              ))}
+                    })}
+                  </tr>
+                )
+              })}
 
               {/* Total */}
               {rows.length > 0 ? (
