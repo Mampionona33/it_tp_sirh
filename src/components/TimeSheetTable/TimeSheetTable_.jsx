@@ -146,10 +146,10 @@ const TimeSheetTable = (props) => {
                 total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
               )
             }
-            return total
+            return Math.round(total * 100) / 100
           }, 0)
 
-        return hs150 >= 8 ? hs150 - 8 : null
+        return hs150 >= 8 ? Math.round((hs150 - 8) * 100) / 100 : null
       },
       header: () => 'HS 150%',
     }),
@@ -582,7 +582,8 @@ const TimeSheetTable = (props) => {
             {total.regularHoursDay !== 0 && total.regularHoursDay.toString().padStart(2, '0')}
           </td>
           <td className="px-6 py-3">
-            {total.overtimeHoursDay !== 0 && total.overtimeHoursDay.toString().padStart(2, '0')}
+            {total.overtimeHoursDay !== 0 &&
+              total.overtimeHoursDay.toFixed(2).toString().padStart(2, '0')}
           </td>
           <td className="px-6 py-3">
             {total.hs130 !== 0 && total.hs130.toString().padStart(2, '0')}
