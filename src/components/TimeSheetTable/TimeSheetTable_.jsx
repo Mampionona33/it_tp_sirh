@@ -89,6 +89,7 @@ const TimeSheetTable = (props) => {
     }),
 
     // colonne HS130
+    // colonne HS130
     columnHelper.accessor('hs130', {
       cell: (info) => {
         if (isCadre || !isMonday(new Date(info.row.original.date))) return 0
@@ -104,13 +105,20 @@ const TimeSheetTable = (props) => {
         const hs130 = weekTotal.reduce((total, item) => {
           if (!item.holidayHours) {
             return (
-              total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
+              total +
+              (item.overtimeHoursDay || 0) +
+              (item.occasionalNightHours || 0) +
+              (item.regularNightHours || 0)
             )
           }
           return total
         }, 0)
 
-        return hs130 >= 8 ? 8 : hs130
+        const result = hs130 >= 8 ? 8 : isNaN(hs130) ? 0 : hs130
+
+        console.log(`Date: ${info.row.original.date}, HS130: ${result}`)
+
+        return result
       },
       header: () => 'HS 130%',
     }),
