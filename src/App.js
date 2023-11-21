@@ -2,7 +2,6 @@ import React, { Component, Suspense } from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 import isAuthenticated from './auth'
-
 import { Provider } from 'react-redux'
 import './scss/style.scss'
 import { store } from './redux/store'
@@ -27,6 +26,8 @@ class App extends Component {
     super(props)
     this.pathname = window.location.pathname
     console.log(this.pathname)
+    this.isAuth = store.getState().auth.isAuthenticated
+    console.log(this.isAuth)
   }
   render() {
     return (
@@ -36,7 +37,7 @@ class App extends Component {
             <Routes>
               <Route
                 path="/login"
-                element={isAuthenticated() ? <Navigate to="/dashboard" replace /> : <Login />}
+                element={this.isAuth ? <Navigate to="/dashboard" replace /> : <Login />}
               />
               <Route path="/register" element={<Register />} />
               <Route exact path="/404" name="Page 404" element={<Page404 />} />

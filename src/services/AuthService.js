@@ -9,8 +9,10 @@ class AuthService {
     this.password = password
     try {
       const resp = await axios.post(`${this.REACT_APP_API_BASE_URL}/login`, {
-        email: this.email,
-        password: this.password,
+        auth: {
+          username: this.email,
+          password: this.password,
+        },
       })
       return resp.data
     } catch (error) {

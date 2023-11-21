@@ -30,15 +30,17 @@ const Login = () => {
     console.log('Username:', username)
     console.log('Password:', password)
     try {
-      const resp = authService.login(username, password)
-      if (resp === 'Connecté') {
+      const resp = await authService.login(username, password)
+      console.log(resp.status)
+
+      if (resp.status === 200) {
         dispatch(setUserLoggedIn({ username: username }))
       }
-
-      // else {
+      //  else {
       //   alert('Mots de passe ou identifiant incorrect')
       // }
     } catch (error) {
+      // Gestion des erreurs de requête
       console.log(error)
     }
 
