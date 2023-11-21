@@ -31,7 +31,7 @@ const Login = () => {
       if (resp === 'Connecté') {
         alert('Vous ete connecté')
       } else {
-        alert(resp.message)
+        alert('Mots de passe ou identifiant incorrect')
       }
     } catch (error) {
       console.log(error)
