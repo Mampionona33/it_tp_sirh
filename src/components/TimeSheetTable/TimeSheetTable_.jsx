@@ -152,10 +152,16 @@ const TimeSheetTable = (props) => {
 
     // Colonne pour travail de nuit habituelles "agent de nuit" x30%
     columnHelper.accessor('hsn30', {
-      cell: (info) =>
-        !isSunday(new Date(info.row.original.date)) &&
-        !info.row.original.holidayHours &&
-        info.row.original.regularNightHours,
+      cell: (info) => {
+        if (!info.row.original.regularNightHours) {
+          return null
+        }
+        return (
+          !isSunday(new Date(info.row.original.date)) &&
+          !info.row.original.holidayHours &&
+          info.row.original.regularNightHours
+        )
+      },
       header: () => 'HSN 30%',
     }),
 
