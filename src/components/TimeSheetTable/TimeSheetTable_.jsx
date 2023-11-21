@@ -121,7 +121,7 @@ const TimeSheetTable = (props) => {
 
         const result = hs130 >= 8 ? 8 : hs130 || null
 
-        return Math.round(result * 100) / 100
+        return result > 0 ? Math.round(result * 100) / 100 : null
       },
       header: () => 'HS 130%',
     }),
