@@ -81,9 +81,7 @@ const TimeSheetTable = (props) => {
         !isSunday(new Date(info.row.original.date)) && !info.row.original.holidayHours
           ? isCadre
             ? 0
-            : info.row.original.overtimeHoursDay +
-              info.row.original.occasionalNightHours +
-              info.row.original.regularNightHours
+            : info.getValue()
           : null,
       header: () => 'HS',
     }),
@@ -236,9 +234,16 @@ const TimeSheetTable = (props) => {
   const formatDataFromBackend = (bakendData, id) => {
     const transFormedData = Array.from(bakendData).map((item) => {
       const parsedDate = parse(item.date, 'dd/MM/yyyy', new Date())
+      let hs = null
+      if (item.heure_normale && item.heure_de_travail) {
+        hs = item.heure_de_travail - item.heure_normale
+      }
+      if (hs < 0) {
+        hs = null
+      } else {
+        hs = Math.round((hs * 100) / 100)
+      }
 
-      const hs = item.heure_de_travail - item.heure_normale
-      console.log(hs)
       return {
         employee: {
           id: id,
@@ -247,7 +252,7 @@ const TimeSheetTable = (props) => {
         regularHoursDay: item.heure_normale,
         regularNightHours: item.hs_de_nuit || 0,
         occasionalNightHours: item.hs_de_nuit || 0,
-        overtimeHoursDay: item.hs,
+        overtimeHoursDay: hs,
         holidayHours: item.hs_jours_feries || 0,
       }
     })
