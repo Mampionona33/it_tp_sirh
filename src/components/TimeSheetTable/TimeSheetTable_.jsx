@@ -109,19 +109,15 @@ const TimeSheetTable = (props) => {
         const hs130 = weekTotal.reduce((total, item) => {
           if (!item.holidayHours) {
             return (
-              total +
-              (item.overtimeHoursDay || 0) +
-              (item.occasionalNightHours || 0) +
-              (item.regularNightHours || 0)
+              total + item.overtimeHoursDay + item.occasionalNightHours + item.regularNightHours
             )
           }
           return total
-        }, 0)
+        }, null)
 
-        const result = hs130 >= 8 ? 8 : hs130 || null
+        const result = hs130 >= 8 ? 8 : Math.round(hs130 * 100) / 100 || null
 
         console.log(`Date: ${info.row.original.date}, HS130: ${result}`)
-
         return result
       },
       header: () => 'HS 130%',
@@ -130,7 +126,7 @@ const TimeSheetTable = (props) => {
     // colonne HS150
     columnHelper.accessor('hs150', {
       cell: (info) => {
-        if (isCadre || !isMonday(new Date(info.row.original.date))) return 0
+        if (isCadre || !isMonday(new Date(info.row.original.date))) return null
 
         const weekStartDate = new Date(info.row.original.date)
         const weekEndDate = new Date(weekStartDate)
@@ -178,7 +174,7 @@ const TimeSheetTable = (props) => {
     // Colonne pour travail dimanche
     columnHelper.accessor('hdim', {
       cell: (info) => {
-        if (isCadre) return 0
+        if (isCadre) return null
 
         return isSunday(new Date(info.row.original.date))
           ? info.row.original.regularHoursDay +
@@ -193,7 +189,7 @@ const TimeSheetTable = (props) => {
     // Colonne pour les heures de jour férié (holidayHours)
     columnHelper.accessor('holidayHours', {
       cell: (info) => {
-        if (isCadre) return 0
+        if (isCadre) return null
 
         if (info.getValue() && !isSunday(new Date(info.row.original.date))) {
           return (
@@ -258,10 +254,10 @@ const TimeSheetTable = (props) => {
         },
         date: format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
         regularHoursDay: item.heure_normale,
-        regularNightHours: item.hs_de_nuit || 0,
-        occasionalNightHours: item.hs_de_nuit || 0,
+        regularNightHours: item.hs_de_nuit,
+        occasionalNightHours: item.hs_de_nuit,
         overtimeHoursDay: hs,
-        holidayHours: item.hs_jours_feries || 0,
+        holidayHours: item.hs_jours_feries,
       }
     })
     console.log('transFormedData', transFormedData)
