@@ -15,15 +15,22 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
+import AuthService from 'src/services/AuthService'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const authService = new AuthService()
 
-  const handleSubmit = (ev) => {
+  const handleSubmit = async (ev) => {
     ev.preventDefault()
     console.log('Username:', username)
     console.log('Password:', password)
+    try {
+      const resp = authService.login(username, password)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
