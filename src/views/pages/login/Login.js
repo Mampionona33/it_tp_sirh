@@ -16,6 +16,11 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 
+const handleLogin = (ev) => {
+  ev.preventDefault()
+  console.log(ev.targe)
+}
+
 const Login = () => {
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
@@ -46,7 +51,12 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton color="primary" className="px-4">
+                        <CButton
+                          type="submit"
+                          color="primary"
+                          onClick={handleLogin}
+                          className="px-4"
+                        >
                           Login
                         </CButton>
                       </CCol>
