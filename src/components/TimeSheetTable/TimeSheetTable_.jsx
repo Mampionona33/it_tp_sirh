@@ -608,39 +608,6 @@ const TimeSheetTable = (props) => {
     )
   }
 
-  const isFirstDayMonday = (firstDay) => {
-    return new Date(firstDay).getDay() === 1
-  }
-  const isFirstDayTuesday = (firstDay) => {
-    return new Date(firstDay).getDay() === 2
-  }
-  const isFirstDayWednesday = (firstDay) => {
-    return new Date(firstDay).getDay() === 3
-  }
-  const isFirstDayThursday = (firstDay) => {
-    return new Date(firstDay).getDay() === 4
-  }
-  const isFirstDayFriday = (firstDay) => {
-    return new Date(firstDay).getDay() === 5
-  }
-
-  const getRowspan = (firstDay, remainingRows) => {
-    if (isFirstDayMonday(firstDay)) {
-      return Math.min(remainingRows, 6)
-    } else if (isFirstDayTuesday(firstDay)) {
-      return Math.min(remainingRows, 5)
-    } else if (isFirstDayWednesday(firstDay)) {
-      return Math.min(remainingRows, 4)
-    } else if (isFirstDayThursday(firstDay)) {
-      return Math.min(remainingRows, 3)
-    } else if (isFirstDayFriday(firstDay)) {
-      return Math.min(remainingRows, 2)
-    } else {
-      // Default case, for Saturday and Sunday
-      return 1
-    }
-  }
-
   return (
     <>
       <div className="border shadow-sm  ">
