@@ -185,11 +185,14 @@ const TimeSheetTable = (props) => {
       cell: (info) => {
         if (isCadre) return null
 
-        return isSunday(new Date(info.row.original.date))
-          ? info.row.original.regularHoursDay +
-              info.row.original.regularNightHours +
-              info.row.original.overtimeHoursDay +
-              info.row.original.occasionalNightHours
+        const sommeHs =
+          info.row.original.regularHoursDay +
+          info.row.original.regularNightHours +
+          info.row.original.overtimeHoursDay +
+          info.row.original.occasionalNightHours
+
+        return isSunday(new Date(info.row.original.date)) && sommeHs > 0
+          ? Math.round(sommeHs * 100) / 100
           : null
       },
       header: () => 'Hdim',
@@ -666,7 +669,7 @@ const TimeSheetTable = (props) => {
                             key={`cell_${rowIndex}_${cellIndex}`}
                             className="px-1 py-2 border-x border-customRed-100"
                           >
-                            {cellValue && currentColumn !== 'jour'
+                            {cellValue && currentColumn !== 'jour' && cellValue !== 0
                               ? cell.column.columnDef
                                   .cell(cell.getContext())
                                   .toString()
