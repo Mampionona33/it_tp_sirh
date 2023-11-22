@@ -20,15 +20,19 @@ export default class CalculPai {
   totalRetenuSalarie = 0
   baseCnaps = 0
   avance = 0
+  salaireBrute = 0
 
-  constructor(salaireBase) {
-    this.salaireBase = salaireBase
+  constructor() {
     this.isCadre = false
   }
 
   // Setter
   setIrsa(irsaAPayer) {
     this.irsaAPayer = irsaAPayer
+  }
+
+  setSalaireDeBase(salaireBase) {
+    this.salaireBase = salaireBase
   }
 
   setAvance(avance) {
@@ -158,8 +162,9 @@ export default class CalculPai {
   }
 
   getSalaireBrut() {
+    console.log(this.salaireBase)
     return this.isCadre
-      ? this.getSalaireDeBase() + this.getTotalAjoutSalaire() - this.getTotalRetenuSalarie()
+      ? this.salaireBase + this.totalAjoutSalaire() - this.totalRetenuSalarie()
       : this.getHsni130() +
           this.getTotalAjoutSalaire() +
           this.getHsni150() +
@@ -168,7 +173,7 @@ export default class CalculPai {
           this.getHDim() +
           this.getHsi130() +
           this.getHsi150() +
-          this.getSalaireDeBase() +
+          this.salaireBase +
           this.getPrimeEtAvantage() -
           this.getTotalRetenuSalarie()
   }

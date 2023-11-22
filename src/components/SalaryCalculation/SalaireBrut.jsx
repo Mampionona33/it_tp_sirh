@@ -35,7 +35,8 @@ const SalaireBrut = () => {
   // ------------------------------
 
   const calculPaie = useMemo(() => {
-    const calc = new CalculPai(salaireDeBase)
+    const calc = new CalculPai()
+    calc.setSalaireDeBase(salaireDeBase)
     calc.setTauxHoraire(173.33)
     calc.setHsni130(hsni130)
     calc.setHsni150(hsni150)
