@@ -25,9 +25,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.pathname = window.location.pathname
-    console.log(this.pathname)
     this.isAuth = store.getState().auth.isAuthenticated
-    console.log(this.isAuth)
   }
   render() {
     return (

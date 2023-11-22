@@ -238,7 +238,6 @@ const TimeSheetTable = (props) => {
         hs = Math.round(hs * 100) / 100
       }
 
-
       return {
         employee: {
           id: id,
