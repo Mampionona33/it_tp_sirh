@@ -288,9 +288,7 @@ const TimeSheetTable = (props) => {
       try {
         if (matricul && salarie && salarie.id) {
           const resp = await heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
-          console.log(resp)
           const transFormedData = formatDataFromBackend(resp, salarie.id)
-          console.log(transFormedData)
           setData(transFormedData)
         }
       } catch (error) {

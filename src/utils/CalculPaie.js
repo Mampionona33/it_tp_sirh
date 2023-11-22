@@ -7,7 +7,6 @@ export default class CalculPai {
   totalHdim = 0
   hsni130 = 0
   hn30 = 0
-  hn50 = 0
   hsni150 = 0
   plafondSME = 1910400
   hsi130 = 0
@@ -21,25 +20,18 @@ export default class CalculPai {
   totalRetenuSalarie = 0
   baseCnaps = 0
   avance = 0
-  salaireBrut = 0
-  totalHn50 = 0
 
   constructor() {
     this.isCadre = false
-    this.calculHn50()
-    this.calculPaie()
-    this.calculHn30()
-    this.calculHsi130()
-    this.calculPaie()
+  }
+
+  setSalaireDeBase(salaireBase) {
+    this.salaireBase = salaireBase
   }
 
   // Setter
   setIrsa(irsaAPayer) {
     this.irsaAPayer = irsaAPayer
-  }
-
-  setSalaireDeBase(salaireBase) {
-    this.salaireBase = salaireBase
   }
 
   setAvance(avance) {
@@ -118,52 +110,24 @@ export default class CalculPai {
   getHsni150() {
     return this.isCadre ? 0 : (this.tauxHoraire * this.hsni150 * 150) / 100
   }
-  calculHsi130() {
-    this.hsi130 = this.isCadre
-      ? 0
-      : (this.tauxHoraire * (this.totalHs130 - this.hsni130) * 130) / 100
-  }
+
   getHsi130() {
-    return this.hsi130
-  }
-  calculHsi150() {
-    this.hsi150 = this.isCadre
-      ? 0
-      : (this.tauxHoraire * (this.totalHs150 - this.hsni150) * 150) / 100
+    return this.isCadre ? 0 : (this.tauxHoraire * (this.totalHs130 - this.hsni130) * 130) / 100
   }
 
   getHsi150() {
-    return this.hsi150
-  }
-
-  calculHn30() {
-    this.hn30 = this.isCadre ? 0 : (this.tauxHoraire * this.totalHn30 * 30) / 100
+    return this.isCadre ? 0 : (this.tauxHoraire * (this.totalHs150 - this.hsni150) * 150) / 100
   }
 
   getHn30() {
-    this.calculHn30()
-    return this.hn30
+    return this.isCadre ? 0 : (this.tauxHoraire * this.totalHn30 * 30) / 100
   }
-
-  calculHn50() {
-    if (this.isCadre) {
-      this.hn50 = 0
-    } else {
-      this.hn50 = (this.tauxHoraire * this.totalHn50 * 50) / 100
-    }
-  }
-
   getHn50() {
-    this.calculHn50()
-    return this.hn50
+    return this.isCadre ? 0 : (this.tauxHoraire * this.totalHn50 * 50) / 100
   }
 
   getHDim() {
-    if (this.isCadre) {
-      return 0
-    } else {
-      return (this.tauxHoraire * this.totalHdim * 100) / 100
-    }
+    return this.isCadre ? 0 : (this.tauxHoraire * this.totalHdim * 100) / 100
   }
 
   getPrimeEtAvantage() {
@@ -196,28 +160,20 @@ export default class CalculPai {
     return this.avance
   }
 
-  calculPaie() {
-    if (this.isCadre) {
-      this.salaireBrut = this.salaireBase + this.totalAjoutSalaire() - this.totalRetenuSalarie()
-    } else {
-      this.salaireBrut =
-        this.salaireBase +
-        this.hsni130 +
-        this.totalAjoutSalaire +
-        this.hsni150 +
-        this.hn30 +
-        this.hn50 +
-        this.totalHdim +
-        this.hsi130 +
-        this.hsi150 +
-        this.primeEtAvantage -
-        this.totalRetenuSalarie
-    }
-  }
-
   getSalaireBrut() {
-    this.calculPaie()
-    return this.salaireBrut
+    return this.isCadre
+      ? this.getSalaireDeBase() + this.getTotalAjoutSalaire() - this.getTotalRetenuSalarie()
+      : this.getHsni130() +
+          this.getTotalAjoutSalaire() +
+          this.getHsni150() +
+          this.getHn30() +
+          this.getHn50() +
+          this.getHDim() +
+          this.getHsi130() +
+          this.getHsi150() +
+          this.getSalaireDeBase() +
+          this.getPrimeEtAvantage() -
+          this.getTotalRetenuSalarie()
   }
 
   getBaseCnaps() {
