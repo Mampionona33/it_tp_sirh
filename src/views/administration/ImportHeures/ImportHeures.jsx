@@ -1,5 +1,6 @@
 import React from 'react'
 import CustomSection from 'src/components/CustomSection'
+import ImportHS from './ImportHS'
 
 const ImportHeures = () => {
   const title = 'Importer heures'
@@ -42,7 +43,7 @@ const ImportHeures = () => {
   return (
     <>
       <div>
-        <CustomSection title={title} body={<Body />} />
+        <CustomSection title={title} body={<ImportHS />} />
       </div>
     </>
   )
