@@ -130,7 +130,7 @@ const SalaireBrut = () => {
     },
     {
       title: 'HSI 130% :',
-      hours: `${totalHs130 - hsni130}`,
+      hours: `${(totalHs130 - hsni130).toFixed(2)}`,
       value: `${formatedHsi130Value}`,
     },
     {
