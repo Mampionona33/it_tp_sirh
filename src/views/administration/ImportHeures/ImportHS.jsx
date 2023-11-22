@@ -46,23 +46,8 @@ function ImportHS() {
 
   return (
     <div className="p-4 flex justify-between flex-col w-full gap-2">
-      <div>
-        <div className="recherche">
-          <label htmlFor="formFileSm" className="">
-            <h6>Rechercher</h6>
-          </label>
-          <input
-            className="form-control form-control-sm"
-            id="formFileSm"
-            type="search"
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-      </div>
-
       <div className="import">
         <label htmlFor="formFileSm" className="">
-          {' '}
           <h5>Importer une liste des HS</h5>{' '}
         </label>
         <input
@@ -73,48 +58,6 @@ function ImportHS() {
           onChange={(e) => handleUpload(e)}
         />
       </div>
-      <table className="table table-dark table-striped">
-        <thead>
-          <tr>
-            <th>Matricule</th>
-            <th>Date et heure</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {heures ? (
-            heures
-              .filter((data) => {
-                if (search === '') {
-                  return data
-                  // console.log(data);
-                } else if (
-                  data.Matricule.toLowerCase().includes(search.toLocaleLowerCase()) ||
-                  data.Time.toLowerCase().includes(search.toLocaleLowerCase()) ||
-                  data.Nom_du_terminal.toLowerCase().includes(search.toLocaleLowerCase())
-                ) {
-                  return data
-                }
-              })
-              .map((heure, index) => (
-                <tr key={index}>
-                  <td> {heure.Matricule} </td>
-                  <td>{heure.Time}</td>
-                  <td>{heure.Nom_du_terminal}</td>
-
-                  <td>
-                    <button type="button" className="btn btn-info">
-                      Modifier
-                    </button>
-                  </td>
-                </tr>
-              ))
-          ) : (
-            <h1>Pas de liste</h1>
-          )}
-        </tbody>
-      </table>
     </div>
   )
 }
