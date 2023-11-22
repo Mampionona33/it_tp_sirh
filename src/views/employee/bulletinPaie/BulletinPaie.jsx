@@ -9,10 +9,10 @@ import Section3 from './Section3'
 
 // Create Document Component
 const MyDocument = (props) => {
-  const { salarie, data } = props
+  const { data } = props
   // console.log(salarie)
   return (
-    <Document title={`Bulletin de paie ${salarie.nom} ${salarie.prenom}`}>
+    <Document title={`Bulletin de paie ${data.salarie.nom} ${data.salarie.prenom}`}>
       <Page size="A4">
         <Section1 data={data} />
         <Section2 data={data} />
