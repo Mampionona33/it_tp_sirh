@@ -12,7 +12,7 @@ const MyDocument = (props) => {
   const { salarie, data } = props
   // console.log(salarie)
   return (
-    <Document title={`Bulletin de paie ${salarie.name.nom}`}>
+    <Document title={`Bulletin de paie ${salarie.nom} ${salarie.prenom}`}>
       <Page size="A4">
         <Section1 data={data} />
         <Section2 data={data} />

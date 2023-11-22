@@ -60,7 +60,8 @@ export default function PrimeEtAvantage() {
 
       const ajoutSalaireUp = mergeArraysByReferenceValue(ajoutSalaire, updatedAjoutSalaire, 'label')
       const retenuSalaireUp = mergeArraysByReferenceValue(retenuSalaire, updatedRetenue, 'label')
-      alert(`Primes : ${ajoutSalaire} <br> Retenues: ${retenuSalaire}`)
+
+      alert(`Primes : ${primeEtAvantage} \nRetenues: ${deduction}`)
       // dispatch(setBulletinDePaie({ totalPrimeEtAvantage: primeEtAvantage }))
       // dispatch(setBulletinDePaie({ totalDeduction: deduction }))
       // dispatch(setBulletinDePaie({ ajoutSalaire: ajoutSalaireUp }))
