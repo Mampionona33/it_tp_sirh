@@ -35,6 +35,8 @@ const Login = () => {
       if (resp && resp === 'Connecté') {
         dispatch(setUserLoggedIn({ username: username }))
         navigate('/dashboard')
+      } else {
+        alert('Mots de passe ou identifiant incorrect')
       }
     } catch (error) {
       console.log(error)
