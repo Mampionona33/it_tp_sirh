@@ -45,12 +45,11 @@ function ImportHS() {
   }
 
   return (
-    <div className="App-header">
+    <div className="p-4 flex justify-between flex-col w-full gap-2">
       <div>
-        <h1>Liste des Heures Supplémentaires </h1>
         <div className="recherche">
           <label htmlFor="formFileSm" className="">
-            <h6>Rechercher</h6>{' '}
+            <h6>Rechercher</h6>
           </label>
           <input
             className="form-control form-control-sm"

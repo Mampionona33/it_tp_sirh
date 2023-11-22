@@ -16,8 +16,6 @@ function DataTable({
   columns,
   exportCsvBtn,
   importCsvBtn,
-  onRowSelect,
-  selectedRows,
   modalImportCsvField,
   modalAddFields,
   colorButtonShowModalImport,

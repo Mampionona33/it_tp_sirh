@@ -46,8 +46,6 @@ export default function PrimeEtAvantage() {
             mouvementSalaire.length > 0 &&
             mouvementSalaire.find((item) => item.id === parseInt(key))
 
-          console.log(field)
-
           if (field) {
             if (field.action === 'ajout') {
               updatedAjoutSalaire.push({ label: field.label, montant: value })
@@ -62,12 +60,11 @@ export default function PrimeEtAvantage() {
 
       const ajoutSalaireUp = mergeArraysByReferenceValue(ajoutSalaire, updatedAjoutSalaire, 'label')
       const retenuSalaireUp = mergeArraysByReferenceValue(retenuSalaire, updatedRetenue, 'label')
-      console.log('primeEtAvantage', primeEtAvantage)
-      console.log('deduction', deduction)
-      dispatch(setBulletinDePaie({ totalPrimeEtAvantage: primeEtAvantage }))
-      dispatch(setBulletinDePaie({ totalDeduction: deduction }))
-      dispatch(setBulletinDePaie({ ajoutSalaire: ajoutSalaireUp }))
-      dispatch(setBulletinDePaie({ retenuSalaire: retenuSalaireUp }))
+      alert(`Primes : ${ajoutSalaire} <br> Retenues: ${retenuSalaire}`)
+      // dispatch(setBulletinDePaie({ totalPrimeEtAvantage: primeEtAvantage }))
+      // dispatch(setBulletinDePaie({ totalDeduction: deduction }))
+      // dispatch(setBulletinDePaie({ ajoutSalaire: ajoutSalaireUp }))
+      // dispatch(setBulletinDePaie({ retenuSalaire: retenuSalaireUp }))
       // dispatch(setPrimeEtAvantage(primeEtAvantage))
       // setIsFormSubmitted(true)
     }
@@ -87,6 +84,8 @@ export default function PrimeEtAvantage() {
       dispatch(setBulletinDePaie({ totalDeduction: null }))
       setIsFormSubmitted(false)
     }
+
+    const handleSubmitPlaceholder = () => {}
 
     React.useEffect(() => {
       let mount = true
@@ -120,7 +119,7 @@ export default function PrimeEtAvantage() {
                       {item.label}
                     </label>
                     <input
-                      className="form-control"
+                      className="form-control disabled"
                       type="number"
                       data-action={item.action}
                       min="0"

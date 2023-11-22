@@ -16,6 +16,7 @@ import {
   cilEnvelopeOpen,
   cilFile,
   cilLockLocked,
+  cilAccountLogout,
   cilSettings,
   cilTask,
   cilUser,
@@ -23,8 +24,20 @@ import {
 import CIcon from '@coreui/icons-react'
 
 import avatar8 from './../../assets/images/avatars/8.jpg'
+import { useDispatch } from 'react-redux'
+import { setUserLoggedOut } from 'src/redux/user/authReducer'
+import { useNavigate } from 'react-router-dom'
 
 const AppHeaderDropdown = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleClickLogout = (ev) => {
+    ev.preventDefault()
+    dispatch(setUserLoggedOut())
+    navigate('/login')
+  }
+
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -82,6 +95,11 @@ const AppHeaderDropdown = () => {
           <CBadge color="primary" className="ms-2">
             42
           </CBadge>
+        </CDropdownItem>
+        <CDropdownDivider />
+        <CDropdownItem className="cursor-pointer" onClick={handleClickLogout}>
+          <CIcon icon={cilAccountLogout} className="me-2" />
+          Log out
         </CDropdownItem>
         <CDropdownDivider />
         <CDropdownItem href="#">
