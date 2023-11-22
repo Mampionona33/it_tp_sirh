@@ -242,10 +242,6 @@ const SalaireBrut = () => {
       dispatch(setBulletinDePaie({ valeurHs50: hn50_ }))
     }
 
-    if (omsi_ && mount) {
-      dispatch(setBulletinDePaie({ omsi: omsi_ }))
-    }
-
     if (plafondSME && mount) {
       dispatch(setBulletinDePaie({ plafondSME: plafondSME }))
     }
@@ -276,6 +272,25 @@ const SalaireBrut = () => {
             retenuSalaire: [...retenuSalaire, { label: 'irsa', montant: irsaArrondi }],
           }),
         )
+      }
+    }
+    if (omsi_ && mount) {
+      dispatch(setBulletinDePaie({ omsi: omsi_ }))
+      if (tauxOmsi) {
+        const omsiObjectIndex = retenuSalaire.findIndex(
+          (ret) => ret.label === 'Retenue sur organisme sanitaire',
+        )
+
+        if (omsiObjectIndex === -1) {
+          dispatch(
+            setBulletinDePaie({
+              retenuSalaire: [
+                ...retenuSalaire,
+                { taux: tauxOmsi, label: 'Retenue sur organisme sanitaire', montant: omsi_ },
+              ],
+            }),
+          )
+        }
       }
     }
 

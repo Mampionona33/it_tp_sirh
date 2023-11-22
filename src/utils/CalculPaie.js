@@ -129,6 +129,9 @@ export default class CalculPai {
   getHDim() {
     return this.isCadre ? 0 : (this.tauxHoraire * this.totalHdim * 100) / 100
   }
+  getTauxOmsi() {
+    return this.tauxOmsi
+  }
 
   getPrimeEtAvantage() {
     return this.primeEtAvantage
@@ -136,10 +139,6 @@ export default class CalculPai {
 
   getTauxCnaps() {
     return this.tauxCnaps
-  }
-
-  getTauxOmsi() {
-    return this.tauxOmsi
   }
 
   getPlafondSME() {
