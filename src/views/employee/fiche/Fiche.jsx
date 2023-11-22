@@ -47,7 +47,7 @@ const Fiche = () => {
       const emp = employees.find((empl) => empl.id === parseInt(id))
 
       if (emp) {
-        const salaireBase = emp.salaireBase
+        const salaireBase = emp.salaireBase * 1
         dispatch(setBulletinDePaie({ salarie: { ...emp } }))
         dispatch(setBulletinDePaie({ salaireDeBase: salaireBase }))
       }

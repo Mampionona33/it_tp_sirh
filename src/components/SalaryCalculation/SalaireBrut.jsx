@@ -36,18 +36,18 @@ const SalaireBrut = () => {
 
   const calculPaie = useMemo(() => {
     const calc = new CalculPai()
-    calc.setSalaireDeBase(salaireDeBase)
+    calc.setSalaireDeBase(salaireDeBase * 1)
     calc.setTauxHoraire(173.33)
-    calc.setHsni130(hsni130)
-    calc.setHsni150(hsni150)
-    calc.setTotalHs130(totalHs130)
-    calc.setTotalHs150(totalHs150)
-    calc.setTotalHn30(totalHs30)
-    calc.setTotalHn50(totalHs50)
-    calc.setTotalHDim(totalHDim)
-    calc.setTotalAjoutSalaire(totalPrimeEtAvantage)
+    calc.setHsni130(hsni130 * 1)
+    calc.setHsni150(hsni150 * 1)
+    calc.setTotalHs130(totalHs130 * 1)
+    calc.setTotalHs150(totalHs150 * 1)
+    calc.setTotalHn30(totalHs30 * 1)
+    calc.setTotalHn50(totalHs50 * 1)
+    calc.setTotalHDim(totalHDim * 1)
+    calc.setTotalAjoutSalaire(totalPrimeEtAvantage * 1)
     calc.setIsCadre(isCadre)
-    calc.setTotalRetenuSalarie(totalDeduction)
+    calc.setTotalRetenuSalarie(totalDeduction * 1)
     return calc
   }, [
     totalDeduction,
