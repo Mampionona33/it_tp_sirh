@@ -24,6 +24,7 @@ const SalaireBrut = () => {
   const totalHs50 = useSelector((state) => state.bulletinDePaie.totalHs50)
   const totalHDim = useSelector((state) => state.bulletinDePaie.totalHDim)
   const retenuSalaire = useSelector((state) => state.bulletinDePaie.retenuSalaire)
+  const totalHs = useSelector((state) => state.bulletinDePaie.totalHs)
 
   const totalPrimeEtAvantage = useSelector((state) => state.bulletinDePaie.totalPrimeEtAvantage)
   const totalDeduction = useSelector((state) => state.bulletinDePaie.totalDeduction)
@@ -41,6 +42,7 @@ const SalaireBrut = () => {
     calc.setHsni130(hsni130 * 1)
     calc.setHsni150(hsni150 * 1)
     calc.setTotalHs130(totalHs130 * 1)
+    calc.setTotalHs(totalHs * 1)
     calc.setTotalHs150(totalHs150 * 1)
     calc.setTotalHn30(totalHs30 * 1)
     calc.setTotalHn50(totalHs50 * 1)
@@ -50,6 +52,7 @@ const SalaireBrut = () => {
     calc.setTotalRetenuSalarie(totalDeduction * 1)
     return calc
   }, [
+    totalHs,
     totalDeduction,
     isCadre,
     salaireDeBase,
@@ -120,7 +123,7 @@ const SalaireBrut = () => {
   const data = [
     {
       title: 'HSNI 130% :',
-      hours: `${hsni130}`,
+      hours: `${totalHs >= 20 ? hsni130 : totalHs130}`,
       value: `${formatedHsni130Value}`,
     },
     {
@@ -130,7 +133,7 @@ const SalaireBrut = () => {
     },
     {
       title: 'HSI 130% :',
-      hours: `${(totalHs130 - hsni130).toFixed(2)}`,
+      hours: `${totalHs >= 20 ? (totalHs130 - hsni130).toFixed(2) : 0}`,
       value: `${formatedHsi130Value}`,
     },
     {

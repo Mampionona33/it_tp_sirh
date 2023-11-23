@@ -20,6 +20,7 @@ export default class CalculPai {
   totalRetenuSalarie = 0
   baseCnaps = 0
   avance = 0
+  totalHs = 0
 
   constructor() {
     this.isCadre = false
@@ -32,6 +33,10 @@ export default class CalculPai {
   // Setter
   setIrsa(irsaAPayer) {
     this.irsaAPayer = irsaAPayer
+  }
+
+  setTotalHs(totalHs) {
+    this.totalHs = totalHs
   }
 
   setAvance(avance) {
@@ -104,7 +109,11 @@ export default class CalculPai {
     return this.totalAjoutSalaire
   }
   getHsni130() {
-    return this.isCadre ? 0 : (this.tauxHoraire * this.hsni130 * 130) / 100
+    if (this.totalHs >= 20) {
+      return this.isCadre ? 0 : (this.tauxHoraire * this.hsni130 * 130) / 100
+    } else {
+      return this.isCadre ? 0 : (this.tauxHoraire * this.totalHs130 * 130) / 100
+    }
   }
 
   getHsni150() {
@@ -112,7 +121,11 @@ export default class CalculPai {
   }
 
   getHsi130() {
-    return this.isCadre ? 0 : (this.tauxHoraire * (this.totalHs130 - this.hsni130) * 130) / 100
+    if (this.totalHs >= 20) {
+      return this.isCadre ? 0 : (this.tauxHoraire * (this.totalHs130 - this.hsni130) * 130) / 100
+    } else {
+      return 0
+    }
   }
 
   getHsi150() {

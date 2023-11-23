@@ -99,10 +99,10 @@ const Login = () => {
               <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
                 <CCardBody className="text-center">
                   <div>
-                    <h2>Sign up</h2>
+                    <h2 className="capitalize text-lg">la ligne scandinave toamasina</h2>
                     <div className="flex flex-col">
                       <div className="flex justify-center">
-                        <img src={Logo} alt="Logo" className="w-4/12" />
+                        <img src={Logo} alt="Logo" className="w-16" />
                       </div>
                       <p>
                         {`Intranet de gestion des paies, et des déclarations administratives

@@ -1,7 +1,14 @@
 const { createSlice } = require('@reduxjs/toolkit')
 
 const initialState = {
-  employeur: {},
+  employeur: {
+    nom: 'LA LIGNE SCANDINAVE',
+    adresse: '2 RUE LIEUTNANT BERARD',
+    CP_et_Ville: '2 RUE LIEUTNANT BERARD',
+    nif: '3000000581',
+    stat: '50121 11 2003 0 00475',
+    rcs: '2002B00608',
+  },
   salarie: {},
   dateDeVirement: 0,
   salaireDeBase: 0,

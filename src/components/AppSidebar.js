@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
+import Logo from 'src/assets/images/LogoLs.png'
 import { AppSidebarNav } from './AppSidebarNav'
 
 import { logoNegative } from 'src/assets/brand/logo-negative'
@@ -30,12 +30,16 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarBrand className="d-none d-md-flex" to="/">
-        <Link
-          to={`/dashboard`}
-          className="btn btn-link text-decoration-none text-xl capitalize text-white font-semibold"
-        >
-          La ligne scandinave
-        </Link>
+        <div className="flex flex-row justify-between">
+          {/* <CIcon className="sidebar-brand-narrow" icon={Logo} height={35} /> */}
+          <img src={Logo} alt="logo" className="w-16" />
+          <Link
+            to={`/dashboard`}
+            className="btn btn-link flex flex-row justify-between text-decoration-none text-xl capitalize text-white font-semibold"
+          >
+            La ligne scandinave
+          </Link>
+        </div>
         {/* <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
         <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} /> */}
       </CSidebarBrand>
