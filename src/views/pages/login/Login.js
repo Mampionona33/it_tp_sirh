@@ -102,7 +102,7 @@ const Login = () => {
                     <h2 className="capitalize text-lg">la ligne scandinave</h2>
                     <div className="flex flex-col">
                       <div className="flex justify-center">
-                        <img src={Logo} alt="Logo" className="w-16" />
+                        <img src={Logo} alt="Logo" className="w-24" />
                       </div>
                       <p>
                         {`Intranet de gestion des paies, et des déclarations administratives
