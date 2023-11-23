@@ -13,7 +13,7 @@ const loading = (
 )
 
 // Containers
-const DefaultLayout = React.lazy(() => import('./views/employee/list/List'))
+const DefaultLayout = React.lazy(() => import('./layout/DefaultLayout'))
 
 // Pages
 const Login = React.lazy(() => import('./views/pages/login/Login'))
