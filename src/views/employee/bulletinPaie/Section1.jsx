@@ -99,8 +99,9 @@ const Section1 = (props) => {
 
         <View style={styles.tableRow}>
           <View style={[styles.tableCol]}>
-            <Text style={[styles.textItalic, styles.textBoldItalic]}>
-              Nom:{props.data.employeur.nom}
+            <Text style={styles.tableCell}>
+              <Text style={[styles.textItalic, styles.textBoldItalic]}>Nom: </Text>
+              {props.data.employeur.nom}
             </Text>
           </View>
           <View style={[styles.tableCol, styles.cellBorderLeft2]}>
@@ -113,8 +114,9 @@ const Section1 = (props) => {
 
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
-            <Text style={[styles.tableCell, styles.textBoldItalic]}>
-              Adresse: {props.data.employeur.adresse}
+            <Text style={styles.tableCell}>
+              <Text style={[styles.textItalic, styles.textBoldItalic]}>Adresse: </Text>
+              <Text style={styles.tableCell}>{props.data.employeur.adresse}</Text>
             </Text>
           </View>
           <View style={[styles.tableCol, styles.cellBorderLeft2, { paddingBottom: 2 }]}>
@@ -127,8 +129,9 @@ const Section1 = (props) => {
 
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
-            <Text style={[styles.tableCell, styles.textBoldItalic]}>
-              CP et Ville: {props.data.employeur.CP_et_Ville}
+            <Text style={styles.tableCell}>
+              <Text style={[styles.textItalic, styles.textBoldItalic]}>CP et Ville: </Text>
+              {props.data.employeur.CP_et_Ville}
             </Text>
           </View>
           <View style={[styles.tableCol, styles.cellBorderLeft2]}>
@@ -141,8 +144,9 @@ const Section1 = (props) => {
 
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
-            <Text style={[styles.tableCell, styles.textBoldItalic]}>
-              Numéro NIF: {props.data.employeur.nif}
+            <Text style={styles.tableCell}>
+              <Text style={[styles.textItalic, styles.textBoldItalic]}>Numéro NIF: </Text>
+              {props.data.employeur.nif}
             </Text>
           </View>
           <View style={[styles.tableCol, styles.cellBorderLeft2]}>
@@ -155,8 +159,9 @@ const Section1 = (props) => {
 
         <View style={styles.tableRow}>
           <View style={styles.tableCol}>
-            <Text style={[styles.tableCell, styles.textBoldItalic]}>
-              Numéro STAT: {props.data.employeur.stat}
+            <Text style={styles.tableCell}>
+              <Text style={[styles.textItalic, styles.textBoldItalic]}>Numéro STAT: </Text>
+              {props.data.employeur.stat}
             </Text>
           </View>
           <View style={[styles.tableCol, styles.cellBorderLeft2]}>
@@ -176,8 +181,9 @@ const Section1 = (props) => {
                 { marginTop: 0, paddingBottom: 15 },
               ]}
             >
-              RCS: {props.data.employeur.rcs}
+              RCS:
             </Text>
+            <Text style={styles.tableCell}>{props.data.employeur.rcs}</Text>
           </View>
           <View style={[styles.tableCol]}>
             <Text
