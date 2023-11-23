@@ -35,7 +35,6 @@ const AppHeaderDropdown = () => {
   const handleClickLogout = (ev) => {
     ev.preventDefault()
     dispatch(setUserLoggedOut())
-    navigate('/login')
   }
 
   return (
@@ -45,7 +44,7 @@ const AppHeaderDropdown = () => {
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-light fw-semibold py-2">Account</CDropdownHeader>
-        <CDropdownItem href="#">
+        {/* <CDropdownItem href="#">
           <CIcon icon={cilBell} className="me-2" />
           Updates
           <CBadge color="info" className="ms-2">
@@ -95,17 +94,17 @@ const AppHeaderDropdown = () => {
           <CBadge color="primary" className="ms-2">
             42
           </CBadge>
-        </CDropdownItem>
-        <CDropdownDivider />
+        </CDropdownItem> */}
+        {/* <CDropdownDivider /> */}
         <CDropdownItem className="cursor-pointer" onClick={handleClickLogout}>
           <CIcon icon={cilAccountLogout} className="me-2" />
           Log out
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="#">
+        {/* <CDropdownItem href="#">
           <CIcon icon={cilLockLocked} className="me-2" />
           Lock Account
-        </CDropdownItem>
+        </CDropdownItem> */}
       </CDropdownMenu>
     </CDropdown>
   )
