@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Logo from 'src/assets/images/LogoLs.png'
 import {
   CButton,
   CCard,
@@ -86,11 +87,11 @@ const Login = () => {
                           Login
                         </CButton>
                       </CCol>
-                      <CCol xs={6} className="text-right">
+                      {/* <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">
                           Forgot password?
                         </CButton>
-                      </CCol>
+                      </CCol> */}
                     </CRow>
                   </CForm>
                 </CCardBody>
@@ -99,10 +100,15 @@ const Login = () => {
                 <CCardBody className="text-center">
                   <div>
                     <h2>Sign up</h2>
-                    <p>
-                      {`Intanet de gestion des paies, et des déclarations administratives
+                    <div className="flex flex-col">
+                      <div className="flex w-4/12 justify-center">
+                        <img src={Logo} alt="Logo" />
+                      </div>
+                      <p>
+                        {`Intranet de gestion des paies, et des déclarations administratives
                       (CNAPS, OSIE, Impôts)`}
-                    </p>
+                      </p>
+                    </div>
                     <Link to="/register">
                       <CButton color="primary" className="mt-3" active tabIndex={-1}>
                         Register Now!
