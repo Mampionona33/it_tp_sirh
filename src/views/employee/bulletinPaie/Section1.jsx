@@ -173,15 +173,8 @@ const Section1 = (props) => {
 
         <View style={[styles.tableRow]}>
           <View style={[styles.tableCol]}>
-            <Text style={styles.tableCell}>
-              <Text
-                style={[
-                  styles.tableCell,
-                  styles.textBoldItalic,
-                  styles.cellBorderBottom2,
-                  { marginTop: 0, paddingBottom: 15 },
-                ]}
-              >
+            <Text style={[styles.tableCell, styles.cellBorderBottom2, {}]}>
+              <Text style={[styles.tableCell, styles.textBoldItalic, { marginTop: 0 }]}>
                 RCS:
                 <Text style={[styles.tableCell, { fontWeight: 'normal' }]}>
                   {props.data.employeur.rcs}
@@ -189,18 +182,16 @@ const Section1 = (props) => {
               </Text>
             </Text>
           </View>
-          <View style={[styles.tableCol]}>
+          <View style={[styles.tableCol, styles.cellBorderBottom2]}>
             <Text
               style={[
                 styles.tableCell,
                 styles.cellBorderLeft2,
-                styles.cellBorderBottom2,
+
                 styles.textBoldItalic,
                 { marginTop: 0, paddingBottom: 15 },
               ]}
-            >
-              {' '}
-            </Text>
+            ></Text>
           </View>
         </View>
 
