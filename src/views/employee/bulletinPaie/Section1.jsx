@@ -173,16 +173,18 @@ const Section1 = (props) => {
 
         <View style={[styles.tableRow]}>
           <View style={[styles.tableCol]}>
-            <Text
-              style={[
-                styles.tableCell,
-                styles.textBoldItalic,
-                styles.cellBorderBottom2,
-                { marginTop: 0, paddingBottom: 15 },
-              ]}
-            >
-              RCS:
-              <Text style={styles.tableCell}>{props.data.employeur.rcs}</Text>
+            <Text style={styles.tableCell}>
+              <Text
+                style={[
+                  styles.tableCell,
+                  styles.textBoldItalic,
+                  styles.cellBorderBottom2,
+                  { marginTop: 0, paddingBottom: 15 },
+                ]}
+              >
+                RCS:
+                <Text style={styles.tableCell}>{props.data.employeur.rcs}</Text>
+              </Text>
             </Text>
           </View>
           <View style={[styles.tableCol]}>
