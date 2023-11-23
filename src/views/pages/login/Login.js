@@ -109,11 +109,11 @@ const Login = () => {
                       (CNAPS, OSIE, Impôts)`}
                       </p>
                     </div>
-                    <Link to="/register">
+                    {/* <Link to="/register">
                       <CButton color="danger" className="mt-3 " active tabIndex={-1}>
                         Register Now!
                       </CButton>
-                    </Link>
+                    </Link> */}
                   </div>
                 </CCardBody>
               </CCard>
