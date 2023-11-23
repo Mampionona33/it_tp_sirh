@@ -2,13 +2,13 @@ const db = require('./db/db.json')
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const { parseISO, isWithinInterval } = require('date-fns')
+const { parseISO, isWithinInterval, isValid } = require('date-fns')
 
 app.use(express.json())
 
 app.use(cors())
 
-const isValid = (email, password) => {
+const isValidCredential = (email, password) => {
   return db.users.some((user) => user.email === email && user.password === password)
 }
 
@@ -16,9 +16,7 @@ app.post('/login', (req, res) => {
   const email = req.body.email
   const password = req.body.password
 
-  console.log(req)
-
-  if (isValid(email, password)) {
+  if (isValidCredential(email, password)) {
     res.send('Connecté')
   } else {
     res.status(401).send('Identifiants incorrects')
@@ -70,8 +68,32 @@ app.get('/employees/id=:id', (req, res) => {
 
 app.post('/heuressupplementaires', (req, res) => {
   const matricule = req.body.matricule
-  const dateDebut = req.body.dateDebut
-  const dateFin = req.body.dateFin
+  const dateDebut = new Date(req.body.dateDebut)
+  const dateFin = new Date(req.body.dateFin)
+
+  const data = db['/employeeHours']
+    .filter((hours) => {
+      const currentDate = new Date(hours.date)
+
+      return (
+        isValid(currentDate) &&
+        hours.employee.matricule === matricule &&
+        currentDate >= dateDebut &&
+        currentDate <= dateFin
+      )
+    })
+    .map((hours) => {
+      return {
+        id: hours.id,
+        employee: hours.employee,
+        date: hours.date,
+        heure_normale: hours.heure_normale,
+      }
+    })
+
+  console.log(data)
+
+  res.status(200).json(data)
 })
 
 app.get('/mouvement-salaire', (req, res) => {

@@ -934,1874 +934,1010 @@
     {
       "id": 1,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-05-05T13:58:52.529Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "15/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "10",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 2,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-20T15:00:28.382Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "16/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 3,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-10T09:54:29.861Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 5,
-      "holidayHours": null
+      "date": "17/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "10",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 4,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-08T14:23:04.187Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 0,
-      "holidayHours": null
+      "date": "18/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,5",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 5,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-02T08:38:51.666Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "19/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,3",
+      "hs_de_nuit": [3, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 6,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-09T11:10:16.029Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "20/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,1",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 7,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-26T15:56:46.871Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
+      "date": "21/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 8,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-18T09:47:58.667Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "22/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,5",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 9,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-01T10:10:24.769Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 0,
-      "holidayHours": null
+      "date": "23/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 10,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-19T11:40:43.578Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "24/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,2",
+      "hs_de_nuit": [2, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 11,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-28T13:16:17.405Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 0,
-      "holidayHours": null
+      "date": "25/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,15",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 12,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-05T00:54:35.157Z",
-      "regularHoursDay": null,
-      "regularNightHours": 1,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": null,
-      "holidayHours": 8
+      "date": "26/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,02",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 13,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-13T08:58:55.408Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 6,
-      "holidayHours": null
+      "date": "27/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 14,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-22T00:52:24.227Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 1,
-      "holidayHours": null
+      "date": "28/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 15,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-16T14:11:50.709Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "29/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 16,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-23T16:47:53.442Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 5,
-      "holidayHours": null
+      "date": "30/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,4",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 17,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-11T18:06:48.705Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 5,
-      "holidayHours": null
+      "date": "31/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,12",
+      "hs_de_nuit": [5, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 18,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-25T20:27:22.993Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
+      "date": "01/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 19,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-05T21:10:54.881Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "02/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8,3",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 20,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-03T05:13:19.364Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "03/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 21,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-16T22:12:08.197Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 6,
-      "holidayHours": null
+      "date": "04/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 22,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-07T08:14:50.826Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "05/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 23,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-04T19:28:52.351Z",
-      "regularHoursDay": null,
-      "regularNightHours": null,
-      "occasionalNightHours": 1,
-      "overtimeHoursDay": 2,
-      "holidayHours": 8
+      "date": "06/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 24,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-15T19:06:25.386Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 6,
-      "holidayHours": null
+      "date": "07/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 25,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-27T17:28:17.663Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
+      "date": "08/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 26,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-21T10:10:50.011Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "09/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8,1",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 27,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-14T03:08:35.290Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 1,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "10/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8,25",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 28,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-12T16:48:28.272Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "11/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8,1",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 29,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-24T13:35:02.680Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "12/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "9",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 30,
       "employee": {
-        "id": 1
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-11-01T13:35:02.680Z",
-      "regularHoursDay": null,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": 8
+      "date": "13/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "10",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 31,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-05-05T13:58:52.529Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 4,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "14/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 32,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-20T15:00:28.382Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "15/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "10,2",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 33,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-10T09:54:29.861Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 2,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "16/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "12",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 34,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-08T14:23:04.187Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "17/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "10",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 35,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-02T08:38:51.666Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 1,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "18/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 36,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-09T11:10:16.029Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "19/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 37,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-26T15:56:46.871Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 5,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "20/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 38,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-18T09:47:58.667Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "21/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 39,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-01T10:10:24.769Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 3,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "22/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 40,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-19T11:40:43.578Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "23/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 41,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-28T13:16:17.405Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 4,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "24/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 42,
       "employee": {
-        "id": 2
+        "id": 1,
+        "matricule": 345
       },
-      "date": "2023-10-05T00:54:35.157Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "25/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "10",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": 10
     },
     {
       "id": 43,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-13T08:58:55.408Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 3,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "15/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 44,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-22T00:52:24.227Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "16/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 45,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-16T14:11:50.709Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 3,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "17/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 46,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-23T16:47:53.442Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 1,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "18/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 47,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-11T18:06:48.705Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "19/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 48,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-25T20:27:22.993Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 4,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "20/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 49,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-05T21:10:54.881Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 1,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "21/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "10",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 50,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-03T05:13:19.364Z",
-      "regularHoursDay": 5,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "22/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,2",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 51,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-16T22:12:08.197Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "23/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 52,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-07T08:14:50.826Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 4,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "24/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 53,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-04T19:28:52.351Z",
-      "regularHoursDay": null,
-      "regularNightHours": 2,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": 1,
-      "holidayHours": 8
+      "date": "25/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 54,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-15T19:06:25.386Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 1,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "26/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,2",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 55,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-27T17:28:17.663Z",
-      "regularHoursDay": 4,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "27/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 56,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-21T10:10:50.011Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 4,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "28/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 57,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-14T03:08:35.290Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "29/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,3",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 58,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-12T16:48:28.272Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 1,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "30/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8,5",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 59,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-24T13:35:02.680Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "31/12/22",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 60,
       "employee": {
-        "id": 2
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-11-01T13:35:02.680Z",
-      "regularHoursDay": 8,
-      "regularNightHours": 4,
-      "occasionalNightHours": null,
-      "overtimeHoursDay": null,
-      "holidayHours": null
+      "date": "01/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8,1",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 61,
       "employee": {
-        "id": 14
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-08T17:23:37.499Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "02/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8,6",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 62,
       "employee": {
-        "id": 15
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-03-14T18:19:14.329Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "03/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 63,
       "employee": {
-        "id": 16
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-01-15T05:14:08.190Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "04/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 64,
       "employee": {
-        "id": 16
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-03-30T23:18:31.528Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "05/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 65,
       "employee": {
-        "id": 16
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-05-04T00:35:03.243Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
+      "date": "06/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 66,
       "employee": {
-        "id": 17
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-02-07T09:49:53.777Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "07/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8,1",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 67,
       "employee": {
-        "id": 17
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-02-27T20:14:46.092Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "08/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8,3",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 68,
       "employee": {
-        "id": 17
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-29T11:34:03.192Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "09/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8,6",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 69,
       "employee": {
-        "id": 18
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-01-28T13:42:00.942Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
+      "date": "10/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 70,
       "employee": {
-        "id": 18
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-06-13T23:58:28.768Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "11/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "9",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 71,
       "employee": {
-        "id": 20
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-10-20T09:24:57.507Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "12/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "10",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 72,
       "employee": {
-        "id": 20
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-03-14T14:24:50.404Z",
-      "regularHoursDay": 6,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "13/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 73,
       "employee": {
-        "id": 20
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-09-14T05:45:17.677Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "14/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8,7",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 74,
       "employee": {
-        "id": 20
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-07-22T01:37:17.873Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "15/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 75,
       "employee": {
-        "id": 20
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-01-26T05:44:12.345Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "16/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 76,
       "employee": {
-        "id": 20
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-08-30T01:32:08.409Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "17/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 77,
       "employee": {
-        "id": 20
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-04-06T03:53:03.982Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "18/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 78,
       "employee": {
-        "id": 21
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-03-21T00:24:50.456Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
+      "date": "19/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 79,
       "employee": {
-        "id": 22
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-09-29T08:22:43.447Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
+      "date": "20/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 80,
       "employee": {
-        "id": 22
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-07-23T02:14:35.536Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
+      "date": "21/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 81,
       "employee": {
-        "id": 22
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-07-20T06:32:57.348Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "22/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 82,
       "employee": {
-        "id": 22
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-08-04T09:07:06.527Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+      "date": "23/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "10",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 83,
       "employee": {
-        "id": 24
+        "id": 2,
+        "matricule": 619
       },
-      "date": "2023-03-27T12:40:08.153Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
+      "date": "24/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "10,1",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     },
     {
       "id": 84,
       "employee": {
-        "id": 24
-      },
-      "date": "2023-03-08T10:34:11.327Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 1,
-      "overtimeHoursDay": 1,
-      "holidayHours": null
-    },
-    {
-      "id": 85,
-      "employee": {
-        "id": 25
-      },
-      "date": "2023-03-08T17:44:19.185Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 86,
-      "employee": {
-        "id": 25
-      },
-      "date": "2023-09-25T03:23:27.079Z",
-      "regularHoursDay": 7.75,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 1.75,
-      "holidayHours": null
-    },
-    {
-      "id": 87,
-      "employee": {
-        "id": 25
-      },
-      "date": "2023-10-02T02:05:11.706Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 88,
-      "employee": {
-        "id": 26
-      },
-      "date": "2023-06-06T19:48:08.777Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 89,
-      "employee": {
-        "id": 26
-      },
-      "date": "2023-07-28T09:41:59.277Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 1,
-      "overtimeHoursDay": 1,
-      "holidayHours": null
-    },
-    {
-      "id": 90,
-      "employee": {
-        "id": 26
-      },
-      "date": "2023-06-20T05:42:56.554Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 91,
-      "employee": {
-        "id": 27
-      },
-      "date": "2023-10-21T07:35:48.367Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 92,
-      "employee": {
-        "id": 27
-      },
-      "date": "2023-05-28T11:36:31.274Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 93,
-      "employee": {
-        "id": 27
-      },
-      "date": "2023-01-01T17:51:56.548Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 94,
-      "employee": {
-        "id": 27
-      },
-      "date": "2023-07-01T16:36:53.155Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 95,
-      "employee": {
-        "id": 27
-      },
-      "date": "2023-07-28T11:30:21.157Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 96,
-      "employee": {
-        "id": 28
-      },
-      "date": "2023-10-08T18:12:48.153Z",
-      "regularHoursDay": 7.5,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 1.5,
-      "holidayHours": null
-    },
-    {
-      "id": 97,
-      "employee": {
-        "id": 28
-      },
-      "date": "2023-01-10T06:58:27.118Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 98,
-      "employee": {
-        "id": 28
-      },
-      "date": "2023-08-07T09:23:24.505Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 99,
-      "employee": {
-        "id": 28
-      },
-      "date": "2023-06-03T15:59:57.218Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 100,
-      "employee": {
-        "id": 28
-      },
-      "date": "2023-03-26T18:56:23.591Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 101,
-      "employee": {
-        "id": 29
-      },
-      "date": "2023-04-09T19:09:31.919Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 1,
-      "overtimeHoursDay": 1,
-      "holidayHours": null
-    },
-    {
-      "id": 102,
-      "employee": {
-        "id": 29
-      },
-      "date": "2023-05-14T11:54:14.739Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 103,
-      "employee": {
-        "id": 30
-      },
-      "date": "2023-07-20T20:36:21.050Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 104,
-      "employee": {
-        "id": 31
-      },
-      "date": "2023-06-21T22:59:57.814Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 105,
-      "employee": {
-        "id": 31
-      },
-      "date": "2023-06-24T19:37:36.798Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 106,
-      "employee": {
-        "id": 32
-      },
-      "date": "2023-01-23T10:43:10.878Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 107,
-      "employee": {
-        "id": 32
-      },
-      "date": "2023-04-22T01:02:01.393Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 108,
-      "employee": {
-        "id": 33
-      },
-      "date": "2023-06-10T02:39:35.368Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 109,
-      "employee": {
-        "id": 33
-      },
-      "date": "2023-05-18T00:40:09.066Z",
-      "regularHoursDay": 7,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 110,
-      "employee": {
-        "id": 35
-      },
-      "date": "2023-01-03T05:19:42.024Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 111,
-      "employee": {
-        "id": 36
-      },
-      "date": "2023-10-05T08:20:59.236Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 112,
-      "employee": {
-        "id": 37
-      },
-      "date": "2023-04-18T12:40:22.048Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 113,
-      "employee": {
-        "id": 37
-      },
-      "date": "2023-09-27T10:33:30.764Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 114,
-      "employee": {
-        "id": 37
-      },
-      "date": "2023-01-02T02:46:23.349Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 115,
-      "employee": {
-        "id": 38
-      },
-      "date": "2023-07-01T04:28:54.679Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 116,
-      "employee": {
-        "id": 38
-      },
-      "date": "2023-05-01T07:15:25.241Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 117,
-      "employee": {
-        "id": 39
-      },
-      "date": "2023-07-28T22:28:40.083Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 118,
-      "employee": {
-        "id": 39
-      },
-      "date": "2023-03-29T12:58:02.276Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 119,
-      "employee": {
-        "id": 40
-      },
-      "date": "2023-03-05T08:46:31.372Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 120,
-      "employee": {
-        "id": 40
-      },
-      "date": "2023-04-01T23:04:11.770Z",
-      "regularHoursDay": 6,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 0,
-      "holidayHours": null
-    },
-    {
-      "id": 121,
-      "employee": {
-        "id": 40
-      },
-      "date": "2023-09-21T18:55:06.165Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 122,
-      "employee": {
-        "id": 40
-      },
-      "date": "2023-05-23T05:06:59.995Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 123,
-      "employee": {
-        "id": 40
-      },
-      "date": "2023-05-19T21:03:08.484Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 124,
-      "employee": {
-        "id": 41
-      },
-      "date": "2023-08-18T01:42:35.082Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 125,
-      "employee": {
-        "id": 41
-      },
-      "date": "2023-07-31T21:24:34.864Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 126,
-      "employee": {
-        "id": 41
-      },
-      "date": "2023-09-27T17:57:48.179Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 127,
-      "employee": {
-        "id": 42
-      },
-      "date": "2023-03-25T18:24:12.600Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 128,
-      "employee": {
-        "id": 43
-      },
-      "date": "2023-02-03T09:50:04.208Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 129,
-      "employee": {
-        "id": 44
-      },
-      "date": "2023-05-05T15:26:29.930Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 130,
-      "employee": {
-        "id": 44
-      },
-      "date": "2023-01-16T14:24:48.652Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 131,
-      "employee": {
-        "id": 44
-      },
-      "date": "2023-08-05T20:16:25.165Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 132,
-      "employee": {
-        "id": 44
-      },
-      "date": "2023-07-14T16:25:24.663Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 133,
-      "employee": {
-        "id": 45
-      },
-      "date": "2023-07-16T16:50:59.861Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 134,
-      "employee": {
-        "id": 45
-      },
-      "date": "2023-10-17T15:40:46.079Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 135,
-      "employee": {
-        "id": 45
-      },
-      "date": "2023-05-03T04:58:23.359Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 136,
-      "employee": {
-        "id": 46
-      },
-      "date": "2023-01-21T13:25:22.144Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 137,
-      "employee": {
-        "id": 46
-      },
-      "date": "2023-04-23T19:18:52.497Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 138,
-      "employee": {
-        "id": 46
-      },
-      "date": "2023-05-17T08:06:15.490Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 139,
-      "employee": {
-        "id": 47
-      },
-      "date": "2023-04-28T23:22:43.783Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 1,
-      "overtimeHoursDay": 1,
-      "holidayHours": null
-    },
-    {
-      "id": 140,
-      "employee": {
-        "id": 47
-      },
-      "date": "2023-06-28T03:18:10.335Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 141,
-      "employee": {
-        "id": 47
-      },
-      "date": "2023-08-24T03:09:09.757Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 142,
-      "employee": {
-        "id": 47
-      },
-      "date": "2023-10-11T19:37:59.436Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 143,
-      "employee": {
-        "id": 47
-      },
-      "date": "2023-08-08T12:58:35.031Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 1,
-      "overtimeHoursDay": 1,
-      "holidayHours": null
-    },
-    {
-      "id": 144,
-      "employee": {
-        "id": 47
-      },
-      "date": "2023-06-09T02:21:42.367Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 145,
-      "employee": {
-        "id": 47
-      },
-      "date": "2023-06-27T12:54:26.764Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 146,
-      "employee": {
-        "id": 48
-      },
-      "date": "2023-09-12T10:04:37.688Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 147,
-      "employee": {
-        "id": 48
-      },
-      "date": "2023-05-11T02:59:23.986Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 148,
-      "employee": {
-        "id": 49
-      },
-      "date": "2023-10-22T16:20:53.938Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 149,
-      "employee": {
-        "id": 49
-      },
-      "date": "2023-04-27T02:55:41.429Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
-    },
-    {
-      "id": 150,
-      "employee": {
-        "id": 49
-      },
-      "date": "2023-03-30T22:30:36.717Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 151,
-      "employee": {
-        "id": 49
-      },
-      "date": "2023-04-02T19:39:31.561Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 152,
-      "employee": {
-        "id": 49
-      },
-      "date": "2023-06-22T10:08:39.453Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 153,
-      "employee": {
-        "id": 49
-      },
-      "date": "2023-05-17T20:13:51.261Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 3,
-      "overtimeHoursDay": 3,
-      "holidayHours": null
-    },
-    {
-      "id": 154,
-      "employee": {
-        "id": 49
-      },
-      "date": "2023-05-06T01:50:23.220Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 155,
-      "employee": {
-        "id": 50
-      },
-      "date": "2023-07-28T03:46:09.074Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 4,
-      "overtimeHoursDay": 4,
-      "holidayHours": null
-    },
-    {
-      "id": 156,
-      "employee": {
-        "id": 50
-      },
-      "date": "2023-09-14T21:49:41.678Z",
-      "regularHoursDay": 8,
-      "regularNightHours": null,
-      "occasionalNightHours": 2,
-      "overtimeHoursDay": 2,
-      "holidayHours": null
+        "id": 2,
+        "matricule": 619
+      },
+      "date": "25/01/23",
+      "heure_normale": 8,
+      "heure_de_travail": "8",
+      "hs_de_nuit": [null, ""],
+      "hs_jours_feries": null
     }
   ],
 
