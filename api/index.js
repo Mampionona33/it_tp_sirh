@@ -6,16 +6,6 @@ const { parseISO, isWithinInterval } = require('date-fns')
 
 app.use(express.json())
 
-const corsOptions = {
-  origin: [
-    'https://3000-mampionona33-ittpsirh-w8k12dobh7e.ws-eu106.gitpod.io',
-    'http://localhost:3000',
-    'https://rv8tjn-8000.csb.app',
-  ],
-  credentials: true,
-  optionsSuccessStatus: 200,
-}
-
 app.use(cors())
 
 app.get('/listeemployes', (req, res) => {
@@ -63,6 +53,23 @@ app.get('/employees/id=:id', (req, res) => {
 
 app.get('/mouvement-salaire', (req, res) => {
   return res.status(200).send(db['mouvementSalaire'])
+})
+
+const isValid = (email, password) => {
+  return db.users.some((user) => user.email === email && user.password === password)
+}
+
+app.post('/login', (req, res) => {
+  const email = req.body.email
+  const password = req.body.password
+
+  console.log(req)
+
+  if (isValid(email, password)) {
+    res.send('Connecté')
+  } else {
+    res.status(401).send('Identifiants incorrects')
+  }
 })
 
 const PORT = process.env.API_PORT || 8000
