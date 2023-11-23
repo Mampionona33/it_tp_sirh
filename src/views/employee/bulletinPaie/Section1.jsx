@@ -182,8 +182,11 @@ const Section1 = (props) => {
               ]}
             >
               RCS:
+              <Text style={[styles.tableCell, { fontWeight: 'normal' }]}>
+                {' '}
+                {props.data.employeur.rcs}
+              </Text>
             </Text>
-            <Text style={styles.tableCell}>{props.data.employeur.rcs}</Text>
           </View>
           <View style={[styles.tableCol]}>
             <Text
