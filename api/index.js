@@ -8,6 +8,23 @@ app.use(express.json())
 
 app.use(cors())
 
+const isValid = (email, password) => {
+  return db.users.some((user) => user.email === email && user.password === password)
+}
+
+app.post('/login', (req, res) => {
+  const email = req.body.email
+  const password = req.body.password
+
+  console.log(req)
+
+  if (isValid(email, password)) {
+    res.send('Connecté')
+  } else {
+    res.status(401).send('Identifiants incorrects')
+  }
+})
+
 app.get('/listeemployes', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*') // Allow any origin during development
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
@@ -51,25 +68,14 @@ app.get('/employees/id=:id', (req, res) => {
   }
 })
 
-app.get('/mouvement-salaire', (req, res) => {
-  return res.status(200).send(db['mouvementSalaire'])
+app.post('/heuressupplementaires', (req, res) => {
+  const matricule = req.body.matricule
+  const dateDebut = req.body.dateDebut
+  const dateFin = req.body.dateFin
 })
 
-const isValid = (email, password) => {
-  return db.users.some((user) => user.email === email && user.password === password)
-}
-
-app.post('/login', (req, res) => {
-  const email = req.body.email
-  const password = req.body.password
-
-  console.log(req)
-
-  if (isValid(email, password)) {
-    res.send('Connecté')
-  } else {
-    res.status(401).send('Identifiants incorrects')
-  }
+app.get('/mouvement-salaire', (req, res) => {
+  return res.status(200).send(db['mouvementSalaire'])
 })
 
 const PORT = process.env.API_PORT || 8000
