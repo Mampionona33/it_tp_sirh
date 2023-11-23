@@ -106,7 +106,7 @@ const Login = () => {
                       </div>
                       <p>
                         {`Intranet de gestion des paies, et des déclarations administratives
-                      (CNAPS, OSIE, Impôts)`}
+                      (CNAPS, OMSI, Impôts)`}
                       </p>
                     </div>
                     {/* <Link to="/register">
