@@ -77,6 +77,9 @@ const styles = StyleSheet.create({
 })
 
 export default function Section3(props) {
+  // Définr la langue du date en français
+  setDefaultOptions({ locale: fr })
+
   const indemnites = props.data.ajoutSalaire ? [props.data.ajoutSalaire].flat() : []
   const retenues = props.data.retenuSalaire ? [props.data.retenuSalaire].flat() : []
   const sousTotal = props.data.totalDeduction
@@ -87,10 +90,7 @@ export default function Section3(props) {
   const salaireNet = props.data.salaireNet
   const avance = props.data.avance
   const salaireNetAPayer = props.data.salaireNetAPayer
-  const dateVirement = format(new Date(), 'cccc ee MMMM uuuu')
-
-  // Définr la langue du date en français
-  setDefaultOptions({ locale: fr })
+  const dateVirement = format(new Date(), 'cccc dd MMMM uuuu', { locale: fr })
 
   const Header = () => {
     return (
