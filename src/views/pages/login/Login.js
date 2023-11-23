@@ -83,7 +83,7 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton type="submit" color="primary" className="px-4">
+                        <CButton type="submit" color="danger" className="px-4">
                           Login
                         </CButton>
                       </CCol>
@@ -101,8 +101,8 @@ const Login = () => {
                   <div>
                     <h2>Sign up</h2>
                     <div className="flex flex-col">
-                      <div className="flex w-4/12 justify-center">
-                        <img src={Logo} alt="Logo" />
+                      <div className="flex justify-center">
+                        <img src={Logo} alt="Logo" className="w-4/12" />
                       </div>
                       <p>
                         {`Intranet de gestion des paies, et des déclarations administratives
@@ -110,7 +110,7 @@ const Login = () => {
                       </p>
                     </div>
                     <Link to="/register">
-                      <CButton color="primary" className="mt-3" active tabIndex={-1}>
+                      <CButton color="danger" className="mt-3 " active tabIndex={-1}>
                         Register Now!
                       </CButton>
                     </Link>
