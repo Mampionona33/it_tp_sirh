@@ -2,7 +2,7 @@ const db = require('./db/db.json')
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const { parseISO, isWithinInterval, isValid } = require('date-fns')
+const { parseISO, isWithinInterval, isValid, parse } = require('date-fns')
 
 app.use(express.json())
 const allowOriginsList = [
@@ -74,33 +74,37 @@ app.get('/employees/id=:id', (req, res) => {
   }
 })
 
+const formatDate = (date) => {
+  const parsedDate = parse(date, 'dd/MM/yyyy', new Date())
+  return parsedDate
+}
+
 app.post('/heuressupplementaires', (req, res) => {
   const matricule = req.body.matricule
-  const dateDebut = new Date(req.body.dateDebut)
-  const dateFin = new Date(req.body.dateFin)
+  const dateDebutString = req.body.dateDebut
+  const dateFinString = req.body.dateFin
+
+  const formatedDateDebut = formatDate(dateDebutString)
+  const formatedDateFin = formatDate(dateFinString)
 
   const data = db['/employeeHours']
-    .filter((hours) => {
-      const currentDate = new Date(hours.date)
+    .map((employHrs) => {
+      const formatedEmployerDate = formatDate(employHrs.date)
+      // console.log('formatedDateDebut', formatedDateDebut)
+      // console.log('formatedDateFin', formatedDateFin)
+      // console.log('formatedEmployerDate', formatedEmployerDate)
 
-      return (
-        isValid(currentDate) &&
-        hours.employee.matricule === matricule &&
-        currentDate >= dateDebut &&
-        currentDate <= dateFin
-      )
-    })
-    .map((hours) => {
-      return {
-        id: hours.id,
-        employee: hours.employee,
-        date: hours.date,
-        heure_normale: hours.heure_normale,
+      if (
+        employHrs.employee.matricule === matricule &&
+        formatedDateDebut <= formatedEmployerDate &&
+        formatedDateFin >= formatedEmployerDate
+      ) {
+        return employHrs
       }
     })
-
+    .filter((item) => item !== undefined)
+    
   console.log(data)
-
   res.status(200).json(data)
 })
 
