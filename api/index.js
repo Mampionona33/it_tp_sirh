@@ -22,7 +22,6 @@ const isValidCredential = (email, password) => {
 app.post('/login', (req, res) => {
   const email = req.body.email
   const password = req.body.password
-  console.log(req)
 
   if (isValidCredential(email, password)) {
     res.send('Connecté')
