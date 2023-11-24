@@ -5,7 +5,7 @@ class CotisationService {
 
   async getAll() {
     try {
-      const resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/cotisations/all`)
+      const resp = await axios.get(`${this.REACT_APP_API_BASE_URL_DEV}/cotisations/all`)
       return resp.data
     } catch (error) {
       console.log(error)
