@@ -57,6 +57,101 @@ const TimeSheetTable = (props) => {
   // Définir la langue de date-fns en français
   setDefaultOptions({ locale: fr })
 
+  const defaultSorting = [
+    {
+      id: 'date',
+      asc: true,
+    },
+  ]
+
+  const [sorting, setSorting] = useState(defaultSorting)
+
+  const formatDataFromBackend = (bakendData, id) => {
+    const transFormedData = Array.from(bakendData).map((item) => {
+      const parsedDate = parse(item.date, 'dd/MM/yyyy', new Date())
+
+      let hs = null
+      if (item.heure_normale && item.heure_de_travail) {
+        hs = item.heure_de_travail - item.heure_normale
+      }
+      if (hs < 0) {
+        hs = null
+      } else {
+        hs = Math.round(hs * 100) / 100
+      }
+
+      return {
+        employee: {
+          id: id,
+        },
+        date: format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
+        regularHoursDay: item.heure_normale && Math.round(item.heure_normale * 100) / 100,
+        regularNightHours: item.hs_de_nuit && Math.round(item.hs_de_nuit * 100) / 100,
+        occasionalNightHours: item.hs_de_nuit && Math.round(item.hs_de_nuit * 100) / 100,
+        overtimeHoursDay: hs,
+        holidayHours: item.hs_jours_feries && Math.round(item.hs_jours_feries * 100) / 100,
+      }
+    })
+
+    return transFormedData
+  }
+
+  const filterDataByDate = useCallback(
+    async (currentFilter) => {
+      const matricul = salarie.matricule
+      const currentDate = currentFilter || new Date()
+      const currentMonth = new Date(currentDate).getMonth() + 1
+      const prevMonth = currentMonth === 1 ? 12 : currentMonth - 1
+      const currentYear = new Date(currentDate).getFullYear()
+
+      // Récupérer le mois et l'année
+      const selectedMonth = format(currentDate, 'MMM', { locale: enUS })
+        .toLowerCase()
+        .replace(/\./gi, '')
+
+      // Récupérer les dates de début et de fin du mois sélectionné
+      const { dateDebut, dateFin } =
+        listDateDebutDateFin &&
+        listDateDebutDateFin[selectedMonth] &&
+        listDateDebutDateFin[selectedMonth]
+
+      // Construire les dates de début et de fin en utilisant les informations récupérées
+      const dateDebutFormatted = `${dateDebut}/${prevMonth.toString().padStart(2, '0')}/${
+        currentYear - (currentMonth === 1 ? 1 : 0)
+      }`
+      const dateFinFormatted = `${dateFin}/${currentMonth
+        .toString()
+        .padStart(2, '0')}/${currentYear}`
+
+      const startDate = '01/01/2023'
+      const endDate = '06/01/2023'
+
+      const heureService = new HeureService()
+      try {
+        if (matricul && salarie && salarie.id) {
+          const resp = await heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
+          const transFormedData = formatDataFromBackend(resp, salarie.id)
+          console.log(transFormedData)
+          setData(transFormedData)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+
+      const filteredData = employeeHours.filter((employHours) => {
+        const employDate = new Date(employHours.date)
+        return (
+          employHours.employee.id === salarie.id &&
+          employDate.getMonth() === currentDate.getMonth() &&
+          employDate.getFullYear() === currentDate.getFullYear()
+        )
+      })
+
+      //   setData(filteredData)
+    },
+    [salarie, setData, listDateDebutDateFin],
+  )
+
   const columns = [
     // Colonne pour la date
     columnHelper.accessor('date', {
@@ -75,7 +170,10 @@ const TimeSheetTable = (props) => {
     // Colonne pour les heures normales jour
     columnHelper.accessor('regularHoursDay', {
       cell: (info) => {
-        return info.getValue() !== 0 ? info.getValue() : null
+        if (info.getValue() !== 0 && !isSunday(new Date(info.row.original.date))) {
+          return info.getValue()
+        }
+        return null
       },
       header: () => 'HN',
     }),
@@ -83,6 +181,7 @@ const TimeSheetTable = (props) => {
     // heures supplémentaires
     columnHelper.accessor('overtimeHoursDay', {
       cell: (info) => {
+        console.log(info.getValue())
         if (info.getValue() === 0) {
           return null
         }
@@ -215,100 +314,6 @@ const TimeSheetTable = (props) => {
       header: () => 'Hférié',
     }),
   ]
-
-  const defaultSorting = [
-    {
-      id: 'date',
-      asc: true,
-    },
-  ]
-
-  const [sorting, setSorting] = useState(defaultSorting)
-
-  const formatDataFromBackend = (bakendData, id) => {
-    const transFormedData = Array.from(bakendData).map((item) => {
-      const parsedDate = parse(item.date, 'dd/MM/yyyy', new Date())
-
-      let hs = null
-      if (item.heure_normale && item.heure_de_travail) {
-        hs = item.heure_de_travail - item.heure_normale
-      }
-      if (hs < 0) {
-        hs = null
-      } else {
-        hs = Math.round(hs * 100) / 100
-      }
-
-      return {
-        employee: {
-          id: id,
-        },
-        date: format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
-        regularHoursDay: item.heure_normale && Math.round(item.heure_normale * 100) / 100,
-        regularNightHours: item.hs_de_nuit && Math.round(item.hs_de_nuit * 100) / 100,
-        occasionalNightHours: item.hs_de_nuit && Math.round(item.hs_de_nuit * 100) / 100,
-        overtimeHoursDay: hs,
-        holidayHours: item.hs_jours_feries && Math.round(item.hs_jours_feries * 100) / 100,
-      }
-    })
-
-    return transFormedData
-  }
-
-  const filterDataByDate = useCallback(
-    async (currentFilter) => {
-      const matricul = salarie.matricule
-      const currentDate = currentFilter || new Date()
-      const currentMonth = new Date(currentDate).getMonth() + 1
-      const prevMonth = currentMonth === 1 ? 12 : currentMonth - 1
-      const currentYear = new Date(currentDate).getFullYear()
-
-      // Récupérer le mois et l'année
-      const selectedMonth = format(currentDate, 'MMM', { locale: enUS })
-        .toLowerCase()
-        .replace(/\./gi, '')
-
-      // Récupérer les dates de début et de fin du mois sélectionné
-      const { dateDebut, dateFin } =
-        listDateDebutDateFin &&
-        listDateDebutDateFin[selectedMonth] &&
-        listDateDebutDateFin[selectedMonth]
-
-      // Construire les dates de début et de fin en utilisant les informations récupérées
-      const dateDebutFormatted = `${dateDebut}/${prevMonth.toString().padStart(2, '0')}/${
-        currentYear - (currentMonth === 1 ? 1 : 0)
-      }`
-      const dateFinFormatted = `${dateFin}/${currentMonth
-        .toString()
-        .padStart(2, '0')}/${currentYear}`
-
-      const startDate = '01/01/2023'
-      const endDate = '06/01/2023'
-
-      const heureService = new HeureService()
-      try {
-        if (matricul && salarie && salarie.id) {
-          const resp = await heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
-          const transFormedData = formatDataFromBackend(resp, salarie.id)
-          setData(transFormedData)
-        }
-      } catch (error) {
-        console.log(error)
-      }
-
-      const filteredData = employeeHours.filter((employHours) => {
-        const employDate = new Date(employHours.date)
-        return (
-          employHours.employee.id === salarie.id &&
-          employDate.getMonth() === currentDate.getMonth() &&
-          employDate.getFullYear() === currentDate.getFullYear()
-        )
-      })
-
-      //   setData(filteredData)
-    },
-    [salarie, setData, listDateDebutDateFin],
-  )
 
   React.useEffect(() => {
     let mount = true
