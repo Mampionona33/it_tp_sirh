@@ -181,7 +181,6 @@ const TimeSheetTable = (props) => {
     // heures supplémentaires
     columnHelper.accessor('overtimeHoursDay', {
       cell: (info) => {
-        console.log(info.getValue())
         if (info.getValue() === 0) {
           return null
         }
