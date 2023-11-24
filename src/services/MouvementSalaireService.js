@@ -6,7 +6,7 @@ class MouvementSalaireService {
 
   async getAll() {
     try {
-      const resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/mouvement-salaire`)
+      const resp = await axios.get(`${this.REACT_APP_API_BASE_URL_DEV}/mouvement-salaire`)
       return resp.data
     } catch (error) {
       console.log(error)
