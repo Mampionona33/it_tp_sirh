@@ -5,8 +5,15 @@ const cors = require('cors')
 const { parseISO, isWithinInterval, isValid } = require('date-fns')
 
 app.use(express.json())
+const allowOriginsList = [
+  'https://3000-mampionona33-ittpsirh-w8k12dobh7e.ws-eu106.gitpod.io',
+  'http://localhost:3000',
+]
+const corsOptions = {
+  origin: allowOriginsList,
+}
 
-app.use(cors())
+app.use(cors(corsOptions))
 
 const isValidCredential = (email, password) => {
   return db.users.some((user) => user.email === email && user.password === password)
@@ -15,6 +22,7 @@ const isValidCredential = (email, password) => {
 app.post('/login', (req, res) => {
   const email = req.body.email
   const password = req.body.password
+  console.log(req)
 
   if (isValidCredential(email, password)) {
     res.send('Connecté')
