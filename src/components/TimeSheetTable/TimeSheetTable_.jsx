@@ -228,6 +228,7 @@ const TimeSheetTable = (props) => {
   const formatDataFromBackend = (bakendData, id) => {
     const transFormedData = Array.from(bakendData).map((item) => {
       const parsedDate = parse(item.date, 'dd/MM/yyyy', new Date())
+
       let hs = null
       if (item.heure_normale && item.heure_de_travail) {
         hs = item.heure_de_travail - item.heure_normale
