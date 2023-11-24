@@ -940,7 +940,7 @@
       "date": "15/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "10",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {

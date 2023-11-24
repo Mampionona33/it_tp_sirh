@@ -90,10 +90,6 @@ app.post('/heuressupplementaires', (req, res) => {
   const data = db['/employeeHours']
     .map((employHrs) => {
       const formatedEmployerDate = formatDate(employHrs.date)
-      // console.log('formatedDateDebut', formatedDateDebut)
-      // console.log('formatedDateFin', formatedDateFin)
-      // console.log('formatedEmployerDate', formatedEmployerDate)
-
       if (
         employHrs.employee.matricule === matricule &&
         formatedDateDebut <= formatedEmployerDate &&
@@ -103,8 +99,7 @@ app.post('/heuressupplementaires', (req, res) => {
       }
     })
     .filter((item) => item !== undefined)
-    
-  console.log(data)
+
   res.status(200).json(data)
 })
 
