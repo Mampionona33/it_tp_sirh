@@ -939,7 +939,7 @@
       },
       "date": "15/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "10",
+      "heure_de_travail": 10,
       "hs_de_nuit": null,
       "hs_jours_feries": null
     },
@@ -951,8 +951,8 @@
       },
       "date": "16/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -964,7 +964,7 @@
       "date": "17/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "10",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -975,8 +975,8 @@
       },
       "date": "18/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8,5",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail":8.5,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -987,7 +987,7 @@
       },
       "date": "19/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8,3",
+      "heure_de_travail": 5.3,
       "hs_de_nuit": [3, ""],
       "hs_jours_feries": null
     },
@@ -999,8 +999,8 @@
       },
       "date": "20/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8,1",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8.1,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1011,8 +1011,8 @@
       },
       "date": "21/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1023,8 +1023,8 @@
       },
       "date": "22/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8,5",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1035,8 +1035,8 @@
       },
       "date": "23/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail":8 ,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1047,7 +1047,7 @@
       },
       "date": "24/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8,2",
+      "heure_de_travail": 8.2,
       "hs_de_nuit": [2, ""],
       "hs_jours_feries": null
     },
@@ -1059,8 +1059,8 @@
       },
       "date": "25/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8,15",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8.15,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1071,8 +1071,8 @@
       },
       "date": "26/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8,02",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8.02,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1083,8 +1083,8 @@
       },
       "date": "27/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1095,8 +1095,8 @@
       },
       "date": "28/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1107,8 +1107,8 @@
       },
       "date": "29/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1119,8 +1119,8 @@
       },
       "date": "30/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8,4",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8.4,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1131,7 +1131,7 @@
       },
       "date": "31/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": "8,12",
+      "heure_de_travail": 8.13,
       "hs_de_nuit": [5, ""],
       "hs_jours_feries": null
     },
@@ -1143,8 +1143,8 @@
       },
       "date": "01/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1155,8 +1155,8 @@
       },
       "date": "02/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": "8,3",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8.3,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1167,8 +1167,8 @@
       },
       "date": "03/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1179,8 +1179,8 @@
       },
       "date": "04/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1191,8 +1191,8 @@
       },
       "date": "05/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1203,8 +1203,8 @@
       },
       "date": "06/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1215,8 +1215,8 @@
       },
       "date": "07/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1227,8 +1227,8 @@
       },
       "date": "08/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1239,8 +1239,8 @@
       },
       "date": "09/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": "8,1",
-      "hs_de_nuit": [null, ""],
+      "heure_de_travail": 8.1,
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1252,7 +1252,7 @@
       "date": "10/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8,25",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1264,7 +1264,7 @@
       "date": "11/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8,1",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1276,7 +1276,7 @@
       "date": "12/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "9",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1288,7 +1288,7 @@
       "date": "13/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "10",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1300,7 +1300,7 @@
       "date": "14/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1312,7 +1312,7 @@
       "date": "15/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "10,2",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1324,7 +1324,7 @@
       "date": "16/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "12",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1336,7 +1336,7 @@
       "date": "17/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "10",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1348,7 +1348,7 @@
       "date": "18/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1360,7 +1360,7 @@
       "date": "19/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1372,7 +1372,7 @@
       "date": "20/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1384,7 +1384,7 @@
       "date": "21/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1396,7 +1396,7 @@
       "date": "22/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1408,7 +1408,7 @@
       "date": "23/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1420,7 +1420,7 @@
       "date": "24/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1432,7 +1432,7 @@
       "date": "25/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "10",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": 10
     },
     {
@@ -1444,7 +1444,7 @@
       "date": "15/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1456,7 +1456,7 @@
       "date": "16/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1468,7 +1468,7 @@
       "date": "17/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1480,7 +1480,7 @@
       "date": "18/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1492,7 +1492,7 @@
       "date": "19/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1504,7 +1504,7 @@
       "date": "20/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1516,7 +1516,7 @@
       "date": "21/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "10",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1528,7 +1528,7 @@
       "date": "22/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8,2",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1540,7 +1540,7 @@
       "date": "23/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1552,7 +1552,7 @@
       "date": "24/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1564,7 +1564,7 @@
       "date": "25/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1576,7 +1576,7 @@
       "date": "26/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8,2",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1588,7 +1588,7 @@
       "date": "27/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1600,7 +1600,7 @@
       "date": "28/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1612,7 +1612,7 @@
       "date": "29/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8,3",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1624,7 +1624,7 @@
       "date": "30/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8,5",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1636,7 +1636,7 @@
       "date": "31/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1648,7 +1648,7 @@
       "date": "01/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8,1",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1660,7 +1660,7 @@
       "date": "02/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8,6",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1672,7 +1672,7 @@
       "date": "03/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1684,7 +1684,7 @@
       "date": "04/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1696,7 +1696,7 @@
       "date": "05/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1708,7 +1708,7 @@
       "date": "06/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1720,7 +1720,7 @@
       "date": "07/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8,1",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1732,7 +1732,7 @@
       "date": "08/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8,3",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1744,7 +1744,7 @@
       "date": "09/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8,6",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1756,7 +1756,7 @@
       "date": "10/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1768,7 +1768,7 @@
       "date": "11/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "9",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1780,7 +1780,7 @@
       "date": "12/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "10",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1792,7 +1792,7 @@
       "date": "13/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1804,7 +1804,7 @@
       "date": "14/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8,7",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1816,7 +1816,7 @@
       "date": "15/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1828,7 +1828,7 @@
       "date": "16/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1840,7 +1840,7 @@
       "date": "17/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1852,7 +1852,7 @@
       "date": "18/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1864,7 +1864,7 @@
       "date": "19/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1876,7 +1876,7 @@
       "date": "20/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1888,7 +1888,7 @@
       "date": "21/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1900,7 +1900,7 @@
       "date": "22/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1912,7 +1912,7 @@
       "date": "23/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "10",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1924,7 +1924,7 @@
       "date": "24/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "10,1",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
@@ -1936,7 +1936,7 @@
       "date": "25/01/2023",
       "heure_normale": 8,
       "heure_de_travail": "8",
-      "hs_de_nuit": [null, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     }
   ],
