@@ -109,7 +109,7 @@ export default class CalculPai {
     return this.totalAjoutSalaire
   }
   getHsni130() {
-    if (this.totalHs >= 20) {
+    if (this.totalHs >= 18) {
       return this.isCadre ? 0 : (this.tauxHoraire * this.hsni130 * 130) / 100
     } else {
       return this.isCadre ? 0 : (this.tauxHoraire * this.totalHs130 * 130) / 100
@@ -121,7 +121,7 @@ export default class CalculPai {
   }
 
   getHsi130() {
-    if (this.totalHs >= 20) {
+    if (this.totalHs >= 18) {
       return this.isCadre ? 0 : (this.tauxHoraire * (this.totalHs130 - this.hsni130) * 130) / 100
     } else {
       return 0
