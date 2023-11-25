@@ -8,6 +8,7 @@ app.use(express.json())
 const allowOriginsList = [
   'https://3000-mampionona33-ittpsirh-w8k12dobh7e.ws-eu106.gitpod.io',
   'http://localhost:3000',
+  'https://rv8tjn-3000.csb.app',
 ]
 const corsOptions = {
   origin: allowOriginsList,
