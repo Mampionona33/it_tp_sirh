@@ -9,6 +9,7 @@ const allowOriginsList = [
   'https://3000-mampionona33-ittpsirh-w8k12dobh7e.ws-eu106.gitpod.io',
   'http://localhost:3000',
   'https://rv8tjn-3000.csb.app',
+  'https://y4y2nk-8000.csb.app',
 ]
 const corsOptions = {
   origin: allowOriginsList,
