@@ -138,15 +138,6 @@ const TimeSheetTable = (props) => {
         console.log(error)
       }
 
-      const filteredData = employeeHours.filter((employHours) => {
-        const employDate = new Date(employHours.date)
-        return (
-          employHours.employee.id === salarie.id &&
-          employDate.getMonth() === currentDate.getMonth() &&
-          employDate.getFullYear() === currentDate.getFullYear()
-        )
-      })
-
       //   setData(filteredData)
     },
     [salarie, setData, listDateDebutDateFin],
