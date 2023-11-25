@@ -97,6 +97,8 @@ app.post('/heuressupplementaires', (req, res) => {
         formatedDateFin >= formatedEmployerDate
       ) {
         return employHrs
+      } else {
+        return []
       }
     })
     .filter((item) => item !== undefined)
