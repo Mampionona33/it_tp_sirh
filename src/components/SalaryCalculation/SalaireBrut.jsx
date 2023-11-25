@@ -93,21 +93,6 @@ const SalaireBrut = () => {
   const tauxOmsi = calculPaie.getTauxOmsi()
   const irsaAPayer = calculPaie.getIrsaAPayer()
 
-  // console.log(`hsni130_: ${hsni130_}`)
-  // console.log(`hsni150_: ${hsni150_}`)
-  // console.log(`hsi130_: ${hsi130_}`)
-  // console.log(`hsi150_: ${hsi150_}`)
-  // console.log(`hn30: ${hn30}`)
-  // console.log(`hn50: ${hn50}`)
-  // console.log(`hdim: ${hdim}`)
-  // console.log(`salaireBrut_: ${salaireBrut_}`)
-  // console.log(`cnaps_: ${cnaps_}`)
-  // console.log(`omsi_: ${omsi_}`)
-  // console.log(`baseIrsa: ${baseIrsa}`)
-  // console.log(`baseCnaps: ${baseCnaps}`)
-  // console.log(indemnite)
-  // ------------------------------
-
   const formatedHsni130Value = formatAriaryMga(hsni130_)
   const formatedHsni150Value = formatAriaryMga(hsni150_)
   const formatedHsi130Value = formatAriaryMga(hsi130_)
