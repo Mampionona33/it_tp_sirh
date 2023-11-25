@@ -28,7 +28,7 @@ app.post('/login', (req, res) => {
   if (isValidCredential(email, password)) {
     res.send('Connecté')
   } else {
-    res.status(401).send('Identifiants incorrects')
+    res.status(401).send('Identifiants incorrects!')
   }
 })
 
