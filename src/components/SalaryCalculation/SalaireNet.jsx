@@ -10,10 +10,10 @@ const SalaireNet = () => {
   const salaireBrut = useSelector((state) => state.bulletinDePaie.salaireBrut)
   const cnaps = useSelector((state) => state.bulletinDePaie.cnaps)
   const omsi = useSelector((state) => state.bulletinDePaie.omsi)
-  const valeurHsni130 = useSelector((state) => state.bulletinDePaie.valeurHsni130)
-  const valeurHsni150 = useSelector((state) => state.bulletinDePaie.valeurHsni150)
+  const valHsni130 = useSelector((state) => state.bulletinDePaie.valHsni130)
+  const valHsni150 = useSelector((state) => state.bulletinDePaie.valHsni150)
   const baseIrsa = useSelector((state) => state.bulletinDePaie.baseIrsa)
-  const irsaArrondi = useSelector((state) => state.bulletinDePaie.irsaArrondi)
+  const baseIrsaArrondi = useSelector((state) => state.bulletinDePaie.baseIrsaArrondi)
   const irsaAPayer = useSelector((state) => state.bulletinDePaie.irsaAPayer)
   const salaireNet = useSelector((state) => state.bulletinDePaie.salaireNet)
 
@@ -37,11 +37,11 @@ const SalaireNet = () => {
       },
       {
         title: 'HSNI 130',
-        value: `${formatAriaryMga(valeurHsni130)}`,
+        value: `${formatAriaryMga(valHsni130)}`,
       },
       {
         title: 'HSNI 150',
-        value: `${formatAriaryMga(valeurHsni150)}`,
+        value: `${formatAriaryMga(valHsni150)}`,
       },
       {
         title: 'Base IRSA',
@@ -49,7 +49,7 @@ const SalaireNet = () => {
       },
       {
         title: 'Imposable arrondi',
-        value: `${formatAriaryMga(irsaArrondi)}`,
+        value: `${formatAriaryMga(baseIrsaArrondi)}`,
       },
       {
         title: 'IRSA à payer',

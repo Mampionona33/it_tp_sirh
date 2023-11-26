@@ -287,11 +287,11 @@ const SalaireBrut = () => {
     }
     if (valHsni130) {
       if (mount) {
-        dispatch(setBulletinDePaie({ valeurHsni130: valHsni130 }))
+        dispatch(setBulletinDePaie({ valHsni130: valHsni130 }))
       }
     }
     if (valHsni150 && mount) {
-      dispatch(setBulletinDePaie({ valeurHsni150: valHsni150 }))
+      dispatch(setBulletinDePaie({ valHsni150: valHsni150 }))
     }
     if (plafondSME && mount) {
       dispatch(setBulletinDePaie({ plafondSME: plafondSME }))
