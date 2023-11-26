@@ -28,6 +28,7 @@ const SalaireBrut = () => {
   const totalHDim = useSelector((state) => state.bulletinDePaie.totalHDim)
   const retenuSalaire = useSelector((state) => state.bulletinDePaie.retenuSalaire)
   const totalHs = useSelector((state) => state.bulletinDePaie.totalHs)
+  const avance = useSelector((state) => state.bulletinDePaie.avance)
 
   const totalPrimeEtAvantage = useSelector((state) => state.bulletinDePaie.totalPrimeEtAvantage)
   const totalDeduction = useSelector((state) => state.bulletinDePaie.totalDeduction)
@@ -42,8 +43,10 @@ const SalaireBrut = () => {
     calc.setTotalHDim(totalHDim)
     calc.setTotalDeduction(totalDeduction)
     calc.setTotalPrimeEtAvantage(totalPrimeEtAvantage)
+    calc.setAvance(avance)
     return calc
   }, [
+    avance,
     salaireDeBase,
     isCadre,
     hsni130,
@@ -67,6 +70,7 @@ const SalaireBrut = () => {
   const baseIrsa_ = calculateurPaie.getBaseIrsa()
   const baseIrsaArrondi = calculateurPaie.getBaseIrsaArrondi()
   const irsaAPayer_ = calculateurPaie.getIrsaAPayer()
+  const salaireNet = calculateurPaie.getSalaireNet()
 
   console.log('valHsni130', valHsni130)
   console.log('valHsni150', valHsni150)
@@ -81,6 +85,7 @@ const SalaireBrut = () => {
   console.log('baseIrsa_', baseIrsa_)
   console.log('baseIrsaArrondi', baseIrsaArrondi)
   console.log('irsaAPayer_', irsaAPayer_)
+  console.log('salaireNet', salaireNet)
 
   // -------------------------------
   // -------------------------------

@@ -24,9 +24,14 @@ export default class CalculateurPaie {
     this.baseIrsa = 0
     this.baseIrsaArrondi = 0
     this.irsaAPayer = 0
+    this.avance = 0
+    this.salaireNet = 0
   }
 
   //   SETTERS
+  setAvance(avance) {
+    this.avance = avance
+  }
   setIrsaAPayer(irsaAPayer) {
     this.irsaAPayer = irsaAPayer
   }
@@ -160,6 +165,9 @@ export default class CalculateurPaie {
   calculBaseIrsaArrondi() {
     this.baseIrsaArrondi = Math.floor(this.baseIrsa / 100) * 100
   }
+  calculSalaireNet() {
+    this.salaireNet = this.baseIrsaArrondi - this.irsaAPayer
+  }
 
   // Calcul Irsa a payer
   // ---------------------------------------------
@@ -198,6 +206,9 @@ export default class CalculateurPaie {
   }
 
   //   GETTERS
+  getAvance() {
+    return this.avance
+  }
 
   getTauxCnaps() {
     return this.tauxCnaps
@@ -286,5 +297,10 @@ export default class CalculateurPaie {
   getIrsaAPayer() {
     this.calculIrsaTranche()
     return Math.round(this.irsaAPayer)
+  }
+
+  getSalaireNet() {
+    this.calculSalaireNet()
+    return this.salaireNet
   }
 }
