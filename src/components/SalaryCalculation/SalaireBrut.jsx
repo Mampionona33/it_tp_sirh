@@ -9,6 +9,7 @@ import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReduce
 // } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 import CalculPai from 'src/utils/CalculPaie'
+import CalculateurPaie from 'src/utils/CalculateurPaie'
 
 const SalaireBrut = () => {
   const dispatch = useDispatch()
@@ -30,6 +31,28 @@ const SalaireBrut = () => {
 
   const totalPrimeEtAvantage = useSelector((state) => state.bulletinDePaie.totalPrimeEtAvantage)
   const totalDeduction = useSelector((state) => state.bulletinDePaie.totalDeduction)
+
+  const calculateurPaie = useMemo(() => {
+    const calc = new CalculateurPaie(salaireDeBase)
+    calc.setHsni130(hsni130)
+    calc.setHsni150(hsni150)
+    calc.setIsCadre(isCadre)
+    calc.setHsi130(hsi130)
+    calc.setHsi150(hsi150)
+    return calc
+  }, [salaireDeBase, isCadre, hsni130, hsni150, hsi130, hsi150])
+
+  const valHsni130 = calculateurPaie.getValHsni130()
+  const valHsni150 = calculateurPaie.getValHsni150()
+  const valHsi130 = calculateurPaie.getValHsi130()
+  const valHsi150 = calculateurPaie.getValHsi150()
+  console.log('valHsni130', valHsni130)
+  console.log('valHsni150', valHsni150)
+  console.log('valHsi130', valHsi130)
+  console.log('valHsi150', valHsi150)
+
+  // -------------------------------
+  // -------------------------------
 
   const calculPaie = useMemo(() => {
     const calc = new CalculPai()
