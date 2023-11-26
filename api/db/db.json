@@ -2261,7 +2261,7 @@
       "heure_normale": 8,
       "heure_de_travail": 8,
       "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_jours_feries": 8
     },
     {
       "id": 112,

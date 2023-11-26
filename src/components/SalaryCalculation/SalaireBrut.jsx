@@ -24,6 +24,7 @@ const SalaireBrut = () => {
   const retenuSalaire = useSelector((state) => state.bulletinDePaie.retenuSalaire)
   const totalHs = useSelector((state) => state.bulletinDePaie.totalHs)
   const avance = useSelector((state) => state.bulletinDePaie.avance)
+  const totalHFerie = useSelector((state) => state.bulletinDePaie.totalHFerie)
 
   const totalPrimeEtAvantage = useSelector((state) => state.bulletinDePaie.totalPrimeEtAvantage)
   const totalDeduction = useSelector((state) => state.bulletinDePaie.totalDeduction)
@@ -39,8 +40,10 @@ const SalaireBrut = () => {
     calc.setTotalDeduction(totalDeduction)
     calc.setTotalPrimeEtAvantage(totalPrimeEtAvantage)
     calc.setAvance(avance)
+    calc.setTotalHFerie(totalHFerie)
     return calc
   }, [
+    totalHFerie,
     avance,
     salaireDeBase,
     isCadre,
@@ -54,6 +57,7 @@ const SalaireBrut = () => {
   ])
 
   const valHsni130 = calculateurPaie.getValHsni130()
+  const valHFerie = calculateurPaie.getValHFerie()
   const valHsni150 = calculateurPaie.getValHsni150()
   const valHsi130 = calculateurPaie.getValHsi130()
   const valHsi150 = calculateurPaie.getValHsi150()
@@ -159,6 +163,7 @@ const SalaireBrut = () => {
   const formatedSalaireBase = formatAriaryMga(salaireDeBase)
   const formatedPrimeEtAvantage = formatAriaryMga(totalPrimeEtAvantage)
   const formatedRetenue = formatAriaryMga(totalDeduction)
+  const formatedValHFerie = formatAriaryMga(valHFerie)
 
   const data = [
     {
@@ -196,6 +201,11 @@ const SalaireBrut = () => {
       title: 'Hdim% :',
       hours: `${totalHDim}`,
       value: `${formatedHdimValue}`,
+    },
+    {
+      title: 'HFérié% :',
+      hours: `${totalHFerie}`,
+      value: `${formatedValHFerie}`,
     },
   ]
 
@@ -305,6 +315,10 @@ const SalaireBrut = () => {
       dispatch(setBulletinDePaie({ baseIrsa: baseIrsa }))
     }
 
+    if (mount && valHFerie) {
+      dispatch(setBulletinDePaie({ valHFerie: valHFerie }))
+    }
+
     if (baseIrsaArrondi && mount) {
       const baseIrsaObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'irsa')
 
@@ -359,6 +373,7 @@ const SalaireBrut = () => {
       mount = false
     }
   }, [
+    valHFerie,
     retenuSalaire,
     tauxOmsi,
     salaireNetAPayer,

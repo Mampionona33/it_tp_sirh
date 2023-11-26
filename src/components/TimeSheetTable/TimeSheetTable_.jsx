@@ -436,13 +436,14 @@ const TimeSheetTable = (props) => {
         const newTotal = calculateTotal()
 
         const totalHn = newTotal.regularHoursDay
+        const totalHFerie = newTotal.holidayHours
         const totalHs = newTotal.overtimeHoursDay
         const totalHDim = newTotal.sundayHours
         const totalHs130 = newTotal.hs130
         const hsni130 = totalHs >= 18 ? 18 : totalHs
         const hsi130 = totalHs >= 20 ? totalHs130 - 18 : 0
         const totalHs150 = newTotal.hs150
-        const hsni150 = totalHs < 18 ? 0 : 2
+        const hsni150 = totalHs < 18 ? 0 : totalHs < 20 ? totalHs - 18 : 2
 
         const hsi150 =
           totalHs >= 18 && totalHs150 >= 2 ? totalHs150 - 2 : totalHs150 < 2 ? totalHs150 : 0
@@ -455,6 +456,7 @@ const TimeSheetTable = (props) => {
             hsni150: hsni150,
             totalHs130: totalHs130,
             totalHs150: totalHs150,
+            totalHFerie: totalHFerie,
             hsi130: hsi130,
             hsi150: hsi150,
             totalHDim: totalHDim,

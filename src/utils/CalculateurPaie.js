@@ -27,9 +27,14 @@ export default class CalculateurPaie {
     this.avance = 0
     this.salaireNet = 0
     this.salaireNetAPayer = 0
+    this.totalHFerie = 0
+    this.valHFerie = 0
   }
 
   //   SETTERS
+  setTotalHFerie(totalHFerie) {
+    this.totalHFerie = totalHFerie
+  }
   setAvance(avance) {
     this.avance = avance
   }
@@ -128,15 +133,28 @@ export default class CalculateurPaie {
       ? 0
       : this.roundToTwoDecimal((this.tauxHoraire * this.totalHDim * 40) / 100)
   }
+  calclulValHFerie() {
+    this.valHFerie = this.isCadre
+      ? 0
+      : this.roundToTwoDecimal((this.tauxHoraire * this.totalHFerie * 100) / 100)
+  }
   calculSalaireBrut() {
     this.salaireBrut = this.isCadre
-      ? this.roundToTwoDecimal(this.salaireBase + this.totalPrimeEtAvantage - this.totalDeduction)
+      ? this.roundToTwoDecimal(
+          this.salaireBase +
+            this.totalPrimeEtAvantage +
+            this.valHdim +
+            this.valHFerie +
+            -this.totalDeduction,
+        )
       : this.roundToTwoDecimal(
           this.salaireBase +
             this.valHsni130 +
-            this.valHsi150 +
+            this.valHsni150 +
             this.valHsi130 +
             this.valHsi150 +
+            this.valHdim +
+            this.valHFerie +
             this.totalPrimeEtAvantage -
             this.totalDeduction,
         )
@@ -210,6 +228,10 @@ export default class CalculateurPaie {
   }
 
   //   GETTERS
+
+  getTotalHFerie() {
+    return this.totalHFerie
+  }
   getAvance() {
     return this.avance
   }
@@ -313,5 +335,9 @@ export default class CalculateurPaie {
   }
   getPlafondSME() {
     return this.plafondSME
+  }
+  getValHFerie() {
+    this.calclulValHFerie()
+    return this.valHFerie
   }
 }
