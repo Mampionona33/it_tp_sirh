@@ -426,9 +426,11 @@ const TimeSheetTable = (props) => {
       totalHS += entry.regularNightHours + entry.occasionalNightHours + entry.overtimeHoursDay
     }
 
-    if (totalHS >= 20) {
+    if (totalHS >= 18) {
       hsni130 = 18
       hsni150 = 2
+    } else {
+      hsni130 = totalHS
     }
 
     return { hsni130, hsni150 }
