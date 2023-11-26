@@ -2045,7 +2045,7 @@
       "date": "23/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 9,
-      "hs_de_nuit": null,
+      "hs_de_nuit": 1,
       "hs_jours_feries": null
     },
     {
@@ -2056,8 +2056,8 @@
       },
       "date": "24/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
+      "heure_de_travail": 10,
+      "hs_de_nuit": 2,
       "hs_jours_feries": null
     },
     {
@@ -2068,8 +2068,8 @@
       },
       "date": "25/12/2022",
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
+      "heure_de_travail": 9,
+      "hs_de_nuit": 1,
       "hs_jours_feries": null
     },
     {
