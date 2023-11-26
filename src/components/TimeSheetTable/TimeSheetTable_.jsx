@@ -450,14 +450,18 @@ const TimeSheetTable = (props) => {
         const totalHs = newTotal.overtimeHoursDay
         const totalHs130 = newTotal.hs130
         const totalHs150 = newTotal.hs150
-        const hsni130 = totalHs >= 20 ? 18 : totalHs
-        const hsni150 = totalHs >= 20 ? 2 : 0
+        const hsni130 = totalHs >= 18 ? 18 : totalHs
+        const hsni150 = totalHs >= 20 ? 2 : totalHs - 18
         const hsi130 = totalHs >= 20 ? totalHs130 - 18 : 0
-        const hsi150 = totalHs >= 20 ? totalHs150 - 2 : 0
+        const hsi150 =
+          totalHs >= 18 && totalHs150 >= 2 ? totalHs150 - 2 : totalHs150 < 2 ? totalHs150 : 0
 
         dispatch(setBulletinDePaie({ totalHn: totalHn }))
 
         console.log('hsni130', hsni130)
+        console.log('hsni150', hsni150)
+        console.log('hsi130', hsi130)
+        console.log('hsi150', hsi150)
 
         //     dispatch(setBulletinDePaie({ totalHn: totalHn }))
         //     dispatch(
