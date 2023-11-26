@@ -399,7 +399,6 @@ const TimeSheetTable = (props) => {
     total.hs150 = Math.round(total.hs150 * 100) / 100
     total.occasionalNightHours = Math.round(total.occasionalNightHours * 100) / 100
     total.overtimeHoursDay = Math.round(total.overtimeHoursDay * 100) / 100
-    total.regularNightHours = Math.round(total.regularNightHours * 100) / 100
     total.sundayHours = Math.round(total.sundayHours * 100) / 100
 
     if (isCadre) {
@@ -450,7 +449,7 @@ const TimeSheetTable = (props) => {
         const totalHn = newTotal.regularHoursDay
         const totalHFerie = newTotal.holidayHours
         const totalHs = newTotal.overtimeHoursDay
-        const totalHs30 = newTotal.regularNightHours
+        const totalHs30 = Math.round(newTotal.regularNightHours * 100) / 100
         const totalHs50 = newTotal.occasionalNightHours
         const totalHDim = newTotal.sundayHours
         const totalHs130 = newTotal.hs130
