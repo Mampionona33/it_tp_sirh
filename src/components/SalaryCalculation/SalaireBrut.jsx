@@ -3,7 +3,6 @@ import CustomSection from 'src/components/CustomSection'
 import { useSelector, useDispatch } from 'react-redux'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
-import CalculPai from 'src/utils/CalculPaie'
 import CalculateurPaie from 'src/utils/CalculateurPaie'
 
 const SalaireBrut = () => {
@@ -80,83 +79,6 @@ const SalaireBrut = () => {
   const tauxOmsi = calculateurPaie.getTauxOmsi()
   const valHs30 = calculateurPaie.getValHs30()
   const valHs50 = calculateurPaie.getValHs50()
-
-  console.log('valHsni130', valHsni130)
-  console.log('valHsni150', valHsni150)
-  console.log('valHsi130', valHsi130)
-  console.log('valHsi150', valHsi150)
-  console.log('hsni150', hsni150)
-  console.log('valHdim', valHdim)
-  console.log('salaireBrut', salaireBrut)
-  console.log('baseCnaps_', baseCnaps)
-  console.log('omsi', omsi)
-  console.log('cnaps', cnaps)
-  console.log('baseIrsa_', baseIrsa)
-  console.log('baseIrsaArrondi', baseIrsaArrondi)
-  console.log('irsaAPayer_', irsaAPayer)
-  console.log('salaireNet', salaireNet)
-  console.log('salaireNetAPayer', salaireNetAPayer)
-
-  // -------------------------------
-  // -------------------------------
-
-  const calculPaie = useMemo(() => {
-    const calc = new CalculPai()
-    calc.setSalaireDeBase(salaireDeBase * 1)
-    calc.setTauxHoraire(173.33)
-    calc.setHsni130(hsni130 * 1)
-    calc.setHsni150(hsni150 * 1)
-    calc.setTotalHs130(totalHs130 * 1)
-    calc.setTotalHs(totalHs * 1)
-    calc.setTotalHs150(totalHs150 * 1)
-    calc.setTotalHn30(totalHs30 * 1)
-    calc.setTotalHn50(totalHs50 * 1)
-    calc.setTotalHDim(totalHDim * 1)
-    calc.setTotalAjoutSalaire(totalPrimeEtAvantage * 1)
-    calc.setIsCadre(isCadre)
-    calc.setTotalRetenuSalarie(totalDeduction * 1)
-    return calc
-  }, [
-    totalHs,
-    totalDeduction,
-    isCadre,
-    salaireDeBase,
-    hsni130,
-    hsni150,
-    totalHDim,
-    totalHs130,
-    totalHs150,
-    totalHs30,
-    totalHs50,
-    totalPrimeEtAvantage,
-  ])
-
-  // const hsni130_ = calculPaie.getHsni130()
-  // const hsni150_ = calculPaie.getHsni150()
-  // const hsi130_ = calculPaie.getHsi130()
-  // const hsi150_ = calculPaie.getHsi150()
-  // const hn30_ = calculPaie.getHn30()
-  // const hn50_ = calculPaie.getHn50()
-  // const hdim_ = calculPaie.getHDim()
-  // const salaireBrut_ = calculPaie.getSalaireBrut()
-  // const cnaps_ = calculPaie.getCnaps()
-  // const omsi_ = calculPaie.getOmsi()
-  // const irsaArrondi = calculPaie.getBaseIrsaArrondi()
-  // const salaireNet_ = calculPaie.getSalaireNet()
-  // const salaireNetAPayer_ = calculPaie.getSalaireNetAPayer()
-
-  // const baseIrsa = useMemo(() => {
-  //   return calculPaie.getBaseIrsa()
-  // }, [calculPaie])
-
-  // const baseCnaps = useMemo(() => {
-  //   return calculPaie.getBaseCnaps()
-  // }, [calculPaie])
-
-  // const plafondSME = calculPaie.getPlafondSME()
-  // const tauxCnaps = calculPaie.getTauxCnaps()
-  // const tauxOmsi = calculPaie.getTauxOmsi()
-  // const irsaAPayer = calculPaie.getIrsaAPayer()
 
   const formatedHsni130Value = formatAriaryMga(valHsni130)
   const formatedHsni150Value = formatAriaryMga(valHsni150)
