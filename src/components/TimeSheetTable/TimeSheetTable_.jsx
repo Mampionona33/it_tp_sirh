@@ -26,17 +26,6 @@ import {
 import MonthYearPicker from './MonthYearPicker'
 import { fr, enUS } from 'date-fns/locale'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  setTotalHNormal,
-  setTotalHdim,
-  setTotalHferier,
-  setTotalHs130,
-  setTotalHs150,
-  setTotalHs30,
-  setTotalHs50,
-  setTotalHsni130,
-  setTotalHsni150,
-} from 'src/redux/employeHours/employeHoursReducer'
 import HeureService from 'src/services/HeureService'
 
 const TimeSheetTable = (props) => {
@@ -448,11 +437,13 @@ const TimeSheetTable = (props) => {
 
         const totalHn = newTotal.regularHoursDay
         const totalHs = newTotal.overtimeHoursDay
+        const totalHDim = newTotal.sundayHours
         const totalHs130 = newTotal.hs130
-        const totalHs150 = newTotal.hs150
         const hsni130 = totalHs >= 18 ? 18 : totalHs
-        const hsni150 = totalHs >= 20 ? 2 : totalHs - 18
         const hsi130 = totalHs >= 20 ? totalHs130 - 18 : 0
+        const totalHs150 = newTotal.hs150
+        const hsni150 = totalHs === 0 || totalHs === 18 ? 0 : totalHs >= 20 ? 2 : totalHs - 18
+
         const hsi150 =
           totalHs >= 18 && totalHs150 >= 2 ? totalHs150 - 2 : totalHs150 < 2 ? totalHs150 : 0
 
@@ -466,6 +457,7 @@ const TimeSheetTable = (props) => {
             totalHs150: totalHs150,
             hsi130: hsi130,
             hsi150: hsi150,
+            totalHDim: totalHDim,
           }),
         )
       }

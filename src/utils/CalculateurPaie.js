@@ -12,9 +12,48 @@ export default class CalculateurPaie {
     this.valHsi130 = 0
     this.valHsi150 = 0
     this.hsi150 = 0
+    this.totalHDim = 0
+    this.valHdim = 0
+    this.totalPrimeEtAvantage = 0
+    this.totalDeduction = 0
+    this.salaireBrut = 0
+    this.baseCnaps = 0
+    this.tauxOmsi = 0.01
+    this.tauxCnaps = 0.01
+    this.cnaps = 0
+    this.baseIrsa = 0
+    this.baseIrsaArrondi = 0
+    this.irsaAPayer = 0
   }
 
   //   SETTERS
+  setIrsaAPayer(irsaAPayer) {
+    this.irsaAPayer = irsaAPayer
+  }
+  setBaseIrsaArrondi(baseIrsaArrondi) {
+    this.baseIrsaArrondi = baseIrsaArrondi
+  }
+  setBaseIrsa(baseIrsa) {
+    this.baseIrsa = baseIrsa
+  }
+  setTauxCnaps(tauxCnaps) {
+    this.tauxCnaps = tauxCnaps
+  }
+  setTauxOmsi(tauxOmsi) {
+    this.tauxOmsi = tauxOmsi
+  }
+  setSalaireBrut(salaireBrut) {
+    this.salaireBrut = salaireBrut
+  }
+  setTotalDeduction(totalDeduction) {
+    this.totalDeduction = totalDeduction
+  }
+  setTotalPrimeEtAvantage(totalPrimeEtAvantage) {
+    this.totalPrimeEtAvantage = totalPrimeEtAvantage
+  }
+  setTotalHDim(totalHDim) {
+    this.totalHDim = totalHDim
+  }
   setHsi150(hsi150) {
     this.hsi150 = hsi150
   }
@@ -50,8 +89,13 @@ export default class CalculateurPaie {
   roundToTwoDecimal(val) {
     return Math.round(val * 100) / 100
   }
+  arrondirNombreDecimales(nombre, decimales) {
+    const facteur = Math.pow(10, decimales)
+    return Math.round(nombre * facteur) / facteur
+  }
 
   //   CALCULATORS
+
   calculValHsni130() {
     this.valHsni130 = this.isCadre
       ? 0
@@ -73,8 +117,103 @@ export default class CalculateurPaie {
       ? 0
       : this.roundToTwoDecimal((this.tauxHoraire * this.hsi150 * 150) / 100)
   }
+  calculValHdim() {
+    this.valHdim = this.isCadre
+      ? 0
+      : this.roundToTwoDecimal((this.tauxHoraire * this.totalHDim * 40) / 100)
+  }
+  calculSalaireBrut() {
+    this.salaireBrut = this.isCadre
+      ? this.roundToTwoDecimal(this.salaireBase + this.totalPrimeEtAvantage - this.totalDeduction)
+      : this.roundToTwoDecimal(
+          this.salaireBase +
+            this.valHsni130 +
+            this.valHsi150 +
+            this.valHsi130 +
+            this.valHsi150 +
+            this.totalPrimeEtAvantage -
+            this.totalDeduction,
+        )
+  }
+  calculBaseCnaps() {
+    if (this.salaireBrut >= this.plafondSME) {
+      this.baseCnaps = this.plafondSME
+    } else {
+      this.baseCnaps = this.salaireBrut
+    }
+  }
+  calculOmsi() {
+    this.omsi = this.roundToTwoDecimal(this.salaireBrut * this.tauxOmsi)
+  }
+  calculateCnaps() {
+    if (this.salaireBrut >= this.plafondSME) {
+      this.cnaps = this.roundToTwoDecimal(this.plafondSME * this.tauxCnaps)
+    } else {
+      this.cnaps = this.roundToTwoDecimal(this.salaireBrut * this.tauxCnaps)
+    }
+  }
+  calculateBaseIrsa() {
+    this.baseIrsa = this.roundToTwoDecimal(
+      this.salaireBrut - this.cnaps - this.omsi - this.hsni130 - this.hsni150,
+    )
+  }
+  calculBaseIrsaArrondi() {
+    this.baseIrsaArrondi = Math.floor(this.baseIrsa / 100) * 100
+  }
+
+  // Calcul Irsa a payer
+  // ---------------------------------------------
+  isTranche_0() {
+    this.calculBaseIrsaArrondi()
+    return this.baseIrsaArrondi <= 350000
+  }
+  isTranche_1() {
+    this.calculBaseIrsaArrondi()
+    return this.baseIrsaArrondi >= 350001 && this.baseIrsaArrondi <= 400000
+  }
+  isTranche_2() {
+    return this.baseIrsaArrondi >= 400001 && this.baseIrsaArrondi <= 500000
+  }
+  isTranche_3() {
+    return this.baseIrsaArrondi >= 500001 && this.baseIrsaArrondi <= 600000
+  }
+
+  calculIrsaTranche() {
+    if (this.isTranche_1()) {
+      this.irsaAPayer = (this.baseIrsaArrondi - 350000) * 0.05
+    } else if (this.isTranche_2()) {
+      this.irsaAPayer = 50000 * 0.05 + (this.baseIrsaArrondi - 400001) * 0.1
+    } else if (this.isTranche_3()) {
+      this.irsaAPayer = 50000 * 0.05 + 100000 * 0.1 + (this.baseIrsaArrondi - 500001) * 0.15
+    } else {
+      this.irsaAPayer =
+        50000 * 0.05 + 100000 * 0.1 + 100000 * 0.15 + (this.baseIrsaArrondi - 600001) * 0.2
+    }
+
+    if (this.irsaAPayer < 2000) {
+      this.irsaAPayer = 2000
+    }
+
+    console.log(this.irsaAPayer)
+  }
 
   //   GETTERS
+
+  getTauxCnaps() {
+    return this.tauxCnaps
+  }
+  getTauxOmsi() {
+    return this.tauxOmsi
+  }
+  getTotalDeduction() {
+    return this.totalDeduction
+  }
+  getTotalPrimeEtAvantage() {
+    return this.totalPrimeEtAvantage
+  }
+  getTotalHDim() {
+    return this.totalHDim
+  }
   getHsi150() {
     return this.hsi150
   }
@@ -109,5 +248,43 @@ export default class CalculateurPaie {
   getValHsi150() {
     this.calculValHsi150()
     return this.valHsi150
+  }
+
+  getValHdim() {
+    this.calculValHdim()
+    return this.valHdim
+  }
+  getSalaireBrut() {
+    this.calculSalaireBrut()
+    return this.salaireBrut
+  }
+
+  getBaseCnaps() {
+    this.calculBaseCnaps()
+    return this.baseCnaps
+  }
+
+  getOmsi() {
+    this.calculOmsi()
+    return this.omsi
+  }
+
+  getValCnaps() {
+    this.calculateCnaps()
+    return this.cnaps
+  }
+
+  getBaseIrsa() {
+    this.calculateBaseIrsa()
+    return this.baseIrsa
+  }
+
+  getBaseIrsaArrondi() {
+    this.calculBaseIrsaArrondi()
+    return this.baseIrsaArrondi
+  }
+  getIrsaAPayer() {
+    this.calculIrsaTranche()
+    return Math.round(this.irsaAPayer)
   }
 }

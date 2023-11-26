@@ -39,17 +39,48 @@ const SalaireBrut = () => {
     calc.setIsCadre(isCadre)
     calc.setHsi130(hsi130)
     calc.setHsi150(hsi150)
+    calc.setTotalHDim(totalHDim)
+    calc.setTotalDeduction(totalDeduction)
+    calc.setTotalPrimeEtAvantage(totalPrimeEtAvantage)
     return calc
-  }, [salaireDeBase, isCadre, hsni130, hsni150, hsi130, hsi150])
+  }, [
+    salaireDeBase,
+    isCadre,
+    hsni130,
+    totalPrimeEtAvantage,
+    totalDeduction,
+    hsni150,
+    hsi130,
+    hsi150,
+    totalHDim,
+  ])
 
   const valHsni130 = calculateurPaie.getValHsni130()
   const valHsni150 = calculateurPaie.getValHsni150()
   const valHsi130 = calculateurPaie.getValHsi130()
   const valHsi150 = calculateurPaie.getValHsi150()
+  const valHdim = calculateurPaie.getValHdim()
+  const salaireBrut = calculateurPaie.getSalaireBrut()
+  const baseCnaps_ = calculateurPaie.getBaseCnaps()
+  const omsi = calculateurPaie.getOmsi()
+  const cnaps = calculateurPaie.getValCnaps()
+  const baseIrsa_ = calculateurPaie.getBaseIrsa()
+  const baseIrsaArrondi = calculateurPaie.getBaseIrsaArrondi()
+  const irsaAPayer_ = calculateurPaie.getIrsaAPayer()
+
   console.log('valHsni130', valHsni130)
   console.log('valHsni150', valHsni150)
   console.log('valHsi130', valHsi130)
   console.log('valHsi150', valHsi150)
+  console.log('hsni150', hsni150)
+  console.log('valHdim', valHdim)
+  console.log('salaireBrut', salaireBrut)
+  console.log('baseCnaps_', baseCnaps_)
+  console.log('omsi', omsi)
+  console.log('cnaps', cnaps)
+  console.log('baseIrsa_', baseIrsa_)
+  console.log('baseIrsaArrondi', baseIrsaArrondi)
+  console.log('irsaAPayer_', irsaAPayer_)
 
   // -------------------------------
   // -------------------------------
@@ -217,7 +248,7 @@ const SalaireBrut = () => {
 
           <div className="sm:grid sm:grid-cols-2">
             <div className="font-medium p-3 border-b align-middle border-customRed-100">
-              Salaire brute:
+              Salaire brut:
             </div>
             <div className="text-right p-3 font-semibold  text-customRed-900 border-b align-middle border-customRed-100">
               {formatedSlaireBruteValue}
