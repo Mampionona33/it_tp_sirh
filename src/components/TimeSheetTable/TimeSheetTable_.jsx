@@ -422,6 +422,7 @@ const TimeSheetTable = (props) => {
     let hsni150 = 0
     let totalHS = 0
 
+    // somme des heurs sup
     for (const entry of data) {
       totalHS += entry.regularNightHours + entry.occasionalNightHours + entry.overtimeHoursDay
     }
