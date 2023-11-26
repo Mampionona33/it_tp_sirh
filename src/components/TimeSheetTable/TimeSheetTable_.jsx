@@ -377,12 +377,6 @@ const TimeSheetTable = (props) => {
         weeklyOvertimeHours += item.occasionalNightHours
         weeklyOvertimeHours += item.regularNightHours
 
-        console.log('item.date', item.date)
-        console.log('overtimeHoursDay', item.overtimeHoursDay)
-        console.log('occasionalNightHours', item.occasionalNightHours)
-        console.log('regularNightHours', item.regularNightHours)
-        console.log('weeklyOvertimeHours', weeklyOvertimeHours)
-
         if (
           isSaturday(new Date(item.date)) ||
           (index === data.length - 1 && weeklyOvertimeHours > 0)
