@@ -456,74 +456,18 @@ const TimeSheetTable = (props) => {
         const hsi150 =
           totalHs >= 18 && totalHs150 >= 2 ? totalHs150 - 2 : totalHs150 < 2 ? totalHs150 : 0
 
-        dispatch(setBulletinDePaie({ totalHn: totalHn }))
-
-        console.log('hsni130', hsni130)
-        console.log('hsni150', hsni150)
-        console.log('hsi130', hsi130)
-        console.log('hsi150', hsi150)
-
-        //     dispatch(setBulletinDePaie({ totalHn: totalHn }))
-        //     dispatch(
-        //       setBulletinDePaie({
-        //         totalHs: isCadre ? 0 : Math.round(totalHs * 100) / 100,
-        //       }),
-        //     )
-
-        //     dispatch(
-        //       setBulletinDePaie({ totalHs130: isCadre ? 0 : Math.round(totalHs130 * 100) / 100 }),
-        //     )
-        //     dispatch(
-        //       setBulletinDePaie({ totalHs150: isCadre ? 0 : Math.round(totalHs150 * 100) / 100 }),
-        //     )
-        //     dispatch(
-        //       setBulletinDePaie({
-        //         totalHs30: isCadre ? 0 : Math.round(newTotal.regularNightHours * 100) / 100,
-        //       }),
-        //     )
-        //     dispatch(
-        //       setBulletinDePaie({
-        //         totalHs50: isCadre ? 0 : Math.round(newTotal.occasionalNightHours * 100) / 100,
-        //       }),
-        //     )
-        //     dispatch(
-        //       setBulletinDePaie({
-        //         totalHDim: isCadre ? 0 : Math.round(newTotal.sundayHours * 100) / 100,
-        //       }),
-        //     )
-        //     dispatch(
-        //       setBulletinDePaie({
-        //         totalHFerier: isCadre ? 0 : Math.round(newTotal.holidayHours * 100) / 100,
-        //       }),
-        //     )
-
-        //     const newTotalHsni = calculateHSNI(data)
-
-        //     if (newTotal.overtimeHoursDay <= 20) {
-        //       // si totalHs <= 20 -> hsni130 = totalHs
-        //       dispatch(
-        //         setBulletinDePaie({
-        //           hsni130: isCadre
-        //             ? 0
-        //             : newTotal.overtimeHoursDay && Math.round(newTotal.overtimeHoursDay * 100) / 100,
-        //         }),
-        //       )
-        //     } else {
-        //       dispatch(
-        //         setBulletinDePaie({
-        //           hsni130: isCadre
-        //             ? 0
-        //             : newTotalHsni.hsni130 && Math.round(newTotalHsni.hsni130 * 100) / 100,
-        //         }),
-        //       )
-        //       dispatch(
-        //         setBulletinDePaie({
-        //           hsni150: isCadre
-        //             ? 0
-        //             : newTotalHsni.hsni150 && Math.round(newTotalHsni.hsni150 * 100) / 100,
-        //         }),
-        //       )
-        //     }
+        dispatch(
+          setBulletinDePaie({
+            totalHn: totalHn,
+            totalHs: totalHs,
+            hsni130: hsni130,
+            hsni150: hsni150,
+            totalHs130: totalHs130,
+            totalHs150: totalHs150,
+            hsi130: hsi130,
+            hsi150: hsi150,
+          }),
+        )
       }
     }
 
