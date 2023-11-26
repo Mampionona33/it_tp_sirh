@@ -106,7 +106,7 @@ const SalaireBrut = () => {
     },
     {
       title: 'HSI 130% :',
-      hours: `${hsi130}`,
+      hours: `${Math.round(hsi130 * 100) / 100}`,
       value: `${formatedHsi130Value}`,
     },
     {
