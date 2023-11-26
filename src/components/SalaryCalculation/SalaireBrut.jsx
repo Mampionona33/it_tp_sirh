@@ -41,8 +41,12 @@ const SalaireBrut = () => {
     calc.setTotalPrimeEtAvantage(totalPrimeEtAvantage)
     calc.setAvance(avance)
     calc.setTotalHFerie(totalHFerie)
+    calc.setTotalHs30(totalHs30)
+    calc.setTotalHs50(totalHs50)
     return calc
   }, [
+    totalHs50,
+    totalHs30,
     totalHFerie,
     avance,
     salaireDeBase,
@@ -74,6 +78,8 @@ const SalaireBrut = () => {
   const plafondSME = calculateurPaie.getPlafondSME()
   const tauxCnaps = calculateurPaie.getTauxCnaps()
   const tauxOmsi = calculateurPaie.getTauxOmsi()
+  const valHs30 = calculateurPaie.getValHs30()
+  const valHs50 = calculateurPaie.getValHs50()
 
   console.log('valHsni130', valHsni130)
   console.log('valHsni150', valHsni150)
@@ -156,8 +162,8 @@ const SalaireBrut = () => {
   const formatedHsni150Value = formatAriaryMga(valHsni150)
   const formatedHsi130Value = formatAriaryMga(valHsi130)
   const formatedHsi150Value = formatAriaryMga(valHsi150)
-  // const formatedHn30Value = formatAriaryMga(hn30_)
-  // const formatedHn50Value = formatAriaryMga(hn50_)
+  const formatedHn30Value = formatAriaryMga(valHs30)
+  const formatedHn50Value = formatAriaryMga(valHs50)
   const formatedHdimValue = formatAriaryMga(valHdim)
   const formatedSlaireBruteValue = formatAriaryMga(salaireBrut)
   const formatedSalaireBase = formatAriaryMga(salaireDeBase)
@@ -189,13 +195,12 @@ const SalaireBrut = () => {
     {
       title: 'HN 30% :',
       hours: `${totalHs30}`,
-      // il faut remplacer par un variable en fonction
-      value: `${0}`,
+      value: `${formatedHn30Value}`,
     },
     {
       title: 'HN 50% :',
       hours: `${totalHs50}`,
-      value: `${0}`,
+      value: `${formatedHn50Value}`,
     },
     {
       title: 'Hdim% :',
@@ -294,12 +299,12 @@ const SalaireBrut = () => {
     if (cnaps && mount) {
       dispatch(setBulletinDePaie({ cnaps: cnaps }))
     }
-    // if (hn30_ && mount) {
-    //   dispatch(setBulletinDePaie({ valeurHs30: hn30_ }))
-    // }
-    // if (hn50_ && mount) {
-    //   dispatch(setBulletinDePaie({ valeurHs50: hn50_ }))
-    // }
+    if (valHs30 && mount) {
+      dispatch(setBulletinDePaie({ valHs30: valHs30 }))
+    }
+    if (valHs50 && mount) {
+      dispatch(setBulletinDePaie({ valHs50: valHs50 }))
+    }
 
     if (baseIrsaArrondi && mount) {
       dispatch(setBulletinDePaie({ baseIrsaArrondi: baseIrsaArrondi }))
@@ -373,6 +378,8 @@ const SalaireBrut = () => {
       mount = false
     }
   }, [
+    valHs50,
+    valHs30,
     valHFerie,
     retenuSalaire,
     tauxOmsi,

@@ -29,9 +29,19 @@ export default class CalculateurPaie {
     this.salaireNetAPayer = 0
     this.totalHFerie = 0
     this.valHFerie = 0
+    this.valHs30 = 0
+    this.valHs50 = 0
+    this.totalHs30 = 0
+    this.totalHs50 = 0
   }
 
   //   SETTERS
+  setTotalHs50(totalHs50) {
+    this.totalHs50 = totalHs50
+  }
+  setTotalHs30(totalHs30) {
+    this.totalHs30 = totalHs30
+  }
   setTotalHFerie(totalHFerie) {
     this.totalHFerie = totalHFerie
   }
@@ -133,6 +143,17 @@ export default class CalculateurPaie {
       ? 0
       : this.roundToTwoDecimal((this.tauxHoraire * this.totalHDim * 40) / 100)
   }
+
+  calculValHs30() {
+    this.valHs30 = this.isCadre
+      ? 0
+      : this.roundToTwoDecimal((this.tauxHoraire * this.totalHs30 * 30) / 100)
+  }
+  calculValHs50() {
+    this.valHs50 = this.isCadre
+      ? 0
+      : this.roundToTwoDecimal((this.tauxHoraire * this.totalHs50 * 50) / 100)
+  }
   calclulValHFerie() {
     this.valHFerie = this.isCadre
       ? 0
@@ -144,8 +165,8 @@ export default class CalculateurPaie {
           this.salaireBase +
             this.totalPrimeEtAvantage +
             this.valHdim +
-            this.valHFerie +
-            -this.totalDeduction,
+            this.valHFerie -
+            this.totalDeduction,
         )
       : this.roundToTwoDecimal(
           this.salaireBase +
@@ -155,6 +176,8 @@ export default class CalculateurPaie {
             this.valHsi150 +
             this.valHdim +
             this.valHFerie +
+            this.valHs30 +
+            this.valHs50 +
             this.totalPrimeEtAvantage -
             this.totalDeduction,
         )
@@ -228,7 +251,9 @@ export default class CalculateurPaie {
   }
 
   //   GETTERS
-
+  getTotalHs30() {
+    return this.totalHs30
+  }
   getTotalHFerie() {
     return this.totalHFerie
   }
@@ -339,5 +364,16 @@ export default class CalculateurPaie {
   getValHFerie() {
     this.calclulValHFerie()
     return this.valHFerie
+  }
+  getValHs30() {
+    this.calculValHs30()
+    return this.valHs30
+  }
+  getTotalHs50() {
+    return this.totalHs50
+  }
+  getValHs50() {
+    this.calculValHs50()
+    return this.valHs50
   }
 }

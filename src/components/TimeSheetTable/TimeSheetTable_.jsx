@@ -33,6 +33,7 @@ const TimeSheetTable = (props) => {
   // const pageSizeOptions = [5, 10, 15, 20, 25, 30, 31]
   const dispatch = useDispatch()
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
+  const travDeNuit = useSelector((state) => state.bulletinDePaie.salarie.travDeNuit)
   const isCadre = salarie.cadre || false
   const listDateDebutDateFin = useSelector(
     (state) => state.parametreCalendrier.listDateDebutDateFin,
@@ -69,14 +70,25 @@ const TimeSheetTable = (props) => {
         hs = Math.round(hs * 100) / 100
       }
 
+      let hsNuitHabituel = 0
+      let hsNuitOccasionnel = 0
+
+      if (item.hs_de_nuit) {
+        if (travDeNuit) {
+          hsNuitHabituel = Math.round(item.hs_de_nuit * 100) / 100
+        } else {
+          hsNuitOccasionnel = Math.round(item.hs_de_nuit * 100) / 100
+        }
+      }
+
       return {
         employee: {
           id: id,
         },
         date: format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
         regularHoursDay: item.heure_normale ? Math.round(item.heure_normale * 100) / 100 : 0,
-        regularNightHours: item.hs_de_nuit ? Math.round(item.hs_de_nuit * 100) / 100 : 0,
-        occasionalNightHours: item.hs_de_nuit ? Math.round(item.hs_de_nuit * 100) / 100 : 0,
+        regularNightHours: hsNuitHabituel,
+        occasionalNightHours: hsNuitOccasionnel,
         overtimeHoursDay: hs,
         holidayHours: item.hs_jours_feries ? Math.round(item.hs_jours_feries * 100) / 100 : 0,
       }
@@ -438,6 +450,8 @@ const TimeSheetTable = (props) => {
         const totalHn = newTotal.regularHoursDay
         const totalHFerie = newTotal.holidayHours
         const totalHs = newTotal.overtimeHoursDay
+        const totalHs30 = newTotal.regularNightHours
+        const totalHs50 = newTotal.occasionalNightHours
         const totalHDim = newTotal.sundayHours
         const totalHs130 = newTotal.hs130
         const hsni130 = totalHs >= 18 ? 18 : totalHs
@@ -450,6 +464,8 @@ const TimeSheetTable = (props) => {
 
         dispatch(
           setBulletinDePaie({
+            totalHs50: totalHs50,
+            totalHs30: totalHs30,
             totalHn: totalHn,
             totalHs: totalHs,
             hsni130: hsni130,
