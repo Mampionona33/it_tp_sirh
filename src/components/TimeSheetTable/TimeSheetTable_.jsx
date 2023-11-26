@@ -85,11 +85,11 @@ const TimeSheetTable = (props) => {
           id: id,
         },
         date: format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
-        regularHoursDay: item.heure_normale && Math.round(item.heure_normale * 100) / 100,
-        regularNightHours: item.hs_de_nuit && Math.round(item.hs_de_nuit * 100) / 100,
-        occasionalNightHours: item.hs_de_nuit && Math.round(item.hs_de_nuit * 100) / 100,
+        regularHoursDay: item.heure_normale ? Math.round(item.heure_normale * 100) / 100 : 0,
+        regularNightHours: item.hs_de_nuit ? Math.round(item.hs_de_nuit * 100) / 100 : 0,
+        occasionalNightHours: item.hs_de_nuit ? Math.round(item.hs_de_nuit * 100) / 100 : 0,
         overtimeHoursDay: hs,
-        holidayHours: item.hs_jours_feries && Math.round(item.hs_jours_feries * 100) / 100,
+        holidayHours: item.hs_jours_feries ? Math.round(item.hs_jours_feries * 100) / 100 : 0,
       }
     })
 
@@ -373,12 +373,20 @@ const TimeSheetTable = (props) => {
         if (isMonday(new Date(item.date)) || index === 0) {
           weeklyOvertimeHours = 0
         }
-
         weeklyOvertimeHours += item.overtimeHoursDay
         weeklyOvertimeHours += item.occasionalNightHours
         weeklyOvertimeHours += item.regularNightHours
 
-        if (isSaturday(new Date(item.date)) || index === data.length - 1) {
+        console.log('item.date', item.date)
+        console.log('overtimeHoursDay', item.overtimeHoursDay)
+        console.log('occasionalNightHours', item.occasionalNightHours)
+        console.log('regularNightHours', item.regularNightHours)
+        console.log('weeklyOvertimeHours', weeklyOvertimeHours)
+
+        if (
+          isSaturday(new Date(item.date)) ||
+          (index === data.length - 1 && weeklyOvertimeHours > 0)
+        ) {
           total.hs130 += Math.min(weeklyOvertimeHours, 8)
           total.hs150 += Math.max(weeklyOvertimeHours - 8, 0)
         }

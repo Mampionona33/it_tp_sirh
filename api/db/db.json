@@ -933,10 +933,7 @@
   "/employeeHours": [
     {
       "id": 1,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "15/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 10,
@@ -945,10 +942,7 @@
     },
     {
       "id": 2,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "16/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -957,10 +951,7 @@
     },
     {
       "id": 3,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "17/12/2022",
       "heure_normale": 8,
       "heure_de_travail": "10",
@@ -969,10 +960,7 @@
     },
     {
       "id": 4,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "18/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.5,
@@ -981,22 +969,16 @@
     },
     {
       "id": 5,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "19/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 5.3,
-      "hs_de_nuit": [3, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
       "id": 6,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "20/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.1,
@@ -1005,10 +987,7 @@
     },
     {
       "id": 7,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "21/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1017,10 +996,7 @@
     },
     {
       "id": 8,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "22/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.5,
@@ -1029,10 +1005,7 @@
     },
     {
       "id": 9,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "23/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1041,22 +1014,16 @@
     },
     {
       "id": 10,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "24/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.2,
-      "hs_de_nuit": [2, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
       "id": 11,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "25/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.15,
@@ -1065,10 +1032,7 @@
     },
     {
       "id": 12,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "26/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.02,
@@ -1077,10 +1041,7 @@
     },
     {
       "id": 13,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "27/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1089,10 +1050,7 @@
     },
     {
       "id": 14,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "28/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1101,10 +1059,7 @@
     },
     {
       "id": 15,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "29/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1113,10 +1068,7 @@
     },
     {
       "id": 16,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "30/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.4,
@@ -1125,22 +1077,16 @@
     },
     {
       "id": 17,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "31/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.13,
-      "hs_de_nuit": [5, ""],
+      "hs_de_nuit": null,
       "hs_jours_feries": null
     },
     {
       "id": 18,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "01/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1149,10 +1095,7 @@
     },
     {
       "id": 19,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "02/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.3,
@@ -1161,10 +1104,7 @@
     },
     {
       "id": 20,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "03/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1173,10 +1113,7 @@
     },
     {
       "id": 21,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "04/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1185,10 +1122,7 @@
     },
     {
       "id": 22,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "05/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1197,10 +1131,7 @@
     },
     {
       "id": 23,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "06/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1209,10 +1140,7 @@
     },
     {
       "id": 24,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "07/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1221,10 +1149,7 @@
     },
     {
       "id": 25,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "08/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1233,10 +1158,7 @@
     },
     {
       "id": 26,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "09/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.1,
@@ -1245,10 +1167,7 @@
     },
     {
       "id": 27,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "10/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.25,
@@ -1257,10 +1176,7 @@
     },
     {
       "id": 28,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "11/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.1,
@@ -1269,10 +1185,7 @@
     },
     {
       "id": 29,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "12/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 9,
@@ -1281,10 +1194,7 @@
     },
     {
       "id": 30,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "13/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 10,
@@ -1293,10 +1203,7 @@
     },
     {
       "id": 31,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "14/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1305,10 +1212,7 @@
     },
     {
       "id": 32,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "15/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 10.2,
@@ -1317,10 +1221,7 @@
     },
     {
       "id": 33,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "16/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 12,
@@ -1329,10 +1230,7 @@
     },
     {
       "id": 34,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "17/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 10,
@@ -1341,10 +1239,7 @@
     },
     {
       "id": 35,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "18/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1353,10 +1248,7 @@
     },
     {
       "id": 36,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "19/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1365,10 +1257,7 @@
     },
     {
       "id": 37,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "20/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1377,10 +1266,7 @@
     },
     {
       "id": 38,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "21/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1389,10 +1275,7 @@
     },
     {
       "id": 39,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "22/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1401,10 +1284,7 @@
     },
     {
       "id": 40,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "23/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1413,10 +1293,7 @@
     },
     {
       "id": 41,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "24/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1425,10 +1302,7 @@
     },
     {
       "id": 42,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "employee": { "id": 1, "matricule": 345 },
       "date": "25/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 10,
@@ -1437,10 +1311,7 @@
     },
     {
       "id": 43,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "15/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1449,10 +1320,7 @@
     },
     {
       "id": 44,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "16/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1461,10 +1329,7 @@
     },
     {
       "id": 45,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "17/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1473,10 +1338,7 @@
     },
     {
       "id": 46,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "18/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1485,10 +1347,7 @@
     },
     {
       "id": 47,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "19/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1497,10 +1356,7 @@
     },
     {
       "id": 48,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "20/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1509,10 +1365,7 @@
     },
     {
       "id": 49,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "21/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 10,
@@ -1521,10 +1374,7 @@
     },
     {
       "id": 50,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "22/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.2,
@@ -1533,10 +1383,7 @@
     },
     {
       "id": 51,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "23/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1545,10 +1392,7 @@
     },
     {
       "id": 52,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "24/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1557,10 +1401,7 @@
     },
     {
       "id": 53,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "25/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1569,10 +1410,7 @@
     },
     {
       "id": 54,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "26/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.2,
@@ -1581,10 +1419,7 @@
     },
     {
       "id": 55,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "27/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1593,10 +1428,7 @@
     },
     {
       "id": 56,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "28/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1605,10 +1437,7 @@
     },
     {
       "id": 57,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "29/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.3,
@@ -1617,10 +1446,7 @@
     },
     {
       "id": 58,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "30/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8.5,
@@ -1629,10 +1455,7 @@
     },
     {
       "id": 59,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "31/12/2022",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1641,10 +1464,7 @@
     },
     {
       "id": 60,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "01/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.1,
@@ -1653,10 +1473,7 @@
     },
     {
       "id": 61,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "02/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.6,
@@ -1665,10 +1482,7 @@
     },
     {
       "id": 62,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "03/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1677,10 +1491,7 @@
     },
     {
       "id": 63,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "04/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1689,10 +1500,7 @@
     },
     {
       "id": 64,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "05/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1701,10 +1509,7 @@
     },
     {
       "id": 65,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "06/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1713,10 +1518,7 @@
     },
     {
       "id": 66,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "07/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.1,
@@ -1725,10 +1527,7 @@
     },
     {
       "id": 67,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "08/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.3,
@@ -1737,10 +1536,7 @@
     },
     {
       "id": 68,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "09/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.6,
@@ -1749,10 +1545,7 @@
     },
     {
       "id": 69,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "10/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1761,10 +1554,7 @@
     },
     {
       "id": 70,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "11/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 9,
@@ -1773,10 +1563,7 @@
     },
     {
       "id": 71,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "12/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 10,
@@ -1785,10 +1572,7 @@
     },
     {
       "id": 72,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "13/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1797,10 +1581,7 @@
     },
     {
       "id": 73,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "14/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.7,
@@ -1809,10 +1590,7 @@
     },
     {
       "id": 74,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "15/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1821,10 +1599,7 @@
     },
     {
       "id": 75,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "16/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1833,10 +1608,7 @@
     },
     {
       "id": 76,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "17/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1845,10 +1617,7 @@
     },
     {
       "id": 77,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "18/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 9,
@@ -1857,10 +1626,7 @@
     },
     {
       "id": 78,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "19/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1869,10 +1635,7 @@
     },
     {
       "id": 79,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "20/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.4,
@@ -1881,10 +1644,7 @@
     },
     {
       "id": 80,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "21/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
@@ -1893,10 +1653,7 @@
     },
     {
       "id": 81,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "22/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8.2,
@@ -1905,10 +1662,7 @@
     },
     {
       "id": 82,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "23/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 10,
@@ -1917,10 +1671,7 @@
     },
     {
       "id": 83,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "24/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 10.1,
@@ -1929,18 +1680,392 @@
     },
     {
       "id": 84,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "employee": { "id": 2, "matricule": 619 },
       "date": "25/01/2023",
       "heure_normale": 8,
       "heure_de_travail": 8,
       "hs_de_nuit": null,
       "hs_jours_feries": null
+    },
+    {
+      "id": 85,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "15/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 86,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "16/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 87,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "17/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": "10",
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 88,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "18/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 89,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "19/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 5.3,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 90,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "20/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.1,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 91,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "21/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 92,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "22/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 93,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "23/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 94,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "24/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.2,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 95,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "25/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.15,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 96,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "26/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.02,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 97,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "27/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 98,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "28/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 99,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "29/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 100,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "30/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.4,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 101,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "31/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.13,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 102,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "01/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 103,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "02/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.3,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 104,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "03/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 105,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "04/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 106,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "05/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 107,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "06/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 108,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "07/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 109,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "08/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 110,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "09/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.1,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 111,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "10/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.25,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 112,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "11/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.1,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 113,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "12/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 9,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 114,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "13/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 115,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "14/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 116,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "15/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10.2,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 117,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "16/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 12,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 118,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "17/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 119,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "18/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 120,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "19/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 121,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "20/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 122,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "21/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 123,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "22/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 124,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "23/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 125,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "24/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 126,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "25/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": 10
     }
   ],
-
   "/cotisations": [
     {
       "id": 1,
