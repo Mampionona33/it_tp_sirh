@@ -26,6 +26,7 @@ export default class CalculateurPaie {
     this.irsaAPayer = 0
     this.avance = 0
     this.salaireNet = 0
+    this.salaireNetAPayer = 0
   }
 
   //   SETTERS
@@ -168,6 +169,9 @@ export default class CalculateurPaie {
   calculSalaireNet() {
     this.salaireNet = this.baseIrsaArrondi - this.irsaAPayer
   }
+  calculSalaireNetAPayer() {
+    this.salaireNetAPayer = this.salaireNet - this.avance
+  }
 
   // Calcul Irsa a payer
   // ---------------------------------------------
@@ -302,5 +306,12 @@ export default class CalculateurPaie {
   getSalaireNet() {
     this.calculSalaireNet()
     return this.salaireNet
+  }
+  getSalaireNetAPayer() {
+    this.calculSalaireNetAPayer()
+    return this.salaireNetAPayer
+  }
+  getPlafondSME() {
+    return this.plafondSME
   }
 }

@@ -2,11 +2,6 @@ import React, { useMemo } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector, useDispatch } from 'react-redux'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
-// import {
-//   setHsni130Value,
-//   setHsni150Value,
-//   setSelectedEmployeSalaireBrut,
-// } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 import CalculPai from 'src/utils/CalculPaie'
 import CalculateurPaie from 'src/utils/CalculateurPaie'
@@ -64,13 +59,17 @@ const SalaireBrut = () => {
   const valHsi150 = calculateurPaie.getValHsi150()
   const valHdim = calculateurPaie.getValHdim()
   const salaireBrut = calculateurPaie.getSalaireBrut()
-  const baseCnaps_ = calculateurPaie.getBaseCnaps()
+  const baseCnaps = calculateurPaie.getBaseCnaps()
   const omsi = calculateurPaie.getOmsi()
   const cnaps = calculateurPaie.getValCnaps()
-  const baseIrsa_ = calculateurPaie.getBaseIrsa()
+  const baseIrsa = calculateurPaie.getBaseIrsa()
   const baseIrsaArrondi = calculateurPaie.getBaseIrsaArrondi()
-  const irsaAPayer_ = calculateurPaie.getIrsaAPayer()
+  const irsaAPayer = calculateurPaie.getIrsaAPayer()
   const salaireNet = calculateurPaie.getSalaireNet()
+  const salaireNetAPayer = calculateurPaie.getSalaireNetAPayer()
+  const plafondSME = calculateurPaie.getPlafondSME()
+  const tauxCnaps = calculateurPaie.getTauxCnaps()
+  const tauxOmsi = calculateurPaie.getTauxOmsi()
 
   console.log('valHsni130', valHsni130)
   console.log('valHsni150', valHsni150)
@@ -79,13 +78,14 @@ const SalaireBrut = () => {
   console.log('hsni150', hsni150)
   console.log('valHdim', valHdim)
   console.log('salaireBrut', salaireBrut)
-  console.log('baseCnaps_', baseCnaps_)
+  console.log('baseCnaps_', baseCnaps)
   console.log('omsi', omsi)
   console.log('cnaps', cnaps)
-  console.log('baseIrsa_', baseIrsa_)
+  console.log('baseIrsa_', baseIrsa)
   console.log('baseIrsaArrondi', baseIrsaArrondi)
-  console.log('irsaAPayer_', irsaAPayer_)
+  console.log('irsaAPayer_', irsaAPayer)
   console.log('salaireNet', salaireNet)
+  console.log('salaireNetAPayer', salaireNetAPayer)
 
   // -------------------------------
   // -------------------------------
@@ -121,41 +121,41 @@ const SalaireBrut = () => {
     totalPrimeEtAvantage,
   ])
 
-  const hsni130_ = calculPaie.getHsni130()
-  const hsni150_ = calculPaie.getHsni150()
-  const hsi130_ = calculPaie.getHsi130()
-  const hsi150_ = calculPaie.getHsi150()
-  const hn30_ = calculPaie.getHn30()
-  const hn50_ = calculPaie.getHn50()
-  const hdim_ = calculPaie.getHDim()
-  const salaireBrut_ = calculPaie.getSalaireBrut()
-  const cnaps_ = calculPaie.getCnaps()
-  const omsi_ = calculPaie.getOmsi()
-  const irsaArrondi = calculPaie.getBaseIrsaArrondi()
-  const salaireNet_ = calculPaie.getSalaireNet()
-  const salaireNetAPayer_ = calculPaie.getSalaireNetAPayer()
+  // const hsni130_ = calculPaie.getHsni130()
+  // const hsni150_ = calculPaie.getHsni150()
+  // const hsi130_ = calculPaie.getHsi130()
+  // const hsi150_ = calculPaie.getHsi150()
+  // const hn30_ = calculPaie.getHn30()
+  // const hn50_ = calculPaie.getHn50()
+  // const hdim_ = calculPaie.getHDim()
+  // const salaireBrut_ = calculPaie.getSalaireBrut()
+  // const cnaps_ = calculPaie.getCnaps()
+  // const omsi_ = calculPaie.getOmsi()
+  // const irsaArrondi = calculPaie.getBaseIrsaArrondi()
+  // const salaireNet_ = calculPaie.getSalaireNet()
+  // const salaireNetAPayer_ = calculPaie.getSalaireNetAPayer()
 
-  const baseIrsa = useMemo(() => {
-    return calculPaie.getBaseIrsa()
-  }, [calculPaie])
+  // const baseIrsa = useMemo(() => {
+  //   return calculPaie.getBaseIrsa()
+  // }, [calculPaie])
 
-  const baseCnaps = useMemo(() => {
-    return calculPaie.getBaseCnaps()
-  }, [calculPaie])
+  // const baseCnaps = useMemo(() => {
+  //   return calculPaie.getBaseCnaps()
+  // }, [calculPaie])
 
-  const plafondSME = calculPaie.getPlafondSME()
-  const tauxCnaps = calculPaie.getTauxCnaps()
-  const tauxOmsi = calculPaie.getTauxOmsi()
-  const irsaAPayer = calculPaie.getIrsaAPayer()
+  // const plafondSME = calculPaie.getPlafondSME()
+  // const tauxCnaps = calculPaie.getTauxCnaps()
+  // const tauxOmsi = calculPaie.getTauxOmsi()
+  // const irsaAPayer = calculPaie.getIrsaAPayer()
 
-  const formatedHsni130Value = formatAriaryMga(hsni130_)
-  const formatedHsni150Value = formatAriaryMga(hsni150_)
-  const formatedHsi130Value = formatAriaryMga(hsi130_)
-  const formatedHsi150Value = formatAriaryMga(hsi150_)
-  const formatedHn30Value = formatAriaryMga(hn30_)
-  const formatedHn50Value = formatAriaryMga(hn50_)
-  const formatedHdimValue = formatAriaryMga(hdim_)
-  const formatedSlaireBruteValue = formatAriaryMga(salaireBrut_)
+  const formatedHsni130Value = formatAriaryMga(valHsni130)
+  const formatedHsni150Value = formatAriaryMga(valHsni150)
+  const formatedHsi130Value = formatAriaryMga(valHsi130)
+  const formatedHsi150Value = formatAriaryMga(valHsi150)
+  // const formatedHn30Value = formatAriaryMga(hn30_)
+  // const formatedHn50Value = formatAriaryMga(hn50_)
+  const formatedHdimValue = formatAriaryMga(valHdim)
+  const formatedSlaireBruteValue = formatAriaryMga(salaireBrut)
   const formatedSalaireBase = formatAriaryMga(salaireDeBase)
   const formatedPrimeEtAvantage = formatAriaryMga(totalPrimeEtAvantage)
   const formatedRetenue = formatAriaryMga(totalDeduction)
@@ -184,12 +184,13 @@ const SalaireBrut = () => {
     {
       title: 'HN 30% :',
       hours: `${totalHs30}`,
-      value: `${formatedHn30Value}`,
+      // il faut remplacer par un variable en fonction
+      value: `${0}`,
     },
     {
       title: 'HN 50% :',
       hours: `${totalHs50}`,
-      value: `${formatedHn50Value}`,
+      value: `${0}`,
     },
     {
       title: 'Hdim% :',
@@ -266,59 +267,57 @@ const SalaireBrut = () => {
 
   React.useEffect(() => {
     let mount = true
-    if (salaireBrut_ && mount) {
-      dispatch(setBulletinDePaie({ salaireBrut: salaireBrut_ }))
+    if (salaireBrut && mount) {
+      dispatch(setBulletinDePaie({ salaireBrut: salaireBrut }))
     }
-    if (hsni130_) {
+    if (valHsni130) {
       if (mount) {
-        dispatch(setBulletinDePaie({ valeurHsni130: hsni130_ }))
+        dispatch(setBulletinDePaie({ valeurHsni130: valHsni130 }))
       }
     }
-    if (hsni150_ && mount) {
-      dispatch(setBulletinDePaie({ valeurHsni150: hsni150_ }))
+    if (valHsni150 && mount) {
+      dispatch(setBulletinDePaie({ valeurHsni150: valHsni150 }))
     }
-
-    if (hn30_ && mount) {
-      dispatch(setBulletinDePaie({ valeurHs30: hn30_ }))
-    }
-    if (hn50_ && mount) {
-      dispatch(setBulletinDePaie({ valeurHs50: hn50_ }))
-    }
-
     if (plafondSME && mount) {
       dispatch(setBulletinDePaie({ plafondSME: plafondSME }))
     }
-
-    if (cnaps_ && mount) {
-      dispatch(setBulletinDePaie({ cnaps: cnaps_ }))
+    if (cnaps && mount) {
+      dispatch(setBulletinDePaie({ cnaps: cnaps }))
     }
-    if (irsaArrondi && mount) {
-      dispatch(setBulletinDePaie({ irsaArrondi: irsaArrondi }))
+    // if (hn30_ && mount) {
+    //   dispatch(setBulletinDePaie({ valeurHs30: hn30_ }))
+    // }
+    // if (hn50_ && mount) {
+    //   dispatch(setBulletinDePaie({ valeurHs50: hn50_ }))
+    // }
+
+    if (baseIrsaArrondi && mount) {
+      dispatch(setBulletinDePaie({ baseIrsaArrondi: baseIrsaArrondi }))
     }
     if (irsaAPayer && mount) {
       dispatch(setBulletinDePaie({ irsaAPayer: irsaAPayer }))
     }
-    if (mount && salaireNet_) {
-      dispatch(setBulletinDePaie({ salaireNet: salaireNet_ }))
+    if (mount && salaireNet) {
+      dispatch(setBulletinDePaie({ salaireNet: salaireNet }))
     }
 
     if (baseIrsa && mount) {
       dispatch(setBulletinDePaie({ baseIrsa: baseIrsa }))
     }
 
-    if (irsaArrondi && mount) {
+    if (baseIrsaArrondi && mount) {
       const baseIrsaObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'irsa')
 
       if (baseIrsaObjectIndex === -1) {
         dispatch(
           setBulletinDePaie({
-            retenuSalaire: [...retenuSalaire, { label: 'irsa', montant: irsaArrondi }],
+            retenuSalaire: [...retenuSalaire, { label: 'irsa', montant: baseIrsaArrondi }],
           }),
         )
       }
     }
-    if (omsi_ && mount) {
-      dispatch(setBulletinDePaie({ omsi: omsi_ }))
+    if (omsi && mount) {
+      dispatch(setBulletinDePaie({ omsi: omsi }))
       if (tauxOmsi) {
         const omsiObjectIndex = retenuSalaire.findIndex(
           (ret) => ret.label === 'Retenue sur organisme sanitaire',
@@ -329,7 +328,7 @@ const SalaireBrut = () => {
             setBulletinDePaie({
               retenuSalaire: [
                 ...retenuSalaire,
-                { taux: tauxOmsi, label: 'Retenue sur organisme sanitaire', montant: omsi_ },
+                { taux: tauxOmsi, label: 'Retenue sur organisme sanitaire', montant: omsi },
               ],
             }),
           )
@@ -337,7 +336,7 @@ const SalaireBrut = () => {
       }
     }
 
-    if (mount && cnaps_ && baseCnaps && tauxCnaps) {
+    if (mount && cnaps && baseCnaps && tauxCnaps) {
       const cnapsObjectIndex = retenuSalaire.findIndex((ret) => ret.label === 'cnaps')
 
       if (cnapsObjectIndex === -1) {
@@ -345,39 +344,38 @@ const SalaireBrut = () => {
           setBulletinDePaie({
             retenuSalaire: [
               ...retenuSalaire,
-              { base: baseCnaps, taux: tauxCnaps, label: 'cnaps', montant: cnaps_ },
+              { base: baseCnaps, taux: tauxCnaps, label: 'cnaps', montant: cnaps },
             ],
           }),
         )
       }
     }
 
-    if (mount && salaireNetAPayer_) {
-      dispatch(setBulletinDePaie({ salaireNetAPayer: salaireNetAPayer_ }))
+    if (mount && salaireNetAPayer) {
+      dispatch(setBulletinDePaie({ salaireNetAPayer: salaireNetAPayer }))
     }
 
     return () => {
       mount = false
     }
   }, [
-    salaireNetAPayer_,
     retenuSalaire,
-    salaireNet_,
-    salaireBrut_,
-    tauxCnaps,
     tauxOmsi,
-    hsni130_,
-    plafondSME,
-    hsni150_,
-    hn30_,
-    hn50_,
+    salaireNetAPayer,
     dispatch,
-    cnaps_,
-    baseIrsa,
+    tauxCnaps,
+    valHsi150,
+    valHsni150,
     baseCnaps,
+    omsi,
+    salaireBrut,
+    valHsni130,
+    plafondSME,
+    cnaps,
+    baseIrsaArrondi,
+    baseIrsa,
     irsaAPayer,
-    omsi_,
-    irsaArrondi,
+    salaireNet,
   ])
 
   return (

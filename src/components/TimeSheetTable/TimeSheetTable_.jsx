@@ -442,7 +442,7 @@ const TimeSheetTable = (props) => {
         const hsni130 = totalHs >= 18 ? 18 : totalHs
         const hsi130 = totalHs >= 20 ? totalHs130 - 18 : 0
         const totalHs150 = newTotal.hs150
-        const hsni150 = totalHs === 0 || totalHs === 18 ? 0 : totalHs >= 20 ? 2 : totalHs - 18
+        const hsni150 = totalHs < 18 ? 0 : 2
 
         const hsi150 =
           totalHs >= 18 && totalHs150 >= 2 ? totalHs150 - 2 : totalHs150 < 2 ? totalHs150 : 0
