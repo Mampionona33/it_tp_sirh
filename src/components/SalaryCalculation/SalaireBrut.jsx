@@ -108,7 +108,7 @@ const SalaireBrut = () => {
   const data = [
     {
       title: 'HSNI 130% :',
-      hours: `${totalHs >= 20 ? hsni130 : totalHs130}`,
+      hours: `${totalHs >= 20 ? hsni130 : totalHs}`,
       value: `${formatedHsni130Value}`,
     },
     {
@@ -123,7 +123,7 @@ const SalaireBrut = () => {
     },
     {
       title: 'HSI 150% :',
-      hours: `${totalHs150 - hsni150}`,
+      hours: `${totalHs >= 18 ? totalHs150 - hsni150 : 0}`,
       value: `${formatedHsi150Value}`,
     },
     {

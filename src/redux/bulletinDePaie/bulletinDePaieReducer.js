@@ -18,6 +18,8 @@ const initialState = {
   totalHs150: 0,
   hsni130: 0,
   hsni150: 0,
+  hsi130: 0,
+  hsi150: 0,
   totalHs30: 0,
   totalHs50: 0,
   totalHDim: 0,

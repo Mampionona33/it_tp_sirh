@@ -13,15 +13,12 @@ class HeureService {
     this.dateDebut = dateDebut
     this.dateFin = dateFin
 
-    console.log(this.matricule)
-
     try {
       this.resp = await axios.post(`${this.REACT_APP_API_BASE_URL}/heuressupplementaires`, {
         matricule: matricule,
         dateDebut: dateDebut,
         dateFin: dateFin,
       })
-      console.log(this.resp)
       return this.resp.data
     } catch (error) {
       console.log(error)

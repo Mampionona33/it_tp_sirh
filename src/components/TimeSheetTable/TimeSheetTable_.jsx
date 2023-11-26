@@ -445,13 +445,13 @@ const TimeSheetTable = (props) => {
     if (data.length > 0) {
       if (mount) {
         const newTotal = calculateTotal()
-        dispatch(setTotalHNormal(newTotal.regularHoursDay))
-        dispatch(setTotalHs130(newTotal.hs130))
-        dispatch(setTotalHs150(newTotal.hs150))
-        dispatch(setTotalHs50(newTotal.occasionalNightHours))
-        dispatch(setTotalHs30(newTotal.regularNightHours))
-        dispatch(setTotalHdim(newTotal.sundayHours))
-        dispatch(setTotalHferier(newTotal.holidayHours))
+        // dispatch(setTotalHNormal(newTotal.regularHoursDay))
+        // dispatch(setTotalHs130(newTotal.hs130))
+        // dispatch(setTotalHs150(newTotal.hs150))
+        // dispatch(setTotalHs50(newTotal.occasionalNightHours))
+        // dispatch(setTotalHs30(newTotal.regularNightHours))
+        // dispatch(setTotalHdim(newTotal.sundayHours))
+        // dispatch(setTotalHferier(newTotal.holidayHours))
 
         dispatch(setBulletinDePaie({ totalHn: newTotal.regularHoursDay }))
         dispatch(
@@ -487,27 +487,31 @@ const TimeSheetTable = (props) => {
         )
 
         const newTotalHsni = calculateHSNI(data)
-        dispatch(
-          setTotalHsni130(newTotalHsni.hsni130 && Math.round(newTotalHsni.hsni130 * 100) / 100),
-        )
-        dispatch(
-          setTotalHsni150(newTotalHsni.hsni150 && Math.round(newTotalHsni.hsni150 * 100) / 100),
-        )
 
-        dispatch(
-          setBulletinDePaie({
-            hsni130: isCadre
-              ? 0
-              : newTotalHsni.hsni130 && Math.round(newTotalHsni.hsni130 * 100) / 100,
-          }),
-        )
-        dispatch(
-          setBulletinDePaie({
-            hsni150: isCadre
-              ? 0
-              : newTotalHsni.hsni150 && Math.round(newTotalHsni.hsni150 * 100) / 100,
-          }),
-        )
+        if (newTotal.overtimeHoursDay <= 20) {
+          dispatch(
+            setBulletinDePaie({
+              hsni130: isCadre
+                ? 0
+                : newTotal.overtimeHoursDay && Math.round(newTotal.overtimeHoursDay * 100) / 100,
+            }),
+          )
+        } else {
+          dispatch(
+            setBulletinDePaie({
+              hsni130: isCadre
+                ? 0
+                : newTotalHsni.hsni130 && Math.round(newTotalHsni.hsni130 * 100) / 100,
+            }),
+          )
+          dispatch(
+            setBulletinDePaie({
+              hsni150: isCadre
+                ? 0
+                : newTotalHsni.hsni150 && Math.round(newTotalHsni.hsni150 * 100) / 100,
+            }),
+          )
+        }
       }
     }
 
