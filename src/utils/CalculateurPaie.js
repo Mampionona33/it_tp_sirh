@@ -208,7 +208,7 @@ export default class CalculateurPaie {
     this.baseIrsaArrondi = Math.floor(this.baseIrsa / 100) * 100
   }
   calculSalaireNet() {
-    this.salaireNet = this.baseIrsaArrondi - this.irsaAPayer
+    this.salaireNet = Math.round(this.baseIrsaArrondi - this.irsaAPayer)
   }
   calculSalaireNetAPayer() {
     this.salaireNetAPayer = this.salaireNet - this.avance

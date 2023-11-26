@@ -83,9 +83,9 @@ export default function Section3(props) {
   const indemnites = props.data.ajoutSalaire ? [props.data.ajoutSalaire].flat() : []
   const retenues = props.data.retenuSalaire ? [props.data.retenuSalaire].flat() : []
   const sousTotal = props.data.totalDeduction
-  const irsa = props.data.irsaArrondi
+  const baseIrsaArrondi = props.data.baseIrsaArrondi
   const cnaps = props.data.cnaps
-  const totalRetenues = sousTotal + irsa + cnaps
+  const totalRetenues = sousTotal + baseIrsaArrondi + cnaps
   const totalIndemnite = props.data.totalPrimeEtAvantage
   const salaireNet = props.data.salaireNet
   const avance = props.data.avance
