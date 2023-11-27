@@ -6,8 +6,7 @@ import { saveAs } from 'file-saver'
 import Section1 from './Section1'
 import Section2 from './Section2'
 import Section3 from './Section3'
-import { cilSave } from '@coreui/icons'
-import CIcon from '@coreui/icons-react'
+import { FolderArrowDownIcon } from '@heroicons/react/24/outline'
 
 // Create Document Component
 const MyDocument = ({ salarie, bulletinDePaie }) => {
@@ -48,9 +47,9 @@ const BulletinPaie = () => {
         </PDFViewer>
       </div>
       <div className="flex fixed top-[15%] right-0">
-        <button type="button" className="btn btn-primary" onClick={handleclickDownload}>
+        <button type="button" className="btn btn-primary p-1" onClick={handleclickDownload}>
           <span className="group flex flex-row items-center">
-            <CIcon icon={cilSave} />
+            <FolderArrowDownIcon className="w-6 h-6" />
             <span className="ml-2 hidden group-hover:flex capitalize">télécharger</span>
           </span>
         </button>
