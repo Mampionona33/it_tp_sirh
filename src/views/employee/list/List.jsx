@@ -114,9 +114,9 @@ const List = () => {
           <div className="flex">
             <MoreButtonMenu
               items={[
-                { path: `/employees/fiche/${info.getValue()}`, label: 'Fiche employé' },
                 { path: `/employee/modifier/${info.getValue()}`, label: 'Modifier' },
                 { path: `/employee/supprimer/${info.getValue()}`, label: 'Supprimer' },
+                { path: `/employees/fiche/${info.getValue()}`, label: 'Fiche employé' },
               ]}
             />
           </div>
