@@ -48,7 +48,7 @@ const BulletinPaie = () => {
         </PDFViewer>
       </div>
       <div className="flex fixed top-[15%] right-0">
-        <button type="button" className="btn btn-danger" onClick={handleclickDownload}>
+        <button type="button" className="btn btn-primary" onClick={handleclickDownload}>
           <span className="group flex flex-row items-center">
             <CIcon icon={cilSave} />
             <span className="ml-2 hidden group-hover:flex capitalize">télécharger</span>
