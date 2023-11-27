@@ -6,7 +6,7 @@ const { parseISO, isWithinInterval, isValid, parse } = require('date-fns')
 
 app.use(express.json())
 const allowOriginsList = [
-  'https://3000-mampionona33-ittpsirh-hbhtjlk3zv1.ws-eu106.gitpod.io',
+  'https://3000-mampionona33-ittpsirh-hfgf7xmges8.ws-eu106.gitpod.io',
   'http://localhost:3000',
   'https://rv8tjn-3000.csb.app',
   'https://y4y2nk-8000.csb.app',
