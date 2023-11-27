@@ -8,7 +8,7 @@ const loadFile = (url, callback) => {
   PizZipUtils.getBinaryContent(url, callback)
 }
 
-const declarationDocxGenerator = (data) => {
+const declarationDocxGenerator = async (data) => {
   loadFile(docTemplate, function (error, content) {
     if (error) {
       throw error

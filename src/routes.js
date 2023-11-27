@@ -80,7 +80,7 @@ const routes = [
     exact: true,
   },
   {
-    path: '/employee/declaration-cnaps/:id',
+    path: '/employee/declaration-cnaps',
     name: 'Déclaration CNAPS',
     element: DeclarationCnaps,
     exact: true,

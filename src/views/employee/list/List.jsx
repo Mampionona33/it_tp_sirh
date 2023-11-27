@@ -115,12 +115,8 @@ const List = () => {
             <MoreButtonMenu
               items={[
                 { path: `/employees/fiche/${info.getValue()}`, label: 'Fiche employé' },
-                {
-                  path: `/employee/declaration-cnaps/${info.getValue()}`,
-                  label: 'Declaration cnaps',
-                },
-                // { path: `/employee/modifier/${info.getValue()}`, label: 'Modifier' },
-                // { path: `/employee/supprimer/${info.getValue()}`, label: 'Supprimer' },
+                { path: `/employee/modifier/${info.getValue()}`, label: 'Modifier' },
+                { path: `/employee/supprimer/${info.getValue()}`, label: 'Supprimer' },
               ]}
             />
           </div>
