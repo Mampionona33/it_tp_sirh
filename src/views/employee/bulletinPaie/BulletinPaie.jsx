@@ -12,7 +12,9 @@ import CIcon from '@coreui/icons-react'
 // Create Document Component
 const MyDocument = ({ salarie, bulletinDePaie }) => {
   return (
-    <Document title={`Bulletin de paie ${salarie.nom} ${salarie.prenom}`}>
+    <Document
+      title={`Bulletin de paie ${bulletinDePaie.salarie.nom} ${bulletinDePaie.salarie.prenom}`}
+    >
       <Page size="A4">
         <Section1 data={bulletinDePaie} />
         <Section2 data={bulletinDePaie} />
@@ -42,7 +44,7 @@ const BulletinPaie = () => {
     <>
       <div className="h-screen">
         <PDFViewer showToolbar={false} width="100%" height="100%">
-          <MyDocument salarie={selectedEmploye} bulletinDePaie={bulletinDePaie} />
+          <MyDocument salarie={salarie} bulletinDePaie={bulletinDePaie} />
         </PDFViewer>
       </div>
       <div className="flex fixed top-[15%] right-0">
