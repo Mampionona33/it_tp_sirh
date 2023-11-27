@@ -9,6 +9,9 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const ListEmployes = React.lazy(() => import('./views/employee/list/List'))
 const FicheEmploye = React.lazy(() => import('src/views/employee/fiche/Fiche'))
 const BulletinPaie = React.lazy(() => import('src/views/employee/bulletinPaie/BulletinPaie'))
+const DeclarationCnaps = React.lazy(() =>
+  import('src/views/employee/declarations/DeclarationCnaps'),
+)
 
 // Administration
 const ImportHeures = React.lazy(() => import('src/views/administration/ImportHeures/ImportHeures'))
@@ -66,6 +69,7 @@ const routes = [
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
 
+  // Employe path def
   { path: '/employees', name: 'Employés', element: Cards, exact: true },
   { path: '/employees/list', name: 'List', element: ListEmployes, exact: true },
   { path: '/employees/fiche/:id', name: 'Fiche', element: FicheEmploye, exact: true },
@@ -73,6 +77,12 @@ const routes = [
     path: '/employees/fiche/:id/:activeTabParam',
     name: 'Fiche',
     element: FicheEmploye,
+    exact: true,
+  },
+  {
+    path: '/employee/declaration-cnaps/:id',
+    name: 'Déclaration CNAPS',
+    element: DeclarationCnaps,
     exact: true,
   },
   { path: '/bulletin-de-paie/:id', name: 'Bulletin de paie', element: BulletinPaie, exact: true },
