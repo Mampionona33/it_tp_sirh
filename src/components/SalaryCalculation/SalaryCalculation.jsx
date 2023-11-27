@@ -28,8 +28,8 @@ const SalaryCalculation = () => {
           <SalaireNet />
           <SalaireNetAPayer />
         </div>
-        <div className="flex justify-end fixed top-[25%] p-1 right-0">
-          <Link to={`/bulletin-de-paie/${id}`} className="btn btn-primary">
+        <div className="flex justify-end fixed top-[15%] p-1 right-0">
+          <Link to={`/bulletin-de-paie/${id}`} className="btn btn-danger">
             <span className="flex items-center group">
               <DocumentTextIcon className="w-6 h-6" />
               <span className="ml-2 hidden group-hover:flex">Voir bulletin</span>

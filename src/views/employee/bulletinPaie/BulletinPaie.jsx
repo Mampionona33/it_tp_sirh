@@ -1,22 +1,22 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Document, PDFViewer, Font, pdf, Page } from '@react-pdf/renderer'
+import { Document, PDFViewer, pdf, Page } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import { saveAs } from 'file-saver'
 import Section1 from './Section1'
 import Section2 from './Section2'
 import Section3 from './Section3'
+import { cilSave } from '@coreui/icons'
+import CIcon from '@coreui/icons-react'
 
 // Create Document Component
-const MyDocument = (props) => {
-  const { data } = props
-  // console.log(salarie)
+const MyDocument = ({ salarie, bulletinDePaie }) => {
   return (
-    <Document title={`Bulletin de paie ${data.salarie.nom} ${data.salarie.prenom}`}>
+    <Document title={`Bulletin de paie ${salarie.nom} ${salarie.prenom}`}>
       <Page size="A4">
-        <Section1 data={data} />
-        <Section2 data={data} />
-        <Section3 data={data} />
+        <Section1 data={bulletinDePaie} />
+        <Section2 data={bulletinDePaie} />
+        <Section3 data={bulletinDePaie} />
       </Page>
     </Document>
   )
@@ -24,24 +24,34 @@ const MyDocument = (props) => {
 
 MyDocument.propTypes = {
   salarie: PropTypes.object,
-  data: PropTypes.object,
+  bulletinDePaie: PropTypes.object,
 }
 
 const BulletinPaie = () => {
-  const selecteEmploy = useSelector((state) => state.selectedEmploye.employe)
+  const selectedEmploye = useSelector((state) => state.selectedEmploye.employe)
   const bulletinDePaie = useSelector((state) => state.bulletinDePaie)
+  const salarie = useSelector((state) => state.bulletinDePaie.salarie)
 
-  // decommenter pour activer le telechargement personnalisé
-  // const pdfBlob = pdf(<MyDocument salarie={selecteEmploy} />)
-  //   .toBlob()
-  //   .then((blob) => saveAs(blob, 'test.pdf'))
+  const handleclickDownload = () => {
+    const pdfBlob = pdf(<MyDocument salarie={selectedEmploye} bulletinDePaie={bulletinDePaie} />)
+      .toBlob()
+      .then((blob) => saveAs(blob, `${salarie.nom}_${salarie.prenom}.pdf`))
+  }
 
   return (
     <>
       <div className="h-screen">
-        <PDFViewer width="100%" height="100%">
-          <MyDocument salarie={selecteEmploy} data={bulletinDePaie} />
+        <PDFViewer showToolbar={false} width="100%" height="100%">
+          <MyDocument salarie={selectedEmploye} bulletinDePaie={bulletinDePaie} />
         </PDFViewer>
+      </div>
+      <div className="flex fixed top-[15%] right-0">
+        <button type="button" className="btn btn-danger" onClick={handleclickDownload}>
+          <span className="group flex flex-row items-center">
+            <CIcon icon={cilSave} />
+            <span className="ml-2 hidden group-hover:flex capitalize">télécharger</span>
+          </span>
+        </button>
       </div>
     </>
   )
