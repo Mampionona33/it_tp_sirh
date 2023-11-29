@@ -9,6 +9,7 @@ const initialState = {
     stat: ' 50121 11 2003 0 00475',
     rcs: ' 2002B00608',
   },
+  dateSelectionne: null,
   salarie: {},
   dateDeVirement: 0,
   salaireDeBase: 0,

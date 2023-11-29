@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
 })
 
 const Section1 = (props) => {
+  const dateSelectionne = props.data.dateSelectionne
   return (
     <View>
       <View style={styles.header}>
@@ -166,7 +167,9 @@ const Section1 = (props) => {
           </View>
           <View style={[styles.tableCol, styles.cellBorderLeft2]}>
             <Text style={styles.tableCell}>
-              <Text style={[styles.textItalic, styles.textBoldItalic]}>Mois: </Text>
+              <Text style={[styles.textItalic, styles.textBoldItalic]}>
+                Mois: {dateSelectionne}
+              </Text>
             </Text>
           </View>
         </View>

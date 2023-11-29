@@ -340,6 +340,9 @@ const TimeSheetTable = (props) => {
 
   const handleDateChange = (newDate) => {
     filterDataByDate(newDate)
+    console.log(newDate)
+    const dateSelectionne = format(new Date(), 'MMM-dd', { locale: fr })
+    dispatch(setBulletinDePaie({ dateSelectionne: dateSelectionne }))
   }
 
   const calculateTotal = useCallback(() => {
