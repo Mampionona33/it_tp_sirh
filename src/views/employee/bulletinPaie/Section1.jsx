@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet } from '@react-pdf/renderer'
+import { Text, View } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import registerFonts from './font'
 import { styles } from './styles'
@@ -23,7 +23,16 @@ const Section1 = (props) => {
   const Line = ({ label, value, valueBold, marginBottom }) => {
     return (
       <View style={[styles.row, { width: '100%' }]}>
-        <Text style={[styles.cell, { width: '45%', padding: 2 }]}>{label}</Text>
+        <Text
+          style={[
+            styles.cell,
+            styles.textBoldItalic,
+            styles.textBold,
+            { width: '45%', padding: 2 },
+          ]}
+        >
+          {label}
+        </Text>
         <Text
           style={[
             styles.cell,
@@ -51,12 +60,12 @@ const Section1 = (props) => {
   const Employeur = () => {
     return (
       <>
-        <Line label={'Nom'} value={nomEmployeur} valueBold={true} />
-        <Line label={'Adresse'} value={addresseEmployeur} />
-        <Line label={'CP et Villes'} value={CP_et_VilleEmployeur} />
-        <Line label={'Numéro NIF'} value={nif} />
-        <Line label={'Numéro STAT'} value={stat} />
-        <Line label={'RSC'} value={rcs} marginBottom={15} />
+        <Line label={'Nom:'} value={nomEmployeur} valueBold={true} />
+        <Line label={'Adresse:'} value={addresseEmployeur} />
+        <Line label={'CP et Ville:'} value={CP_et_VilleEmployeur} />
+        <Line label={'Numéro NIF:'} value={nif} />
+        <Line label={'Numéro STAT:'} value={stat} />
+        <Line label={'RSC:'} value={rcs} marginBottom={15} />
       </>
     )
   }
@@ -65,10 +74,10 @@ const Section1 = (props) => {
     return (
       <>
         <Line label={'Nom et Prénom:'} value={`${nomPrenomSalarie} ${prenomSalarie}`} />
-        <Line label={'Fonction'} value={fonction} />
-        <Line label={'Numéro Matricule'} value={numMatriculSalarie} />
-        <Line label={'Catégorie'} value={catSalarie} />
-        <Line label={'Mois'} value={dateSelectionne} />
+        <Line label={'Fonction:'} value={fonction} />
+        <Line label={'Numéro Matricule:'} value={numMatriculSalarie} />
+        <Line label={'Catégorie:'} value={catSalarie} />
+        <Line label={'Mois:'} value={dateSelectionne} />
       </>
     )
   }
@@ -76,7 +85,12 @@ const Section1 = (props) => {
   return (
     <>
       <View style={[{ width: '100%' }]}>
-        <Text style={[{ textTransform: 'uppercase', textAlign: 'center', fontSize: 10 }]}>
+        <Text
+          style={[
+            styles.textBold,
+            { textTransform: 'uppercase', textAlign: 'center', fontSize: 11, padding: 1 },
+          ]}
+        >
           bulletin de paie
         </Text>
       </View>
@@ -84,14 +98,14 @@ const Section1 = (props) => {
         <Text
           style={[
             styles.borderRight,
+            styles.textBold,
             {
               width: '45%',
-              backgroundColor: 'red',
               fontSize: 10,
               textTransform: 'uppercase',
               paddingLeft: 5,
-              paddingBottom: 2,
-              paddingTop: 2,
+              paddingBottom: 1,
+              paddingTop: 1,
             },
           ]}
         >
@@ -99,25 +113,25 @@ const Section1 = (props) => {
         </Text>
         <Text
           style={[
+            styles.textBold,
             {
               width: '55%',
-              backgroundColor: 'green',
               fontSize: 11,
               textTransform: 'uppercase',
               paddingLeft: 5,
-              paddingBottom: 2,
-              paddingTop: 2,
+              paddingBottom: 1,
+              paddingTop: 1,
             },
           ]}
         >
           Salarie:
         </Text>
       </View>
-      <View style={[styles.row, styles.borderBottom, { width: '100%', backgroundColor: 'red' }]}>
+      <View style={[styles.row, styles.borderBottom, { width: '100%' }]}>
         <View style={[styles.borderRight, { width: '45%' }]}>
           <Employeur />
         </View>
-        <View style={[{ width: '55%', backgroundColor: 'blue' }]}>
+        <View style={[{ width: '55%' }]}>
           <Salarie />
         </View>
       </View>
