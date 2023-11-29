@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 import { employeesCategories } from 'src/db/db'
-import { format, parseISO } from 'date-fns'
+import { format } from 'date-fns'
 import { useSelector } from 'react-redux'
 import Loading from './Loading'
 
@@ -15,8 +15,11 @@ const FormInfoGalEmployee = (props) => {
     poste: '',
     telephone: '',
     manager: '',
+    adresse: '',
     email: '',
+    numCnaps: '',
     sexe: 'homme',
+    cadre: false,
     cat: '',
     dateEmbauche: '1991-01-01',
   })
@@ -129,13 +132,55 @@ const FormInfoGalEmployee = (props) => {
             />
           </div>
           <div className="col-12 col-lg-6">
-            <label className="form-label" htmlFor="matricule">
-              Poste
+            <label className="form-label capitalize" htmlFor="numCnaps">
+              N° de sécurité sociale
             </label>
             <input
               className="form-control"
               type="text"
-              name="post"
+              name="numCnaps"
+              id="numCnaps"
+              placeholder="A01200"
+              value={employee.numCnaps}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-12 col-lg-6">
+            <label className="form-label capitalize" htmlFor="adresse">
+              adresse
+            </label>
+            <input
+              className="form-control"
+              type="text"
+              name="adresse"
+              id="adresse"
+              placeholder="Toamasina"
+              value={employee.adresse}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-12 col-lg-6">
+            <label className="form-label capitalize" htmlFor="cin">
+              cin
+            </label>
+            <input
+              className="form-control"
+              type="text"
+              name="cin"
+              id="cin"
+              placeholder="000.000.000.000"
+              value={employee.cin}
+              onChange={handleChange}
+            />
+          </div>
+          <div className="col-12 col-lg-6">
+            <label className="form-label capitalize" htmlFor="poste">
+              fonction
+            </label>
+            <input
+              className="form-control"
+              type="text"
+              name="poste"
               id="poste"
               placeholder="Directeur"
               value={employee.poste}
@@ -184,6 +229,41 @@ const FormInfoGalEmployee = (props) => {
                 />
                 <label className="form-check-label" htmlFor="sexeFemme">
                   Femme
+                </label>
+              </div>
+            </fieldset>
+          </div>
+          <div className="col-12 col-lg-6">
+            <fieldset className="form-group">
+              <legend className="form-label text-base">Est un cadre</legend>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                  type="radio"
+                  name="cadre"
+                  id="cadreOui"
+                  value="oui"
+                  checked={employee.cadre === true}
+                  onChange={handleChange}
+                />
+                <label className="form-check-label" htmlFor="cadreOui">
+                  Oui
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                  type="radio"
+                  name="cadre"
+                  id="cadreNon"
+                  value="non"
+                  checked={employee.cadre !== true}
+                  onChange={handleChange}
+                />
+                <label className="form-check-label" htmlFor="cadreNon">
+                  Non
                 </label>
               </div>
             </fieldset>
