@@ -5,8 +5,12 @@ import { createColumnHelper } from '@tanstack/react-table'
 import MoreButtonMenu from 'src/components/MoreButtonMenu'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
-import { resetBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
+import {
+  resetBulletinDePaie,
+  setBulletinDePaie,
+} from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametreCalendrierReducer'
+import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
 
 const List = () => {
   const dispatch = useDispatch()
@@ -28,6 +32,9 @@ const List = () => {
       dispatch(fetchAllEmployees())
       dispatch(resetBulletinDePaie())
       dispatch(resetParametreCalendrier())
+      dispatch(setBulletinDePaie({ ajoutSalaire: [] }))
+      dispatch(setBulletinDePaie({ retenuSalaire: [] }))
+      dispatch(fetchAllMouvementSalaire())
     }
     return () => {
       mount = false

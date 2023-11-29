@@ -92,6 +92,8 @@ export default function Section3(props) {
   const salaireNetAPayer = props.data.salaireNetAPayer
   const dateVirement = format(new Date(), 'cccc dd MMMM uuuu', { locale: fr })
 
+  console.log(indemnites)
+
   const Header = () => {
     return (
       <View style={[styles.row, styles.textBold, { width: '100%', marginTop: '5mm' }]}>
