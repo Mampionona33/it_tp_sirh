@@ -148,7 +148,7 @@ const TimeSheetTable = (props) => {
 
       //   setData(filteredData)
     },
-    [salarie, setData, listDateDebutDateFin],
+    [salarie, setData, listDateDebutDateFin, formatDataFromBackend],
   )
 
   const columns = [
