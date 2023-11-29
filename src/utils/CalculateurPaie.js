@@ -246,8 +246,6 @@ export default class CalculateurPaie {
     if (this.irsaAPayer < 2000) {
       this.irsaAPayer = 2000
     }
-
-    console.log(this.irsaAPayer)
   }
 
   //   GETTERS
