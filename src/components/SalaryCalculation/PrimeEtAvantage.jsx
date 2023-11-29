@@ -1,10 +1,8 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useDispatch } from 'react-redux'
-// import { setPrimeEtAvantage } from 'src/redux/selectedEmploye/selectedEmployeReducer'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { useSelector } from 'react-redux'
-import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
 import mergeArraysByReferenceValue from 'src/utils/mergeArraysByReferenceValue'
 
 export default function PrimeEtAvantage() {
@@ -61,12 +59,10 @@ export default function PrimeEtAvantage() {
       const ajoutSalaireUp = mergeArraysByReferenceValue(ajoutSalaire, updatedAjoutSalaire, 'label')
       const retenuSalaireUp = mergeArraysByReferenceValue(retenuSalaire, updatedRetenue, 'label')
 
-      // alert(`Primes : ${primeEtAvantage} \nRetenues: ${deduction}`)
       dispatch(setBulletinDePaie({ totalPrimeEtAvantage: primeEtAvantage }))
       dispatch(setBulletinDePaie({ totalDeduction: deduction }))
       dispatch(setBulletinDePaie({ ajoutSalaire: ajoutSalaireUp }))
       dispatch(setBulletinDePaie({ retenuSalaire: retenuSalaireUp }))
-      // dispatch(setPrimeEtAvantage(primeEtAvantage))
       // setIsFormSubmitted(true)
     }
 

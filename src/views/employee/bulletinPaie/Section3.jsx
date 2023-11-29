@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, pdf } from '@react-pdf/renderer'
+import { Text, View } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import registerFonts from './font'
 import formatNumberWithSpaces from 'src/utils/formatNumberWithSpaces'
