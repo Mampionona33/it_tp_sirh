@@ -14,7 +14,9 @@
       "sexe": "femme",
       "salaireBase": 3444500,
       "cat": "1a",
-      "enfant": 3
+      "enfant": 3,
+      "adresse": "Antskaviro",
+      "numCnaps": "1034029683016"
     },
     {
       "id": 2,
@@ -30,7 +32,9 @@
       "sexe": "femme",
       "salaireBase": 800367,
       "cat": "c3",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Antskaviro",
+      "numCnaps": "278441002565"
     },
     {
       "id": 3,
@@ -46,7 +50,9 @@
       "sexe": "homme",
       "salaireBase": 2444500,
       "cat": "",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Ampahibe",
+      "numCnaps": "119288888481"
     },
     {
       "id": 4,
@@ -63,7 +69,9 @@
       "travDeNuit": true,
       "salaireBase": 505000,
       "cat": "",
-      "enfant": 2
+      "enfant": 2,
+      "adresse": "Antskaviro",
+      "numCnaps": "997847377539"
     },
     {
       "id": 5,
@@ -79,7 +87,9 @@
       "sexe": "homme",
       "salaireBase": 519810,
       "cat": "",
-      "enfant": 2
+      "enfant": 2,
+      "adresse": "Isotry",
+      "numCnaps": "1069476845038"
     },
     {
       "id": 6,
@@ -95,7 +105,9 @@
       "sexe": "homme",
       "salaireBase": 1157510,
       "cat": "1b",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Ampahibe",
+      "numCnaps": "440425539141"
     },
     {
       "id": 7,
@@ -111,7 +123,9 @@
       "sexe": "femme",
       "salaireBase": 1412612,
       "cat": "1a",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Ambohimanarina",
+      "numCnaps": "483175584886"
     },
     {
       "id": 8,
@@ -127,7 +141,9 @@
       "sexe": "homme",
       "salaireBase": 769755,
       "cat": "d1",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Besarety",
+      "numCnaps": "128661238568"
     },
     {
       "id": 9,
@@ -143,7 +159,9 @@
       "sexe": "homme",
       "salaireBase": 634147,
       "cat": "",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Antskaviro",
+      "numCnaps": "389851315734"
     },
     {
       "id": 10,
@@ -159,7 +177,9 @@
       "sexe": "femme",
       "salaireBase": 411224,
       "cat": "a2",
-      "enfant": 3
+      "enfant": 3,
+      "adresse": "Besarety",
+      "numCnaps": "195770223338"
     },
     {
       "id": 11,
@@ -175,7 +195,9 @@
       "sexe": "homme",
       "salaireBase": 411225,
       "cat": "b3",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Antskaviro",
+      "numCnaps": "293558468972"
     },
     {
       "id": 12,
@@ -191,7 +213,9 @@
       "sexe": "femme",
       "salaireBase": 411226,
       "cat": "d3",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Ambohimanarina",
+      "numCnaps": "588087018556"
     },
     {
       "id": 13,
@@ -207,7 +231,9 @@
       "sexe": "homme",
       "salaireBase": 411227,
       "cat": "c3",
-      "enfant": 2
+      "enfant": 2,
+      "adresse": "Ampahibe",
+      "numCnaps": "287875574526"
     },
     {
       "id": 14,
@@ -223,7 +249,9 @@
       "sexe": "femme",
       "salaireBase": 411228,
       "cat": "b2",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Antskaviro",
+      "numCnaps": "761667206963"
     },
     {
       "id": 15,
@@ -239,7 +267,9 @@
       "sexe": "homme",
       "salaireBase": 411229,
       "cat": "b2",
-      "enfant": 2
+      "enfant": 2,
+      "adresse": "Besarety",
+      "numCnaps": "787139447040"
     },
     {
       "id": 16,
@@ -255,7 +285,9 @@
       "sexe": "femme",
       "salaireBase": 411230,
       "cat": "2b",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Ambohimanarina",
+      "numCnaps": "141827838804"
     },
     {
       "id": 17,
@@ -271,7 +303,9 @@
       "sexe": "femme",
       "salaireBase": 411231,
       "cat": "c3",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Ambohimanarina",
+      "numCnaps": "1004363994987"
     },
     {
       "id": 18,
@@ -287,7 +321,9 @@
       "sexe": "homme",
       "salaireBase": 411232,
       "cat": "os3",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Isotry",
+      "numCnaps": "461221163030"
     },
     {
       "id": 19,
@@ -303,7 +339,9 @@
       "sexe": "femme",
       "salaireBase": 411233,
       "cat": "d2",
-      "enfant": 2
+      "enfant": 2,
+      "adresse": "Besarety",
+      "numCnaps": "288862081983"
     },
     {
       "id": 20,
@@ -319,7 +357,9 @@
       "sexe": "homme",
       "salaireBase": 411234,
       "cat": "d3",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Ambohimanarina",
+      "numCnaps": "734822881489"
     },
     {
       "id": 21,
@@ -335,7 +375,9 @@
       "sexe": "homme",
       "salaireBase": 411235,
       "cat": "b4",
-      "enfant": 4
+      "enfant": 4,
+      "adresse": "Antskaviro",
+      "numCnaps": "844717639724"
     },
     {
       "id": 22,
@@ -351,7 +393,9 @@
       "sexe": "homme",
       "salaireBase": 411236,
       "cat": "os2",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Besarety",
+      "numCnaps": "1020035224966"
     },
     {
       "id": 23,
@@ -367,7 +411,9 @@
       "sexe": "femme",
       "salaireBase": 411237,
       "cat": "b2",
-      "enfant": 4
+      "enfant": 4,
+      "adresse": "Ambohimanarina",
+      "numCnaps": "782007024633"
     },
     {
       "id": 24,
@@ -383,7 +429,9 @@
       "sexe": "homme",
       "salaireBase": 411238,
       "cat": "3a",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Isotry",
+      "numCnaps": "490287373153"
     },
     {
       "id": 25,
@@ -399,7 +447,9 @@
       "sexe": "femme",
       "salaireBase": 963632,
       "cat": "1b",
-      "enfant": 3
+      "enfant": 3,
+      "adresse": "Isotry",
+      "numCnaps": "984647809506"
     },
     {
       "id": 26,
@@ -415,7 +465,9 @@
       "sexe": "homme",
       "salaireBase": 838632,
       "cat": "d1",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Besarety",
+      "numCnaps": "1025576639342"
     },
     {
       "id": 27,
@@ -431,7 +483,9 @@
       "sexe": "homme",
       "salaireBase": 838633,
       "cat": "a2",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Ampahibe",
+      "numCnaps": "272551569087"
     },
     {
       "id": 28,
@@ -447,7 +501,9 @@
       "sexe": "homme",
       "salaireBase": 838634,
       "cat": "os1",
-      "enfant": 2
+      "enfant": 2,
+      "adresse": "Ambohimanarina",
+      "numCnaps": "508942059924"
     },
     {
       "id": 29,
@@ -463,7 +519,9 @@
       "sexe": "homme",
       "salaireBase": 838635,
       "cat": "os2",
-      "enfant": 6
+      "enfant": 6,
+      "adresse": "Ampahibe",
+      "numCnaps": "188744129482"
     },
     {
       "id": 30,
@@ -479,7 +537,9 @@
       "sexe": "femme",
       "salaireBase": 838636,
       "cat": "b4",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Isotry",
+      "numCnaps": "352563399089"
     },
     {
       "id": 31,
@@ -495,7 +555,9 @@
       "sexe": "femme",
       "salaireBase": 838637,
       "cat": "a2",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Antskaviro",
+      "numCnaps": "426037450564"
     },
     {
       "id": 32,
@@ -511,7 +573,9 @@
       "sexe": "homme",
       "salaireBase": 838638,
       "cat": "d3",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Ampahibe",
+      "numCnaps": "206078022922"
     },
     {
       "id": 33,
@@ -527,7 +591,9 @@
       "sexe": "femme",
       "salaireBase": 838639,
       "cat": "op1",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Antskaviro",
+      "numCnaps": "345971396177"
     },
     {
       "id": 34,
@@ -543,7 +609,9 @@
       "sexe": "femme",
       "salaireBase": 838640,
       "cat": "m2",
-      "enfant": 2
+      "enfant": 2,
+      "adresse": "Ampahibe",
+      "numCnaps": "210492338072"
     },
     {
       "id": 35,
@@ -559,7 +627,9 @@
       "sexe": "femme",
       "salaireBase": 838641,
       "cat": "c3",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Antskaviro",
+      "numCnaps": "313391590120"
     },
     {
       "id": 36,
@@ -575,7 +645,9 @@
       "sexe": "homme",
       "salaireBase": 838642,
       "cat": "c2",
-      "enfant": 3
+      "enfant": 3,
+      "adresse": "Antskaviro",
+      "numCnaps": "198179587759"
     },
     {
       "id": 37,
@@ -591,7 +663,9 @@
       "sexe": "femme",
       "salaireBase": 838643,
       "cat": "2b",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Besarety",
+      "numCnaps": "108604359134"
     },
     {
       "id": 38,
@@ -607,7 +681,9 @@
       "sexe": "homme",
       "salaireBase": 838644,
       "cat": "2b",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Ampahibe",
+      "numCnaps": "834371782437"
     },
     {
       "id": 39,
@@ -623,7 +699,9 @@
       "sexe": "homme",
       "salaireBase": 411239,
       "cat": "d2",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Ampahibe",
+      "numCnaps": "715872692268"
     },
     {
       "id": 40,
@@ -639,7 +717,9 @@
       "sexe": "homme",
       "salaireBase": 1412613,
       "cat": "a3",
-      "enfant": 2
+      "enfant": 2,
+      "adresse": "Ampahibe",
+      "numCnaps": "932672224524"
     },
     {
       "id": 41,
@@ -655,7 +735,9 @@
       "sexe": "homme",
       "salaireBase": 1412614,
       "cat": "os1",
-      "enfant": 5
+      "enfant": 5,
+      "adresse": "Besarety",
+      "numCnaps": "1063381452607"
     },
     {
       "id": 42,
@@ -671,7 +753,9 @@
       "sexe": "femme",
       "salaireBase": 1412615,
       "cat": "m2",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Besarety",
+      "numCnaps": "609025928761"
     },
     {
       "id": 43,
@@ -687,7 +771,9 @@
       "sexe": "homme",
       "salaireBase": 1412616,
       "cat": "d3",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Besarety",
+      "numCnaps": "270149710759"
     },
     {
       "id": 44,
@@ -703,7 +789,9 @@
       "sexe": "femme",
       "salaireBase": 3666360,
       "cat": "",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Besarety",
+      "numCnaps": "525720716564"
     },
     {
       "id": 45,
@@ -719,7 +807,9 @@
       "sexe": "femme",
       "salaireBase": 541444,
       "cat": "os3",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Antskaviro",
+      "numCnaps": "432777201824"
     },
     {
       "id": 46,
@@ -735,7 +825,9 @@
       "sexe": "femme",
       "salaireBase": 838632,
       "cat": "a1",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Antskaviro",
+      "numCnaps": "177030661238"
     },
     {
       "id": 47,
@@ -751,7 +843,9 @@
       "sexe": "femme",
       "salaireBase": 838632,
       "cat": "m2",
-      "enfant": 1
+      "enfant": 1,
+      "adresse": "Antskaviro",
+      "numCnaps": "200051667167"
     },
     {
       "id": 48,
@@ -767,7 +861,9 @@
       "sexe": "homme",
       "salaireBase": 603314,
       "cat": "",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Ampahibe",
+      "numCnaps": "376206123129"
     },
     {
       "id": 49,
@@ -783,7 +879,9 @@
       "sexe": "femme",
       "salaireBase": 411240,
       "cat": "op1",
-      "enfant": 3
+      "enfant": 3,
+      "adresse": "Ampahibe",
+      "numCnaps": "921520356849"
     },
     {
       "id": 50,
@@ -799,10 +897,11 @@
       "sexe": "femme",
       "salaireBase": 677408,
       "cat": "1b",
-      "enfant": null
+      "enfant": null,
+      "adresse": "Ampahibe",
+      "numCnaps": "876626911838"
     }
   ],
-
   "/employeesCategories": [
     {
       "id": 1,
