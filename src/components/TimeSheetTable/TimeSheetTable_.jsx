@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import {
   useReactTable,
@@ -104,7 +104,8 @@ const TimeSheetTable = (props) => {
   const filterDataByDate = useCallback(
     async (currentFilter) => {
       const matricul = salarie.matricule
-      const currentDate = currentFilter || new Date()
+      const currentDate = currentFilter ? currentFilter : new Date()
+      // console.log(currentDate)
       const currentMonth = new Date(currentDate).getMonth() + 1
       const prevMonth = currentMonth === 1 ? 12 : currentMonth - 1
       const currentYear = new Date(currentDate).getFullYear()
@@ -313,9 +314,9 @@ const TimeSheetTable = (props) => {
     }),
   ]
 
-  React.useEffect(() => {
+  useEffect(() => {
     let mount = true
-    if (salarie && employeeHours) {
+    if (salarie) {
       if (mount) {
         filterDataByDate()
       }
