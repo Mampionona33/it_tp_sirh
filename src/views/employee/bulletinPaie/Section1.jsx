@@ -88,7 +88,7 @@ const Section1 = (props) => {
         <Text
           style={[
             styles.textBold,
-            { textTransform: 'uppercase', textAlign: 'center', fontSize: 11, padding: 1 },
+            { textTransform: 'uppercase', textAlign: 'center', fontSize: 10, padding: 1 },
           ]}
         >
           bulletin de paie
