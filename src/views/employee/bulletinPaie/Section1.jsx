@@ -52,7 +52,7 @@ const Section1 = (props) => {
   }
   Line.propTypes = {
     label: PropTypes.string,
-    value: PropTypes.string,
+    value: PropTypes.string || PropTypes.number,
     valueBold: PropTypes.bool,
     marginBottom: PropTypes.number,
   }

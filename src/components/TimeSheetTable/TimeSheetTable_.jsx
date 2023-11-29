@@ -27,6 +27,7 @@ import MonthYearPicker from './MonthYearPicker'
 import { fr, enUS } from 'date-fns/locale'
 import { useDispatch, useSelector } from 'react-redux'
 import HeureService from 'src/services/HeureService'
+import convertHumanDateToIso from 'src/utils/convertHumanDateToIso'
 
 const TimeSheetTable = (props) => {
   const columnHelper = createColumnHelper()
@@ -56,46 +57,49 @@ const TimeSheetTable = (props) => {
 
   const [sorting, setSorting] = useState(defaultSorting)
 
-  const formatDataFromBackend = (bakendData, id) => {
-    const transFormedData = Array.from(bakendData).map((item) => {
-      const parsedDate = parse(item.date, 'dd/MM/yyyy', new Date())
+  const formatDataFromBackend = useCallback(
+    (bakendData, id) => {
+      const transFormedData = Array.from(bakendData).map((item) => {
+        const parsedDate = parse(item.date, 'dd/MM/yyyy', new Date())
 
-      let hs = null
-      if (item.heure_normale && item.heure_de_travail) {
-        hs = item.heure_de_travail - item.heure_normale
-      }
-      if (hs < 0) {
-        hs = null
-      } else {
-        hs = Math.round(hs * 100) / 100
-      }
-
-      let hsNuitHabituel = 0
-      let hsNuitOccasionnel = 0
-
-      if (item.hs_de_nuit) {
-        if (travDeNuit) {
-          hsNuitHabituel = Math.round(item.hs_de_nuit * 100) / 100
-        } else {
-          hsNuitOccasionnel = Math.round(item.hs_de_nuit * 100) / 100
+        let hs = null
+        if (item.heure_normale && item.heure_de_travail) {
+          hs = item.heure_de_travail - item.heure_normale
         }
-      }
+        if (hs < 0) {
+          hs = null
+        } else {
+          hs = Math.round(hs * 100) / 100
+        }
 
-      return {
-        employee: {
-          id: id,
-        },
-        date: format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
-        regularHoursDay: item.heure_normale ? Math.round(item.heure_normale * 100) / 100 : 0,
-        regularNightHours: hsNuitHabituel,
-        occasionalNightHours: hsNuitOccasionnel,
-        overtimeHoursDay: hs,
-        holidayHours: item.hs_jours_feries ? Math.round(item.hs_jours_feries * 100) / 100 : 0,
-      }
-    })
+        let hsNuitHabituel = 0
+        let hsNuitOccasionnel = 0
 
-    return transFormedData
-  }
+        if (item.hs_de_nuit) {
+          if (travDeNuit) {
+            hsNuitHabituel = Math.round(item.hs_de_nuit * 100) / 100
+          } else {
+            hsNuitOccasionnel = Math.round(item.hs_de_nuit * 100) / 100
+          }
+        }
+
+        return {
+          employee: {
+            id: id,
+          },
+          date: format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss.SSSxxx"),
+          regularHoursDay: item.heure_normale ? Math.round(item.heure_normale * 100) / 100 : 0,
+          regularNightHours: hsNuitHabituel,
+          occasionalNightHours: hsNuitOccasionnel,
+          overtimeHoursDay: hs,
+          holidayHours: item.hs_jours_feries ? Math.round(item.hs_jours_feries * 100) / 100 : 0,
+        }
+      })
+
+      return transFormedData
+    },
+    [travDeNuit],
+  )
 
   const filterDataByDate = useCallback(
     async (currentFilter) => {
@@ -132,8 +136,11 @@ const TimeSheetTable = (props) => {
         if (matricul && salarie && salarie.id) {
           const resp = await heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
           const transFormedData = formatDataFromBackend(resp, salarie.id)
-          // console.log(transFormedData)
           setData(transFormedData)
+
+          // Ajouter le jour "01" à la date de fin avant de l'utiliser dans parseISO
+          const parsedEndDate = convertHumanDateToIso(dateFinFormatted)
+          return parsedEndDate
         }
       } catch (error) {
         console.log(error)
@@ -338,10 +345,9 @@ const TimeSheetTable = (props) => {
   const headerGroups = table.getHeaderGroups()
   const rows = table.getRowModel().rows
 
-  const handleDateChange = (newDate) => {
-    filterDataByDate(newDate)
-    console.log(newDate)
-    const dateSelectionne = format(new Date(), 'MMM-dd', { locale: fr })
+  const handleDateChange = async (newDate) => {
+    const endDate = await filterDataByDate(newDate)
+    const dateSelectionne = format(new Date(endDate), 'MMM-dd', { locale: fr })
     dispatch(setBulletinDePaie({ dateSelectionne: dateSelectionne }))
   }
 
