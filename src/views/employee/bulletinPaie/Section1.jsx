@@ -77,30 +77,40 @@ registerFonts()
 const Section1 = (props) => {
   const dateSelectionne = props.data.dateSelectionne
   const nomEmployeur = props.data.employeur.nom
+  const addresseEmployeur = props.data.employeur.adresse
+  const CP_et_VilleEmployeur = props.data.employeur.CP_et_Ville
+  const nif = props.data.employeur.nif
+  const stat = props.data.employeur.stat
+  const rcs = props.data.employeur.rcs
+  const nomPrenomSalarie = props.data.salarie.nom
+
+  const Line = ({ label, value, valueBold }) => {
+    return (
+      <View style={[styles.row, { width: '100%' }]}>
+        <Text style={[styles.cell, valueBold && styles.textBold, { width: '45%', padding: 2 }]}>
+          {label}
+        </Text>
+        <Text style={[styles.cell, { width: '65%', textAlign: 'center', padding: 2 }]}>
+          {value}
+        </Text>
+      </View>
+    )
+  }
+  Line.propTypes = {
+    label: PropTypes.string,
+    value: PropTypes.string,
+    valueBold: PropTypes.bool,
+  }
 
   const Employeur = () => {
     return (
       <>
-        <View style={[styles.row, { width: '100%' }]}>
-          <View style={[styles.row, { width: '45%', backgroundColor: 'red' }]}>
-            <Text style={[styles.cell]}>Nom:</Text>
-          </View>
-          <View
-            style={[
-              styles.row,
-              {
-                width: '65%',
-                backgroundColor: 'blue',
-              },
-            ]}
-          >
-            <View style={[styles.cell, { justifyContent: 'center' }]}>
-              <Text style={[{ textAlign: 'center', backgroundColor: 'green', width: '100%' }]}>
-                {nomEmployeur}
-              </Text>
-            </View>
-          </View>
-        </View>
+        <Line label={'Nom'} value={nomEmployeur} valueBold={true} />
+        <Line label={'Adresse'} value={addresseEmployeur} />
+        <Line label={'CP et Villes'} value={CP_et_VilleEmployeur} />
+        <Line label={'Numéro NIF'} value={nif} />
+        <Line label={'Numéro STAT'} value={stat} />
+        <Line label={'RSC'} value={rcs} />
       </>
     )
   }
@@ -108,12 +118,7 @@ const Section1 = (props) => {
   const Salarie = () => {
     return (
       <>
-        <View style={[{ width: '45%' }]}>
-          <Text>Nom:</Text>
-        </View>
-        <View>
-          <Text></Text>
-        </View>
+        <Line label={'Nom et Prénom:'} value={nomPrenomSalarie} />
       </>
     )
   }
@@ -158,7 +163,7 @@ const Section1 = (props) => {
           Salarie:
         </Text>
       </View>
-      <View style={[{ width: '100%' }]}>
+      <View style={[styles.row, { width: '100%' }]}>
         <View style={[{ width: '45%' }]}>
           <Employeur data />
         </View>
