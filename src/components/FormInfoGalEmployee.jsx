@@ -72,6 +72,7 @@ const FormInfoGalEmployee = (props) => {
     const { name, value } = ev.target
     setEmployee({ ...employee, [name]: value })
   }
+
   const renderRadioButton = (value, label, id, condition) => (
     <div className="form-check" key={id}>
       <input
@@ -235,6 +236,13 @@ const FormInfoGalEmployee = (props) => {
               <legend className="form-label text-base">Sexe</legend>
               {renderRadioButton('homme', 'Homme', 'sexeHomme', 'Homme')}
               {renderRadioButton('femme', 'Femme', 'sexeFemme', 'Femme')}
+            </fieldset>
+          </div>
+          <div className="col-12 col-lg-6">
+            <fieldset className="form-group">
+              <legend className="form-label text-base">Cadre</legend>
+              {renderRadioButton('oui', 'Oui', 'cadreOui', 'Oui')}
+              {renderRadioButton('non', 'Non', 'cadreNon', 'Non')}
             </fieldset>
           </div>
 
