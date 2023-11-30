@@ -18,7 +18,7 @@ const FormInfoGalEmployee = (props) => {
     adresse: '',
     email: '',
     numCnaps: '',
-    sexe: 'homme',
+    sexe: 'Homme',
     cadre: false,
     cat: '',
     dateEmbauche: '1991-01-01',
@@ -69,12 +69,12 @@ const FormInfoGalEmployee = (props) => {
     const { name, value } = ev.target
     setEmployee({ ...employee, [name]: value })
   }
-
+  console.log(employee)
   return (
     <>
       {loadList === 'loading' ? <Loading /> : null}
       <div className="container">
-        <form className="row g-3">
+        <div className="row g-3">
           <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="nom">
               Nom
@@ -113,10 +113,11 @@ const FormInfoGalEmployee = (props) => {
               name="dateEmbauche"
               id="dateEmbauche"
               placeholder="Date d'embauche"
-              value={format(new Date(employee.dateEmbauche), 'yyyy-MM-dd')}
+              value={employee.dateEmbauche}
               onChange={handleChange}
             />
           </div>
+
           <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="matricule">
               Matricule
@@ -268,7 +269,7 @@ const FormInfoGalEmployee = (props) => {
               </div>
             </fieldset>
           </div>
-        </form>
+        </div>
       </div>
     </>
   )

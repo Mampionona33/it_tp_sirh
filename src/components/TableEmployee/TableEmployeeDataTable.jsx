@@ -12,7 +12,8 @@ import {
 import { format } from 'date-fns'
 import MoreButtonMenu from '../MoreButtonMenu'
 import { DebounceInput } from 'react-debounce-input'
-import { rankItem } from '@tanstack/match-sorter-utils'
+import CustomModal from '../CustomModal'
+import FormInfoGalEmployee from '../FormInfoGalEmployee'
 
 const TableEmployeeDataTable = () => {
   const dispatch = useDispatch()
@@ -168,6 +169,15 @@ const TableEmployeeDataTable = () => {
             className="p-2 text-black "
             placeholder="Rechercher"
           />
+        </div>
+        <div className="flex-grow-0 flex-shrink-0 ml-auto flex gap-2">
+          <CustomModal
+            iconBtnActivation={'add'}
+            totltipText="Ajouter employé"
+            modalTitle="Ajouter employé"
+          >
+            <FormInfoGalEmployee />
+          </CustomModal>
         </div>
       </div>
 
