@@ -1,9 +1,15 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
 import CustomPagination from '../CustomPagination'
-import { createColumnHelper, getCoreRowModel, useReactTable } from '@tanstack/react-table'
-import { format, parseISO } from 'date-fns'
+import {
+  createColumnHelper,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
+import { format } from 'date-fns'
 import MoreButtonMenu from '../MoreButtonMenu'
 
 const TableEmployeeDataTable = () => {
@@ -19,7 +25,6 @@ const TableEmployeeDataTable = () => {
     return () => (mount = false)
   }, [dispatch])
 
-  const pageSizeOptions = [5, 10, 15, 20, 25, 30]
   const columnHelper = createColumnHelper()
   console.log(data)
 
@@ -111,15 +116,35 @@ const TableEmployeeDataTable = () => {
     ],
     [],
   )
+  const [globalFilter, setGlobalFilter] = useState('')
+  const [rowSelection, setRowSelection] = useState({})
+  const pageSizeOptions = [5, 10, 15, 20, 25, 30]
 
   const table = useReactTable({
     data,
     columns,
+    onRowSelectionChange: setRowSelection,
+    onGlobalFilterChange: setGlobalFilter,
+    enableRowSelection: true,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    debugTable: false,
   })
 
   const headerGroups = table.getHeaderGroups()
   const rows = table.getRowModel().rows
+
+  useEffect(() => {
+    table.setState((prev) => ({
+      ...prev,
+      pagination: {
+        ...prev.pagination,
+        pageIndex: 0,
+        pageSize: 5,
+      },
+    }))
+  }, [table])
 
   return (
     <div className="overflow-x-auto">
@@ -163,6 +188,23 @@ const TableEmployeeDataTable = () => {
           )}
         </tbody>
       </table>
+      <div className="bg-gray-100 overflow-auto py-2 px-4">
+        <div className="flex justify-center  p-2 mt-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <CustomPagination
+              pageIndex={table.getState().pagination.pageIndex}
+              pageCount={table.getPageCount()}
+              goToPage={table.setPageIndex}
+              nextPage={table.nextPage}
+              previousPage={table.previousPage}
+              canNextPage={table.getCanNextPage()}
+              canPreviousPage={table.getCanPreviousPage()}
+              pageSizeOptions={pageSizeOptions}
+              setPageSize={table.setPageSize}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
