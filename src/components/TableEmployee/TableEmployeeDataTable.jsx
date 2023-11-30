@@ -11,11 +11,15 @@ import {
 } from '@tanstack/react-table'
 import { format } from 'date-fns'
 import MoreButtonMenu from '../MoreButtonMenu'
+import { DebounceInput } from 'react-debounce-input'
+import { rankItem } from '@tanstack/match-sorter-utils'
 
 const TableEmployeeDataTable = () => {
   const dispatch = useDispatch()
   const data = useSelector((state) => state.employeesList.list)
-
+  const [globalFilter, setGlobalFilter] = useState('')
+  const [rowSelection, setRowSelection] = useState({})
+  const pageSizeOptions = [5, 10, 15, 20, 25, 30]
   // recuperation list employé
   useEffect(() => {
     let mount = true
@@ -26,7 +30,6 @@ const TableEmployeeDataTable = () => {
   }, [dispatch])
 
   const columnHelper = createColumnHelper()
-  console.log(data)
 
   const columns = useMemo(
     () => [
@@ -67,13 +70,15 @@ const TableEmployeeDataTable = () => {
         cell: (info) => info.getValue(),
         header: () => 'matricule',
       }),
-      columnHelper.accessor('name', {
+      columnHelper.accessor('full_name', {
+        // Utilisez un nom de colonne unique
         cell: (info) => {
-          const nom = info.row.original.nom
-          const prenom = info.row.original.prenom
-          return `${prenom} ${nom}`
+          const nom = info.row.original.nom || ''
+          const prenom = info.row.original.prenom || ''
+          return `${nom} ${prenom} `
         },
         header: () => 'Nom et Prénom',
+        meta: () => ({}),
       }),
       columnHelper.accessor('cin', {
         cell: (info) => info.getValue(),
@@ -116,20 +121,35 @@ const TableEmployeeDataTable = () => {
     ],
     [],
   )
-  const [globalFilter, setGlobalFilter] = useState('')
-  const [rowSelection, setRowSelection] = useState({})
-  const pageSizeOptions = [5, 10, 15, 20, 25, 30]
+
+  const fuzzyFilter = (row, columnId, value, addMeta) => {
+    const nom = row.original.nom || ''
+    const prenom = row.original.prenom || ''
+    const fullName = String(nom + prenom).toLowerCase()
+
+    const itemRank = rankItem(fullName, value)
+    addMeta({
+      itemRank,
+    })
+
+    return itemRank.passed
+  }
 
   const table = useReactTable({
     data,
     columns,
+    state: { globalFilter, rowSelection },
     onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: setGlobalFilter,
     enableRowSelection: true,
+    globalFilterFn: fuzzyFilter,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     debugTable: false,
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
   })
 
   const headerGroups = table.getHeaderGroups()
@@ -147,48 +167,72 @@ const TableEmployeeDataTable = () => {
   }, [table])
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full table-auto ">
-        <thead className="text-sm uppercase text-gray-700 dark:text-gray-400 bg-stone-200">
-          {headerGroups.length > 0 &&
-            headerGroups.map((headerGroup, key) => (
-              <tr key={`headerRow_${key}`}>
-                {headerGroup.headers.map((header, headerIndex) => (
-                  <th scope="col" className="px-6 py-3" key={`header_${header.id}_${headerIndex}`}>
-                    {header.isPlaceholder
-                      ? null
-                      : header.column.columnDef.header(header.getContext())}
-                  </th>
-                ))}
+    <>
+      <div className="flex flex-row flex-wrap w-full bg-customRed-900 gap-4 px-4 py-2 text-white">
+        <div className="flex-grow">
+          <h5 className="text-2xl font-semibold mb-2">Liste employée</h5>
+        </div>
+        <div className="flex-grow-0 flex-shrink-0 flex">
+          <DebounceInput
+            value={globalFilter || ''}
+            onChange={(e) => {
+              const value = e.target.value
+              setGlobalFilter(String(value))
+            }}
+            className="p-2 text-black "
+            placeholder="Rechercher"
+          />
+        </div>
+      </div>
+
+      <div className="overflow-x-auto w-full">
+        <table className="w-full table-auto ">
+          <thead className="text-sm uppercase text-gray-700 dark:text-gray-400 bg-stone-200">
+            {headerGroups.length > 0 &&
+              headerGroups.map((headerGroup, key) => (
+                <tr key={`headerRow_${key}`}>
+                  {headerGroup.headers.map((header, headerIndex) => (
+                    <th
+                      scope="col"
+                      className="px-6 py-3"
+                      key={`header_${header.id}_${headerIndex}`}
+                    >
+                      {header.isPlaceholder
+                        ? null
+                        : header.column.columnDef.header(header.getContext())}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+          </thead>
+          <tbody>
+            {rows.length > 0 ? (
+              rows.map((row, rowIndex) => (
+                <tr
+                  key={`row_${rowIndex}`}
+                  className={`border-y border-customRed-100 ${
+                    rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-100'
+                  }`}
+                >
+                  {row.getVisibleCells().map((cell, cellIndex) => (
+                    <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2 text-sm">
+                      {cell.column.columnDef.cell(cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="10" className="text-lg font-medium p-4">
+                  Aucune donnée trouvée
+                </td>
               </tr>
-            ))}
-        </thead>
-        <tbody>
-          {rows.length > 0 ? (
-            rows.map((row, rowIndex) => (
-              <tr
-                key={`row_${rowIndex}`}
-                className={`border-y border-customRed-100 ${
-                  rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-100'
-                }`}
-              >
-                {row.getVisibleCells().map((cell, cellIndex) => (
-                  <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2 text-sm">
-                    {cell.column.columnDef.cell(cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="10" className="text-lg font-medium p-4">
-                Aucune donnée trouvée
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-      <div className="bg-gray-100 overflow-auto py-2 px-4">
+            )}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="bg-gray-100 overflow-auto py-2 px-4 w-full">
         <div className="flex justify-center  p-2 mt-2">
           <div className="flex flex-wrap items-center gap-2">
             <CustomPagination
@@ -205,7 +249,7 @@ const TableEmployeeDataTable = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
