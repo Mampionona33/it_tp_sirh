@@ -129,7 +129,7 @@ const TableEmployeeDataTable = ({ data }) => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    debugTable: true,
+    debugTable: false,
   })
 
   const headerGroups = table.getHeaderGroups()

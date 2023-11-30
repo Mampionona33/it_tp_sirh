@@ -21,7 +21,7 @@ const FormInfoGalEmployee = (props) => {
     sexe: 'Homme',
     cadre: false,
     cat: '',
-    dateEmbauche: new Date(),
+    dateEmbauche: null,
   })
   const loadList = useSelector((state) => state.employeesList.loading)
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
@@ -66,8 +66,6 @@ const FormInfoGalEmployee = (props) => {
   const handleSelectChange = (selectedOption) => {
     setEmployee({ ...employee, cat: selectedOption.value })
   }
-
-  console.log()
 
   const handleChange = (ev) => {
     const { name, value } = ev.target
@@ -116,7 +114,12 @@ const FormInfoGalEmployee = (props) => {
               name="dateEmbauche"
               id="dateEmbauche"
               placeholder="Date d'embauche"
-              value={format(new Date(employee.dateEmbauche), 'yyyy-MM-dd') || ''}
+              value={
+                format(
+                  new Date(employee.dateEmbauche ? employee.dateEmbauche : Date.now()),
+                  'yyyy-MM-dd',
+                ) || ''
+              }
               onChange={handleChange}
             />
           </div>
@@ -135,7 +138,7 @@ const FormInfoGalEmployee = (props) => {
               onChange={handleChange}
             />
           </div>
-          {/* <div className="col-12 col-lg-6">
+          <div className="col-12 col-lg-6">
             <label className="form-label capitalize" htmlFor="numCnaps">
               N° de sécurité sociale
             </label>
@@ -145,7 +148,7 @@ const FormInfoGalEmployee = (props) => {
               name="numCnaps"
               id="numCnaps"
               placeholder="A01200"
-              value={employee.numCnaps}
+              value={employee.numCnaps || ''}
               onChange={handleChange}
             />
           </div>
@@ -159,7 +162,7 @@ const FormInfoGalEmployee = (props) => {
               name="adresse"
               id="adresse"
               placeholder="Toamasina"
-              value={employee.adresse}
+              value={employee.adresse || ''}
               onChange={handleChange}
             />
           </div>
@@ -173,7 +176,7 @@ const FormInfoGalEmployee = (props) => {
               name="cin"
               id="cin"
               placeholder="000.000.000.000"
-              value={employee.cin}
+              value={employee.cin || ''}
               onChange={handleChange}
             />
           </div>
@@ -187,11 +190,11 @@ const FormInfoGalEmployee = (props) => {
               name="poste"
               id="poste"
               placeholder="Directeur"
-              value={employee.poste}
+              value={employee.poste || ''}
               onChange={handleChange}
             />
           </div>
-          <div className="col-12 col-lg-6">
+          {/* <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="cat">
               Catégorie
             </label>
