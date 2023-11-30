@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
 import CustomPagination from '../CustomPagination'
 import {
@@ -9,25 +9,17 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { format } from 'date-fns'
+import PropTypes from 'prop-types'
 import MoreButtonMenu from '../MoreButtonMenu'
 import { DebounceInput } from 'react-debounce-input'
 import CustomModal from '../CustomModal'
 import FormInfoGalEmployee from '../FormInfoGalEmployee'
 
-const TableEmployeeDataTable = () => {
+const TableEmployeeDataTable = ({ data }) => {
   const dispatch = useDispatch()
-  const data = useSelector((state) => state.employeesList.list)
   const [globalFilter, setGlobalFilter] = useState('')
   const [rowSelection, setRowSelection] = useState({})
   const pageSizeOptions = [5, 10, 15, 20, 25, 30]
-  // Formater les données de la table
-  const employeeData = data.map((item) => ({
-    ...item,
-    fullName: item.nom + ' ' + item.prenom,
-    dateEmbauche: format(new Date(item.dateEmbauche), ' dd MMM yyyy'),
-    cadre: item.cadre ? 'Oui' : '',
-  }))
 
   // recuperation list employé
   useEffect(() => {
@@ -35,6 +27,7 @@ const TableEmployeeDataTable = () => {
     if (mount) {
       dispatch(fetchAllEmployees())
     }
+
     return () => (mount = false)
   }, [dispatch])
 
@@ -123,11 +116,11 @@ const TableEmployeeDataTable = () => {
         ),
       }),
     ],
-    [],
+    [columnHelper],
   )
 
   const table = useReactTable({
-    data: employeeData,
+    data,
     columns,
     state: { globalFilter, rowSelection },
     onRowSelectionChange: setRowSelection,
@@ -136,7 +129,7 @@ const TableEmployeeDataTable = () => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    debugTable: false,
+    debugTable: true,
   })
 
   const headerGroups = table.getHeaderGroups()
@@ -247,6 +240,10 @@ const TableEmployeeDataTable = () => {
       </div>
     </>
   )
+}
+
+TableEmployeeDataTable.propTypes = {
+  data: PropTypes.array,
 }
 
 export default TableEmployeeDataTable

@@ -35,7 +35,7 @@ function CustomPagination({
         setPageSize(defaultPageSize)
       }
     }
-  }, [defaultPageSize])
+  }, [defaultPageSize, setPageSize])
 
   const renderPageNumbers = () => {
     return Array.from({ length: pageCount }, (_, index) => {

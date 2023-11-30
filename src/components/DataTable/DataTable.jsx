@@ -35,7 +35,7 @@ function DataTable({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    debugTable: false,
+    debugTable: true,
   })
 
   useEffect(() => {
