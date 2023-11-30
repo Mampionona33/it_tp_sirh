@@ -20,6 +20,14 @@ const TableEmployeeDataTable = () => {
   const [globalFilter, setGlobalFilter] = useState('')
   const [rowSelection, setRowSelection] = useState({})
   const pageSizeOptions = [5, 10, 15, 20, 25, 30]
+  // Formater les données de la table
+  const employeeData = data.map((item) => ({
+    ...item,
+    fullName: item.nom + ' ' + item.prenom,
+    dateEmbauche: format(new Date(item.dateEmbauche), ' dd MMM yyyy'),
+    cadre: item.cadre ? 'Oui' : '',
+  }))
+
   // recuperation list employé
   useEffect(() => {
     let mount = true
@@ -70,15 +78,10 @@ const TableEmployeeDataTable = () => {
         cell: (info) => info.getValue(),
         header: () => 'matricule',
       }),
-      columnHelper.accessor('full_name', {
+      columnHelper.accessor('fullName', {
         // Utilisez un nom de colonne unique
-        cell: (info) => {
-          const nom = info.row.original.nom || ''
-          const prenom = info.row.original.prenom || ''
-          return `${nom} ${prenom} `
-        },
+        cell: (info) => info.getValue(),
         header: () => 'Nom et Prénom',
-        meta: () => ({}),
       }),
       columnHelper.accessor('cin', {
         cell: (info) => info.getValue(),
@@ -89,7 +92,7 @@ const TableEmployeeDataTable = () => {
         header: () => 'adresse',
       }),
       columnHelper.accessor('dateEmbauche', {
-        cell: (info) => format(new Date(info.getValue()), 'dd MMM yyyy'),
+        cell: (info) => info.getValue(),
         header: () => "date d'ambauche",
       }),
       columnHelper.accessor('numCnaps', {
@@ -101,7 +104,7 @@ const TableEmployeeDataTable = () => {
         header: () => 'Fonction',
       }),
       columnHelper.accessor('cadre', {
-        cell: (info) => (info.getValue() ? 'Oui' : ''),
+        cell: (info) => info.getValue(),
         header: () => 'cadre',
       }),
       columnHelper.accessor('id', {
@@ -122,34 +125,17 @@ const TableEmployeeDataTable = () => {
     [],
   )
 
-  const fuzzyFilter = (row, columnId, value, addMeta) => {
-    const nom = row.original.nom || ''
-    const prenom = row.original.prenom || ''
-    const fullName = String(nom + prenom).toLowerCase()
-
-    const itemRank = rankItem(fullName, value)
-    addMeta({
-      itemRank,
-    })
-
-    return itemRank.passed
-  }
-
   const table = useReactTable({
-    data,
+    data: employeeData,
     columns,
     state: { globalFilter, rowSelection },
     onRowSelectionChange: setRowSelection,
     onGlobalFilterChange: setGlobalFilter,
     enableRowSelection: true,
-    globalFilterFn: fuzzyFilter,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     debugTable: false,
-    filterFns: {
-      fuzzy: fuzzyFilter,
-    },
   })
 
   const headerGroups = table.getHeaderGroups()
