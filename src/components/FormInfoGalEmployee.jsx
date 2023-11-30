@@ -194,7 +194,7 @@ const FormInfoGalEmployee = (props) => {
               onChange={handleChange}
             />
           </div>
-          {/* <div className="col-12 col-lg-6">
+          <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="cat">
               Catégorie
             </label>
@@ -203,11 +203,11 @@ const FormInfoGalEmployee = (props) => {
               menuPlacement="auto"
               onChange={handleSelectChange}
               options={employeesCategories}
-              value={employeesCategories.find((cat) => cat.value === employee.cat)}
+              value={employeesCategories.find((cat) => cat.value === employee.cat) || ''}
               styles={customStyles}
             />
           </div>
-          <div className="col-12 col-lg-6">
+          {/* <div className="col-12 col-lg-6">
             <fieldset className="form-group">
               <legend className="form-label text-base">Sexe</legend>
               <div className="form-check">
