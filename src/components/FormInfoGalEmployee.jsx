@@ -96,6 +96,23 @@ const FormInfoGalEmployee = (props) => {
     </div>
   )
 
+  const renderBooleanRadioButton = (label, value, id) => (
+    <div className="form-check" key={id}>
+      <input
+        className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+        type="radio"
+        name="cadre"
+        id={id}
+        value={value.toString()}
+        checked={employee.cadre === value || (employee.cadre === null && value === false)}
+        onChange={handleChange}
+      />
+      <label className="form-check-label" htmlFor={id}>
+        {label}
+      </label>
+    </div>
+  )
+
   const ModalInputText = ({ label, name, id, placeholder, value, onChange }) => {
     return (
       <div className="col-12 col-lg-6">
@@ -269,11 +286,46 @@ const FormInfoGalEmployee = (props) => {
           </div>
           <div className="col-12 col-lg-6">
             <fieldset className="form-group">
-              <legend className="form-label text-base">Cadre</legend>
-              {renderRadioButton('oui', 'Oui', 'cadreOui', 'Oui')}
-              {renderRadioButton('non', 'Non', 'cadreNon', 'Non')}
+              <legend className="form-label text-base">Est un cadre</legend>
+              {renderBooleanRadioButton('Oui', true, 'cadreOui')}
+              {renderBooleanRadioButton('Non', false, 'cadreNon')}
             </fieldset>
           </div>
+          {/* <div className="col-12 col-lg-6">
+            <fieldset className="form-group">
+              <legend className="form-label text-base">Est un cadre</legend>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                  type="radio"
+                  name="cadre"
+                  id="cadreOui"
+                  value="oui"
+                  checked={employee.cadre === true}
+                  onChange={handleChange}
+                />
+                <label className="form-check-label" htmlFor="cadreOui">
+                  Oui
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                  type="radio"
+                  name="cadre"
+                  id="cadreNon"
+                  value="non"
+                  checked={employee.cadre !== true}
+                  onChange={handleChange}
+                />
+                <label className="form-check-label" htmlFor="cadreNon">
+                  Non
+                </label>
+              </div>
+            </fieldset>
+          </div> */}
         </div>
       </div>
     </>
