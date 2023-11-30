@@ -4,6 +4,7 @@ import { employeesCategories } from 'src/db/db'
 import { format, isValid } from 'date-fns'
 import { useSelector } from 'react-redux'
 import Loading from './Loading'
+import { check } from 'prettier'
 
 const FormInfoGalEmployee = (props) => {
   const [employee, setEmployee] = useState({
@@ -18,7 +19,7 @@ const FormInfoGalEmployee = (props) => {
     adresse: '',
     email: '',
     numCnaps: '',
-    sexe: 'Homme',
+    sexe: null,
     cadre: false,
     cat: '',
     dateEmbauche: null,
@@ -71,6 +72,28 @@ const FormInfoGalEmployee = (props) => {
     const { name, value } = ev.target
     setEmployee({ ...employee, [name]: value })
   }
+  const renderRadioButton = (value, label, id, condition) => (
+    <div className="form-check" key={id}>
+      <input
+        className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+        type="radio"
+        name="sexe"
+        id={id}
+        value={value}
+        checked={
+          (employee.sexe && employee.sexe.toLowerCase() === condition.toLowerCase()) ||
+          (!employee.sexe && check)
+            ? true
+            : undefined
+        }
+        onChange={handleChange}
+      />
+      <label className="form-check-label" htmlFor={id}>
+        {label}
+      </label>
+    </div>
+  )
+
   return (
     <>
       {loadList === 'loading' ? <Loading /> : null}
@@ -207,40 +230,15 @@ const FormInfoGalEmployee = (props) => {
               styles={customStyles}
             />
           </div>
-          {/* <div className="col-12 col-lg-6">
+          <div className="col-12 col-lg-6">
             <fieldset className="form-group">
               <legend className="form-label text-base">Sexe</legend>
-              <div className="form-check">
-                <input
-                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
-                  type="radio"
-                  name="sexe"
-                  id="sexeHomme"
-                  value="homme"
-                  checked={employee.sexe === 'homme' || employee.sexe === 'Homme'}
-                  onChange={handleChange}
-                />
-                <label className="form-check-label" htmlFor="sexeHomme">
-                  Homme
-                </label>
-              </div>
-              <div className="form-check">
-                <input
-                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
-                  type="radio"
-                  name="sexe"
-                  id="sexeFemme"
-                  value="femme"
-                  checked={employee.sexe === 'femme' || employee.sexe === 'Femme'}
-                  onChange={handleChange}
-                />
-                <label className="form-check-label" htmlFor="sexeFemme">
-                  Femme
-                </label>
-              </div>
+              {renderRadioButton('homme', 'Homme', 'sexeHomme', 'Homme')}
+              {renderRadioButton('femme', 'Femme', 'sexeFemme', 'Femme')}
             </fieldset>
           </div>
-          <div className="col-12 col-lg-6">
+
+          {/* <div className="col-12 col-lg-6">
             <fieldset className="form-group">
               <legend className="form-label text-base">Est un cadre</legend>
 
