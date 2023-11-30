@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Select from 'react-select'
 import { employeesCategories } from 'src/db/db'
-import { format } from 'date-fns'
+import { format, isValid } from 'date-fns'
 import { useSelector } from 'react-redux'
 import Loading from './Loading'
 
@@ -21,7 +21,7 @@ const FormInfoGalEmployee = (props) => {
     sexe: 'Homme',
     cadre: false,
     cat: '',
-    dateEmbauche: '1991-01-01',
+    dateEmbauche: new Date(),
   })
   const loadList = useSelector((state) => state.employeesList.loading)
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
@@ -29,7 +29,9 @@ const FormInfoGalEmployee = (props) => {
   useEffect(() => {
     let mount = true
     if (mount && salarie) {
-      setEmployee(salarie)
+      setEmployee({
+        ...salarie,
+      })
     }
     return () => {
       mount = false
@@ -65,11 +67,12 @@ const FormInfoGalEmployee = (props) => {
     setEmployee({ ...employee, cat: selectedOption.value })
   }
 
+  console.log()
+
   const handleChange = (ev) => {
     const { name, value } = ev.target
     setEmployee({ ...employee, [name]: value })
   }
-  console.log(employee)
   return (
     <>
       {loadList === 'loading' ? <Loading /> : null}
@@ -85,7 +88,7 @@ const FormInfoGalEmployee = (props) => {
               name="nom"
               id="nom"
               placeholder="Nom"
-              value={employee.nom}
+              value={employee.nom || ''}
               onChange={handleChange}
             />
           </div>
@@ -99,7 +102,7 @@ const FormInfoGalEmployee = (props) => {
               name="prenom"
               id="prenom"
               placeholder="Prénom"
-              value={employee.prenom}
+              value={employee.prenom || ''}
               onChange={handleChange}
             />
           </div>
@@ -113,7 +116,7 @@ const FormInfoGalEmployee = (props) => {
               name="dateEmbauche"
               id="dateEmbauche"
               placeholder="Date d'embauche"
-              value={employee.dateEmbauche}
+              value={format(new Date(employee.dateEmbauche), 'yyyy-MM-dd') || ''}
               onChange={handleChange}
             />
           </div>
@@ -128,11 +131,11 @@ const FormInfoGalEmployee = (props) => {
               name="matricule"
               id="matricule"
               placeholder="A01200"
-              value={employee.matricule}
+              value={employee.matricule || ''}
               onChange={handleChange}
             />
           </div>
-          <div className="col-12 col-lg-6">
+          {/* <div className="col-12 col-lg-6">
             <label className="form-label capitalize" htmlFor="numCnaps">
               N° de sécurité sociale
             </label>
@@ -268,7 +271,7 @@ const FormInfoGalEmployee = (props) => {
                 </label>
               </div>
             </fieldset>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
