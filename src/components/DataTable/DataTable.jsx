@@ -96,7 +96,7 @@ function DataTable({
           ) : null}
           {exportCsvBtn ? (
             <>
-              <TableModal title="Export CSV" iconButtonShow="save" toolTip="Enregistrer" />
+              <TableModal title="Export CSV" iconButtonShow="save" toolTip="Export" />
             </>
           ) : null}
         </div>

@@ -11,6 +11,7 @@ import {
 } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametreCalendrierReducer'
 import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
+import TableEmployee from 'src/components/TableEmployee/TableEmployee'
 
 const List = () => {
   const dispatch = useDispatch()
@@ -121,8 +122,8 @@ const List = () => {
           <div className="flex">
             <MoreButtonMenu
               items={[
-                { path: `/employee/modifier/${info.getValue()}`, label: 'Modifier' },
-                { path: `/employee/supprimer/${info.getValue()}`, label: 'Supprimer' },
+                // { path: `/employee/modifier/${info.getValue()}`, label: 'Modifier' },
+                // { path: `/employee/supprimer/${info.getValue()}`, label: 'Supprimer' },
                 { path: `/employees/fiche/${info.getValue()}`, label: 'Fiche employé' },
               ]}
             />
@@ -134,21 +135,27 @@ const List = () => {
   )
 
   return (
-    <CRow>
-      <CCol xs={12}>
-        <DataTable
-          title="Liste employés"
-          data={employees ? employees : []}
-          columns={columns}
-          exportCsvBtn
-          importCsvBtn
-          modalAddFields={modalAddFields}
-          colorButtonShowModalImport="success"
-          modalImportCsvField={modalImportCsvField}
-        />
-      </CCol>
-    </CRow>
+    <>
+      <TableEmployee />
+    </>
   )
+
+  // return (
+  //   <CRow>
+  //     <CCol xs={12}>
+  //       <DataTable
+  //         title="Liste employés"
+  //         data={employees ? employees : []}
+  //         columns={columns}
+  //         exportCsvBtn
+  //         importCsvBtn
+  //         modalAddFields={modalAddFields}
+  //         colorButtonShowModalImport="success"
+  //         modalImportCsvField={modalImportCsvField}
+  //       />
+  //     </CCol>
+  //   </CRow>
+  // )
 }
 
 export default List
