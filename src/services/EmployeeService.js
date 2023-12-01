@@ -8,7 +8,7 @@ class EmployeeService {
 
   async getAll() {
     try {
-      const response = await axios.get(`${this.REACT_APP_API_BASE_URL}/listeemployes`, {
+      const response = await axios.get(`${this.REACT_APP_API_BASE_URL}/personnels`, {
         auth: {
           username: this.login,
           password: this.pass,
