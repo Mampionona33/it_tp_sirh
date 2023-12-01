@@ -301,6 +301,23 @@ const FormInfoGalEmployee = (props) => {
               styles={customStyles}
             />
           </div>
+
+          <div className="col-12 col-lg-6">
+            <label className="form-label capitalize" htmlFor="telephone">
+              télephone
+            </label>
+            <input
+              // required
+              className="form-control"
+              type="text"
+              name="telephone"
+              id="tel"
+              placeholder="06 00 00 00 00"
+              value={employee.telephone || ''}
+              onChange={handleChange}
+            />
+          </div>
+
           <div className="col-12 col-lg-6">
             <fieldset className="form-group">
               <legend className="form-label text-base">Genre</legend>
@@ -391,22 +408,6 @@ const FormInfoGalEmployee = (props) => {
                 </label>
               </div>
             </fieldset>
-          </div>
-
-          <div className="col-12 col-lg-6">
-            <label className="form-label capitalize" htmlFor="telephone">
-              télephone
-            </label>
-            <input
-              // required
-              className="form-control"
-              type="text"
-              name="telephone"
-              id="tel"
-              placeholder="06 00 00 00 00"
-              value={employee.telephone || ''}
-              onChange={handleChange}
-            />
           </div>
 
           <div className="col-12 col-lg-6">

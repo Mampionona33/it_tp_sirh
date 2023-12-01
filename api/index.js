@@ -33,7 +33,7 @@ app.post('/login', (req, res) => {
   }
 })
 
-app.get('/listeemployes', (req, res) => {
+app.get('/personnels', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*') // Allow any origin during development
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
 
