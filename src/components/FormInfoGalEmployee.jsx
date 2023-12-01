@@ -250,6 +250,7 @@ const FormInfoGalEmployee = (props) => {
               onChange={handleChange}
             />
           </div>
+
           <div className="col-12 col-lg-6">
             <label className="form-label capitalize" htmlFor="poste">
               fonction
@@ -265,6 +266,23 @@ const FormInfoGalEmployee = (props) => {
               onChange={handleChange}
             />
           </div>
+
+          <div className="col-12 col-lg-6">
+            <label className="form-label capitalize" htmlFor="email">
+              email
+            </label>
+            <input
+              // required
+              className="form-control"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="yN9kA@example.com"
+              value={employee.email || ''}
+              onChange={handleChange}
+            />
+          </div>
+
           <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="cat">
               Catégorie
@@ -392,19 +410,48 @@ const FormInfoGalEmployee = (props) => {
           </div>
 
           <div className="col-12 col-lg-6">
-            <label className="form-label capitalize" htmlFor="email">
-              email
-            </label>
-            <input
-              // required
-              className="form-control"
-              type="email"
-              name="email"
-              id="email"
-              placeholder="yN9kA@example.com"
-              value={employee.email || ''}
-              onChange={handleChange}
-            />
+            <fieldset className="form-group">
+              <legend className="form-label text-base">Travail de nuit</legend>
+              <div className="form-check">
+                <input
+                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                  type="radio"
+                  name="travDeNuit"
+                  id="travailDeNuitOui"
+                  value={true}
+                  checked={employee.travDeNuit === true}
+                  onChange={(ev) =>
+                    setEmployee((cu) => ({
+                      ...cu,
+                      travDeNuit: ev.target.checked,
+                    }))
+                  }
+                />
+                <label className="form-check-label" htmlFor="travailDeNuitOui">
+                  Oui
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                  type="radio"
+                  name="travDeNuit"
+                  id="travailDeNuitNon"
+                  value={false}
+                  checked={employee.travDeNuit !== true}
+                  onChange={(ev) =>
+                    setEmployee((cu) => ({
+                      ...cu,
+                      travDeNuit: !ev.target.checked,
+                    }))
+                  }
+                />
+                <label className="form-check-label" htmlFor="travailDeNuitNon">
+                  Non
+                </label>
+              </div>
+            </fieldset>
           </div>
         </div>
       </div>

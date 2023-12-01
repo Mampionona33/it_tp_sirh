@@ -164,6 +164,7 @@ const TableEmployeeDataTable = ({ data }) => {
     const enfant = data.target.enfant.value
     const salaireBase = data.target.salaireBase.value
     const telephone = data.target.telephone.value
+    const travDeNuit = data.target.travDeNuit.value
 
     try {
       const res = await employeeService.addEmployee({
@@ -182,6 +183,7 @@ const TableEmployeeDataTable = ({ data }) => {
         enfant: enfant,
         salaireBase: salaireBase,
         telephone: telephone,
+        travDeNuit: travDeNuit,
       })
       dispatch(fetchAllEmployees())
     } catch (error) {
