@@ -24,7 +24,7 @@ class EmployeeService {
     return axios.get(`${this.REACT_APP_API_BASE_URL}/employees/id=${id}`)
   }
 
-  async add(data) {
+  async addEmployee(data) {
     try {
       const response = await axios.post(`${this.REACT_APP_API_BASE_URL}/personnels/ajout`, data, {
         auth: {

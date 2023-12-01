@@ -14,12 +14,14 @@ import MoreButtonMenu from '../MoreButtonMenu'
 import { DebounceInput } from 'react-debounce-input'
 import CustomModal from '../CustomModal'
 import FormInfoGalEmployee from '../FormInfoGalEmployee'
+import EmployeeService from 'src/services/EmployeeService'
 
 const TableEmployeeDataTable = ({ data }) => {
   const dispatch = useDispatch()
   const [globalFilter, setGlobalFilter] = useState('')
   const [rowSelection, setRowSelection] = useState({})
   const pageSizeOptions = [5, 10, 15, 20, 25, 30]
+  const employeeService = EmployeeService
 
   // recuperation list employé
   useEffect(() => {
@@ -146,12 +148,45 @@ const TableEmployeeDataTable = ({ data }) => {
     }))
   }, [table])
 
-  const validateAddEmployee = (data) => {
-    console.log(data)
-  }
+  const handleAddEmployee = async (data) => {
+    const nom = data.target.nom.value
+    const prenom = data.target.prenom.value
+    const cin = data.target.cin.value
+    const adresse = data.target.adresse.value
+    const dateEmbauche = data.target.dateEmbauche.value
+    const numCnaps = data.target.numCnaps.value
+    const poste = data.target.poste.value
+    const cadre = data.target.cadre.value
+    const matricule = data.target.matricule.value
+    const sexe = data.target.sexe.value
+    const email = data.target.email.value
+    const cat = data.target.cat.value
+    const enfant = data.target.enfant.value
+    const salaireBase = data.target.salaireBase.value
+    const telephone = data.target.telephone.value
 
-  const handleAddEmployee = (data) => {
-    console.log(data.target.nom.value)
+    try {
+      const res = await employeeService.addEmployee({
+        nom: nom,
+        prenom: prenom,
+        cin: cin,
+        adresse: adresse,
+        dateEmbauche: dateEmbauche,
+        numCnaps: numCnaps,
+        poste: poste,
+        cadre: cadre,
+        email: email,
+        matricule: matricule,
+        sexe: sexe,
+        cat: cat,
+        enfant: enfant,
+        salaireBase: salaireBase,
+        telephone: telephone,
+      })
+      dispatch(fetchAllEmployees())
+    } catch (error) {
+      throw error
+    }
   }
 
   return (

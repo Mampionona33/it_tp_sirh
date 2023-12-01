@@ -15,13 +15,16 @@ const FormInfoGalEmployee = (props) => {
     prenom: '',
     poste: '',
     telephone: '',
-    manager: '',
+    enfant: 0,
     adresse: '',
     email: '',
     numCnaps: '',
     sexe: 'homme',
     cadre: false,
+    travDeNuit: 0,
     cat: '',
+    salaireBase: 0,
+    dateNaissance: null,
     dateEmbauche: null,
   })
   const loadList = useSelector((state) => state.employeesList.loading)
@@ -109,7 +112,7 @@ const FormInfoGalEmployee = (props) => {
               Nom
             </label>
             <input
-              required
+              // required
               className="form-control"
               type="text"
               name="nom"
@@ -124,7 +127,7 @@ const FormInfoGalEmployee = (props) => {
               Prénom
             </label>
             <input
-              required
+              // required
               className="form-control"
               type="text"
               name="prenom"
@@ -139,7 +142,7 @@ const FormInfoGalEmployee = (props) => {
               {`Date d'embauche`}
             </label>
             <input
-              required
+              // required
               className="form-control"
               type="date"
               name="dateEmbauche"
@@ -160,7 +163,7 @@ const FormInfoGalEmployee = (props) => {
               Matricule
             </label>
             <input
-              required
+              // required
               className="form-control"
               type="text"
               name="matricule"
@@ -189,7 +192,7 @@ const FormInfoGalEmployee = (props) => {
               adresse
             </label>
             <input
-              required
+              // required
               className="form-control"
               type="text"
               name="adresse"
@@ -199,12 +202,45 @@ const FormInfoGalEmployee = (props) => {
               onChange={handleChange}
             />
           </div>
+
+          <div className="col-12 col-lg-6">
+            <label className="form-label capitalize" htmlFor="salaireBase">
+              salaire de base
+            </label>
+            <input
+              // required
+              className="form-control"
+              type="number"
+              name="salaireBase"
+              id="salaireBase"
+              min={0}
+              value={employee.salaireBase || ''}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="col-12 col-lg-6">
+            <label className="form-label capitalize" htmlFor="enfant">
+              {`Nombre d'enfant à charge`}
+            </label>
+            <input
+              className="form-control"
+              // required
+              type="number"
+              name="enfant"
+              id="enfant"
+              min={0}
+              value={employee.enfant || ''}
+              onChange={handleChange}
+            />
+          </div>
+
           <div className="col-12 col-lg-6">
             <label className="form-label capitalize" htmlFor="cin">
               cin
             </label>
             <input
-              required
+              // required
               className="form-control"
               type="text"
               name="cin"
@@ -219,7 +255,7 @@ const FormInfoGalEmployee = (props) => {
               fonction
             </label>
             <input
-              required
+              // required
               className="form-control"
               type="text"
               name="poste"
@@ -235,8 +271,12 @@ const FormInfoGalEmployee = (props) => {
             </label>
             <Select
               {...props}
-              required
+              // required
               menuPlacement="auto"
+              id="cat"
+              name="cat"
+              className="basic-multi-select"
+              classNamePrefix="select"
               onChange={handleSelectChange}
               options={employeesCategories}
               value={employeesCategories.find((cat) => cat.value === employee.cat) || ''}
@@ -333,6 +373,38 @@ const FormInfoGalEmployee = (props) => {
                 </label>
               </div>
             </fieldset>
+          </div>
+
+          <div className="col-12 col-lg-6">
+            <label className="form-label capitalize" htmlFor="telephone">
+              télephone
+            </label>
+            <input
+              // required
+              className="form-control"
+              type="text"
+              name="telephone"
+              id="tel"
+              placeholder="06 00 00 00 00"
+              value={employee.telephone || ''}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="col-12 col-lg-6">
+            <label className="form-label capitalize" htmlFor="email">
+              email
+            </label>
+            <input
+              // required
+              className="form-control"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="yN9kA@example.com"
+              value={employee.email || ''}
+              onChange={handleChange}
+            />
           </div>
         </div>
       </div>
