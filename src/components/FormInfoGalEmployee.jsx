@@ -112,7 +112,7 @@ const FormInfoGalEmployee = (props) => {
               Nom
             </label>
             <input
-              // required
+              required
               className="form-control"
               type="text"
               name="nom"
@@ -127,7 +127,7 @@ const FormInfoGalEmployee = (props) => {
               Prénom
             </label>
             <input
-              // required
+              required
               className="form-control"
               type="text"
               name="prenom"
@@ -142,7 +142,7 @@ const FormInfoGalEmployee = (props) => {
               {`Date d'embauche`}
             </label>
             <input
-              // required
+              required
               className="form-control"
               type="date"
               name="dateEmbauche"
@@ -163,7 +163,7 @@ const FormInfoGalEmployee = (props) => {
               Matricule
             </label>
             <input
-              // required
+              required
               className="form-control"
               type="text"
               name="matricule"
@@ -192,7 +192,7 @@ const FormInfoGalEmployee = (props) => {
               adresse
             </label>
             <input
-              // required
+              required
               className="form-control"
               type="text"
               name="adresse"
@@ -208,7 +208,7 @@ const FormInfoGalEmployee = (props) => {
               salaire de base
             </label>
             <input
-              // required
+              required
               className="form-control"
               type="number"
               name="salaireBase"
@@ -225,12 +225,12 @@ const FormInfoGalEmployee = (props) => {
             </label>
             <input
               className="form-control"
-              // required
+              required
               type="number"
               name="enfant"
               id="enfant"
               min={0}
-              value={employee.enfant || ''}
+              value={employee.enfant || 0}
               onChange={handleChange}
             />
           </div>
@@ -240,7 +240,7 @@ const FormInfoGalEmployee = (props) => {
               cin
             </label>
             <input
-              // required
+              required
               className="form-control"
               type="text"
               name="cin"
@@ -256,7 +256,7 @@ const FormInfoGalEmployee = (props) => {
               fonction
             </label>
             <input
-              // required
+              required
               className="form-control"
               type="text"
               name="poste"
@@ -272,7 +272,7 @@ const FormInfoGalEmployee = (props) => {
               email
             </label>
             <input
-              // required
+              required
               className="form-control"
               type="email"
               name="email"
@@ -289,7 +289,7 @@ const FormInfoGalEmployee = (props) => {
             </label>
             <Select
               {...props}
-              // required
+              required
               menuPlacement="auto"
               id="cat"
               name="cat"
@@ -307,7 +307,7 @@ const FormInfoGalEmployee = (props) => {
               télephone
             </label>
             <input
-              // required
+              required
               className="form-control"
               type="text"
               name="telephone"
