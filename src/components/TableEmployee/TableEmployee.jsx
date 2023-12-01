@@ -14,12 +14,15 @@ export default function TableEmployee() {
    */
 
   const listEmploye = useSelector((state) => state.employeesList.list)
-  const employeeData = listEmploye.map((item) => ({
-    ...item,
-    fullName: item.nom + ' ' + item.prenom,
-    dateEmbauche: format(new Date(item.dateEmbauche), ' dd MMM yyyy'),
-    cadre: item.cadre ? 'Oui' : '',
-  }))
+  const employeeData =
+    listEmploye.length > 0
+      ? listEmploye.map((item) => ({
+          ...item,
+          fullName: item.nom + ' ' + item.prenom,
+          dateEmbauche: format(new Date(item.dateEmbauche), ' dd MMM yyyy'),
+          cadre: item.cadre ? 'Oui' : '',
+        }))
+      : []
 
   return (
     <div className="border shadow-sm overflow-hidden">
