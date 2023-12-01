@@ -11,11 +11,21 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Tooltip as ReactTooltip } from 'react-tooltip'
 
-function CustomModal({ modalTitle, iconBtnActivation, totltipText, children }) {
+function CustomModal({ modalTitle, iconBtnActivation, totltipText, children, handleSubMission }) {
   const [visible, setVisible] = useState(false)
 
   const handleClickBtn = () => {
     setVisible(!visible)
+  }
+
+  const handleClose = () => {
+    setVisible(false)
+  }
+
+  const handleSub = (ev) => {
+    ev.preventDefault()
+    handleSubMission(ev)
+    handleClose()
   }
 
   return (
@@ -27,19 +37,22 @@ function CustomModal({ modalTitle, iconBtnActivation, totltipText, children }) {
 
       <CModal
         visible={visible}
-        onClose={() => setVisible(false)}
+        onClose={handleClose}
+        size="lg"
         aria-labelledby="LiveDemoExampleLabel"
       >
-        <CForm>
-          <CModalHeader onClose={() => setVisible(false)}>
+        <CForm onSubmit={handleSub}>
+          <CModalHeader onClose={handleClose}>
             <CModalTitle id="LiveDemoExampleLabel">{modalTitle}</CModalTitle>
           </CModalHeader>
           <CModalBody>{children}</CModalBody>
           <CModalFooter>
-            <CButton color="secondary" onClick={() => setVisible(false)}>
+            <CButton color="secondary" onClick={handleClose}>
               Annuler
             </CButton>
-            <CButton color="danger">Valider</CButton>
+            <CButton type="submit" color="danger">
+              Valider
+            </CButton>
           </CModalFooter>
         </CForm>
       </CModal>
@@ -52,6 +65,7 @@ CustomModal.propTypes = {
   iconBtnActivation: PropTypes.string,
   totltipText: PropTypes.string,
   children: PropTypes.node,
+  handleSubMission: PropTypes.func,
 }
 
 export default CustomModal

@@ -146,6 +146,10 @@ const TableEmployeeDataTable = ({ data }) => {
     }))
   }, [table])
 
+  const handleAddEmployee = (data) => {
+    console.log(data.target.nom.value)
+  }
+
   return (
     <>
       <div className="flex flex-row flex-wrap w-full bg-customRed-900 gap-4 px-4 py-2 text-white">
@@ -168,6 +172,7 @@ const TableEmployeeDataTable = ({ data }) => {
             iconBtnActivation={'add'}
             totltipText="Ajouter employé"
             modalTitle="Ajouter employé"
+            handleSubMission={(data) => handleAddEmployee(data)}
           >
             <FormInfoGalEmployee />
           </CustomModal>
