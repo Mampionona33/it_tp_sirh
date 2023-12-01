@@ -20,7 +20,7 @@ const FormInfoGalEmployee = (props) => {
     email: '',
     numCnaps: '',
     sexe: 'homme',
-    cadre: false,
+    cadre: 0,
     travDeNuit: 0,
     cat: '',
     salaireBase: 0,
@@ -109,7 +109,7 @@ const FormInfoGalEmployee = (props) => {
         <div className="row g-3">
           <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="nom">
-              Nom
+              Nom *
             </label>
             <input
               required
@@ -124,7 +124,7 @@ const FormInfoGalEmployee = (props) => {
           </div>
           <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="prenom">
-              Prénom
+              Prénom *
             </label>
             <input
               required
@@ -160,7 +160,7 @@ const FormInfoGalEmployee = (props) => {
 
           <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="matricule">
-              Matricule
+              Matricule *
             </label>
             <input
               required
@@ -175,7 +175,7 @@ const FormInfoGalEmployee = (props) => {
           </div>
           <div className="col-12 col-lg-6">
             <label className="form-label capitalize" htmlFor="numCnaps">
-              N° de sécurité sociale
+              N° de sécurité sociale *
             </label>
             <input
               className="form-control"
@@ -189,7 +189,7 @@ const FormInfoGalEmployee = (props) => {
           </div>
           <div className="col-12 col-lg-6">
             <label className="form-label capitalize" htmlFor="adresse">
-              adresse
+              adresse *
             </label>
             <input
               required
@@ -205,7 +205,7 @@ const FormInfoGalEmployee = (props) => {
 
           <div className="col-12 col-lg-6">
             <label className="form-label capitalize" htmlFor="salaireBase">
-              salaire de base
+              salaire de base *
             </label>
             <input
               required
@@ -214,7 +214,7 @@ const FormInfoGalEmployee = (props) => {
               name="salaireBase"
               id="salaireBase"
               min={0}
-              value={employee.salaireBase || ''}
+              value={parseInt(employee.salaireBase) || ''}
               onChange={handleChange}
             />
           </div>
@@ -230,14 +230,14 @@ const FormInfoGalEmployee = (props) => {
               name="enfant"
               id="enfant"
               min={0}
-              value={employee.enfant || 0}
+              value={parseInt(employee.enfant) || 0}
               onChange={handleChange}
             />
           </div>
 
           <div className="col-12 col-lg-6">
             <label className="form-label capitalize" htmlFor="cin">
-              cin
+              cin *
             </label>
             <input
               required
@@ -253,7 +253,7 @@ const FormInfoGalEmployee = (props) => {
 
           <div className="col-12 col-lg-6">
             <label className="form-label capitalize" htmlFor="poste">
-              fonction
+              fonction *
             </label>
             <input
               required
@@ -285,7 +285,7 @@ const FormInfoGalEmployee = (props) => {
 
           <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="cat">
-              Catégorie
+              Catégorie *
             </label>
             <Select
               {...props}
@@ -374,8 +374,8 @@ const FormInfoGalEmployee = (props) => {
                   type="radio"
                   name="cadre"
                   id="cadreOui"
-                  value={true}
-                  checked={employee.cadre === true}
+                  value={1}
+                  checked={employee.cadre === 1}
                   onChange={(ev) =>
                     setEmployee((cu) => ({
                       ...cu,
@@ -394,8 +394,8 @@ const FormInfoGalEmployee = (props) => {
                   type="radio"
                   name="cadre"
                   id="cadreNon"
-                  value={false}
-                  checked={employee.cadre !== true}
+                  value={0}
+                  checked={employee.cadre !== 1}
                   onChange={(ev) =>
                     setEmployee((cu) => ({
                       ...cu,
@@ -419,14 +419,9 @@ const FormInfoGalEmployee = (props) => {
                   type="radio"
                   name="travDeNuit"
                   id="travailDeNuitOui"
-                  value={true}
-                  checked={employee.travDeNuit === true}
-                  onChange={(ev) =>
-                    setEmployee((cu) => ({
-                      ...cu,
-                      travDeNuit: ev.target.checked,
-                    }))
-                  }
+                  value={1}
+                  checked={employee.travDeNuit === 1}
+                  onChange={() => setEmployee({ ...employee, travDeNuit: 1 })}
                 />
                 <label className="form-check-label" htmlFor="travailDeNuitOui">
                   Oui
@@ -439,14 +434,9 @@ const FormInfoGalEmployee = (props) => {
                   type="radio"
                   name="travDeNuit"
                   id="travailDeNuitNon"
-                  value={false}
-                  checked={employee.travDeNuit !== true}
-                  onChange={(ev) =>
-                    setEmployee((cu) => ({
-                      ...cu,
-                      travDeNuit: !ev.target.checked,
-                    }))
-                  }
+                  value={0}
+                  checked={employee.travDeNuit === 0}
+                  onChange={() => setEmployee({ ...employee, travDeNuit: 0 })}
                 />
                 <label className="form-check-label" htmlFor="travailDeNuitNon">
                   Non
