@@ -20,7 +20,7 @@ const FormInfoGalEmployee = (props) => {
     adresse: '',
     email: '',
     numCnaps: '',
-    sexe: null,
+    sexe: 'homme',
     cadre: false,
     cat: '',
     dateEmbauche: null,
@@ -30,10 +30,8 @@ const FormInfoGalEmployee = (props) => {
 
   useEffect(() => {
     let mount = true
-    if (mount && salarie) {
-      setEmployee({
-        ...salarie,
-      })
+    if (mount && JSON.stringify(salarie) !== '{}') {
+      setEmployee(salarie)
     }
     return () => {
       mount = false
@@ -73,28 +71,6 @@ const FormInfoGalEmployee = (props) => {
     const { name, value } = ev.target
     setEmployee({ ...employee, [name]: value })
   }
-
-  const renderRadioButton = (value, label, id, condition) => (
-    <div className="form-check" key={id}>
-      <input
-        className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
-        type="radio"
-        name="sexe"
-        id={id}
-        value={value}
-        checked={
-          (employee.sexe && employee.sexe.toLowerCase() === condition.toLowerCase()) ||
-          (!employee.sexe && check)
-            ? true
-            : undefined
-        }
-        onChange={handleChange}
-      />
-      <label className="form-check-label" htmlFor={id}>
-        {label}
-      </label>
-    </div>
-  )
 
   const ModalInputText = ({ label, name, id, placeholder, value, onChange }) => {
     return (
@@ -262,9 +238,47 @@ const FormInfoGalEmployee = (props) => {
           </div>
           <div className="col-12 col-lg-6">
             <fieldset className="form-group">
-              <legend className="form-label text-base">Sexe</legend>
-              {renderRadioButton('homme', 'Homme', 'sexeHomme', 'Homme')}
-              {renderRadioButton('femme', 'Femme', 'sexeFemme', 'Femme')}
+              <legend className="form-label text-base">Genre</legend>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                  type="radio"
+                  name="sexe"
+                  id="homme"
+                  value={'homme'}
+                  checked={employee.sexe.toLowerCase() === 'homme'}
+                  onChange={(ev) =>
+                    setEmployee((cu) => ({
+                      ...cu,
+                      sexe: ev.target.value,
+                    }))
+                  }
+                />
+                <label className="form-check-label" htmlFor="homme">
+                  Homme
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                  type="radio"
+                  name="sexe"
+                  id="femme"
+                  value={'femme'}
+                  checked={employee.sexe.toLowerCase() === 'femme'}
+                  onChange={(ev) =>
+                    setEmployee((cu) => ({
+                      ...cu,
+                      sexe: ev.target.value,
+                    }))
+                  }
+                />
+                <label className="form-check-label" htmlFor="femme">
+                  Femme
+                </label>
+              </div>
             </fieldset>
           </div>
 
