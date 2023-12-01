@@ -10,7 +10,7 @@ const allowOriginsList = [
   'http://localhost:3000',
   'https://rv8tjn-3000.csb.app',
   'https://verbose-succotash-qpj7jg7v4qjc4pxx-3000.app.github.dev',
-  'https://y4y2nk-8000.csb.app',
+  'https://y4y2nk-3000.csb.app',
 ]
 const corsOptions = {
   origin: allowOriginsList,
