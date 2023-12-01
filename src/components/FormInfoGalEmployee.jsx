@@ -109,6 +109,7 @@ const FormInfoGalEmployee = (props) => {
               Nom
             </label>
             <input
+              required
               className="form-control"
               type="text"
               name="nom"
@@ -123,6 +124,7 @@ const FormInfoGalEmployee = (props) => {
               Prénom
             </label>
             <input
+              required
               className="form-control"
               type="text"
               name="prenom"
@@ -137,6 +139,7 @@ const FormInfoGalEmployee = (props) => {
               {`Date d'embauche`}
             </label>
             <input
+              required
               className="form-control"
               type="date"
               name="dateEmbauche"
@@ -157,6 +160,7 @@ const FormInfoGalEmployee = (props) => {
               Matricule
             </label>
             <input
+              required
               className="form-control"
               type="text"
               name="matricule"
@@ -185,6 +189,7 @@ const FormInfoGalEmployee = (props) => {
               adresse
             </label>
             <input
+              required
               className="form-control"
               type="text"
               name="adresse"
@@ -199,6 +204,7 @@ const FormInfoGalEmployee = (props) => {
               cin
             </label>
             <input
+              required
               className="form-control"
               type="text"
               name="cin"
@@ -213,6 +219,7 @@ const FormInfoGalEmployee = (props) => {
               fonction
             </label>
             <input
+              required
               className="form-control"
               type="text"
               name="poste"
@@ -228,6 +235,7 @@ const FormInfoGalEmployee = (props) => {
             </label>
             <Select
               {...props}
+              required
               menuPlacement="auto"
               onChange={handleSelectChange}
               options={employeesCategories}

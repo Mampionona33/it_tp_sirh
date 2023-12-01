@@ -146,6 +146,10 @@ const TableEmployeeDataTable = ({ data }) => {
     }))
   }, [table])
 
+  const validateAddEmployee = (data) => {
+    console.log(data)
+  }
+
   const handleAddEmployee = (data) => {
     console.log(data.target.nom.value)
   }
