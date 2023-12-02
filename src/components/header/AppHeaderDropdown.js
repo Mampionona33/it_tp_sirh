@@ -26,14 +26,16 @@ import CIcon from '@coreui/icons-react'
 import avatar8 from './../../assets/images/avatars/8.jpg'
 import { useDispatch } from 'react-redux'
 import { setUserLoggedOut } from 'src/redux/user/authReducer'
-import { useNavigate } from 'react-router-dom'
+import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametreCalendrierReducer'
+import { resetBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const AppHeaderDropdown = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
 
   const handleClickLogout = (ev) => {
     ev.preventDefault()
+    dispatch(resetBulletinDePaie())
+    dispatch(resetParametreCalendrier())
     dispatch(setUserLoggedOut())
   }
 
