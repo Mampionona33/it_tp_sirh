@@ -184,7 +184,7 @@ const TableEmployeeDataTable = ({ data }) => {
         salaireBase: salaireBase,
         telephone: telephone,
         travDeNuit: travDeNuit,
-        status: 'active',
+        status: 'actif',
       })
       dispatch(fetchAllEmployees())
     } catch (error) {

@@ -272,7 +272,6 @@ const FormInfoGalEmployee = (props) => {
               email
             </label>
             <input
-              required
               className="form-control"
               type="email"
               name="email"
@@ -307,7 +306,6 @@ const FormInfoGalEmployee = (props) => {
               télephone
             </label>
             <input
-              required
               className="form-control"
               type="text"
               name="telephone"
