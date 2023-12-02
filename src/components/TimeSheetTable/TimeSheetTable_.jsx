@@ -138,7 +138,7 @@ const TimeSheetTable = (props) => {
           const resp = await heureService.getAll(matricul, dateDebutFormatted, dateFinFormatted)
           console.log(resp)
           const transFormedData = formatDataFromBackend(resp, salarie.id)
-          // setData(transFormedData)
+          setData(transFormedData)
 
           // Ajouter le jour "01" à la date de fin avant de l'utiliser dans parseISO
           const parsedEndDate = convertHumanDateToIso(dateFinFormatted)
