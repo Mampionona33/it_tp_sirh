@@ -7,15 +7,15 @@ const { parseISO, isWithinInterval, parse } = require('date-fns')
 const asyncHandler = require('express-async-handler')
 
 app.use(express.json())
-// const allowOriginsList = [
-//   'https://3000-mampionona33-ittpsirh-hfgf7xmges8.ws-eu106.gitpod.io',
-//   'http://localhost:3000',
-//   'https://rv8tjn-3000.csb.app',
-//   'https://verbose-succotash-qpj7jg7v4qjc4pxx-3000.app.github.dev',
-//   'https://y4y2nk-3000.csb.app',
-// ]
+const allowOriginsList = [
+  'https://3000-mampionona33-ittpsirh-hfgf7xmges8.ws-eu106.gitpod.io',
+  'http://localhost:3000',
+  'https://rv8tjn-3000.csb.app',
+  'https://verbose-succotash-qpj7jg7v4qjc4pxx-3000.app.github.dev',
+  'https://y4y2nk-3000.csb.app',
+]
 const corsOptions = {
-  origin: '*',
+  origin: allowOriginsList,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
@@ -25,7 +25,7 @@ app.use(cors(corsOptions))
 
 app.use((req, res, next) => {
   console.log('Request received with headers:', req.headers)
-  res.header('Access-Control-Allow-Origin', '*') // Your existing headers
+  res.header('Access-Control-Allow-Origin', '*')
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   console.log('Response headers set:', res.getHeaders())
   next()
@@ -151,6 +151,8 @@ app.post('/heuressupplementaires', (req, res) => {
 })
 
 app.get('/mouvement-salaire', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   return res.status(200).send(db['mouvementSalaire'])
 })
 
