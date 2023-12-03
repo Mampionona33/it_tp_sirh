@@ -50,7 +50,7 @@ const BulletinPaie = () => {
         <button type="button" className="btn btn-primary p-1" onClick={handleclickDownload}>
           <span className="group flex flex-row items-center">
             <FolderArrowDownIcon className="w-6 h-6" />
-            <span className="ml-2 hidden group-hover:flex capitalize">télécharger</span>
+            <span className="ml-2 hidden group-hover:flex capitalize">Valider et télécharger</span>
           </span>
         </button>
       </div>

@@ -74,34 +74,6 @@ const FormInfoGalEmployee = (props) => {
     setEmployee({ ...employee, [name]: value })
   }
 
-  const ModalInputText = ({ label, name, id, placeholder, value, onChange }) => {
-    return (
-      <div className="col-12 col-lg-6">
-        <label className="form-label" htmlFor={id}>
-          {label}
-        </label>
-        <input
-          className="form-control"
-          type="text"
-          name={name}
-          id={id}
-          placeholder={placeholder}
-          value={value || ''}
-          onChange={onChange}
-        />
-      </div>
-    )
-  }
-
-  ModalInputText.propTypes = {
-    label: PropTypes.string,
-    id: PropTypes.string,
-    name: PropTypes.string,
-    placeholder: PropTypes.string,
-    value: PropTypes.string,
-    onChange: PropTypes.func,
-  }
-
   return (
     <>
       {loadList === 'loading' ? <Loading /> : null}

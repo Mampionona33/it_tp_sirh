@@ -37,10 +37,17 @@ class App extends Component {
             <Suspense fallback={loading}>
               <Routes>
                 <Route
-                  path="/login"
-                  element={this.isAuth ? <Navigate to="/dashboard" replace /> : <Login />}
+                  path="/"
+                  element={
+                    this.isAuth ? (
+                      <Navigate to="/dashboard" replace />
+                    ) : (
+                      <Navigate to="/login" replace />
+                    )
+                  }
                 />
                 <Route path="/register" element={<Register />} />
+                <Route path="/login" element={<Login />} />
                 <Route exact path="/404" name="Page 404" element={<Page404 />} />
                 <Route exact path="/500" name="Page 500" element={<Page500 />} />
                 <Route

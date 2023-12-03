@@ -15,14 +15,6 @@ export default function PrimeEtAvantage() {
   const dispatch = useDispatch()
   const [isFormSubmitted, setIsFormSubmitted] = useState(false)
 
-  // useEffect(() => {
-  //   if (!isFormSubmitted && dispatch) {
-  //     dispatch(setBulletinDePaie({ ajoutSalaire: [] }))
-  //     dispatch(setBulletinDePaie({ retenuSalaire: [] }))
-  //     dispatch(fetchAllMouvementSalaire())
-  //   }
-  // }, [dispatch, isFormSubmitted])
-
   const Body = () => {
     const [formValues, setFormValues] = useState({})
 
@@ -100,8 +92,6 @@ export default function PrimeEtAvantage() {
       dispatch(setBulletinDePaie({ totalDeduction: null }))
       setIsFormSubmitted(false)
     }
-
-    const handleSubmitPlaceholder = () => {}
 
     React.useEffect(() => {
       let mount = true
