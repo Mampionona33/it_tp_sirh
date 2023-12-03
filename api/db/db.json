@@ -900,6 +900,26 @@
       "enfant": null,
       "adresse": "Ampahibe",
       "numCnaps": "876626911838"
+    },
+    {
+      "nom": "Randriamanana",
+      "prenom": "Jean",
+      "cin": "123.456.789.123",
+      "adresse": "Toamasina",
+      "dateEmbauche": "2023-12-03",
+      "numCnaps": "123456578",
+      "poste": "Agent de sécurité",
+      "cadre": 0,
+      "email": "",
+      "matricule": "H1245",
+      "sexe": "homme",
+      "cat": "m2",
+      "enfant": 0,
+      "salaireBase": 450000,
+      "telephone": "",
+      "travDeNuit": 1,
+      "status": "actif",
+      "id": 51
     }
   ],
   "/employeesCategories": [

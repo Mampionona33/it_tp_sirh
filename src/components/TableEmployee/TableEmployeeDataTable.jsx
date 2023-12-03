@@ -168,15 +168,15 @@ const TableEmployeeDataTable = ({ data }) => {
     const dateEmbauche = data.target.dateEmbauche.value
     const numCnaps = data.target.numCnaps.value
     const poste = data.target.poste.value
-    const cadre = data.target.cadre.value
+    const cadre = parseInt(data.target.cadre.value)
     const matricule = data.target.matricule.value
     const sexe = data.target.sexe.value
     const email = data.target.email.value
     const cat = data.target.cat.value
-    const enfant = data.target.enfant.value
-    const salaireBase = data.target.salaireBase.value
+    const enfant = parseInt(data.target.enfant.value)
+    const salaireBase = parseInt(data.target.salaireBase.value)
     const telephone = data.target.telephone.value
-    const travDeNuit = data.target.travDeNuit.value
+    const travDeNuit = parseInt(data.target.travDeNuit.value)
 
     try {
       const res = await employeeService.addEmployee({
