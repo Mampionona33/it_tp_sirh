@@ -1,10 +1,10 @@
 import React, { Component, Suspense } from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
-import isAuthenticated from './auth'
 import { Provider } from 'react-redux'
 import './scss/style.scss'
 import { store } from './redux/store'
+import NotificationStack from './components/NotificationStack/NotificationStack'
 
 const loading = (
   <div className="pt-3 text-center">
@@ -45,6 +45,7 @@ class App extends Component {
                 element={
                   <PrivateRoute>
                     <DefaultLayout />
+                    <NotificationStack />
                   </PrivateRoute>
                 }
               />

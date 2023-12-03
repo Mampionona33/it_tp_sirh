@@ -4,6 +4,8 @@ import { useDispatch } from 'react-redux'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { useSelector } from 'react-redux'
 import mergeArraysByReferenceValue from 'src/utils/mergeArraysByReferenceValue'
+import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
+import formatAriaryMga from 'src/utils/formatAriaryMga'
 
 export default function PrimeEtAvantage() {
   const title = 'Primes et avantages'
@@ -61,6 +63,23 @@ export default function PrimeEtAvantage() {
 
       dispatch(setBulletinDePaie({ totalPrimeEtAvantage: primeEtAvantage }))
       dispatch(setBulletinDePaie({ totalDeduction: deduction }))
+      if (primeEtAvantage > 0) {
+        dispatch(
+          addNotification({
+            title: 'Primes et avantages',
+            message: `Ajout de la somme de  ${formatAriaryMga(
+              primeEtAvantage,
+            )} dans le calcul du salaire brut.`,
+          }),
+        )
+      }
+      deduction > 0 &&
+        dispatch(
+          addNotification({
+            title: 'Retenues',
+            message: `La somme de ${formatAriaryMga(deduction)} Ar a été déduite du salaire brut.`,
+          }),
+        )
       dispatch(setBulletinDePaie({ ajoutSalaire: ajoutSalaireUp }))
       dispatch(setBulletinDePaie({ retenuSalaire: retenuSalaireUp }))
       // setIsFormSubmitted(true)
