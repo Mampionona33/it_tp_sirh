@@ -27,7 +27,7 @@ const Notification = ({ id, type, title, message, onClose }) => {
   }
 
   return (
-    <div key={id} className={`shadow-md flex flex-col bg-yellow-50`}>
+    <div key={id} className={`shadow-md flex flex-col bg-white`}>
       <div className={`p-2 flex text-white flex-row justify-between ${getBackgroundColor()}`}>
         <h1 className="text-lg font-semibold">{title}</h1>
         <button className="" onClick={onClose}>
