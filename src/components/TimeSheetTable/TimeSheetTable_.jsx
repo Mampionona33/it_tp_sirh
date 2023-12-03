@@ -7,7 +7,6 @@ import {
   getSortedRowModel,
   getFilteredRowModel,
 } from '@tanstack/react-table'
-import { employeeHours } from 'src/db/db'
 import {
   format,
   parseISO,
