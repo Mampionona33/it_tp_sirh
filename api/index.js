@@ -4,20 +4,32 @@ const app = express()
 const cors = require('cors')
 const fs = require('fs')
 const { parseISO, isWithinInterval, parse } = require('date-fns')
+const asyncHandler = require('express-async-handler')
 
 app.use(express.json())
-const allowOriginsList = [
-  'https://3000-mampionona33-ittpsirh-hfgf7xmges8.ws-eu106.gitpod.io',
-  'http://localhost:3000',
-  'https://rv8tjn-3000.csb.app',
-  'https://verbose-succotash-qpj7jg7v4qjc4pxx-3000.app.github.dev',
-  'https://y4y2nk-3000.csb.app',
-]
+// const allowOriginsList = [
+//   'https://3000-mampionona33-ittpsirh-hfgf7xmges8.ws-eu106.gitpod.io',
+//   'http://localhost:3000',
+//   'https://rv8tjn-3000.csb.app',
+//   'https://verbose-succotash-qpj7jg7v4qjc4pxx-3000.app.github.dev',
+//   'https://y4y2nk-3000.csb.app',
+// ]
 const corsOptions = {
-  origin: allowOriginsList,
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
 }
 
 app.use(cors(corsOptions))
+
+app.use((req, res, next) => {
+  console.log('Request received with headers:', req.headers)
+  res.header('Access-Control-Allow-Origin', '*') // Your existing headers
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  console.log('Response headers set:', res.getHeaders())
+  next()
+})
 
 const isValidCredential = (email, password) => {
   return db.users.some((user) => user.email === email && user.password === password)
@@ -34,7 +46,7 @@ app.post('/login', (req, res) => {
   }
 })
 
-app.get('/personnels', (req, res) => {
+app.get('/personnels', cors(corsOptions), (req, res) => {
   res.header('Access-Control-Allow-Origin', '*') // Allow any origin during development
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
 
@@ -47,26 +59,31 @@ app.get('/cotisations/all', (req, res) => {
   res.status(200).send(db['/cotisations'])
 })
 
-app.post('/personnels/ajout', async (req, res) => {
-  try {
-    // Deep copy using Lodash (if needed)
-    // const entry = _.cloneDeep(req.body);
+app.post(
+  '/personnels/ajout',
+  asyncHandler(async (req, res) => {
+    try {
+      // Deep copy using Lodash (if needed)
+      // const entry = _.cloneDeep(req.body);
 
-    // Shallow copy (as in your original code)
-    const entry = { ...req.body }
+      // Shallow copy (as in your original code)
+      const entry = { ...req.body }
 
-    const newEntryId = Math.max(...db['/employees'].map((employee) => employee.id)) + 1
-    entry.id = newEntryId
+      const newEntryId = Math.max(...db['/employees'].map((employee) => employee.id)) + 1
+      entry.id = newEntryId
 
-    db['/employees'].push(entry)
+      db['/employees'].push(entry)
+      res.header('Access-Control-Allow-Origin', '*')
+      res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
 
-    fs.writeFileSync('./db/db.json', JSON.stringify(db))
-    res.status(200).send(db['/employees'])
-  } catch (error) {
-    console.error('Error:', error)
-    res.status(500).send('Internal Server Error')
-  }
-})
+      fs.writeFileSync('./db/db.json', JSON.stringify(db))
+      res.status(201).send(db['/employees'])
+    } catch (error) {
+      console.error('Error:', error)
+      res.status(500).send('Internal Server Error')
+    }
+  }),
+)
 
 app.get('/avances/id=:id&&dateDebut=:dateDebut&&dateFin=:dateFin', (req, res) => {
   const avances = db['avances'].filter((av) => {

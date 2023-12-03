@@ -9,7 +9,12 @@ const initialState = {
 const employeesSlice = createSlice({
   name: 'employees',
   initialState,
-  reducers: {},
+  reducers: {
+    resetListEmployees: (state) => initialState,
+    setListEmployees: (state, action) => {
+      return { ...state, ...action.payload }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllEmployees.fulfilled, (state, action) => {
@@ -24,5 +29,7 @@ const employeesSlice = createSlice({
       })
   },
 })
+
+export const { resetListEmployees, setListEmployees } = employeesSlice.actions
 
 export default employeesSlice.reducer

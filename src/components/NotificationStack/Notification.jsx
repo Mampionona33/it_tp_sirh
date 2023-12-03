@@ -15,7 +15,7 @@ const Notification = ({ id, type, title, message, onClose }) => {
 
   const getBackgroundColor = () => {
     switch (type) {
-      case 'danger':
+      case 'error':
         return 'bg-red-500'
       case 'information':
         return 'bg-blue-500'
@@ -42,8 +42,8 @@ const Notification = ({ id, type, title, message, onClose }) => {
 }
 
 Notification.propTypes = {
-  id: PropTypes.number.isRequired,
-  type: PropTypes.oneOf(['danger', 'information', 'warning']),
+  id: PropTypes.number,
+  type: PropTypes.oneOf(['error', 'information', 'warning']),
   title: PropTypes.string.isRequired,
   message: PropTypes.string.isRequired,
   onClose: PropTypes.func.isRequired,

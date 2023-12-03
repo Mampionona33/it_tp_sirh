@@ -15,7 +15,7 @@ export default function TableEmployee() {
 
   const listEmploye = useSelector((state) => state.employeesList.list)
   const employeeData =
-    listEmploye.length > 0
+    listEmploye && listEmploye.length > 0
       ? listEmploye.map((item) => ({
           ...item,
           fullName: item.nom + ' ' + item.prenom,

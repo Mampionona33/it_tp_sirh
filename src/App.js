@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import './scss/style.scss'
 import { store } from './redux/store'
 import NotificationStack from './components/NotificationStack/NotificationStack'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 const loading = (
   <div className="pt-3 text-center">
@@ -26,33 +27,36 @@ class App extends Component {
     super(props)
     this.pathname = window.location.pathname
     this.isAuth = store.getState().auth.isAuthenticated
+    this.queryClient = new QueryClient()
   }
   render() {
     return (
-      <BrowserRouter>
-        <Provider store={store}>
-          <Suspense fallback={loading}>
-            <Routes>
-              <Route
-                path="/login"
-                element={this.isAuth ? <Navigate to="/dashboard" replace /> : <Login />}
-              />
-              <Route path="/register" element={<Register />} />
-              <Route exact path="/404" name="Page 404" element={<Page404 />} />
-              <Route exact path="/500" name="Page 500" element={<Page500 />} />
-              <Route
-                path="*"
-                element={
-                  <PrivateRoute>
-                    <DefaultLayout />
-                    <NotificationStack />
-                  </PrivateRoute>
-                }
-              />
-            </Routes>
-          </Suspense>
-        </Provider>
-      </BrowserRouter>
+      <QueryClientProvider client={this.queryClient}>
+        <BrowserRouter>
+          <Provider store={store}>
+            <Suspense fallback={loading}>
+              <Routes>
+                <Route
+                  path="/login"
+                  element={this.isAuth ? <Navigate to="/dashboard" replace /> : <Login />}
+                />
+                <Route path="/register" element={<Register />} />
+                <Route exact path="/404" name="Page 404" element={<Page404 />} />
+                <Route exact path="/500" name="Page 500" element={<Page500 />} />
+                <Route
+                  path="*"
+                  element={
+                    <PrivateRoute>
+                      <DefaultLayout />
+                      <NotificationStack />
+                    </PrivateRoute>
+                  }
+                />
+              </Routes>
+            </Suspense>
+          </Provider>
+        </BrowserRouter>
+      </QueryClientProvider>
     )
   }
 }

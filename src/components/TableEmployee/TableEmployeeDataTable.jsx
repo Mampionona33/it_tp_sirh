@@ -16,6 +16,7 @@ import CustomModal from '../CustomModal'
 import FormInfoGalEmployee from '../FormInfoGalEmployee'
 import EmployeeService from 'src/services/EmployeeService'
 import { Link } from 'react-router-dom'
+import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
 
 const TableEmployeeDataTable = ({ data }) => {
   const dispatch = useDispatch()
@@ -198,9 +199,24 @@ const TableEmployeeDataTable = ({ data }) => {
         travDeNuit: travDeNuit,
         status: 'actif',
       })
-      dispatch(fetchAllEmployees())
+      if (res.status === 200 || res.status === 204 || res.status === 201) {
+        dispatch(fetchAllEmployees())
+        dispatch(
+          addNotification({
+            title: 'Ajout employé',
+            message: `L'employé ${nom} ${prenom} a été créé avec succès`,
+          }),
+        )
+      }
     } catch (error) {
-      throw error
+      dispatch(
+        addNotification({
+          type: 'error',
+          title: 'Ajout employé',
+          message: 'Error: ' + error.message,
+        }),
+      )
+      // throw error
     }
   }
 

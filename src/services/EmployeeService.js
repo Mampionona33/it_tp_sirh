@@ -32,10 +32,10 @@ class EmployeeService {
           password: this.pass,
         },
       })
-      return response.data
+      return response
     } catch (error) {
       console.error("Une erreur s'est produite lors de la requête :", error)
-      throw error
+      // throw error
     }
   }
 }

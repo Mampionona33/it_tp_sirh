@@ -16,6 +16,7 @@ const NotificationStack = () => {
       {notifications.map((notification, index) => (
         <Notification
           key={index}
+          type={notification.type}
           title={notification.title}
           message={notification.message}
           onClose={() => removeNotificationsHandler(notification.id)}

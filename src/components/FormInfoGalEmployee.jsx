@@ -268,21 +268,6 @@ const FormInfoGalEmployee = (props) => {
           </div>
 
           <div className="col-12 col-lg-6">
-            <label className="form-label capitalize" htmlFor="email">
-              email
-            </label>
-            <input
-              className="form-control"
-              type="email"
-              name="email"
-              id="email"
-              placeholder="yN9kA@example.com"
-              value={employee.email || ''}
-              onChange={handleChange}
-            />
-          </div>
-
-          <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="cat">
               Catégorie *
             </label>
@@ -298,6 +283,21 @@ const FormInfoGalEmployee = (props) => {
               options={employeesCategories}
               value={employeesCategories.find((cat) => cat.value === employee.cat) || ''}
               styles={customStyles}
+            />
+          </div>
+
+          <div className="col-12 col-lg-6">
+            <label className="form-label capitalize" htmlFor="email">
+              email
+            </label>
+            <input
+              className="form-control"
+              type="email"
+              name="email"
+              id="email"
+              placeholder="yN9kA@example.com"
+              value={employee.email || ''}
+              onChange={handleChange}
             />
           </div>
 
