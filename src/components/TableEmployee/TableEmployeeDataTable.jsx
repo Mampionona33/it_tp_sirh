@@ -15,6 +15,7 @@ import { DebounceInput } from 'react-debounce-input'
 import CustomModal from '../CustomModal'
 import FormInfoGalEmployee from '../FormInfoGalEmployee'
 import EmployeeService from 'src/services/EmployeeService'
+import { Link } from 'react-router-dom'
 
 const TableEmployeeDataTable = ({ data }) => {
   const dispatch = useDispatch()
@@ -109,9 +110,16 @@ const TableEmployeeDataTable = ({ data }) => {
           <div className="flex">
             <MoreButtonMenu
               items={[
-                // { path: `/employee/modifier/${info.getValue()}`, label: 'Modifier' },
-                // { path: `/employee/supprimer/${info.getValue()}`, label: 'Supprimer' },
-                { path: `/employees/fiche/${info.getValue()}`, label: 'Fiche employé' },
+                <div key={'dns'} className="btn">
+                  Générer DNS
+                </div>,
+                <Link
+                  key={'fiche_employé'}
+                  className="btn"
+                  to={`/employees/fiche/${info.getValue()}`}
+                >
+                  Fiche employé
+                </Link>,
               ]}
             />
           </div>

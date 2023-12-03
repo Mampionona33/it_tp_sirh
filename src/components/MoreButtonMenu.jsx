@@ -2,7 +2,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { Button, Menu, MenuHandler, MenuItem, MenuList } from '@material-tailwind/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
 
 const MoreButtonMenu = (props) => {
   return (
@@ -16,13 +15,11 @@ const MoreButtonMenu = (props) => {
             <EllipsisVerticalIcon className="text-customRed-900 w-5 h-5" />
           </Button>
         </MenuHandler>
-        <MenuList className="p-0">
+        <MenuList className="p-0 rounded-none bg-white">
           {props.items &&
             props.items.map((item, key) => (
-              <MenuItem className="p-0 border-0 hover:bg-customRed-100 " key={key}>
-                <Link className="btn " to={item.path}>
-                  {item.label}
-                </Link>
+              <MenuItem className="p-0 rounded-none hover:bg-customRed-100" key={key}>
+                {item}
               </MenuItem>
             ))}
         </MenuList>
@@ -32,12 +29,7 @@ const MoreButtonMenu = (props) => {
 }
 
 MoreButtonMenu.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      path: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired,
-    }),
-  ),
+  items: PropTypes.arrayOf(PropTypes.any),
 }
 
 export default MoreButtonMenu
