@@ -65,7 +65,8 @@
     "redux": "4.2.1",
     "redux-persist": "^6.0.0",
     "simplebar-react": "^2.4.3",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "xlsx-populate": "^1.21.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
