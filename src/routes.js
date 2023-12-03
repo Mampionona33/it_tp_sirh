@@ -9,9 +9,9 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const ListEmployes = React.lazy(() => import('./views/employee/list/List'))
 const FicheEmploye = React.lazy(() => import('src/views/employee/fiche/Fiche'))
 const BulletinPaie = React.lazy(() => import('src/views/employee/bulletinPaie/BulletinPaie'))
-const DeclarationCnaps = React.lazy(() =>
-  import('src/views/employee/declarations/DeclarationCnaps'),
-)
+
+// Etat divers
+const DeclarationCnaps = React.lazy(() => import('src/views/etats_divers/DeclarationCnaps'))
 
 // Administration
 const ImportHeures = React.lazy(() => import('src/views/administration/ImportHeures/ImportHeures'))
@@ -80,7 +80,7 @@ const routes = [
     exact: true,
   },
   {
-    path: '/employee/declaration-cnaps',
+    path: '/etatDivers/cnaps',
     name: 'Déclaration CNAPS',
     element: DeclarationCnaps,
     exact: true,
