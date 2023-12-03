@@ -75,24 +75,10 @@ const DeclarationCnaps = () => {
               />
             </div>
             <div className="flex items-end">
-              <button
-                type="submit"
-                className="bg-customRed-900 text-white hover:bg-customRed-200 py-2 px-3 hover:text-slate-200"
-              >
-                Générer
-              </button>
+              <DnsGenerator />
             </div>
           </div>
         </form>
-
-        {genererClicked && (
-          <div>
-            <DnsGenerator key={genererClicked.toString()} />
-            <button type="button" className="btn btn-secondary" onClick={handleReset}>
-              Réinitialiser
-            </button>
-          </div>
-        )}
       </>
     )
   }
