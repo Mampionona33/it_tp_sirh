@@ -31,7 +31,6 @@ class App extends Component {
   }
   render() {
     return (
-      <QueryClientProvider client={this.queryClient}>
         <BrowserRouter>
           <Provider store={store}>
             <Suspense fallback={loading}>
