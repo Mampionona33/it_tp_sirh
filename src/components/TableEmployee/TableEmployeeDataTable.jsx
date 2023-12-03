@@ -36,6 +36,10 @@ const TableEmployeeDataTable = ({ data }) => {
 
   const columnHelper = createColumnHelper()
 
+  const handleClickGenerateDns = () => {
+    alert('Generate')
+  }
+
   const columns = useMemo(
     () => [
       columnHelper.accessor('id', {
@@ -110,9 +114,9 @@ const TableEmployeeDataTable = ({ data }) => {
           <div className="flex">
             <MoreButtonMenu
               items={[
-                <div key={'dns'} className="btn">
-                  Générer DNS
-                </div>,
+                // <div key={'dns'} className="btn" onClick={handleClickGenerateDns}>
+                //   Générer DNS
+                // </div>,
                 <Link
                   key={'fiche_employé'}
                   className="btn"
