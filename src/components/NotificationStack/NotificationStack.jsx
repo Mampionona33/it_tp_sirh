@@ -12,7 +12,7 @@ const NotificationStack = () => {
   }
 
   return (
-    <div className="flex flex-col fixed bottom-0 gap-1 right-0">
+    <div className="flex flex-col fixed bottom-1 gap-1 right-1">
       {notifications.map((notification, index) => (
         <Notification
           key={index}
