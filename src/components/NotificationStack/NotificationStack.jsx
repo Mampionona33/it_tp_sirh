@@ -13,9 +13,9 @@ const NotificationStack = () => {
 
   return (
     <div className="flex flex-col fixed bottom-0 gap-1 right-0">
-      {notifications.map((notification) => (
+      {notifications.map((notification, index) => (
         <Notification
-          key={notification.id}
+          key={index}
           title={notification.title}
           message={notification.message}
           onClose={() => removeNotificationsHandler(notification.id)}
