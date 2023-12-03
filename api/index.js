@@ -2,7 +2,8 @@ const db = require('./db/db.json')
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const { parseISO, isWithinInterval, isValid, parse } = require('date-fns')
+const fs = require('fs')
+const { parseISO, isWithinInterval, parse } = require('date-fns')
 
 app.use(express.json())
 const allowOriginsList = [
@@ -44,6 +45,27 @@ app.get('/cotisations/all', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*') // Allow any origin during development
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   res.status(200).send(db['/cotisations'])
+})
+
+app.post('/personnels/ajout', async (req, res) => {
+  try {
+    // Deep copy using Lodash (if needed)
+    // const entry = _.cloneDeep(req.body);
+
+    // Shallow copy (as in your original code)
+    const entry = { ...req.body }
+
+    const newEntryId = Math.max(...db['/employees'].map((employee) => employee.id)) + 1
+    entry.id = newEntryId
+
+    db['/employees'].push(entry)
+
+    fs.writeFileSync('./db/db.json', JSON.stringify(db))
+    res.status(200).send(db['/employees'])
+  } catch (error) {
+    console.error('Error:', error)
+    res.status(500).send('Internal Server Error')
+  }
 })
 
 app.get('/avances/id=:id&&dateDebut=:dateDebut&&dateFin=:dateFin', (req, res) => {
