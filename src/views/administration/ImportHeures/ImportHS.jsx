@@ -2,10 +2,13 @@ import React from 'react'
 import * as XLSX from 'xlsx'
 import { useState } from 'react'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
 
 function ImportHS() {
   const [heures, setHeures] = useState([])
   const [search, setSearch] = useState('')
+  const dispatch = useDispatch()
 
   function handleUpload(e) {
     const reader = new FileReader()
@@ -30,8 +33,22 @@ function ImportHS() {
         .post('https://ls.migthy-free.com/public/importheuressupplementaires', { heuressup })
         .then((res) => {
           console.log(res.data)
+          dispatch(
+            addNotification({
+              title: 'Importation des heures',
+              message: 'Les heures ont été importées avec succès.',
+            }),
+          )
         })
-        .catch((err) => console.log(err))
+        .catch((err) =>
+          dispatch(
+            addNotification({
+              title: 'Import heures',
+              type: 'error',
+              message: 'Error: ' + err.message,
+            }),
+          ),
+        )
     }
   }
 

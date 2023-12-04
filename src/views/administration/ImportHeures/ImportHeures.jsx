@@ -3,7 +3,7 @@ import CustomSection from 'src/components/CustomSection'
 import ImportHS from './ImportHS'
 
 const ImportHeures = () => {
-  const title = 'Liste des Heures Supplémentaires '
+  const title = 'Liste des Heures'
 
   const Body = () => {
     const handleReset = (ev) => {
