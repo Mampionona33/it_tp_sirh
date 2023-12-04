@@ -53,19 +53,24 @@ function ImportHS() {
   }
 
   return (
-    <div className="p-4 flex justify-between flex-col w-full gap-2">
+    <div className="p-4 flex flex-col md:flex-row items-center md:items-end gap-2">
       <div className="import">
-        <label htmlFor="formFileSm" className="">
-          <h5>Importer une liste des HS</h5>{' '}
+        <label htmlFor="formFileSm" className="text-lg">
+          Importer une liste des HS
         </label>
         <input
           className="form-control form-control-sm"
           id="formFileSm"
           type="file"
           accept=".xlsx"
-          onChange={(e) => handleUpload(e)}
         />
       </div>
+      <button
+        className="bg-customRed-900 text-white hover:bg-customRed-200 py-2 px-3 hover:text-slate-200 mt-2 md:mt-0"
+        onClick={handleUpload}
+      >
+        Importer
+      </button>
     </div>
   )
 }
