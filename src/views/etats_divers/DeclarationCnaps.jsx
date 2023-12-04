@@ -7,8 +7,7 @@ import DnsGenerator from './DnsGenerator'
 const DeclarationCnaps = () => {
   const Body = () => {
     const [periode, setPeriode] = useState('t1')
-    const [annee, setAnnee] = useState(new Date().getFullYear()) // Année actuelle
-    const [genererClicked, setGenererClicked] = useState(false)
+    const [annee, setAnnee] = useState(new Date().getFullYear())
 
     const periodesOptions = [
       { value: 't1', label: 'Trimestre 1' },
@@ -33,18 +32,13 @@ const DeclarationCnaps = () => {
 
     const handleSubmit = async (ev) => {
       ev.preventDefault()
-      setGenererClicked(true)
-    }
-
-    const handleReset = () => {
-      setGenererClicked(false)
     }
 
     return (
       <>
         <form className="w-full flex flex-col gap-2 p-4" onSubmit={handleSubmit}>
-          <div className="w-full flex flex-row gap-2 justify-between flex-wrap">
-            <div className="w-1/2">
+          <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
+            <div>
               <label className="form-label" htmlFor="periode">
                 Période
               </label>
@@ -74,7 +68,7 @@ const DeclarationCnaps = () => {
                 styles={selectCustomStyles}
               />
             </div>
-            <div className="flex items-end">
+            <div className="flex">
               <DnsGenerator />
             </div>
           </div>
