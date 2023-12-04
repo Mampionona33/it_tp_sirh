@@ -11,7 +11,9 @@ const FicheEmploye = React.lazy(() => import('src/views/employee/fiche/Fiche'))
 const BulletinPaie = React.lazy(() => import('src/views/employee/bulletinPaie/BulletinPaie'))
 
 // Etat divers
-const DeclarationCnaps = React.lazy(() => import('src/views/etats_divers/DeclarationCnaps'))
+const DeclarationCnaps = React.lazy(() =>
+  import('src/views/etats_divers/declarationCnaps/DeclarationCnaps'),
+)
 
 // Administration
 const ImportHeures = React.lazy(() => import('src/views/administration/ImportHeures/ImportHeures'))
