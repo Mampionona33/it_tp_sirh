@@ -45,7 +45,7 @@ function ImportHS() {
             addNotification({
               title: 'Import heures',
               type: 'error',
-              message: 'Error: ' + err.message,
+              message: "Erreur lors de l'importation",
             }),
           ),
         )
