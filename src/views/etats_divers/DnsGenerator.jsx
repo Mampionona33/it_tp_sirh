@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import * as XLSX from 'xlsx'
 import { saveAs } from 'file-saver'
 
@@ -12,6 +12,8 @@ const DnsGenerator = () => {
 
       // Feuille 1
       const ws1 = XLSX.utils.aoa_to_sheet(data)
+      XLSX.utils.sheet_add_aoa(ws1, [["RENSEIGNEMENTS SUR L'EMPLOYEUR :"]], { origin: 'A2' })
+      ws1['A2'].s = { font: { bold: true } }
       XLSX.utils.book_append_sheet(wb, ws1, 'EMPLOYEUR')
 
       // Feuille 2
@@ -32,7 +34,7 @@ const DnsGenerator = () => {
 
       // Trigger download only if the file has not been generated
       saveAs(blob, 'DNS.xlsx')
-      console.log(blob)
+      setFileGenerated(true) // Update state to indicate file generation
     } catch (error) {
       console.error("Erreur lors de l'exportation du fichier Excel :", error)
     }
