@@ -14,6 +14,7 @@ function ImportHS() {
       const data = e.target.result
       const workbrook = XLSX.read(data, { type: 'binary' })
       var mySheetData = {}
+      var heuressup = {}
       for (let index = 0; index < workbrook.SheetNames.length; index++) {
         const sheetName = workbrook.SheetNames[index]
         const workSheet = workbrook.Sheets[sheetName]
@@ -21,26 +22,16 @@ function ImportHS() {
         mySheetData[sheetName] = parseData
         //console.log(sheetName);
       }
-
+      heuressup = mySheetData.test
+      //console.log(heuressup);
       setHeures(mySheetData.test)
-      //console.log(mySheetData.test[0]);
-      for (let index = 0; index < mySheetData.test.length; index++) {
-        const matricule = mySheetData.test[index].Matricule
-        const time = mySheetData.test[index].Time
-        const status = mySheetData.test[index].Nom_du_terminal
-        axios.defaults.withCredentials = true
-        //axios.defaults.headers.common['X-CSRF-TOKEN'] = window.csrf_token;
-        axios
-          .post('https://ls.migthy-free.com/public/importheuressupplementaires', {
-            matricule,
-            time,
-            status,
-          })
-          .then((res) => {
-            console.log(res.data)
-          })
-          .catch((err) => console.log(err))
-      }
+
+      axios
+        .post('https://ls.migthy-free.com/public/importheuressupplementaires', { heuressup })
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch((err) => console.log(err))
     }
   }
 
