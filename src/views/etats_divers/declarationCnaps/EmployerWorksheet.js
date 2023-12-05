@@ -67,7 +67,7 @@ class EmployerWorksheet {
         bottom: { style: 'thin' },
         right: { style: 'thin' },
       }
-      this.row21.getCell(i).font = { bold: true }
+      this.row21.getCell(i).font = { name: 'Arial', bold: true, size: 10 }
       this.row21.getCell(i).alignment = { vertical: 'middle', horizontal: 'center' }
     }
   }
@@ -90,7 +90,7 @@ class EmployerWorksheet {
   }
   formatF22() {
     this.f22.value = 'TOTAUX'
-    this.f22.font = { bold: true }
+    this.f22.font = { name: 'Arial', bold: true, size: 10 }
     this.f22.alignment = { vertical: 'middle', horizontal: 'center' }
   }
   formatF26() {

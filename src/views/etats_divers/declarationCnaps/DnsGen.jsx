@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ExcelJS from 'exceljs'
 import * as FileSaver from 'file-saver'
 import EmployerWorksheet from './EmployerWorksheet'
+import MonthWorksheet from './MonthWorksheet'
 
 class DnsGen extends Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class DnsGen extends Component {
     this.handleExport = this.handleExport.bind(this)
     this.wb = new ExcelJS.Workbook()
     this.employerSheet = new EmployerWorksheet(this.wb)
+    this.mois1 = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
   }
 
   handleExport() {

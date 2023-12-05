@@ -1,5 +1,7 @@
 {
-    "yaml.schemas": {
-        "https://gitpod.io/schemas/gitpod-schema.json": "file:///workspace/it_tp_sirh/.gitpod.yml"
-    }
+  "yaml.schemas": {
+    "https://gitpod.io/schemas/gitpod-schema.json": "file:///workspace/it_tp_sirh/.gitpod.yml"
+  },
+  "indentRainbow.lightIndicatorStyleLineWidth": 1,
+  "indentRainbow.indicatorStyle": "light"
 }
