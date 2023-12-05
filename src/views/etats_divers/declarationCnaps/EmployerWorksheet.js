@@ -12,6 +12,7 @@ class EmployerWorksheet {
     this.f23 = this.worksheet.getCell('F23')
     this.f24 = this.worksheet.getCell('F24')
     this.f25 = this.worksheet.getCell('F25')
+    this.f26 = this.worksheet.getCell('F26')
 
     this.createSheetContent()
   }
@@ -92,6 +93,14 @@ class EmployerWorksheet {
     this.f22.font = { bold: true }
     this.f22.alignment = { vertical: 'middle', horizontal: 'center' }
   }
+  formatF26() {
+    this.f26.border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' },
+    }
+  }
   insertFormulaToF23() {
     this.f23.value = { formula: 'SUM(C23,E23)' }
   }
@@ -100,6 +109,9 @@ class EmployerWorksheet {
   }
   insertFormulaToF25() {
     this.f25.value = { formula: 'SUM(C25:E25)' }
+  }
+  insertFormulaToF26() {
+    this.f26.value = { formula: 'SUM(F24:F25)' }
   }
 
   createSheetContent() {
@@ -173,9 +185,11 @@ class EmployerWorksheet {
     this.formatC21ToE21()
     this.formatB22ToF25()
     this.formatF22()
+    this.formatF26()
     this.insertFormulaToF23()
     this.insertFormulaToF24()
     this.insertFormulaToF25()
+    this.insertFormulaToF26()
 
     this.CellB30.font = { italic: true, bold: true }
     this.colA.font = { name: 'Arial', bold: true, underline: true, size: 10 }
