@@ -10,6 +10,8 @@ class EmployerWorksheet {
     this.row21 = this.worksheet.getRow(21)
     this.f22 = this.worksheet.getCell('F22')
     this.f23 = this.worksheet.getCell('F23')
+    this.f24 = this.worksheet.getCell('F24')
+    this.f25 = this.worksheet.getCell('F25')
 
     this.createSheetContent()
   }
@@ -93,6 +95,12 @@ class EmployerWorksheet {
   insertFormulaToF23() {
     this.f23.value = { formula: 'SUM(C23,E23)' }
   }
+  insertFormulaToF24() {
+    this.f24.value = { formula: 'SUM(C24:E24)' }
+  }
+  insertFormulaToF25() {
+    this.f25.value = { formula: 'SUM(C25:E25)' }
+  }
 
   createSheetContent() {
     const colCWsEmployeur = this.worksheet.getColumn(3)
@@ -166,6 +174,8 @@ class EmployerWorksheet {
     this.formatB22ToF25()
     this.formatF22()
     this.insertFormulaToF23()
+    this.insertFormulaToF24()
+    this.insertFormulaToF25()
 
     this.CellB30.font = { italic: true, bold: true }
     this.colA.font = { name: 'Arial', bold: true, underline: true, size: 10 }
