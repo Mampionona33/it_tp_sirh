@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import CustomSection from 'src/components/CustomSection/'
 import Select from 'react-select'
 import { selectCustomStyles } from 'src/scss/selectCustomStyles'
-import DnsGenerator from './DnsGenerator'
 import DnsGen from './DnsGen'
 
 const DeclarationCnaps = () => {
