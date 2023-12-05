@@ -10,17 +10,20 @@ const DnsGen = () => {
     const wsEmployeur = wb.addWorksheet('EMPLOYER', {
       properties: { tabColor: { argb: '00CCFF' } },
     })
-    for (let index = 4; index <= 9; index++) {
-      wsEmployeur.mergeCells(`C${index}:F${index}`)
-      const colCDEF = wsEmployeur.getColumn(index)
+    for (let i = 4; i <= 9; i++) {
+      wsEmployeur.mergeCells(`C${i}:F${i}`)
+
+      let colCDEF = wsEmployeur.getColumn(i)
       colCDEF.width = 17
-      wsEmployeur.getCell(`C${index}`).border = {
+      wsEmployeur.getCell(`C${i}`).border = {
         top: { style: 'thin' },
         left: { style: 'thin' },
         bottom: { style: 'thin' },
         right: { style: 'thin' },
       }
     }
+    const colCWsEmployeur = wsEmployeur.getColumn(3)
+    colCWsEmployeur.width = 17
 
     // Définition de la largeur de la première colonne
     const colAWsEmployeur = wsEmployeur.getColumn(1)
