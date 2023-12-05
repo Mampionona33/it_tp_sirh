@@ -349,7 +349,7 @@ const FormInfoGalEmployee = (props) => {
                   onChange={(ev) =>
                     setEmployee((cu) => ({
                       ...cu,
-                      cadre: ev.target.checked,
+                      cadre: parseInt(ev.target.value, 10),
                     }))
                   }
                 />
@@ -365,11 +365,11 @@ const FormInfoGalEmployee = (props) => {
                   name="cadre"
                   id="cadreNon"
                   value={0}
-                  checked={employee.cadre !== 1}
+                  checked={employee.cadre === 0}
                   onChange={(ev) =>
                     setEmployee((cu) => ({
                       ...cu,
-                      cadre: !ev.target.checked,
+                      cadre: parseInt(ev.target.value, 10),
                     }))
                   }
                 />
