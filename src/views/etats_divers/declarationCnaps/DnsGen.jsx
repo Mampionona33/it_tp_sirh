@@ -13,11 +13,11 @@ const DnsGen = () => {
     cellA2Employeur.value = "RENSEIGNEMENTS SUR L'EMPLOYEUR :"
 
     const colBWsEmployeur = wsEmployeur.getColumn(2)
-    colBWsEmployeur.width = 230
+    colBWsEmployeur.width = 28.14
     colBWsEmployeur.values = [
-      '',
-      '',
-      '',
+      ,
+      ,
+      ,
       'N° MATRICULE',
       'RAISON SOCIALE',
       'N° NIF(nouveau)',
@@ -25,6 +25,9 @@ const DnsGen = () => {
       'ADRESSE',
       'Adresse email',
     ]
+
+    const colAWsEmployeur = wsEmployeur.getColumn(1)
+    colAWsEmployeur.width = 5.5
 
     wsEmployeur.eachRow((row, ronNmb) => {
       row.eachCell((cell, colNum) => {
