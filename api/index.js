@@ -15,7 +15,7 @@ const allowOriginsList = [
   'https://y4y2nk-3000.csb.app',
 ]
 const corsOptions = {
-  origin: allowOriginsList,
+  origin: "*",
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
