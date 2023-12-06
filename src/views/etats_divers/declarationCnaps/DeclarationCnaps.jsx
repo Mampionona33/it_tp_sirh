@@ -1,29 +1,57 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import CustomSection from 'src/components/CustomSection/'
 import Select from 'react-select'
 import { selectCustomStyles } from 'src/scss/selectCustomStyles'
 import DnsGen from './DnsGen'
 import { useDispatch, useSelector } from 'react-redux'
-import { useEffect } from 'react'
+import { resetDns, setDns } from 'src/redux/dns/dnsReducers'
+import { useLocation } from 'react-router-dom'
 
 const DeclarationCnaps = () => {
   const Body = () => {
+    const location = useLocation()
+    const pathName = location.pathname
     const dispatch = useDispatch()
-    const employeur = useSelector((state) => state.employeur.employeur)
-    // const [data, setData] = useState([])
-    const [periode, setPeriode] = useState('t1')
-    const [annee, setAnnee] = useState(new Date().getFullYear())
-    const data = []
+    const dns = useSelector((state) => state.dns)
 
-    if (employeur.length > 0) {
-      data.push({ employeur: { ...employeur[0] } })
-    }
+    // Local state to hold initial values
+    const [initialPeriode, setInitialPeriode] = useState('t1')
+    const [initialAnnee, setInitialAnnee] = useState(new Date().getFullYear())
+
+    // Local state for dynamic rendering
+    const [periode, setPeriode] = useState(initialPeriode)
+    const [annee, setAnnee] = useState(initialAnnee)
 
     const periodesOptions = [
       { value: 't1', label: 'Trimestre 1' },
       { value: 't2', label: 'Trimestre 2' },
       { value: 't3', label: 'Trimestre 3' },
     ]
+
+    useEffect(() => {
+      // Save initial values of periode and annee
+      // console.log(dns)
+      setInitialPeriode(dns?.periodSelectionne || 't1')
+      setInitialAnnee(dns?.anneeSelectionne || new Date().getFullYear())
+
+      // Update local state
+      setPeriode(dns?.periodSelectionne || 't1')
+      setAnnee(dns?.anneeSelectionne || new Date().getFullYear())
+
+      const handleBeforeUnload = (event) => {
+        localStorage.setItem('dns', JSON.stringify(dns))
+      }
+
+      window.addEventListener('beforeunload', handleBeforeUnload)
+
+      return () => {
+        window.removeEventListener('beforeunload', handleBeforeUnload)
+        if (pathName !== '/etatDivers/cnaps') {
+          dispatch(resetDns())
+          localStorage.removeItem('dns')
+        }
+      }
+    }, [dispatch, pathName, dns])
 
     // Générer la liste d'années de 1900 à l'année actuelle
     const currentYear = new Date().getFullYear()
@@ -34,8 +62,10 @@ const DeclarationCnaps = () => {
 
     const handleInputChange = (selectedOption, actionMeta) => {
       if (actionMeta.name === 'periode') {
+        dispatch(setDns({ ...dns, periodSelectionne: selectedOption.value }))
         setPeriode(selectedOption.value)
       } else if (actionMeta.name === 'annee') {
+        dispatch(setDns({ ...dns, anneeSelectionne: selectedOption.value }))
         setAnnee(selectedOption.value)
       }
     }
@@ -79,7 +109,7 @@ const DeclarationCnaps = () => {
               />
             </div>
             <div className="flex">
-              <DnsGen data={data} />
+              <DnsGen />
             </div>
           </div>
         </form>

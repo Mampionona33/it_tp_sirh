@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  selectedPeriod: 't1',
-  selectedYear: new Date().getFullYear().toString(),
+  periodSelectionne: 't1',
+  anneeSelectionne: new Date().getFullYear(),
 }
 
 const dnsSlice = createSlice({
@@ -12,9 +12,7 @@ const dnsSlice = createSlice({
     setDns: (state, action) => {
       return { ...state, ...action.payload }
     },
-    resetDns: (state) => {
-      return initialState
-    },
+    resetDns: (state) => initialState,
   },
   extraReducers: (builder) => {},
 })

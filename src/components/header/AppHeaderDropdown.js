@@ -29,6 +29,7 @@ import { setUserLoggedOut } from 'src/redux/user/authReducer'
 import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametreCalendrierReducer'
 import { resetBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { useNavigate } from 'react-router-dom'
+import { resetDns } from 'src/redux/dns/dnsReducers'
 
 const AppHeaderDropdown = () => {
   const dispatch = useDispatch()
@@ -36,6 +37,7 @@ const AppHeaderDropdown = () => {
 
   const handleClickLogout = (ev) => {
     ev.preventDefault()
+    dispatch(resetDns())
     dispatch(resetBulletinDePaie())
     dispatch(resetParametreCalendrier())
     dispatch(setUserLoggedOut())
