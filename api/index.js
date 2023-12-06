@@ -5,6 +5,7 @@ const cors = require('cors')
 const fs = require('fs')
 const { parseISO, isWithinInterval, parse } = require('date-fns')
 const asyncHandler = require('express-async-handler')
+const employeurRoutes = require('./routes/employeurRoutes')
 
 app.use(express.json())
 const allowOriginsList = [
@@ -15,7 +16,7 @@ const allowOriginsList = [
   'https://y4y2nk-3000.csb.app',
 ]
 const corsOptions = {
-  origin: "*",
+  origin: '*',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
@@ -23,13 +24,13 @@ const corsOptions = {
 
 app.use(cors(corsOptions))
 
-app.use((req, res, next) => {
-  console.log('Request received with headers:', req.headers)
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-  console.log('Response headers set:', res.getHeaders())
-  next()
-})
+// app.use((req, res, next) => {
+//   console.log('Request received with headers:', req.headers)
+//   res.header('Access-Control-Allow-Origin', '*')
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+//   console.log('Response headers set:', res.getHeaders())
+//   next()
+// })
 
 const isValidCredential = (email, password) => {
   return db.users.some((user) => user.email === email && user.password === password)
@@ -155,6 +156,12 @@ app.get('/mouvement-salaire', (req, res) => {
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
   return res.status(200).send(db['mouvementSalaire'])
 })
+
+app.get('/employeur', (req, res) => {
+  res.status(200).send('hello')
+})
+
+// app.use('/employeur', employeurRoutes)
 
 const PORT = process.env.API_PORT || 8000
 

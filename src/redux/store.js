@@ -11,6 +11,7 @@ import mouvementSalaireReducer from './mouvementSalaire/mouvementSalaireReducer'
 import parametreCalendrierReducer from './parametreCalendrier/parametreCalendrierReducer'
 import authReducer from 'src/redux/user/authReducer'
 import notificationStackReducer from './notificationStack/notificationStackReducer'
+import dnsReducers from './dns/dnsReducers'
 
 const persistConfig = {
   key: 'root',
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   parametreCalendrier: parametreCalendrierReducer,
   auth: authReducer,
   notification: notificationStackReducer,
+  dns: dnsReducers,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
