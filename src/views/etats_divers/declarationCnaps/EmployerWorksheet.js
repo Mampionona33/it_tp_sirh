@@ -40,7 +40,7 @@ class EmployerWorksheet {
   }
 
   isEmployeurExist() {
-    return this.employeurData && Array(this.employeurData).length > 0
+    return Array.isArray(this.employeurData) && this.employeurData.length > 0
   }
 
   formatC4ToC9() {
