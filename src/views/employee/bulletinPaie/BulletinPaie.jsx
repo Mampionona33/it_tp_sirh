@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Document, PDFViewer, pdf, Page } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
@@ -7,6 +7,7 @@ import Section1 from './Section1'
 import Section2 from './Section2'
 import Section3 from './Section3'
 import { FolderArrowDownIcon } from '@heroicons/react/24/outline'
+import { useNavigate } from 'react-router-dom'
 
 // Create Document Component
 const MyDocument = ({ salarie, bulletinDePaie }) => {
@@ -29,9 +30,22 @@ MyDocument.propTypes = {
 }
 
 const BulletinPaie = () => {
+  const navigate = useNavigate()
   const selectedEmploye = useSelector((state) => state.selectedEmploye.employe)
   const bulletinDePaie = useSelector((state) => state.bulletinDePaie)
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
+
+  useEffect(() => {
+    let mount = true
+    if (mount) {
+      if (Object.entries(bulletinDePaie.salarie).length <= 0) {
+        navigate('/', { replace: true })
+      }
+    }
+    return () => {
+      mount = false
+    }
+  }, [bulletinDePaie.salarie, navigate])
 
   const handleclickDownload = () => {
     const pdfBlob = pdf(<MyDocument salarie={selectedEmploye} bulletinDePaie={bulletinDePaie} />)
