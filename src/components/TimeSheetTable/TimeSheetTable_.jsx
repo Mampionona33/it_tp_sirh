@@ -62,6 +62,10 @@ const TimeSheetTable = (props) => {
         const parsedDate = parse(item.date, 'dd/MM/yyyy', new Date())
 
         let hs = null
+        let hdim = null
+        if (item.hs_de_dimanche && item.hs_de_dimanche > 0) {
+          hdim = item.hs_de_dimanche
+        }
         if (item.heure_normale && item.heure_de_travail) {
           hs = item.heure_de_travail - item.heure_normale
         }
@@ -91,6 +95,7 @@ const TimeSheetTable = (props) => {
           regularNightHours: hsNuitHabituel,
           occasionalNightHours: hsNuitOccasionnel,
           overtimeHoursDay: hs,
+          hdim: hdim,
           holidayHours: item.hs_jours_feries ? Math.round(item.hs_jours_feries * 100) / 100 : 0,
         }
       })
@@ -281,16 +286,16 @@ const TimeSheetTable = (props) => {
     columnHelper.accessor('hdim', {
       cell: (info) => {
         if (isCadre) return null
+        return info.getValue()
+        // const sommeHs =
+        //   info.row.original.regularHoursDay +
+        //   info.row.original.regularNightHours +
+        //   info.row.original.overtimeHoursDay +
+        //   info.row.original.occasionalNightHours
 
-        const sommeHs =
-          info.row.original.regularHoursDay +
-          info.row.original.regularNightHours +
-          info.row.original.overtimeHoursDay +
-          info.row.original.occasionalNightHours
-
-        return isSunday(new Date(info.row.original.date)) && sommeHs > 0
-          ? Math.round(sommeHs * 100) / 100
-          : null
+        // return isSunday(new Date(info.row.original.date)) && sommeHs > 0
+        //   ? Math.round(sommeHs * 100) / 100
+        //   : null
       },
       header: () => 'Hdim',
     }),
@@ -396,11 +401,12 @@ const TimeSheetTable = (props) => {
         }
       } else {
         // Calcul des heures du dimanche
-        total.sundayHours +=
-          item.regularHoursDay +
-          item.overtimeHoursDay +
-          item.regularNightHours +
-          item.occasionalNightHours
+        total.sundayHours += item.hdim
+        // total.sundayHours +=
+        //   item.regularHoursDay +
+        //   item.overtimeHoursDay +
+        //   item.regularNightHours +
+        //   item.occasionalNightHours
       }
     })
 
