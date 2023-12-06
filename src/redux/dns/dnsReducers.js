@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   selectedPeriod: 't1',
   selectedYear: new Date().getFullYear().toString(),
-  employeur: [],
 }
 
 const dnsSlice = createSlice({

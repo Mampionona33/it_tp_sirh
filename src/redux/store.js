@@ -12,6 +12,7 @@ import parametreCalendrierReducer from './parametreCalendrier/parametreCalendrie
 import authReducer from 'src/redux/user/authReducer'
 import notificationStackReducer from './notificationStack/notificationStackReducer'
 import dnsReducers from './dns/dnsReducers'
+import employeurReducer from './employeur/employeurReducer'
 
 const persistConfig = {
   key: 'root',
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   notification: notificationStackReducer,
   dns: dnsReducers,
+  employeur: employeurReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

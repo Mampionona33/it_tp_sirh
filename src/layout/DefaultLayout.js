@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
+import { useDispatch } from 'react-redux'
+import { fetcheEmpoyeur } from '../redux/employeur/employeurAction'
 
 const DefaultLayout = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    let mount = true
+    if (mount) {
+      dispatch(fetcheEmpoyeur())
+    }
+    return () => {
+      mount = false
+    }
+  }, [dispatch])
+
   return (
     <div>
       <AppSidebar />
