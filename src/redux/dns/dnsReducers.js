@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+
 const initialState = {
   selectedPeriod: 't1',
-  selectedYear: '',
+  selectedYear: new Date().getFullYear().toString(),
   employeur: [],
 }
 

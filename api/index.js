@@ -1,11 +1,12 @@
 const db = require('./db/db.json')
 const express = require('express')
 const app = express()
+const router = express.Router()
 const cors = require('cors')
 const fs = require('fs')
 const { parseISO, isWithinInterval, parse } = require('date-fns')
 const asyncHandler = require('express-async-handler')
-const employeurRoutes = require('./routes/employeurRoutes')
+const employeurRoutes = require('./routes/employeurRoutes.js')
 
 app.use(express.json())
 const allowOriginsList = [
@@ -157,11 +158,7 @@ app.get('/mouvement-salaire', (req, res) => {
   return res.status(200).send(db['mouvementSalaire'])
 })
 
-app.get('/employeur', (req, res) => {
-  res.status(200).send('hello')
-})
-
-// app.use('/employeur', employeurRoutes)
+app.use('/employeur', employeurRoutes)
 
 const PORT = process.env.API_PORT || 8000
 
