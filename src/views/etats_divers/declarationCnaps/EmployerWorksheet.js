@@ -1,8 +1,11 @@
 class EmployerWorksheet {
-  constructor(workbook) {
+  constructor(workbook, employeurData) {
+    this.employeurData = employeurData
     this.worksheet = workbook.addWorksheet('EMPLOYER', {
       properties: { tabColor: { argb: '00CCFF' } },
     })
+
+    console.log(this.employeurData)
     this.colA = this.worksheet.getColumn(1)
     this.colB = this.worksheet.getColumn(2)
     this.CellB30 = this.worksheet.getCell('B30')
@@ -28,6 +31,24 @@ class EmployerWorksheet {
   formatC4ToC9() {
     for (let i = 4; i <= 9; i++) {
       this.worksheet.mergeCells(`C${i}:F${i}`)
+      if (i === 4) {
+        this.worksheet.getCell(`C${i}`).value = this.employeurData.employeur.rcs || null
+      }
+      if (i === 5) {
+        this.worksheet.getCell(`C${i}`).value = this.employeurData.employeur.nom || null
+      }
+      if (i === 6) {
+        this.worksheet.getCell(`C${i}`).value = this.employeurData.employeur.nif || null
+      }
+      if (i === 7) {
+        this.worksheet.getCell(`C${i}`).value = this.employeurData.employeur.tel || null
+      }
+      if (i === 8) {
+        this.worksheet.getCell(`C${i}`).value = this.employeurData.employeur.adresse || null
+      }
+      if (i === 9) {
+        this.worksheet.getCell(`C${i}`).value = this.employeurData.employeur.email || null
+      }
       let colCDEF = this.worksheet.getColumn(i)
       colCDEF.width = 17
       this.worksheet.getCell(`C${i}`).border = {
@@ -39,7 +60,7 @@ class EmployerWorksheet {
     }
   }
   formatC12ToC16() {
-    for (let i = 12; i < 16; i++) {
+    for (let i = 12; i <= 16; i++) {
       this.worksheet.getCell(`C${i}`).border = {
         top: { style: 'thin' },
         left: { style: 'thin' },

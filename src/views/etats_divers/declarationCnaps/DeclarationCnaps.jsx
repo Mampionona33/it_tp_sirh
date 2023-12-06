@@ -3,13 +3,21 @@ import CustomSection from 'src/components/CustomSection/'
 import Select from 'react-select'
 import { selectCustomStyles } from 'src/scss/selectCustomStyles'
 import DnsGen from './DnsGen'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 const DeclarationCnaps = () => {
   const Body = () => {
     const dispatch = useDispatch()
+    const employeur = useSelector((state) => state.employeur.employeur)
+    // const [data, setData] = useState([])
     const [periode, setPeriode] = useState('t1')
     const [annee, setAnnee] = useState(new Date().getFullYear())
+    const data = []
+
+    if (employeur.length > 0) {
+      data.push({ employeur: { ...employeur[0] } })
+    }
 
     const periodesOptions = [
       { value: 't1', label: 'Trimestre 1' },
@@ -71,7 +79,7 @@ const DeclarationCnaps = () => {
               />
             </div>
             <div className="flex">
-              <DnsGen />
+              <DnsGen data={data} />
             </div>
           </div>
         </form>
