@@ -11,6 +11,8 @@ class DnsGen extends Component {
     this.wb = new ExcelJS.Workbook()
     this.employerSheet = new EmployerWorksheet(this.wb)
     this.mois1 = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
+    this.mois2 = new MonthWorksheet(this.wb, 'Mois 2', '99ccff')
+    this.mois3 = new MonthWorksheet(this.wb, 'Mois 3', '00ccff')
   }
 
   handleExport() {
