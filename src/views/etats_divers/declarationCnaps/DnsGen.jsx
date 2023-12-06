@@ -9,17 +9,6 @@ import { store } from 'src/redux/store'
 class DnsGen extends Component {
   constructor(props) {
     super(props)
-    const { data } = props
-    this.data = Array.isArray(data) ? data : []
-    this.store = store.getState()
-
-    this.employeurData =
-      this.store.employeur.employeur.length > 0 ? this.store.employeur.employeur[0] : []
-
-    this.period = ''
-    this.anneeSelectionne = this.store.dns.anneeSelectionne
-    this.periodSelectionne = this.store.dns.periodSelectionne
-    this.formatPeriod()
 
     this.wb = new ExcelJS.Workbook()
 
@@ -32,21 +21,23 @@ class DnsGen extends Component {
     if (!this.employerSheet) {
       this.employerSheet = new EmployerWorksheet(this.wb)
     }
+    this.fetchData()
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
   }
 
-  componentDidUpdate(prevProps) {
+  fetchData() {
     this.store = store.getState()
-    this.employeurData =
-      this.store.employeur.employeur.length > 0 ? this.store.employeur.employeur[0] : []
-
-    this.period = ''
+    this.employeurData = this.store.employeur.employeur[0]
     this.anneeSelectionne = this.store.dns.anneeSelectionne
     this.periodSelectionne = this.store.dns.periodSelectionne
     this.formatPeriod()
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
+  }
+
+  componentDidUpdate(prevProps) {
+    this.fetchData()
   }
 
   formatPeriod() {
