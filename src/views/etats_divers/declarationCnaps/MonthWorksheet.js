@@ -25,11 +25,31 @@ class MonthWorksheet {
     this.P1 = this.worksheet.getCell('P1')
     this.createSheetContent()
   }
+  adjustColumnWidths() {
+    this.worksheet.columns.forEach((column, index) => {
+      let maxStringLength = 0
+      this.worksheet.eachRow({ includeEmpty: true }, (row) => {
+        const cellValue = row.getCell(index + 1).value
+        const cellLength = cellValue ? String(cellValue).length : 0
+        maxStringLength = Math.max(maxStringLength, cellLength)
+      })
+
+      column.width = Math.max(10, Math.min(30, maxStringLength + 2))
+    })
+  }
 
   setDefaultFont() {
+    this.adjustColumnWidths()
     this.worksheet.eachRow((row) => {
       row.eachCell((cell) => {
         cell.font = { name: 'Arial Narrow', size: 9 }
+        cell.alignment = { vertical: 'middle', horizontal: 'center' }
+        cell.border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' },
+          right: { style: 'thin' },
+        }
       })
     })
   }
