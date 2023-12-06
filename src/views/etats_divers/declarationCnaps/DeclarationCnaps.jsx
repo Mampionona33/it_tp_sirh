@@ -3,9 +3,11 @@ import CustomSection from 'src/components/CustomSection/'
 import Select from 'react-select'
 import { selectCustomStyles } from 'src/scss/selectCustomStyles'
 import DnsGen from './DnsGen'
+import { useDispatch } from 'react-redux'
 
 const DeclarationCnaps = () => {
   const Body = () => {
+    const dispatch = useDispatch()
     const [periode, setPeriode] = useState('t1')
     const [annee, setAnnee] = useState(new Date().getFullYear())
 
@@ -70,7 +72,6 @@ const DeclarationCnaps = () => {
             </div>
             <div className="flex">
               <DnsGen />
-              {/* <DnsGenerator /> */}
             </div>
           </div>
         </form>
