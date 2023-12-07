@@ -46,7 +46,7 @@ const TableEmployeeDataTable = ({ data }) => {
       columnHelper.accessor('id', {
         cell: (info) => {
           return (
-            <div className="px-6 py-3 flex gap-2">
+            <div className="px-6 py-3 justify-center flex gap-2">
               <input
                 type="checkbox"
                 name="id"
@@ -62,7 +62,7 @@ const TableEmployeeDataTable = ({ data }) => {
 
         header: ({ table }) => (
           <div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 justify-center">
               <input
                 type="checkbox"
                 name="matriculeHead"
