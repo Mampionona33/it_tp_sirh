@@ -48,7 +48,7 @@ class EmployerWorksheet {
       if (this.worksheet.getCell(`C${i}`).style !== this.worksheet.getCell(`F${i}`).style) {
         this.worksheet.mergeCells(`C${i}:F${i}`)
       }
-      if (this.isEmployeurExist()) {
+      if (this.isEmployeurExist) {
         if (i === 4) {
           this.worksheet.getCell(`C${i}`).value = this.employeurData.rcs || null
         }
