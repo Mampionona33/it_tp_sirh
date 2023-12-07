@@ -2,6 +2,7 @@ class EmployerWorksheet {
   constructor(workbook) {
     this.employeurData = null
     this.period = ''
+    this.periodSelectionne = null
 
     this.worksheet = workbook.addWorksheet('EMPLOYER', {
       properties: { tabColor: { argb: '00CCFF' } },
@@ -19,6 +20,10 @@ class EmployerWorksheet {
     this.f26 = this.worksheet.getCell('F26')
 
     // this.createSheetContent()
+  }
+
+  setPeriodeSelectionne(periodSelectionne) {
+    this.periodSelectionne = periodSelectionne
   }
 
   setEmployeurData(employeurData) {
@@ -158,6 +163,35 @@ class EmployerWorksheet {
     this.f26.value = { formula: 'SUM(F24:F25)' }
   }
 
+  isPeriodeSelectionneT1() {
+    return this.periodSelectionne === 't1'
+  }
+
+  isPeriodeSelectionneT2() {
+    return this.periodSelectionne === 't2'
+  }
+  isPeriodeSelectionneT3() {
+    return this.periodSelectionne === 't3'
+  }
+
+  insertValueToC18ToE18() {
+    if (this.isPeriodeSelectionneT1()) {
+      this.worksheet.getCell('C18').value = 'Janvier'
+      this.worksheet.getCell('D18').value = 'Février'
+      this.worksheet.getCell('E18').value = 'Mars'
+    }
+    if (this.isPeriodeSelectionneT2()) {
+      this.worksheet.getCell('C18').value = 'Avril'
+      this.worksheet.getCell('D18').value = 'Mai'
+      this.worksheet.getCell('E18').value = 'Juin'
+    }
+    if (this.isPeriodeSelectionneT3()) {
+      this.worksheet.getCell('C18').value = 'Juillet'
+      this.worksheet.getCell('D18').value = 'Août'
+      this.worksheet.getCell('E18').value = 'Septembre'
+    }
+  }
+
   createSheetContent() {
     const colCWsEmployeur = this.worksheet.getColumn(3)
     colCWsEmployeur.width = 17
@@ -234,6 +268,7 @@ class EmployerWorksheet {
     this.insertFormulaToF24()
     this.insertFormulaToF25()
     this.insertFormulaToF26()
+    this.insertValueToC18ToE18()
 
     this.CellB30.font = { italic: true, bold: true }
     this.colA.font = { name: 'Arial', bold: true, underline: true, size: 10 }

@@ -38,7 +38,9 @@ class DnsGen extends Component {
     this.employeurData = this.store.employeur.employeur[0]
     this.anneeSelectionne = this.store.dns.anneeSelectionne
     this.periodSelectionne = this.store.dns.periodSelectionne
+    console.log(this.periodSelectionne)
     this.formatPeriod()
+    this.employerSheet.setPeriodeSelectionne(this.periodSelectionne)
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
   }
