@@ -8,11 +8,11 @@ class EmployeurService {
 
   async fetchEmployeur() {
     try {
-      this.resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/employeur`)
-      console.log(this.resp)
+      this.resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/employeu`)
+      // console.log(this.resp)
       return this.resp
     } catch (error) {
-      console.error(error)
+      // console.error(error)
       throw error
     }
   }

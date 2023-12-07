@@ -4,12 +4,15 @@ import { fetcheEmpoyeur } from './employeurAction' // Correction : Renommer la f
 const initialState = {
   employeur: [],
   loading: 'idle',
+  error: null,
 }
 
 const employeurSlice = createSlice({
   name: 'employeur',
   initialState,
-  reducers: {},
+  reducers: {
+    resetEmployeur: (state) => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetcheEmpoyeur.fulfilled, (state, action) => {
@@ -20,10 +23,11 @@ const employeurSlice = createSlice({
         state.loading = 'loading'
       })
       .addCase(fetcheEmpoyeur.rejected, (state, action) => {
+        console.log(action)
         state.loading = 'idle'
-        state.error = action.payload
+        state.error = action.error
       })
   },
 })
-
+export const { resetEmployeur } = employeurSlice.actions
 export default employeurSlice.reducer
