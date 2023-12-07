@@ -34,7 +34,7 @@ const Login = () => {
     try {
       const resp = await authService.login(username, password)
       if (resp && resp === 'Connecté') {
-        dispatch(setUserLoggedIn({ username: username }))
+        dispatch(setUserLoggedIn({ email: username, password: password }))
         navigate('/dashboard')
       } else {
         alert('Mots de passe ou identifiant incorrect')
