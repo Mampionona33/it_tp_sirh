@@ -14,15 +14,15 @@ const DefaultLayout = () => {
     let mount = true
     if (mount) {
       dispatch(fetcheEmpoyeur())
-      // if (errorFetchEmployeur) {
-      //   dispatch(
-      //     addNotification({
-      //       title: "Récupération des informations de l'employeur",
-      //       message: "Erreur lors de la récupération des données de l'employeur",
-      //       type: 'error',
-      //     }),
-      //   )
-      // }
+      if (errorFetchEmployeur) {
+        dispatch(
+          addNotification({
+            title: "Récupération des informations de l'employeur",
+            message: "Erreur lors de la récupération des données de l'employeur",
+            type: 'error',
+          }),
+        )
+      }
     }
     return () => {
       mount = false

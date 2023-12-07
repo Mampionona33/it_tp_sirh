@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetcheEmpoyeur } from './employeurAction'
+import { fetchEmployeur } from './employeurAction' // Correction : Renommer la fonction
 
 const initialState = {
   employeur: [],
@@ -13,18 +13,18 @@ const employeurSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetcheEmpoyeur.fulfilled, (state, action) => {
+      .addCase(fetchEmployeur.fulfilled, (state, action) => {
         state.employeur = action.payload
         state.loading = 'idle'
         state.error = null
       })
-      .addCase(fetcheEmpoyeur.pending, (state, action) => {
+      .addCase(fetchEmployeur.pending, (state) => {
         state.loading = 'loading'
         state.error = null
       })
-      .addCase(fetcheEmpoyeur.rejected, (state, action) => {
+      .addCase(fetchEmployeur.rejected, (state, action) => {
         state.loading = 'idle'
-        state.error = action.payload
+        state.error = action.error.message // Correction : Utiliser le message d'erreur
       })
   },
 })

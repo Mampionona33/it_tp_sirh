@@ -6,17 +6,14 @@ class EmployeurService {
     this.resp = null
   }
 
-  async fetcheEmpoyeur() {
+  async fetchEmployeur() {
     try {
       this.resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/employeur`)
       console.log(this.resp)
-      return this.resp
+      return this.resp.data // Correction : Retourner la propriété 'data' de la réponse
     } catch (error) {
-      console.log(error)
+      console.error(error) // Correction : Utilisation de console.error pour indiquer une erreur
+      throw error // Correction : Lancer à nouveau l'erreur pour la gestion ultérieure
     }
   }
 }
-
-const EmployeurServiceInstance = new EmployeurService()
-
-export default EmployeurServiceInstance
