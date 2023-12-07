@@ -78,7 +78,7 @@ const FormInfoGalEmployee = (props) => {
     <>
       {loadList === 'loading' ? <Loading /> : null}
       <div className="container">
-        <div className="row g-3">
+        <div className="row ">
           <div className="col-12 col-lg-6">
             <label className="form-label" htmlFor="nom">
               Nom *
@@ -287,132 +287,135 @@ const FormInfoGalEmployee = (props) => {
               onChange={handleChange}
             />
           </div>
-
           <div className="col-12 col-lg-6">
-            <fieldset className="form-group">
-              <legend className="form-label text-base">Genre</legend>
+            <div className="d-flex flex-row justify-between">
+              {/* <div className="col-12 col-lg-6"> */}
+              <fieldset className="form-group">
+                <legend className="form-label text-base">Genre</legend>
 
-              <div className="form-check">
-                <input
-                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
-                  type="radio"
-                  name="sexe"
-                  id="homme"
-                  value={'homme'}
-                  checked={employee.sexe.toLowerCase() === 'homme'}
-                  onChange={(ev) =>
-                    setEmployee((cu) => ({
-                      ...cu,
-                      sexe: ev.target.value,
-                    }))
-                  }
-                />
-                <label className="form-check-label" htmlFor="homme">
-                  Homme
-                </label>
-              </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                    type="radio"
+                    name="sexe"
+                    id="homme"
+                    value={'homme'}
+                    checked={employee.sexe.toLowerCase() === 'homme'}
+                    onChange={(ev) =>
+                      setEmployee((cu) => ({
+                        ...cu,
+                        sexe: ev.target.value,
+                      }))
+                    }
+                  />
+                  <label className="form-check-label" htmlFor="homme">
+                    Homme
+                  </label>
+                </div>
 
-              <div className="form-check">
-                <input
-                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
-                  type="radio"
-                  name="sexe"
-                  id="femme"
-                  value={'femme'}
-                  checked={employee.sexe.toLowerCase() === 'femme'}
-                  onChange={(ev) =>
-                    setEmployee((cu) => ({
-                      ...cu,
-                      sexe: ev.target.value,
-                    }))
-                  }
-                />
-                <label className="form-check-label" htmlFor="femme">
-                  Femme
-                </label>
-              </div>
-            </fieldset>
-          </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                    type="radio"
+                    name="sexe"
+                    id="femme"
+                    value={'femme'}
+                    checked={employee.sexe.toLowerCase() === 'femme'}
+                    onChange={(ev) =>
+                      setEmployee((cu) => ({
+                        ...cu,
+                        sexe: ev.target.value,
+                      }))
+                    }
+                  />
+                  <label className="form-check-label" htmlFor="femme">
+                    Femme
+                  </label>
+                </div>
+              </fieldset>
+              {/* </div> */}
 
-          <div className="col-12 col-lg-6">
-            <fieldset className="form-group">
-              <legend className="form-label text-base">Est un cadre</legend>
+              {/* <div className="col-12 col-lg-6"> */}
+              <fieldset className="form-group">
+                <legend className="form-label text-base">Est un cadre</legend>
 
-              <div className="form-check">
-                <input
-                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
-                  type="radio"
-                  name="cadre"
-                  id="cadreOui"
-                  value={1}
-                  checked={employee.cadre === 1}
-                  onChange={(ev) =>
-                    setEmployee((cu) => ({
-                      ...cu,
-                      cadre: parseInt(ev.target.value, 10),
-                    }))
-                  }
-                />
-                <label className="form-check-label" htmlFor="cadreOui">
-                  Oui
-                </label>
-              </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                    type="radio"
+                    name="cadre"
+                    id="cadreOui"
+                    value={1}
+                    checked={employee.cadre === 1}
+                    onChange={(ev) =>
+                      setEmployee((cu) => ({
+                        ...cu,
+                        cadre: parseInt(ev.target.value, 10),
+                      }))
+                    }
+                  />
+                  <label className="form-check-label" htmlFor="cadreOui">
+                    Oui
+                  </label>
+                </div>
 
-              <div className="form-check">
-                <input
-                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
-                  type="radio"
-                  name="cadre"
-                  id="cadreNon"
-                  value={0}
-                  checked={employee.cadre === 0}
-                  onChange={(ev) =>
-                    setEmployee((cu) => ({
-                      ...cu,
-                      cadre: parseInt(ev.target.value, 10),
-                    }))
-                  }
-                />
-                <label className="form-check-label" htmlFor="cadreNon">
-                  Non
-                </label>
-              </div>
-            </fieldset>
-          </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                    type="radio"
+                    name="cadre"
+                    id="cadreNon"
+                    value={0}
+                    checked={employee.cadre === 0}
+                    onChange={(ev) =>
+                      setEmployee((cu) => ({
+                        ...cu,
+                        cadre: parseInt(ev.target.value, 10),
+                      }))
+                    }
+                  />
+                  <label className="form-check-label" htmlFor="cadreNon">
+                    Non
+                  </label>
+                </div>
+              </fieldset>
+              {/* </div> */}
 
-          <div className="col-12 col-lg-6">
-            <fieldset className="form-group">
-              <legend className="form-label text-base">Travail de nuit</legend>
-              <div className="form-check">
-                <input
-                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
-                  type="radio"
-                  name="travDeNuit"
-                  id="travailDeNuitOui"
-                  value={1}
-                  checked={employee.travDeNuit === 1}
-                  onChange={() => setEmployee({ ...employee, travDeNuit: 1 })}
-                />
-                <label className="form-check-label" htmlFor="travailDeNuitOui">
-                  Oui
-                </label>
-              </div>
+              {/* <div className="col-12 col-lg-6"> */}
+              <fieldset className="form-group">
+                <legend className="form-label text-base">Travail de nuit</legend>
+                <div className="form-check">
+                  <input
+                    className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                    type="radio"
+                    name="travDeNuit"
+                    id="travailDeNuitOui"
+                    value={1}
+                    checked={employee.travDeNuit === 1}
+                    onChange={() => setEmployee({ ...employee, travDeNuit: 1 })}
+                  />
+                  <label className="form-check-label" htmlFor="travailDeNuitOui">
+                    Oui
+                  </label>
+                </div>
 
-              <div className="form-check">
-                <input
-                  className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
-                  type="radio"
-                  name="travDeNuit"
-                  id="travailDeNuitNon"
-                  value={0}
-                  checked={employee.travDeNuit === 0}
-                  onChange={() => setEmployee({ ...employee, travDeNuit: 0 })}
-                />
-                <label className="form-check-label" htmlFor="travailDeNuitNon">
-                  Non
-                </label>
-              </div>
-            </fieldset>
+                <div className="form-check">
+                  <input
+                    className="form-check-input checked:bg-customRed-900 checked:border-customRed-900 focus:ring-[0.25rem] focus:ring-[#e7b7b4]"
+                    type="radio"
+                    name="travDeNuit"
+                    id="travailDeNuitNon"
+                    value={0}
+                    checked={employee.travDeNuit === 0}
+                    onChange={() => setEmployee({ ...employee, travDeNuit: 0 })}
+                  />
+                  <label className="form-check-label" htmlFor="travailDeNuitNon">
+                    Non
+                  </label>
+                </div>
+              </fieldset>
+              {/* </div> */}
+            </div>
           </div>
         </div>
       </div>
