@@ -6,12 +6,9 @@ class DnsService {
     this.resp = null
   }
 
-  async fetch() {
+  async fetch(periode, annee) {
     try {
-      this.resp = await axios.post(`${this.REACT_APP_API_BASE_URL}/dns`, {
-        periode: periode,
-        annee: annee,
-      })
+      this.resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/dns/${periode}/:${annee}`)
       return this.resp
     } catch (error) {
       throw error
