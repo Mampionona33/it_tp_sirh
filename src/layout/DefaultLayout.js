@@ -1,23 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { fetcheEmpoyeur } from '../redux/employeur/employeurAction'
 
 const DefaultLayout = () => {
   const dispatch = useDispatch()
-  const employeur = useSelector((store) => store.employeur.employeur)
+  const errorFetchEmployeur = useSelector((store) => store.employeur.error)
+  const [hasErrorNotificationDisplayed, setHasErrorNotificationDisplayed] = useState(false)
+  console.log(errorFetchEmployeur)
 
   useEffect(() => {
     let mount = true
     if (mount) {
-      if (employeur.length <= 0) {
-        dispatch(fetcheEmpoyeur())
+      dispatch(fetcheEmpoyeur())
+      if (errorFetchEmployeur) {
+        dispatch(
+          addNotification({
+            title: "Récupération des informations de l'employeur",
+            message: "Erreur lors de la récupération des données de l'employeur",
+            type: 'error',
+          }),
+        )
       }
     }
     return () => {
       mount = false
     }
-  }, [dispatch, employeur])
+  }, [dispatch, hasErrorNotificationDisplayed])
 
   return (
     <div>
