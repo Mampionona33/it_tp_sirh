@@ -49,6 +49,9 @@ class DnsGen extends Component {
     if (!this.employerSheet) {
       this.employerSheet = new EmployerWorksheet(this.wb)
     }
+    if (!this.mois1) {
+      this.mois1 = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
+    }
     this.fetchData()
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
@@ -60,8 +63,8 @@ class DnsGen extends Component {
 
   handleExport() {
     this.employerSheet.createSheetContent()
+    this.mois1.createSheetContent()
 
-    // this.mois1 = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
     // this.mois2 = new MonthWorksheet(this.wb, 'Mois 2', '99ccff')
     // this.mois3 = new MonthWorksheet(this.wb, 'Mois 3', '00ccff')
 

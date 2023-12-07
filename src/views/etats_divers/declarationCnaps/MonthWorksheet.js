@@ -1,8 +1,15 @@
 class MonthWorksheet {
   constructor(workbook, monthLabel, tabColor) {
+    this.monthLabel = null
+    this.workbook = workbook
+    this.tabColor = null
+
     this.worksheet = workbook.addWorksheet(monthLabel, {
       properties: { tabColor: { argb: tabColor } },
     })
+  }
+
+  initializeHeaders() {
     this.A1 = this.worksheet.getCell('A1')
     this.B1 = this.worksheet.getCell('B1')
     this.B2 = this.worksheet.getCell('B2')
@@ -23,8 +30,16 @@ class MonthWorksheet {
     this.N2 = this.worksheet.getCell('N2')
     this.O2 = this.worksheet.getCell('O2')
     this.P1 = this.worksheet.getCell('P1')
-    this.createSheetContent()
   }
+
+  setLabel(monthLabel) {
+    this.monthLabel = monthLabel
+  }
+
+  setTabColor(tabColor) {
+    this.tabColor = tabColor
+  }
+
   adjustColumnWidths() {
     this.worksheet.columns.forEach((column, index) => {
       let maxStringLength = 0
@@ -141,6 +156,7 @@ class MonthWorksheet {
   }
 
   createSheetContent() {
+    this.initializeHeaders()
     this.formatA1()
     this.formatB1()
     this.formatB2()
