@@ -152,7 +152,7 @@ app.get('/mouvement-salaire', (req, res) => {
   return res.status(200).send(db['mouvementSalaire'])
 })
 
-app.use('/employeur', employeurRoutes)
+app.use('/employeurs', employeurRoutes)
 
 const PORT = process.env.API_PORT || 8000
 
