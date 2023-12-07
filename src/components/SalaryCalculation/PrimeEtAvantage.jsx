@@ -120,7 +120,7 @@ export default function PrimeEtAvantage() {
             <div className="col-12 col-lg-6">
               {firstHalf &&
                 firstHalf.map((item, index) => (
-                  <div key={item.id} className="mb-3">
+                  <div key={item.id} className="mb-1">
                     <label className="form-label" htmlFor={item.id}>
                       {item.label}
                     </label>
@@ -141,7 +141,7 @@ export default function PrimeEtAvantage() {
             <div className="col-12 col-lg-6">
               {secondHalf &&
                 secondHalf.map((item, index) => (
-                  <div key={item.id} className="mb-3">
+                  <div key={item.id} className="mb-1">
                     <label className="form-label" htmlFor={item.id}>
                       {item.label}
                     </label>
