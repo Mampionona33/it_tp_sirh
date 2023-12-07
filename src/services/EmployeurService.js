@@ -17,3 +17,7 @@ class EmployeurService {
     }
   }
 }
+
+const EmployeurServiceInstance = new EmployeurService()
+
+export default EmployeurServiceInstance
