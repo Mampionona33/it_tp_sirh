@@ -3,6 +3,9 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   periodSelectionne: 't1',
   anneeSelectionne: new Date().getFullYear(),
+  mois1: null,
+  mois2: null,
+  mois3: null,
 }
 
 const dnsSlice = createSlice({
