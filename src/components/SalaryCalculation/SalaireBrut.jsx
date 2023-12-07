@@ -142,10 +142,10 @@ const SalaireBrut = () => {
         <div className="flex flex-col">
           {/* First Element */}
           <div className="sm:grid sm:grid-cols-2">
-            <div className="font-medium p-3 border-b align-middle border-customRed-100">
+            <div className="font-medium px-4 py-2 border-b align-middle border-customRed-100">
               Salaire de base:
             </div>
-            <div className="text-right p-3 border-b align-middle border-customRed-100">
+            <div className="text-right px-4 py-2 border-b align-middle border-customRed-100">
               {formatedSalaireBase}
             </div>
           </div>
@@ -159,41 +159,41 @@ const SalaireBrut = () => {
                   index % 2 === 0 ? 'mobile:bg-gray-100' : 'mobile:bg-white'
                 }`}
               >
-                <div className="font-medium p-3 border-b align-middle border-customRed-100">
+                <div className="font-medium px-4 py-2 border-b align-middle border-customRed-100">
                   {item.title}
                 </div>
-                <div className="sm:text-center text-right p-3 border-b align-middle border-customRed-100">
+                <div className="sm:text-center text-right px-4 py-2 border-b align-middle border-customRed-100">
                   {item.hours.toString().padStart(2, '0')} H
                 </div>
-                <div className="text-right p-3 border-b align-middle border-customRed-100">
+                <div className="text-right px-4 py-2 border-b align-middle border-customRed-100">
                   {item.value}
                 </div>
               </div>
             </React.Fragment>
           ))}
           <div className="sm:grid sm:grid-cols-2">
-            <div className="font-medium p-3 border-b align-middle border-customRed-100">
+            <div className="font-medium px-4 py-2 border-b align-middle border-customRed-100">
               Primes et avantages:
             </div>
-            <div className="text-right p-3 border-b align-middle border-customRed-100">
+            <div className="text-right px-4 py-2 border-b align-middle border-customRed-100">
               {formatedPrimeEtAvantage}
             </div>
           </div>
 
           <div className="sm:grid sm:grid-cols-2">
-            <div className="font-medium p-3 border-b align-middle border-customRed-100">
+            <div className="font-medium px-4 py-2 border-b align-middle border-customRed-100">
               Retenues:
             </div>
-            <div className="text-right p-3 border-b align-middle border-customRed-100">
+            <div className="text-right px-4 py-2 border-b align-middle border-customRed-100">
               {formatedRetenue}
             </div>
           </div>
 
           <div className="sm:grid sm:grid-cols-2">
-            <div className="font-medium p-3 border-b align-middle border-customRed-100">
+            <div className="font-medium px-4 py-2 border-b align-middle border-customRed-100">
               Salaire brut:
             </div>
-            <div className="text-right p-3 font-semibold  text-customRed-900 border-b align-middle border-customRed-100">
+            <div className="text-right px-4 py-2 font-semibold  text-customRed-900 border-b align-middle border-customRed-100">
               {formatedSlaireBruteValue}
             </div>
           </div>
