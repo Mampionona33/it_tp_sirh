@@ -40,7 +40,6 @@ class EmployerWorksheet {
   }
 
   isEmployeurExist() {
-    console.log(this.employeurData)
     return this.employeurData !== null && this.employeurData !== undefined
   }
 
