@@ -4,6 +4,7 @@ import { fetcheEmpoyeur } from './employeurAction'
 const initialState = {
   employeur: [],
   loading: 'idle',
+  error: null,
 }
 
 const employeurSlice = createSlice({
@@ -15,12 +16,15 @@ const employeurSlice = createSlice({
       .addCase(fetcheEmpoyeur.fulfilled, (state, action) => {
         state.employeur = action.payload
         state.loading = 'idle'
+        state.error = null
       })
       .addCase(fetcheEmpoyeur.pending, (state, action) => {
         state.loading = 'loading'
+        state.error = null
       })
       .addCase(fetcheEmpoyeur.rejected, (state, action) => {
         state.loading = 'idle'
+        state.error = action.payload
       })
   },
 })
