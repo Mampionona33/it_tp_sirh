@@ -73,8 +73,8 @@ const SalaireNet = () => {
                 className="flex flex-wrap justify-between border-b border-customRed-100"
                 key={index}
               >
-                <td className="text-left py-3 px-4 font-medium">{item.title}</td>
-                <td className="py-3 pl-8 px-4 text-right">{item.value}</td>
+                <td className="text-left py-2 px-4 font-medium">{item.title}</td>
+                <td className="py-2 pl-8 px-4 text-right">{item.value}</td>
               </tr>
             ))}
           </tbody>
