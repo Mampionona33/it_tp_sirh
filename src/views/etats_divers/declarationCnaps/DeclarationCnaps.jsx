@@ -6,6 +6,7 @@ import DnsGen from './DnsGen'
 import { useDispatch, useSelector } from 'react-redux'
 import { resetDns, setDns } from 'src/redux/dns/dnsReducers'
 import { useLocation } from 'react-router-dom'
+import { fetchDnsData } from 'src/redux/dns/dnsActions'
 
 const DeclarationCnaps = () => {
   const Body = () => {
@@ -13,6 +14,7 @@ const DeclarationCnaps = () => {
     const pathName = location.pathname
     const dispatch = useDispatch()
     const dns = useSelector((state) => state.dns)
+    const dsnData = useSelector((state) => state.dns.dsnData)
 
     // Local state to hold initial values
     const [initialPeriode, setInitialPeriode] = useState('t1')
@@ -29,19 +31,18 @@ const DeclarationCnaps = () => {
     ]
 
     useEffect(() => {
-      // Save initial values of periode and annee
-      // console.log(dns)
       setInitialPeriode(dns?.periodSelectionne || 't1')
       setInitialAnnee(dns?.anneeSelectionne || new Date().getFullYear())
 
-      // Update local state
       setPeriode(dns?.periodSelectionne || 't1')
       setAnnee(dns?.anneeSelectionne || new Date().getFullYear())
 
       const handleBeforeUnload = (event) => {
         localStorage.setItem('dns', JSON.stringify(dns))
       }
-
+      if (!dsnData && periode && annee) {
+        // dispatch(fetchDnsData(periode, annee))
+      }
       window.addEventListener('beforeunload', handleBeforeUnload)
 
       return () => {
@@ -51,7 +52,7 @@ const DeclarationCnaps = () => {
           localStorage.removeItem('dns')
         }
       }
-    }, [dispatch, pathName, dns])
+    }, [dispatch, pathName, dns, periode, annee, dsnData])
 
     // Générer la liste d'années de 1900 à l'année actuelle
     const currentYear = new Date().getFullYear()
@@ -64,19 +65,17 @@ const DeclarationCnaps = () => {
       if (actionMeta.name === 'periode') {
         dispatch(setDns({ ...dns, periodSelectionne: selectedOption.value }))
         setPeriode(selectedOption.value)
+        dispatch(fetchDnsData({ periode: selectedOption.value, annee: annee }))
       } else if (actionMeta.name === 'annee') {
         dispatch(setDns({ ...dns, anneeSelectionne: selectedOption.value }))
         setAnnee(selectedOption.value)
+        dispatch(fetchDnsData({ periode: periode, annee: selectedOption.value }))
       }
-    }
-
-    const handleSubmit = async (ev) => {
-      ev.preventDefault()
     }
 
     return (
       <>
-        <form className="w-full flex flex-col gap-2 p-4" onSubmit={handleSubmit}>
+        <form className="w-full flex flex-col gap-2 p-4">
           <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
             <div>
               <label className="form-label" htmlFor="periode">

@@ -4,11 +4,6 @@ class DnsControllers {
   constructor() {}
 
   fetchDns = (req, res) => {
-    const periode = req.periode
-    const annee = req.annee
-
-    console.log('periode', periode, annee)
-
     res.status(200).send('hello world')
   }
 }
