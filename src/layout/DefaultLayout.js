@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { fetcheEmpoyeur } from '../redux/employeur/employeurAction'
-import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
 
 const DefaultLayout = () => {
   const dispatch = useDispatch()
@@ -14,7 +13,7 @@ const DefaultLayout = () => {
     let mount = true
     if (mount) {
       dispatch(fetcheEmpoyeur())
-      if (errorFetchEmployeur && !hasErrorNotificationDisplayed) {
+      if (errorFetchEmployeur) {
         dispatch(
           addNotification({
             title: "Récupération des informations de l'employeur",
@@ -22,13 +21,12 @@ const DefaultLayout = () => {
             type: 'error',
           }),
         )
-        setHasErrorNotificationDisplayed(true)
       }
     }
     return () => {
       mount = false
     }
-  }, [dispatch, errorFetchEmployeur, hasErrorNotificationDisplayed])
+  }, [dispatch, hasErrorNotificationDisplayed])
 
   return (
     <div>
