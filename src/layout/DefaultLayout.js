@@ -15,18 +15,18 @@ const DefaultLayout = () => {
     if (employeur.length === 0) {
       dispatch(fetcheEmpoyeur())
     }
-    if (errorOnFetchEmployeur && !createErrorNotification) {
-      if (mount) {
-        dispatch(
-          addNotification({
-            title: 'Erreur ',
-            type: 'error',
-            message: `${errorOnFetchEmployeur.message}`,
-          }),
-        )
-        setCreateErrorNotification(true)
-      }
-    }
+    // if (errorOnFetchEmployeur && !createErrorNotification) {
+    //   if (mount) {
+    //     dispatch(
+    //       addNotification({
+    //         title: 'Erreur ',
+    //         type: 'error',
+    //         message: `${errorOnFetchEmployeur.message}`,
+    //       }),
+    //     )
+    //     setCreateErrorNotification(true)
+    //   }
+    // }
     return () => {
       mount = false
     }

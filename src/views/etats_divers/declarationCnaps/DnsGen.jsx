@@ -17,29 +17,6 @@ class DnsGen extends Component {
     this.formatPeriod = this.formatPeriod.bind(this)
   }
 
-  componentDidMount() {
-    if (!this.employerSheet) {
-      this.employerSheet = new EmployerWorksheet(this.wb)
-    }
-    this.fetchData()
-    this.employerSheet.setEmployeurData(this.employeurData)
-    this.employerSheet.setPeriod(this.period)
-  }
-
-  fetchData() {
-    this.store = store.getState()
-    this.employeurData = this.store.employeur.employeur[0]
-    this.anneeSelectionne = this.store.dns.anneeSelectionne
-    this.periodSelectionne = this.store.dns.periodSelectionne
-    this.formatPeriod()
-    this.employerSheet.setEmployeurData(this.employeurData)
-    this.employerSheet.setPeriod(this.period)
-  }
-
-  componentDidUpdate(prevProps) {
-    this.fetchData()
-  }
-
   formatPeriod() {
     switch (this.periodSelectionne) {
       case 't1':
@@ -54,6 +31,29 @@ class DnsGen extends Component {
       default:
         break
     }
+  }
+
+  fetchData() {
+    this.store = store.getState()
+    this.employeurData = this.store.employeur.employeur[0]
+    this.anneeSelectionne = this.store.dns.anneeSelectionne
+    this.periodSelectionne = this.store.dns.periodSelectionne
+    this.formatPeriod()
+    this.employerSheet.setEmployeurData(this.employeurData)
+    this.employerSheet.setPeriod(this.period)
+  }
+
+  componentDidMount() {
+    if (!this.employerSheet) {
+      this.employerSheet = new EmployerWorksheet(this.wb)
+    }
+    this.fetchData()
+    this.employerSheet.setEmployeurData(this.employeurData)
+    this.employerSheet.setPeriod(this.period)
+  }
+
+  componentDidUpdate(prevProps) {
+    this.fetchData()
   }
 
   handleExport() {
