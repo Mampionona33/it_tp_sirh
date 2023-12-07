@@ -85,35 +85,38 @@ const TableEmployeeDataTable = ({ data }) => {
         cell: (info) => info.getValue(),
         header: () => 'Nom et Prénom',
       }),
-      columnHelper.accessor('cin', {
-        cell: (info) => info.getValue(),
-        header: () => 'cin',
-      }),
-      columnHelper.accessor('adresse', {
-        cell: (info) => info.getValue(),
-        header: () => 'adresse',
-      }),
-      columnHelper.accessor('dateEmbauche', {
-        cell: (info) => info.getValue(),
-        header: () => "date d'ambauche",
-      }),
-      columnHelper.accessor('numCnaps', {
-        cell: (info) => info.getValue(),
-        header: () => 'N° de sécurité sociale',
-      }),
+      // columnHelper.accessor('cin', {
+      //   cell: (info) => info.getValue(),
+      //   header: () => 'cin',
+      // }),
+      // columnHelper.accessor('adresse', {
+      //   cell: (info) => info.getValue(),
+      //   header: () => 'adresse',
+      // }),
+      // columnHelper.accessor('dateEmbauche', {
+      //   cell: (info) => info.getValue(),
+      //   header: () => "date d'ambauche",
+      // }),
+      // columnHelper.accessor('numCnaps', {
+      //   cell: (info) => info.getValue(),
+      //   header: () => 'N° de sécurité sociale',
+      // }),
       columnHelper.accessor('poste', {
         cell: (info) => info.getValue(),
         header: () => 'Fonction',
       }),
-      columnHelper.accessor('cadre', {
-        cell: (info) => info.getValue(),
-        header: () => 'cadre',
-      }),
+      // columnHelper.accessor('cadre', {
+      //   cell: (info) => info.getValue(),
+      //   header: () => 'cadre',
+      // }),
       columnHelper.accessor('id', {
         header: () => 'action',
         cell: (info) => (
           <div className="flex">
-            <MoreButtonMenu
+            <Link className="btn btn-danger" to={`/employees/fiche/${info.getValue()}`}>
+              Fiche
+            </Link>
+            {/* <MoreButtonMenu
               items={[
                 // <div key={'dns'} className="btn" onClick={handleClickGenerateDns}>
                 //   Générer DNS
@@ -126,7 +129,7 @@ const TableEmployeeDataTable = ({ data }) => {
                   Fiche employé
                 </Link>,
               ]}
-            />
+            /> */}
           </div>
         ),
       }),
