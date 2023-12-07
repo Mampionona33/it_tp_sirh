@@ -9,8 +9,10 @@ class EmployeurService {
 
   async fetchEmployeur() {
     try {
-      const email = store.getState().auth.user.email
-      const password = store.getState().auth.user.password
+      // const email = store.getState().auth.user.email
+      // const password = store.getState().auth.user.password
+      const email = 'lslisteemployes'
+      const password = '20lsliste23'
 
       this.resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/employeurs`, {
         auth: {
