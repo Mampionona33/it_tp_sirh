@@ -71,7 +71,12 @@ class DnsGen extends Component {
     this.formatPeriod()
     this.wb.xlsx.writeBuffer().then((buffer) => {
       const blob = new Blob([buffer], { type: 'application/octet-stream' })
-      FileSaver.saveAs(blob, 'NomDuFichier.xlsx')
+      FileSaver.saveAs(
+        blob,
+        `declaration_CNAPS_${this.periodSelectionne.toLocaleUpperCase()}_${
+          this.anneeSelectionne
+        }.xlsx`,
+      )
     })
   }
 
