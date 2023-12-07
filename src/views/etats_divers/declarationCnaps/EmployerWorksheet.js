@@ -1,6 +1,6 @@
 class EmployerWorksheet {
   constructor(workbook) {
-    this.employeurData = []
+    this.employeurData = null
     this.period = ''
 
     this.worksheet = workbook.addWorksheet('EMPLOYER', {
@@ -40,7 +40,8 @@ class EmployerWorksheet {
   }
 
   isEmployeurExist() {
-    return Array.isArray(this.employeurData) && this.employeurData.length > 0
+    console.log(this.employeurData)
+    return this.employeurData !== null && this.employeurData !== undefined
   }
 
   formatC4ToC9() {
@@ -48,7 +49,7 @@ class EmployerWorksheet {
       if (this.worksheet.getCell(`C${i}`).style !== this.worksheet.getCell(`F${i}`).style) {
         this.worksheet.mergeCells(`C${i}:F${i}`)
       }
-      if (this.isEmployeurExist) {
+      if (this.isEmployeurExist()) {
         if (i === 4) {
           this.worksheet.getCell(`C${i}`).value = this.employeurData.rcs || null
         }
