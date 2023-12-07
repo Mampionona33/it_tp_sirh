@@ -24,7 +24,7 @@ const employeurSlice = createSlice({
       })
       .addCase(fetchEmployeur.rejected, (state, action) => {
         state.loading = 'idle'
-        state.error = action.error.message // Correction : Utiliser le message d'erreur
+        state.error = action.error.message
       })
   },
 })

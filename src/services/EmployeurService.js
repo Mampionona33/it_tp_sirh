@@ -10,10 +10,10 @@ class EmployeurService {
     try {
       this.resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/employeur`)
       console.log(this.resp)
-      return this.resp.data // Correction : Retourner la propriété 'data' de la réponse
+      return this.resp
     } catch (error) {
-      console.error(error) // Correction : Utilisation de console.error pour indiquer une erreur
-      throw error // Correction : Lancer à nouveau l'erreur pour la gestion ultérieure
+      console.error(error)
+      throw error
     }
   }
 }
