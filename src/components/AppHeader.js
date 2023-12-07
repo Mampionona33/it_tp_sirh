@@ -62,7 +62,7 @@ const AppHeader = () => {
           </CNavItem>
         </CHeaderNav>
         <CHeaderNav>
-          <CNavItem>
+          {/* <CNavItem>
             <Link to={`/#`} className="btn btn-link text-decoration-none ">
               <BellIcon className="text-customRed-900 w-6 h-6" />
             </Link>
@@ -76,7 +76,7 @@ const AppHeader = () => {
             <Link to={`/#`} className="btn btn-link text-decoration-none ">
               <EnvelopeIcon className="text-customRed-900 w-6 h-6" />
             </Link>
-          </CNavItem>
+          </CNavItem> */}
         </CHeaderNav>
         <CHeaderNav className="ms-3">
           <AppHeaderDropdown />
