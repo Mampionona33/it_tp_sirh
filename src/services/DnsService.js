@@ -8,8 +8,17 @@ class DnsService {
   }
 
   async fetch(periode, annee) {
+    const email = 'lslisteemployes'
+    const password = '20lsliste23'
     try {
-      this.resp = await axios.get(`${DnsService.REACT_APP_API_BASE_URL}/dns/${periode}/${annee}`)
+      this.resp = await axios.get(`${DnsService.REACT_APP_API_BASE_URL}/dns/${annee}/${periode}`, {
+        auth: {
+          username: email,
+          password: password,
+        },
+      })
+
+      console.log(this.resp)
       return this.resp
     } catch (error) {
       throw error

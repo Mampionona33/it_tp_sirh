@@ -44,7 +44,10 @@ const DeclarationCnaps = () => {
 
       console.log('test', typeof dsnData, dsnData, initialPeriode, initialAnnee)
 
-      if (dsnData === null && initialPeriode && initialAnnee && loading !== 'succeeded') {
+      if (
+        (dsnData === null && initialPeriode && initialAnnee && loading !== 'succeeded') ||
+        loading !== 'idle'
+      ) {
         console.log('Dispatching fetchDnsData...')
         dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee }))
       } else {
