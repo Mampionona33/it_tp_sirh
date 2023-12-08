@@ -15,6 +15,7 @@ const DeclarationCnaps = () => {
     const dispatch = useDispatch()
     const dns = useSelector((state) => state.dns)
     const dsnData = useSelector((state) => state.dns.dsnData)
+    const loading = useSelector((state) => state.dns.loading)
 
     // Local state to hold initial values
     const [initialPeriode, setInitialPeriode] = useState('t1')
@@ -40,9 +41,16 @@ const DeclarationCnaps = () => {
       const handleBeforeUnload = (event) => {
         localStorage.setItem('dns', JSON.stringify(dns))
       }
-      if (!dsnData && periode && annee) {
-        // dispatch(fetchDnsData(periode, annee))
+
+      console.log('test', typeof dsnData, dsnData, initialPeriode, initialAnnee)
+
+      if (dsnData === null && initialPeriode && initialAnnee && loading !== 'succeeded') {
+        console.log('Dispatching fetchDnsData...')
+        dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee }))
+      } else {
+        console.log('Conditions not met, skipping fetchDnsData dispatch.')
       }
+
       window.addEventListener('beforeunload', handleBeforeUnload)
 
       return () => {
@@ -52,7 +60,7 @@ const DeclarationCnaps = () => {
           localStorage.removeItem('dns')
         }
       }
-    }, [dispatch, pathName, dns, periode, annee, dsnData])
+    }, [dispatch, pathName, dns, initialPeriode, initialAnnee, dsnData, loading])
 
     // Générer la liste d'années de 1900 à l'année actuelle
     const currentYear = new Date().getFullYear()
