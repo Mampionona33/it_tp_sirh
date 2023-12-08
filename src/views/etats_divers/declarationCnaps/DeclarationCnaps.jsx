@@ -49,7 +49,6 @@ const DeclarationCnaps = () => {
         if (loading === 'idle') {
           dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee }))
         } else if (loading === 'reject') {
-          // Correction : Utiliser setTimeout au lieu de setInterval pour un seul délai
           dispatch(
             addNotification({ title: 'Error', type: 'error', message: "Une erreur c'est produit" }),
           )
