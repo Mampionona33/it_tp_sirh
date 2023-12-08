@@ -50,7 +50,11 @@ const DeclarationCnaps = () => {
           dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee }))
         } else if (loading === 'reject') {
           dispatch(
-            addNotification({ title: 'Error', type: 'error', message: "Une erreur c'est produit" }),
+            addNotification({
+              title: 'Error',
+              type: 'error',
+              message: "Une erreur c'est produite",
+            }),
           )
           setTimeout(
             () => dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee })),
