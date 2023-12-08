@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { resetDns, setDns } from 'src/redux/dns/dnsReducers'
 import { useLocation } from 'react-router-dom'
 import { fetchDnsData } from 'src/redux/dns/dnsActions'
+import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
 
 const DeclarationCnaps = () => {
   const Body = () => {
@@ -44,12 +45,19 @@ const DeclarationCnaps = () => {
 
       console.log('test', typeof dsnData, dsnData, initialPeriode, initialAnnee)
 
-      if (
-        (dsnData === null && initialPeriode && initialAnnee && loading !== 'succeeded') ||
-        loading !== 'idle'
-      ) {
-        console.log('Dispatching fetchDnsData...')
-        dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee }))
+      if (!dsnData && initialPeriode && initialAnnee) {
+        if (loading === 'idle') {
+          dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee }))
+        } else if (loading === 'reject') {
+          // Correction : Utiliser setTimeout au lieu de setInterval pour un seul délai
+          dispatch(
+            addNotification({ title: 'Error', type: 'error', message: "Une erreur c'est produit" }),
+          )
+          setTimeout(
+            () => dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee })),
+            15000,
+          )
+        }
       } else {
         console.log('Conditions not met, skipping fetchDnsData dispatch.')
       }

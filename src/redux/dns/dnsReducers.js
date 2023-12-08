@@ -20,7 +20,7 @@ const dnsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchDnsData.fulfilled, (state, action) => {
-        state.data = action.payload.data
+        state.dsnData = action.payload.data
         state.loading = 'succeeded'
       })
       .addCase(fetchDnsData.pending, (state, action) => {
