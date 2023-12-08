@@ -11,7 +11,7 @@ class DnsService {
     const email = 'lslisteemployes'
     const password = '20lsliste23'
     try {
-      this.resp = await axios.get(`${DnsService.REACT_APP_API_BASE_URL}/dn/${annee}/${periode}`, {
+      this.resp = await axios.get(`${DnsService.REACT_APP_API_BASE_URL}/dns/${annee}/${periode}`, {
         auth: {
           username: email,
           password: password,
