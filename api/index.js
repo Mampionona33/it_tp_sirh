@@ -6,8 +6,8 @@ const cors = require('cors')
 const fs = require('fs')
 const { parseISO, isWithinInterval, parse } = require('date-fns')
 const asyncHandler = require('express-async-handler')
-const employeurRoutes = require('./routes/employeurRoutes.js')
-
+const dnsController = require('./controllers/DnsControllers')
+const employeurControllers = require('./controllers/EmployeurControllers')
 app.use(express.json())
 
 const corsOptions = {
@@ -152,7 +152,9 @@ app.get('/mouvement-salaire', (req, res) => {
   return res.status(200).send(db['mouvementSalaire'])
 })
 
-app.use('/employeurs', employeurRoutes)
+app.route('/employeurs').get(employeurControllers.getEmployeur)
+
+app.route('/dns/:annee/:period').get(dnsController.fetchDns)
 
 const PORT = process.env.API_PORT || 8000
 

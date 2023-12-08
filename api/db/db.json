@@ -1217,5 +1217,43 @@
       "email": "ls@gmail.com"
     }
   ],
-  "users": [{ "id": 1, "email": "admin@ls.ls", "password": "lsadmin2023" }]
+  "users": [{ "id": 1, "email": "admin@ls.ls", "password": "lsadmin2023" }],
+
+  "dns":[
+    {
+      "annee_moi": "2023-04",
+      "travailleur": {
+         "nom": "Rakoto",
+         "prenoms": "Bema",
+         "date_embauche": "2018-09-01",
+         "date_depart": "",
+         "salaire_du_mois": 4500000,
+         "avantage_du_mois": 1000010,
+         "temps_presence": 160,
+         "hs_non_plafonne": 4,
+         "hs_plafonne": 2,
+         "num_cnaps": "465454656",
+         "cin": "100.454.454.663"
+      },
+    "employeur" : {
+        "id": 1,
+        "nom": "LA LIGNE SCANDINAVE",
+        "adresse": "2 RUE LIEUTNANT BERARD",
+        "Cp_ville": "501 - TOAMASINA",
+        "nif": "3000000581",
+        "stat": "50121 11 2003 0 00475",
+        "rcs": "2002B00608",
+        "tel": "020 000211",
+        "email": "ls@gmail.com",
+        "ref":"446f4fd5445"
+      },
+     
+      "cotisation": {
+        "employeur": 10000,
+         "travailleur": 1000,
+         "total": 11000
+      }
+   }
+   
+   ]
 }

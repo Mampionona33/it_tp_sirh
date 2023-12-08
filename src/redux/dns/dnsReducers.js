@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { fetchDnsData } from './dnsActions'
 
 const initialState = {
   periodSelectionne: 't1',
   anneeSelectionne: new Date().getFullYear(),
-  mois1: null,
-  mois2: null,
-  mois3: null,
+  dsnData: null,
+  loading: 'idle',
 }
 
 const dnsSlice = createSlice({
@@ -17,7 +17,19 @@ const dnsSlice = createSlice({
     },
     resetDns: (state) => initialState,
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchDnsData.fulfilled, (state, action) => {
+        state.data = action.payload.data
+        state.loading = 'succeeded'
+      })
+      .addCase(fetchDnsData.pending, (state, action) => {
+        state.loading = 'loading'
+      })
+      .addCase(fetchDnsData.rejected, (state, action) => {
+        state.loading = 'reject'
+      })
+  },
 })
 
 export const { setDns, resetDns } = dnsSlice.actions

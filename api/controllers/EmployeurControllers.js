@@ -6,4 +6,4 @@ class EmployeurControllers {
   }
 }
 
-module.exports = EmployeurControllers
+module.exports = new EmployeurControllers()
