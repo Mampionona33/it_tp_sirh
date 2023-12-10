@@ -1185,10 +1185,18 @@
     }
   ],
   "/cotisations": [
-    { "id": 1, "label": "cnaps", "taux": 0.01 },
-    { "id": 2, "label": "osmi", "taux": 0.01 },
-    { "id": 3, "label": "Cotisation sociale", "taux": 0.01 }
+    { "id": 1, "label": "cnaps", "type": "cnaps", "payer": "salarie", "taux": 0.01 },
+    { "id": 2, "label": "osmi", "type": "osmi", "payer": "salarie", "taux": 0.01 },
+    { "id": 3, "label": "Cotisation sociale", "type": "social", "payer": "salarie", "taux": 0.01 },
+    {
+      "id": 4,
+      "label": "Cotisation cnaps employeur",
+      "type": "cnaps",
+      "payer": "employeur",
+      "taux": 0.02
+    }
   ],
+
   "allocationFamil": [{ "id": 1, "label": "enfant", "montant": 2000, "age_max": 21 }],
   "avances": [
     { "id": 1, "employee": { "id": 1 }, "date": "2023-01-15T05:14:08.190Z", "montant": 100000 },
