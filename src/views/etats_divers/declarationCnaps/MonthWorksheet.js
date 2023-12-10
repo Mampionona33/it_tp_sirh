@@ -47,6 +47,10 @@ class MonthWorksheet {
     this.P1 = this.worksheet.getCell('P1')
   }
 
+  verifyCellNotMerged(cell1, cell2) {
+    return this.worksheet.getCell(cell1).style !== this.worksheet.getCell(cell2).style
+  }
+
   setLabel(monthLabel) {
     this.monthLabel = monthLabel
   }
@@ -87,12 +91,16 @@ class MonthWorksheet {
   formatA1() {
     this.A1.width = '2.3cm'
     this.A1.value = 'ANNEE-MOIS'
-    this.worksheet.mergeCells('A1:A2')
+    if (this.verifyCellNotMerged('A1', 'A2')) {
+      this.worksheet.mergeCells('A1:A2')
+    }
   }
   formatB1() {
     this.B1.width = '6cm'
     this.B1.value = 'TRAVAILLEURS'
-    this.worksheet.mergeCells('B1:C1')
+    if (this.verifyCellNotMerged('B1', 'C1')) {
+      this.worksheet.mergeCells('B1:C1')
+    }
   }
   formatB2() {
     // this.B2.width = '6cm'
@@ -104,17 +112,23 @@ class MonthWorksheet {
   formatD1() {
     this.D1.width = '2.3cm'
     this.D1.value = 'N° CNaPS'
-    this.worksheet.mergeCells('D1:D2')
+    if (this.verifyCellNotMerged('D1', 'D2')) {
+      this.worksheet.mergeCells('D1:D2')
+    }
   }
   formatE1() {
     this.E1.width = '2.3cm'
     this.E1.value = 'Réf. Employeur'
-    this.worksheet.mergeCells('E1:E2')
+    if (this.verifyCellNotMerged('E1', 'E2')) {
+      this.worksheet.mergeCells('E1:E2')
+    }
   }
   formatF1() {
     // this.F1.width = '2.3cm'
     this.F1.value = 'DATE'
-    this.worksheet.mergeCells('F1:G1')
+    if (this.verifyCellNotMerged('F1', 'G1')) {
+      this.worksheet.mergeCells('F1:G1')
+    }
   }
   formatF2() {
     // this.F2.width = '2.3cm'
@@ -126,22 +140,30 @@ class MonthWorksheet {
   formatH1() {
     // this.H1.width = '2.3cm'
     this.H1.value = 'SALAIRE DU MOIS'
-    this.worksheet.mergeCells('H1:H2')
+    if (this.verifyCellNotMerged('H1', 'H2')) {
+      this.worksheet.mergeCells('H1:H2')
+    }
   }
   formatI1() {
     // this.I1.width = '2.3cm'
     this.I1.value = 'AVANTAGE DU MOIS'
-    this.worksheet.mergeCells('I1:I2')
+    if (this.verifyCellNotMerged('I1', 'I2')) {
+      this.worksheet.mergeCells('I1:I2')
+    }
   }
   formatJ1() {
     // this.J1.width = '2.3cm'
     this.J1.value = 'TEMPS PRESENCE'
-    this.worksheet.mergeCells('J1:J2')
+    if (this.verifyCellNotMerged('J1', 'J2')) {
+      this.worksheet.mergeCells('J1:J2')
+    }
   }
   formatK1() {
     // this.K1.width = '2.3cm'
     this.K1.value = 'TOTAL'
-    this.worksheet.mergeCells('K1:L1')
+    if (this.verifyCellNotMerged('K1', 'L1')) {
+      this.worksheet.mergeCells('K1:L1')
+    }
   }
   formatK2() {
     this.K2.value = 'NON PLAFONNE'
@@ -153,7 +175,9 @@ class MonthWorksheet {
   formatM1() {
     // this.M1.width = '2.3cm'
     this.M1.value = 'COTISATIONS'
-    this.worksheet.mergeCells('M1:O1')
+    if (this.verifyCellNotMerged('M1', 'O1')) {
+      this.worksheet.mergeCells('M1:O1')
+    }
   }
   formatM2() {
     this.M2.value = 'EMPLOYEUR'
@@ -167,7 +191,9 @@ class MonthWorksheet {
   formatP1() {
     // this.P1.width = '2.3cm'
     this.P1.value = 'N° CIN/N°PASSEPORT'
-    this.worksheet.mergeCells('P1:P2')
+    if (this.verifyCellNotMerged('P1', 'P2')) {
+      this.worksheet.mergeCells('P1:P2')
+    }
   }
 
   createSheetContent() {
