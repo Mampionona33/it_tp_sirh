@@ -1,4 +1,4 @@
-import { parse } from 'date-fns'
+import { parse, format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 
 class MonthWorksheet {
@@ -11,25 +11,25 @@ class MonthWorksheet {
     this.employeurData = null
 
     this.startCharCode = 'A'.charCodeAt(0)
-    this.endCharCode = 'O'.charCodeAt(0)
+    this.endCharCode = 'P'.charCodeAt(0)
     this.columnNames = []
     this.columnData = [
       'date',
       'nom',
       'prenom',
       'num_cnaps',
-      'refEmployeur',
-      'dateEmbauche',
-      'dateDepart',
-      'salaireDuMois',
-      'avantageDuMois',
-      'tempsPresence',
-      'nonPlafonne',
+      'ref_employeur',
+      'date_embauche',
+      'date_depart',
+      'salaire_du_mois',
+      'avantage_du_mois',
+      'temps_presence',
+      'non_plafonne',
       'plafonne',
-      'cotisationEmployeur',
-      'cotisationTravailleur',
-      'cotisationTotal',
-      'numCin',
+      'cotisation_employeur',
+      'cotisaton_travailleur',
+      'cotisation_total',
+      'cin',
     ]
     this.generateColumnNames()
 
@@ -38,7 +38,7 @@ class MonthWorksheet {
     })
   }
 
-  setData(data) {
+  setTravailleurData(data) {
     this.travailleurData = data
   }
 
@@ -46,8 +46,13 @@ class MonthWorksheet {
     this.employeurData = employeeHours
   }
 
-  isDataExist() {
+  isTravailleurDataExist() {
     return this.travailleurData !== null && this.travailleurData !== undefined
+  }
+
+  isEmployeurDataExist() {
+    console.log(this.employeurData)
+    return this.employeurData !== null && this.employeurData !== undefined
   }
 
   formatDate(annee, mois) {
@@ -68,32 +73,28 @@ class MonthWorksheet {
   }
 
   formatData() {
-    if (this.isDataExist()) {
-      this.formatedData = this.travailleurData.map((item) => {
+    if (this.isTravailleurDataExist() && this.isEmployeurDataExist()) {
+      this.formatedData = this.travailleurData.map((item, key) => {
+        const plafond = 1940000
+        const non_plafonne = item.salaire_du_mois + item.avantage_du_mois
+
         return {
           ...item,
           date: this.formatDate(item.annee, item.mois),
+          date_embauche: item.date_embauche
+            ? format(new Date(item.date_embauche), 'dd/MM/yyyy')
+            : '',
+          date_depart: item.date_depart ? format(new Date(item.date_depart), 'dd/MM/yyyy') : '',
+          ref_employeur: this.employeurData.rcs,
+          non_plafonne: non_plafonne,
+          plafonne: non_plafonne <= plafond ? non_plafonne : plafond,
+          cotisation_employeur: item.cotisation_employeur || 0,
+          cotisaton_travailleur: item.cotisaton_travailleur || 0,
+          cotisation_total: item.cotisation_employeur + item.cotisaton_travailleur,
         }
       })
     }
   }
-
-  // fillColA() {
-  //   for (let i = 0; i < this.travailleurData.length; i++) {
-  //     const rowNumber = i + 3
-  //     this.worksheet.getCell(`A${rowNumber}`).value = this.formatDate(
-  //       this.travailleurData[i].annee,
-  //       this.travailleurData[i].mois,
-  //     )
-  //   }
-  // }
-
-  // fillColB() {
-  //   for (let i = 0; i < this.travailleurData.length; i++) {
-  //     const rowNumber = i + 3
-  //     this.worksheet.getCell(`B${rowNumber}`).value = this.travailleurData[i].nom
-  //   }
-  // }
 
   generateColumnNames() {
     for (let charCode = this.startCharCode; charCode <= this.endCharCode; charCode++) {
@@ -115,11 +116,8 @@ class MonthWorksheet {
   }
 
   injectData() {
-    if (this.isDataExist()) {
+    if (this.isTravailleurDataExist()) {
       this.formatData()
-      // this.fillColA()
-      // this.fillColB()
-      console.log('formatedData: ', this.formatedData)
       this.fillCollData()
     }
   }

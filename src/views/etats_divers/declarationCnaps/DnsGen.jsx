@@ -69,7 +69,8 @@ class DnsGen extends Component {
     }
     this.fetchData()
     console.log('travailleurs mois 1 ', this.listTravailleurMois1)
-    this.mois1.setData(this.listTravailleurMois1)
+    this.mois1.setTravailleurData(this.listTravailleurMois1)
+    this.mois1.setEmployeurData(this.employeurData)
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
   }
