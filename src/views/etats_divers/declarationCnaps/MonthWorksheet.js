@@ -18,9 +18,17 @@ class MonthWorksheet {
     return this.data !== null && this.data !== undefined
   }
 
+  fellColNom() {
+    for (let i = 3; i < this.data.length + 3; i++) {
+      const nom = this.data.map((travailleur) => travailleur.nom)
+      this.worksheet.getCell(`B${i}`).value = nom
+    }
+  }
+
   injectData() {
     if (this.isDataExist()) {
       console.log('data: ', this.data)
+      this.fellColNom()
     }
   }
 
