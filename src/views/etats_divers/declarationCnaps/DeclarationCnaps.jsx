@@ -8,6 +8,7 @@ import { resetDns, setDns } from 'src/redux/dns/dnsReducers'
 import { useLocation } from 'react-router-dom'
 import { fetchDnsData } from 'src/redux/dns/dnsActions'
 import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
+import DnsGenerator from './DnsGenerator'
 
 const DeclarationCnaps = () => {
   const Body = () => {
@@ -131,6 +132,7 @@ const DeclarationCnaps = () => {
             </div>
             <div className="flex">
               <DnsGen />
+              <DnsGenerator />
             </div>
           </div>
         </form>

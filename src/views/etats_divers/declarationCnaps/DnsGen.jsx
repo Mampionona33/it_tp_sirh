@@ -49,7 +49,7 @@ class DnsGen extends Component {
     this.anneeSelectionne = this.store.dns.anneeSelectionne
     this.periodSelectionne = this.store.dns.periodSelectionne
 
-    this.dsnData = this.store.dns.dsnData
+    this.dnsData = this.store.dns.dnsData
     this.employeurData = this.store.employeur.employeur[0]
 
     this.formatPeriod()
@@ -82,12 +82,12 @@ class DnsGen extends Component {
   }
 
   verifyDnsDataExist() {
-    return this.dsnData && Array.from(this.dsnData).length > 0
+    return this.dnsData && Array.from(this.dnsData).length > 0
   }
 
   getTravailleurs() {
     if (this.verifyDnsDataExist()) {
-      this.travailleurs = Array.from(this.dsnData)[0].travailleurs
+      this.travailleurs = Array.from(this.dnsData)[0].travailleurs
     }
   }
 
