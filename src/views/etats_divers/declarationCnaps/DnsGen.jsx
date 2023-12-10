@@ -11,8 +11,13 @@ class DnsGen extends Component {
     super(props)
 
     this.wb = new ExcelJS.Workbook()
-    this.moi1Data = null
-    this.travalleurs = null
+    this.listTravailleurMois1 = null
+    this.listTravailleurMois2 = null
+    this.listTravailleurMois2 = null
+    this.travailleurs = null
+    this.mois1List = ['janvier', 'avril', 'juillet']
+    this.mois2List = ['fevrier', 'mai', 'août']
+    this.mois3List = ['mars', 'juin', 'septembre']
 
     // Utiliser une méthode fléchée pour lier correctement "this" à la fonction
     this.handleExport = this.handleExport.bind(this)
@@ -41,8 +46,15 @@ class DnsGen extends Component {
     this.anneeSelectionne = this.store.dns.anneeSelectionne
     this.periodSelectionne = this.store.dns.periodSelectionne
     this.dsnData = this.store.dns.dsnData
+
     this.formatPeriod()
-    this.getTravailleurs()
+    if (this.verifyDnsDataExist()) {
+      this.getTravailleurs()
+      this.getListTravailleurMois1()
+      this.getListTravailleurMois2()
+      this.getListTravailleurMois3()
+    }
+
     this.employerSheet.setPeriodeSelectionne(this.periodSelectionne)
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
@@ -56,24 +68,53 @@ class DnsGen extends Component {
       this.mois1 = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
     }
     this.fetchData()
-
-    console.log('travailleur', this.travalleurs)
-    this.mois1.setData(this.dsnData)
+    console.log('travailleurs mois 1 ', this.listTravailleurMois1)
+    this.mois1.setData(this.listTravailleurMois1)
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
   }
 
+  verifyDnsDataExist() {
+    return this.dsnData && Array.from(this.dsnData).length > 0
+  }
+
   getTravailleurs() {
-    if (this.dsnData && Array.from(this.dsnData).length > 0) {
-      this.travalleurs = Array.from(this.dsnData)[0].travailleurs
+    if (this.verifyDnsDataExist()) {
+      this.travailleurs = Array.from(this.dsnData)[0].travailleurs
     }
   }
 
-  getMois1Data() {}
+  verifyTravailleursExist() {
+    return this.travailleurs !== null && this.travailleurs !== undefined
+  }
+
+  getListTravailleurMois1() {
+    if (this.verifyTravailleursExist()) {
+      this.listTravailleurMois1 = this.travailleurs.filter((travailleur) =>
+        this.mois1List.includes(travailleur.mois),
+      )
+    }
+  }
+
+  getListTravailleurMois2() {
+    if (this.verifyTravailleursExist()) {
+      this.listTravailleurMois2 = this.travailleurs.filter((travailleur) =>
+        this.mois2List.includes(travailleur.mois),
+      )
+    }
+  }
+
+  getListTravailleurMois3() {
+    if (this.verifyTravailleursExist()) {
+      this.listTravailleurMois3 = this.travailleurs.filter((travailleur) =>
+        this.mois3List.includes(travailleur.mois),
+      )
+    }
+  }
 
   componentDidUpdate(prevProps) {
     this.fetchData()
-    console.log('travailleur', this.travalleurs)
+    console.log('travailleurs mois 1', this.listTravailleurMois1)
   }
 
   handleExport(ev) {
