@@ -1,7 +1,7 @@
 class EmployerWorksheet {
   constructor(workbook) {
     this.employeurData = null
-    this.period = ''
+    this.period = null
     this.periodSelectionne = null
 
     this.worksheet = workbook.addWorksheet('EMPLOYER', {
@@ -88,10 +88,16 @@ class EmployerWorksheet {
       }
     }
   }
+
+  isPeriodExist() {
+    return this.period !== null && this.period !== undefined
+  }
   formatC12ToC16() {
     for (let i = 12; i <= 16; i++) {
-      if (i === 12 && this.period.length > 0) {
-        this.worksheet.getCell(`C${i}`).value = this.period
+      if (this.isPeriodExist()) {
+        if (i === 12 && this.period.length > 0) {
+          this.worksheet.getCell(`C${i}`).value = this.period
+        }
       }
 
       this.worksheet.getCell(`C${i}`).border = {
