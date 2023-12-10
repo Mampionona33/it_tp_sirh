@@ -75,11 +75,7 @@ class MonthWorksheet {
   formatData() {
     if (this.isTravailleurDataExist() && this.isEmployeurDataExist()) {
       this.formatedData = this.travailleurData.map((item, key) => {
-        const plafond = 1940000
-        const non_plafonne = item.salaire_du_mois + item.avantage_du_mois
-        const plafonne = non_plafonne <= plafond ? non_plafonne : plafond
-        const cotisation_employeur = item.taux_cotisation_cnaps_employeur * plafonne || 0
-        const cotisaton_travailleur = item.taux_cotisation_cnaps_salarie * plafonne || 0
+        const plafondReglemente = 1940000
 
         return {
           ...item,
@@ -90,9 +86,11 @@ class MonthWorksheet {
           date_depart: item.date_depart ? format(new Date(item.date_depart), 'dd/MM/yyyy') : '',
           ref_employeur: this.employeurData.rcs,
           non_plafonne: { formula: `SUM(H${key + 3},I${key + 3})` },
-          plafonne: { formula: `=IF(K${key + 3} <= 1940000, K${key + 3}, 1940000)` },
-          cotisation_employeur: cotisation_employeur,
-          cotisaton_travailleur: cotisaton_travailleur,
+          plafonne: {
+            formula: `=IF(K${key + 3} <= ${plafondReglemente}, K${key + 3}, ${plafondReglemente})`,
+          },
+          cotisation_employeur: { formula: `${item.taux_cotisation_cnaps_employeur}*L${key + 3}` },
+          cotisaton_travailleur: { formula: `${item.taux_cotisation_cnaps_salarie}*L${key + 3}` },
           cotisation_total: { formula: `M${key + 3}+N${key + 3}` },
         }
       })
