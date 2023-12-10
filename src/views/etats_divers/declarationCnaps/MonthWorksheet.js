@@ -89,7 +89,7 @@ class MonthWorksheet {
             : '',
           date_depart: item.date_depart ? format(new Date(item.date_depart), 'dd/MM/yyyy') : '',
           ref_employeur: this.employeurData.rcs,
-          non_plafonne: non_plafonne,
+          non_plafonne: { formula: `SUM(H${key + 3},I${key + 3})` },
           plafonne: { formula: `=IF(K${key + 3} <= 1940000, K${key + 3}, 1940000)` },
           cotisation_employeur: cotisation_employeur,
           cotisaton_travailleur: cotisaton_travailleur,
@@ -171,6 +171,20 @@ class MonthWorksheet {
 
       column.width = Math.max(10, Math.min(30, maxStringLength + 2))
     })
+  }
+
+  formatCellToNumberDecima() {
+    if (this.isEmployeurDataExist())
+      for (let i = 0; i <= this.formatedData.length; i++) {
+        const dataCell = i + 3
+        this.worksheet.getCell(`H${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`I${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`K${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`L${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`M${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`N${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`O${dataCell}`).numFmt = '0.00'
+      }
   }
 
   setDefaultFont() {
@@ -320,6 +334,7 @@ class MonthWorksheet {
     this.formatO2()
     this.formatP1()
     this.injectData()
+    this.formatCellToNumberDecima()
     this.setDefaultFont()
   }
 }
