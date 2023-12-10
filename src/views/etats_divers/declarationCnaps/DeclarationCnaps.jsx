@@ -43,7 +43,7 @@ const DeclarationCnaps = () => {
         localStorage.setItem('dns', JSON.stringify(dns))
       }
 
-      console.log('test', typeof dsnData, dsnData, initialPeriode, initialAnnee)
+      // console.log('test', typeof dsnData, dsnData, initialPeriode, initialAnnee)
 
       if (!dsnData && initialPeriode && initialAnnee) {
         if (loading === 'idle') {

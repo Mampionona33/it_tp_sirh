@@ -3,10 +3,25 @@ class MonthWorksheet {
     this.monthLabel = null
     this.workbook = workbook
     this.tabColor = null
+    this.data = null
 
     this.worksheet = workbook.addWorksheet(monthLabel, {
       properties: { tabColor: { argb: tabColor } },
     })
+  }
+
+  setData(data) {
+    this.data = data
+  }
+
+  isDataExist() {
+    return this.data !== null && this.data !== undefined
+  }
+
+  injectData() {
+    if (this.isDataExist()) {
+      console.log('data: ', this.data)
+    }
   }
 
   initializeHeaders() {
@@ -178,6 +193,7 @@ class MonthWorksheet {
     this.formatO2()
     this.formatP1()
     this.setDefaultFont()
+    this.injectData()
   }
 }
 

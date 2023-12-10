@@ -38,6 +38,7 @@ class DnsGen extends Component {
     this.employeurData = this.store.employeur.employeur[0]
     this.anneeSelectionne = this.store.dns.anneeSelectionne
     this.periodSelectionne = this.store.dns.periodSelectionne
+    this.dsnData = this.store.dns.dsnData
     this.formatPeriod()
     this.employerSheet.setPeriodeSelectionne(this.periodSelectionne)
     this.employerSheet.setEmployeurData(this.employeurData)
@@ -52,6 +53,7 @@ class DnsGen extends Component {
       this.mois1 = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
     }
     this.fetchData()
+    this.mois1.setData(this.dsnData)
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
   }
@@ -60,13 +62,11 @@ class DnsGen extends Component {
     this.fetchData()
   }
 
-  handleExport() {
+  handleExport(ev) {
+    ev.preventDefault()
     this.formatPeriod()
     this.employerSheet.createSheetContent()
     this.mois1.createSheetContent()
-
-    // this.mois2 = new MonthWorksheet(this.wb, 'Mois 2', '99ccff')
-    // this.mois3 = new MonthWorksheet(this.wb, 'Mois 3', '00ccff')
 
     this.wb.xlsx.writeBuffer().then((buffer) => {
       const blob = new Blob([buffer], { type: 'application/octet-stream' })
