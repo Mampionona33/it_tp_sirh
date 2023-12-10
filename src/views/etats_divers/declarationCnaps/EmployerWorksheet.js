@@ -48,11 +48,16 @@ class EmployerWorksheet {
     return this.employeurData !== null && this.employeurData !== undefined
   }
 
+  verifyCellNotMerged(cell1, cell2) {
+    return this.worksheet.getCell(cell1).style !== this.worksheet.getCell(cell2).style
+  }
+
   formatC4ToC9() {
     for (let i = 4; i <= 9; i++) {
-      if (this.worksheet.getCell(`C${i}`).style !== this.worksheet.getCell(`F${i}`).style) {
+      if (this.verifyCellNotMerged(`C${i}`, `F${i}`)) {
         this.worksheet.mergeCells(`C${i}:F${i}`)
       }
+
       if (this.isEmployeurExist()) {
         if (i === 4) {
           this.worksheet.getCell(`C${i}`).value = this.employeurData.rcs || null

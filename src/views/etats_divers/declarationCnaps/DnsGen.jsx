@@ -66,7 +66,7 @@ class DnsGen extends Component {
     ev.preventDefault()
     this.formatPeriod()
     this.employerSheet.createSheetContent()
-    this.mois1.createSheetContent()
+    // this.mois1.createSheetContent()
 
     this.wb.xlsx.writeBuffer().then((buffer) => {
       const blob = new Blob([buffer], { type: 'application/octet-stream' })
