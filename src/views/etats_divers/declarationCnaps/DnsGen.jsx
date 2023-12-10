@@ -11,6 +11,8 @@ class DnsGen extends Component {
     super(props)
 
     this.wb = new ExcelJS.Workbook()
+    this.moi1Data = null
+    this.travalleurs = null
 
     // Utiliser une méthode fléchée pour lier correctement "this" à la fonction
     this.handleExport = this.handleExport.bind(this)
@@ -40,6 +42,7 @@ class DnsGen extends Component {
     this.periodSelectionne = this.store.dns.periodSelectionne
     this.dsnData = this.store.dns.dsnData
     this.formatPeriod()
+    this.getTravailleurs()
     this.employerSheet.setPeriodeSelectionne(this.periodSelectionne)
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
@@ -53,13 +56,24 @@ class DnsGen extends Component {
       this.mois1 = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
     }
     this.fetchData()
+
+    console.log('travailleur', this.travalleurs)
     this.mois1.setData(this.dsnData)
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
   }
 
+  getTravailleurs() {
+    if (this.dsnData && Array.from(this.dsnData).length > 0) {
+      this.travalleurs = Array.from(this.dsnData)[0].travailleurs
+    }
+  }
+
+  getMois1Data() {}
+
   componentDidUpdate(prevProps) {
     this.fetchData()
+    console.log('travailleur', this.travalleurs)
   }
 
   handleExport(ev) {
