@@ -8,6 +8,7 @@ class MonthWorksheet {
     this.tabColor = null
     this.travailleurData = null
     this.formatedData = []
+    this.employeurData = null
 
     this.startCharCode = 'A'.charCodeAt(0)
     this.endCharCode = 'O'.charCodeAt(0)
@@ -39,6 +40,10 @@ class MonthWorksheet {
 
   setData(data) {
     this.travailleurData = data
+  }
+
+  setEmployeurData(employeeHours) {
+    this.employeurData = employeeHours
   }
 
   isDataExist() {
@@ -73,15 +78,22 @@ class MonthWorksheet {
     }
   }
 
-  fillColA() {
-    for (let i = 0; i < this.travailleurData.length; i++) {
-      const rowNumber = i + 3
-      this.worksheet.getCell(`A${rowNumber}`).value = this.formatDate(
-        this.travailleurData[i].annee,
-        this.travailleurData[i].mois,
-      )
-    }
-  }
+  // fillColA() {
+  //   for (let i = 0; i < this.travailleurData.length; i++) {
+  //     const rowNumber = i + 3
+  //     this.worksheet.getCell(`A${rowNumber}`).value = this.formatDate(
+  //       this.travailleurData[i].annee,
+  //       this.travailleurData[i].mois,
+  //     )
+  //   }
+  // }
+
+  // fillColB() {
+  //   for (let i = 0; i < this.travailleurData.length; i++) {
+  //     const rowNumber = i + 3
+  //     this.worksheet.getCell(`B${rowNumber}`).value = this.travailleurData[i].nom
+  //   }
+  // }
 
   generateColumnNames() {
     for (let charCode = this.startCharCode; charCode <= this.endCharCode; charCode++) {
@@ -99,13 +111,6 @@ class MonthWorksheet {
         const rowNumber = i + 3
         this.worksheet.getCell(`${colName}${rowNumber}`).value = this.formatedData[i][dataKey]
       }
-    }
-  }
-
-  fillColB() {
-    for (let i = 0; i < this.travailleurData.length; i++) {
-      const rowNumber = i + 3
-      this.worksheet.getCell(`B${rowNumber}`).value = this.travailleurData[i].nom
     }
   }
 
@@ -313,8 +318,8 @@ class MonthWorksheet {
     this.formatN2()
     this.formatO2()
     this.formatP1()
-    this.setDefaultFont()
     this.injectData()
+    this.setDefaultFont()
   }
 }
 
