@@ -1,9 +1,36 @@
+import { parse } from 'date-fns'
+import { fr } from 'date-fns/locale'
+
 class MonthWorksheet {
   constructor(workbook, monthLabel, tabColor) {
     this.monthLabel = null
     this.workbook = workbook
     this.tabColor = null
-    this.data = null
+    this.travailleurData = null
+    this.formatedData = []
+
+    this.startCharCode = 'A'.charCodeAt(0)
+    this.endCharCode = 'O'.charCodeAt(0)
+    this.columnNames = []
+    this.columnData = [
+      'date',
+      'nom',
+      'prenom',
+      'num_cnaps',
+      'refEmployeur',
+      'dateEmbauche',
+      'dateDepart',
+      'salaireDuMois',
+      'avantageDuMois',
+      'tempsPresence',
+      'nonPlafonne',
+      'plafonne',
+      'cotisationEmployeur',
+      'cotisationTravailleur',
+      'cotisationTotal',
+      'numCin',
+    ]
+    this.generateColumnNames()
 
     this.worksheet = workbook.addWorksheet(monthLabel, {
       properties: { tabColor: { argb: tabColor } },
@@ -11,24 +38,84 @@ class MonthWorksheet {
   }
 
   setData(data) {
-    this.data = data
+    this.travailleurData = data
   }
 
   isDataExist() {
-    return this.data !== null && this.data !== undefined
+    return this.travailleurData !== null && this.travailleurData !== undefined
   }
 
-  fellColNom() {
-    for (let i = 3; i < this.data.length + 3; i++) {
-      const nom = this.data.map((travailleur) => travailleur.nom)
-      this.worksheet.getCell(`B${i}`).value = nom
+  formatDate(annee, mois) {
+    try {
+      const dateStr = `${annee}-${mois}-01`
+
+      const parsedDate = parse(dateStr, 'yyyy-MMMM-dd', new Date(), { locale: fr })
+
+      const formattedDate = `${parsedDate.getFullYear()}${(parsedDate.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}`
+
+      return formattedDate
+    } catch (error) {
+      console.error('Error formatting date:', error)
+      return ''
+    }
+  }
+
+  formatData() {
+    if (this.isDataExist()) {
+      this.formatedData = this.travailleurData.map((item) => {
+        return {
+          ...item,
+          date: this.formatDate(item.annee, item.mois),
+        }
+      })
+    }
+  }
+
+  fillColA() {
+    for (let i = 0; i < this.travailleurData.length; i++) {
+      const rowNumber = i + 3
+      this.worksheet.getCell(`A${rowNumber}`).value = this.formatDate(
+        this.travailleurData[i].annee,
+        this.travailleurData[i].mois,
+      )
+    }
+  }
+
+  generateColumnNames() {
+    for (let charCode = this.startCharCode; charCode <= this.endCharCode; charCode++) {
+      const columnName = String.fromCharCode(charCode)
+      this.columnNames.push(columnName)
+    }
+  }
+
+  fillCollData() {
+    for (let colIndex = 0; colIndex < this.columnNames.length; colIndex++) {
+      const colName = this.columnNames[colIndex]
+      const dataKey = this.columnData[colIndex]
+
+      for (let i = 0; i < this.formatedData.length; i++) {
+        const rowNumber = i + 3
+        this.worksheet.getCell(`${colName}${rowNumber}`).value = this.formatedData[i][dataKey]
+      }
+    }
+  }
+
+  fillColB() {
+    for (let i = 0; i < this.travailleurData.length; i++) {
+      const rowNumber = i + 3
+      this.worksheet.getCell(`B${rowNumber}`).value = this.travailleurData[i].nom
     }
   }
 
   injectData() {
     if (this.isDataExist()) {
-      console.log('data: ', this.data)
-      this.fellColNom()
+      this.formatData()
+      // this.fillColA()
+      // this.fillColB()
+      console.log('formatedData: ', this.formatedData)
+      this.fillCollData()
     }
   }
 
