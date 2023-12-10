@@ -1241,7 +1241,9 @@
           "num_cnaps": "960101059868",
           "cin": "101261745236",
           "created_at": null,
-          "updated_at": null
+          "updated_at": null,
+          "employeur": 10000,
+          "travailleur": 1000
         },
         {
           "id": 2,
@@ -1261,6 +1263,8 @@
           "num_cnaps": "960101059745",
           "cin": "101261135258",
           "created_at": null,
+          "employeur": 10000,
+          "travailleur": 1000,
           "updated_at": null
         },
         {
@@ -1281,6 +1285,8 @@
           "num_cnaps": "960101059868",
           "cin": "101261745236",
           "created_at": null,
+          "employeur": 10000,
+          "travailleur": 1000,
           "updated_at": null
         },
         {
@@ -1301,6 +1307,8 @@
           "num_cnaps": "960101059745",
           "cin": "101261135258",
           "created_at": null,
+          "employeur": 10000,
+          "travailleur": 1000,
           "updated_at": null
         },
         {
@@ -1321,6 +1329,8 @@
           "num_cnaps": "960101059868",
           "cin": "101261745236",
           "created_at": null,
+          "employeur": 10000,
+          "travailleur": 1000,
           "updated_at": null
         },
         {
@@ -1341,6 +1351,8 @@
           "num_cnaps": "960101059745",
           "cin": "101261135258",
           "created_at": null,
+          "employeur": 10000,
+          "travailleur": 1000,
           "updated_at": null
         }
       ],
@@ -1355,16 +1367,6 @@
           "numero_stat": "50121 11 2003 0 00475",
           "email": "sealtmm@seal.mg",
           "telephone": "033 05 573 00",
-          "created_at": null,
-          "updated_at": null
-        }
-      ],
-      "cotisation": [
-        {
-          "id": 1,
-          "employeur": 10000,
-          "travailleur": 1000,
-          "total": 11000,
           "created_at": null,
           "updated_at": null
         }
