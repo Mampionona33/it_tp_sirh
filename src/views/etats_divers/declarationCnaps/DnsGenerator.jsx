@@ -21,7 +21,9 @@ class DnsGenerator extends Component {
     this.store = null
     this.dnsData = null
     this.listSalarie = null
+    this.employeurData = null
     this.listSalarieMois1 = null
+    this.period = null
 
     if (this.dnsData && Array.from(this.dnsData).length > 0) {
       this.listSalarie = this.dnsData[0].travailleurs
@@ -46,7 +48,6 @@ class DnsGenerator extends Component {
     this.dnsData = this.store.dns.dnsData
 
     const travailleurs = this.dnsData[0].travailleurs
-    console.log(travailleurs)
     this.getListSalarieMois1(travailleurs)
   }
 
@@ -56,13 +57,42 @@ class DnsGenerator extends Component {
       : []
   }
 
+  formatPeriod() {
+    switch (this.store.dns.periodSelectionne) {
+      case 't1':
+        this.period = '01-' + this.store.dns.anneeSelectionne.toString()
+        break
+      case 't2':
+        this.period = '04-' + this.store.dns.anneeSelectionne.toString()
+        break
+      case 't3':
+        this.period = '07-' + this.store.dns.anneeSelectionne.toString()
+        break
+      default:
+        break
+    }
+  }
+
   handleExport = (ev) => {
     ev.preventDefault()
     this.store = store.getState()
+    this.formatPeriod()
+
+    this.employeurData = this.store.employeur.employeur
 
     if (this.listSalarieMois1) {
       this.mois1WorkSheet.setTravailleurData(this.listSalarieMois1)
       this.mois1WorkSheet.createSheetContent()
+    }
+
+    if (this.period) {
+      this.employeurSheet.setPeriod(this.period)
+    }
+
+    if (this.employeurData) {
+      this.employeurSheet.setPeriodeSelectionne(this.store.dns.periodSelectionne)
+      this.employeurSheet.setEmployeurData(this.employeurData[0])
+      this.employeurSheet.createSheetContent()
     }
 
     this.wb.xlsx.writeBuffer().then((data) => {

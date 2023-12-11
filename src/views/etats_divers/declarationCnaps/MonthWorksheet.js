@@ -47,7 +47,6 @@ class MonthWorksheet {
   }
 
   isTravailleurDataExist() {
-    console.log(this.travailleurData)
     return this.travailleurData !== null && this.travailleurData !== undefined
   }
 
@@ -120,7 +119,6 @@ class MonthWorksheet {
 
   injectData = () => {
     if (this.isTravailleurDataExist()) {
-      console.log('data salarie exist')
       this.formatData()
       this.fillCollData()
     } else {
