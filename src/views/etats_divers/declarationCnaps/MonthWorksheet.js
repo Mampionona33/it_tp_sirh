@@ -85,7 +85,6 @@ class MonthWorksheet {
             ? format(new Date(item.date_embauche), 'dd/MM/yyyy')
             : '',
           date_depart: item.date_depart ? format(new Date(item.date_depart), 'dd/MM/yyyy') : '',
-          ref_employeur: this.employeurData.rcs || '', // à remplacer
           non_plafonne: { formula: `SUM(H${key + 3},I${key + 3})` },
           plafonne: {
             formula: `=IF(K${key + 3} <= ${plafondReglemente}, K${key + 3}, ${plafondReglemente})`,
