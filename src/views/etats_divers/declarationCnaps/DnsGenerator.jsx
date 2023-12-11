@@ -13,7 +13,7 @@ class DnsGenerator extends Component {
     this.wb = new ExcelJS.Workbook()
     this.employeurSheet = new EmployerWorksheet(this.wb)
     this.mois1WorkSheet = null
-    
+
     this.mois1List = ['janvier', 'avril', 'juillet']
     this.mois2List = ['fevrier', 'mai', 'août']
     this.mois3List = ['mars', 'juin', 'septembre']
@@ -54,7 +54,7 @@ class DnsGenerator extends Component {
     ev.preventDefault()
     // Updated to setState instead of this.state()
     this.setState({}, () => {
-      if(!this.mois1WorkSheet && this.listSalarie){
+      if (!this.mois1WorkSheet && this.listSalarie) {
         console.log(this.listSalarie)
         this.mois1WorkSheet = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
         this.mois1WorkSheet.setTravailleurData(this.listSalarie)
