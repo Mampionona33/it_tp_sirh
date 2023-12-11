@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { store } from 'src/redux/store'
 import EmployerWorksheet from './EmployerWorksheet'
 import MonthWorksheet from './MonthWorksheet'
-import { fetchDnsData } from 'src/redux/dns/dnsActions'
 import * as FileSaver from 'file-saver'
 
 class DnsGenerator extends Component {
@@ -33,18 +32,6 @@ class DnsGenerator extends Component {
       periodeSelectionne: null,
     }
   }
-
-  // fetchData = () => {
-  //   if (this.state.anneSelectionne && this.state.periodeSelectionne) {
-  //     console.log(this.state.anneSelectionne, this.state.periodeSelectionne)
-  //     store.dispatch(
-  //       fetchDnsData({
-  //         annee: this.state.anneSelectionne,
-  //         periode: this.state.periodeSelectionne,
-  //       }),
-  //     )
-  //   }
-  // }
 
   componentDidMount() {
     this.store = store.getState()
