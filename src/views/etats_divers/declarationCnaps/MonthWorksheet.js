@@ -47,6 +47,7 @@ class MonthWorksheet {
   }
 
   isTravailleurDataExist() {
+    console.log(this.travailleurData)
     return this.travailleurData !== null && this.travailleurData !== undefined
   }
 
@@ -73,7 +74,7 @@ class MonthWorksheet {
   }
 
   formatData() {
-    if (this.isTravailleurDataExist() && this.isEmployeurDataExist()) {
+    if (this.isTravailleurDataExist()) {
       this.formatedData = this.travailleurData.map((item, key) => {
         const plafondReglemente = 1940000
 
@@ -84,7 +85,7 @@ class MonthWorksheet {
             ? format(new Date(item.date_embauche), 'dd/MM/yyyy')
             : '',
           date_depart: item.date_depart ? format(new Date(item.date_depart), 'dd/MM/yyyy') : '',
-          ref_employeur: this.employeurData.rcs,
+          ref_employeur: this.employeurData.rcs || '', // à remplacer
           non_plafonne: { formula: `SUM(H${key + 3},I${key + 3})` },
           plafonne: {
             formula: `=IF(K${key + 3} <= ${plafondReglemente}, K${key + 3}, ${plafondReglemente})`,
@@ -94,6 +95,8 @@ class MonthWorksheet {
           cotisation_total: { formula: `M${key + 3}+N${key + 3}` },
         }
       })
+    } else {
+      console.log("Impossible de générer le contenu de l'onglet mois")
     }
   }
 
@@ -116,10 +119,13 @@ class MonthWorksheet {
     }
   }
 
-  injectData() {
+  injectData = () => {
     if (this.isTravailleurDataExist()) {
+      console.log('data salarie exist')
       this.formatData()
       this.fillCollData()
+    } else {
+      console.log('no data')
     }
   }
 
@@ -172,7 +178,7 @@ class MonthWorksheet {
   }
 
   formatCellToNumberDecima() {
-    if (this.isEmployeurDataExist())
+    if (this.isTravailleurDataExist())
       for (let i = 0; i <= this.formatedData.length; i++) {
         const dataCell = i + 3
         this.worksheet.getCell(`H${dataCell}`).numFmt = '0.00'

@@ -1,86 +1,96 @@
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { Component } from 'react'
 import ExcelJS from 'exceljs'
+import PropTypes from 'prop-types'
+import { store } from 'src/redux/store'
 import EmployerWorksheet from './EmployerWorksheet'
 import MonthWorksheet from './MonthWorksheet'
-import { useDispatch, useSelector } from 'react-redux'
-import * as FileSaver from 'file-saver'
 import { fetchDnsData } from 'src/redux/dns/dnsActions'
+import * as FileSaver from 'file-saver'
 
-const DnsGenerator = () => {
-  const dispatch = useDispatch()
-  const wb = new ExcelJS.Workbook()
-  const employerSheet = new EmployerWorksheet(wb)
-
-  const anneeSelectionne = useSelector((store) => store.dns.anneeSelectionne)
-  const periodSelectionne = useSelector((store) => store.dns.periodSelectionne)
-  const dnsData = useSelector((store) => store.dns.dnsData)
-  const listSalaries = dnsData && dnsData.length > 0 && dnsData[0].travailleurs
-
-  const mois1Sheet = new MonthWorksheet(wb, 'Mois 1', 'ffff00')
-  const [listSalarieMois1, setListSalarieMois1] = React.useState([])
-
-  const verifySalariesExist = useCallback(() => {
-    return listSalaries && listSalaries.length > 0
-  }, [listSalaries])
-
-  const formatPeriod = useCallback(() => {
-    switch (periodSelectionne) {
-      case 't1':
-        return '01-' + anneeSelectionne
-      case 't2':
-        return '04-' + anneeSelectionne
-      case 't3':
-        return '07-' + anneeSelectionne
-      default:
-        return ''
+class DnsGenerator extends Component {
+  constructor(props) {
+    super(props)
+    this.wb = new ExcelJS.Workbook()
+    this.employeurSheet = new EmployerWorksheet(this.wb)
+    this.mois1WorkSheet = null
+    
+    this.mois1List = ['janvier', 'avril', 'juillet']
+    this.mois2List = ['fevrier', 'mai', 'août']
+    this.mois3List = ['mars', 'juin', 'septembre']
+    this.store = store.getState()
+    this.dnsData = this.store.dns.dnsData
+    this.listSalarie = null
+    if (this.dnsData && Array.from(this.dnsData).length > 0) {
+      this.listSalarie = this.dnsData[0].travailleurs
     }
-  }, [anneeSelectionne, periodSelectionne])
 
-  const getListSalarieMois1 = useCallback(() => {
-    const mois1List = ['janvier', 'avril', 'juillet']
-    if (verifySalariesExist()) {
-      const listSalMois1 = listSalaries.filter((salarie) => mois1List.includes(salarie.mois))
-      setListSalarieMois1(listSalMois1)
+    this.state = {
+      anneSelectionne: this.store.dns.anneeSelectionne,
+      periodeSelectionne: this.store.dns.periodSelectionne,
     }
-  }, [listSalaries, verifySalariesExist])
+  }
 
-  useEffect(() => {
-    if (anneeSelectionne && periodSelectionne) {
-      dispatch(fetchDnsData({ annee: anneeSelectionne, periode: periodSelectionne }))
-    }
-  }, [anneeSelectionne, periodSelectionne, dispatch])
-
-  useEffect(() => {
-    if (listSalaries) {
-      getListSalarieMois1()
-    }
-  }, [listSalaries, getListSalarieMois1])
-
-  const handleExport = (ev) => {
-    ev.preventDefault()
-    console.log(listSalarieMois1)
-    mois1Sheet.setTravailleurData(listSalarieMois1)
-    mois1Sheet.createSheetContent()
-
-    wb.xlsx.writeBuffer().then((buffer) => {
-      const blob = new Blob([buffer], { type: 'application/octet-stream' })
-      FileSaver.saveAs(
-        blob,
-        `declaration_CNAPS_${periodSelectionne.toLocaleUpperCase()}_${anneeSelectionne}.xlsx`,
+  fetchData = () => {
+    if (this.state.anneSelectionne && this.state.periodeSelectionne) {
+      console.log(this.state.anneSelectionne, this.state.periodeSelectionne)
+      store.dispatch(
+        fetchDnsData({
+          annee: this.state.anneSelectionne,
+          periode: this.state.periodeSelectionne,
+        }),
       )
+    }
+  }
+
+  componentDidMount() {
+    this.fetchData()
+  }
+
+  componentDidUpdate() {
+    // Add any specific logic for component updates if needed
+  }
+
+  handleExport = (ev) => {
+    ev.preventDefault()
+    // Updated to setState instead of this.state()
+    this.setState({}, () => {
+      if(!this.mois1WorkSheet && this.listSalarie){
+        console.log(this.listSalarie)
+        this.mois1WorkSheet = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
+        this.mois1WorkSheet.setTravailleurData(this.listSalarie)
+        this.mois1WorkSheet.createSheetContent()
+      }
+
+      this.wb.xlsx.writeBuffer().then((data) => {
+        const blob = new Blob([data], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        })
+        FileSaver.saveAs(
+          blob,
+          `declaration_CNAPS_${this.state.periodeSelectionne.toLocaleUpperCase()}_${
+            this.state.anneSelectionne
+          }.xlsx`,
+        )
+      })
     })
   }
 
-  return (
-    <div>
-      <button
-        className="bg-customRed-900 text-white hover:bg-customRed-200 py-2 px-3 hover:text-slate-200"
-        onClick={handleExport}
-      >
-        Générer
-      </button>
-    </div>
-  )
+  render() {
+    return (
+      <>
+        <div>
+          <button
+            className="bg-customRed-900 text-white hover:bg-customRed-200 py-2 px-3 hover:text-slate-200"
+            onClick={this.handleExport}
+          >
+            Générer
+          </button>
+        </div>
+      </>
+    )
+  }
 }
+
+DnsGenerator.propTypes = {}
 
 export default DnsGenerator
