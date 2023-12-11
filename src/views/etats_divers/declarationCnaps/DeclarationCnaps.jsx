@@ -131,7 +131,7 @@ const DeclarationCnaps = () => {
               />
             </div>
             <div className="flex">
-              <DnsGen />
+              {/* <DnsGen /> */}
               <DnsGenerator />
             </div>
           </div>
