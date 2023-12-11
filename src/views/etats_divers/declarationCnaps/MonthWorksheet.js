@@ -74,6 +74,7 @@ class MonthWorksheet {
 
   formatData() {
     if (this.isTravailleurDataExist()) {
+      console.log(this.travailleurData)
       this.formatedData = this.travailleurData.map((item, key) => {
         const plafondReglemente = 1940000
 

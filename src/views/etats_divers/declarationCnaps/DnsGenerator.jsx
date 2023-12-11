@@ -24,7 +24,7 @@ class DnsGenerator extends Component {
     this.employeurData = null
     this.listSalarieMois1 = null
     this.period = null
-
+    this.salaries = null
     if (this.dnsData && Array.from(this.dnsData).length > 0) {
       this.listSalarie = this.dnsData[0].travailleurs
     }
@@ -39,22 +39,29 @@ class DnsGenerator extends Component {
     this.store = store.getState()
     this.dnsData = this.store.dns.dnsData
 
-    const travailleurs = this.dnsData[0].travailleurs
-    this.getListSalarieMois1(travailleurs)
+    this.salaries = this.dnsData[0].travailleurs
+    this.getListSalarieMois1(this.salaries)
   }
 
   componentDidUpdate() {
     this.store = store.getState()
     this.dnsData = this.store.dns.dnsData
-
-    const travailleurs = this.dnsData[0].travailleurs
-    this.getListSalarieMois1(travailleurs)
+    this.salaries = this.dnsData[0].travailleurs
+    this.mois1WorkSheet.setTravailleurData(null)
+    this.getListSalarieMois1(this.salaries)
   }
 
-  getListSalarieMois1 = (listSalarie) => {
-    this.listSalarieMois1 = listSalarie
-      ? Array.from(listSalarie).filter((salarie) => this.mois1List.includes(salarie.mois))
-      : []
+  getListSalarieMois1 = () => {
+    console.log(this.salaries)
+    this.listSalarieMois1 = []
+    for (let i = 0; i < this.salaries.length; i++) {
+      if (
+        this.mois1List.includes(this.salaries[i].mois) &&
+        this.salaries[i].trimestre === this.store.dns.periodSelectionne
+      ) {
+        this.listSalarieMois1.push(this.salaries[i])
+      }
+    }
   }
 
   formatPeriod() {
