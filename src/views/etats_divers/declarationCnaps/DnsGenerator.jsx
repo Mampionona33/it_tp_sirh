@@ -11,16 +11,18 @@ class DnsGenerator extends Component {
   constructor(props) {
     super(props)
     this.wb = new ExcelJS.Workbook()
-    this.mois1WorkSheet = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
 
+    this.mois1WorkSheet = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
     this.employeurSheet = new EmployerWorksheet(this.wb)
 
     this.mois1List = ['janvier', 'avril', 'juillet']
     this.mois2List = ['fevrier', 'mai', 'août']
     this.mois3List = ['mars', 'juin', 'septembre']
+
     this.store = store.getState()
     this.dnsData = this.store.dns.dnsData
     this.listSalarie = null
+
     if (this.dnsData && Array.from(this.dnsData).length > 0) {
       this.listSalarie = this.dnsData[0].travailleurs
     }
@@ -53,25 +55,23 @@ class DnsGenerator extends Component {
 
   handleExport = (ev) => {
     ev.preventDefault()
-    this.setState({}, () => {
-      if (this.listSalarie) {
-        console.log(this.listSalarie)
+    if (this.listSalarie && this.mois1WorkSheet) {
+      console.log(this.listSalarie)
 
-        this.mois1WorkSheet.setTravailleurData(this.listSalarie)
-        this.mois1WorkSheet.createSheetContent()
-      }
+      this.mois1WorkSheet.setTravailleurData(this.listSalarie)
+      this.mois1WorkSheet.createSheetContent()
+    }
 
-      this.wb.xlsx.writeBuffer().then((data) => {
-        const blob = new Blob([data], {
-          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-        })
-        FileSaver.saveAs(
-          blob,
-          `declaration_CNAPS_${this.state.periodeSelectionne.toLocaleUpperCase()}_${
-            this.state.anneSelectionne
-          }.xlsx`,
-        )
+    this.wb.xlsx.writeBuffer().then((data) => {
+      const blob = new Blob([data], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
       })
+      FileSaver.saveAs(
+        blob,
+        `declaration_CNAPS_${this.state.periodeSelectionne.toLocaleUpperCase()}_${
+          this.state.anneSelectionne
+        }.xlsx`,
+      )
     })
   }
 
