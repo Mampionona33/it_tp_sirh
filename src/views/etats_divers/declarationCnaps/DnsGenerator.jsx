@@ -51,7 +51,6 @@ class DnsGenerator extends Component {
     this.dnsData = this.store.dns.dnsData
 
     const travailleurs = this.dnsData[0].travailleurs
-    console.log(travailleurs)
     this.getListSalarieMois1(travailleurs)
   }
 
@@ -75,7 +74,6 @@ class DnsGenerator extends Component {
     this.store = store.getState()
 
     if (this.listSalarieMois1) {
-      console.log(this.listSalarieMois1)
       this.mois1WorkSheet.setTravailleurData(this.listSalarieMois1)
       this.mois1WorkSheet.createSheetContent()
     }
