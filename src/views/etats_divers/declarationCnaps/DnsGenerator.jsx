@@ -12,53 +12,71 @@ class DnsGenerator extends Component {
     super(props)
     this.wb = new ExcelJS.Workbook()
 
-    this.mois1WorkSheet = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
     this.employeurSheet = new EmployerWorksheet(this.wb)
+    this.mois1WorkSheet = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
 
     this.mois1List = ['janvier', 'avril', 'juillet']
     this.mois2List = ['fevrier', 'mai', 'août']
     this.mois3List = ['mars', 'juin', 'septembre']
 
-    this.store = store.getState()
-    this.dnsData = this.store.dns.dnsData
+    this.store = null
+    this.dnsData = null
     this.listSalarie = null
+    this.listSalarieMois1 = null
 
     if (this.dnsData && Array.from(this.dnsData).length > 0) {
       this.listSalarie = this.dnsData[0].travailleurs
     }
 
     this.state = {
-      anneSelectionne: this.store.dns.anneeSelectionne,
-      periodeSelectionne: this.store.dns.periodSelectionne,
+      anneSelectionne: null,
+      periodeSelectionne: null,
     }
   }
 
-  fetchData = () => {
-    if (this.state.anneSelectionne && this.state.periodeSelectionne) {
-      console.log(this.state.anneSelectionne, this.state.periodeSelectionne)
-      store.dispatch(
-        fetchDnsData({
-          annee: this.state.anneSelectionne,
-          periode: this.state.periodeSelectionne,
-        }),
-      )
-    }
-  }
+  // fetchData = () => {
+  //   if (this.state.anneSelectionne && this.state.periodeSelectionne) {
+  //     console.log(this.state.anneSelectionne, this.state.periodeSelectionne)
+  //     store.dispatch(
+  //       fetchDnsData({
+  //         annee: this.state.anneSelectionne,
+  //         periode: this.state.periodeSelectionne,
+  //       }),
+  //     )
+  //   }
+  // }
 
   componentDidMount() {
-    this.fetchData()
+    this.store = store.getState()
+    this.dnsData = this.store.dns.dnsData
+
+    const travailleurs = this.dnsData[0].travailleurs
+    console.log(travailleurs)
+    this.getListSalarieMois1(travailleurs)
   }
 
   componentDidUpdate() {
-    // Add any specific logic for component updates if needed
+    this.store = store.getState()
+    this.dnsData = this.store.dns.dnsData
+
+    const travailleurs = this.dnsData[0].travailleurs
+    console.log(travailleurs)
+    this.getListSalarieMois1(travailleurs)
+  }
+
+  getListSalarieMois1 = (listSalarie) => {
+    this.listSalarieMois1 = listSalarie
+      ? Array.from(listSalarie).filter((salarie) => this.mois1List.includes(salarie.mois))
+      : []
   }
 
   handleExport = (ev) => {
     ev.preventDefault()
-    if (this.listSalarie && this.mois1WorkSheet) {
-      console.log(this.listSalarie)
+    this.store = store.getState()
 
-      this.mois1WorkSheet.setTravailleurData(this.listSalarie)
+    if (this.listSalarieMois1) {
+      console.log(this.listSalarieMois1)
+      this.mois1WorkSheet.setTravailleurData(this.listSalarieMois1)
       this.mois1WorkSheet.createSheetContent()
     }
 
@@ -68,8 +86,8 @@ class DnsGenerator extends Component {
       })
       FileSaver.saveAs(
         blob,
-        `declaration_CNAPS_${this.state.periodeSelectionne.toLocaleUpperCase()}_${
-          this.state.anneSelectionne
+        `declaration_CNAPS_${this.store.dns.periodSelectionne.toUpperCase()}_${
+          this.store.dns.anneeSelectionne
         }.xlsx`,
       )
     })
