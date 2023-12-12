@@ -39,43 +39,11 @@ const DeclarationCnaps = () => {
 
       setPeriode(dns?.periodSelectionne || 't1')
       setAnnee(dns?.anneeSelectionne || new Date().getFullYear())
-
-      // const handleBeforeUnload = (event) => {
-      //   localStorage.setItem('dns', JSON.stringify(dns))
-      // }
-
-      // console.log('test', typeof dsnData, dsnData, initialPeriode, initialAnnee)
-
-      // if (!dsnData && initialPeriode && initialAnnee) {
-      //   if (loading === 'idle') {
-      //     dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee }))
-      //   } else if (loading === 'reject') {
-      //     dispatch(
-      //       addNotification({
-      //         title: 'Error',
-      //         type: 'error',
-      //         message: "Une erreur c'est produite",
-      //       }),
-      //     )
-      //     setTimeout(
-      //       () => dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee })),
-      //       15000,
-      //     )
-      //   }
-      // } else {
-      //   console.log('Conditions not met, skipping fetchDnsData dispatch.')
-      // }
-
-      // window.addEventListener('beforeunload', handleBeforeUnload)
-
-      // return () => {
-      //   window.removeEventListener('beforeunload', handleBeforeUnload)
-      //   if (pathName !== '/etatDivers/cnaps') {
-      //     dispatch(resetDns())
-      //     localStorage.removeItem('dns')
-      //   }
-      // }
     }, [dispatch, pathName, dns, initialPeriode, initialAnnee, dsnData, loading])
+
+    useEffect(() => {
+      dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee }))
+    }, [])
 
     // Générer la liste d'années de 1900 à l'année actuelle
     const currentYear = new Date().getFullYear()
@@ -98,7 +66,7 @@ const DeclarationCnaps = () => {
 
     return (
       <>
-        <form className="w-full flex flex-col gap-2 p-4">
+        <form action="post" className="w-full flex flex-col gap-2 p-4">
           <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
             <div>
               <label className="form-label" htmlFor="periode">

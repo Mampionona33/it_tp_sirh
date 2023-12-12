@@ -339,6 +339,25 @@ class MonthWorksheet {
     this.formatCellToNumberDecima()
     this.setDefaultFont()
   }
+
+  clearAllCellValues() {
+    for (let i = 0; i < this.formatedData.length; i++) {
+      const rowNumber = i + 3
+
+      // Remove the entire row
+      this.worksheet.spliceRows(rowNumber, 1)
+
+      // Alternatively, if you want to remove only specific cells in the row, you can use splice on the row object
+      // const row = this.worksheet.getRow(rowNumber);
+      // row.splice(1, this.columnNames.length);
+      // row.commit(); // Commit the changes to the row
+    }
+  }
+
+  resetData = () => {
+    this.travailleurData = null
+    this.clearAllCellValues()
+  }
 }
 
 export default MonthWorksheet

@@ -25,9 +25,8 @@ class DnsGenerator extends Component {
     this.listSalarieMois1 = null
     this.period = null
     this.salaries = null
-    if (this.dnsData && Array.from(this.dnsData).length > 0) {
-      this.listSalarie = this.dnsData[0].travailleurs
-    }
+
+    this.listSalarie = this.isDnsDataExist() ? this.dnsData[0].travailleurs : []
 
     this.state = {
       anneSelectionne: null,
@@ -37,29 +36,39 @@ class DnsGenerator extends Component {
 
   componentDidMount() {
     this.store = store.getState()
-    this.dnsData = this.store.dns.dnsData
-
-    this.salaries = this.dnsData[0].travailleurs
+    this.dnsData = this.isDnsDataExist() ? this.store.dns.dnsData : []
+    this.salaries = this.isDnsDataExist() ? this.dnsData[0].travailleurs : []
     this.getListSalarieMois1(this.salaries)
+  }
+  isDnsDataExist = () => {
+    return (
+      this.dnsData !== null && this.dnsData !== undefined && Array.from(this.dnsData).length > 0
+    )
   }
 
   componentDidUpdate() {
     this.store = store.getState()
     this.dnsData = this.store.dns.dnsData
-    this.salaries = this.dnsData[0].travailleurs
+    this.salaries = this.isDnsDataExist() && this.dnsData[0].travailleurs
     this.mois1WorkSheet.setTravailleurData(null)
     this.getListSalarieMois1(this.salaries)
   }
 
+  isSalariesExist = () => {
+    return this.salaries !== undefined && this.salaries !== null
+  }
+
   getListSalarieMois1 = () => {
-    console.log(this.salaries)
     this.listSalarieMois1 = []
-    for (let i = 0; i < this.salaries.length; i++) {
-      if (
-        this.mois1List.includes(this.salaries[i].mois) &&
-        this.salaries[i].trimestre === this.store.dns.periodSelectionne
-      ) {
-        this.listSalarieMois1.push(this.salaries[i])
+    if (this.isSalariesExist()) {
+      console.log(this.salaries)
+      for (let i = 0; i < this.salaries.length; i++) {
+        if (
+          this.mois1List.includes(this.salaries[i].mois) &&
+          this.salaries[i].trimestre === this.store.dns.periodSelectionne
+        ) {
+          this.listSalarieMois1.push(this.salaries[i])
+        }
       }
     }
   }
@@ -80,12 +89,16 @@ class DnsGenerator extends Component {
     }
   }
 
-  handleExport = (ev) => {
+  isEmployeurDataExist = () => {
+    return this.store.employeur.employeur !== null && this.store.employeur.employeur !== undefined
+  }
+
+  handleExport = async (ev) => {
     ev.preventDefault()
     this.store = store.getState()
     this.formatPeriod()
 
-    this.employeurData = this.store.employeur.employeur
+    this.employeurData = this.isEmployeurDataExist() ? this.store.employeur.employeur : []
 
     if (this.listSalarieMois1) {
       this.mois1WorkSheet.setTravailleurData(this.listSalarieMois1)
@@ -96,7 +109,7 @@ class DnsGenerator extends Component {
       this.employeurSheet.setPeriod(this.period)
     }
 
-    if (this.employeurData) {
+    if (this.isEmployeurDataExist()) {
       this.employeurSheet.setPeriodeSelectionne(this.store.dns.periodSelectionne)
       this.employeurSheet.setEmployeurData(this.employeurData[0])
       this.employeurSheet.createSheetContent()
@@ -113,6 +126,8 @@ class DnsGenerator extends Component {
         }.xlsx`,
       )
     })
+
+    this.mois1WorkSheet.resetData()
   }
 
   render() {
@@ -120,6 +135,7 @@ class DnsGenerator extends Component {
       <>
         <div>
           <button
+            type="submit"
             className="bg-customRed-900 text-white hover:bg-customRed-200 py-2 px-3 hover:text-slate-200"
             onClick={this.handleExport}
           >
