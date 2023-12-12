@@ -1,0 +1,4 @@
+declare module '@views/employee/fiche/Fiche' {
+  const Fiche: React.ComponentType
+  export default Fiche
+}
