@@ -3,7 +3,7 @@
   "setupTasks": [
     {
       "name": "Install Dependencies",
-      "command": "yarn install"
+      "command": "yarn install --legacy-peer-deps"
     }
   ],
 
@@ -27,15 +27,15 @@
     },
     "build": {
       "name": "build",
-      "command": "yarn build"
+      "command": "npm build"
     },
     "test": {
       "name": "test",
-      "command": "yarn test"
+      "command": "npm test"
     },
     "eject": {
       "name": "eject",
-      "command": "yarn eject"
+      "command": "npm eject"
     }
   }
 }

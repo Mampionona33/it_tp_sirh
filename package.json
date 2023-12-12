@@ -23,6 +23,7 @@
     "test:debug": "react-scripts --inspect-brk test --runInBand"
   },
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@coreui/chartjs": "^3.1.2",
     "@coreui/coreui": "^4.2.6",
     "@coreui/icons": "^3.0.1",
@@ -36,7 +37,6 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@tanstack/match-sorter-utils": "^8.8.4",
     "@tanstack/react-table": "^8.10.6",
-    "@wixc3/react-board": "^2.3.0",
     "axios": "^1.6.1",
     "bootstrap": "^5.3.2",
     "chart.js": "^3.9.1",
@@ -67,7 +67,6 @@
     "redux": "4.2.1",
     "redux-persist": "^6.0.0",
     "simplebar-react": "^2.4.3",
-    "typescript": "^5.3.3",
     "xlsx": "^0.18.5",
     "xlsx-populate": "^1.21.0"
   },
