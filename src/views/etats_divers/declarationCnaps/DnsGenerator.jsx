@@ -61,7 +61,6 @@ class DnsGenerator extends Component {
   getListSalarieMois1 = () => {
     this.listSalarieMois1 = []
     if (this.isSalariesExist()) {
-      console.log(this.salaries)
       for (let i = 0; i < this.salaries.length; i++) {
         if (
           this.mois1List.includes(this.salaries[i].mois) &&
