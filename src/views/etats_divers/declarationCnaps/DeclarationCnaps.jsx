@@ -18,6 +18,8 @@ const DeclarationCnaps = () => {
     const dns = useSelector((state) => state.dns)
     const dsnData = useSelector((state) => state.dns.dsnData)
     const loading = useSelector((state) => state.dns.loading)
+    const periodSelectionne = useSelector((state) => state.dns.periodSelectionne)
+    const anneeSelectionne = useSelector((state) => state.dns.anneeSelectionne)
 
     // Local state to hold initial values
     const [initialPeriode, setInitialPeriode] = useState('t1')
@@ -42,7 +44,7 @@ const DeclarationCnaps = () => {
     }, [dispatch, pathName, dns, initialPeriode, initialAnnee, dsnData, loading])
 
     useEffect(() => {
-      dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee }))
+      dispatch(fetchDnsData({ periode: periodSelectionne, annee: anneeSelectionne }))
     }, [])
 
     // Générer la liste d'années de 1900 à l'année actuelle

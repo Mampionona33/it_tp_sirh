@@ -26,8 +26,8 @@ class MonthWorksheet {
       'temps_presence',
       'non_plafonne',
       'plafonne',
-      'cotisation_employeur',
-      'cotisaton_travailleur',
+      'taux_cotisation_cnaps_employeur',
+      'taux_cotisation_cnaps_salarie',
       'cotisation_total',
       'cin',
     ]
