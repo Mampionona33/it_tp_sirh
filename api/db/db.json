@@ -1185,10 +1185,18 @@
     }
   ],
   "/cotisations": [
-    { "id": 1, "label": "cnaps", "taux": 0.01 },
-    { "id": 2, "label": "osmi", "taux": 0.01 },
-    { "id": 3, "label": "Cotisation sociale", "taux": 0.01 }
+    { "id": 1, "label": "cnaps", "type": "cnaps", "payer": "salarie", "taux": 0.01 },
+    { "id": 2, "label": "osmi", "type": "osmi", "payer": "salarie", "taux": 0.01 },
+    { "id": 3, "label": "Cotisation sociale", "type": "social", "payer": "salarie", "taux": 0.01 },
+    {
+      "id": 4,
+      "label": "Cotisation cnaps employeur",
+      "type": "cnaps",
+      "payer": "employeur",
+      "taux": 0.02
+    }
   ],
+
   "allocationFamil": [{ "id": 1, "label": "enfant", "montant": 2000, "age_max": 21 }],
   "avances": [
     { "id": 1, "employee": { "id": 1 }, "date": "2023-01-15T05:14:08.190Z", "montant": 100000 },
@@ -1219,41 +1227,187 @@
   ],
   "users": [{ "id": 1, "email": "admin@ls.ls", "password": "lsadmin2023" }],
 
-  "dns":[
+  "dns": [
     {
-      "annee_moi": "2023-04",
-      "travailleur": {
-         "nom": "Rakoto",
-         "prenoms": "Bema",
-         "date_embauche": "2018-09-01",
-         "date_depart": "",
-         "salaire_du_mois": 4500000,
-         "avantage_du_mois": 1000010,
-         "temps_presence": 160,
-         "hs_non_plafonne": 4,
-         "hs_plafonne": 2,
-         "num_cnaps": "465454656",
-         "cin": "100.454.454.663"
-      },
-    "employeur" : {
-        "id": 1,
-        "nom": "LA LIGNE SCANDINAVE",
-        "adresse": "2 RUE LIEUTNANT BERARD",
-        "Cp_ville": "501 - TOAMASINA",
-        "nif": "3000000581",
-        "stat": "50121 11 2003 0 00475",
-        "rcs": "2002B00608",
-        "tel": "020 000211",
-        "email": "ls@gmail.com",
-        "ref":"446f4fd5445"
-      },
-     
-      "cotisation": {
-        "employeur": 10000,
-         "travailleur": 1000,
-         "total": 11000
-      }
-   }
-   
-   ]
+      "annee_mois": "",
+      "travailleur": [
+        {
+          "id": 1,
+          "annee": "2023",
+          "trimestre": "t2",
+          "mois": "avril",
+          "matricule": "345",
+          "nom": "RAZANAKOLONA",
+          "prenom": "Fandio",
+          "date_embauche": "2015-03-12",
+          "date_depart": null,
+          "salaire_du_mois": 1000000,
+          "avantage_du_mois": 100000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059868",
+          "cin": "101261745236",
+          "created_at": null,
+          "ref_employeur": "2002B00608",
+          "updated_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1
+        },
+        {
+          "id": 2,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "janvier",
+          "matricule": "442",
+          "nom": "ANDRIAINA",
+          "prenom": "José",
+          "date_embauche": "2016-04-16",
+          "date_depart": null,
+          "salaire_du_mois": 800000,
+          "avantage_du_mois": 8000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059745",
+          "cin": "101261135258",
+          "ref_employeur": "2002B00608",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        },
+        {
+          "id": 3,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "janvier",
+          "matricule": "345",
+          "nom": "RAZAKOLONA",
+          "prenom": "Lioka",
+          "date_embauche": "2015-03-12",
+          "date_depart": null,
+          "salaire_du_mois": 1000000,
+          "avantage_du_mois": 100000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "ref_employeur": "2002B00608",
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059868",
+          "cin": "101261745236",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        },
+        {
+          "id": 4,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "février",
+          "matricule": "442",
+          "nom": "ANDRIAINA",
+          "prenom": "José",
+          "date_embauche": "2016-04-16",
+          "date_depart": null,
+          "salaire_du_mois": 800000,
+          "avantage_du_mois": 8000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "ref_employeur": "2002B00608",
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059745",
+          "cin": "101261135258",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        },
+        {
+          "id": 5,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "mars",
+          "matricule": "345",
+          "nom": "RAZANAJAFY",
+          "prenom": "Fredy",
+          "date_embauche": "2015-03-12",
+          "date_depart": null,
+          "salaire_du_mois": 1000000,
+          "avantage_du_mois": 100000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059868",
+          "ref_employeur": "2002B00608",
+          "cin": "101261745236",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        },
+        {
+          "id": 6,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "mars",
+          "matricule": "442",
+          "nom": "ANDRIAINA",
+          "prenom": "José",
+          "date_embauche": "2016-04-16",
+          "date_depart": null,
+          "salaire_du_mois": 800000,
+          "avantage_du_mois": 8000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059745",
+          "cin": "101261135258",
+          "ref_employeur": "2002B00608",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        },
+        {
+          "id": 6,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "janvier",
+          "matricule": "442",
+          "nom": "RAKOTOZANANY",
+          "prenom": "Benjamin",
+          "date_embauche": "2016-04-16",
+          "date_depart": null,
+          "salaire_du_mois": 800000,
+          "avantage_du_mois": 8000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059745",
+          "cin": "101261135258",
+          "ref_employeur": "2002B00608",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        }
+      ],
+      "employeur": [
+        {
+          "id": 1,
+          "nom": "LA LIGNE SCANDINAVE",
+          "numero_rcs": "2002B00608",
+          "adresse": "2, rue Lieutenant BERARD",
+          "cp_ville": "501-Toamasina",
+          "numero_nif": "3000000581",
+          "numero_stat": "50121 11 2003 0 00475",
+          "email": "sealtmm@seal.mg",
+          "telephone": "033 05 573 00",
+          "created_at": null,
+          "updated_at": null
+        }
+      ]
+    }
+  ]
 }

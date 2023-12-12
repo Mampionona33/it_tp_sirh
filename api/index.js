@@ -154,7 +154,7 @@ app.get('/mouvement-salaire', (req, res) => {
 
 app.route('/employeurs').get(employeurControllers.getEmployeur)
 
-app.route('/dns/:annee/:period').get(dnsController.fetchDns)
+app.route('/dns/:annee/:periode').get(dnsController.fetchDns)
 
 const PORT = process.env.API_PORT || 8000
 

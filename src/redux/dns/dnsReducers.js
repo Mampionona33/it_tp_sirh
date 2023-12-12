@@ -4,7 +4,7 @@ import { fetchDnsData } from './dnsActions'
 const initialState = {
   periodSelectionne: 't1',
   anneeSelectionne: new Date().getFullYear(),
-  dsnData: null,
+  dnsData: null,
   loading: 'idle',
 }
 
@@ -20,7 +20,7 @@ const dnsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchDnsData.fulfilled, (state, action) => {
-        state.data = action.payload.data
+        state.dnsData = action.payload.data
         state.loading = 'succeeded'
       })
       .addCase(fetchDnsData.pending, (state, action) => {

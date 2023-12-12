@@ -1,7 +1,7 @@
 class EmployerWorksheet {
   constructor(workbook) {
     this.employeurData = null
-    this.period = ''
+    this.period = null
     this.periodSelectionne = null
 
     this.worksheet = workbook.addWorksheet('EMPLOYER', {
@@ -48,11 +48,16 @@ class EmployerWorksheet {
     return this.employeurData !== null && this.employeurData !== undefined
   }
 
+  verifyCellNotMerged(cell1, cell2) {
+    return this.worksheet.getCell(cell1).style !== this.worksheet.getCell(cell2).style
+  }
+
   formatC4ToC9() {
     for (let i = 4; i <= 9; i++) {
-      if (this.worksheet.getCell(`C${i}`).style !== this.worksheet.getCell(`F${i}`).style) {
+      if (this.verifyCellNotMerged(`C${i}`, `F${i}`)) {
         this.worksheet.mergeCells(`C${i}:F${i}`)
       }
+
       if (this.isEmployeurExist()) {
         if (i === 4) {
           this.worksheet.getCell(`C${i}`).value = this.employeurData.rcs || null
@@ -83,10 +88,16 @@ class EmployerWorksheet {
       }
     }
   }
+
+  isPeriodExist() {
+    return this.period !== null && this.period !== undefined
+  }
   formatC12ToC16() {
     for (let i = 12; i <= 16; i++) {
-      if (i === 12 && this.period.length > 0) {
-        this.worksheet.getCell(`C${i}`).value = this.period
+      if (this.isPeriodExist()) {
+        if (i === 12 && this.period.length > 0) {
+          this.worksheet.getCell(`C${i}`).value = this.period
+        }
       }
 
       this.worksheet.getCell(`C${i}`).border = {

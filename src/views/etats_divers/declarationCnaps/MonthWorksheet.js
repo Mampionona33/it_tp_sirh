@@ -1,12 +1,130 @@
+import { parse, format } from 'date-fns'
+import { fr } from 'date-fns/locale'
+
 class MonthWorksheet {
   constructor(workbook, monthLabel, tabColor) {
     this.monthLabel = null
     this.workbook = workbook
     this.tabColor = null
+    this.travailleurData = null
+    this.formatedData = []
+    this.employeurData = null
+
+    this.startCharCode = 'A'.charCodeAt(0)
+    this.endCharCode = 'P'.charCodeAt(0)
+    this.columnNames = []
+    this.columnData = [
+      'date',
+      'nom',
+      'prenom',
+      'num_cnaps',
+      'ref_employeur',
+      'date_embauche',
+      'date_depart',
+      'salaire_du_mois',
+      'avantage_du_mois',
+      'temps_presence',
+      'non_plafonne',
+      'plafonne',
+      'taux_cotisation_cnaps_employeur',
+      'taux_cotisation_cnaps_salarie',
+      'cotisation_total',
+      'cin',
+    ]
+    this.generateColumnNames()
 
     this.worksheet = workbook.addWorksheet(monthLabel, {
       properties: { tabColor: { argb: tabColor } },
     })
+  }
+
+  setTravailleurData(data) {
+    this.travailleurData = data
+  }
+
+  setEmployeurData(employeeHours) {
+    this.employeurData = employeeHours
+  }
+
+  isTravailleurDataExist() {
+    return this.travailleurData !== null && this.travailleurData !== undefined
+  }
+
+  isEmployeurDataExist() {
+    console.log(this.employeurData)
+    return this.employeurData !== null && this.employeurData !== undefined
+  }
+
+  formatDate(annee, mois) {
+    try {
+      const dateStr = `${annee}-${mois}-01`
+
+      const parsedDate = parse(dateStr, 'yyyy-MMMM-dd', new Date(), { locale: fr })
+
+      const formattedDate = `${parsedDate.getFullYear()}${(parsedDate.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')}`
+
+      return formattedDate
+    } catch (error) {
+      console.error('Error formatting date:', error)
+      return ''
+    }
+  }
+
+  formatData() {
+    if (this.isTravailleurDataExist()) {
+      console.log(this.travailleurData)
+      this.formatedData = this.travailleurData.map((item, key) => {
+        const plafondReglemente = 1940000
+
+        return {
+          ...item,
+          date: this.formatDate(item.annee, item.mois),
+          date_embauche: item.date_embauche
+            ? format(new Date(item.date_embauche), 'dd/MM/yyyy')
+            : '',
+          date_depart: item.date_depart ? format(new Date(item.date_depart), 'dd/MM/yyyy') : '',
+          non_plafonne: { formula: `SUM(H${key + 3},I${key + 3})` },
+          plafonne: {
+            formula: `=IF(K${key + 3} <= ${plafondReglemente}, K${key + 3}, ${plafondReglemente})`,
+          },
+          cotisation_employeur: { formula: `${item.taux_cotisation_cnaps_employeur}*L${key + 3}` },
+          cotisaton_travailleur: { formula: `${item.taux_cotisation_cnaps_salarie}*L${key + 3}` },
+          cotisation_total: { formula: `M${key + 3}+N${key + 3}` },
+        }
+      })
+    } else {
+      console.log("Impossible de générer le contenu de l'onglet mois")
+    }
+  }
+
+  generateColumnNames() {
+    for (let charCode = this.startCharCode; charCode <= this.endCharCode; charCode++) {
+      const columnName = String.fromCharCode(charCode)
+      this.columnNames.push(columnName)
+    }
+  }
+
+  fillCollData() {
+    for (let colIndex = 0; colIndex < this.columnNames.length; colIndex++) {
+      const colName = this.columnNames[colIndex]
+      const dataKey = this.columnData[colIndex]
+
+      for (let i = 0; i < this.formatedData.length; i++) {
+        const rowNumber = i + 3
+        this.worksheet.getCell(`${colName}${rowNumber}`).value = this.formatedData[i][dataKey]
+      }
+    }
+  }
+
+  injectData = () => {
+    if (this.isTravailleurDataExist()) {
+      this.formatData()
+      this.fillCollData()
+    } else {
+      console.log('no data')
+    }
   }
 
   initializeHeaders() {
@@ -32,6 +150,10 @@ class MonthWorksheet {
     this.P1 = this.worksheet.getCell('P1')
   }
 
+  verifyCellNotMerged(cell1, cell2) {
+    return this.worksheet.getCell(cell1).style !== this.worksheet.getCell(cell2).style
+  }
+
   setLabel(monthLabel) {
     this.monthLabel = monthLabel
   }
@@ -53,6 +175,20 @@ class MonthWorksheet {
     })
   }
 
+  formatCellToNumberDecima() {
+    if (this.isTravailleurDataExist())
+      for (let i = 0; i <= this.formatedData.length; i++) {
+        const dataCell = i + 3
+        this.worksheet.getCell(`H${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`I${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`K${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`L${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`M${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`N${dataCell}`).numFmt = '0.00'
+        this.worksheet.getCell(`O${dataCell}`).numFmt = '0.00'
+      }
+  }
+
   setDefaultFont() {
     this.adjustColumnWidths()
     this.worksheet.eachRow((row) => {
@@ -72,12 +208,16 @@ class MonthWorksheet {
   formatA1() {
     this.A1.width = '2.3cm'
     this.A1.value = 'ANNEE-MOIS'
-    this.worksheet.mergeCells('A1:A2')
+    if (this.verifyCellNotMerged('A1', 'A2')) {
+      this.worksheet.mergeCells('A1:A2')
+    }
   }
   formatB1() {
     this.B1.width = '6cm'
     this.B1.value = 'TRAVAILLEURS'
-    this.worksheet.mergeCells('B1:C1')
+    if (this.verifyCellNotMerged('B1', 'C1')) {
+      this.worksheet.mergeCells('B1:C1')
+    }
   }
   formatB2() {
     // this.B2.width = '6cm'
@@ -89,17 +229,23 @@ class MonthWorksheet {
   formatD1() {
     this.D1.width = '2.3cm'
     this.D1.value = 'N° CNaPS'
-    this.worksheet.mergeCells('D1:D2')
+    if (this.verifyCellNotMerged('D1', 'D2')) {
+      this.worksheet.mergeCells('D1:D2')
+    }
   }
   formatE1() {
     this.E1.width = '2.3cm'
     this.E1.value = 'Réf. Employeur'
-    this.worksheet.mergeCells('E1:E2')
+    if (this.verifyCellNotMerged('E1', 'E2')) {
+      this.worksheet.mergeCells('E1:E2')
+    }
   }
   formatF1() {
     // this.F1.width = '2.3cm'
     this.F1.value = 'DATE'
-    this.worksheet.mergeCells('F1:G1')
+    if (this.verifyCellNotMerged('F1', 'G1')) {
+      this.worksheet.mergeCells('F1:G1')
+    }
   }
   formatF2() {
     // this.F2.width = '2.3cm'
@@ -111,22 +257,30 @@ class MonthWorksheet {
   formatH1() {
     // this.H1.width = '2.3cm'
     this.H1.value = 'SALAIRE DU MOIS'
-    this.worksheet.mergeCells('H1:H2')
+    if (this.verifyCellNotMerged('H1', 'H2')) {
+      this.worksheet.mergeCells('H1:H2')
+    }
   }
   formatI1() {
     // this.I1.width = '2.3cm'
     this.I1.value = 'AVANTAGE DU MOIS'
-    this.worksheet.mergeCells('I1:I2')
+    if (this.verifyCellNotMerged('I1', 'I2')) {
+      this.worksheet.mergeCells('I1:I2')
+    }
   }
   formatJ1() {
     // this.J1.width = '2.3cm'
     this.J1.value = 'TEMPS PRESENCE'
-    this.worksheet.mergeCells('J1:J2')
+    if (this.verifyCellNotMerged('J1', 'J2')) {
+      this.worksheet.mergeCells('J1:J2')
+    }
   }
   formatK1() {
     // this.K1.width = '2.3cm'
     this.K1.value = 'TOTAL'
-    this.worksheet.mergeCells('K1:L1')
+    if (this.verifyCellNotMerged('K1', 'L1')) {
+      this.worksheet.mergeCells('K1:L1')
+    }
   }
   formatK2() {
     this.K2.value = 'NON PLAFONNE'
@@ -138,7 +292,9 @@ class MonthWorksheet {
   formatM1() {
     // this.M1.width = '2.3cm'
     this.M1.value = 'COTISATIONS'
-    this.worksheet.mergeCells('M1:O1')
+    if (this.verifyCellNotMerged('M1', 'O1')) {
+      this.worksheet.mergeCells('M1:O1')
+    }
   }
   formatM2() {
     this.M2.value = 'EMPLOYEUR'
@@ -152,7 +308,9 @@ class MonthWorksheet {
   formatP1() {
     // this.P1.width = '2.3cm'
     this.P1.value = 'N° CIN/N°PASSEPORT'
-    this.worksheet.mergeCells('P1:P2')
+    if (this.verifyCellNotMerged('P1', 'P2')) {
+      this.worksheet.mergeCells('P1:P2')
+    }
   }
 
   createSheetContent() {
@@ -177,7 +335,28 @@ class MonthWorksheet {
     this.formatN2()
     this.formatO2()
     this.formatP1()
+    this.injectData()
+    this.formatCellToNumberDecima()
     this.setDefaultFont()
+  }
+
+  clearAllCellValues() {
+    for (let i = 0; i < this.formatedData.length; i++) {
+      const rowNumber = i + 3
+
+      // Remove the entire row
+      this.worksheet.spliceRows(rowNumber, 1)
+
+      // Alternatively, if you want to remove only specific cells in the row, you can use splice on the row object
+      // const row = this.worksheet.getRow(rowNumber);
+      // row.splice(1, this.columnNames.length);
+      // row.commit(); // Commit the changes to the row
+    }
+  }
+
+  resetData = () => {
+    this.travailleurData = null
+    this.clearAllCellValues()
   }
 }
 

@@ -9,7 +9,11 @@ const initialState = {
 const cotisationSlice = createSlice({
   name: 'cotisations',
   initialState,
-  reducers: {},
+  reducers: {
+    resetCotisation: (state) => {
+      return initialState
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchAllCotisations.fulfilled, (state, action) => {
       state.liste = action.payload
@@ -17,5 +21,7 @@ const cotisationSlice = createSlice({
     })
   },
 })
+
+export const { resetCotisation } = cotisationSlice.actions
 
 export default cotisationSlice.reducer

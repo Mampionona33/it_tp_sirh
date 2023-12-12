@@ -11,6 +11,16 @@ class DnsGen extends Component {
     super(props)
 
     this.wb = new ExcelJS.Workbook()
+    this.listTravailleurMois1 = null
+    this.listTravailleurMois2 = null
+    this.listTravailleurMois2 = null
+
+    this.employeurData = null
+    this.travailleurs = null
+
+    this.mois1List = ['janvier', 'avril', 'juillet']
+    this.mois2List = ['fevrier', 'mai', 'août']
+    this.mois3List = ['mars', 'juin', 'septembre']
 
     // Utiliser une méthode fléchée pour lier correctement "this" à la fonction
     this.handleExport = this.handleExport.bind(this)
@@ -35,11 +45,24 @@ class DnsGen extends Component {
 
   fetchData() {
     this.store = store.getState()
-    this.employeurData = this.store.employeur.employeur[0]
+
     this.anneeSelectionne = this.store.dns.anneeSelectionne
     this.periodSelectionne = this.store.dns.periodSelectionne
+
+    this.dnsData = this.store.dns.dnsData
+    this.employeurData = this.store.employeur.employeur[0]
+
     this.formatPeriod()
-    this.employerSheet.setPeriodeSelectionne(this.periodSelectionne)
+    if (this.verifyDnsDataExist()) {
+      this.getTravailleurs()
+      this.getListTravailleurMois1()
+      this.getListTravailleurMois2()
+      this.getListTravailleurMois3()
+    }
+
+    this.mois1.setTravailleurData(this.listTravailleurMois1)
+    this.mois1.setEmployeurData(this.employeurData)
+
     this.employerSheet.setEmployeurData(this.employeurData)
     this.employerSheet.setPeriod(this.period)
   }
@@ -52,31 +75,89 @@ class DnsGen extends Component {
       this.mois1 = new MonthWorksheet(this.wb, 'Mois 1', 'ffff00')
     }
     this.fetchData()
-    this.employerSheet.setEmployeurData(this.employeurData)
-    this.employerSheet.setPeriod(this.period)
   }
 
   componentDidUpdate(prevProps) {
     this.fetchData()
   }
 
-  handleExport() {
-    this.formatPeriod()
-    this.employerSheet.createSheetContent()
-    this.mois1.createSheetContent()
+  verifyDnsDataExist() {
+    return this.dnsData && Array.from(this.dnsData).length > 0
+  }
 
-    // this.mois2 = new MonthWorksheet(this.wb, 'Mois 2', '99ccff')
-    // this.mois3 = new MonthWorksheet(this.wb, 'Mois 3', '00ccff')
+  getTravailleurs() {
+    if (this.verifyDnsDataExist()) {
+      this.travailleurs = Array.from(this.dnsData)[0].travailleurs
+    }
+  }
 
-    this.wb.xlsx.writeBuffer().then((buffer) => {
-      const blob = new Blob([buffer], { type: 'application/octet-stream' })
-      FileSaver.saveAs(
-        blob,
-        `declaration_CNAPS_${this.periodSelectionne.toLocaleUpperCase()}_${
-          this.anneeSelectionne
-        }.xlsx`,
+  verifyTravailleursExist() {
+    return this.travailleurs !== null && this.travailleurs !== undefined
+  }
+
+  getListTravailleurMois1() {
+    if (this.verifyTravailleursExist()) {
+      this.listTravailleurMois1 = this.travailleurs.filter((travailleur) =>
+        this.mois1List.includes(travailleur.mois),
       )
-    })
+    }
+  }
+
+  getListTravailleurMois2() {
+    if (this.verifyTravailleursExist()) {
+      this.listTravailleurMois2 = this.travailleurs.filter((travailleur) =>
+        this.mois2List.includes(travailleur.mois),
+      )
+    }
+  }
+
+  getListTravailleurMois3() {
+    if (this.verifyTravailleursExist()) {
+      this.listTravailleurMois3 = this.travailleurs.filter((travailleur) =>
+        this.mois3List.includes(travailleur.mois),
+      )
+    }
+  }
+
+  // handleExport(ev) {
+  //   ev.preventDefault()
+  //   this.formatPeriod()
+  //   this.employerSheet.createSheetContent()
+  //   this.mois1.createSheetContent()
+
+  //   this.wb.xlsx.writeBuffer().then((buffer) => {
+  //     const blob = new Blob([buffer], { type: 'application/octet-stream' })
+  //     FileSaver.saveAs(
+  //       blob,
+  //       `declaration_CNAPS_${this.periodSelectionne.toLocaleUpperCase()}_${
+  //         this.anneeSelectionne
+  //       }.xlsx`,
+  //     )
+  //   })
+  // }
+
+  handleExport(ev) {
+    ev.preventDefault()
+
+    this.setState(
+      {}, // You can pass an empty object if you don't need to update the state
+      () => {
+        // The callback will be called after the state has been updated
+        this.formatPeriod()
+        this.employerSheet.createSheetContent()
+        this.mois1.createSheetContent()
+
+        this.wb.xlsx.writeBuffer().then((buffer) => {
+          const blob = new Blob([buffer], { type: 'application/octet-stream' })
+          FileSaver.saveAs(
+            blob,
+            `declaration_CNAPS_${this.periodSelectionne.toLocaleUpperCase()}_${
+              this.anneeSelectionne
+            }.xlsx`,
+          )
+        })
+      },
+    )
   }
 
   render() {

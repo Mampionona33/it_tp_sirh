@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { resetDns, setDns } from 'src/redux/dns/dnsReducers'
 import { useLocation } from 'react-router-dom'
 import { fetchDnsData } from 'src/redux/dns/dnsActions'
+import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
+import DnsGenerator from './DnsGenerator'
 
 const DeclarationCnaps = () => {
   const Body = () => {
@@ -16,6 +18,8 @@ const DeclarationCnaps = () => {
     const dns = useSelector((state) => state.dns)
     const dsnData = useSelector((state) => state.dns.dsnData)
     const loading = useSelector((state) => state.dns.loading)
+    const periodSelectionne = useSelector((state) => state.dns.periodSelectionne)
+    const anneeSelectionne = useSelector((state) => state.dns.anneeSelectionne)
 
     // Local state to hold initial values
     const [initialPeriode, setInitialPeriode] = useState('t1')
@@ -37,33 +41,11 @@ const DeclarationCnaps = () => {
 
       setPeriode(dns?.periodSelectionne || 't1')
       setAnnee(dns?.anneeSelectionne || new Date().getFullYear())
-
-      const handleBeforeUnload = (event) => {
-        localStorage.setItem('dns', JSON.stringify(dns))
-      }
-
-      console.log('test', typeof dsnData, dsnData, initialPeriode, initialAnnee)
-
-      if (
-        (dsnData === null && initialPeriode && initialAnnee && loading !== 'succeeded') ||
-        loading !== 'idle'
-      ) {
-        console.log('Dispatching fetchDnsData...')
-        dispatch(fetchDnsData({ periode: initialPeriode, annee: initialAnnee }))
-      } else {
-        console.log('Conditions not met, skipping fetchDnsData dispatch.')
-      }
-
-      window.addEventListener('beforeunload', handleBeforeUnload)
-
-      return () => {
-        window.removeEventListener('beforeunload', handleBeforeUnload)
-        if (pathName !== '/etatDivers/cnaps') {
-          dispatch(resetDns())
-          localStorage.removeItem('dns')
-        }
-      }
     }, [dispatch, pathName, dns, initialPeriode, initialAnnee, dsnData, loading])
+
+    useEffect(() => {
+      dispatch(fetchDnsData({ periode: periodSelectionne, annee: anneeSelectionne }))
+    }, [])
 
     // Générer la liste d'années de 1900 à l'année actuelle
     const currentYear = new Date().getFullYear()
@@ -86,7 +68,7 @@ const DeclarationCnaps = () => {
 
     return (
       <>
-        <form className="w-full flex flex-col gap-2 p-4">
+        <form action="post" className="w-full flex flex-col gap-2 p-4">
           <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
             <div>
               <label className="form-label" htmlFor="periode">
@@ -119,7 +101,8 @@ const DeclarationCnaps = () => {
               />
             </div>
             <div className="flex">
-              <DnsGen />
+              {/* <DnsGen /> */}
+              <DnsGenerator />
             </div>
           </div>
         </form>

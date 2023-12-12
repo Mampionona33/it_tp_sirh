@@ -3,6 +3,7 @@ import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/inde
 import { useDispatch, useSelector } from 'react-redux'
 import { fetcheEmpoyeur } from '../redux/employeur/employeurAction'
 import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
+import { fetchAllCotisations } from 'src/redux/cotisations/cotisationsActions'
 
 const DefaultLayout = () => {
   const dispatch = useDispatch()
@@ -13,20 +14,14 @@ const DefaultLayout = () => {
   useEffect(() => {
     let mount = true
     if (employeur.length === 0) {
-      dispatch(fetcheEmpoyeur())
+      if (mount) {
+        dispatch(fetcheEmpoyeur())
+      }
     }
-    // if (errorOnFetchEmployeur && !createErrorNotification) {
-    //   if (mount) {
-    //     dispatch(
-    //       addNotification({
-    //         title: 'Erreur ',
-    //         type: 'error',
-    //         message: `${errorOnFetchEmployeur.message}`,
-    //       }),
-    //     )
-    //     setCreateErrorNotification(true)
-    //   }
-    // }
+    if (mount) {
+      dispatch(fetchAllCotisations())
+    }
+
     return () => {
       mount = false
     }
