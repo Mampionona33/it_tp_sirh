@@ -1,59 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
-import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee';
-import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation';
-import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable_';
-import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer';
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useLocation, useParams, useNavigate } from 'react-router-dom'
+import FormInfoGalEmployee from 'src/components/FormInfoGalEmployee'
+import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculation'
+import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable_'
+import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const Fiche: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('info-perso');
-  const { id, activeTabParam } = useParams();
-  const dispatch = useDispatch();
-  const employees = useSelector((state: any) => state.employeesList.list);
-  const location = useLocation();
-  const navigate = useNavigate();
-  const selectedEmployee = useSelector((state: any) => state.bulletinDePaie.salarie);
+  const [activeTab, setActiveTab] = useState<string>('info-perso')
+  const { id, activeTabParam } = useParams()
+  const dispatch = useDispatch()
+  const employees = useSelector((state: any) => state.employeesList.list)
+  const location = useLocation()
+  const navigate = useNavigate()
+  const selectedEmployee = useSelector((state: any) => state.bulletinDePaie.salarie)
 
   useEffect(() => {
-    const pathParts = location.pathname.split('/');
-    const lastPathPart = pathParts[pathParts.length - 1];
+    const pathParts = location.pathname.split('/')
+    const lastPathPart = pathParts[pathParts.length - 1]
 
     if (['info-perso', 'heures-travailles', 'bulletin-de-paie'].includes(lastPathPart)) {
-      setActiveTab(lastPathPart);
+      setActiveTab(lastPathPart)
     } else if (activeTabParam) {
-      setActiveTab(activeTabParam);
+      setActiveTab(activeTabParam)
     }
-  }, [location.pathname, activeTabParam]);
+  }, [location.pathname, activeTabParam])
 
   const handleTabClick = (eventKey: string) => {
-    setActiveTab(eventKey);
-    navigate(`/employees/fiche/${id}/${eventKey}`);
-  };
+    setActiveTab(eventKey)
+    navigate(`/employees/fiche/${id}/${eventKey}`)
+  }
 
   const tabList = [
     { key: 'info-perso', label: 'Information générale' },
     { key: 'heures-travailles', label: 'Heures travaillées' },
     { key: 'bulletin-de-paie', label: 'Calcul paie' },
-  ];
+  ]
 
   useEffect(() => {
-    let mount = true;
+    let mount = true
 
     if (id && employees && mount) {
-      const emp = employees.find((empl: any) => empl.id === parseInt(id, 10));
+      const emp = employees.find((empl: any) => empl.id === parseInt(id, 10))
 
       if (emp) {
-        const salaireBase = emp.salaireBase * 1;
-        dispatch(setBulletinDePaie({ salarie: { ...emp } }));
-        dispatch(setBulletinDePaie({ salaireDeBase: salaireBase }));
+        const salaireBase = emp.salaireBase * 1
+        dispatch(setBulletinDePaie({ salarie: { ...emp } }))
+        dispatch(setBulletinDePaie({ salaireDeBase: salaireBase }))
       }
     }
 
     return () => {
-      mount = false;
-    };
-  }, [id, employees, dispatch]);
+      mount = false
+    }
+  }, [id, employees, dispatch])
 
   const renderTab = (tab: { key: string; label: string }) => (
     <li key={tab.key} className="mr-2" role="presentation">
@@ -72,20 +72,20 @@ const Fiche: React.FC = () => {
         {tab.label}
       </button>
     </li>
-  );
+  )
 
   const renderTabContent = (tabKey: string): JSX.Element | null => {
     switch (tabKey) {
       case 'info-perso':
-        return <FormInfoGalEmployee />;
+        return <FormInfoGalEmployee />
       case 'heures-travailles':
-        return <TimeSheetTable />;
+        return <TimeSheetTable />
       case 'bulletin-de-paie':
-        return <SalaryCalculation />;
+        return <SalaryCalculation />
       default:
-        return null;
+        return null
     }
-  };
+  }
 
   return (
     <div className="bg-white dark:bg-gray-800 p-4 shadow">
@@ -115,7 +115,7 @@ const Fiche: React.FC = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Fiche;
+export default Fiche
