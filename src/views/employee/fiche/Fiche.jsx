@@ -19,7 +19,11 @@ const Fiche = () => {
     const pathParts = location.pathname.split('/')
     const lastPathPart = pathParts[pathParts.length - 1]
 
-    if (['info-perso', 'heures-travailles', 'bulletin-de-paie'].includes(lastPathPart)) {
+    if (
+      ['info-perso', 'heures-travailles', 'bulletin-de-paie'].includes(
+        lastPathPart,
+      )
+    ) {
       setActiveTab(lastPathPart)
     } else if (activeTabParam) {
       setActiveTab(activeTabParam)

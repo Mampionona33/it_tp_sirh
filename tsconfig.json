@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "es5",
+    "jsx": "react",
+    "allowJs": true,
+    "paths": {
+      "@src/*": ["src/*"],
+      ""
+    }
+  },
+  "include": ["src/**/*", "**/*.d.ts"],
+  "exclude": ["node_modules"]
+}
