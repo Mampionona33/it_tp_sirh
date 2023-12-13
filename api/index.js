@@ -130,7 +130,6 @@ app.post('/heuressupplementaires', (req, res) => {
       // console.log(typeof matricule)
       // console.log(formatedDateDebut)
       // console.log(formatedDateFin)
-      // console.log(formatedEmployerDate)
       if (
         employHrs.employee.matricule === matricule &&
         formatedDateDebut <= formatedEmployerDate &&
