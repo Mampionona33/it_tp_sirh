@@ -4,10 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon ."
+    "start": "node index.js",
+    "build":"echo build",
+    "vercel-build":"echo hello",
+    "dev": "nodemon ."
   },
   "devDependencies": {
-    "start": "node index.js",
     "nodemon": "^3.0.1"
   },
   "dependencies": {
