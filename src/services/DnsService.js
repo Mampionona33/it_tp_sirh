@@ -18,7 +18,7 @@ class DnsService {
         },
       })
 
-      // console.log(this.resp)
+      // console.log(this.resp) change
       return this.resp
     } catch (error) {
       throw error
