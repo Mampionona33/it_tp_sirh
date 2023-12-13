@@ -9,7 +9,7 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx'],
       options: {
-        parser:'typescript',
+        parser: 'typescript',
       },
     },
   ],

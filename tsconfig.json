@@ -4,9 +4,15 @@
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
+    "esModuleInterop": true,
     "paths": {
       "@src/*": ["src/*"],
-      ""
+      "@components": ["src/components/**"],
+      "@layout": ["src/layout/**"],
+      "@redux": ["src/redux/**"],
+      "@services": ["src/services/**"],
+      "@utils": ["src/utils/**"],
+      "@views": ["src/views/**"]
     }
   },
   "include": ["src/**/*", "**/*.d.ts"],
