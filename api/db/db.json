@@ -18,7 +18,7 @@
       "telephone": "",
       "travDeNuit": 1,
       "status": "actif",
-      "id": 51
+      "id": 0
     }
   ],
   "/employeesCategories": [
@@ -1409,5 +1409,79 @@
         }
       ]
     }
-  ]
+  ],
+
+  "employe": {
+    "nom": "RAKOTOZANANY",
+    "prenom": "Benjamin",
+    "date_naissance": "2016-04-16",
+    "lieu_naissance": "Toamasina",
+    "adresse": "2 RUE LIEUTNANT BERARD",
+    "tel": "020 000211",
+    "email": "sealtmm@seal.mg",
+    "num_cin": "10126174565",
+    "genre": "M",
+    "contact_urgence": [
+      {
+        "nom": "RAZAKOLONA",
+        "prenom": "Jean",
+        "tel": "034 45 123 45"
+      },
+      {
+        "nom": "Matheo",
+        "prenom": "Pierre",
+        "tel": "032 80 167 45s"
+      }
+    ],
+    "conjoint": {
+      "nom": "Flavini",
+      "prenom": "Blanchard",
+      "date_naissance": "1987-03-12",
+      "lieu_naissance": "Toamasina",
+      "adresse": "2 RUE LIEUTNANT BERARD",
+      "num_cin": "101261745236",
+      "tel": "034 45 123 90",
+      "email": "flavini@gmail.com"
+    },
+    "enfant": [
+      {
+        "nom": "Bambini",
+        "prenom": "Rosam",
+        "date_naissance": "2022-04-16",
+        "lieu_naissance": "Toamasina",
+        "genre": 0
+      },
+      {
+        "nom": "Bambini",
+        "prenom": "Didié",
+        "date_naissance": "2017-04-16",
+        "lieu_naissance": "Toamasina",
+        "genre": 1
+      }
+    ],
+    "titre_poste": "Responsable Import et logistique ",
+    "matricule": "442",
+    "categorie": "B5",
+    "date_embauche": "2016-04-16",
+    "departement": "Logistique",
+    "lieu_travail": "Toamasina",
+    "est_cadre": true,
+    "travail_de_nuit": false,
+    "salaire_du_mois": 800000,
+    "rib": "454787f7dsf787878fd",
+    "mode_payement_salaire": "Virement banquaire",
+    "num_cnaps": "960101059745",
+    "num_osie": "96010105hjod4",
+    "prime_et_avantage_permanent": [
+      {
+        "libelle": "Carburant",
+        "montant": 450000
+      },
+      { "libelle": "gas", "montant": 100000 }
+    ],
+    "depart":{
+      "date": null,
+      "motif": null
+    }
+  }
 }
