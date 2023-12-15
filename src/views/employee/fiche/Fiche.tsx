@@ -16,7 +16,6 @@ const Fiche: React.FC = () => {
   const selectedEmployee = useSelector((state: any) => state.bulletinDePaie.salarie)
 
   useEffect(() => {
-    // test
     const pathParts = location.pathname.split('/')
     const lastPathPart = pathParts[pathParts.length - 1]
 
