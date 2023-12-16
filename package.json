@@ -13,7 +13,7 @@
   "license": "MIT",
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
-    "build": "react-scripts start",
+    "build": "react-scripts build",
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**/*.js\"",
     "prettier": "npx prettier --write 'src/**/*.{js,ts,tsx}'",
@@ -37,7 +37,10 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@tanstack/match-sorter-utils": "^8.8.4",
     "@tanstack/react-table": "^8.10.6",
-    "@types/react-dom": "^18.2.17",
+    "@types/jest": "^29.5.11",
+    "@types/node": "^20.10.4",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
     "axios": "^1.6.1",
     "bootstrap": "^5.3.2",
     "chart.js": "^3.9.1",
@@ -83,7 +86,7 @@
     "react-scripts": "^5.0.1",
     "sass": "^1.63.6",
     "tailwindcss": "^3.3.3",
-    "typescript": "^5.2.0",
+    "typescript": "^5.3.3",
     "web-vitals": "^3.3.2"
   },
   "engines": {
