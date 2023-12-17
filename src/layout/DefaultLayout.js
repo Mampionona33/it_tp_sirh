@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetcheEmpoyeur } from '../redux/employeur/employeurAction'
 import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
 import { fetchAllCotisations } from 'src/redux/cotisations/cotisationsActions'
+import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
 
 const DefaultLayout = () => {
   const dispatch = useDispatch()
@@ -20,6 +21,7 @@ const DefaultLayout = () => {
     }
     if (mount) {
       dispatch(fetchAllCotisations())
+      dispatch(fetchAllEmployees())
     }
 
     return () => {

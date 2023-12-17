@@ -6,31 +6,27 @@ import SalaryCalculation from 'src/components/SalaryCalculation/SalaryCalculatio
 import TimeSheetTable from 'src/components/TimeSheetTable/TimeSheetTable_'
 import { setBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 
-const Fiche = () => {
-  const [activeTab, setActiveTab] = useState('info-perso')
+const Fiche: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<string>('info-perso')
   const { id, activeTabParam } = useParams()
   const dispatch = useDispatch()
-  const employees = useSelector((state) => state.employeesList.list)
+  const employees = useSelector((state: any) => state.employeesList.list)
   const location = useLocation()
   const navigate = useNavigate()
-  const selectedEmployee = useSelector((state) => state.bulletinDePaie.salarie)
+  const selectedEmployee = useSelector((state: any) => state.bulletinDePaie.salarie)
 
   useEffect(() => {
     const pathParts = location.pathname.split('/')
     const lastPathPart = pathParts[pathParts.length - 1]
 
-    if (
-      ['info-perso', 'heures-travailles', 'bulletin-de-paie'].includes(
-        lastPathPart,
-      )
-    ) {
+    if (['info-perso', 'heures-travailles', 'bulletin-de-paie'].includes(lastPathPart)) {
       setActiveTab(lastPathPart)
     } else if (activeTabParam) {
       setActiveTab(activeTabParam)
     }
   }, [location.pathname, activeTabParam])
 
-  const handleTabClick = (eventKey) => {
+  const handleTabClick = (eventKey: string) => {
     setActiveTab(eventKey)
     navigate(`/employees/fiche/${id}/${eventKey}`)
   }
@@ -45,7 +41,7 @@ const Fiche = () => {
     let mount = true
 
     if (id && employees && mount) {
-      const emp = employees.find((empl) => empl.id === parseInt(id))
+      const emp = employees.find((empl: any) => empl.id === parseInt(id, 10))
 
       if (emp) {
         const salaireBase = emp.salaireBase * 1
@@ -59,7 +55,7 @@ const Fiche = () => {
     }
   }, [id, employees, dispatch])
 
-  const renderTab = (tab) => (
+  const renderTab = (tab: { key: string; label: string }) => (
     <li key={tab.key} className="mr-2" role="presentation">
       <button
         className={`inline-block p-4 border-b-2 rounded-t-lg ${
@@ -77,6 +73,19 @@ const Fiche = () => {
       </button>
     </li>
   )
+
+  const renderTabContent = (tabKey: string): JSX.Element | null => {
+    switch (tabKey) {
+      case 'info-perso':
+        return <FormInfoGalEmployee />
+      case 'heures-travailles':
+        return <TimeSheetTable />
+      case 'bulletin-de-paie':
+        return <SalaryCalculation />
+      default:
+        return null
+    }
+  }
 
   return (
     <div className="bg-white dark:bg-gray-800 p-4 shadow">
@@ -107,19 +116,6 @@ const Fiche = () => {
       </div>
     </div>
   )
-
-  function renderTabContent(tabKey) {
-    switch (tabKey) {
-      case 'info-perso':
-        return <FormInfoGalEmployee />
-      case 'heures-travailles':
-        return <TimeSheetTable />
-      case 'bulletin-de-paie':
-        return <SalaryCalculation />
-      default:
-        return null
-    }
-  }
 }
 
 export default Fiche
