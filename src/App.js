@@ -32,7 +32,7 @@ class App extends Component {
   render() {
     return (
       <QueryClientProvider client={this.queryClient}>
-        <HashRouter>
+        <BrowserRouter>
           <Provider store={store}>
             <Suspense fallback={loading}>
               <Routes>
@@ -62,7 +62,7 @@ class App extends Component {
               </Routes>
             </Suspense>
           </Provider>
-        </HashRouter>
+        </BrowserRouter>
       </QueryClientProvider>
     )
   }
