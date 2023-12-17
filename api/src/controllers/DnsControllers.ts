@@ -1,15 +1,16 @@
-const db = require('../db/db.json')
+import { Request, Response } from 'express'
 
 class DnsControllers {
-  constructor() {
+  private db: any
+  constructor(db: any) {
     this.db = db
   }
 
-  fetchDns = (req, res) => {
+  fetchDns = (req: Request, res: Response) => {
     const { annee, periode } = req.params
 
-    const data = this.db['dns'].map((dns) => {
-      const travailleurs = dns.travailleur.filter((trav) => {
+    const data = this.db['dns'].map((dns: any) => {
+      const travailleurs = dns.travailleur.filter((trav: any) => {
         return trav.trimestre === periode && trav.annee === annee
       })
 
@@ -20,4 +21,4 @@ class DnsControllers {
   }
 }
 
-module.exports = new DnsControllers()
+export default DnsControllers

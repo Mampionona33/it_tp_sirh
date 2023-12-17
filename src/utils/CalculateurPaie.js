@@ -35,7 +35,7 @@ export default class CalculateurPaie {
     this.totalHs50 = 0
   }
 
-  //   SETTERS
+  //   SETTERS cl
   setTotalHs50(totalHs50) {
     this.totalHs50 = totalHs50
   }

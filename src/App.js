@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react'
-import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, Navigate, HashRouter } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 import { Provider } from 'react-redux'
 import './scss/style.scss'
@@ -30,6 +30,7 @@ class App extends Component {
     this.queryClient = new QueryClient()
   }
   render() {
+    // ajout comment
     return (
       <QueryClientProvider client={this.queryClient}>
         <BrowserRouter>
