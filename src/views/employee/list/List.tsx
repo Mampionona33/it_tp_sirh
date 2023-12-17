@@ -11,7 +11,7 @@ import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSa
 import TableListeEmploye from '@components/TableListeEmploye/TableListeEmploye'
 
 const List = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<any>()
 
   useEffect(() => {
     let mount = true
@@ -27,10 +27,21 @@ const List = () => {
       mount = false
     }
   }, [dispatch])
+
+  const ButtonDetail: React.FC = () => {
+    return (
+      <>
+        <button className="bg-customRed-900 text-white hover:bg-customRed-200 py-2 px-3 hover:text-slate-200">
+          Détails
+        </button>
+      </>
+    )
+  }
+
   return (
     <>
       {/* <TableEmployee /> */}
-      <TableListeEmploye />
+      <TableListeEmploye actions={[ButtonDetail]} />
     </>
   )
 }

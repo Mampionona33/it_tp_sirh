@@ -1,4 +1,4 @@
-export interface Root {
+export interface IEmploye {
   nom: string
   prenom: string
   date_naissance: string

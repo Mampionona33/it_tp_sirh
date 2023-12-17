@@ -1,16 +1,10 @@
 import React, { useMemo } from 'react'
-// import { Root as IEmploye } from '@src/interfaces/interfaceEmploye'
-import { Root as IEmploye } from '@interfaces/interfaceEmploye'
 import { createColumnHelper, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import CustomPagination from '../CustomPagination'
+import { IDataTableEmploye } from './interfaceDataTableEmploy'
 
-interface DataTableEmployeProps {
-  data: IEmploye[]
-}
-
-const DataTableEmploye: React.FC<DataTableEmployeProps> = ({ data }) => {
+const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data }) => {
   const columnHelper = createColumnHelper()
-  const pageSizeOptions = [5, 10, 15, 20, 25, 30]
 
   const columns = useMemo(
     () => [
@@ -60,6 +54,22 @@ const DataTableEmploye: React.FC<DataTableEmployeProps> = ({ data }) => {
         cell: (info) => info.getValue(),
         header: () => 'Fonction',
       }),
+      columnHelper.accessor('actions', {
+        cell: (info) => {
+          const actionOriginal: any = info.row.original
+          const actions = actionOriginal.actions ? actionOriginal.actions : []
+
+          // Assuming actions is an array of React components
+          return (
+            <div>
+              {actions.map((ActionComponent: React.FC, index: number) => (
+                <ActionComponent key={`action_${index}`} />
+              ))}
+            </div>
+          )
+        },
+        header: () => 'Actions',
+      }),
     ],
     [columnHelper],
   )
@@ -80,21 +90,36 @@ const DataTableEmploye: React.FC<DataTableEmployeProps> = ({ data }) => {
           <thead className="text-sm uppercase text-gray-700 dark:text-gray-400 bg-stone-200">
             {headerGroups.length > 0 &&
               headerGroups.map((headerGroup, key) => (
-                <tr key={`headerRow_${key}`}>
-                  {headerGroup.headers.map((header, headerIndex) => (
-                    <th
-                      scope="col"
-                      className="px-6 py-3"
-                      key={`header_${header.id}_${headerIndex}`}
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : typeof header.column.columnDef.header === 'function'
-                        ? header.column.columnDef.header(header.getContext())
-                        : null}
-                    </th>
-                  ))}
-                </tr>
+                <React.Fragment key={`headerGroup_${key}`}>
+                  <tr key={`headerRow_${key}`}>
+                    {headerGroup.headers.map((header, headerIndex) => {
+                      if (header.id.toLowerCase() === 'actions') return ''
+
+                      return (
+                        <React.Fragment key={`header_${header.id}_${headerIndex}`}>
+                          {header.column.id !== 'Actions' && (
+                            <th
+                              scope="col"
+                              className="px-6 py-3"
+                              key={`header_${header.id}_${headerIndex}`}
+                            >
+                              {header.isPlaceholder
+                                ? null
+                                : typeof header.column.columnDef.header === 'function'
+                                ? header.column.columnDef.header(header.getContext())
+                                : null}
+                            </th>
+                          )}
+                        </React.Fragment>
+                      )
+                    })}
+                    {rows.length > 0 && (rows[0] as any).original.actions && (
+                      <th scope="col" className="px-6 py-3">
+                        Actions
+                      </th>
+                    )}
+                  </tr>
+                </React.Fragment>
               ))}
           </thead>
 
@@ -107,18 +132,22 @@ const DataTableEmploye: React.FC<DataTableEmployeProps> = ({ data }) => {
                     rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-100'
                   }`}
                 >
-                  {row.getVisibleCells().map((cell, cellIndex) => (
-                    <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2 text-sm">
-                      {typeof cell.column.columnDef.cell === 'function'
-                        ? cell.column.columnDef.cell(cell.getContext())
-                        : cell.column.columnDef.cell}
-                    </td>
-                  ))}
+                  {row.getVisibleCells().map((cell, cellIndex) => {
+                    if (cell.getContext().column.id === 'actions' && !cell.getValue()) return null
+
+                    return (
+                      <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2 text-sm">
+                        {typeof cell.column.columnDef.cell === 'function'
+                          ? cell.column.columnDef.cell(cell.getContext())
+                          : cell.column.columnDef.cell}
+                      </td>
+                    )
+                  })}
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan={10} className="text-lg font-medium p-4">
+                <td colSpan={headerGroups.length} className="text-lg font-medium p-4">
                   Aucune donnée trouvée
                 </td>
               </tr>
