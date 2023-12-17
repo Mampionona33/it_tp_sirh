@@ -84,7 +84,6 @@
     "eslint-plugin-prettier": "^4.2.1",
     "postcss": "^8.4.31",
     "prettier": "2.8.8",
-    "craco": "^5.0.1",
     "sass": "^1.63.6",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.3.3",
