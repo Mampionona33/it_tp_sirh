@@ -8,6 +8,7 @@ import {
 } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametreCalendrierReducer'
 import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
+import TableListeEmploye from '@components/TableListeEmploye/TableListeEmploye'
 
 const List = () => {
   const dispatch = useDispatch()
@@ -28,7 +29,8 @@ const List = () => {
   }, [dispatch])
   return (
     <>
-      <TableEmployee />
+      {/* <TableEmployee /> */}
+      <TableListeEmploye />
     </>
   )
 }
