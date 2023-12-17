@@ -3,6 +3,10 @@ import { createColumnHelper, getCoreRowModel, useReactTable } from '@tanstack/re
 import CustomPagination from '../CustomPagination'
 import { IDataTableEmploye } from './interfaceDataTableEmploy'
 
+interface ActionComponentProps {
+  rowId: any
+}
+
 const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data }) => {
   const columnHelper = createColumnHelper()
 
@@ -59,11 +63,10 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data }) => {
           const actionOriginal: any = info.row.original
           const actions = actionOriginal.actions ? actionOriginal.actions : []
 
-          // Assuming actions is an array of React components
           return (
             <div>
-              {actions.map((ActionComponent: React.FC, index: number) => (
-                <ActionComponent key={`action_${index}`} />
+              {actions.map((ActionComponent: React.FC<ActionComponentProps>, index: number) => (
+                <ActionComponent key={`action_${index}`} rowId={(info.row as any).original.id} />
               ))}
             </div>
           )

@@ -9,6 +9,11 @@ import {
 import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametreCalendrierReducer'
 import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
 import TableListeEmploye from '@components/TableListeEmploye/TableListeEmploye'
+import { Link } from 'react-router-dom'
+
+interface ButtonDetailProps {
+  rowId: number
+}
 
 const List = () => {
   const dispatch = useDispatch<any>()
@@ -28,12 +33,12 @@ const List = () => {
     }
   }, [dispatch])
 
-  const ButtonDetail: React.FC = () => {
+  const ButtonDetail: React.FC<ButtonDetailProps> = ({ rowId }) => {
     return (
       <>
-        <button className="bg-customRed-900 text-white hover:bg-customRed-200 py-2 px-3 hover:text-slate-200">
-          Détails
-        </button>
+        <Link className="btn btn-danger" to={`/employees/fiche/${rowId}`}>
+          Fiche
+        </Link>
       </>
     )
   }
