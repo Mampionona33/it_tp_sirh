@@ -4,6 +4,10 @@
     {
       "name": "Install Dependencies",
       "command": "yarn install"
+    },
+    {
+      "name": "install api/ dep",
+      "command": "cd api/ && yarn install"
     }
   ],
 
@@ -19,7 +23,7 @@
     },
     "start-api": {
       "name": "start-api",
-      "command": "cd api/ && npm run start",
+      "command": "cd api/ && yarn build && yarn start",
       "runAtStart": true,
       "preview": {
         "port": 8000
