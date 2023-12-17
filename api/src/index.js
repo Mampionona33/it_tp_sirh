@@ -8,6 +8,7 @@ const { parseISO, isWithinInterval, parse } = require('date-fns')
 const asyncHandler = require('express-async-handler')
 const dnsController = require('./controllers/DnsControllers')
 const employeurControllers = require('./controllers/EmployeurControllers')
+const salaierControllerInstance = require('./controllers/salariesControllers')
 app.use(express.json())
 
 const corsOptions = {
@@ -42,12 +43,12 @@ app.post('/login', (req, res) => {
   }
 })
 
-app.get('/personnels', cors(corsOptions), (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*') // Allow any origin during development
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+// app.get('/personnels', cors(corsOptions), (req, res) => {
+//   res.header('Access-Control-Allow-Origin', '*') // Allow any origin during development
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
 
-  res.status(200).send(db['/employees'])
-})
+//   res.status(200).send(db['/employees'])
+// })
 
 app.get('/cotisations/all', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*') // Allow any origin during development
@@ -127,10 +128,9 @@ app.post('/heuressupplementaires', (req, res) => {
   const data = db['/employeeHours']
     .map((employHrs) => {
       const formatedEmployerDate = formatDate(employHrs.date)
-      console.log(typeof matricule)
-      console.log(formatedDateDebut)
-      console.log(formatedDateFin)
-      console.log(formatedEmployerDate)
+      // console.log(typeof matricule)
+      // console.log(formatedDateDebut)
+      // console.log(formatedDateFin)
       if (
         employHrs.employee.matricule === matricule &&
         formatedDateDebut <= formatedEmployerDate &&
@@ -156,7 +156,9 @@ app.route('/employeurs').get(employeurControllers.getEmployeur)
 
 app.route('/dns/:annee/:periode').get(dnsController.fetchDns)
 
-const PORT = process.env.API_PORT || 8000
+app.route('/personnels').get(salaierControllerInstance.getAll)
+
+const PORT = process.env.PORT || 8000
 
 app.listen(PORT, () => {
   console.log(`Server started at port: ${PORT}`)
