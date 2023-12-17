@@ -5,10 +5,19 @@ import { useSelector } from 'react-redux'
 function TableListeEmploye(): JSX.Element {
   const data = useSelector((state: any) => state.employeesList.list)
   console.log(data)
+
+  const formattedData =
+    data && data.length > 0
+      ? data.map((item: any) => ({
+          ...item,
+          fullName: `${item.nom} ${item.prenom}`,
+        }))
+      : []
+
   return (
     <div>
       <div>Table liste employé</div>
-      <DataTableEmploye data={data} />
+      <DataTableEmploye data={formattedData} />
     </div>
   )
 }

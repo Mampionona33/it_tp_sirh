@@ -1468,7 +1468,7 @@
       "date_embauche": "2016-04-16",
       "departement": "Logistique",
       "lieu_travail": "Toamasina",
-      "est_cadre": true,
+      "cadre": true,
       "travail_de_nuit": false,
       "salaire_du_mois": 800000,
       "rib": "454787f7dsf787878fd",
