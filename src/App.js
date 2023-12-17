@@ -30,6 +30,7 @@ class App extends Component {
     this.queryClient = new QueryClient()
   }
   render() {
+    // ajout comment
     return (
       <QueryClientProvider client={this.queryClient}>
         <BrowserRouter>
