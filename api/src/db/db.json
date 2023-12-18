@@ -1422,7 +1422,7 @@
       "adresse": "2 RUE LIEUTNANT BERARD",
       "tel": "020 000211",
       "email": "sealtmm@seal.mg",
-      "num_cin": "10126174565",
+      "cin": "10126174565",
       "sexe": "homme",
       "contact_urgence": [
         {
@@ -1442,7 +1442,7 @@
         "date_naissance": "1987-03-12",
         "lieu_naissance": "Toamasina",
         "adresse": "2 RUE LIEUTNANT BERARD",
-        "num_cin": "101261745236",
+        "cin": "101261745236",
         "tel": "034 45 123 90",
         "email": "flavini@gmail.com"
       },
@@ -1497,7 +1497,7 @@
       "adresse": "2 RUE LIEUTNANT BERARD",
       "tel": "020 000211",
       "email": "sealtmm@seal.mg",
-      "num_cin": "10126174565",
+      "cin": "10126174565",
       "sexe": "homme",
       "contact_urgence": [
         {
@@ -1517,7 +1517,7 @@
         "date_naissance": "1987-03-12",
         "lieu_naissance": "Toamasina",
         "adresse": "2 RUE LIEUTNANT BERARD",
-        "num_cin": "101261745236",
+        "cin": "101261745236",
         "tel": "034 45 123 90",
         "email": "flavini@gmail.com"
       },
