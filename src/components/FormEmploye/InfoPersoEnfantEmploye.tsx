@@ -110,7 +110,6 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
           <fieldset>
             <legend className="text-base">Genre</legend>
             <div className="grid grid-cols-2">
-              <label htmlFor={`masculin_${index}`}>Masculin</label>
               <div className="text-center">
                 <input
                   type="radio"
@@ -123,10 +122,10 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
                   }
                 />
               </div>
+              <label htmlFor={`masculin_${index}`}>Masculin</label>
             </div>
 
             <div className="grid grid-cols-2">
-              <label htmlFor={`feminin_${index}`}>Féminin</label>
               <div className="text-center">
                 <input
                   type="radio"
@@ -139,6 +138,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
                   }
                 />
               </div>
+              <label htmlFor={`feminin_${index}`}>Féminin</label>
             </div>
           </fieldset>
         </div>

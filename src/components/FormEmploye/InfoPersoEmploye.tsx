@@ -9,7 +9,7 @@ function InfoPersoEmploye() {
     adresse: '',
     lieu_naissance: '',
     cin: '',
-    genre: '',
+    genre: 'homme',
   })
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

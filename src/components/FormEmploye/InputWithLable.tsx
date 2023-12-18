@@ -23,28 +23,33 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
 }) => {
   return (
     <div className="flex flex-col mb-2">
-      <label htmlFor={name}>
-        {label} {required ? '*' : ''}
-      </label>
+      {type !== 'radio' && (
+        <label htmlFor={name}>
+          {label} {required ? '*' : ''}
+        </label>
+      )}
       {type === 'radio' && options ? (
-        // Render radio buttons if type is 'radio' and options are provided
-        <div className="flex">
+        // Render a fieldset for radio buttons
+        <fieldset>
+          <legend className="text-base">{label}</legend>
           {options.map((option, index) => (
-            <div key={index} className="flex items-center mr-4">
-              <input
-                type="radio"
-                id={`${name}_${index}`}
-                name={name}
-                value={option.value}
-                checked={value === option.value}
-                onChange={(event) => onChange(event, index)}
-              />
-              <label htmlFor={`${name}_${index}`} className="ml-1">
+            <div key={index} className="grid grid-cols-4">
+              <div className="text-center">
+                <input
+                  type="radio"
+                  id={`${name}_${index}`}
+                  name={name}
+                  value={option.value}
+                  checked={value === option.value}
+                  onChange={(event) => onChange(event, index)}
+                />
+              </div>
+              <label htmlFor={`${name}_${index}`} className="ml-1 col-span-3">
                 {option.label}
               </label>
             </div>
           ))}
-        </div>
+        </fieldset>
       ) : (
         // Render a regular input for other types
         <input
