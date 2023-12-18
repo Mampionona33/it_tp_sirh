@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { useLocation, useParams } from 'react-router-dom'
 import MainHeader from './MainHeader'
 import InfoPersoEmploye from './InfoPersoEmploye'
+import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
 
 const FormEmploye = () => {
   const { id } = useParams()
@@ -24,6 +25,7 @@ const FormEmploye = () => {
             <div className="bg-white flex flex-col py-11">
               <MainHeader />
               <InfoPersoEmploye />
+              <InfoPersoEnfantEmploye/>
             </div>
           </>
         ) : (

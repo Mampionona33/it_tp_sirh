@@ -9,6 +9,7 @@ function InfoPersoEmploye() {
     adresse: '',
     lieu_naissance: '',
     cin: '',
+    genre: '',
   })
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +19,11 @@ function InfoPersoEmploye() {
       [name]: value,
     }))
   }
+
+  const genreOptions = [
+    { label: 'Homme', value: 'homme' },
+    { label: 'Femme', value: 'Femme' },
+  ]
 
   const inputs: IInputWithLabelProps[] = [
     {
@@ -66,6 +72,15 @@ function InfoPersoEmploye() {
       name: 'cin',
       type: 'text',
       value: formData.cin,
+      onChange: handleInputChange,
+    },
+    {
+      label: 'Genre',
+      required: true,
+      name: 'genre',
+      type: 'radio',
+      options: genreOptions,
+      value: formData.genre,
       onChange: handleInputChange,
     },
   ]
