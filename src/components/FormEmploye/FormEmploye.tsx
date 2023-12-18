@@ -25,7 +25,7 @@ const FormEmploye = () => {
             <div className="bg-white flex flex-col py-11">
               <MainHeader />
               <InfoPersoEmploye />
-              <InfoPersoEnfantEmploye/>
+              <InfoPersoEnfantEmploye />
             </div>
           </>
         ) : (

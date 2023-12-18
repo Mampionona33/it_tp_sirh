@@ -22,7 +22,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   index,
 }) => {
   return (
-    <div className="flex flex-col mb-3">
+    <div className="flex flex-col mb-2">
       <label htmlFor={name}>
         {label} {required ? '*' : ''}
       </label>
@@ -34,7 +34,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
               <input
                 type="radio"
                 id={`${name}_${index}`}
-                name={name} // Use the name attribute to create unique radio button groups
+                name={name}
                 value={option.value}
                 checked={value === option.value}
                 onChange={(event) => onChange(event, index)}
@@ -53,7 +53,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           id={name}
           value={value}
           onChange={(event) => onChange(event, index)}
-          className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[30px]"
+          className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
           required={required}
         />
       )}
