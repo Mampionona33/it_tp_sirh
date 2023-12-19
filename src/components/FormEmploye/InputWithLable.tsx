@@ -87,12 +87,10 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
             aria-label={label}
             name={name}
             options={options as { label: string; value: string }[]}
-            value={options.find(
-              (opt: { label: string; value: string }) => opt.value === value
-            )}
-            onChange={(
-              selectedOption: { label: string; value: string } | undefined
-            ) => onChange(selectedOption ? selectedOption.value : '', index)}
+            value={options.find((opt: { label: string; value: string }) => opt.value === value)}
+            onChange={(selectedOption: { label: string; value: string } | undefined) =>
+              onChange(selectedOption ? selectedOption.value : '', index)
+            }
             theme={(theme) => ({
               ...theme,
               borderRadius: 0,
@@ -112,9 +110,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           name={name}
           id={name}
           value={value}
-          onChange={(event) =>
-            onChange(event as ChangeEvent<HTMLInputElement>, index)
-          }
+          onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
           className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
           required={required}
         />
