@@ -24,7 +24,6 @@
     "start": {
       "name": "start",
       "command": "yarn start",
-      "runAtStart": true,
       "preview": {
         "port": 3000
       }
@@ -38,12 +37,12 @@
         "port": 8000
       }
     },
-    
+
     "build-api": {
       "name": "build",
       "command": "cd api/ && yarn run build"
     },
-    
+
     "test": {
       "name": "test",
       "command": "npm test"
