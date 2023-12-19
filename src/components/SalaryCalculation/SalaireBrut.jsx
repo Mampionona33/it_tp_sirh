@@ -44,19 +44,19 @@ const SalaireBrut = () => {
     calc.setTotalHs50(totalHs50)
     return calc
   }, [
-    totalHs50,
-    totalHs30,
-    totalHFerie,
-    avance,
-    salaireDeBase,
+    totalHs50 || 0,
+    totalHs30 || 0,
+    totalHFerie || 0,
+    avance || 0,
+    salaireDeBase || 0,
     isCadre,
-    hsni130,
-    totalPrimeEtAvantage,
-    totalDeduction,
-    hsni150,
-    hsi130,
-    hsi150,
-    totalHDim,
+    hsni130 || 0,
+    totalPrimeEtAvantage || 0,
+    totalDeduction || 0,
+    hsni150 || 0,
+    hsi130 || 0,
+    hsi150 || 0,
+    totalHDim || 0,
   ])
 
   const valHsni130 = calculateurPaie.getValHsni130()
