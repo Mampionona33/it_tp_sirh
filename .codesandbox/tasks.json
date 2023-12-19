@@ -13,7 +13,7 @@
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
-    "start": {
+    "start-app-dev": {
       "name": "start",
       "command": "yarn start",
       "runAtStart": true,
@@ -23,8 +23,8 @@
     },
     "build-api": {
       "name": "build",
-      "runAtStart": true,
-      "command": "cd api/ && yarn run build"
+      "command": "cd api/ && yarn run build",
+      "runAtStart": true
     },
     "start-api": {
       "name": "start-api",
@@ -45,6 +45,14 @@
     "eject": {
       "name": "eject",
       "command": "npm eject"
+    },
+    "start": {
+      "name": "start",
+      "command": "yarn start",
+      "runAtStart": true,
+      "preview": {
+        "port": 3000
+      }
     }
   }
 }
