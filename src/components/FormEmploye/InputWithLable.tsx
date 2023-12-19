@@ -1,18 +1,18 @@
-import React, { ChangeEvent } from 'react'
-import Select from 'react-select'
+import React, { ChangeEvent } from "react";
+import Select from "react-select";
 
 export interface IInputWithLabelProps {
-  label: string
-  name: string
-  type: string
-  required?: boolean
-  value?: any
-  index?: number
+  label: string;
+  name: string;
+  type: string;
+  required?: boolean;
+  value?: any;
+  index?: number;
   options?:
     | { label: string; value: string }[]
     | { label: string; value: string }[]
-    | { label: number; value: string }[]
-  onChange?: (value: any, index?: number) => void
+    | { label: number; value: string }[];
+  onChange?: (value: any, index?: number) => void;
 }
 
 const InputWithLabel: React.FC<IInputWithLabelProps> = ({
@@ -28,36 +28,36 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   const customSelectStyles = {
     control: (provided, state) => ({
       ...provided,
-      borderColor: state.isFocused ? '#da200d' : '',
-      boxShadow: state.isFocused ? '0 0 0 0.25rem #e7b7b4' : null,
+      borderColor: state.isFocused ? "#da200d" : "",
+      boxShadow: state.isFocused ? "0 0 0 0.25rem #e7b7b4" : null,
       borderRadius: 0,
     }),
 
     container: (provided) => ({
       ...provided,
-      width: '100%',
+      height: "28px",
     }),
-    menu: (provided, state) => ({
-      ...provided,
-      width: '100%',
-    }),
-    option: (provided, state) => ({
-      ...provided,
-      backgroundColor: state.isSelected ? '#da200d' : 'inherit',
-      ':hover': {
-        backgroundColor: '#e7b7b4',
-      },
-    }),
-  }
+    // menu: (provided, state) => ({
+    //   ...provided,
+    //   width: "100%",
+    // }),
+    // option: (provided, state) => ({
+    //   ...provided,
+    //   backgroundColor: state.isSelected ? "#da200d" : "inherit",
+    //   ":hover": {
+    //     backgroundColor: "#e7b7b4",
+    //   },
+    // }),
+  };
 
   return (
     <div className="flex flex-col mb-2">
-      {type !== 'radio' && type !== 'select' && (
+      {type !== "radio" && type !== "select" && (
         <label htmlFor={name}>
-          {label} {required ? '*' : ''}
+          {label} {required ? "*" : ""}
         </label>
       )}
-      {type === 'radio' && options ? (
+      {type === "radio" && options ? (
         // Render a fieldset for radio buttons
         <fieldset>
           <legend className="text-base">{label}</legend>
@@ -79,7 +79,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
             </div>
           ))}
         </fieldset>
-      ) : type === 'select' && options ? (
+      ) : type === "select" && options ? (
         // Render a select dropdown using react-select
         <div className="flex flex-col mb-2">
           <label htmlFor={name}>{label}</label>
@@ -87,11 +87,20 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
             aria-label={label}
             name={name}
             options={options as { label: string; value: string }[]}
-            value={options.find((opt: { label: string; value: string }) => opt.value === value)}
-            onChange={(selectedOption: { label: string; value: string } | undefined) =>
-              onChange(selectedOption ? selectedOption.value : '', index)
-            }
-            // styles={customSelectStyles}
+            value={options.find(
+              (opt: { label: string; value: string }) => opt.value === value
+            )}
+            onChange={(
+              selectedOption: { label: string; value: string } | undefined
+            ) => onChange(selectedOption ? selectedOption.value : "", index)}
+            theme={(theme) => ({
+              ...theme,
+              borderRadius: 0,
+              height: 28,
+              colors: {
+                primary25: "#D6111E",
+              },
+            })}
           />
         </div>
       ) : (
@@ -101,13 +110,15 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           name={name}
           id={name}
           value={value}
-          onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
+          onChange={(event) =>
+            onChange(event as ChangeEvent<HTMLInputElement>, index)
+          }
           className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
           required={required}
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default InputWithLabel
+export default InputWithLabel;
