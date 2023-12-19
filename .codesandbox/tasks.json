@@ -15,7 +15,7 @@
   "tasks": {
     "start": {
       "name": "start",
-      "command": "npm run start",
+      "command": "yarn start",
       "runAtStart": true,
       "preview": {
         "port": 3000
@@ -23,7 +23,7 @@
     },
     "start-api": {
       "name": "start-api",
-      "command": "cd api/ && npm run start",
+      "command": "cd api/ && yarn dev",
       "runAtStart": true,
       "preview": {
         "port": 8000
