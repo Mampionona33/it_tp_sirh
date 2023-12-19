@@ -81,16 +81,19 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
         </fieldset>
       ) : type === 'select' && options ? (
         // Render a select dropdown using react-select
-        <Select
-          aria-label={label}
-          name={name}
-          options={options as { label: string; value: string }[]}
-          value={options.find((opt: { label: string; value: string }) => opt.value === value)}
-          onChange={(selectedOption: { label: string; value: string } | undefined) =>
-            onChange(selectedOption ? selectedOption.value : '', index)
-          }
-          // styles={customSelectStyles}
-        />
+        <div>
+          <label htmlFor={name}>{label}</label>
+          <Select
+            aria-label={label}
+            name={name}
+            options={options as { label: string; value: string }[]}
+            value={options.find((opt: { label: string; value: string }) => opt.value === value)}
+            onChange={(selectedOption: { label: string; value: string } | undefined) =>
+              onChange(selectedOption ? selectedOption.value : '', index)
+            }
+            // styles={customSelectStyles}
+          />
+        </div>
       ) : (
         // Render a regular input for other types
         <input
