@@ -4,6 +4,10 @@
     {
       "name": "Install Dependencies",
       "command": "yarn install --legacy-peer-deps"
+    },
+    {
+      "command": "cd api/ && yarn install --legacy-peer-deps",
+      "name": "c"
     }
   ],
 
