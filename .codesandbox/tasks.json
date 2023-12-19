@@ -16,7 +16,6 @@
     "start": {
       "name": "start",
       "command": "yarn start",
-      "runAtStart": true,
       "preview": {
         "port": 3000
       }
@@ -36,7 +35,8 @@
     },
     "build-app": {
       "name": "build app",
-      "command": "yarn build"
+      "command": "yarn build",
+      "runAtStart": true
     },
     "test": {
       "name": "test",
@@ -49,7 +49,6 @@
     "serve-builded-app": {
       "name": "serve-builded-app",
       "command": "node build/index.js",
-      "runAtStart": true,
       "preview": {
         "port": 3000
       }
