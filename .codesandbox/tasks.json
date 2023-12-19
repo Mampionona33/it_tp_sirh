@@ -8,6 +8,14 @@
     {
       "name": "install api deps",
       "command": "cd api/ && yarn install --legacy-peer-deps"
+    },
+    {
+      "name": "build api",
+      "command": "cd api/ && yarn build"
+    },
+    {
+      "name": "build app",
+      "command": "yarn build"
     }
   ],
 
@@ -16,15 +24,12 @@
     "start": {
       "name": "start",
       "command": "yarn start",
+      "runAtStart": true,
       "preview": {
         "port": 3000
       }
     },
-    "build-api": {
-      "name": "build",
-      "command": "cd api/ && yarn run build",
-      "runAtStart": true
-    },
+
     "start-api": {
       "name": "start-api",
       "command": "cd api/ &&  yarn start",
@@ -33,14 +38,12 @@
         "port": 8000
       }
     },
-    "build-app": {
-      "name": "build app",
-      "command": "yarn build",
-      "runAtStart": true,
-      "restartOn": {
-        "files": ["/*"]
-      }
+    
+    "build-api": {
+      "name": "build",
+      "command": "cd api/ && yarn run build"
     },
+    
     "test": {
       "name": "test",
       "command": "npm test"
@@ -48,13 +51,6 @@
     "eject": {
       "name": "eject",
       "command": "npm eject"
-    },
-    "serve-builded-app": {
-      "name": "serve-builded-app",
-      "command": "node build/index.js",
-      "preview": {
-        "port": 3000
-      }
     }
   }
 }
