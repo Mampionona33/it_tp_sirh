@@ -36,7 +36,10 @@
     "build-app": {
       "name": "build app",
       "command": "yarn build",
-      "runAtStart": true
+      "runAtStart": true,
+      "restartOn": {
+        "files": ["/*"]
+      }
     },
     "test": {
       "name": "test",
