@@ -1,11 +1,10 @@
 import React, { Component, Suspense } from 'react'
 import { BrowserRouter, Route, Routes, Navigate, HashRouter } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
-import { Provider } from 'react-redux'
 import './scss/style.scss'
-import { store } from './redux/store'
 import NotificationStack from './components/NotificationStack/NotificationStack'
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { store } from './redux/store'
 
 const loading = (
   <div className="pt-3 text-center">
@@ -34,35 +33,33 @@ class App extends Component {
     return (
       <QueryClientProvider client={this.queryClient}>
         <BrowserRouter>
-          <Provider store={store}>
-            <Suspense fallback={loading}>
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    this.isAuth ? (
-                      <Navigate to="/dashboard" replace />
-                    ) : (
-                      <Navigate to="/login" replace />
-                    )
-                  }
-                />
-                <Route path="/register" element={<Register />} />
-                <Route path="/login" element={<Login />} />
-                <Route exact path="/404" name="Page 404" element={<Page404 />} />
-                <Route exact path="/500" name="Page 500" element={<Page500 />} />
-                <Route
-                  path="*"
-                  element={
-                    <PrivateRoute>
-                      <DefaultLayout />
-                      <NotificationStack />
-                    </PrivateRoute>
-                  }
-                />
-              </Routes>
-            </Suspense>
-          </Provider>
+          <Suspense fallback={loading}>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  this.isAuth ? (
+                    <Navigate to="/dashboard" replace />
+                  ) : (
+                    <Navigate to="/login" replace />
+                  )
+                }
+              />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route exact path="/404" name="Page 404" element={<Page404 />} />
+              <Route exact path="/500" name="Page 500" element={<Page500 />} />
+              <Route
+                path="*"
+                element={
+                  <PrivateRoute>
+                    <DefaultLayout />
+                    <NotificationStack />
+                  </PrivateRoute>
+                }
+              />
+            </Routes>
+          </Suspense>
         </BrowserRouter>
       </QueryClientProvider>
     )
