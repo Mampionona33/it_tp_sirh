@@ -2,12 +2,12 @@
   // These tasks will run in order when initializing your CodeSandbox project.
   "setupTasks": [
     {
-      "name": "Install Dependencies",
+      "name": "Install app Dependencies",
       "command": "yarn install --legacy-peer-deps"
     },
     {
-      "command": "cd api/ && yarn install --legacy-peer-deps",
-      "name": "c"
+      "name": "install api deps",
+      "command": "cd api/ && yarn install --legacy-peer-deps"
     }
   ],
 
@@ -21,17 +21,22 @@
         "port": 3000
       }
     },
+    "build-api": {
+      "name": "build",
+      "runAtStart": true,
+      "command": "cd api/ && yarn run build"
+    },
     "start-api": {
       "name": "start-api",
-      "command": "cd api/ && yarn start",
+      "command": "cd api/ &&  yarn start",
       "runAtStart": true,
       "preview": {
         "port": 8000
       }
     },
     "build": {
-      "name": "build",
-      "command": "npm build"
+      "name": "build app",
+      "command": "yarn build"
     },
     "test": {
       "name": "test",
