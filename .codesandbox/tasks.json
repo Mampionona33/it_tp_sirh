@@ -46,9 +46,9 @@
       "name": "eject",
       "command": "npm eject"
     },
-    "start": {
-      "name": "start",
-      "command": "yarn start",
+    "serve-builded-app": {
+      "name": "serve-builded-app",
+      "command": "node build/index.js",
       "runAtStart": true,
       "preview": {
         "port": 3000
