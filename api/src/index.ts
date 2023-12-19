@@ -6,6 +6,7 @@ import CotisationController from '@controllers/CotisationControllers'
 import EmployeurControllers from '@controllers/EmployeurControllers'
 import SalaierControllers from '@controllers/SalariesControllers'
 import HeuresControllers from '@controllers/HeuresControllers'
+import CategorieEmployeControllers from '@controllers/CategorieEmployeControllers'
 const cors = require('cors')
 
 const app = express()
@@ -27,6 +28,7 @@ const cotisationController = new CotisationController(db)
 const employeurController = new EmployeurControllers(db)
 const salarieController = new SalaierControllers(db)
 const heuresController = new HeuresControllers(db)
+const categorieEmployeController = new CategorieEmployeControllers(db)
 
 router.route('/login').post(authController.login)
 router.route('/mouvement-salaire').get(mouvementSalaireController.getAll)
@@ -34,6 +36,7 @@ router.route('/cotisations/all').get(cotisationController.getAll)
 router.route('/employeurs').get(employeurController.getAll)
 router.route('/personnels').get(salarieController.getAll)
 router.route('/heuressupplementaires').post(heuresController.getOne)
+router.route('/categorie-employe').get(categorieEmployeController.getAll)
 
 const PORT = process.env.PORT || 8000
 

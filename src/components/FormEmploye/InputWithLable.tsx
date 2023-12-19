@@ -1,14 +1,18 @@
 import React, { ChangeEvent } from 'react'
+import Select from 'react-select'
 
 export interface IInputWithLabelProps {
   label: string
   name: string
   type: string
-  required: boolean
+  required?: boolean
   value: any
   index?: number
-  options?: { label: string; value: string }[] | { label: number; value: string }[]
-  onChange: (event: ChangeEvent<HTMLInputElement>, index?: number) => void
+  options?:
+    | { label: string; value: string }[]
+    | { label: string; value: string }[]
+    | { label: number; value: string }[]
+  onChange: (value: any, index?: number) => void
 }
 
 const InputWithLabel: React.FC<IInputWithLabelProps> = ({
@@ -23,7 +27,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
 }) => {
   return (
     <div className="flex flex-col mb-2">
-      {type !== 'radio' && (
+      {type !== 'radio' && type !== 'select' && (
         <label htmlFor={name}>
           {label} {required ? '*' : ''}
         </label>
@@ -50,6 +54,15 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
             </div>
           ))}
         </fieldset>
+      ) : type === 'select' && options ? (
+        // Render a select dropdown using react-select
+        <Select
+          options={options as { label: string; value: string }[]}
+          value={options.find((opt: { label: string; value: string }) => opt.value === value)}
+          onChange={(selectedOption: { label: string; value: string } | undefined) =>
+            onChange(selectedOption ? selectedOption.value : '', index)
+          }
+        />
       ) : (
         // Render a regular input for other types
         <input
@@ -57,7 +70,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           name={name}
           id={name}
           value={value}
-          onChange={(event) => onChange(event, index)}
+          onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
           className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
           required={required}
         />

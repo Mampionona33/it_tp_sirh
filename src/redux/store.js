@@ -14,6 +14,7 @@ import authReducer from 'src/redux/user/authReducer'
 import notificationStackReducer from './notificationStack/notificationStackReducer'
 import dnsReducers from './dns/dnsReducers'
 import employeurReducer from './employeur/employeurReducer'
+import categorieEmployeReducer from './categorieEmploye/CategorieEmployeReducer'
 
 const persistConfig = {
   key: 'root',
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   notification: notificationStackReducer,
   dns: dnsReducers,
   employeur: employeurReducer,
+  cateogieEmploye: categorieEmployeReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

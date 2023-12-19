@@ -5,6 +5,7 @@ import { fetcheEmpoyeur } from '../redux/employeur/employeurAction'
 import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
 import { fetchAllCotisations } from 'src/redux/cotisations/cotisationsActions'
 import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
+import { fetchCategorieEmployes } from '@src/redux/categorieEmploye/CategorieEmployeActions'
 
 const DefaultLayout = () => {
   const dispatch = useDispatch()
@@ -22,6 +23,7 @@ const DefaultLayout = () => {
     if (mount) {
       dispatch(fetchAllCotisations())
       dispatch(fetchAllEmployees())
+      dispatch(fetchCategorieEmployes())
     }
 
     return () => {

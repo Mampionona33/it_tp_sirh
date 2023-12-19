@@ -1,10 +1,11 @@
 import Page404 from '@src/views/pages/page404/Page404'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { useLocation, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import MainHeader from './MainHeader'
 import InfoPersoEmploye from './InfoPersoEmploye'
 import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
+import InfoPro from './InfoPro'
 
 const FormEmploye = () => {
   const { id } = useParams()
@@ -13,9 +14,6 @@ const FormEmploye = () => {
   const isSalarieExist = () => {
     return listSalarie.some((salarie) => salarie.id.toString() === id)
   }
-
-  console.log(id)
-  console.log(listSalarie)
 
   return (
     <>
@@ -26,6 +24,7 @@ const FormEmploye = () => {
               <MainHeader />
               <InfoPersoEmploye />
               <InfoPersoEnfantEmploye />
+              <InfoPro />
             </div>
           </>
         ) : (
