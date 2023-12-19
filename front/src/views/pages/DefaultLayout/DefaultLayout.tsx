@@ -1,9 +1,9 @@
 import React from 'react'
 
 const DefaultLayout: React.FC = () => {
-  return(
+  return (
     <>
-    <div>DefaultLayout</div>
+      <div>DefaultLayout</div>
     </>
   )
 }

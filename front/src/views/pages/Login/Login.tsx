@@ -1,9 +1,9 @@
 import React from 'react'
 
 const Login: React.FC = () => {
-  return(
+  return (
     <>
-    <div>Login</div>
+      <div>Login</div>
     </>
   )
 }
