@@ -13,7 +13,7 @@
 
   // These tasks can be run from CodeSandbox. Running one will open a log in the app.
   "tasks": {
-    "start-app-dev": {
+    "start": {
       "name": "start",
       "command": "yarn start",
       "runAtStart": true,
@@ -34,7 +34,7 @@
         "port": 8000
       }
     },
-    "build": {
+    "build-app": {
       "name": "build app",
       "command": "yarn build"
     },
