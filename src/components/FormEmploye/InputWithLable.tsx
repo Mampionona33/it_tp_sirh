@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import Select from 'react-select'
+import Select, { StylesConfig } from 'react-select'
 
 export interface IInputWithLabelProps {
   label: string
@@ -26,17 +26,22 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   index,
 }) => {
   const customSelectStyles = {
-    control: (provided, state) => ({
+    control: (provided) => ({
       ...provided,
-      borderColor: state.isFocused ? '#da200d' : '',
-      boxShadow: state.isFocused ? '0 0 0 0.25rem #e7b7b4' : null,
-      borderRadius: 0,
+      adding: 1,
+      height: 28,
+      padding: '1 2px',
+      minHeight: 28,
+    }),
+    valueContainer: (base) => ({
+      ...base,
+      minHeight: 28,
     }),
 
-    container: (provided) => ({
-      ...provided,
-      height: '28px',
-    }),
+    // container: (provided) => ({
+    //   ...provided,
+    //   height: '28px',
+    // }),
     // menu: (provided, state) => ({
     //   ...provided,
     //   width: "100%",
@@ -91,6 +96,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
             onChange={(selectedOption: { label: string; value: string } | undefined) =>
               onChange(selectedOption ? selectedOption.value : '', index)
             }
+            styles={customSelectStyles}
             theme={(theme) => ({
               ...theme,
               borderRadius: 0,
