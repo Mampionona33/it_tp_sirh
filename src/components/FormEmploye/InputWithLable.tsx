@@ -81,7 +81,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
         </fieldset>
       ) : type === 'select' && options ? (
         // Render a select dropdown using react-select
-        <div>
+        <div className="flex flex-col mb-2">
           <label htmlFor={name}>{label}</label>
           <Select
             aria-label={label}
