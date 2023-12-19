@@ -47,7 +47,7 @@ const InfoPro = () => {
       onChange: handleInputChange,
     },
   ]
-
+  // change
   return (
     <div>
       <h1 className="text-lg text-customRed-930 uppercase m-3">
