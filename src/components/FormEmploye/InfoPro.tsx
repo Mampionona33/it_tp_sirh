@@ -9,7 +9,10 @@ const InfoPro = () => {
     matricule: '',
     cat: '',
   })
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const { name, value } = event.target ?? { name: '', value: '' }
     setFormData((prevData) => ({
       ...prevData,
@@ -47,7 +50,9 @@ const InfoPro = () => {
 
   return (
     <div>
-      <h1 className="text-lg text-customRed-930 uppercase m-3">Informations professionnelles</h1>
+      <h1 className="text-lg text-customRed-930 uppercase m-3">
+        Informations professionnelles
+      </h1>
       <div className="flex bg-customRed-25 mt-2 shadow-md">
         <div className="grid grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
           {inputs.map((input, index) => (
