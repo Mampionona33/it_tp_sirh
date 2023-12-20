@@ -2,12 +2,13 @@ import React, { useMemo } from 'react'
 import { createColumnHelper, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import CustomPagination from '../CustomPagination'
 import { IDataTableEmploye } from './interfaceDataTableEmploy'
+import TableHead from './TableHead'
 
 interface ActionComponentProps {
   rowId: any
 }
 
-const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data }) => {
+const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, headerComponents }) => {
   const columnHelper = createColumnHelper()
 
   const columns = useMemo(
@@ -88,9 +89,10 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data }) => {
 
   return (
     <>
+      {tableTitle && <TableHead title={tableTitle}>{headerComponents}</TableHead>}
       <div className="overflow-x-auto w-full">
         <table className="w-full table-auto ">
-          <thead className="text-sm uppercase text-gray-700 dark:text-gray-400 bg-stone-200">
+          <thead className="text-sm uppercase  bg-customRed-100">
             {headerGroups.length > 0 &&
               headerGroups.map((headerGroup, key) => (
                 <React.Fragment key={`headerGroup_${key}`}>

@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { Children } from 'react'
 import DataTableEmploye from '@components/TableListeEmploye/DataTableEmploye'
 import { useSelector } from 'react-redux'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
+import ButtonWithIcon from '@components/ButtonWithIcon'
+import TableHead from './TableHead'
+import { PlusIcon } from '@heroicons/react/24/outline'
 
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
@@ -9,6 +12,7 @@ interface IDataWithActions extends IEmploye {
 
 function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
   const data = useSelector((state: any) => state.employeesList.list)
+
   /**
    * Pour assurer la stabilité des données dans la table,
    * il est nécessaire d'isoler les données à envoyer en les formatant
@@ -28,7 +32,11 @@ function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
 
   return (
     <div>
-      <DataTableEmploye data={formattedData} />
+      <DataTableEmploye
+        data={formattedData}
+        tableTitle="Liste des employés"
+        headerComponents={<ButtonWithIcon label="Ajouter" />}
+      />
     </div>
   )
 }
