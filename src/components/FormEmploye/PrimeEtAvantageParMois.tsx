@@ -10,8 +10,19 @@ interface PrimeEtAvantageItem {
 }
 
 const RowTablePrimeEtAvantage: React.FC<{ rowIndex: number }> = ({ rowIndex }) => {
+  const [rowState, setRowState] = useState<PrimeEtAvantageItem>({
+    id: rowIndex + 1,
+    nature: false,
+    libelle: '',
+    montant: 0,
+  })
   const setBackroundColor = () => {
     return rowIndex % 2 === 0 ? 'bg-white' : 'bg-customRed-25'
+  }
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    setRowState((prevState) => ({ ...prevState, [name]: value }))
   }
 
   return (
@@ -28,7 +39,9 @@ const RowTablePrimeEtAvantage: React.FC<{ rowIndex: number }> = ({ rowIndex }) =
             name="libelle"
             id="libelle"
             required
-            className="w-full border border-customRed-50 focus:outline-customRed-100 focus:rounded-none px-2"
+            value={rowState.libelle}
+            onChange={handleInputChange}
+            className="w-full border border-customRed-50 text-current focus:outline-customRed-100 focus:rounded-none px-2"
           />
         </div>
       </td>
@@ -40,6 +53,8 @@ const RowTablePrimeEtAvantage: React.FC<{ rowIndex: number }> = ({ rowIndex }) =
             name="montant"
             id="montant"
             required
+            value={rowState.montant}
+            onChange={handleInputChange}
             className="w-full border border-customRed-50 focus:outline-customRed-100 focus:rounded-none px-2"
           />
         </div>
@@ -79,9 +94,9 @@ const TablePrimeEtAvantage: React.FC = () => {
           {`Aucune prime ou avantage n'a encore été ajouté`}
         </div>
       ) : (
-        <table className="table-auto w-full bg-customRed-200 text-white py-3">
+        <table className="table-auto w-full bg-customRed-200 py-3">
           <thead>
-            <tr>
+            <tr className="text-white">
               <th className="text-center">Nature</th>
               <th>Libellé</th>
               <th>Montant</th>
