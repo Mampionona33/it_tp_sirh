@@ -171,9 +171,6 @@ const InfoPersoEnfantEmploye: React.FC = () => {
   }
   const handleCloseEnfant = (index: number) => {
     setFormData((prevData) => {
-      console.log(index)
-      console.log(prevData)
-
       const updatedEnfants = [...prevData.enfants]
       updatedEnfants.splice(index, 1)
 
@@ -186,7 +183,7 @@ const InfoPersoEnfantEmploye: React.FC = () => {
 
   return (
     <>
-      <div className="flex mt-4 flex-col">
+      <div className="flex mt-4 gap-y-2 flex-col">
         <div className="pl-5">
           <button className="group " onClick={addEnfant}>
             <span className="py-2 px-2.5 group-hover:shadow-lg group-hover:bg-customRed-930  justify-between uppercase bg-customRed-900 text-white flex items-center">

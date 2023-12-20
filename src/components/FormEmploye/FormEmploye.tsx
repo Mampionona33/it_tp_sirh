@@ -6,6 +6,7 @@ import MainHeader from './MainHeader'
 import InfoPersoEmploye from './InfoPersoEmploye'
 import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
 import InfoPro from './InfoPro'
+import InformationPaie from './InformationPaie'
 
 const FormEmploye = () => {
   const { id } = useParams()
@@ -25,6 +26,7 @@ const FormEmploye = () => {
               <InfoPersoEmploye />
               <InfoPersoEnfantEmploye />
               <InfoPro />
+              <InformationPaie />
             </div>
           </>
         ) : (
