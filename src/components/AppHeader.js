@@ -26,8 +26,8 @@ const AppHeader = () => {
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
   return (
-    <CHeader position="sticky" className="mb-4">
-      <CContainer fluid>
+    <CHeader position="sticky" className="mb-2 py-1">
+      <div className="w-full flex flex-row ">
         <CHeaderToggler
           className="ps-1"
           // onClick={() => dispatch({ type: 'set', sidebarShow: !sidebarShow })}
@@ -81,8 +81,8 @@ const AppHeader = () => {
         <CHeaderNav className="ms-3">
           <AppHeaderDropdown />
         </CHeaderNav>
-      </CContainer>
-      <CHeaderDivider />
+      </div>
+      <CHeaderDivider className="my-1 py-1" />
       <CContainer fluid>
         <AppBreadcrumb />
       </CContainer>
