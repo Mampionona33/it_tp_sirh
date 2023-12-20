@@ -6,8 +6,12 @@ const FormEmployeGroupButton = () => {
     <>
       <div className="flex flex-row justify-end m-4 gap-3">
         <ButtonWithIcon label="Annuler" variant={ButtonWithIconVariant.Tertiary} />
-        <ButtonWithIcon label="Recommencer" variant={ButtonWithIconVariant.Secondary} />
-        <ButtonWithIcon label="Enregistrer" />
+        <ButtonWithIcon
+          type="reset"
+          label="Recommencer"
+          variant={ButtonWithIconVariant.Secondary}
+        />
+        <ButtonWithIcon type="submit" label="Enregistrer" />
       </div>
     </>
   )

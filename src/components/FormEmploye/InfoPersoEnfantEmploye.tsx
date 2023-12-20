@@ -160,7 +160,8 @@ const InfoPersoEnfantEmploye: React.FC = () => {
     })),
   })
 
-  const addEnfant = () => {
+  const addEnfant = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
     setNombreEnfant((prevNombreEnfant) => prevNombreEnfant + 1)
     setFormData((prevData) => ({
       ...prevData,
@@ -187,6 +188,7 @@ const InfoPersoEnfantEmploye: React.FC = () => {
       <div className="flex mt-4 gap-y-2 flex-col">
         <div className="pl-5">
           <ButtonWithIcon
+            type="button"
             label="Ajouter un enfant"
             icon={<PlusIcon width={20} height={20} />}
             onClick={addEnfant}

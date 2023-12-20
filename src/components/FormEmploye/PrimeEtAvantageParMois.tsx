@@ -25,6 +25,10 @@ const RowTablePrimeEtAvantage: React.FC<{ rowIndex: number }> = ({ rowIndex }) =
     setRowState((prevState) => ({ ...prevState, [name]: value }))
   }
 
+  const handleClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+  }
+
   return (
     <tr className={`${setBackroundColor()} my-4 border-b`}>
       <td>
@@ -60,7 +64,11 @@ const RowTablePrimeEtAvantage: React.FC<{ rowIndex: number }> = ({ rowIndex }) =
         </div>
       </td>
       <td className="text-center">
-        <ButtonWithIcon icon={<TrashIcon width={20} height={20} />} />
+        <ButtonWithIcon
+          type="button"
+          icon={<TrashIcon width={20} height={20} />}
+          onClick={handleClickDelete}
+        />
       </td>
     </tr>
   )
@@ -69,7 +77,8 @@ const RowTablePrimeEtAvantage: React.FC<{ rowIndex: number }> = ({ rowIndex }) =
 const TablePrimeEtAvantage: React.FC = () => {
   const [primeEtAvantage, setPrimeEtAvantage] = useState<PrimeEtAvantageItem[]>([])
 
-  const addPrimeEtAvantage = () => {
+  const addPrimeEtAvantage = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
     const newPrimeEtAvantageItem: PrimeEtAvantageItem = {
       id: primeEtAvantage.length + 1,
       nature: false,
@@ -84,6 +93,7 @@ const TablePrimeEtAvantage: React.FC = () => {
     <>
       <div className="ml-4 mb-4">
         <ButtonWithIcon
+          type="button"
           label="Ajouter Prime et avantage (mois)"
           icon={<PlusIcon width={20} height={20} />}
           onClick={addPrimeEtAvantage}
@@ -96,7 +106,7 @@ const TablePrimeEtAvantage: React.FC = () => {
       ) : (
         <table className="table-auto w-full bg-customRed-200 py-3">
           <thead>
-            <tr className="text-white">
+            <tr className="text-white py-2">
               <th className="text-center">Nature</th>
               <th>Libellé</th>
               <th>Montant</th>

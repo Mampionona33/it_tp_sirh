@@ -18,20 +18,27 @@ const FormEmploye = () => {
     return listSalarie.some((salarie) => salarie.id.toString() === id)
   }
 
+  const handleSubmit = (ev: React.FormEvent) => {
+    ev.preventDefault()
+    console.log(ev.target)
+  }
+
   return (
     <>
       <div>
         {isSalarieExist() ? (
           <>
-            <div className="bg-white flex flex-col py-11">
-              <MainHeader />
-              <InfoPersoEmploye />
-              <InfoPersoEnfantEmploye />
-              <InfoPro />
-              <InformationPaie />
-              <PrimeEtAvantageParMois />
-              <FormEmployeGroupButton />
-            </div>
+            <form action="" onSubmit={handleSubmit}>
+              <div className="bg-white flex flex-col py-11">
+                <MainHeader />
+                <InfoPersoEmploye />
+                <InfoPersoEnfantEmploye />
+                <InfoPro />
+                <InformationPaie />
+                <PrimeEtAvantageParMois />
+                <FormEmployeGroupButton />
+              </div>
+            </form>
           </>
         ) : (
           <Page404 />
