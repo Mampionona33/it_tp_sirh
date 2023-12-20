@@ -17,6 +17,7 @@ const InformationPaie = () => {
       name: 'salaire_de_base',
       type: 'number',
       required: true,
+      min: 0,
     },
     {
       label: 'RIB',

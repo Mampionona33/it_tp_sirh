@@ -8,6 +8,8 @@ export interface IInputWithLabelProps {
   required?: boolean
   value?: any
   index?: number
+  min?: number
+  max?: number
   options?: IInputWithLabelOptionsProps[]
   onChange?: (value: any, index?: number) => void
 }
@@ -26,6 +28,8 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   onChange,
   options,
   index,
+  min,
+  max,
 }) => {
   const customSelectStyles = {
     control: (provided) => ({
@@ -118,6 +122,8 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           name={name}
           id={name}
           value={value}
+          min={min}
+          max={max}
           onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
           className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
           required={required}

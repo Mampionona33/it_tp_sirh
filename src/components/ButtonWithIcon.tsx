@@ -38,8 +38,8 @@ const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({
       <span
         className={`py-2 px-2.5 ${variantClass} group-hover:shadow-lg gap-1 justify-between uppercase  text-white flex items-center`}
       >
-        {icon}
-        <span>{label}</span>
+        {icon ? icon : null}
+        {label ? <span>{label}</span> : null}
       </span>
     </button>
   )
