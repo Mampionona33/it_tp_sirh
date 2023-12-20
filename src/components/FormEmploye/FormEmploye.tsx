@@ -7,6 +7,7 @@ import InfoPersoEmploye from './InfoPersoEmploye'
 import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
 import InfoPro from './InfoPro'
 import InformationPaie from './InformationPaie'
+import PrimeEtAvantageParMois from './PrimeEtAvantageParMois'
 
 const FormEmploye = () => {
   const { id } = useParams()
@@ -27,6 +28,7 @@ const FormEmploye = () => {
               <InfoPersoEnfantEmploye />
               <InfoPro />
               <InformationPaie />
+              <PrimeEtAvantageParMois/>
             </div>
           </>
         ) : (
