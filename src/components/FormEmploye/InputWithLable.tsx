@@ -102,8 +102,8 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
               height: 28,
               colors: {
                 ...theme.colors,
-                primary25: '#FA8181',
-                primary: '#D6111E',
+                primary25: '#FFF2F2',
+                primary: '#FEBABA',
               },
             })}
           />
