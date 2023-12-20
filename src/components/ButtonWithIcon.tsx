@@ -6,7 +6,7 @@ interface ButtonWithIconProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
   variant?: ButtonWithIconVariant
 }
 
-enum ButtonWithIconVariant {
+export enum ButtonWithIconVariant {
   Primary = 'primary',
   Secondary = 'secondary',
   Tertiary = 'tertiary',
@@ -15,11 +15,11 @@ enum ButtonWithIconVariant {
 const getVariantClass = (variant?: ButtonWithIconVariant): string => {
   switch (variant) {
     case ButtonWithIconVariant.Primary:
-      return 'group-hover:bg-customRed-930 bg-customRed-900'
+      return 'group-hover:bg-customRed-930 bg-customRed-900 text-white'
     case ButtonWithIconVariant.Secondary:
-      return 'bg-gray-500 text-white'
+      return 'group-hover:bg-customRed-50 bg-customRed-25 text-customRed-900 border-1 border-customRed-900'
     case ButtonWithIconVariant.Tertiary:
-      return 'bg-green-500 text-white'
+      return 'group-hover:bg-zinc-400 group-hover:text-white bg-slate-300 text-customRed-900 border-1 border-customRed-900'
     default:
       return 'bg-blue-500 text-white'
   }
@@ -36,7 +36,7 @@ const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({
   return (
     <button {...props} className={`group`}>
       <span
-        className={`py-2 px-2.5 ${variantClass} group-hover:shadow-lg gap-1 justify-between uppercase  text-white flex items-center`}
+        className={`py-2 px-2.5 ${variantClass} border-collapse    group-hover:shadow-lg gap-1 justify-between uppercase flex items-center`}
       >
         {icon ? icon : null}
         {label ? <span>{label}</span> : null}
