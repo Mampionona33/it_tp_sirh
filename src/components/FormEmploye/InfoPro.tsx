@@ -1,5 +1,5 @@
 import React from 'react'
-import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
+import InputWithLabel, { IInputWithLabelProps, IInputWithLabelOptionsProps } from './InputWithLable'
 import { useSelector } from 'react-redux'
 
 const InfoPro = () => {
@@ -8,14 +8,26 @@ const InfoPro = () => {
     titre_poste: '',
     matricule: '',
     cat: '',
+    departement: '',
+    date_embauche: '',
+    lieu_travail: '',
+    cadre: 0,
+    travail_de_nuit: 0,
   })
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { name, value } = event.target ?? { name: '', value: '' }
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
+    setFormData((prevData) => {
+      return {
+        ...prevData,
+        [name]: name === 'cadre' || name === 'travail_de_nuit' ? parseInt(value) : value,
+      }
+    })
   }
+
+  const radioOption: IInputWithLabelOptionsProps[] = [
+    { label: 'Oui', value: 1 },
+    { label: 'Non', value: 0 },
+  ]
 
   const inputs: IInputWithLabelProps[] = [
     {
@@ -43,8 +55,50 @@ const InfoPro = () => {
       options: catOptions,
       onChange: handleInputChange,
     },
+    {
+      label: 'Département',
+      name: 'departement',
+      value: formData.departement,
+      type: 'text',
+      required: true,
+      onChange: handleInputChange,
+    },
+    {
+      label: "Date d'embauche",
+      name: 'date_embauche',
+      value: formData.date_embauche,
+      type: 'date',
+      required: true,
+      onChange: handleInputChange,
+    },
+    {
+      label: 'Lieu de travail',
+      name: 'lieu_travail',
+      value: formData.lieu_travail,
+      type: 'text',
+      required: true,
+      onChange: handleInputChange,
+    },
+    {
+      label: 'Est un cadre',
+      name: 'cadre',
+      value: formData.cadre,
+      type: 'radio',
+      required: true,
+      options: radioOption,
+      onChange: (value: any) => handleInputChange(value, 0),
+    },
+    {
+      label: 'Travail de nuit',
+      name: 'travail_de_nuit',
+      value: formData.travail_de_nuit,
+      type: 'radio',
+      required: true,
+      options: radioOption,
+      onChange: (value: any) => handleInputChange(value, 0),
+    },
   ]
-  // change
+
   return (
     <div>
       <h1 className="text-lg text-customRed-930 uppercase m-3">Informations professionnelles</h1>

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
+import InputWithLabel, { IInputWithLabelOptionsProps, IInputWithLabelProps } from './InputWithLable'
 
 function InfoPersoEmploye() {
   const [formData, setFormData] = React.useState({
@@ -20,7 +20,7 @@ function InfoPersoEmploye() {
     }))
   }
 
-  const genreOptions = [
+  const genreOptions: IInputWithLabelOptionsProps[] = [
     { label: 'Homme', value: 'homme' },
     { label: 'Femme', value: 'Femme' },
   ]

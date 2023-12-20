@@ -8,11 +8,13 @@ export interface IInputWithLabelProps {
   required?: boolean
   value?: any
   index?: number
-  options?:
-    | { label: string; value: string }[]
-    | { label: string; value: string }[]
-    | { label: number; value: string }[]
+  options?: IInputWithLabelOptionsProps[]
   onChange?: (value: any, index?: number) => void
+}
+
+export interface IInputWithLabelOptionsProps {
+  label: string | number
+  value: string | number
 }
 
 const InputWithLabel: React.FC<IInputWithLabelProps> = ({
@@ -66,8 +68,8 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
         <fieldset>
           <legend className="text-base">{label}</legend>
           {options.map((option, index) => (
-            <div key={index} className="grid grid-cols-4">
-              <div className="text-center">
+            <div key={index} className="flex items-center">
+              <div className="text-center mr-2">
                 <input
                   type="radio"
                   id={`${name}_${index}`}
@@ -77,19 +79,20 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
                   onChange={(event) => onChange(event, index)}
                 />
               </div>
-              <label htmlFor={`${name}_${index}`} className="ml-1 col-span-3">
-                {option.label}
-              </label>
+              <label htmlFor={`${name}_${index}`}>{option.label}</label>
             </div>
           ))}
         </fieldset>
       ) : type === 'select' && options ? (
         // Render a select dropdown using react-select
         <div className="flex flex-col mb-2">
-          <label htmlFor={name}>{label}</label>
+          <label htmlFor={name}>
+            {label} {required ? '*' : ''}
+          </label>
           <Select
             aria-label={label}
             name={name}
+            required={required}
             options={options as { label: string; value: string }[]}
             value={options.find((opt: { label: string; value: string }) => opt.value === value)}
             onChange={(selectedOption: { label: string; value: string } | undefined) =>
