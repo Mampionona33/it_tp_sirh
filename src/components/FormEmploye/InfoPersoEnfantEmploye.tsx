@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
+import ButtonWithIcon from '../ButtonWithIcon'
 
 interface IFormEnfant {
   nom: string
@@ -185,12 +186,11 @@ const InfoPersoEnfantEmploye: React.FC = () => {
     <>
       <div className="flex mt-4 gap-y-2 flex-col">
         <div className="pl-5">
-          <button className="group " onClick={addEnfant}>
-            <span className="py-2 px-2.5 group-hover:shadow-lg group-hover:bg-customRed-930  justify-between uppercase bg-customRed-900 text-white flex items-center">
-              <PlusIcon width={20} height={20} />
-              <span>Ajouter un enfant</span>
-            </span>
-          </button>
+          <ButtonWithIcon
+            label="Ajouter un enfant"
+            icon={<PlusIcon width={20} height={20} />}
+            onClick={addEnfant}
+          />
         </div>
         {nombreEnfant > 0 && (
           <>
