@@ -28,7 +28,7 @@ const FormEmploye = () => {
               <InfoPersoEnfantEmploye />
               <InfoPro />
               <InformationPaie />
-              <PrimeEtAvantageParMois/>
+              <PrimeEtAvantageParMois />
             </div>
           </>
         ) : (

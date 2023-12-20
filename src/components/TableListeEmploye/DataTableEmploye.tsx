@@ -150,7 +150,7 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data }) => {
               ))
             ) : (
               <tr>
-                <td colSpan={headerGroups.length} className="text-lg font-medium p-4">
+                <td colSpan={headerGroups.length} className="text-lg font-medium p-4 bg-white">
                   Aucune donnée trouvée
                 </td>
               </tr>
