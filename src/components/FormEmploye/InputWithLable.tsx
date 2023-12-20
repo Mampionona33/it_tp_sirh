@@ -28,31 +28,30 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   const customSelectStyles = {
     control: (provided) => ({
       ...provided,
-      adding: 1,
       height: 28,
-      padding: '1 2px',
       minHeight: 28,
     }),
-    valueContainer: (base) => ({
-      ...base,
-      minHeight: 28,
-    }),
-
-    // container: (provided) => ({
-    //   ...provided,
-    //   height: '28px',
-    // }),
-    // menu: (provided, state) => ({
-    //   ...provided,
-    //   width: "100%",
-    // }),
-    // option: (provided, state) => ({
-    //   ...provided,
-    //   backgroundColor: state.isSelected ? "#da200d" : "inherit",
-    //   ":hover": {
-    //     backgroundColor: "#e7b7b4",
-    //   },
-    // }),
+    valueContainer: (style) => {
+      return {
+        ...style,
+        height: 28,
+        minHeight: 28,
+      }
+    },
+    input: (style) => {
+      return {
+        ...style,
+        height: 26,
+        minHeight: 26,
+      }
+    },
+    indicatorsContainer: (style) => {
+      return {
+        ...style,
+        height: 28,
+        minHeight: 28,
+      }
+    },
   }
 
   return (
