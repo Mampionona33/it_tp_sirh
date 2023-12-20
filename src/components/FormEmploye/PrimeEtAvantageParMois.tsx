@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, MouseEvent, ChangeEvent } from 'react'
 import ButtonWithIcon from '../ButtonWithIcon'
 import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline'
 
@@ -9,31 +9,49 @@ interface PrimeEtAvantageItem {
   montant: number
 }
 
-const RowTablePrimeEtAvantage: React.FC<{ rowIndex: number }> = ({ rowIndex }) => {
+interface RowTablePrimeEtAvantageProps {
+  rowIndex: number
+  onInputChange: (index: number, field: string, value: string | number | boolean) => void
+  onRemove: (index: number) => void
+}
+
+const RowTablePrimeEtAvantage: React.FC<RowTablePrimeEtAvantageProps> = ({
+  rowIndex,
+  onInputChange,
+  onRemove,
+}) => {
   const [rowState, setRowState] = useState<PrimeEtAvantageItem>({
     id: rowIndex + 1,
     nature: false,
     libelle: '',
     montant: 0,
   })
+
   const setBackroundColor = () => {
     return rowIndex % 2 === 0 ? 'bg-white' : 'bg-customRed-25'
   }
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setRowState((prevState) => ({ ...prevState, [name]: value }))
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = event.target
+
+    setRowState((prevState) => ({
+      ...prevState,
+      [name]: type === 'checkbox' ? checked : value,
+    }))
+
+    onInputChange(rowIndex, name, type === 'checkbox' ? checked : value)
   }
 
-  const handleClickDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClickDelete = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
+    onRemove(rowIndex)
   }
 
   return (
     <tr className={`${setBackroundColor()} my-4 border-b`}>
       <td>
         <div className="flex items-center justify-center">
-          <input type="checkbox" name="nature" id="nature" className="border" />
+          <input type="checkbox" name="nature" id={`nature-${rowIndex}`} className="border" />
         </div>
       </td>
       <td>
@@ -41,7 +59,7 @@ const RowTablePrimeEtAvantage: React.FC<{ rowIndex: number }> = ({ rowIndex }) =
           <input
             type="text"
             name="libelle"
-            id="libelle"
+            id={`libelle-${rowIndex}`}
             required
             value={rowState.libelle}
             onChange={handleInputChange}
@@ -55,7 +73,7 @@ const RowTablePrimeEtAvantage: React.FC<{ rowIndex: number }> = ({ rowIndex }) =
             type="number"
             min={0}
             name="montant"
-            id="montant"
+            id={`montant-${rowIndex}`}
             required
             value={rowState.montant}
             onChange={handleInputChange}
@@ -77,8 +95,7 @@ const RowTablePrimeEtAvantage: React.FC<{ rowIndex: number }> = ({ rowIndex }) =
 const TablePrimeEtAvantage: React.FC = () => {
   const [primeEtAvantage, setPrimeEtAvantage] = useState<PrimeEtAvantageItem[]>([])
 
-  const addPrimeEtAvantage = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
+  const addPrimeEtAvantage = () => {
     const newPrimeEtAvantageItem: PrimeEtAvantageItem = {
       id: primeEtAvantage.length + 1,
       nature: false,
@@ -87,6 +104,20 @@ const TablePrimeEtAvantage: React.FC = () => {
     }
 
     setPrimeEtAvantage([...primeEtAvantage, newPrimeEtAvantageItem])
+  }
+
+  const removePrimeEtAvantage = (index: number) => {
+    const updatedPrimeEtAvantage = [...primeEtAvantage]
+    updatedPrimeEtAvantage.splice(index, 1)
+    setPrimeEtAvantage(updatedPrimeEtAvantage)
+  }
+
+  const handleInputChange = (index: number, field: string, value: string | number | boolean) => {
+    const updatedPrimeEtAvantage = primeEtAvantage.map((item, i) =>
+      i === index ? { ...item, [field]: value } : item,
+    )
+
+    setPrimeEtAvantage(updatedPrimeEtAvantage)
   }
 
   return (
@@ -115,7 +146,12 @@ const TablePrimeEtAvantage: React.FC = () => {
           </thead>
           <tbody>
             {primeEtAvantage.map((item, index) => (
-              <RowTablePrimeEtAvantage key={item.id} rowIndex={index} />
+              <RowTablePrimeEtAvantage
+                key={item.id}
+                rowIndex={index}
+                onInputChange={handleInputChange}
+                onRemove={removePrimeEtAvantage}
+              />
             ))}
           </tbody>
         </table>
