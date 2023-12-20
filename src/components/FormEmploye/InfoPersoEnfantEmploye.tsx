@@ -63,6 +63,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             id={`nom_${index}`}
             value={formData[`nom_${index}`]}
             onChange={handleInputChange}
+            placeholder="Nom de l'enfant"
             required
             className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
           />
@@ -77,6 +78,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             value={formData[`prenom_${index}`]}
             onChange={handleInputChange}
             required
+            placeholder="Prénom de l'enfant"
             className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
           />
         </div>
@@ -103,6 +105,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             value={formData[`lieu_naissance_${index}`]}
             onChange={handleInputChange}
             required
+            placeholder="Toamasina..."
             className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
           />
         </div>

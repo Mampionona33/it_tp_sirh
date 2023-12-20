@@ -29,8 +29,8 @@ const FormEmploye = () => {
       <div>
         {isSalarieExist() ? (
           <>
-            <form action="" onSubmit={handleSubmit}>
-              <div className="bg-white flex flex-col py-11">
+            <div className="bg-white flex flex-col py-11">
+              <form action="" onSubmit={handleSubmit}>
                 <MainHeader />
                 <InfoPersoEmploye />
                 <InfoPersoEnfantEmploye />
@@ -38,9 +38,9 @@ const FormEmploye = () => {
                 <InformationPaie />
                 <PrimeEtAvantageParMois />
                 <FormEmployeGroupButton />
-                <FormResiliationContrat />
-              </div>
-            </form>
+              </form>
+              <FormResiliationContrat />
+            </div>
           </>
         ) : (
           <Page404 />

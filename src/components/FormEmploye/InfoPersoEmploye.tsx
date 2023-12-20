@@ -33,6 +33,7 @@ function InfoPersoEmploye() {
       type: 'text',
       value: formData.nom,
       onChange: handleInputChange,
+      placeholder: 'Nom employé',
     },
     {
       label: 'Prénom',
@@ -41,6 +42,7 @@ function InfoPersoEmploye() {
       type: 'text',
       value: formData.prenom,
       onChange: handleInputChange,
+      placeholder: 'Prénom employé',
     },
     {
       label: 'Adresse',
@@ -49,6 +51,7 @@ function InfoPersoEmploye() {
       type: 'text',
       value: formData.adresse,
       onChange: handleInputChange,
+      placeholder: 'Toamasina ...',
     },
     {
       label: 'Date de naissance',
@@ -65,6 +68,7 @@ function InfoPersoEmploye() {
       type: 'text',
       value: formData.lieu_naissance,
       onChange: handleInputChange,
+      placeholder: 'Toamasina...',
     },
     {
       label: 'N° CIN',
@@ -73,6 +77,7 @@ function InfoPersoEmploye() {
       type: 'text',
       value: formData.cin,
       onChange: handleInputChange,
+      placeholder: '000.000.000.000',
     },
     {
       label: 'Genre',

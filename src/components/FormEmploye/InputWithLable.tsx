@@ -10,6 +10,7 @@ export interface IInputWithLabelProps {
   index?: number
   min?: number
   max?: number
+  placeholder?: string
   options?: IInputWithLabelOptionsProps[]
   onChange?: (value: any, index?: number) => void
 }
@@ -30,6 +31,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   index,
   min,
   max,
+  placeholder,
 }) => {
   const customSelectStyles = {
     control: (provided) => ({
@@ -75,6 +77,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
             <div key={index} className="flex items-center">
               <div className="text-center mr-2">
                 <input
+                  placeholder={placeholder}
                   type="radio"
                   id={`${name}_${index}`}
                   name={name}
@@ -95,6 +98,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           </label>
           <Select
             aria-label={label}
+            placeholder={placeholder}
             name={name}
             required={required}
             options={options as { label: string; value: string }[]}
@@ -124,6 +128,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           value={value}
           min={min}
           max={max}
+          placeholder={placeholder}
           onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
           className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
           required={required}

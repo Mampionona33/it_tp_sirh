@@ -36,6 +36,7 @@ const InfoPro = () => {
       value: formData.matricule,
       type: 'text',
       required: true,
+      placeholder: 'Matricule',
       onChange: handleInputChange,
     },
     {
@@ -44,6 +45,7 @@ const InfoPro = () => {
       value: formData.titre_poste,
       type: 'text',
       required: true,
+      placeholder: 'Directeur ...',
       onChange: handleInputChange,
     },
     {
@@ -53,6 +55,7 @@ const InfoPro = () => {
       type: 'select',
       required: true,
       options: catOptions,
+      placeholder: 'Catégorie ...',
       onChange: handleInputChange,
     },
     {
@@ -61,6 +64,7 @@ const InfoPro = () => {
       value: formData.departement,
       type: 'text',
       required: true,
+      placeholder: 'Sérvice ...',
       onChange: handleInputChange,
     },
     {
@@ -77,6 +81,7 @@ const InfoPro = () => {
       value: formData.lieu_travail,
       type: 'text',
       required: true,
+      placeholder: 'Toamasina ...',
       onChange: handleInputChange,
     },
     {

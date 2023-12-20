@@ -24,6 +24,7 @@ const InformationPaie = () => {
       value: state.rib,
       name: 'rib',
       type: 'text',
+      placeholder: 'RIB',
     },
     {
       label: 'Mode de payement',
@@ -31,6 +32,7 @@ const InformationPaie = () => {
       name: 'mode_payement_salaire',
       type: 'text',
       required: true,
+      placeholder: 'Virement bancaire...',
     },
     {
       label: "Numéros d'identification fiscale",
