@@ -1,8 +1,15 @@
 import React, { useMemo } from 'react'
-import { createColumnHelper, getCoreRowModel, useReactTable } from '@tanstack/react-table'
+import {
+  createColumnHelper,
+  getCoreRowModel,
+  getFilteredRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
 import CustomPagination from '../CustomPagination'
 import { IDataTableEmploye } from './interfaceDataTableEmploy'
 import TableHead from './TableHead'
+import { PlusIcon } from '@heroicons/react/24/outline'
+import { DebounceInput } from 'react-debounce-input'
 
 interface ActionComponentProps {
   rowId: any
@@ -10,6 +17,7 @@ interface ActionComponentProps {
 
 const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, headerComponents }) => {
   const columnHelper = createColumnHelper()
+  const [globalFilter, setGlobalFilter] = React.useState('')
 
   const columns = useMemo(
     () => [
@@ -81,7 +89,10 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
   const table = useReactTable({
     data,
     columns,
+    state: { globalFilter },
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
   })
 
   const headerGroups = table.getHeaderGroups()
@@ -89,7 +100,31 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
 
   return (
     <>
-      {tableTitle && <TableHead title={tableTitle}>{headerComponents}</TableHead>}
+      {tableTitle && (
+        <div className="w-full my-2">
+          <div className="flex gap-2 items-center">
+            <div className="flex gap-3 w-full justify-start">
+              <div>
+                <h1 className="text-lg">{tableTitle}</h1>
+              </div>
+              <div>
+                <DebounceInput
+                  value={globalFilter || ''}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    setGlobalFilter(String(value))
+                    console.log(globalFilter)
+                  }}
+                  className="p-1"
+                  placeholder="Rechercher"
+                />
+              </div>
+            </div>
+            <div className="flex justify-end w-full">{headerComponents}</div>
+          </div>
+        </div>
+      )}
+
       <div className="overflow-x-auto w-full">
         <table className="w-full table-auto ">
           <thead className="text-sm uppercase  bg-customRed-100">
@@ -134,7 +169,7 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
                 <tr
                   key={`row_${rowIndex}`}
                   className={`border-y border-customRed-100 ${
-                    rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-100'
+                    rowIndex % 2 === 0 ? 'bg-white' : 'bg-gray-200'
                   }`}
                 >
                   {row.getVisibleCells().map((cell, cellIndex) => {

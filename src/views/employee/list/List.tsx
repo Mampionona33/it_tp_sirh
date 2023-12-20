@@ -36,7 +36,7 @@ const List = () => {
   const ButtonDetail: React.FC<ButtonDetailProps> = ({ rowId }) => {
     return (
       <>
-        <Link className="btn btn-danger" to={`/employees/fiche/${rowId}`}>
+        <Link className="btn btn-danger py-1 px-1.5" to={`/employees/fiche/${rowId}`}>
           Fiche
         </Link>
       </>

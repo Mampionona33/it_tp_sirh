@@ -35,7 +35,9 @@ function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
       <DataTableEmploye
         data={formattedData}
         tableTitle="Liste des employés"
-        headerComponents={<ButtonWithIcon label="Ajouter" />}
+        headerComponents={
+          <ButtonWithIcon icon={<PlusIcon width={20} height={20} />} label="Ajouter" />
+        }
       />
     </div>
   )
