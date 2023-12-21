@@ -39,7 +39,7 @@ function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
   const HeaderComponents: React.FC = () => {
     return (
       <>
-        <Link to="/ajouter-employe">
+        <Link to="/ajouter-employe" className="bg-customRed-900 flex flex-col justify-between">
           <PlusIcon width={20} height={20} />
           <span>Ajouter</span>
         </Link>
