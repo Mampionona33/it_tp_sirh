@@ -33,7 +33,7 @@
       }
     },
 
-    "start-api": {
+    "start api": {
       "name": "start-api",
       "command": "cd api/ &&  yarn start",
       "runAtStart": true,
@@ -42,14 +42,17 @@
       }
     },
 
-    "build-api": {
+    "build api": {
       "name": "build",
       "command": "cd api/ && yarn run build"
     },
 
-    "serve app":{
+    "serve app": {
       "name": "serve app",
-      "command":"serve -s build/"
+      "command": "serve -s build/",
+      "preview": {
+        "port": 3000
+      }
     },
 
     "test": {
