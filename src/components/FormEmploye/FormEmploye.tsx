@@ -17,13 +17,14 @@ const FormEmploye = () => {
       prenom: { value: string }
       adresse: { value: string }
       lieu_naissance: { value: string }
+      date_naissance: { value: Date }
       cin: { value: string }
       genre: { value: string }
       titre_poste: { value: string }
       matricule: { value: string }
       cat: { value: string }
       departement: { value: string }
-      date_embauche: { value: string }
+      date_embauche: { value: Date }
       lieu_travail: { value: string }
       cadre: { value: string }
       travail_de_nuit: { value: string }
@@ -37,6 +38,7 @@ const FormEmploye = () => {
     const nom = target.nom.value
     const prenom = target.prenom.value
     const adresse = target.adresse.value
+    const date_naissance = target.date_naissance.value
     const lieu_naissance = target.lieu_naissance.value
     const cin = target.cin.value
     const genre = target.genre.value
@@ -59,6 +61,7 @@ const FormEmploye = () => {
       prenom,
       adresse,
       lieu_naissance,
+      date_naissance,
       cin,
       genre,
       titre_poste,
