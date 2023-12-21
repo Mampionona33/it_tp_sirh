@@ -13,7 +13,7 @@
   "license": "MIT",
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
-    "build": "craco build",
+    "build": "craco start",
     "eject": "craco eject",
     "start": "craco start",
     "lint": "eslint \"src/**/*.js\"",
