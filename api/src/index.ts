@@ -38,10 +38,12 @@ router.route('/personnels').get(salarieController.getAll)
 router.route('/heuressupplementaires').post(heuresController.getOne)
 router.route('/categorie-employe').get(categorieEmployeController.getAll)
 
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT
 
 app.use('/', router)
 
 app.listen(PORT, () => {
   console.log(`Server started at port: ${PORT}`)
 })
+
+module.exports = app
