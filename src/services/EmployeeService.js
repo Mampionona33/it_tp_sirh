@@ -24,7 +24,7 @@ class EmployeeService {
     return axios.get(`${this.REACT_APP_API_BASE_URL}/employees/id=${id}`)
   }
 
-  async addEmployee(data) {
+  async add(data) {
     try {
       const response = await axios.post(`${this.REACT_APP_API_BASE_URL}/personnels/ajout`, data, {
         auth: {
@@ -39,6 +39,6 @@ class EmployeeService {
     }
   }
 }
-const newEmployeeService = new EmployeeService()
+const employeService = new EmployeeService()
 
-export default newEmployeeService
+export default employeService

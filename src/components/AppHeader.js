@@ -45,7 +45,7 @@ const AppHeader = () => {
             </Link>
           </CNavItem>
           <CNavItem>
-            <Link to={`/employee/list`} className="btn btn-link text-decoration-none ">
+            <Link to={`/employees/list`} className="btn btn-link text-decoration-none ">
               Employés
             </Link>
           </CNavItem>
