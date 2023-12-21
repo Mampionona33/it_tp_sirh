@@ -6,6 +6,10 @@
       "command": "yarn install --legacy-peer-deps"
     },
     {
+      "name": "install serve",
+      "command": "yarn global add serve"
+    },
+    {
       "name": "install api deps",
       "command": "cd api/ && yarn install --legacy-peer-deps"
     },
@@ -41,6 +45,11 @@
     "build-api": {
       "name": "build",
       "command": "cd api/ && yarn run build"
+    },
+
+    "serve app":{
+      "name": "serve app",
+      "command":"serve -s build/"
     },
 
     "test": {
