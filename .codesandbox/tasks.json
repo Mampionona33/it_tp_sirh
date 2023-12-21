@@ -7,7 +7,7 @@
     },
     {
       "name": "install serve",
-      "command": "yarn global add serve"
+      "command": "npm install --global serve"
     },
     {
       "name": "install api deps",
