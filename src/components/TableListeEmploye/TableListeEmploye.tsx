@@ -31,20 +31,14 @@ function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
         }))
       : []
 
-  const handleClickAjout = (ev: React.MouseEvent<HTMLButtonElement>) => {
-    ev.preventDefault()
-    console.log('add clicked')
-  }
-
   const HeaderComponents: React.FC = () => {
     return (
       <>
-        <Link
-          to="/ajouter-employe"
-          className="bg-customRed-900 flex flex-col justify-between text-white px-4 py-2 "
-        >
-          <PlusIcon width={20} height={20} />
-          <span>Ajouter</span>
+        <Link to="/ajouter-employe" className="group no-underline">
+          <span className="bg-customRed-900 flex flex-row justify-between uppercase text-white px-1.5 py-1">
+            <PlusIcon width={20} height={20} />
+            <span>Ajouter</span>
+          </span>
         </Link>
       </>
     )
