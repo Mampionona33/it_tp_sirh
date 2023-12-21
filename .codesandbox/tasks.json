@@ -32,7 +32,6 @@
         "port": 3000
       }
     },
-
     "start api": {
       "name": "start-api",
       "command": "cd api/ &&  yarn start",
@@ -41,12 +40,10 @@
         "port": 8000
       }
     },
-
     "build api": {
       "name": "build",
       "command": "cd api/ && yarn run build"
     },
-
     "serve app": {
       "name": "serve app",
       "command": "serve -s build/",
@@ -54,7 +51,6 @@
         "port": 3000
       }
     },
-
     "test": {
       "name": "test",
       "command": "npm test"
