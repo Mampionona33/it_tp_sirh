@@ -8,7 +8,7 @@ import {
 import CustomPagination from '../CustomPagination'
 import { IDataTableEmploye } from './interfaceDataTableEmploy'
 import TableHead from './TableHead'
-import { PlusIcon } from '@heroicons/react/24/outline'
+
 import { DebounceInput } from 'react-debounce-input'
 
 interface ActionComponentProps {
