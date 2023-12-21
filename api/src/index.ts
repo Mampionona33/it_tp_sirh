@@ -38,7 +38,7 @@ router.route('/personnels').get(salarieController.getAll)
 router.route('/heuressupplementaires').post(heuresController.getOne)
 router.route('/categorie-employe').get(categorieEmployeController.getAll)
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 8000
 
 app.use('/', router)
 
