@@ -1,17 +1,17 @@
-import React, { Children } from 'react'
-import DataTableEmploye from '@components/TableListeEmploye/DataTableEmploye'
-import { useSelector } from 'react-redux'
-import { IEmploye } from '@src/interfaces/interfaceEmploye'
-import ButtonWithIcon from '@components/ButtonWithIcon'
-import TableHead from './TableHead'
-import { PlusIcon } from '@heroicons/react/24/outline'
+import React, { Children } from "react";
+import DataTableEmploye from "@components/TableListeEmploye/DataTableEmploye";
+import { useSelector } from "react-redux";
+import { IEmploye } from "@src/interfaces/interfaceEmploye";
+import ButtonWithIcon from "@components/ButtonWithIcon";
+import TableHead from "./TableHead";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 interface IDataWithActions extends IEmploye {
-  actions?: React.FC[]
+  actions?: React.FC[];
 }
 
 function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
-  const data = useSelector((state: any) => state.employeesList.list)
+  const data = useSelector((state: any) => state.employeesList.list);
 
   /**
    * Pour assurer la stabilité des données dans la table,
@@ -28,7 +28,12 @@ function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
           fullName: `${item.nom} ${item.prenom}`,
           actions: actions,
         }))
-      : []
+      : [];
+
+  const handleClickAjout = (ev: React.MouseEvent<HTMLButtonElement>) => {
+    ev.preventDefault();
+    console.log("add clicked");
+  };
 
   return (
     <div>
@@ -36,11 +41,15 @@ function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
         data={formattedData}
         tableTitle="Liste des employés"
         headerComponents={
-          <ButtonWithIcon icon={<PlusIcon width={20} height={20} />} label="Ajouter" />
+          <ButtonWithIcon
+            icon={<PlusIcon width={20} height={20} />}
+            label="Ajouter"
+            onClick={handleClickAjout}
+          />
         }
       />
     </div>
-  )
+  );
 }
 
-export default TableListeEmploye
+export default TableListeEmploye;
