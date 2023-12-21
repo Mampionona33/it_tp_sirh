@@ -1,4 +1,3 @@
-import React from 'react'
 import lazyWithRetry from './utils/lazyWithRetry'
 
 // const Dashboard = lazyWithRetry(() => import('./views/dashboard/Dashboard'))
@@ -7,9 +6,11 @@ const Colors = lazyWithRetry(() => import('./views/theme/colors/Colors'))
 const Typography = lazyWithRetry(() => import('./views/theme/typography/Typography'))
 
 // Employés
-const ListEmployes = lazyWithRetry(() => import('./views/employee/list/List'))
+// const ListEmployes = lazyWithRetry(() => import('./views/employee/list/List'))
+const ListEmployes = lazyWithRetry(() => import('@views/employee/list/List'))
 const FicheEmploye = lazyWithRetry(() => import('src/views/employee/fiche/Fiche'))
 const BulletinPaie = lazyWithRetry(() => import('src/views/employee/bulletinPaie/BulletinPaie'))
+const AjoutEmploye = lazyWithRetry(() => import('@views/employee/ajout/AjoutEmploye'))
 
 // Etat divers
 const DeclarationCnaps = lazyWithRetry(() =>
@@ -77,6 +78,7 @@ const routes = [
   // Employe path def
   { path: '/employees', name: 'Employés', element: Cards, exact: true },
   { path: '/employees/list', name: 'List', element: ListEmployes, exact: true },
+  { path: '/employees/ajout', name: 'Ajout', element: AjoutEmploye, exact: true },
   {
     path: '/employees/fiche/:id',
     name: 'Fiche',
