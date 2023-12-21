@@ -5,6 +5,7 @@ import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import ButtonWithIcon from '@components/ButtonWithIcon'
 import TableHead from './TableHead'
 import { PlusIcon } from '@heroicons/react/24/outline'
+import { Link } from 'react-router-dom'
 
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
@@ -35,18 +36,23 @@ function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
     console.log('add clicked')
   }
 
+  const HeaderComponents: React.FC = () => {
+    return (
+      <>
+        <Link to="/ajouter-employe">
+          <PlusIcon width={20} height={20} />
+          <span>Ajouter</span>
+        </Link>
+      </>
+    )
+  }
+
   return (
     <div>
       <DataTableEmploye
         data={formattedData}
         tableTitle="Liste des employés"
-        headerComponents={
-          <ButtonWithIcon
-            icon={<PlusIcon width={20} height={20} />}
-            label="Ajouter"
-            onClick={handleClickAjout}
-          />
-        }
+        headerComponents={<HeaderComponents />}
       />
     </div>
   )
