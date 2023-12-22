@@ -10,6 +10,7 @@
       "@src/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@layout/*": ["src/layout/*"],
+      "@interfaces/*": ["src/interfaces/*"],
       "@redux/*": ["src/redux/*"],
       "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"],

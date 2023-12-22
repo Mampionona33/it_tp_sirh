@@ -1,5 +1,6 @@
 const path = require('path')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 
 const { NODE_ENV = 'production' } = process.env
 
@@ -28,4 +29,9 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [{ from: 'src/db', to: 'db' }],
+    }),
+  ],
 }

@@ -8,9 +8,15 @@ import {
 } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametreCalendrierReducer'
 import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
+import TableListeEmploye from '@components/TableListeEmploye/TableListeEmploye'
+import { Link } from 'react-router-dom'
+
+interface ButtonDetailProps {
+  rowId: number
+}
 
 const List = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<any>()
 
   useEffect(() => {
     let mount = true
@@ -26,9 +32,21 @@ const List = () => {
       mount = false
     }
   }, [dispatch])
+
+  const ButtonDetail: React.FC<ButtonDetailProps> = ({ rowId }) => {
+    return (
+      <>
+        <Link className="btn btn-danger py-1 px-1.5" to={`/employees/fiche/${rowId}`}>
+          Fiche
+        </Link>
+      </>
+    )
+  }
+
   return (
     <>
-      <TableEmployee />
+      {/* <TableEmployee /> */}
+      <TableListeEmploye actions={[ButtonDetail]} />
     </>
   )
 }

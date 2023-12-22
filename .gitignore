@@ -10,6 +10,7 @@ yarn.lock
 
 # production
 /build
+**/build
 
 # gitpod env
 .gitpod.yml
@@ -29,3 +30,4 @@ yarn-error.log*
 
 .devcontainer
 .vercel
+.vercelignore

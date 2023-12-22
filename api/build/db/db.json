@@ -1,0 +1,1567 @@
+{
+  "/employees": [
+    {
+      "nom": "Randriamanana",
+      "prenom": "Jean",
+      "cin": "123.456.789.123",
+      "adresse": "cvcxv",
+      "dateEmbauche": "2023-12-05",
+      "numCnaps": "123456578",
+      "poste": "Agent de sécurité",
+      "cadre": 1,
+      "email": "",
+      "matricule": "145454",
+      "sexe": "femme",
+      "cat": "m2",
+      "enfant": 0,
+      "salaireBase": 450000,
+      "telephone": "",
+      "travDeNuit": 1,
+      "status": "actif",
+      "id": 0
+    }
+  ],
+  "/employeesCategories": [
+    { "id": 1, "value": "m1", "label": "M1" },
+    { "id": 2, "value": "m2", "label": "M2" },
+    { "id": 3, "value": "1a", "label": "1A" },
+    { "id": 4, "value": "1b", "label": "1B" },
+    { "id": 5, "value": "os1", "label": "OS1" },
+    { "id": 6, "value": "os2", "label": "OS2" },
+    { "id": 7, "value": "os3", "label": "OS3" },
+    { "id": 8, "value": "op1", "label": "OP1" },
+    { "id": 9, "value": "2a", "label": "2A" },
+    { "id": 10, "value": "2b", "label": "2B" },
+    { "id": 11, "value": "3a", "label": "3A" },
+    { "id": 13, "value": "3b", "label": "3B" },
+    { "id": 14, "value": "a1", "label": "A1" },
+    { "id": 15, "value": "a2", "label": "A2" },
+    { "id": 16, "value": "a3", "label": "A3" },
+    { "id": 17, "value": "b1", "label": "B1" },
+    { "id": 18, "value": "b2", "label": "B2" },
+    { "id": 19, "value": "b3", "label": "B3" },
+    { "id": 20, "value": "b4", "label": "B4" },
+    { "id": 21, "value": "c1", "label": "C1" },
+    { "id": 22, "value": "c2", "label": "C2" },
+    { "id": 23, "value": "c3", "label": "C3" },
+    { "id": 24, "value": "d1", "label": "D1" },
+    { "id": 25, "value": "d2", "label": "D2" },
+    { "id": 26, "value": "d3", "label": "D3" }
+  ],
+  "/employeeHours": [
+    {
+      "id": 1,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "15/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 2,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "16/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 3,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "17/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 4,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "18/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 5,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "19/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 5.3,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 6,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "20/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.1,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 7,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "21/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 8,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "22/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 9,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "23/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 10,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "24/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.2,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 11,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "25/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.15,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 12,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "26/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.02,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 13,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "27/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 14,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "28/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 15,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "29/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 16,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "30/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.4,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 17,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "31/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.13,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 18,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "01/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 19,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "02/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.3,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 20,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "03/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 21,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "04/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 22,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "05/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 23,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "06/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 24,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "07/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 25,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "08/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 26,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "09/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.1,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 27,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "10/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.25,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 28,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "11/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.1,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 29,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "12/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 9,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 30,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "13/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 31,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "14/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 32,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "15/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10.2,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 33,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "16/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 12,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 34,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "17/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 35,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "18/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 36,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "19/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 37,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "20/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 38,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "21/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 39,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "22/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 40,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "23/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 41,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "24/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 42,
+      "employee": { "id": 1, "matricule": 345 },
+      "date": "25/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": 10
+    },
+    {
+      "id": 43,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "15/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 44,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "16/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 45,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "17/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 46,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "18/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 47,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "19/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 48,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "20/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 49,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "21/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 50,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "22/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.2,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 51,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "23/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 52,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "24/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 53,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "25/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 54,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "26/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.2,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 55,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "27/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 56,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "28/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 57,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "29/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.3,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 58,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "30/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 59,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "31/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 60,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "01/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.1,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 61,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "02/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.6,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 62,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "03/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 63,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "04/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 64,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "05/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 65,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "06/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 66,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "07/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.1,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 67,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "08/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.3,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 68,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "09/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.6,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 69,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "10/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 70,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "11/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 9,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 71,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "12/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 72,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "13/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 73,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "14/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.7,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 74,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "15/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 75,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "16/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 76,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "17/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 77,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "18/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 9,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 78,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "19/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 79,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "20/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.4,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 80,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "21/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 81,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "22/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.2,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 82,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "23/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 83,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "24/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10.1,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 84,
+      "employee": { "id": 2, "matricule": 619 },
+      "date": "25/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 85,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "15/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 86,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "16/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 87,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "17/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 11,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 88,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "18/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 89,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "19/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 90,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "20/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 91,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "21/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.4,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 92,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "22/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 93,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "23/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 9,
+      "hs_de_nuit": 1,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 94,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "24/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": 2,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 95,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "25/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 9,
+      "hs_de_nuit": 1,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 96,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "26/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 97,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "27/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 11,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 98,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "28/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 99,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "29/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 100,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "30/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 101,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "31/12/2022",
+      "heure_normale": 8,
+      "heure_de_travail": 8.2,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 102,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "01/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.4,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 103,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "02/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 9,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 104,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "03/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 105,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "04/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 10,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 106,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "05/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 11,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 107,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "06/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 9,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 108,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "07/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 109,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "08/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 110,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "09/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 111,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "10/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": 8
+    },
+    {
+      "id": 112,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "11/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8.5,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 113,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "12/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 114,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "13/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 9,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 115,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "14/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 11,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 116,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "15/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 117,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "16/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 118,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "17/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 119,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "18/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 120,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "19/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 121,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "20/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 122,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "21/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 123,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "22/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 124,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "23/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 125,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "24/01/2023",
+      "heure_normale": 8,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": null
+    },
+    {
+      "id": 126,
+      "employee": { "id": 4, "matricule": 869 },
+      "date": "25/01/2023",
+      "heure_normale": null,
+      "heure_de_travail": 8,
+      "hs_de_nuit": null,
+      "hs_jours_feries": 10
+    }
+  ],
+  "/cotisations": [
+    { "id": 1, "label": "cnaps", "type": "cnaps", "payer": "salarie", "taux": 0.01 },
+    { "id": 2, "label": "osmi", "type": "osmi", "payer": "salarie", "taux": 0.01 },
+    { "id": 3, "label": "Cotisation sociale", "type": "social", "payer": "salarie", "taux": 0.01 },
+    {
+      "id": 4,
+      "label": "Cotisation cnaps employeur",
+      "type": "cnaps",
+      "payer": "employeur",
+      "taux": 0.02
+    }
+  ],
+
+  "allocationFamil": [{ "id": 1, "label": "enfant", "montant": 2000, "age_max": 21 }],
+  "avances": [
+    { "id": 1, "employee": { "id": 1 }, "date": "2023-01-15T05:14:08.190Z", "montant": 100000 },
+    { "id": 2, "employee": { "id": 2 }, "date": "2023-01-15T05:14:08.190Z", "montant": 30000 }
+  ],
+  "mouvementSalaire": [
+    { "id": 1, "label": "Prime d'assuicidité", "action": "ajout" },
+    { "id": 2, "label": "Prime d'excellence", "action": "ajout" },
+    { "id": 3, "label": "Indemnité de transport", "action": "ajout" },
+    { "id": 4, "label": "Avantages en nature (Logement)", "action": "ajout", "nature": true },
+    { "id": 5, "label": "Avantages en nature (Véhicule)", "action": "ajout", "nature": true },
+    { "id": 6, "label": "Autres indemnités", "action": "ajout", "nature": true },
+    { "id": 7, "label": "Autres avantages", "action": "ajout" },
+    { "id": 8, "label": "Absence / Retard à déduire", "action": "deduction" }
+  ],
+  "employeur": [
+    {
+      "id": 1,
+      "nom": "LA LIGNE SCANDINAVE",
+      "adresse": "2 RUE LIEUTNANT BERARD",
+      "Cp_ville": "501 - TOAMASINA",
+      "nif": "3000000581",
+      "stat": "50121 11 2003 0 00475",
+      "rcs": "2002B00608",
+      "tel": "020 000211",
+      "email": "ls@gmail.com"
+    }
+  ],
+  "users": [{ "id": 1, "email": "admin@ls.ls", "password": "lsadmin2023" }],
+
+  "dns": [
+    {
+      "annee_mois": "",
+      "travailleur": [
+        {
+          "id": 1,
+          "annee": "2023",
+          "trimestre": "t2",
+          "mois": "avril",
+          "matricule": "345",
+          "nom": "RAZANAKOLONA",
+          "prenom": "Fandio",
+          "date_embauche": "2015-03-12",
+          "date_depart": null,
+          "salaire_du_mois": 1000000,
+          "avantage_du_mois": 100000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059868",
+          "cin": "101261745236",
+          "created_at": null,
+          "ref_employeur": "2002B00608",
+          "updated_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1
+        },
+        {
+          "id": 2,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "janvier",
+          "matricule": "442",
+          "nom": "ANDRIAINA",
+          "prenom": "José",
+          "date_embauche": "2016-04-16",
+          "date_depart": null,
+          "salaire_du_mois": 800000,
+          "avantage_du_mois": 8000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059745",
+          "cin": "101261135258",
+          "ref_employeur": "2002B00608",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        },
+        {
+          "id": 3,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "janvier",
+          "matricule": "345",
+          "nom": "RAZAKOLONA",
+          "prenom": "Lioka",
+          "date_embauche": "2015-03-12",
+          "date_depart": null,
+          "salaire_du_mois": 1000000,
+          "avantage_du_mois": 100000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "ref_employeur": "2002B00608",
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059868",
+          "cin": "101261745236",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        },
+        {
+          "id": 4,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "février",
+          "matricule": "442",
+          "nom": "ANDRIAINA",
+          "prenom": "José",
+          "date_embauche": "2016-04-16",
+          "date_depart": null,
+          "salaire_du_mois": 800000,
+          "avantage_du_mois": 8000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "ref_employeur": "2002B00608",
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059745",
+          "cin": "101261135258",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        },
+        {
+          "id": 5,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "mars",
+          "matricule": "345",
+          "nom": "RAZANAJAFY",
+          "prenom": "Fredy",
+          "date_embauche": "2015-03-12",
+          "date_depart": null,
+          "salaire_du_mois": 1000000,
+          "avantage_du_mois": 100000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059868",
+          "ref_employeur": "2002B00608",
+          "cin": "101261745236",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        },
+        {
+          "id": 6,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "mars",
+          "matricule": "442",
+          "nom": "ANDRIAINA",
+          "prenom": "José",
+          "date_embauche": "2016-04-16",
+          "date_depart": null,
+          "salaire_du_mois": 800000,
+          "avantage_du_mois": 8000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059745",
+          "cin": "101261135258",
+          "ref_employeur": "2002B00608",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        },
+        {
+          "id": 6,
+          "annee": "2023",
+          "trimestre": "t1",
+          "mois": "janvier",
+          "matricule": "442",
+          "nom": "RAKOTOZANANY",
+          "prenom": "Benjamin",
+          "date_embauche": "2016-04-16",
+          "date_depart": null,
+          "salaire_du_mois": 800000,
+          "avantage_du_mois": 8000,
+          "temps_presence": 160,
+          "hs_non_plafonne": 4,
+          "hs_plafonne": 2,
+          "num_cnaps": "960101059745",
+          "cin": "101261135258",
+          "ref_employeur": "2002B00608",
+          "created_at": null,
+          "taux_cotisation_cnaps_employeur": 0.035,
+          "taux_cotisation_cnaps_salarie": 0.1,
+          "updated_at": null
+        }
+      ],
+      "employeur": [
+        {
+          "id": 1,
+          "nom": "LA LIGNE SCANDINAVE",
+          "numero_rcs": "2002B00608",
+          "adresse": "2, rue Lieutenant BERARD",
+          "cp_ville": "501-Toamasina",
+          "numero_nif": "3000000581",
+          "numero_stat": "50121 11 2003 0 00475",
+          "email": "sealtmm@seal.mg",
+          "telephone": "033 05 573 00",
+          "created_at": null,
+          "updated_at": null
+        }
+      ]
+    }
+  ],
+
+  "salaries": [
+    {
+      "id": 1,
+      "actif": true,
+      "nom": "RAKOTOZANANY",
+      "prenom": "Benjamin",
+      "date_naissance": "2016-04-16",
+      "lieu_naissance": "Toamasina",
+      "adresse": "2 RUE LIEUTNANT BERARD",
+      "tel": "020 000211",
+      "email": "sealtmm@seal.mg",
+<<<<<<< HEAD:api/src/db/db.json
+      "num_cin": "10126174565",
+      "sexe": "homme",
+      "contact_urgence": [
+        {
+          "nom": "RAZAKOLONA",
+          "prenom": "Jean",
+          "tel": "034 45 123 45"
+        },
+        {
+          "nom": "Matheo",
+          "prenom": "Pierre",
+          "tel": "032 80 167 45s"
+        }
+      ],
+      "conjoint": {
+        "nom": "Flavini",
+        "prenom": "Blanchard",
+        "date_naissance": "1987-03-12",
+        "lieu_naissance": "Toamasina",
+        "adresse": "2 RUE LIEUTNANT BERARD",
+        "num_cin": "101261745236",
+        "tel": "034 45 123 90",
+        "email": "flavini@gmail.com"
+      },
+=======
+      "cin": "10126174565",
+      "genre": "masculin",
+      "enfant": [
+        {
+          "nom": "Bambini",
+          "prenom": "Rosam",
+          "date_naissance": "2022-04-16",
+          "lieu_naissance": "Toamasina",
+          "genre": "masculin"
+        },
+        {
+          "nom": "Bambini",
+          "prenom": "Didié",
+          "date_naissance": "2017-04-16",
+          "lieu_naissance": "Toamasina",
+          "genre": "feminin"
+        }
+      ],
+      "titre_poste": "Responsable Import et logistique ",
+      "matricule": "442",
+      "categorie": "B5",
+      "date_embauche": "2016-04-16",
+      "departement": "Logistique",
+      "lieu_travail": "Toamasina",
+      "cadre": true,
+      "travail_de_nuit": false,
+      "salaire_du_mois": 800000,
+      "rib": "454787f7dsf787878fd",
+      "mode_payement_salaire": "Virement banquaire",
+      "num_cnaps": "960101059745",
+      "num_osie": "96010105hjod4",
+      "prime_et_avantage_permanent": [
+        {
+          "libelle": "Carburant",
+          "montant": 450000
+        },
+        { "libelle": "gas", "montant": 100000 }
+      ],
+      "depart": {
+        "date": null,
+        "motif": null
+      }
+    },
+    {
+      "id": 2,
+      "actif": true,
+      "nom": "Rabezavana",
+      "prenom": "Tsihoarana Martin",
+      "date_naissance": "2016-04-16",
+      "lieu_naissance": "Toamasina",
+      "adresse": "2 RUE LIEUTNANT BERARD",
+      "tel": "020 000211",
+      "email": "sealtmm@seal.mg",
+      "cin": "10126174565",
+      "genre": "masculin",
+>>>>>>> dev:api/build/db/db.json
+      "enfant": [
+        {
+          "nom": "Bambini",
+          "prenom": "Rosam",
+          "date_naissance": "2022-04-16",
+          "lieu_naissance": "Toamasina",
+<<<<<<< HEAD:api/src/db/db.json
+          "genre": 0
+=======
+          "genre": "feminin",
+          "age": 1
+>>>>>>> dev:api/build/db/db.json
+        },
+        {
+          "nom": "Bambini",
+          "prenom": "Didié",
+          "date_naissance": "2017-04-16",
+          "lieu_naissance": "Toamasina",
+<<<<<<< HEAD:api/src/db/db.json
+          "genre": 1
+        }
+      ],
+      "titre_poste": "Responsable Import et logistique ",
+      "matricule": "442",
+=======
+          "genre": "masculin",
+          "age": 6
+        }
+      ],
+      "titre_poste": "Responsable Import et logistique ",
+      "matricule": "523",
+>>>>>>> dev:api/build/db/db.json
+      "categorie": "B5",
+      "date_embauche": "2016-04-16",
+      "departement": "Logistique",
+      "lieu_travail": "Toamasina",
+<<<<<<< HEAD:api/src/db/db.json
+      "est_cadre": true,
+=======
+      "cadre": true,
+>>>>>>> dev:api/build/db/db.json
+      "travail_de_nuit": false,
+      "salaire_du_mois": 800000,
+      "rib": "454787f7dsf787878fd",
+      "mode_payement_salaire": "Virement banquaire",
+      "num_cnaps": "960101059745",
+      "num_osie": "96010105hjod4",
+      "prime_et_avantage_permanent": [
+        {
+          "libelle": "Carburant",
+          "montant": 450000
+        },
+        { "libelle": "gas", "montant": 100000 }
+      ],
+      "depart": {
+        "date": null,
+        "motif": null
+      }
+    }
+  ]
+}

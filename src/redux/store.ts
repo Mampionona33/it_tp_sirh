@@ -1,4 +1,5 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
+import { combineReducers } from 'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import sidebarReducer from './sidebar/sidebarReducer'
 import employeHoursReducer from './employeHours/employeHoursReducer'
 import selectedEmployeReducer from './selectedEmploye/selectedEmployeReducer'
@@ -13,6 +14,7 @@ import authReducer from 'src/redux/user/authReducer'
 import notificationStackReducer from './notificationStack/notificationStackReducer'
 import dnsReducers from './dns/dnsReducers'
 import employeurReducer from './employeur/employeurReducer'
+import categorieEmployeReducer from './categorieEmploye/CategorieEmployeReducer'
 
 const persistConfig = {
   key: 'root',
@@ -33,6 +35,7 @@ const rootReducer = combineReducers({
   notification: notificationStackReducer,
   dns: dnsReducers,
   employeur: employeurReducer,
+  cateogieEmploye: categorieEmployeReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
@@ -47,3 +50,6 @@ const configStore = configureStore({
 
 export const store = configStore
 export const persistor = persistStore(configStore)
+
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
