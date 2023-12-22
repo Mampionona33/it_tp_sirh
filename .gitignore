@@ -9,8 +9,8 @@ yarn.lock
 /coverage
 
 # production
-#/build
-#**/build
+/build
+**/build
 
 # gitpod env
 .gitpod.yml
