@@ -60,7 +60,7 @@ const InformationPaie = () => {
   return (
     <>
       <div className="mt-6">
-        <h1 className="text-lg border-t text-customRed-930 uppercase pt-3 mb-3">
+        <h1 className="text-lg border-t text-customRed-930 ml-4 uppercase pt-3 mb-3">
           Information sur la paie
         </h1>
         <div className="flex border-y bg-customRed-25 mt-2 shadow-sm">
