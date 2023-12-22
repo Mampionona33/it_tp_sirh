@@ -20,14 +20,16 @@ const FormEmploye = () => {
     for (let i = 0; i < formElements.length; i++) {
       const element = formElements[i] as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
 
-      if (
-        element.name === 'salaire_de_base' ||
-        element.name === 'cadre' ||
-        element.name === 'travail_de_nuit'
-      ) {
-        employeData[element.name] = parseFloat(element.value)
-      } else {
-        employeData[element.name] = element.value
+      if (element.name !== undefined && element.name !== '') {
+        if (
+          element.name === 'salaire_de_base' ||
+          element.name === 'cadre' ||
+          element.name === 'travail_de_nuit'
+        ) {
+          employeData[element.name] = parseFloat(element.value)
+        } else {
+          employeData[element.name] = element.value
+        }
       }
     }
 
