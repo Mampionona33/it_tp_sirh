@@ -9,9 +9,11 @@ import FormEmployeGroupButton from './FormEmployeGroupButton'
 import FormResiliationContrat from './FormResiliationContrat'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import employeService from '@src/services/EmployeeService'
+import { useNavigate } from 'react-router-dom'
 
 const FormEmploye = () => {
-  const handleSubmit = (ev: React.FormEvent) => {
+  const navigate = useNavigate()
+  const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault()
 
     const formElements = (ev.target as HTMLFormElement).elements
@@ -34,9 +36,14 @@ const FormEmploye = () => {
     }
 
     console.log(employeData)
-
-    // Uncomment the line below when you're ready to use employeService.create
-    employeService.create(employeData)
+    try {
+      const createEmploye = await employeService.create(employeData)
+      if (createEmploye.status === 201) {
+        navigate('/employees/list')
+      }
+    } catch (error) {
+      throw error
+    }
   }
 
   return (
