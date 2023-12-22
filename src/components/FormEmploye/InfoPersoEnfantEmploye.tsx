@@ -47,9 +47,9 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
 
   return (
     <>
-      <div className="relative grid grid-cols-3 gap-x-4 gap-y-2 px-8 py-3 w-full">
+      <div className="relative border-y grid grid-cols-3 gap-x-4 gap-y-2 px-8 py-3 w-full">
         <ButtonWithIcon
-          className="absolute right-1 top-1"
+          className="absolute right-0 top-0"
           onClick={handleClose}
           icon={<XMarkIcon width={20} height={20} />}
         ></ButtonWithIcon>
@@ -187,12 +187,12 @@ const InfoPersoEnfantEmploye: React.FC = () => {
 
   return (
     <>
-      <div className="flex mt-4 gap-y-2 flex-col">
+      <div className="flex mt-6 gap-y-2 flex-col">
         <div className="pl-5">
           <ButtonWithIcon
             type="button"
             label="Ajouter un enfant"
-            icon={<PlusIcon width={20} height={20} />}
+            icon={<PlusIcon width={18} height={18} />}
             onClick={addEnfant}
           />
         </div>

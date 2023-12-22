@@ -59,16 +59,20 @@ const InformationPaie = () => {
   }
   return (
     <>
-      <h1 className="text-lg text-customRed-930 uppercase m-3">Information sur la paie</h1>
-      <div className="flex bg-customRed-25 mt-2 shadow-sm">
-        <div className="grid grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
-          {inputs.map((input, index) => (
-            <InputWithLabel
-              key={index}
-              {...input}
-              onChange={(event) => handleInputChange(event, index)}
-            />
-          ))}
+      <div className="mt-6">
+        <h1 className="text-lg border-t text-customRed-930 uppercase pt-3 mb-3">
+          Information sur la paie
+        </h1>
+        <div className="flex border-y bg-customRed-25 mt-2 shadow-sm">
+          <div className="grid grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
+            {inputs.map((input, index) => (
+              <InputWithLabel
+                key={index}
+                {...input}
+                onChange={(event) => handleInputChange(event, index)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </>

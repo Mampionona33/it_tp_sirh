@@ -37,7 +37,7 @@ const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({
   return (
     <button {...props} className={`group ${className}`}>
       <span
-        className={`py-1 px-2 ${variantClass} border-collapse rounded-sm group-hover:shadow-lg gap-1 justify-between uppercase flex items-center`}
+        className={`p-2 ${variantClass} border-collapse rounded-sm group-hover:shadow-lg gap-1 justify-center text-sm font-semibold flex items-center`}
       >
         {icon ? icon : null}
         {label ? <span>{label}</span> : null}

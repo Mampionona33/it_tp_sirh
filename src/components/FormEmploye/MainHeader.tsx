@@ -7,9 +7,6 @@ const MainHeader = () => {
         <div className="justify-center pb-3 text-red-900 text-lg font-medium uppercase max-md:max-w-full">
           Informations personnelles
         </div>
-        <div className="justify-end text-black text-base font-medium mt-3 max-md:max-w-full">
-          Employé
-        </div>
       </div>
     </>
   )

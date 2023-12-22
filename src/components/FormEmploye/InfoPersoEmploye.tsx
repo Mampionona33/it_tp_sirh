@@ -91,7 +91,7 @@ function InfoPersoEmploye() {
   ]
 
   return (
-    <div className="flex bg-customRed-25 mt-2 shadow-sm">
+    <div className="flex bg-customRed-25 mt-2 shadow-sm border-y">
       <div className="grid grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
         {inputs.map((input, index) => (
           <InputWithLabel key={index} {...input} />

@@ -46,7 +46,7 @@ const FormResiliationContrat = () => {
           <div className="flex justify-end">
             <ButtonWithIcon
               type="submit"
-              label="résilier"
+              label="Résilier"
               icon={<UserMinusIcon width={20} height={20} />}
             />
           </div>
