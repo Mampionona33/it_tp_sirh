@@ -1977,35 +1977,6 @@
       "adresse": "2 RUE LIEUTNANT BERARD",
       "tel": "020 000211",
       "email": "sealtmm@seal.mg",
-<<<<<<< HEAD
-<<<<<<< HEAD:api/src/db/db.json
-      "num_cin": "10126174565",
-      "sexe": "homme",
-      "contact_urgence": [
-        {
-          "nom": "RAZAKOLONA",
-          "prenom": "Jean",
-          "tel": "034 45 123 45"
-        },
-        {
-          "nom": "Matheo",
-          "prenom": "Pierre",
-          "tel": "032 80 167 45s"
-        }
-      ],
-      "conjoint": {
-        "nom": "Flavini",
-        "prenom": "Blanchard",
-        "date_naissance": "1987-03-12",
-        "lieu_naissance": "Toamasina",
-        "adresse": "2 RUE LIEUTNANT BERARD",
-        "num_cin": "101261745236",
-        "tel": "034 45 123 90",
-        "email": "flavini@gmail.com"
-      },
-=======
-=======
->>>>>>> dev
       "cin": "10126174565",
       "genre": "masculin",
       "enfant": [
@@ -2042,7 +2013,6 @@
           "libelle": "Carburant",
           "montant": 450000
         },
-        { "libelle": "gas", "montant": 100000 }
         {
           "libelle": "gas",
           "montant": 100000
@@ -2065,70 +2035,33 @@
       "email": "sealtmm@seal.mg",
       "cin": "10126174565",
       "genre": "masculin",
-<<<<<<< HEAD
->>>>>>> dev:api/build/db/db.json
-=======
->>>>>>> dev
       "enfant": [
         {
           "nom": "Bambini",
           "prenom": "Rosam",
           "date_naissance": "2022-04-16",
           "lieu_naissance": "Toamasina",
-<<<<<<< HEAD
-<<<<<<< HEAD:api/src/db/db.json
-          "genre": 0
-=======
           "genre": "feminin",
           "age": 1
->>>>>>> dev:api/build/db/db.json
-=======
-          "genre": "feminin",
-          "age": 1
->>>>>>> dev
         },
         {
           "nom": "Bambini",
           "prenom": "Didié",
           "date_naissance": "2017-04-16",
           "lieu_naissance": "Toamasina",
-<<<<<<< HEAD
-<<<<<<< HEAD:api/src/db/db.json
-          "genre": 1
-        }
-      ],
-      "titre_poste": "Responsable Import et logistique ",
-      "matricule": "442",
-=======
-=======
->>>>>>> dev
           "genre": "masculin",
           "age": 6
         }
       ],
       "titre_poste": "Responsable Import et logistique ",
       "matricule": "523",
-<<<<<<< HEAD
->>>>>>> dev:api/build/db/db.json
-=======
->>>>>>> dev
       "categorie": "B5",
       "date_embauche": "2016-04-16",
       "departement": "Logistique",
       "lieu_travail": "Toamasina",
-<<<<<<< HEAD
-<<<<<<< HEAD:api/src/db/db.json
-      "est_cadre": true,
-=======
-      "cadre": true,
->>>>>>> dev:api/build/db/db.json
-      "travail_de_nuit": false,
-      "salaire_du_mois": 800000,
-=======
       "cadre": true,
       "travail_de_nuit": false,
       "salaire_de_base": 800000,
->>>>>>> dev
       "rib": "454787f7dsf787878fd",
       "mode_payement_salaire": "Virement banquaire",
       "num_cnaps": "960101059745",
@@ -2138,14 +2071,10 @@
           "libelle": "Carburant",
           "montant": 450000
         },
-<<<<<<< HEAD
-        { "libelle": "gas", "montant": 100000 }
-=======
         {
           "libelle": "gas",
           "montant": 100000
         }
->>>>>>> dev
       ],
       "depart": {
         "date": null,
