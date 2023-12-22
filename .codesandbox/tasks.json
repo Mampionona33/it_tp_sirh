@@ -16,10 +16,6 @@
     {
       "name": "build api",
       "command": "cd api/ && yarn build"
-    },
-    {
-      "name": "build app",
-      "command": "yarn build"
     }
   ],
 
