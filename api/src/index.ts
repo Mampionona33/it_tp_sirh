@@ -34,7 +34,7 @@ router.route('/login').post(authController.login)
 router.route('/mouvement-salaire').get(mouvementSalaireController.getAll)
 router.route('/cotisations/all').get(cotisationController.getAll)
 router.route('/employeurs').get(employeurController.getAll)
-router.route('/personnels').get(salarieController.getAll)
+router.route('/personnels').get(salarieController.getAll).post(salarieController.create)
 router.route('/heuressupplementaires').post(heuresController.getOne)
 router.route('/categorie-employe').get(categorieEmployeController.getAll)
 

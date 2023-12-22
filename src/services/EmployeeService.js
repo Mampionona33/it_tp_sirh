@@ -1,3 +1,5 @@
+import { createEmploye } from '@src/redux/employe/employeReducer'
+import { store } from '@src/redux/store'
 import axios from 'axios'
 
 class EmployeeService {
@@ -24,14 +26,17 @@ class EmployeeService {
     return axios.get(`${this.REACT_APP_API_BASE_URL}/employees/id=${id}`)
   }
 
-  async add(data) {
+  async create(data) {
+    console.log(data)
     try {
-      const response = await axios.post(`${this.REACT_APP_API_BASE_URL}/personnels/ajout`, data, {
+      const response = await axios.post(`${this.REACT_APP_API_BASE_URL}/personnels`, data, {
         auth: {
           username: this.login,
           password: this.pass,
         },
       })
+      console.log(response)
+      // store.dispatch(createEmploye(response.data))
       return response
     } catch (error) {
       console.error("Une erreur s'est produite lors de la requête :", error)
