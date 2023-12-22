@@ -65,7 +65,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   return (
     <div className="flex flex-col mb-2">
       {type !== 'radio' && type !== 'select' && (
-        <label htmlFor={name}>
+        <label htmlFor={name} className="text-sm">
           {label} {required ? '*' : ''}
         </label>
       )}
@@ -93,7 +93,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
       ) : type === 'select' && options ? (
         // Render a select dropdown using react-select
         <div className="flex flex-col mb-2">
-          <label htmlFor={name}>
+          <label htmlFor={name} className="text-sm">
             {label} {required ? '*' : ''}
           </label>
           <Select
@@ -130,7 +130,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           max={max}
           placeholder={placeholder}
           onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
-          className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
+          className="border border-customRed-50 focus:outline-customRed-100 text-sm p-2 h-[28px]"
           required={required}
         />
       )}
