@@ -1,5 +1,5 @@
 import React, { useState, MouseEvent, ChangeEvent } from 'react'
-import ButtonWithIcon from '../ButtonWithIcon'
+import ButtonWithIcon from '../buttons/ButtonWithIcon'
 import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline'
 
 interface PrimeEtAvantageItem {

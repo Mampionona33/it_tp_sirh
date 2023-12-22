@@ -1,5 +1,5 @@
 import React from 'react'
-import ButtonWithIcon from '../ButtonWithIcon'
+import ButtonWithIcon from '../buttons/ButtonWithIcon'
 import { UserMinusIcon } from '@heroicons/react/24/outline'
 const FormResiliationContrat = () => {
   const handleSubmit = (ev: React.FormEvent) => {

@@ -10,6 +10,7 @@ import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametr
 import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
 import TableListeEmploye from '@components/TableListeEmploye/TableListeEmploye'
 import { Link } from 'react-router-dom'
+import ButtonLink from '@src/components/buttons/ButtonLink'
 
 interface ButtonDetailProps {
   rowId: number
@@ -34,13 +35,7 @@ const List = () => {
   }, [dispatch])
 
   const ButtonDetail: React.FC<ButtonDetailProps> = ({ rowId }) => {
-    return (
-      <>
-        <Link className="btn btn-danger py-1 px-1.5" to={`/employees/fiche/${rowId}`}>
-          Fiche
-        </Link>
-      </>
-    )
+    return <ButtonLink to={`/employees/fiche/${rowId}`}>Fiche</ButtonLink>
   }
 
   return (

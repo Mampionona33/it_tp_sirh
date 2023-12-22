@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
-import ButtonWithIcon from '../ButtonWithIcon'
+import ButtonWithIcon from '../buttons/ButtonWithIcon'
 
 interface IFormEnfant {
   nom: string
@@ -48,12 +48,11 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
   return (
     <>
       <div className="relative grid grid-cols-3 gap-x-4 gap-y-2 px-8 py-3 w-full">
-        <button
+        <ButtonWithIcon
+          className="absolute right-1 top-1"
           onClick={handleClose}
-          className="hover:bg-customRed-930 p-1 absolute right-1 top-1 bg-customRed-900 text-white"
-        >
-          <XMarkIcon width={20} height={20} />
-        </button>
+          icon={<XMarkIcon width={20} height={20} />}
+        ></ButtonWithIcon>
 
         <div className="flex flex-col">
           <label htmlFor={`nom_${index}`}>Nom *</label>

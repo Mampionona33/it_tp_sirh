@@ -1,5 +1,5 @@
 import React from 'react'
-import ButtonWithIcon, { ButtonWithIconVariant } from '../ButtonWithIcon'
+import ButtonWithIcon, { ButtonWithIconVariant } from '../buttons/ButtonWithIcon'
 
 const FormEmployeGroupButton = () => {
   return (

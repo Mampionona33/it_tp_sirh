@@ -2,10 +2,10 @@ import React, { Children } from 'react'
 import DataTableEmploye from '@components/TableListeEmploye/DataTableEmploye'
 import { useSelector } from 'react-redux'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
-import ButtonWithIcon from '@components/ButtonWithIcon'
+import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import TableHead from './TableHead'
 import { PlusIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
+import ButtonLink from '../buttons/ButtonLink'
 
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
@@ -34,12 +34,12 @@ function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
   const HeaderComponents: React.FC = () => {
     return (
       <>
-        <Link to="/employees/ajout" className="group no-underline">
-          <span className="bg-customRed-900 flex flex-row justify-between uppercase text-white px-1.5 py-1">
-            <PlusIcon width={20} height={20} />
-            <span>Ajouter</span>
-          </span>
-        </Link>
+        <ButtonLink
+          icon={<PlusIcon width={20} height={20} fontWeight={'bold'} />}
+          to="/employees/ajout"
+        >
+          Ajouter
+        </ButtonLink>
       </>
     )
   }

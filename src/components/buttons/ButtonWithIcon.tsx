@@ -21,7 +21,7 @@ const getVariantClass = (variant?: ButtonWithIconVariant): string => {
     case ButtonWithIconVariant.Tertiary:
       return 'group-hover:bg-zinc-400 group-hover:text-white bg-slate-300 text-customRed-900 border-1 border-customRed-900'
     default:
-      return 'bg-blue-500 text-white'
+      return 'group-hover:bg-customRed-930 bg-customRed-900 text-white'
   }
 }
 
@@ -29,14 +29,15 @@ const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({
   icon,
   label,
   variant = ButtonWithIconVariant.Primary,
+  className,
   ...props
 }) => {
   const variantClass = getVariantClass(variant)
 
   return (
-    <button {...props} className={`group`}>
+    <button {...props} className={`group ${className}`}>
       <span
-        className={`py-1 px-2 ${variantClass} border-collapse    group-hover:shadow-lg gap-1 justify-between uppercase flex items-center`}
+        className={`py-1 px-2 ${variantClass} border-collapse rounded-sm group-hover:shadow-lg gap-1 justify-between uppercase flex items-center`}
       >
         {icon ? icon : null}
         {label ? <span>{label}</span> : null}

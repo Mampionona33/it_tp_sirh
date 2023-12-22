@@ -176,7 +176,7 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
                     if (cell.getContext().column.id === 'actions' && !cell.getValue()) return null
 
                     return (
-                      <td key={`cell_${rowIndex}_${cellIndex}`} className="px-6 py-2 text-sm">
+                      <td key={`cell_${rowIndex}_${cellIndex}`} className="px-3 py-1 text-sm">
                         {typeof cell.column.columnDef.cell === 'function'
                           ? cell.column.columnDef.cell(cell.getContext())
                           : cell.column.columnDef.cell}
