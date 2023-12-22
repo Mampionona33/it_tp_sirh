@@ -46,6 +46,7 @@ export interface Conjoint {
 }
 
 export interface Enfant {
+  id: number
   nom: string
   prenom: string
   date_naissance: string
@@ -54,6 +55,7 @@ export interface Enfant {
 }
 
 export interface PrimeEtAvantagePermanent {
+  id: number
   libelle: string
   montant: number
 }
