@@ -9,6 +9,8 @@ import FormResiliationContrat from './FormResiliationContrat'
 import employeService from '@src/services/EmployeeService'
 import { useNavigate } from 'react-router-dom'
 import { IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
 interface IFormatListEnfant {
   pattern: string
@@ -49,6 +51,8 @@ const removeEnfantInputsFromData = (pattern, data): void => {
 
 const FormEmploye = () => {
   const navigate = useNavigate()
+  const dispacth = useAppDispatch()
+  const formEmploye = useAppSelector((state) => state.formEmploye)
   const radioValuesRef = useRef<{ [name: string]: string }>({})
 
   const handleSubmit = async (ev: React.FormEvent) => {
@@ -87,7 +91,8 @@ const FormEmploye = () => {
     }
 
     try {
-      console.log(employeData)
+      console.log(formEmploye)
+      dispacth(resetFormEmploye())
       // const createEmploye = await employeService.create(employeData)
       // if (createEmploye.status === 201) {
       //   navigate('/employees/list')

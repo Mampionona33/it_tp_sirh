@@ -15,6 +15,7 @@ import notificationStackReducer from './notificationStack/notificationStackReduc
 import dnsReducers from './dns/dnsReducers'
 import employeurReducer from './employeur/employeurReducer'
 import categorieEmployeReducer from './categorieEmploye/CategorieEmployeReducer'
+import formEmployeReducer from './FormEmploye/formEmployeReducer'
 
 const persistConfig = {
   key: 'root',
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   dns: dnsReducers,
   employeur: employeurReducer,
   cateogieEmploye: categorieEmployeReducer,
+  formEmploye: formEmployeReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

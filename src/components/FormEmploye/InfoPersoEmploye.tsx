@@ -1,25 +1,21 @@
 import * as React from 'react'
 import InputWithLabel, { IInputWithLabelOptionsProps, IInputWithLabelProps } from './InputWithLable'
 import { EnumGenre } from '@src/interfaces/interfaceEmploye'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
 function InfoPersoEmploye() {
-  const [formData, setFormData] = React.useState({
-    nom: '',
-    prenom: '',
-    date_naissance: '',
-    adresse: '',
-    lieu_naissance: '',
-    cin: '',
-    genre: EnumGenre.MASCULIN,
-  })
+  const dispach = useAppDispatch()
+  const formEmploye = useAppSelector((state) => state.formEmploye)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
-
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }))
+    dispach(
+      setFormEmploye({
+        ...formEmploye,
+        [name]: value,
+      }),
+    )
   }
 
   const genreOptions: IInputWithLabelOptionsProps[] = [
@@ -33,7 +29,7 @@ function InfoPersoEmploye() {
       required: true,
       name: 'nom',
       type: 'text',
-      value: formData.nom,
+      value: formEmploye.nom,
       onChange: handleInputChange,
       placeholder: 'Nom employé',
     },
@@ -42,7 +38,7 @@ function InfoPersoEmploye() {
       required: true,
       name: 'prenom',
       type: 'text',
-      value: formData.prenom,
+      value: formEmploye.prenom,
       onChange: handleInputChange,
       placeholder: 'Prénom employé',
     },
@@ -51,7 +47,7 @@ function InfoPersoEmploye() {
       required: true,
       name: 'adresse',
       type: 'text',
-      value: formData.adresse,
+      value: formEmploye.adresse,
       onChange: handleInputChange,
       placeholder: 'Toamasina ...',
     },
@@ -60,7 +56,7 @@ function InfoPersoEmploye() {
       required: true,
       name: 'date_naissance',
       type: 'date',
-      value: formData.date_naissance,
+      value: formEmploye.date_naissance,
       onChange: handleInputChange,
     },
     {
@@ -68,16 +64,16 @@ function InfoPersoEmploye() {
       required: true,
       name: 'lieu_naissance',
       type: 'text',
-      value: formData.lieu_naissance,
+      value: formEmploye.lieu_naissance,
       onChange: handleInputChange,
       placeholder: 'Toamasina...',
     },
     {
       label: 'N° CIN',
       required: true,
-      name: 'cin',
+      name: 'num_cin',
       type: 'text',
-      value: formData.cin,
+      value: formEmploye.num_cin,
       onChange: handleInputChange,
       placeholder: '000.000.000.000',
     },
@@ -87,7 +83,7 @@ function InfoPersoEmploye() {
       name: 'genre',
       type: 'radio',
       options: genreOptions,
-      value: formData.genre,
+      value: formEmploye.genre,
       onChange: handleInputChange,
     },
   ]

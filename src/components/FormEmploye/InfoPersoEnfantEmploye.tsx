@@ -3,6 +3,12 @@ import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
 import { EnumGenre, IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import {
+  formEmployeAjoutEnfant,
+  formEmployeSupprimerEnfant,
+  setFormEmploye,
+} from '@src/redux/FormEmploye/formEmployeReducer'
 
 // interface IFormEnfant {
 //   nom: string
@@ -16,10 +22,13 @@ import { EnumGenre, IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
 
 interface IFormEnfantsProps {
   index: number
-  handleClose: () => void
+  handleClose: (event: React.MouseEvent<HTMLButtonElement>, index: number) => void
 }
 
 const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
+  const dispatch = useAppDispatch()
+  const formEmploye = useAppSelector((state) => state.formEmploye)
+
   const [formData, setFormData] = useState<IEnfantEmploye>({
     id: 0,
     nom: '',
@@ -29,28 +38,71 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
     genre: EnumGenre.MASCULIN,
   })
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    console.log('Input changed:', name, value)
+  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  //   event.preventDefault()
+  //   const { name, value } = event.target
+  //   console.log('handleInputChange', name, value, index)
 
+  //   dispatch(
+  //     setFormEmploye({
+  //       ...formEmploye,
+  //       enfant: formEmploye.enfant.map((enf) => {
+  //         if (enf.id === index) {
+  //           console.log(enf.id, index)
+  //           const preValue = Object.values(enf[name.slice(0, name.indexOf('_enfant'))]).toString()
+
+  //           return {
+  //             ...enf,
+  //             [name.slice(0, name.indexOf('_enfant'))]:
+  //               value !== ',' ? preValue.replace(/,/g, '') + value : preValue + value,
+  //           }
+  //         }
+  //         return enf
+  //       }),
+  //     }),
+  //   )
+  // }
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    event.preventDefault()
+    const { name, value } = event.target
+    console.log('handleInputChange', name, value, index)
+
+    // Mettre à jour l'état local avec useState
     setFormData((prevData) => ({
       ...prevData,
-      [`${name}_${index}`]: value,
+      [name]: value,
     }))
+
+    // Mettre à jour l'état global avec Redux
+    // dispatch(
+    //   setFormEmploye({
+    //     ...formEmploye,
+    //     enfant: formEmploye.enfant.map((enf) => {
+    //       if (enf.id === index) {
+    //         return {
+    //           ...enf,
+    //           [name.slice(0, name.indexOf('_enfant'))]: Object.values(formData[name]),
+    //         }
+    //       }
+    //       return enf
+    //     }),
+    //   }),
+    // )
   }
 
-  useEffect(() => {
-    if (index) {
-      const defaultGenre = index % 2 === 0 ? 'masculin' : 'feminin'
-    }
-  }, [index])
+  // useEffect(() => {
+  //   if (index) {
+  //     const defaultGenre = index % 2 === 0 ? 'masculin' : 'feminin'
+  //   }
+  // }, [index])
 
   return (
     <>
       <div className="relative border-y grid grid-cols-3 gap-x-4 gap-y-2 px-8 py-3 w-full">
         <ButtonWithIcon
           className="absolute h-[20px] right-0 top-0"
-          onClick={handleClose}
+          onClick={(event) => handleClose(event, index)}
           icon={<XMarkIcon width={18} height={18} />}
         ></ButtonWithIcon>
         <div style={{ display: 'none' }}>
@@ -65,8 +117,8 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             type="text"
             name={`nom_enfant_${index}`}
             id={`nom_enfant_${index}`}
-            value={formData[`nom_enfant_${index}`]}
-            onChange={handleInputChange}
+            value={formEmploye.enfant[index]?.nom || ''}
+            onChange={(event) => handleInputChange(event, index)}
             placeholder="Nom de l'enfant"
             required
             className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px] text-sm"
@@ -81,8 +133,8 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             type="text"
             name={`prenom_enfant_${index}`}
             id={`prenom_enfant_${index}`}
-            value={formData[`prenom_enfant_${index}`]}
-            onChange={handleInputChange}
+            value={formEmploye.enfant[index]?.prenom || ''}
+            onChange={(event) => handleInputChange(event, index)}
             required
             placeholder="Prénom de l'enfant"
             className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px] text-sm"
@@ -97,8 +149,8 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             type="date"
             name={`date_naissance_enfant_${index}`}
             id={`date_naissance_enfant_${index}`}
-            value={formData[`date_naissance_enfant_${index}`]}
-            onChange={handleInputChange}
+            value={formEmploye.enfant[index]?.date_naissance || ''}
+            onChange={(event) => handleInputChange(event, index)}
             required
             className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px] text-sm"
           />
@@ -112,8 +164,8 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             type="text"
             name={`lieu_naissance_enfant_${index}`}
             id={`lieu_naissance_enfant_${index}`}
-            value={formData[`lieu_naissance_enfant_${index}`]}
-            onChange={handleInputChange}
+            value={formEmploye.enfant[index]?.lieu_naissance || ''}
+            onChange={(event) => handleInputChange(event, index)}
             required
             placeholder="Toamasina..."
             className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px] text-sm"
@@ -130,13 +182,8 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
                   name={`genre_enfant_${index}`}
                   id={`masculin_${index}`}
                   value={EnumGenre.MASCULIN}
-                  checked={formData.genre === EnumGenre.MASCULIN}
-                  onChange={(event) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      genre: event.target.value as EnumGenre,
-                    }))
-                  }
+                  checked={formEmploye.enfant[index]?.genre === EnumGenre.MASCULIN}
+                  onChange={(event) => handleInputChange(event, index)}
                 />
               </div>
               <label className="text-sm" htmlFor={`masculin_${index}`}>
@@ -151,13 +198,8 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
                   name={`genre_enfant_${index}`}
                   id={`feminin_${index}`}
                   value={EnumGenre.FEMININ}
-                  checked={formData.genre === EnumGenre.FEMININ}
-                  onChange={(event) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      genre: event.target.value as EnumGenre,
-                    }))
-                  }
+                  checked={formEmploye.enfant[index]?.genre === EnumGenre.FEMININ}
+                  onChange={(event) => handleInputChange(event, index)}
                 />
               </div>
               <label className="text-sm" htmlFor={`feminin_${index}`}>
@@ -177,47 +219,27 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
  * @return {ReactElement} The rendered component.
  */
 const InfoPersoEnfantEmploye: React.FC = () => {
-  const [nombreEnfant, setNombreEnfant] = useState(0)
-  const [formData, setFormData] = useState<{ enfants: IEnfantEmploye[] }>({
-    enfants: Array.from({ length: nombreEnfant }, () => ({
-      id: 0,
+  const formEmploye = useAppSelector((state) => state.formEmploye)
+  const dispatch = useAppDispatch()
+
+  const addEnfant = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+
+    const nouvelEnfant: IEnfantEmploye = {
+      id: formEmploye.enfant.length + 1,
       nom: '',
       prenom: '',
       date_naissance: '',
       lieu_naissance: '',
       genre: EnumGenre.MASCULIN,
-    })),
-  })
+    }
 
-  const addEnfant = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    setNombreEnfant((prevNombreEnfant) => prevNombreEnfant + 1)
-    setFormData((prevData) => ({
-      ...prevData,
-      enfants: [
-        ...prevData.enfants,
-        {
-          id: 0, // ou un identifiant unique approprié
-          nom: '',
-          prenom: '',
-          date_naissance: '',
-          lieu_naissance: '',
-          genre: EnumGenre.MASCULIN,
-        },
-      ],
-    }))
+    dispatch(formEmployeAjoutEnfant(nouvelEnfant))
   }
 
-  const handleCloseEnfant = (index: number) => {
-    setFormData((prevData) => {
-      const updatedEnfants = [...prevData.enfants]
-      updatedEnfants.splice(index, 1)
-
-      return {
-        ...prevData,
-        enfants: updatedEnfants,
-      }
-    })
+  const handleCloseEnfant = (event: React.MouseEvent<HTMLButtonElement>, index: number) => {
+    event.preventDefault()
+    dispatch(formEmployeSupprimerEnfant(index))
   }
 
   return (
@@ -231,19 +253,15 @@ const InfoPersoEnfantEmploye: React.FC = () => {
             onClick={addEnfant}
           />
         </div>
-        {nombreEnfant > 0 && (
-          <>
-            {formData.enfants.map((enfant, index) => (
-              <div key={index} className="flex bg-customRed-25 gap-y-2 mt-2 shadow-md">
-                <FormEnfants
-                  key={index}
-                  index={index}
-                  handleClose={() => handleCloseEnfant(index)}
-                />
-              </div>
-            ))}
-          </>
-        )}
+        {formEmploye.enfant.map((enfant, index) => (
+          <div key={enfant.id} className="flex bg-customRed-25 gap-y-2 mt-2 shadow-md">
+            <FormEnfants
+              key={index}
+              index={enfant.id}
+              handleClose={(event, index) => handleCloseEnfant(event, enfant.id)}
+            />
+          </div>
+        ))}
       </div>
     </>
   )
