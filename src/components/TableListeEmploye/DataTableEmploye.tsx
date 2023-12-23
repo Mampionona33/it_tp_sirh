@@ -127,7 +127,7 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
 
       <div className="overflow-x-auto w-full">
         <table className="w-full table-auto ">
-          <thead className="text-sm uppercase  bg-customRed-100">
+          <thead className="text-sm uppercase  bg-customRed-200">
             {headerGroups.length > 0 &&
               headerGroups.map((headerGroup, key) => (
                 <React.Fragment key={`headerGroup_${key}`}>
@@ -140,7 +140,7 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
                           {header.column.id !== 'Actions' && (
                             <th
                               scope="col"
-                              className="px-6 py-3"
+                              className="px-6 py-3 text-white"
                               key={`header_${header.id}_${headerIndex}`}
                             >
                               {header.isPlaceholder
@@ -154,7 +154,7 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
                       )
                     })}
                     {rows.length > 0 && (rows[0] as any).original.actions && (
-                      <th scope="col" className="px-6 py-3">
+                      <th scope="col" className="px-6 py-3 text-white">
                         Actions
                       </th>
                     )}
