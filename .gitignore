@@ -32,4 +32,5 @@ yarn-error.log*
 .vercel
 .vercelignore
 .firebase
-
+firebase.json
+.firebaserc
