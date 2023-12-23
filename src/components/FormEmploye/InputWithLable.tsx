@@ -72,7 +72,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
       {type === 'radio' && options ? (
         // Render a fieldset for radio buttons
         <fieldset>
-          <legend className="text-base">{label}</legend>
+          <legend className="text-sm">{label}</legend>
           {options.map((option, index) => (
             <div key={index} className="flex items-center">
               <div className="text-center mr-2">
@@ -84,9 +84,12 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
                   value={option.value}
                   checked={value === option.value}
                   onChange={(event) => onChange(event, index)}
+                  className="text-sm"
                 />
               </div>
-              <label htmlFor={`${name}_${index}`}>{option.label}</label>
+              <label htmlFor={`${name}_${index}`} className="text-sm">
+                {option.label}
+              </label>
             </div>
           ))}
         </fieldset>
