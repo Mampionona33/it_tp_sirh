@@ -26,6 +26,7 @@ export interface IEmploye {
   num_osie?: string
   prime_et_avantage_permanent?: PrimeEtAvantagePermanent[]
   depart?: Depart
+  actif?: boolean
 }
 
 export interface ContactUrgence {
