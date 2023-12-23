@@ -140,7 +140,7 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
                           {header.column.id !== 'Actions' && (
                             <th
                               scope="col"
-                              className="px-6 py-3 text-white"
+                              className="px-3 py-2 text-white"
                               key={`header_${header.id}_${headerIndex}`}
                             >
                               {header.isPlaceholder
@@ -154,7 +154,7 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
                       )
                     })}
                     {rows.length > 0 && (rows[0] as any).original.actions && (
-                      <th scope="col" className="px-6 py-3 text-white">
+                      <th scope="col" className="px-3 py-2 text-white">
                         Actions
                       </th>
                     )}
