@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import MainHeader from './MainHeader'
 import InfoPersoEmploye from './InfoPersoEmploye'
 import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
@@ -49,11 +49,13 @@ const removeEnfantInputsFromData = (pattern, data): void => {
 
 const FormEmploye = () => {
   const navigate = useNavigate()
+  const radioValuesRef = useRef<{ [name: string]: string }>({})
 
   const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault()
 
     const formElements = (ev.target as HTMLFormElement).elements
+
     let employeData: { [key: string]: string | number | boolean | IEnfantEmploye[] } = {}
     const listEnfant = []
 
@@ -76,6 +78,10 @@ const FormEmploye = () => {
         if (element.name.includes('_enfant_')) {
           employeData['enfant'] = formatListEnfant(element.name, element.value, listEnfant)
           removeEnfantInputsFromData(element.name, employeData)
+        }
+        if (element.type === 'radio' && (element as HTMLInputElement).checked) {
+          console.log(element.name, element.value)
+          employeData[radioValuesRef.current[element.name]] = element.value
         }
       }
     }

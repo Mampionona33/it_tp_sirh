@@ -79,15 +79,15 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
                 <input
                   placeholder={placeholder}
                   type="radio"
-                  id={`${name}_${index}`}
-                  name={name}
+                  id={`${name}_${index}_${option.value}`}
+                  name={`${name}`}
                   value={option.value}
                   checked={value === option.value}
                   onChange={(event) => onChange(event, index)}
                   className="text-sm"
                 />
               </div>
-              <label htmlFor={`${name}_${index}`} className="text-sm">
+              <label htmlFor={`${name}`} className="text-sm">
                 {option.label}
               </label>
             </div>

@@ -4,15 +4,15 @@ import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
 import { EnumGenre, IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
 
-interface IFormEnfant {
-  nom: string
-  prenom: string
-  date_naissance: string
-  adresse: string
-  lieu_naissance: string
-  cin: string
-  genre: string
-}
+// interface IFormEnfant {
+//   nom: string
+//   prenom: string
+//   date_naissance: string
+//   adresse: string
+//   lieu_naissance: string
+//   cin: string
+//   genre: string
+// }
 
 interface IFormEnfantsProps {
   index: number
@@ -20,14 +20,13 @@ interface IFormEnfantsProps {
 }
 
 const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
-  const [formData, setFormData] = useState<IFormEnfant>({
+  const [formData, setFormData] = useState<IEnfantEmploye>({
+    id: 0,
     nom: '',
     prenom: '',
     date_naissance: '',
-    adresse: '',
     lieu_naissance: '',
-    cin: '',
-    genre: '',
+    genre: EnumGenre.MASCULIN,
   })
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,10 +129,13 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
                   type="radio"
                   name={`genre_enfant_${index}`}
                   id={`masculin_${index}`}
-                  value="masculin"
-                  checked={formData.genre === 'masculin' || formData.genre === ''}
+                  value={EnumGenre.MASCULIN}
+                  checked={formData.genre === EnumGenre.MASCULIN}
                   onChange={(event) =>
-                    setFormData((prevData) => ({ ...prevData, genre: event.target.value }))
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      genre: event.target.value as EnumGenre,
+                    }))
                   }
                 />
               </div>
@@ -148,10 +150,13 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
                   type="radio"
                   name={`genre_enfant_${index}`}
                   id={`feminin_${index}`}
-                  value="feminin"
-                  checked={formData.genre === 'feminin'}
+                  value={EnumGenre.FEMININ}
+                  checked={formData.genre === EnumGenre.FEMININ}
                   onChange={(event) =>
-                    setFormData((prevData) => ({ ...prevData, genre: event.target.value }))
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      genre: event.target.value as EnumGenre,
+                    }))
                   }
                 />
               </div>
@@ -180,7 +185,7 @@ const InfoPersoEnfantEmploye: React.FC = () => {
       prenom: '',
       date_naissance: '',
       lieu_naissance: '',
-      genre: 0,
+      genre: EnumGenre.MASCULIN,
     })),
   })
 
@@ -197,7 +202,7 @@ const InfoPersoEnfantEmploye: React.FC = () => {
           prenom: '',
           date_naissance: '',
           lieu_naissance: '',
-          genre: 0,
+          genre: EnumGenre.MASCULIN,
         },
       ],
     }))

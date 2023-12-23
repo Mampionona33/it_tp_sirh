@@ -7,7 +7,7 @@ export interface IEmploye {
   tel?: string
   email?: string
   num_cin: string
-  genre: number
+  genre: EnumGenre
   contact_urgence?: ContactUrgence[]
   conjoint?: Conjoint
   enfant?: IEnfantEmploye[]
@@ -52,7 +52,7 @@ export interface IEnfantEmploye {
   prenom: string
   date_naissance: string
   lieu_naissance: string
-  genre: number
+  genre: EnumGenre
 }
 
 export enum EnumGenre {
