@@ -7,10 +7,10 @@ export interface IEmploye {
   tel?: string
   email?: string
   num_cin: string
-  genre: string
+  genre: number
   contact_urgence?: ContactUrgence[]
   conjoint?: Conjoint
-  enfant?: Enfant[]
+  enfant?: IEnfantEmploye[]
   titre_poste: string
   matricule: string
   categorie: string
@@ -26,7 +26,7 @@ export interface IEmploye {
   num_osie?: string
   prime_et_avantage_permanent?: PrimeEtAvantagePermanent[]
   depart?: Depart
-  actif?: boolean
+  actif: boolean
 }
 
 export interface ContactUrgence {
@@ -46,13 +46,18 @@ export interface Conjoint {
   email: string
 }
 
-export interface Enfant {
+export interface IEnfantEmploye {
   id: number
   nom: string
   prenom: string
   date_naissance: string
   lieu_naissance: string
   genre: number
+}
+
+export enum EnumGenre {
+  MASCULIN = 'masculin',
+  FEMININ = 'feminin',
 }
 
 export interface PrimeEtAvantagePermanent {

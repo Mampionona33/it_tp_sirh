@@ -4,20 +4,58 @@ import InfoPersoEmploye from './InfoPersoEmploye'
 import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
 import InfoPro from './InfoPro'
 import InformationPaie from './InformationPaie'
-import PrimeEtAvantageParMois from './PrimeEtAvantageParMois'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
 import FormResiliationContrat from './FormResiliationContrat'
-import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import employeService from '@src/services/EmployeeService'
 import { useNavigate } from 'react-router-dom'
+import { IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
+
+interface IFormatListEnfant {
+  pattern: string
+  value: any
+  list: IEnfantEmploye[]
+}
+
+const formatListEnfant: (pattern: string, value: any, list: any[]) => any[] = (
+  pattern,
+  value,
+  list,
+) => {
+  if (pattern.includes('_enfant_')) {
+    const parts = pattern.split('_')
+    const index = parseInt(parts[parts.length - 1], 10)
+    const key = pattern.slice(0, pattern.indexOf('_enfant'))
+    const formatedValue = key === 'id' ? parseFloat(value) : value
+    let enfant = { [key]: formatedValue } as IEnfantEmploye
+
+    // Ajouter l'enfant à la liste si l'index est valide
+    if (index < list.length) {
+      list[index] = { ...list[index], ...enfant }
+    } else {
+      // Ajouter l'enfant à la fin de la liste
+      list.push(enfant)
+    }
+  }
+
+  return list
+}
+
+const removeEnfantInputsFromData = (pattern, data): void => {
+  if (pattern.includes('_enfant_')) {
+    // Supprimer l'enfant de employeData
+    delete data[pattern]
+  }
+}
 
 const FormEmploye = () => {
   const navigate = useNavigate()
+
   const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault()
 
     const formElements = (ev.target as HTMLFormElement).elements
-    const employeData: { [key: string]: string | number | boolean } = {}
+    let employeData: { [key: string]: string | number | boolean | IEnfantEmploye[] } = {}
+    const listEnfant = []
 
     for (let i = 0; i < formElements.length; i++) {
       const element = formElements[i] as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -32,15 +70,22 @@ const FormEmploye = () => {
         } else {
           employeData[element.name] = element.value
         }
+
+        employeData['actif'] = 1
+
+        if (element.name.includes('_enfant_')) {
+          employeData['enfant'] = formatListEnfant(element.name, element.value, listEnfant)
+          removeEnfantInputsFromData(element.name, employeData)
+        }
       }
     }
 
-    console.log(employeData)
     try {
-      const createEmploye = await employeService.create(employeData)
-      if (createEmploye.status === 201) {
-        navigate('/employees/list')
-      }
+      console.log(employeData)
+      // const createEmploye = await employeService.create(employeData)
+      // if (createEmploye.status === 201) {
+      //   navigate('/employees/list')
+      // }
     } catch (error) {
       throw error
     }
@@ -57,7 +102,7 @@ const FormEmploye = () => {
               <InfoPersoEnfantEmploye />
               <InfoPro />
               <InformationPaie />
-              <PrimeEtAvantageParMois />
+              {/* <PrimeEtAvantageParMois /> */}
               <FormEmployeGroupButton />
             </form>
             <FormResiliationContrat />

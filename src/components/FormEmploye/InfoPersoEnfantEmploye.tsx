@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
+import { EnumGenre, IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
 
 interface IFormEnfant {
   nom: string
@@ -53,16 +54,19 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
           onClick={handleClose}
           icon={<XMarkIcon width={18} height={18} />}
         ></ButtonWithIcon>
+        <div style={{ display: 'none' }}>
+          <input type="number" name={`id_enfant_${index}`} value={index} readOnly />
+        </div>
 
         <div className="flex flex-col">
-          <label className="text-sm" htmlFor={`nom_${index}`}>
+          <label className="text-sm" htmlFor={`nom_enfant_${index}`}>
             Nom *
           </label>
           <input
             type="text"
-            name={`nom_${index}`}
-            id={`nom_${index}`}
-            value={formData[`nom_${index}`]}
+            name={`nom_enfant_${index}`}
+            id={`nom_enfant_${index}`}
+            value={formData[`nom_enfant_${index}`]}
             onChange={handleInputChange}
             placeholder="Nom de l'enfant"
             required
@@ -71,14 +75,14 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
         </div>
 
         <div className="flex flex-col">
-          <label className="text-sm" htmlFor={`prenom_${index}`}>
+          <label className="text-sm" htmlFor={`prenom_enfant_${index}`}>
             Prénom *
           </label>
           <input
             type="text"
-            name={`prenom_${index}`}
-            id={`prenom_${index}`}
-            value={formData[`prenom_${index}`]}
+            name={`prenom_enfant_${index}`}
+            id={`prenom_enfant_${index}`}
+            value={formData[`prenom_enfant_${index}`]}
             onChange={handleInputChange}
             required
             placeholder="Prénom de l'enfant"
@@ -87,14 +91,14 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
         </div>
 
         <div className="flex flex-col">
-          <label className="text-sm" htmlFor={`date_naissance_${index}`}>
+          <label className="text-sm" htmlFor={`date_naissance_enfant_${index}`}>
             Date de naissance *
           </label>
           <input
             type="date"
-            name={`date_naissance_${index}`}
-            id={`date_naissance_${index}`}
-            value={formData[`date_naissance_${index}`]}
+            name={`date_naissance_enfant_${index}`}
+            id={`date_naissance_enfant_${index}`}
+            value={formData[`date_naissance_enfant_${index}`]}
             onChange={handleInputChange}
             required
             className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px] text-sm"
@@ -102,14 +106,14 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
         </div>
 
         <div className="flex flex-col">
-          <label className="text-sm" htmlFor={`lieu_naissance_${index}`}>
+          <label className="text-sm" htmlFor={`lieu_naissance_enfant_${index}`}>
             Lieu de naissance *
           </label>
           <input
             type="text"
-            name={`lieu_naissance_${index}`}
-            id={`lieu_naissance_${index}`}
-            value={formData[`lieu_naissance_${index}`]}
+            name={`lieu_naissance_enfant_${index}`}
+            id={`lieu_naissance_enfant_${index}`}
+            value={formData[`lieu_naissance_enfant_${index}`]}
             onChange={handleInputChange}
             required
             placeholder="Toamasina..."
@@ -124,7 +128,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
               <div className="text-center">
                 <input
                   type="radio"
-                  name={`genre_${index}`}
+                  name={`genre_enfant_${index}`}
                   id={`masculin_${index}`}
                   value="masculin"
                   checked={formData.genre === 'masculin' || formData.genre === ''}
@@ -142,7 +146,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
               <div className="text-center">
                 <input
                   type="radio"
-                  name={`genre_${index}`}
+                  name={`genre_enfant_${index}`}
                   id={`feminin_${index}`}
                   value="feminin"
                   checked={formData.genre === 'feminin'}
@@ -169,13 +173,14 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
  */
 const InfoPersoEnfantEmploye: React.FC = () => {
   const [nombreEnfant, setNombreEnfant] = useState(0)
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{ enfants: IEnfantEmploye[] }>({
     enfants: Array.from({ length: nombreEnfant }, () => ({
+      id: 0,
       nom: '',
       prenom: '',
       date_naissance: '',
       lieu_naissance: '',
-      genre_enfant: '',
+      genre: 0,
     })),
   })
 
@@ -186,10 +191,18 @@ const InfoPersoEnfantEmploye: React.FC = () => {
       ...prevData,
       enfants: [
         ...prevData.enfants,
-        { nom: '', prenom: '', date_naissance: '', lieu_naissance: '', genre_enfant: '' },
+        {
+          id: 0, // ou un identifiant unique approprié
+          nom: '',
+          prenom: '',
+          date_naissance: '',
+          lieu_naissance: '',
+          genre: 0,
+        },
       ],
     }))
   }
+
   const handleCloseEnfant = (index: number) => {
     setFormData((prevData) => {
       const updatedEnfants = [...prevData.enfants]

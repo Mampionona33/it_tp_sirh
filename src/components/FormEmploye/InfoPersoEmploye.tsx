@@ -1,5 +1,6 @@
 import * as React from 'react'
 import InputWithLabel, { IInputWithLabelOptionsProps, IInputWithLabelProps } from './InputWithLable'
+import { EnumGenre } from '@src/interfaces/interfaceEmploye'
 
 function InfoPersoEmploye() {
   const [formData, setFormData] = React.useState({
@@ -9,11 +10,13 @@ function InfoPersoEmploye() {
     adresse: '',
     lieu_naissance: '',
     cin: '',
-    genre: 'homme',
+    genre: EnumGenre.MASCULIN,
   })
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
+    console.log('Input changed:', name, value)
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -21,8 +24,8 @@ function InfoPersoEmploye() {
   }
 
   const genreOptions: IInputWithLabelOptionsProps[] = [
-    { label: 'Homme', value: 'homme' },
-    { label: 'Femme', value: 'Femme' },
+    { label: 'Homme', value: EnumGenre.MASCULIN },
+    { label: 'Femme', value: EnumGenre.FEMININ },
   ]
 
   const inputs: IInputWithLabelProps[] = [
