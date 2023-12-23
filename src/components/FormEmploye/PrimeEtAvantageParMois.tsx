@@ -135,7 +135,7 @@ const TablePrimeEtAvantage: React.FC = () => {
           {`Aucune prime ou avantage n'a encore été ajouté`}
         </div>
       ) : (
-        <table className="table-auto w-full bg-customRed-200 py-3">
+        <table className="table-auto w-full bg-customRed-200 border-y py-3">
           <thead>
             <tr className="text-white py-2">
               <th className="text-center">Nature</th>

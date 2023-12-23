@@ -76,7 +76,7 @@ const routes = [
   { path: '/theme/typography', name: 'Typography', element: Typography },
 
   // Employe path def
-  { path: '/employees', name: 'Employés', element: Cards, exact: true },
+  { path: '/employees', name: 'Employés', element: ListEmployes, exact: true },
   { path: '/employees/list', name: 'List', element: ListEmployes, exact: true },
   { path: '/employees/ajout', name: 'Ajout', element: AjoutEmploye, exact: true },
   {

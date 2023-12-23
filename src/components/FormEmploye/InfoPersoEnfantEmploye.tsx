@@ -49,13 +49,15 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
     <>
       <div className="relative border-y grid grid-cols-3 gap-x-4 gap-y-2 px-8 py-3 w-full">
         <ButtonWithIcon
-          className="absolute right-0 top-0"
+          className="absolute h-[20px] right-0 top-0"
           onClick={handleClose}
-          icon={<XMarkIcon width={20} height={20} />}
+          icon={<XMarkIcon width={18} height={18} />}
         ></ButtonWithIcon>
 
         <div className="flex flex-col">
-          <label htmlFor={`nom_${index}`}>Nom *</label>
+          <label className="text-sm" htmlFor={`nom_${index}`}>
+            Nom *
+          </label>
           <input
             type="text"
             name={`nom_${index}`}
@@ -64,12 +66,14 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             onChange={handleInputChange}
             placeholder="Nom de l'enfant"
             required
-            className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
+            className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px] text-sm"
           />
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor={`prenom_${index}`}>Prénom *</label>
+          <label className="text-sm" htmlFor={`prenom_${index}`}>
+            Prénom *
+          </label>
           <input
             type="text"
             name={`prenom_${index}`}
@@ -78,12 +82,14 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             onChange={handleInputChange}
             required
             placeholder="Prénom de l'enfant"
-            className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
+            className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px] text-sm"
           />
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor={`date_naissance_${index}`}>Date de naissance *</label>
+          <label className="text-sm" htmlFor={`date_naissance_${index}`}>
+            Date de naissance *
+          </label>
           <input
             type="date"
             name={`date_naissance_${index}`}
@@ -91,12 +97,14 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             value={formData[`date_naissance_${index}`]}
             onChange={handleInputChange}
             required
-            className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
+            className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px] text-sm"
           />
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor={`lieu_naissance_${index}`}>Lieu de naissance *</label>
+          <label className="text-sm" htmlFor={`lieu_naissance_${index}`}>
+            Lieu de naissance *
+          </label>
           <input
             type="text"
             name={`lieu_naissance_${index}`}
@@ -105,13 +113,13 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
             onChange={handleInputChange}
             required
             placeholder="Toamasina..."
-            className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px]"
+            className="border border-customRed-50 focus:outline-customRed-100 p-2 h-[28px] text-sm"
           />
         </div>
 
         <div className="flex shadow-inner p-2">
           <fieldset>
-            <legend className="text-base">Genre</legend>
+            <legend className="text-sm">Genre</legend>
             <div className="grid grid-cols-2">
               <div className="text-center">
                 <input
@@ -125,7 +133,9 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
                   }
                 />
               </div>
-              <label htmlFor={`masculin_${index}`}>Masculin</label>
+              <label className="text-sm" htmlFor={`masculin_${index}`}>
+                Masculin
+              </label>
             </div>
 
             <div className="grid grid-cols-2">
@@ -141,7 +151,9 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
                   }
                 />
               </div>
-              <label htmlFor={`feminin_${index}`}>Féminin</label>
+              <label className="text-sm" htmlFor={`feminin_${index}`}>
+                Féminin
+              </label>
             </div>
           </fieldset>
         </div>
@@ -150,6 +162,11 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
   )
 }
 
+/**
+ * Renders a component for managing personal information of employed children.
+ *
+ * @return {ReactElement} The rendered component.
+ */
 const InfoPersoEnfantEmploye: React.FC = () => {
   const [nombreEnfant, setNombreEnfant] = useState(0)
   const [formData, setFormData] = useState({
