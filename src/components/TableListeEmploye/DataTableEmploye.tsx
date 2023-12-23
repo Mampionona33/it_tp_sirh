@@ -25,7 +25,7 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
         cell: (info) => {
           const cellValue = info.getValue() as string
           return (
-            <div className="px-6 py-3 justify-center flex gap-2">
+            <div className="px-3 py-1 justify-center flex gap-2">
               <input
                 type="checkbox"
                 name="id"
