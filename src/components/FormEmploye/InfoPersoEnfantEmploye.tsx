@@ -10,16 +10,6 @@ import {
   setFormEmploye,
 } from '@src/redux/FormEmploye/formEmployeReducer'
 
-// interface IFormEnfant {
-//   nom: string
-//   prenom: string
-//   date_naissance: string
-//   adresse: string
-//   lieu_naissance: string
-//   cin: string
-//   genre: string
-// }
-
 interface IFormEnfantsProps {
   index: number
   handleClose: (event: React.MouseEvent<HTMLButtonElement>, index: number) => void
@@ -75,11 +65,37 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       onChange: (ev) => handleInputChange(ev, index),
       placeholder: "Nom de l'enfant",
     },
+    {
+      label: 'Prénom',
+      required: true,
+      name: 'prenom',
+      type: 'text',
+      value: formData.prenom || '',
+      placeholder: "Prénom de l'enfant",
+      onChange: (ev) => handleInputChange(ev, index),
+    },
+    {
+      label: 'Date de naissance',
+      required: true,
+      name: 'date_naissance',
+      type: 'date',
+      value: formData.date_naissance || '2005-01-01',
+      onChange: (ev) => handleInputChange(ev, index),
+    },
+    {
+      label: 'Lieu de naissance',
+      required: true,
+      name: 'lieu_naissance',
+      type: 'text',
+      value: formData.lieu_naissance || '',
+      onChange: (ev) => handleInputChange(ev, index),
+      placeholder: 'Toamasina...',
+    },
   ]
 
   return (
     <>
-      <div className="flex relative bg-customRed-25 mt-2 shadow-sm border-y">
+      <div className="flex relative w-full">
         <ButtonWithIcon
           className="absolute h-[20px] right-0 top-0"
           onClick={(event) => handleClose(event, index)}
