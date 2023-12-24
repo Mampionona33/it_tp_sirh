@@ -18,8 +18,8 @@ export interface IEmploye {
   date_embauche: string
   departement: string
   lieu_travail: string
-  est_cadre?: boolean
-  travail_de_nuit: boolean
+  est_cadre?: number
+  travail_de_nuit: number
   salaire_de_base: number
   rib?: string
   mode_payement_salaire: string
@@ -27,7 +27,7 @@ export interface IEmploye {
   num_osie?: string
   prime_et_avantage_permanent?: PrimeEtAvantagePermanent[]
   depart?: Depart
-  actif: boolean
+  actif: number
 }
 
 export interface ContactUrgence {

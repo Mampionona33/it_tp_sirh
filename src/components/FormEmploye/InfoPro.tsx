@@ -1,27 +1,22 @@
 import React from 'react'
 import InputWithLabel, { IInputWithLabelProps, IInputWithLabelOptionsProps } from './InputWithLable'
 import { useSelector } from 'react-redux'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
 const InfoPro = () => {
+  const dispatch = useAppDispatch()
+  const formEmploye = useAppSelector((state) => state.formEmploye)
   const catOptions = useSelector((state: any) => state.cateogieEmploye.data)
-  const [formData, setFormData] = React.useState({
-    titre_poste: '',
-    matricule: '',
-    cat: '',
-    departement: '',
-    date_embauche: '',
-    lieu_travail: '',
-    cadre: 0,
-    travail_de_nuit: 0,
-  })
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { name, value } = event.target ?? { name: '', value: '' }
-    setFormData((prevData) => {
-      return {
-        ...prevData,
+    dispatch(
+      setFormEmploye({
+        ...formEmploye,
         [name]: name === 'cadre' || name === 'travail_de_nuit' ? parseInt(value) : value,
-      }
-    })
+      }),
+    )
   }
 
   const radioOption: IInputWithLabelOptionsProps[] = [
@@ -33,7 +28,7 @@ const InfoPro = () => {
     {
       label: 'Matricule',
       name: 'matricule',
-      value: formData.matricule,
+      value: formEmploye.matricule,
       type: 'text',
       required: true,
       placeholder: 'Matricule',
@@ -42,7 +37,7 @@ const InfoPro = () => {
     {
       label: 'Titre du poste',
       name: 'titre_poste',
-      value: formData.titre_poste,
+      value: formEmploye.titre_poste,
       type: 'text',
       required: true,
       placeholder: 'Directeur ...',
@@ -51,7 +46,7 @@ const InfoPro = () => {
     {
       label: 'Catégorie',
       name: 'cat',
-      value: formData.cat,
+      value: formEmploye.categorie,
       type: 'select',
       required: true,
       options: catOptions,
@@ -61,7 +56,7 @@ const InfoPro = () => {
     {
       label: 'Département',
       name: 'departement',
-      value: formData.departement,
+      value: formEmploye.departement,
       type: 'text',
       required: true,
       placeholder: 'Sérvice ...',
@@ -70,7 +65,7 @@ const InfoPro = () => {
     {
       label: "Date d'embauche",
       name: 'date_embauche',
-      value: formData.date_embauche,
+      value: formEmploye.date_embauche,
       type: 'date',
       required: true,
       onChange: handleInputChange,
@@ -78,7 +73,7 @@ const InfoPro = () => {
     {
       label: 'Lieu de travail',
       name: 'lieu_travail',
-      value: formData.lieu_travail,
+      value: formEmploye.lieu_travail,
       type: 'text',
       required: true,
       placeholder: 'Toamasina ...',
@@ -87,7 +82,7 @@ const InfoPro = () => {
     {
       label: 'Est un cadre',
       name: 'cadre',
-      value: formData.cadre,
+      value: formEmploye.est_cadre,
       type: 'radio',
       required: true,
       options: radioOption,
@@ -96,7 +91,7 @@ const InfoPro = () => {
     {
       label: 'Travail de nuit',
       name: 'travail_de_nuit',
-      value: formData.travail_de_nuit,
+      value: formEmploye.travail_de_nuit,
       type: 'radio',
       required: true,
       options: radioOption,
