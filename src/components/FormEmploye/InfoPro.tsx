@@ -3,6 +3,7 @@ import InputWithLabel, { IInputWithLabelProps, IInputWithLabelOptionsProps } fro
 import { useSelector } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
+import { EnumTravailDeNuit } from '@src/interfaces/interfaceEmploye'
 
 const InfoPro = () => {
   const dispatch = useAppDispatch()
@@ -20,8 +21,8 @@ const InfoPro = () => {
   }
 
   const radioOption: IInputWithLabelOptionsProps[] = [
-    { label: 'Oui', value: 1 },
-    { label: 'Non', value: 0 },
+    { label: 'Oui', value: EnumTravailDeNuit.OUI },
+    { label: 'Non', value: EnumTravailDeNuit.NON },
   ]
 
   const inputs: IInputWithLabelProps[] = [

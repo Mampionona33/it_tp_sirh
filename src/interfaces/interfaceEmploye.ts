@@ -19,7 +19,7 @@ export interface IEmploye {
   departement: string
   lieu_travail: string
   est_cadre?: number
-  travail_de_nuit: number
+  travail_de_nuit: EnumTravailDeNuit
   salaire_de_base: number
   rib?: string
   mode_payement_salaire: string
@@ -28,6 +28,11 @@ export interface IEmploye {
   prime_et_avantage_permanent?: PrimeEtAvantagePermanent[]
   depart?: Depart
   actif: number
+}
+
+export enum EnumTravailDeNuit {
+  OUI = 'oui',
+  NON = 'non',
 }
 
 export interface ContactUrgence {
