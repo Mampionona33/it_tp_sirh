@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
@@ -6,13 +6,6 @@ import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 const InformationPaie = () => {
   const dispatch = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
-  const [state, setState] = useState({
-    salaire_de_base: 0,
-    rib: '',
-    mode_payement_salaire: '',
-    num_cnaps: '',
-    num_osie: '',
-  })
 
   const inputs: IInputWithLabelProps[] = [
     {
@@ -59,16 +52,10 @@ const InformationPaie = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { name, value } = event.target ?? { name: '', value: '' }
-    // setState((prevState) => {
-    //   return {
-    //     ...prevState,
-    //     [name]: name === 'cadre' || name === 'travail_de_nuit' ? parseInt(value) : value,
-    //   }
-    // })
+
     dispatch(
       setFormEmploye({
         ...formEmploye,
-        // [name]: name === 'cadre' || name === 'travail_de_nuit' ? parseInt(value) : value,
         [name]: value,
       }),
     )
