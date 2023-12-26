@@ -25,6 +25,7 @@ function InfoPersoEmploye() {
 
   const inputs: IInputWithLabelProps[] = [
     {
+      id: 'nom_employe',
       label: 'Nom',
       required: true,
       name: 'nom',
@@ -34,6 +35,7 @@ function InfoPersoEmploye() {
       placeholder: 'Nom employé',
     },
     {
+      id: 'prenom_employe',
       label: 'Prénom',
       required: true,
       name: 'prenom',
@@ -43,6 +45,7 @@ function InfoPersoEmploye() {
       placeholder: 'Prénom employé',
     },
     {
+      id: 'adresse_employe',
       label: 'Adresse',
       required: true,
       name: 'adresse',
@@ -52,6 +55,7 @@ function InfoPersoEmploye() {
       placeholder: 'Toamasina ...',
     },
     {
+      id: 'date_naissance_employe',
       label: 'Date de naissance',
       required: true,
       name: 'date_naissance',
@@ -60,6 +64,7 @@ function InfoPersoEmploye() {
       onChange: handleInputChange,
     },
     {
+      id: 'lieu_naissance_employe',
       label: 'Lieu de naissance',
       required: true,
       name: 'lieu_naissance',
@@ -69,6 +74,7 @@ function InfoPersoEmploye() {
       placeholder: 'Toamasina...',
     },
     {
+      id: 'num_cin_employe',
       label: 'N° CIN',
       required: true,
       name: 'num_cin',
@@ -78,6 +84,7 @@ function InfoPersoEmploye() {
       placeholder: '000.000.000.000',
     },
     {
+      id: 'genre_employe',
       label: 'Genre',
       required: true,
       name: 'genre',

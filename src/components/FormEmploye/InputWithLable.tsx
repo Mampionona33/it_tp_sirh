@@ -2,6 +2,7 @@ import React, { ChangeEvent } from 'react'
 import Select, { StylesConfig } from 'react-select'
 
 export interface IInputWithLabelProps {
+  id?: string
   label: string
   name: string
   type: string
@@ -21,6 +22,7 @@ export interface IInputWithLabelOptionsProps {
 }
 
 const InputWithLabel: React.FC<IInputWithLabelProps> = ({
+  id,
   label,
   name,
   type,
@@ -73,25 +75,28 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
         // Render a fieldset for radio buttons
         <fieldset>
           <legend className="text-sm">{label}</legend>
-          {options.map((option, index) => (
-            <div key={index} className="flex items-center">
-              <div className="text-center mr-2">
-                <input
-                  placeholder={placeholder}
-                  type="radio"
-                  id={`${name}_${index}_${option.value}`}
-                  name={`${name}`}
-                  value={option.value}
-                  checked={value === option.value}
-                  onChange={(event) => onChange(event, index)}
-                  className="text-sm"
-                />
+          {options.map((option, index) => {
+            const id = `${name}_${index}_${option.value}`
+            return (
+              <div key={index} className="flex items-center">
+                <div className="text-center mr-2">
+                  <input
+                    placeholder={placeholder}
+                    type="radio"
+                    id={id}
+                    name={`${name}`}
+                    value={option.value}
+                    checked={value === option.value}
+                    onChange={(event) => onChange(event, index)}
+                    className="text-sm"
+                  />
+                </div>
+                <label htmlFor={id} className="text-sm">
+                  {option.label}
+                </label>
               </div>
-              <label htmlFor={`${name}`} className="text-sm">
-                {option.label}
-              </label>
-            </div>
-          ))}
+            )
+          })}
         </fieldset>
       ) : type === 'select' && options ? (
         // Render a select dropdown using react-select
@@ -127,7 +132,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
         <input
           type={type}
           name={name}
-          id={name}
+          id={id || name}
           value={value}
           min={min}
           max={max}
