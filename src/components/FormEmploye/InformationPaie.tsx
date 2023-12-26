@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
 const InformationPaie = () => {
+  const dispatch = useAppDispatch()
+  const formEmploye = useAppSelector((state) => state.formEmploye)
   const [state, setState] = useState({
     salaire_de_base: 0,
     rib: '',
@@ -14,7 +18,7 @@ const InformationPaie = () => {
     {
       id: 'salaire_de_base',
       label: 'Salaire de base',
-      value: state.salaire_de_base,
+      value: formEmploye.salaire_de_base,
       name: 'salaire_de_base',
       type: 'number',
       required: true,
@@ -23,7 +27,7 @@ const InformationPaie = () => {
     {
       id: 'rib',
       label: 'RIB',
-      value: state.rib,
+      value: formEmploye.rib,
       name: 'rib',
       type: 'text',
       placeholder: 'RIB',
@@ -31,7 +35,7 @@ const InformationPaie = () => {
     {
       id: 'mode_payement_salaire',
       label: 'Mode de payement',
-      value: state.mode_payement_salaire,
+      value: formEmploye.mode_payement_salaire,
       name: 'mode_payement_salaire',
       type: 'text',
       required: true,
@@ -40,14 +44,14 @@ const InformationPaie = () => {
     {
       id: 'num_cnaps',
       label: "Numéros d'identification fiscale",
-      value: state.num_cnaps,
+      value: formEmploye.num_cnaps,
       name: 'num_cnaps',
       type: 'text',
     },
     {
       id: 'num_osie',
       label: 'Numéros OSIE',
-      value: state.num_osie,
+      value: formEmploye.num_osie,
       name: 'num_osie',
       type: 'text',
     },
@@ -55,12 +59,19 @@ const InformationPaie = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { name, value } = event.target ?? { name: '', value: '' }
-    setState((prevState) => {
-      return {
-        ...prevState,
-        [name]: name === 'cadre' || name === 'travail_de_nuit' ? parseInt(value) : value,
-      }
-    })
+    // setState((prevState) => {
+    //   return {
+    //     ...prevState,
+    //     [name]: name === 'cadre' || name === 'travail_de_nuit' ? parseInt(value) : value,
+    //   }
+    // })
+    dispatch(
+      setFormEmploye({
+        ...formEmploye,
+        // [name]: name === 'cadre' || name === 'travail_de_nuit' ? parseInt(value) : value,
+        [name]: value,
+      }),
+    )
   }
   return (
     <>
