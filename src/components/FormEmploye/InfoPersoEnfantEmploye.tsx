@@ -66,6 +66,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       type: 'text',
       value: formData.nom || '',
       onChange: (ev) => handleInputChange(ev, index),
+      onInput: (ev) => handleInputChange(ev, index),
       placeholder: "Nom de l'enfant",
     },
     {
@@ -77,6 +78,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       value: formData.prenom || '',
       placeholder: "Prénom de l'enfant",
       onChange: (ev) => handleInputChange(ev, index),
+      onInput: (ev) => handleInputChange(ev, index),
     },
     {
       id: `date_naissance_${idEnfant}`,
@@ -86,6 +88,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       type: 'date',
       value: formData.date_naissance || '2005-01-01',
       onChange: (ev) => handleInputChange(ev, index),
+      onInput: (ev) => handleInputChange(ev, index),
     },
     {
       id: `lieu_naissance_${idEnfant}`,
@@ -95,6 +98,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       type: 'text',
       value: formData.lieu_naissance || '',
       onChange: (ev) => handleInputChange(ev, index),
+      onInput: (ev) => handleInputChange(ev, index),
       placeholder: 'Toamasina...',
     },
   ]

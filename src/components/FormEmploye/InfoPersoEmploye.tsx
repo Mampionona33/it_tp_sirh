@@ -10,6 +10,7 @@ function InfoPersoEmploye() {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
+    console.log(name, value)
     dispach(
       setFormEmploye({
         ...formEmploye,
@@ -31,6 +32,7 @@ function InfoPersoEmploye() {
       name: 'nom',
       type: 'text',
       value: formEmploye.nom,
+      onInput: handleInputChange,
       onChange: handleInputChange,
       placeholder: 'Nom employé',
     },
@@ -41,6 +43,7 @@ function InfoPersoEmploye() {
       name: 'prenom',
       type: 'text',
       value: formEmploye.prenom,
+      onInput: handleInputChange,
       onChange: handleInputChange,
       placeholder: 'Prénom employé',
     },
@@ -51,6 +54,7 @@ function InfoPersoEmploye() {
       name: 'adresse',
       type: 'text',
       value: formEmploye.adresse,
+      onInput: handleInputChange,
       onChange: handleInputChange,
       placeholder: 'Toamasina ...',
     },
@@ -61,6 +65,7 @@ function InfoPersoEmploye() {
       name: 'date_naissance',
       type: 'date',
       value: formEmploye.date_naissance,
+      onInput: handleInputChange,
       onChange: handleInputChange,
     },
     {
@@ -70,6 +75,7 @@ function InfoPersoEmploye() {
       name: 'lieu_naissance',
       type: 'text',
       value: formEmploye.lieu_naissance,
+      onInput: handleInputChange,
       onChange: handleInputChange,
       placeholder: 'Toamasina...',
     },
@@ -80,6 +86,7 @@ function InfoPersoEmploye() {
       name: 'num_cin',
       type: 'text',
       value: formEmploye.num_cin,
+      onInput: handleInputChange,
       onChange: handleInputChange,
       placeholder: '000.000.000.000',
     },
@@ -91,6 +98,7 @@ function InfoPersoEmploye() {
       type: 'radio',
       options: genreOptions,
       value: formEmploye.genre,
+      onInput: handleInputChange,
       onChange: handleInputChange,
     },
   ]

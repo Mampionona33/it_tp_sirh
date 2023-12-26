@@ -10,6 +10,7 @@ import {
   CContainer,
   CForm,
   CFormInput,
+  CFormLabel,
   CInputGroup,
   CInputGroupText,
   CRow,
@@ -58,6 +59,9 @@ const Login = () => {
                   <CForm onSubmit={handleSubmit}>
                     <h1>Login</h1>
                     <p className="text-medium-emphasis">Sign In to your account</p>
+                    <CFormLabel hidden htmlFor="username">
+                      username
+                    </CFormLabel>
                     <CInputGroup className="mb-3">
                       <CInputGroupText>
                         <CIcon icon={cilUser} />
@@ -65,6 +69,7 @@ const Login = () => {
                       <CFormInput
                         placeholder="Username"
                         autoComplete="username"
+                        id="username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                       />
@@ -75,6 +80,7 @@ const Login = () => {
                       </CInputGroupText>
                       <CFormInput
                         type="password"
+                        id="password"
                         placeholder="Password"
                         autoComplete="current-password"
                         value={password}

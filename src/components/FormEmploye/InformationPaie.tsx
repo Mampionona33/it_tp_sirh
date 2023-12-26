@@ -75,6 +75,7 @@ const InformationPaie = () => {
                 key={index}
                 {...input}
                 onChange={(event) => handleInputChange(event, index)}
+                onInput={(event) => handleInputChange(event, index)}
               />
             ))}
           </div>

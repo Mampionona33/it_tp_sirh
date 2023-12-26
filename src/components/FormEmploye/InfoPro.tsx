@@ -21,6 +21,12 @@ const InfoPro = () => {
     )
   }
 
+  const handleCategorieChange = (selectedOption: IInputWithLabelOptionsProps) => {
+    console.log(selectedOption)
+    console.log('handleCategorieChange', selectedOption)
+    dispatch(setFormEmploye({ ...formEmploye, categorie: selectedOption.value }))
+  }
+
   const radioOption: IInputWithLabelOptionsProps[] = [
     { label: 'Oui', value: EnumBoolean.OUI },
     { label: 'Non', value: EnumBoolean.NON },
@@ -49,14 +55,14 @@ const InfoPro = () => {
     },
     {
       label: 'Catégorie',
-      name: 'cat',
+      name: 'categorie',
       id: 'categorie',
       value: formEmploye.categorie,
       type: 'select',
       required: true,
       options: catOptions,
       placeholder: 'Catégorie ...',
-      onChange: handleInputChange,
+      onSelectChange: handleCategorieChange,
     },
     {
       id: 'departement',

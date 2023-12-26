@@ -58,41 +58,41 @@ const FormEmploye = () => {
   const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault()
 
-    const formElements = (ev.target as HTMLFormElement).elements
+    // const formElements = (ev.target as HTMLFormElement).elements
 
-    let employeData: { [key: string]: string | number | boolean | IEnfantEmploye[] } = {}
-    const listEnfant = []
+    // let employeData: { [key: string]: string | number | boolean | IEnfantEmploye[] } = {}
+    // const listEnfant = []
 
-    for (let i = 0; i < formElements.length; i++) {
-      const element = formElements[i] as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    // for (let i = 0; i < formElements.length; i++) {
+    //   const element = formElements[i] as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
 
-      if (element.name !== undefined && element.name !== '') {
-        if (
-          element.name === 'salaire_de_base' ||
-          element.name === 'cadre' ||
-          element.name === 'travail_de_nuit'
-        ) {
-          employeData[element.name] = parseFloat(element.value)
-        } else {
-          employeData[element.name] = element.value
-        }
+    //   if (element.name !== undefined && element.name !== '') {
+    //     if (
+    //       element.name === 'salaire_de_base' ||
+    //       element.name === 'cadre' ||
+    //       element.name === 'travail_de_nuit'
+    //     ) {
+    //       employeData[element.name] = parseFloat(element.value)
+    //     } else {
+    //       employeData[element.name] = element.value
+    //     }
 
-        employeData['actif'] = 1
+    //     employeData['actif'] = 1
 
-        if (element.name.includes('_enfant_')) {
-          employeData['enfant'] = formatListEnfant(element.name, element.value, listEnfant)
-          removeEnfantInputsFromData(element.name, employeData)
-        }
-        if (element.type === 'radio' && (element as HTMLInputElement).checked) {
-          console.log(element.name, element.value)
-          employeData[radioValuesRef.current[element.name]] = element.value
-        }
-      }
-    }
+    //     if (element.name.includes('_enfant_')) {
+    //       employeData['enfant'] = formatListEnfant(element.name, element.value, listEnfant)
+    //       removeEnfantInputsFromData(element.name, employeData)
+    //     }
+    //     if (element.type === 'radio' && (element as HTMLInputElement).checked) {
+    //       console.log(element.name, element.value)
+    //       employeData[radioValuesRef.current[element.name]] = element.value
+    //     }
+    //   }
+    // }
 
     try {
       console.log(formEmploye)
-      dispacth(resetFormEmploye())
+      // dispacth(resetFormEmploye())
       // const createEmploye = await employeService.create(employeData)
       // if (createEmploye.status === 201) {
       //   navigate('/employees/list')
