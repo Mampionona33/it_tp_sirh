@@ -1,6 +1,6 @@
 import * as React from 'react'
 import InputWithLabel, { IInputWithLabelOptionsProps, IInputWithLabelProps } from './InputWithLable'
-import { EnumGenre } from '@src/interfaces/interfaceEmploye'
+import { EnumGenre, genreOptions } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
@@ -18,11 +18,6 @@ function InfoPersoEmploye() {
       }),
     )
   }
-
-  const genreOptions: IInputWithLabelOptionsProps[] = [
-    { label: 'Homme', value: EnumGenre.MASCULIN },
-    { label: 'Femme', value: EnumGenre.FEMININ },
-  ]
 
   const inputs: IInputWithLabelProps[] = [
     {

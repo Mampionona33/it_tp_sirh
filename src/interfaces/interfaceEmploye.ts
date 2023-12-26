@@ -1,3 +1,5 @@
+import { IInputWithLabelOptionsProps } from '@src/components/FormEmploye/InputWithLable'
+
 export interface IEmploye {
   id?: number
   nom: string
@@ -65,6 +67,11 @@ export enum EnumGenre {
   MASCULIN = 'masculin',
   FEMININ = 'feminin',
 }
+
+export const genreOptions: IInputWithLabelOptionsProps[] = [
+  { label: 'Homme', value: EnumGenre.MASCULIN },
+  { label: 'Femme', value: EnumGenre.FEMININ },
+]
 
 export interface PrimeEtAvantagePermanent {
   id: number
