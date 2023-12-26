@@ -1,10 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import {
-  EnumGenre,
-  EnumTravailDeNuit,
-  IEmploye,
-  IEnfantEmploye,
-} from '@src/interfaces/interfaceEmploye'
+import { EnumGenre, EnumBoolean, IEmploye, IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
 import { format } from 'date-fns'
 
 export const initialState: IEmploye = {
@@ -26,13 +21,13 @@ export const initialState: IEmploye = {
   date_embauche: format(new Date(), 'yyyy-MM-dd'),
   lieu_travail: '',
   salaire_de_base: 0,
-  travail_de_nuit: EnumTravailDeNuit.NON,
+  travail_de_nuit: EnumBoolean.NON,
   mode_payement_salaire: '',
-  actif: 1,
+  actif: EnumBoolean.OUI,
   departement: '',
   num_cnaps: '',
   num_osie: '',
-  est_cadre: 0,
+  est_cadre: EnumBoolean.NON,
   rib: '',
   prime_et_avantage_permanent: null,
   depart: null,

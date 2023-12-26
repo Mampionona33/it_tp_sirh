@@ -3,7 +3,7 @@ import InputWithLabel, { IInputWithLabelProps, IInputWithLabelOptionsProps } fro
 import { useSelector } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
-import { EnumTravailDeNuit } from '@src/interfaces/interfaceEmploye'
+import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 
 const InfoPro = () => {
   const dispatch = useAppDispatch()
@@ -15,14 +15,15 @@ const InfoPro = () => {
     dispatch(
       setFormEmploye({
         ...formEmploye,
-        [name]: name === 'cadre' || name === 'travail_de_nuit' ? parseInt(value) : value,
+        // [name]: name === 'cadre' || name === 'travail_de_nuit' ? parseInt(value) : value,
+        [name]: value,
       }),
     )
   }
 
   const radioOption: IInputWithLabelOptionsProps[] = [
-    { label: 'Oui', value: EnumTravailDeNuit.OUI },
-    { label: 'Non', value: EnumTravailDeNuit.NON },
+    { label: 'Oui', value: EnumBoolean.OUI },
+    { label: 'Non', value: EnumBoolean.NON },
   ]
 
   const inputs: IInputWithLabelProps[] = [
@@ -72,22 +73,13 @@ const InfoPro = () => {
       onChange: handleInputChange,
     },
     {
-      label: 'Lieu de travail',
-      name: 'lieu_travail',
-      value: formEmploye.lieu_travail,
-      type: 'text',
-      required: true,
-      placeholder: 'Toamasina ...',
-      onChange: handleInputChange,
-    },
-    {
-      label: 'Est un cadre',
-      name: 'cadre',
+      label: 'Est cadre',
+      name: 'est_cadre',
       value: formEmploye.est_cadre,
       type: 'radio',
       required: true,
       options: radioOption,
-      onChange: (value: any) => handleInputChange(value, 0),
+      onChange: handleInputChange,
     },
     {
       label: 'Travail de nuit',
@@ -96,7 +88,7 @@ const InfoPro = () => {
       type: 'radio',
       required: true,
       options: radioOption,
-      onChange: (value: any) => handleInputChange(value, 0),
+      onChange: handleInputChange,
     },
   ]
 
