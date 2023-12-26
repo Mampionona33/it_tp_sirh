@@ -29,6 +29,7 @@ const InfoPro = () => {
   const inputs: IInputWithLabelProps[] = [
     {
       label: 'Matricule',
+      id: 'matricule',
       name: 'matricule',
       value: formEmploye.matricule,
       type: 'text',
@@ -37,6 +38,7 @@ const InfoPro = () => {
       onChange: handleInputChange,
     },
     {
+      id: 'titre_poste',
       label: 'Titre du poste',
       name: 'titre_poste',
       value: formEmploye.titre_poste,
@@ -48,6 +50,7 @@ const InfoPro = () => {
     {
       label: 'Catégorie',
       name: 'cat',
+      id: 'categorie',
       value: formEmploye.categorie,
       type: 'select',
       required: true,
@@ -56,6 +59,7 @@ const InfoPro = () => {
       onChange: handleInputChange,
     },
     {
+      id: 'departement',
       label: 'Département',
       name: 'departement',
       value: formEmploye.departement,
@@ -65,6 +69,7 @@ const InfoPro = () => {
       onChange: handleInputChange,
     },
     {
+      id: 'date_embauche',
       label: "Date d'embauche",
       name: 'date_embauche',
       value: formEmploye.date_embauche,
@@ -73,6 +78,7 @@ const InfoPro = () => {
       onChange: handleInputChange,
     },
     {
+      id: 'est_cadre',
       label: 'Est cadre',
       name: 'est_cadre',
       value: formEmploye.est_cadre,
@@ -82,6 +88,7 @@ const InfoPro = () => {
       onChange: handleInputChange,
     },
     {
+      id: 'travail_de_nuit',
       label: 'Travail de nuit',
       name: 'travail_de_nuit',
       value: formEmploye.travail_de_nuit,

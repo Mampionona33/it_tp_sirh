@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react'
 import Select, { StylesConfig } from 'react-select'
 
 export interface IInputWithLabelProps {
-  id?: string
+  id: string
   label: string
   name: string
   type: string
@@ -67,7 +67,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   return (
     <div className="flex flex-col mb-2">
       {type !== 'radio' && type !== 'select' && (
-        <label htmlFor={name} className="text-sm">
+        <label htmlFor={id} className="text-sm">
           {label} {required ? '*' : ''}
         </label>
       )}
@@ -105,6 +105,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
             {label} {required ? '*' : ''}
           </label>
           <Select
+            inputId={id}
             aria-label={label}
             placeholder={placeholder}
             name={name}

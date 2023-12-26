@@ -12,6 +12,7 @@ const InformationPaie = () => {
 
   const inputs: IInputWithLabelProps[] = [
     {
+      id: 'salaire_de_base',
       label: 'Salaire de base',
       value: state.salaire_de_base,
       name: 'salaire_de_base',
@@ -20,6 +21,7 @@ const InformationPaie = () => {
       min: 0,
     },
     {
+      id: 'rib',
       label: 'RIB',
       value: state.rib,
       name: 'rib',
@@ -27,6 +29,7 @@ const InformationPaie = () => {
       placeholder: 'RIB',
     },
     {
+      id: 'mode_payement_salaire',
       label: 'Mode de payement',
       value: state.mode_payement_salaire,
       name: 'mode_payement_salaire',
@@ -35,12 +38,14 @@ const InformationPaie = () => {
       placeholder: 'Virement bancaire...',
     },
     {
+      id: 'num_cnaps',
       label: "Numéros d'identification fiscale",
       value: state.num_cnaps,
       name: 'num_cnaps',
       type: 'text',
     },
     {
+      id: 'num_osie',
       label: 'Numéros OSIE',
       value: state.num_osie,
       name: 'num_osie',

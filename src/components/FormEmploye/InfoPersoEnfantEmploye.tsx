@@ -30,6 +30,8 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
     },
   )
 
+  const idEnfant = formEmploye.enfant.find((enfant) => enfant.id === index).id
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     event.preventDefault()
     const { name, value } = event.target
@@ -57,6 +59,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
 
   const inputs: IInputWithLabelProps[] = [
     {
+      id: `nom_enfant_${idEnfant}`,
       label: 'Nom',
       required: true,
       name: 'nom',
@@ -66,6 +69,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       placeholder: "Nom de l'enfant",
     },
     {
+      id: `prenom_enfant_${idEnfant}`,
       label: 'Prénom',
       required: true,
       name: 'prenom',
@@ -75,6 +79,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       onChange: (ev) => handleInputChange(ev, index),
     },
     {
+      id: `date_naissance_${idEnfant}`,
       label: 'Date de naissance',
       required: true,
       name: 'date_naissance',
@@ -83,6 +88,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       onChange: (ev) => handleInputChange(ev, index),
     },
     {
+      id: `lieu_naissance_${idEnfant}`,
       label: 'Lieu de naissance',
       required: true,
       name: 'lieu_naissance',
