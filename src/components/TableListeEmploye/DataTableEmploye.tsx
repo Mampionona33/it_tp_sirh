@@ -102,7 +102,7 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
     <>
       {tableTitle && (
         <div className="w-full my-2">
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 flex-wrap items-center">
             <div className="flex gap-3 w-full justify-start">
               <div>
                 <h1 className="text-lg">{tableTitle}</h1>
