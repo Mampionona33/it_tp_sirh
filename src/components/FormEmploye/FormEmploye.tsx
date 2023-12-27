@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import MainHeader from './MainHeader'
 import InfoPersoEmploye from './InfoPersoEmploye'
 import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
@@ -6,8 +6,6 @@ import InfoPro from './InfoPro'
 import InformationPaie from './InformationPaie'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
 import FormResiliationContrat from './FormResiliationContrat'
-import employeService from '@src/services/EmployeeService'
-import { IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
@@ -53,7 +51,7 @@ const FormEmploye = () => {
               {/* <PrimeEtAvantageParMois /> */}
               <FormEmployeGroupButton />
             </form>
-            <FormResiliationContrat />
+            {formEmploye.id && <FormResiliationContrat />}
           </div>
         </>
       </div>
