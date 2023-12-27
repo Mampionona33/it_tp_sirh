@@ -13,7 +13,6 @@ export const initialState: IEmploye = {
   email: '',
   num_cin: '',
   genre: EnumGenre.MASCULIN,
-  contact_urgence: [],
   enfant: [],
   titre_poste: '',
   matricule: '',
