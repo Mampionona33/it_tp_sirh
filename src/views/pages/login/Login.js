@@ -21,6 +21,7 @@ import AuthService from 'src/services/AuthService'
 import { useDispatch } from 'react-redux'
 import { setUserLoggedIn } from 'src/redux/user/authReducer'
 import { useNavigate } from 'react-router-dom'
+import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 
 const Login = () => {
   const [username, setUsername] = useState('')
@@ -89,9 +90,7 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <CButton type="submit" color="danger" className="px-4">
-                          Login
-                        </CButton>
+                        <ButtonWithIcon type="submit" label="Login" />
                       </CCol>
                       {/* <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">
