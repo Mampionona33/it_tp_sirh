@@ -102,8 +102,8 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
     <>
       {tableTitle && (
         <div className="w-full my-2">
-          <div className="flex gap-2 flex-wrap items-center">
-            <div className="flex gap-3 w-full justify-start">
+          <div className="grid grid-cols-1 sm:grid-cols-2  gap-3">
+            <div className="flex gap-3 justify-start items-start">
               <div>
                 <h1 className="text-lg">{tableTitle}</h1>
               </div>
@@ -115,12 +115,12 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
                     setGlobalFilter(String(value))
                     console.log(globalFilter)
                   }}
-                  className="p-1"
+                  className="p-1 h-9"
                   placeholder="Rechercher"
                 />
               </div>
             </div>
-            <div className="flex justify-end w-full">{headerComponents}</div>
+            <div className="flex justify-end items-start flex-wrap">{headerComponents}</div>
           </div>
         </div>
       )}
