@@ -174,7 +174,7 @@ const InfoPersoEnfantEmploye: React.FC = () => {
 
   return (
     <>
-      <div className="flex mt-6 gap-y-2 flex-col">
+      <div className="flex mt-6 gap-y-4 flex-col">
         <div className="pl-5">
           <ButtonWithIcon
             type="button"

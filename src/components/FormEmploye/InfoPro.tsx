@@ -129,7 +129,7 @@ const InfoPro = () => {
   ]
 
   return (
-    <div className="border-y my-4">
+    <>
       <h1 className="text-lg  text-customRed-930 uppercase m-3">Informations professionnelles</h1>
       <div className="flex border-t bg-customRed-25 mt-2 shadow-sm">
         <div className="grid grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
@@ -142,7 +142,7 @@ const InfoPro = () => {
           ))}
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

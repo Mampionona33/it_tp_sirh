@@ -1,5 +1,4 @@
 import React from 'react'
-import MainHeader from './MainHeader'
 import InfoPersoEmploye from './InfoPersoEmploye'
 import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
 import InfoPro from './InfoPro'
@@ -41,9 +40,8 @@ const FormEmploye = () => {
     <>
       <div>
         <>
-          <div className="bg-white flex flex-col py-11">
+          <div className="bg-white flex flex-col">
             <form action="" onSubmit={handleSubmit} onReset={handleReset}>
-              <MainHeader />
               <InfoPersoEmploye />
               <InfoPersoEnfantEmploye />
               <InfoPro />
