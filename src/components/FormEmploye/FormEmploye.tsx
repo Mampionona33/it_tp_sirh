@@ -43,7 +43,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           dispacth(resetFormEmploye())
         }
       }
-      // navigate('/employees/list')
+      navigate('/employees/list')
     } catch (error) {
       throw error
     }
