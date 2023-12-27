@@ -102,12 +102,14 @@ const InfoPro = () => {
       id: 'email',
       label: 'Email',
       name: 'email',
+      autoComplete: 'on',
       value: formEmploye.email,
       type: 'email',
       onChange: handleInputChange,
     },
     {
       id: 'est_cadre',
+      dynamiqueId: true,
       label: 'Est cadre',
       name: 'est_cadre',
       value: formEmploye.est_cadre,
@@ -118,6 +120,7 @@ const InfoPro = () => {
     },
     {
       id: 'travail_de_nuit',
+      dynamiqueId: true,
       label: 'Travail de nuit',
       name: 'travail_de_nuit',
       value: formEmploye.travail_de_nuit,

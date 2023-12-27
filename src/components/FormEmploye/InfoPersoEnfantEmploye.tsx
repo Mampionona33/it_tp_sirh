@@ -116,6 +116,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
     {
       id: `genre_enfant_${idEnfant}`,
       label: 'Genre',
+      dynamiqueId: true,
       required: true,
       name: `genre_enfant_${idEnfant}`, // Dynamic property name
       type: 'radio',

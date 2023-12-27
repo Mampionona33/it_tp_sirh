@@ -87,6 +87,7 @@ function InfoPersoEmploye() {
     {
       id: 'genre_employe',
       label: 'Genre',
+      dynamiqueId: true,
       required: true,
       name: 'genre',
       type: 'radio',

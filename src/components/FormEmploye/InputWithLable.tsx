@@ -3,10 +3,12 @@ import Select, { StylesConfig } from 'react-select'
 
 export interface IInputWithLabelProps {
   id: string
+  dynamiqueId?: boolean
   label: string
   name: string
   type: string
   required?: boolean
+  autoComplete?: string
   value?: any
   index?: number
   min?: any
@@ -25,6 +27,7 @@ export interface IInputWithLabelOptionsProps {
 
 const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   id,
+  dynamiqueId,
   label,
   name,
   type,
@@ -32,6 +35,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   value,
   options,
   index,
+  autoComplete,
   min,
   max,
   placeholder,
@@ -104,14 +108,14 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
         <fieldset>
           <legend className="text-sm">{label}</legend>
           {options.map((option, index) => {
-            // const id = `${name}_${index}_${option.value}`
+            const optionID = dynamiqueId ? `${id}_${option.value}` : id
             return (
               <div key={index} className="flex items-center">
                 <div className="text-center mr-2">
                   <input
                     placeholder={placeholder}
                     type="radio"
-                    id={id}
+                    id={optionID}
                     name={name}
                     value={option.value}
                     checked={value === option.value}
@@ -120,7 +124,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
                     className="text-sm"
                   />
                 </div>
-                <label htmlFor={id} className="text-sm">
+                <label htmlFor={optionID} className="text-sm">
                   {option.label}
                 </label>
               </div>
@@ -162,6 +166,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
         // Render a regular input for other types
         <input
           type={type}
+          autoComplete={autoComplete}
           name={name}
           id={id || name}
           value={value}
