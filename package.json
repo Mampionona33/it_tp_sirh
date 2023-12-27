@@ -14,7 +14,7 @@
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
     "build": "cp .env.local.production .env && craco build",
-    "start": "cp .env.local.dev .env && craco start",
+    "start": "cp .env.local.dev .env.local && craco start",
     "lint": "eslint \"src/**/*.js\"",
     "prettier": "npx prettier --write 'src/**/*.{js,ts,tsx}'",
     "test": "craco test",
