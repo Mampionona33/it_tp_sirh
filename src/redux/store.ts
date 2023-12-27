@@ -16,6 +16,7 @@ import dnsReducers from './dns/dnsReducers'
 import employeurReducer from './employeur/employeurReducer'
 import categorieEmployeReducer from './categorieEmploye/CategorieEmployeReducer'
 import formEmployeReducer from './FormEmploye/formEmployeReducer'
+import modalReducer from './modal/modalReducer'
 
 const persistConfig = {
   key: 'root',
@@ -38,6 +39,7 @@ const rootReducer = combineReducers({
   employeur: employeurReducer,
   cateogieEmploye: categorieEmployeReducer,
   formEmploye: formEmployeReducer,
+  modal: modalReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

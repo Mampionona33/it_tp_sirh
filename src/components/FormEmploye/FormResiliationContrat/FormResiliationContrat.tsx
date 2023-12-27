@@ -1,14 +1,19 @@
 import React, { useState } from 'react'
-import ButtonWithIcon from '../buttons/ButtonWithIcon'
+import ButtonWithIcon, { ButtonWithIconVariant } from '../../buttons/ButtonWithIcon'
 import { UserMinusIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { useAppSelector } from '@src/hooks/useAppDispatch'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { Alert } from '@material-tailwind/react'
 import employeService from '@src/services/EmployeeService'
 import { format } from 'date-fns'
 import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'
+import { setModalOpen } from '@src/redux/modal/modalReducer'
+import AppModal from '../../Modal/AppModal'
+import ModalValidResiliation from './ModalValidResiliation'
+import FormAlertError from './FormAlertError'
 
 const FormResiliationContrat = () => {
   const formEmploye = useAppSelector((store) => store.formEmploye)
+  const dispatch = useAppDispatch()
   const [appModalError, setAppModalError] = useState(false)
   const [formData, setFormData] = useState({
     nom_matricule: '',
@@ -23,6 +28,7 @@ const FormResiliationContrat = () => {
     ev.preventDefault()
     if (isNomMatriculeValid()) {
       console.log('Formulaire soumis avec succès', formData)
+      dispatch(setModalOpen())
     } else {
       setAppModalError(true)
     }
@@ -35,29 +41,12 @@ const FormResiliationContrat = () => {
     })
   }
 
-  const FormAlertError = () => {
-    return (
-      <div className="w-full">
-        {appModalError && (
-          <div className="relative">
-            <button
-              className="absolute top-0 right-0 cursor-pointer z-50 text-white"
-              onClick={() => setAppModalError(false)}
-            >
-              <XMarkIcon className="w-6 h-6" />
-            </button>
-          </div>
-        )}
-        <Alert open={appModalError} color="red">
-          Veuillez remplir correctement le champ nom matricule
-        </Alert>
-      </div>
-    )
-  }
-
   return (
     <>
-      <FormAlertError />
+      <FormAlertError appModalError={appModalError} setAppModalError={setAppModalError} />
+      <AppModal>
+        <ModalValidResiliation motif={formData.motif} />
+      </AppModal>
       <div className="my-4 p-3 bg-customRed-25 border-collapse border-1 border-customRed-930">
         <h1 className="text-lg text-customRed-930">Résiliation du contrat</h1>
         <p className="text-base text-customRed-930">

@@ -38,7 +38,7 @@ class SalaierControllers {
 
       const dbContent = JSON.parse(fs.readFileSync(dbFilePath, 'utf-8'))
 
-      const { id } = req.body.id
+      const { id } = req.params
       const updatedEmployee = req.body
 
       const employeeIndex = dbContent.salaries.findIndex(

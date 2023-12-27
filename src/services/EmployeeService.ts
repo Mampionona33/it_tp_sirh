@@ -1,6 +1,7 @@
 import { createEmploye } from '@src/redux/employe/employeReducer'
 import { store } from '@src/redux/store'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
+import { IEmploye } from '@src/interfaces/interfaceEmploye'
 
 class EmployeeService {
   REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
@@ -22,11 +23,11 @@ class EmployeeService {
     }
   }
 
-  getById(id) {
+  getById(id: string | number) {
     return axios.get(`${this.REACT_APP_API_BASE_URL}/employees/id=${id}`)
   }
 
-  async create(data) {
+  async create(data: IEmploye) {
     try {
       const response = await axios.post(`${this.REACT_APP_API_BASE_URL}/personnels/ajout`, data, {
         auth: {
@@ -42,15 +43,19 @@ class EmployeeService {
     }
   }
 
-  async update(data) {
+  async update(id: string | number, data: IEmploye): Promise<AxiosResponse> {
     console.log(data)
     try {
-      const response = await axios.put(`${this.REACT_APP_API_BASE_URL}/personnels/modifie`, data, {
-        auth: {
-          username: this.login,
-          password: this.pass,
+      const response = await axios.put(
+        `${this.REACT_APP_API_BASE_URL}/personnels/modifier/${id}`,
+        data,
+        {
+          auth: {
+            username: this.login,
+            password: this.pass,
+          },
         },
-      })
+      )
       console.log(response)
       return response
     } catch (error) {
@@ -59,6 +64,7 @@ class EmployeeService {
     }
   }
 }
+
 const employeService = new EmployeeService()
 
 export default employeService

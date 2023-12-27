@@ -4,7 +4,7 @@ import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
 import InfoPro from './InfoPro'
 import InformationPaie from './InformationPaie'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
-import FormResiliationContrat from './FormResiliationContrat'
+import FormResiliationContrat from './FormResiliationContrat/FormResiliationContrat'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import employeService from '@src/services/EmployeeService'
@@ -38,7 +38,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           dispacth(resetFormEmploye())
         }
       } else {
-        const updateEmploye = await employeService.update(requestData)
+        const updateEmploye = await employeService.update(formEmploye.id, requestData)
         if (updateEmploye.status === 200) {
           dispacth(resetFormEmploye())
         }

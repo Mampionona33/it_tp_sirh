@@ -15,7 +15,7 @@ module.exports = {
           200: '#bfc0d3',
           100: '#8375EE',
           50: '#C3B6FD',
-          25: '#F5F2FF',  
+          25: '#F5F2FF',
         },
         customRed: {
           950: '#26000B',

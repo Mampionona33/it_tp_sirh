@@ -1,74 +1,25 @@
-import React, { useState, ReactNode } from 'react'
-import {
-  CButton,
-  CForm,
-  CModal,
-  CModalBody,
-  CModalFooter,
-  CModalHeader,
-  CModalTitle,
-} from '@coreui/react'
-import { Tooltip as ReactTooltip } from 'react-tooltip'
+import { useAppSelector } from '@src/hooks/useAppDispatch'
+import { IAppModal } from '@src/interfaces/interfaceModal'
+import React from 'react'
 
-interface CustomModalProps {
-  modalTitle: string
-  iconBtnActivation?: string
-  totltipText?: string
-  children: ReactNode
-  handleSubMission: (ev: React.FormEvent) => void
-}
+const AppModal: React.FC<IAppModal> = ({ children }) => {
+  const isOpen = useAppSelector((store) => store.modal.isOpen)
 
-const AppModal: React.FC<CustomModalProps> = ({
-  modalTitle,
-  iconBtnActivation,
-  totltipText,
-  children,
-  handleSubMission,
-}) => {
-  const [visible, setVisible] = useState(false)
-
-  const handleClickBtn = () => {
-    setVisible(!visible)
-  }
-
-  const handleClose = () => {
-    setVisible(false)
-  }
-
-  const handleSub = (ev: React.FormEvent) => {
-    ev.preventDefault()
-    handleSubMission(ev)
-    handleClose()
-  }
+  if (!isOpen) return null
 
   return (
     <>
-      <button data-tooltip-id="btn-tooltip" onClick={handleClickBtn}>
-        <span className="material-icons-outlined">{iconBtnActivation}</span>
-      </button>
-      {!visible && <ReactTooltip id="btn-tooltip" place="bottom" content={totltipText} />}
-
-      <CModal
-        visible={visible}
-        onClose={handleClose}
-        size="lg"
-        aria-labelledby="LiveDemoExampleLabel"
+      <div
+        style={{ zIndex: 10000, backgroundColor: 'rgba(0, 10, 59, 0.81)' }}
+        className="w-full h-full fixed top-0 left-0 overflow-hidden"
       >
-        <CForm onSubmit={handleSub}>
-          <CModalHeader>
-            <CModalTitle id="LiveDemoExampleLabel">{modalTitle}</CModalTitle>
-          </CModalHeader>
-          <CModalBody>{children}</CModalBody>
-          <CModalFooter>
-            <CButton color="secondary" onClick={handleClose}>
-              Annuler
-            </CButton>
-            <CButton type="submit" color="danger">
-              Valider
-            </CButton>
-          </CModalFooter>
-        </CForm>
-      </CModal>
+        <div
+          style={{ zIndex: 10001, opacity: 1 }}
+          className="w-full h-full flex items-center justify-center"
+        >
+          {children}
+        </div>
+      </div>
     </>
   )
 }
