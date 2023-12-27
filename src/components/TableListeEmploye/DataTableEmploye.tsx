@@ -103,9 +103,9 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
       {tableTitle && (
         <div className="w-full my-2">
           <div className="grid grid-cols-1 sm:grid-cols-2  gap-3">
-            <div className="flex gap-3 justify-start items-start">
+            <div className="flex gap-3 justify-start items-start w-full">
               <div>
-                <h1 className="text-lg">{tableTitle}</h1>
+                <h1 className="text-lg px-0">{tableTitle}</h1>
               </div>
               <div>
                 <DebounceInput
@@ -113,9 +113,8 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
                   onChange={(e) => {
                     const value = e.target.value
                     setGlobalFilter(String(value))
-                    console.log(globalFilter)
                   }}
-                  className="p-1 h-9"
+                  className="p-1 h-9 sm:w-full w-[63vw] "
                   placeholder="Rechercher"
                 />
               </div>
