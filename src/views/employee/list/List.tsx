@@ -35,7 +35,7 @@ const List = () => {
   }, [dispatch])
 
   const ButtonDetail: React.FC<ButtonDetailProps> = ({ rowId }) => {
-    return <ButtonLink to={`/employees/fiche/${rowId}`}>Fiche</ButtonLink>
+    return <ButtonLink to={`/employees/fiche/${rowId}`}>Détails</ButtonLink>
   }
 
   return (
