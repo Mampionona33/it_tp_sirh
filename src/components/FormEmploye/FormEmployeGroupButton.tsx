@@ -5,7 +5,7 @@ import ButtonLink, { ButtonLinkVariant } from '../buttons/ButtonLink'
 const FormEmployeGroupButton = () => {
   return (
     <>
-      <div className="flex flex-row justify-end m-4 gap-3">
+      <div className="flex flex-row flex-wrap justify-end m-4 gap-3">
         <ButtonLink to="/employees/list" variant={ButtonLinkVariant.Tertiary}>
           Annuler
         </ButtonLink>
