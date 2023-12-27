@@ -135,7 +135,7 @@ const InfoPro = () => {
     <>
       <h1 className="text-lg  text-customRed-930 uppercase m-3">Informations professionnelles</h1>
       <div className="flex border-t bg-customRed-25 mt-2 shadow-sm">
-        <div className="grid grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
+        <div className="grid sm:grid-cols-3 grid-cols-1 gap-x-4 gap-y-0 px-8 py-3 w-full">
           {inputs.map((input, index) => (
             <InputWithLabel
               key={index}

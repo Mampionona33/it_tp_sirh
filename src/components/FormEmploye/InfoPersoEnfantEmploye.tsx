@@ -134,7 +134,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
           onClick={(event) => handleClose(event, index)}
           icon={<XMarkIcon width={18} height={18} />}
         ></ButtonWithIcon>
-        <div className="grid grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
+        <div className="grid sm:grid-cols-3 grid-cols-1 gap-x-4 gap-y-0 px-8 py-3 w-full">
           {inputs.map((input, index) => (
             <InputWithLabel key={index} index={index} {...input} />
           ))}

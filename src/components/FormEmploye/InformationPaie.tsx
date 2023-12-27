@@ -66,7 +66,7 @@ const InformationPaie = () => {
         Information sur la paie
       </h1>
       <div className="flex border-y bg-customRed-25 mt-2 shadow-sm">
-        <div className="grid grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
+        <div className="grid sm:grid-cols-3 grid-cols-1 gap-x-4 gap-y-0 px-8 py-3 w-full">
           {inputs.map((input, index) => (
             <InputWithLabel
               key={index}
