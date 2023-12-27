@@ -24,11 +24,13 @@ function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
    */
   const formattedData: IDataWithActions[] =
     data && data.length > 0
-      ? data.map((item: any) => ({
-          ...item,
-          fullName: `${item.nom} ${item.prenom}`,
-          actions: actions,
-        }))
+      ? data
+          .filter((item: any) => item.actif === 'oui')
+          .map((item: any) => ({
+            ...item,
+            fullName: `${item.nom} ${item.prenom}`,
+            actions: actions,
+          }))
       : []
 
   const HeaderComponents: React.FC = () => {
