@@ -68,7 +68,7 @@ class SalaierControllers {
       fs.writeFileSync(dbFilePath, JSON.stringify(dbContent, null, 2), 'utf-8')
 
       // Répondre avec la copie de l'employé existant (ancienne version)
-      res.status(201).json(updatedSalaries[employeeIndex])
+      res.status(200).json(updatedSalaries[employeeIndex])
     } catch (error) {
       // En cas d'erreur, répondre avec un statut d'erreur
       console.error("Une erreur s'est produite lors de la mise à jour de l'employé :", error)
