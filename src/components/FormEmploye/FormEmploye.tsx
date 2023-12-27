@@ -10,10 +10,18 @@ import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import employeService from '@src/services/EmployeeService'
 import { useNavigate } from 'react-router-dom'
 
-const FormEmploye = () => {
+interface IFormEmploye {
+  id?: string | number
+}
+
+const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   const navigate = useNavigate()
   const dispacth = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
+
+  const isEmployeExist = (): boolean => {
+    return formEmploye.id !== null
+  }
 
   const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault()
@@ -24,11 +32,18 @@ const FormEmploye = () => {
         salaire_de_base: parseFloat(String(formEmploye.salaire_de_base)),
       }
       console.log(requestData)
-      // const createEmploye = await employeService.create(requestData)
-      // if (createEmploye.status === 201) {
-      //   dispacth(resetFormEmploye())
-      //   navigate('/employees/list')
-      // }
+      if (isEmployeExist()) {
+        const createEmploye = await employeService.create(requestData)
+        if (createEmploye.status === 201) {
+          dispacth(resetFormEmploye())
+        }
+      } else {
+        const updateEmploye = await employeService.update(requestData)
+        if (updateEmploye.status === 200) {
+          dispacth(resetFormEmploye())
+        }
+      }
+      // navigate('/employees/list')
     } catch (error) {
       throw error
     }

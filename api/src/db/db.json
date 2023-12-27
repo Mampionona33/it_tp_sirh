@@ -1969,45 +1969,39 @@
   "salaries": [
     {
       "id": 1,
-      "actif": true,
       "nom": "RAKOTOZANANY",
       "prenom": "Benjamin",
       "date_naissance": "2016-04-16",
       "lieu_naissance": "Toamasina",
       "adresse": "2 RUE LIEUTNANT BERARD",
-      "tel": "020 000211",
+      "telephone": "",
       "email": "sealtmm@seal.mg",
-      "cin": "10126174565",
+      "num_cin": "fdsffsdfdf",
       "genre": "masculin",
       "enfant": [
         {
-          "nom": "Bambini",
-          "prenom": "Rosam",
-          "date_naissance": "2022-04-16",
-          "lieu_naissance": "Toamasina",
-          "genre": "masculin"
-        },
-        {
-          "nom": "Bambini",
-          "prenom": "Didié",
-          "date_naissance": "2017-04-16",
-          "lieu_naissance": "Toamasina",
-          "genre": "feminin"
+          "id": 1,
+          "nom": "Rosali ",
+          "prenom": "Bambini",
+          "date_naissance": "2023-12-14",
+          "lieu_naissance": "Petronum",
+          "genre_enfant": "masculin"
         }
       ],
       "titre_poste": "Responsable Import et logistique ",
       "matricule": "442",
-      "categorie": "B5",
+      "categorie": "1a",
       "date_embauche": "2016-04-16",
-      "departement": "Logistique",
       "lieu_travail": "Toamasina",
-      "cadre": true,
-      "travail_de_nuit": false,
       "salaire_de_base": 800000,
-      "rib": "454787f7dsf787878fd",
+      "travail_de_nuit": "oui",
       "mode_payement_salaire": "Virement banquaire",
+      "actif": true,
+      "departement": "Logistique",
       "num_cnaps": "960101059745",
       "num_osie": "96010105hjod4",
+      "est_cadre": "non",
+      "rib": "454787f7dsf787878fd",
       "prime_et_avantage_permanent": [
         {
           "libelle": "Carburant",
@@ -2021,7 +2015,10 @@
       "depart": {
         "date": null,
         "motif": null
-      }
+      },
+      "tel": "020 000211",
+      "cin": "10126174565",
+      "cadre": true
     },
     {
       "id": 2,

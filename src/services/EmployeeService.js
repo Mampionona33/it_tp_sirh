@@ -43,6 +43,23 @@ class EmployeeService {
       // throw error
     }
   }
+
+  async update(data) {
+    console.log(data)
+    try {
+      const response = await axios.put(`${this.REACT_APP_API_BASE_URL}/personnels`, data, {
+        auth: {
+          username: this.login,
+          password: this.pass,
+        },
+      })
+      console.log(response)
+      return response
+    } catch (error) {
+      console.error("Une erreur s'est produite lors de la requête :", error)
+      // throw error
+    }
+  }
 }
 const employeService = new EmployeeService()
 
