@@ -7,8 +7,11 @@ import FormEmployeGroupButton from './FormEmployeGroupButton'
 import FormResiliationContrat from './FormResiliationContrat'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
+import employeService from '@src/services/EmployeeService'
+import { useNavigate } from 'react-router-dom'
 
 const FormEmploye = () => {
+  const navigate = useNavigate()
   const dispacth = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
 
@@ -21,9 +24,9 @@ const FormEmploye = () => {
         salaire_de_base: parseFloat(String(formEmploye.salaire_de_base)),
       }
       console.log(requestData)
-      // dispacth(resetFormEmploye())
-      // const createEmploye = await employeService.create(employeData)
+      // const createEmploye = await employeService.create(requestData)
       // if (createEmploye.status === 201) {
+      //   dispacth(resetFormEmploye())
       //   navigate('/employees/list')
       // }
     } catch (error) {
