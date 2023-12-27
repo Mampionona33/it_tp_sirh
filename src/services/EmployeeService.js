@@ -27,16 +27,14 @@ class EmployeeService {
   }
 
   async create(data) {
-    console.log(data)
     try {
-      const response = await axios.post(`${this.REACT_APP_API_BASE_URL}/personnels`, data, {
+      const response = await axios.post(`${this.REACT_APP_API_BASE_URL}/personnels/ajout`, data, {
         auth: {
           username: this.login,
           password: this.pass,
         },
       })
-      console.log(response)
-      // store.dispatch(createEmploye(response.data))
+      console.log(response.data)
       return response
     } catch (error) {
       console.error("Une erreur s'est produite lors de la requête :", error)
@@ -47,7 +45,7 @@ class EmployeeService {
   async update(data) {
     console.log(data)
     try {
-      const response = await axios.put(`${this.REACT_APP_API_BASE_URL}/personnels`, data, {
+      const response = await axios.put(`${this.REACT_APP_API_BASE_URL}/personnels/modifie`, data, {
         auth: {
           username: this.login,
           password: this.pass,

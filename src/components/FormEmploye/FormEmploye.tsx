@@ -31,18 +31,18 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         ...formEmploye,
         salaire_de_base: parseFloat(String(formEmploye.salaire_de_base)),
       }
-      console.log(requestData)
-      // if (isEmployeExist()) {
-      //   const createEmploye = await employeService.create(requestData)
-      //   if (createEmploye.status === 201) {
-      //     dispacth(resetFormEmploye())
-      //   }
-      // } else {
-      //   const updateEmploye = await employeService.update(requestData)
-      //   if (updateEmploye.status === 200) {
-      //     dispacth(resetFormEmploye())
-      //   }
-      // }
+      // console.log(requestData)
+      if (isEmployeExist()) {
+        const createEmploye = await employeService.create(requestData)
+        if (createEmploye.status === 201) {
+          dispacth(resetFormEmploye())
+        }
+      } else {
+        const updateEmploye = await employeService.update(requestData)
+        if (updateEmploye.status === 200) {
+          dispacth(resetFormEmploye())
+        }
+      }
       navigate('/employees/list')
     } catch (error) {
       throw error
