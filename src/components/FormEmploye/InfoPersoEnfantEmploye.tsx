@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
-import { EnumGenre, IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
+import { EnumGenre, IEnfantEmploye, genreOptions } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import {
   formEmployeAjoutEnfant,
@@ -26,16 +26,22 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       prenom: '',
       date_naissance: '',
       lieu_naissance: '',
-      genre: EnumGenre.MASCULIN,
+      genre_enfant: EnumGenre.MASCULIN,
     },
   )
 
   const idEnfant = formEmploye.enfant.find((enfant) => enfant.id === index).id
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    event.preventDefault()
     const { name, value } = event.target
     // Mettre à jour l'état local avec useState
+
+    if (name === `genre_enfant_${idEnfant}`) {
+      setFormData({
+        ...formData,
+        [name]: value as EnumGenre,
+      })
+    }
     setFormData({
       ...formData,
       [name]: value,
@@ -46,6 +52,12 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
         ...formEmploye,
         enfant: formEmploye.enfant.map((enf) => {
           if (enf.id === index) {
+            if (name === `genre_enfant_${idEnfant}`) {
+              return {
+                ...enf,
+                genre_enfant: value as EnumGenre,
+              }
+            }
             return {
               ...enf,
               [name]: value,
@@ -86,7 +98,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       required: true,
       name: 'date_naissance',
       type: 'date',
-      value: formData.date_naissance || '2005-01-01',
+      value: formData.date_naissance,
       onChange: (ev) => handleInputChange(ev, index),
       onInput: (ev) => handleInputChange(ev, index),
     },
@@ -100,6 +112,16 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       onChange: (ev) => handleInputChange(ev, index),
       onInput: (ev) => handleInputChange(ev, index),
       placeholder: 'Toamasina...',
+    },
+    {
+      id: `genre_enfant_${idEnfant}`,
+      label: 'Genre',
+      required: true,
+      name: `genre_enfant_${idEnfant}`, // Dynamic property name
+      type: 'radio',
+      options: genreOptions,
+      value: formData[`genre_enfant_${idEnfant}`] || EnumGenre.MASCULIN, // Dynamic property name
+      onChange: (ev) => handleInputChange(ev, index),
     },
   ]
 
@@ -139,7 +161,7 @@ const InfoPersoEnfantEmploye: React.FC = () => {
       prenom: '',
       date_naissance: '',
       lieu_naissance: '',
-      genre: EnumGenre.MASCULIN,
+      genre_enfant: EnumGenre.MASCULIN,
     }
 
     dispatch(formEmployeAjoutEnfant(nouvelEnfant))

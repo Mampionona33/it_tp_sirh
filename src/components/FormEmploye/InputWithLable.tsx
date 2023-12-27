@@ -9,8 +9,8 @@ export interface IInputWithLabelProps {
   required?: boolean
   value?: any
   index?: number
-  min?: number
-  max?: number
+  min?: any
+  max?: any
   placeholder?: string
   onSelectChange?: (selectedValue: any) => void
   options?: IInputWithLabelOptionsProps[]
@@ -104,7 +104,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
         <fieldset>
           <legend className="text-sm">{label}</legend>
           {options.map((option, index) => {
-            const id = `${name}_${index}_${option.value}`
+            // const id = `${name}_${index}_${option.value}`
             return (
               <div key={index} className="flex items-center">
                 <div className="text-center mr-2">
@@ -112,7 +112,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
                     placeholder={placeholder}
                     type="radio"
                     id={id}
-                    name={`${name}`}
+                    name={name}
                     value={option.value}
                     checked={value === option.value}
                     onChange={(event) => onChange(event, index)}

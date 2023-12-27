@@ -7,13 +7,11 @@ import InformationPaie from './InformationPaie'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
 import FormResiliationContrat from './FormResiliationContrat'
 import employeService from '@src/services/EmployeeService'
-import { useNavigate } from 'react-router-dom'
 import { IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
 const FormEmploye = () => {
-  const navigate = useNavigate()
   const dispacth = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
 
@@ -21,7 +19,11 @@ const FormEmploye = () => {
     ev.preventDefault()
 
     try {
-      console.log(formEmploye)
+      const requestData = {
+        ...formEmploye,
+        salaire_de_base: parseFloat(String(formEmploye.salaire_de_base)),
+      }
+      console.log(requestData)
       // dispacth(resetFormEmploye())
       // const createEmploye = await employeService.create(employeData)
       // if (createEmploye.status === 201) {
@@ -32,12 +34,17 @@ const FormEmploye = () => {
     }
   }
 
+  const handleReset = (ev: React.FormEvent) => {
+    ev.preventDefault()
+    dispacth(resetFormEmploye())
+  }
+
   return (
     <>
       <div>
         <>
           <div className="bg-white flex flex-col py-11">
-            <form action="" onSubmit={handleSubmit}>
+            <form action="" onSubmit={handleSubmit} onReset={handleReset}>
               <MainHeader />
               <InfoPersoEmploye />
               <InfoPersoEnfantEmploye />

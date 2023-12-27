@@ -9,7 +9,7 @@ export const initialState: IEmploye = {
   date_naissance: '',
   lieu_naissance: '',
   adresse: '',
-  tel: '',
+  telephone: '',
   email: '',
   num_cin: '',
   genre: EnumGenre.MASCULIN,

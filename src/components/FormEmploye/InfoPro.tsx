@@ -15,15 +15,12 @@ const InfoPro = () => {
     dispatch(
       setFormEmploye({
         ...formEmploye,
-        // [name]: name === 'cadre' || name === 'travail_de_nuit' ? parseInt(value) : value,
         [name]: value,
       }),
     )
   }
 
   const handleCategorieChange = (selectedOption: IInputWithLabelOptionsProps) => {
-    console.log(selectedOption)
-    console.log('handleCategorieChange', selectedOption)
     dispatch(setFormEmploye({ ...formEmploye, categorie: selectedOption.value }))
   }
 
@@ -81,6 +78,32 @@ const InfoPro = () => {
       value: formEmploye.date_embauche,
       type: 'date',
       required: true,
+      onChange: handleInputChange,
+    },
+    {
+      id: 'lieu_travail',
+      name: 'lieu_travail',
+      required: true,
+      label: 'Lieu de travail',
+      type: 'text',
+      value: formEmploye.lieu_travail,
+      placeholder: 'Toamasina...',
+      onChange: handleInputChange,
+    },
+    {
+      id: 'telephone',
+      label: 'Telephone',
+      name: 'telephone',
+      value: formEmploye.telephone,
+      type: 'text',
+      onChange: handleInputChange,
+    },
+    {
+      id: 'email',
+      label: 'Email',
+      name: 'email',
+      value: formEmploye.email,
+      type: 'email',
       onChange: handleInputChange,
     },
     {

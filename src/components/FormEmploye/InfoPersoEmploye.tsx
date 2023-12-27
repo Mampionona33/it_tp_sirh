@@ -10,7 +10,6 @@ function InfoPersoEmploye() {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
-    console.log(name, value)
     dispach(
       setFormEmploye({
         ...formEmploye,

@@ -7,7 +7,7 @@ export interface IEmploye {
   date_naissance: string
   lieu_naissance: string
   adresse: string
-  tel?: string
+  telephone?: string
   email?: string
   num_cin: string
   genre: EnumGenre
@@ -60,7 +60,7 @@ export interface IEnfantEmploye {
   prenom: string
   date_naissance: string
   lieu_naissance: string
-  genre: EnumGenre
+  genre_enfant: EnumGenre
 }
 
 export enum EnumGenre {
@@ -69,8 +69,8 @@ export enum EnumGenre {
 }
 
 export const genreOptions: IInputWithLabelOptionsProps[] = [
-  { label: 'Homme', value: EnumGenre.MASCULIN },
-  { label: 'Femme', value: EnumGenre.FEMININ },
+  { label: 'Masculin', value: EnumGenre.MASCULIN },
+  { label: 'Feminin', value: EnumGenre.FEMININ },
 ]
 
 export interface PrimeEtAvantagePermanent {
