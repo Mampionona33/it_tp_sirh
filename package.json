@@ -20,7 +20,7 @@
     "test": "craco test",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "craco --inspect-brk test --runInBand",
-    "deploy:prod": "cp .env.local.production .env && craco build && firebase deploy "
+    "deploy:prod": "cp .env.local.production .env && craco build && firebase deploy && rm -rf .env"
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
