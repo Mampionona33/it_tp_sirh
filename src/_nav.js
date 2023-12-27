@@ -71,6 +71,12 @@ const _nav = [
     ],
   },
   {
+    component: CNavItem,
+    name: 'Gestion de paie',
+    to: '/gestion-de-paie/liste-employee',
+    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
+  },
+  {
     component: CNavGroup,
     name: 'Administration',
     to: '/admin',

@@ -12,6 +12,9 @@ const FicheEmploye = lazyWithRetry(() => import('src/views/employee/fiche/Fiche'
 const BulletinPaie = lazyWithRetry(() => import('src/views/employee/bulletinPaie/BulletinPaie'))
 const AjoutEmploye = lazyWithRetry(() => import('@views/employee/ajout/AjoutEmploye'))
 
+// Gestion de paie
+const GestionPaie = lazyWithRetry(() => import('@views/gestion-paie/GestionPaie'))
+
 // Etat divers
 const DeclarationCnaps = lazyWithRetry(() =>
   import('src/views/etats_divers/declarationCnaps/DeclarationCnaps'),
@@ -101,6 +104,14 @@ const routes = [
     path: '/bulletin-de-paie/:id',
     name: 'Bulletin de paie',
     element: BulletinPaie,
+    exact: true,
+  },
+
+  // Gestion de paie path def
+  {
+    path: '/gestion-de-paie/liste-employee',
+    name: 'Gestion de paie',
+    element: GestionPaie,
     exact: true,
   },
 
