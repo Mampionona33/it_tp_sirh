@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react'
-import ReusableTable from '@src/components/DataTable/ReusableTable'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
 import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import ButtonLink from '@src/components/buttons/ButtonLink'
+import ReusableTable from '@src/components/ReusableTable/ReusableTable'
 
 const GestionPaie: React.FC = () => {
   const listeEmploye = useAppSelector((store) => store.employeesList.list)

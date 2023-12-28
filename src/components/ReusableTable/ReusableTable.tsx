@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   ColumnDef,
   useReactTable,
   getCoreRowModel,
   flexRender,
   getFilteredRowModel,
+  getPaginationRowModel,
 } from '@tanstack/react-table'
 import { DebounceInput } from 'react-debounce-input'
-import { XCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import ReusableTablePagination from './ReusableTablePagination'
 
 export interface IReusableTableProps<T extends object> {
   title?: string
@@ -26,6 +28,7 @@ const ReusableTable = <T extends object>({
   headerComponents,
 }: IReusableTableProps<T>) => {
   const [globalFilter, setGlobalFilter] = React.useState('')
+  const pageSizeOptions = [5, 10, 15, 20, 25, 30]
   const table = useReactTable({
     data,
     columns,
@@ -33,6 +36,7 @@ const ReusableTable = <T extends object>({
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (
@@ -103,7 +107,7 @@ const ReusableTable = <T extends object>({
                       >
                         {row.getVisibleCells().map((cell) => (
                           <td
-                            className="whitespace-nowrap px-2 py-2 text-sm font-light text-gray-900"
+                            className="whitespace-nowrap px-2 py-1 text-sm font-light text-gray-900"
                             key={cell.id}
                           >
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -117,6 +121,35 @@ const ReusableTable = <T extends object>({
             </div>
           </div>
         </div>
+
+        <div className="flex flex-col">
+          <div className="overflow-x-auto sm:-mx-2 lg:-mx-4">
+            <div className="inline-block min-w-full py-1 sm:px-2 lg:px-4">
+              <div className="overflow-hidden p-2">
+                <ReusableTablePagination
+                  pageIndex={table.getState().pagination.pageIndex}
+                  pageCount={table.getPageCount()}
+                  goToPage={table.setPageIndex}
+                  nextPage={table.nextPage}
+                  previousPage={table.previousPage}
+                  canNextPage={table.getCanNextPage()}
+                  canPreviousPage={table.getCanPreviousPage()}
+                  pageSizeOptions={pageSizeOptions}
+                  setPageSize={table.setPageSize}
+                  defaultPageSize={5}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <div className="bg-gray-100 overflow-auto px-2 w-full">
+          <div className="flex justify-center  p-2 mt-2">
+            <div className="flex flex-wrap items-center gap-2">
+             
+            </div>
+          </div>
+        </div> */}
       </div>
     </div>
   )
