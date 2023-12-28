@@ -16,6 +16,7 @@ export interface IReusableTableProps<T extends object> {
   headerButtonsGroupe?: React.ReactNode[]
   data: T[]
   searchBar?: boolean
+  pagination?: boolean
   headerComponents?: React.ReactNode[]
   columns: ColumnDef<T, any>[]
 }
@@ -25,6 +26,7 @@ const ReusableTable = <T extends object>({
   columns,
   title,
   searchBar = false,
+  pagination = false,
   headerComponents,
 }: IReusableTableProps<T>) => {
   const [globalFilter, setGlobalFilter] = React.useState('')
@@ -122,34 +124,28 @@ const ReusableTable = <T extends object>({
           </div>
         </div>
 
-        <div className="flex flex-col">
-          <div className="overflow-x-auto sm:-mx-2 lg:-mx-4">
-            <div className="inline-block min-w-full py-1 sm:px-2 lg:px-4">
-              <div className="overflow-hidden p-2">
-                <ReusableTablePagination
-                  pageIndex={table.getState().pagination.pageIndex}
-                  pageCount={table.getPageCount()}
-                  goToPage={table.setPageIndex}
-                  nextPage={table.nextPage}
-                  previousPage={table.previousPage}
-                  canNextPage={table.getCanNextPage()}
-                  canPreviousPage={table.getCanPreviousPage()}
-                  pageSizeOptions={pageSizeOptions}
-                  setPageSize={table.setPageSize}
-                  defaultPageSize={5}
-                />
+        {pagination && (
+          <div className="flex flex-col">
+            <div className="overflow-x-auto sm:-mx-2 lg:-mx-4">
+              <div className="inline-block min-w-full py-1 sm:px-2 lg:px-4">
+                <div className="overflow-hidden p-2">
+                  <ReusableTablePagination
+                    pageIndex={table.getState().pagination.pageIndex}
+                    pageCount={table.getPageCount()}
+                    goToPage={table.setPageIndex}
+                    nextPage={table.nextPage}
+                    previousPage={table.previousPage}
+                    canNextPage={table.getCanNextPage()}
+                    canPreviousPage={table.getCanPreviousPage()}
+                    pageSizeOptions={pageSizeOptions}
+                    setPageSize={table.setPageSize}
+                    defaultPageSize={5}
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* <div className="bg-gray-100 overflow-auto px-2 w-full">
-          <div className="flex justify-center  p-2 mt-2">
-            <div className="flex flex-wrap items-center gap-2">
-             
-            </div>
-          </div>
-        </div> */}
+        )}
       </div>
     </div>
   )

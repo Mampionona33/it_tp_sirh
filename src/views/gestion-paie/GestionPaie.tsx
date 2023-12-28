@@ -42,7 +42,7 @@ const GestionPaie: React.FC = () => {
   return (
     <div>
       <div>
-        <ReusableTable data={actifEmployes} columns={cols} searchBar />
+        <ReusableTable data={actifEmployes} columns={cols} searchBar pagination />
       </div>
     </div>
   )
