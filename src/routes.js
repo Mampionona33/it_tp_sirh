@@ -110,7 +110,7 @@ const routes = [
   // Gestion de paie path def
   {
     path: '/gestion-de-paie/liste-employee',
-    name: 'Gestion de paie',
+    name: 'Liste employée (Gestion de paie)',
     element: GestionPaie,
     exact: true,
   },
