@@ -5,18 +5,16 @@ import { format } from 'date-fns'
 import ButtonLink, { ButtonLinkVariant } from '@src/components/buttons/ButtonLink'
 import { fr } from 'date-fns/locale'
 import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
-import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'
-import { useParams } from 'react-router-dom'
-import { useAppSelector } from '@src/hooks/useAppDispatch'
+import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 import Page404 from '@src/views/pages/page404/Page404'
+import useEmployeeExists from '@src/hooks/useEmployeeExists'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
   actions?: React.FC[]
 }
 
 const HistoriquePaie: React.FC = () => {
-  const { id } = useParams()
-  const listEmploye = useAppSelector((store) => store.employeesList.list)
+  const isEmployeExist = useEmployeeExists()
   const historiquePaiement: IHistoriquePaieProps[] = [
     {
       id: 1,
@@ -99,10 +97,6 @@ const HistoriquePaie: React.FC = () => {
     [columnHelper],
   )
 
-  const isEmployeExist = (): boolean => {
-    return listEmploye.some((employe: IEmploye) => employe.id === Number(id))
-  }
-
   const DateFilter = () => {
     return (
       <>
@@ -128,7 +122,7 @@ const HistoriquePaie: React.FC = () => {
 
   return (
     <div>
-      {isEmployeExist() ? (
+      {isEmployeExist ? (
         <ReusableTable
           data={historiquePaiement}
           columns={cols}
