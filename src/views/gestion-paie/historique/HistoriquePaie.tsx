@@ -94,9 +94,37 @@ const HistoriquePaie: React.FC = () => {
     [columnHelper],
   )
 
+  const DateFilter = () => {
+    return (
+      <>
+        <div className="flex gap-2 flex-row">
+          Du
+          <div>
+            <label htmlFor="dateDepart" className="hidden">
+              Date du départ
+            </label>
+            <input type="date" name="dateDepart" id="dateDepart" />
+          </div>
+          au
+          <div>
+            <label htmlFor="dateFin" className="hidden">
+              Date fin
+            </label>
+            <input type="date" name="dateFin" id="dateFin" />
+          </div>
+        </div>
+      </>
+    )
+  }
+
   return (
     <div>
-      <ReusableTable data={historiquePaiement} columns={cols} title="Historique de paie" />
+      <ReusableTable
+        data={historiquePaiement}
+        columns={cols}
+        title="Historique de paie"
+        headerComponents={<DateFilter />}
+      />
     </div>
   )
 }
