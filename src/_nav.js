@@ -6,6 +6,7 @@ import {
   cilChartPie,
   cilCursor,
   cilDescription,
+  cilEuro,
   cilDrop,
   cilNotes,
   cilPencil,
@@ -74,7 +75,7 @@ const _nav = [
     component: CNavItem,
     name: 'Gestion de paie',
     to: '/gestion-de-paie/liste-employee',
-    icon: <CIcon icon={cilCalculator} customClassName="nav-icon" />,
+    icon: <CIcon icon={cilEuro} customClassName="nav-icon" />,
   },
   {
     component: CNavGroup,
