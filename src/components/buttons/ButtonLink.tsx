@@ -41,7 +41,7 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
     <Link to={to} {...props} className={`no-underline ${className}`}>
       <span className="group ">
         <span
-          className={`flex flex-row rounded-sm justify-center gap-1 text-sm font-semibold p-2 ${variantClass}`}
+          className={`flex flex-row rounded-sm justify-center gap-1 text-sm font-semibold px-2 py-1 ${variantClass}`}
         >
           {icon ? icon : null}
           {children ? <span>{children}</span> : null}
