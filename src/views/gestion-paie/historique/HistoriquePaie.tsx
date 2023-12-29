@@ -4,14 +4,8 @@ import ReusableTable from '@src/components/ReusableTable/ReusableTable'
 import { format } from 'date-fns'
 import ButtonLink, { ButtonLinkVariant } from '@src/components/buttons/ButtonLink'
 import { fr } from 'date-fns/locale'
-
-interface IHistoriquePaieProps {
-  id: number
-  date: string
-  salaire_brut: number
-  salaire_net: number
-  status: string
-}
+import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
+import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
   actions?: React.FC[]
@@ -19,10 +13,38 @@ interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
 
 const HistoriquePaie: React.FC = () => {
   const historiquePaiement: IHistoriquePaieProps[] = [
-    { id: 1, date: '2023-01-24', salaire_brut: 1000, salaire_net: 900, status: 'oui' },
-    { id: 2, date: '2023-02-22', salaire_brut: 1000, salaire_net: 900, status: 'oui' },
-    { id: 3, date: '2023-03-23', salaire_brut: 1000, salaire_net: 900, status: 'oui' },
-    { id: 3, date: '2023-12-23', salaire_brut: 1000, salaire_net: 900, status: 'non' },
+    {
+      id: 1,
+      id_employe: 1,
+      date: '2023-01-24',
+      salaire_brut: 1000,
+      salaire_net: 900,
+      status: EnumBoolean.OUI,
+    },
+    {
+      id: 2,
+      id_employe: 1,
+      date: '2023-02-22',
+      salaire_brut: 1000,
+      salaire_net: 900,
+      status: EnumBoolean.OUI,
+    },
+    {
+      id: 3,
+      id_employe: 1,
+      date: '2023-03-23',
+      salaire_brut: 1000,
+      salaire_net: 900,
+      status: EnumBoolean.OUI,
+    },
+    {
+      id: 3,
+      id_employe: 1,
+      date: '2023-12-23',
+      salaire_brut: 1000,
+      salaire_net: 900,
+      status: EnumBoolean.NON,
+    },
   ]
 
   const columnHelper = createColumnHelper<IHistoriquePaieTableProps>()
@@ -42,12 +64,12 @@ const HistoriquePaie: React.FC = () => {
         header: () => 'Salaire net',
       }),
       columnHelper.accessor('status', {
-        cell: (info) => info.getValue(),
+        cell: (info) => <span className="font-medium">{info.getValue()}</span>,
         header: () => 'Validée',
       }),
       columnHelper.accessor('actions', {
         cell: (info) => {
-          if (info.row.original.status === 'oui') {
+          if (info.row.original.status === EnumBoolean.OUI) {
             return (
               <div className="flex justify-center">
                 <ButtonLink

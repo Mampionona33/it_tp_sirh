@@ -2232,5 +2232,39 @@
       "prime_et_avantage_permanent": null,
       "depart": null
     }
+  ],
+  "historiquePaie": [
+    {
+      "id": 1,
+      "id_employe": 1,
+      "date": "2023-01-24",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "status": "oui"
+    },
+    {
+      "id": 2,
+      "id_employe": 1,
+      "date": "2023-02-22",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "status": "oui"
+    },
+    {
+      "id": 3,
+      "id_employe": 1,
+      "date": "2023-03-23",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "status": "oui"
+    },
+    {
+      "id": 4,
+      "id_employe": 1,
+      "date": "2023-12-23",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "status": "non"
+    }
   ]
 }
