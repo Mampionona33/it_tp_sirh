@@ -1,6 +1,7 @@
 import useEmployeeExists from '@src/hooks/useEmployeeExists'
 import Page404 from '@src/views/pages/page404/Page404'
 import React from 'react'
+import ValidPaieOngletContainer from './ValidPaieOngletContainer'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
@@ -10,7 +11,7 @@ const ValidePaie = () => {
       <div>
         {isEmployeExist ? (
           <div>
-            <p>Valid paie</p>
+            <ValidPaieOngletContainer />
           </div>
         ) : (
           <Page404 />
