@@ -88,7 +88,7 @@ const HistoriquePaie: React.FC = () => {
           } else if (info.row.original.status === 'non') {
             return (
               <div className="flex justify-center">
-                <ButtonLink to={`valider/${info.row.original.id}`}>Valider</ButtonLink>
+                <ButtonLink to={`valider/${info.row.original.date}`}>Valider</ButtonLink>
               </div>
             )
           }
