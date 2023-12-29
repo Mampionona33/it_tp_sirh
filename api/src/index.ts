@@ -37,7 +37,7 @@ router.route('/employeurs').get(employeurController.getAll)
 
 router.route('/personnels').get(salarieController.getAll)
 router.route('/personnels/ajout').post(salarieController.create)
-router.route('/personnels/modifier/:id').put(salarieController.update)
+router.route('/updatepersonnel/:id').put(salarieController.update)
 
 router.route('/heuressupplementaires').post(heuresController.getOne)
 router.route('/categorie-employe').get(categorieEmployeController.getAll)

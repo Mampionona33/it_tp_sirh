@@ -47,7 +47,7 @@ class EmployeeService {
     console.log(data)
     try {
       const response = await axios.put(
-        `${this.REACT_APP_API_BASE_URL}/personnels/modifier/${id}`,
+        `${this.REACT_APP_API_BASE_URL}/updatepersonnel/${id}`,
         data,
         {
           auth: {
