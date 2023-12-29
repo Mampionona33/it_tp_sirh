@@ -14,13 +14,13 @@
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
     "build": "cp .env.local.production .env && craco build",
-    "start": "cp .env.local.dev .env.local && craco start",
+    "start": "rm -rf .env &&cp .env.local.dev .env.local && craco start",
     "lint": "eslint \"src/**/*.js\"",
     "prettier": "npx prettier --write 'src/**/*.{js,ts,tsx}'",
     "test": "craco test",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "craco --inspect-brk test --runInBand",
-    "deploy:prod": "cp .env.local.production .env && craco build && firebase deploy && rm -rf .env"
+    "deploy:prod": "rm -rf .env.local build && cp .env.local.production .env && craco build && firebase deploy && rm -rf .env"
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
