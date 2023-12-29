@@ -3,6 +3,7 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
 import { format } from 'date-fns'
 import ButtonLink, { ButtonLinkVariant } from '@src/components/buttons/ButtonLink'
+import { fr } from 'date-fns/locale'
 
 interface IHistoriquePaieProps {
   id: number
@@ -29,7 +30,7 @@ const HistoriquePaie: React.FC = () => {
   const cols = useMemo<ColumnDef<IHistoriquePaieTableProps>[]>(
     () => [
       columnHelper.accessor('date', {
-        cell: (info) => format(new Date(info.getValue()), 'dd MMMM yyyy'),
+        cell: (info) => format(new Date(info.getValue()), 'dd MMMM yyyy', { locale: fr }),
         header: () => 'Date',
       }),
       columnHelper.accessor('salaire_brut', {
@@ -42,7 +43,7 @@ const HistoriquePaie: React.FC = () => {
       }),
       columnHelper.accessor('status', {
         cell: (info) => info.getValue(),
-        header: () => 'Validé',
+        header: () => 'Validée',
       }),
       columnHelper.accessor('actions', {
         cell: (info) => {
@@ -53,7 +54,7 @@ const HistoriquePaie: React.FC = () => {
                   variant={ButtonLinkVariant.Secondary}
                   to={`details/${info.row.original.id}`}
                 >
-                  Details
+                  Détails
                 </ButtonLink>
               </div>
             )
@@ -73,7 +74,7 @@ const HistoriquePaie: React.FC = () => {
 
   return (
     <div>
-      <ReusableTable data={historiquePaiement} columns={cols} />
+      <ReusableTable data={historiquePaiement} columns={cols} title="Historique de paie" />
     </div>
   )
 }
