@@ -14,6 +14,7 @@ const AjoutEmploye = lazyWithRetry(() => import('@views/employee/ajout/AjoutEmpl
 
 // Gestion de paie
 const GestionPaie = lazyWithRetry(() => import('@views/gestion-paie/GestionPaie'))
+const HistoriquePaie = lazyWithRetry(() => import('@views/gestion-paie/historique/HistoriquePaie'))
 
 // Etat divers
 const DeclarationCnaps = lazyWithRetry(() =>
@@ -112,6 +113,12 @@ const routes = [
     path: '/gestion-de-paie/liste-employee',
     name: 'Liste employée (Gestion de paie)',
     element: GestionPaie,
+    exact: true,
+  },
+  {
+    path: '/gestion-de-paie/liste-employee/historique/:id',
+    name: 'Historique',
+    element: HistoriquePaie,
     exact: true,
   },
 

@@ -18,10 +18,6 @@ import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
-interface ButtonDetailProps {
-  rowId: number
-}
-
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
 }
