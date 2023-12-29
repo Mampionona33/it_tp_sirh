@@ -16,7 +16,7 @@ const ValidPaieOngletContainer: React.FC = () => {
   const navigate = useNavigate()
   const { id, activeTabParam } = useParams()
   const tabList: ITabListProps[] = [
-    { key: 'detail-heures', label: 'Detail heures' },
+    { key: 'detail-heures', label: 'Détails heures' },
     { key: 'valid-paie', label: 'Valider paie' },
     { key: 'confirm-valid-paie', label: 'Confirm validation paie' },
     { key: 'bullettin-paie', label: 'Bulletin de paie' },
