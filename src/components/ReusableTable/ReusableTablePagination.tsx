@@ -75,6 +75,18 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
     })
   }
 
+  const handleNextPage = () => {
+    const nextPageValue = pageIndex + 2 // 1-based index for the URL
+    updateUrl(nextPageValue, selectedPageSize)
+    nextPage && nextPage()
+  }
+
+  const handlePreviousPage = () => {
+    const previousPageValue = pageIndex // 1-based index for the URL
+    updateUrl(previousPageValue, selectedPageSize)
+    previousPage && previousPage()
+  }
+
   useEffect(() => {
     let mount = true
 
@@ -98,7 +110,7 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
   return (
     <div className="flex flex-wrap items-center justify-center space-x-2 ">
       <Button
-        onClick={() => previousPage && previousPage()}
+        onClick={handlePreviousPage}
         variant="text"
         color="gray"
         disabled={!canPreviousPage}
@@ -112,7 +124,7 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
       <div className="flex items-center gap-3">{renderPageNumbers()}</div>
 
       <Button
-        onClick={() => nextPage && nextPage()}
+        onClick={handleNextPage}
         variant="text"
         color="gray"
         disabled={!canNextPage}
