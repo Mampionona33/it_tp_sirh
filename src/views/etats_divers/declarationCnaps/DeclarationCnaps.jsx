@@ -112,7 +112,8 @@ const DeclarationCnaps = () => {
 
   return (
     <>
-      <CustomSection body={<Body />} title="Déclaration nominative de salaires" />
+      <p>Déclaration nominative des salariés</p>
+      {/* <CustomSection body={<Body />} title="Déclaration nominative de salaires" /> */}
     </>
   )
 }
