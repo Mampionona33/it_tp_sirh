@@ -43,7 +43,7 @@ const HistoriquePaie: React.FC = () => {
     {
       id: 3,
       id_employe: 1,
-      date: '2023-12-23',
+      date: '2023-01-22',
       salaire_brut: 1000,
       salaire_net: 900,
       status: EnumBoolean.NON,
