@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Button } from '@material-tailwind/react'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 interface IReusableTablePaginationProps {
   pageIndex: number
@@ -27,39 +28,72 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
   nextPage,
   goToPage,
 }) => {
+  const navigate = useNavigate()
+  const { search } = useLocation()
+  const page = search ? Number(new URLSearchParams(search).get('page')) : 1
+  const pageSize = search ? Number(new URLSearchParams(search).get('pageSize')) : defaultPageSize
   const [selectedPageSize, setSelectedPageSize] = useState(defaultPageSize)
+
+  const updateUrl = useCallback(
+    (page: number, pageSize: number) => {
+      const url = new URL(window.location.href)
+      url.searchParams.set('page', page.toString())
+      url.searchParams.set('pageSize', pageSize.toString())
+      navigate(url.pathname + url.search)
+    },
+    [navigate],
+  )
 
   const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newSize = Number(e.target.value)
-
     setSelectedPageSize(newSize)
+    updateUrl(Number(page), newSize)
     setPageSize(newSize)
+  }
+
+  const handlePageClick = (tablePage: number) => {
+    goToPage && goToPage(tablePage - 1)
+    updateUrl(tablePage, selectedPageSize)
   }
 
   const renderPageNumbers = () => {
     return Array.from({ length: pageCount }, (_, index) => {
-      const page = index + 1
+      const tablePage = index + 1
       return (
         <button
-          key={page}
-          onClick={() => goToPage && goToPage(page - 1)}
+          key={tablePage}
+          onClick={() => handlePageClick(tablePage)}
           className={`rounded-full w-9 h-9 relative ${
-            pageIndex === page - 1
+            pageIndex === tablePage - 1
               ? 'bg-customRed-900 text-white'
               : 'hover:bg-customRed-100 hover:-4 hover:ring-customRed-100 transition-all duration-300'
           }`}
         >
-          {page}
+          {tablePage}
         </button>
       )
     })
   }
 
   useEffect(() => {
-    if (defaultPageSize) {
+    let mount = true
+
+    if (mount && page && pageSize && Number(page) !== pageIndex + 1) {
+      goToPage(Number(page) - 1)
+    }
+
+    return () => {
+      mount = false
+    }
+  }, [updateUrl, page, pageSize, goToPage, search, pageIndex])
+
+  useEffect(() => {
+    if (pageSize) {
+      setPageSize(Number(pageSize))
+    } else {
       setPageSize(defaultPageSize)
     }
-  }, [defaultPageSize, setPageSize])
+  }, [pageSize, setPageSize, defaultPageSize])
 
   return (
     <div className="flex flex-wrap items-center justify-center space-x-2 ">
