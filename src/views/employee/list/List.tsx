@@ -16,6 +16,7 @@ import { PlusIcon } from '@heroicons/react/24/outline'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
 interface ButtonDetailProps {
   rowId: number
@@ -49,6 +50,7 @@ const List = () => {
         dispatch(setBulletinDePaie({ ajoutSalaire: [] }))
         dispatch(setBulletinDePaie({ retenuSalaire: [] }))
         dispatch(fetchAllMouvementSalaire())
+        dispatch(resetFormEmploye())
       }
     }
 
