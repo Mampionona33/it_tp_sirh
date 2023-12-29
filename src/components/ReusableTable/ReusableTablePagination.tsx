@@ -87,17 +87,22 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
     previousPage && previousPage()
   }
 
+  const updatePage = (tablePage: number) => {
+    goToPage && goToPage(tablePage - 1)
+    updateUrl(tablePage, selectedPageSize)
+  }
+
   useEffect(() => {
     let mount = true
 
-    if (mount && page && pageSize && Number(page) !== pageIndex + 1) {
-      goToPage(Number(page) - 1)
+    if (mount && page && Number(page) !== pageIndex + 1) {
+      updatePage(Number(page))
     }
 
     return () => {
       mount = false
     }
-  }, [updateUrl, page, pageSize, goToPage, search, pageIndex])
+  }, [page, pageIndex, updatePage])
 
   useEffect(() => {
     if (pageSize) {

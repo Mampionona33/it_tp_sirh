@@ -17,7 +17,7 @@ export interface IReusableTableProps<T extends object> {
   data: T[]
   searchBar?: boolean
   pagination?: boolean
-  headerComponents?: React.ReactNode[]
+  headerComponents?: React.ReactNode
   columns: ColumnDef<T, any>[]
 }
 
