@@ -32,7 +32,7 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
   const { search } = useLocation()
   const page = search ? Number(new URLSearchParams(search).get('page')) : 1
   const pageSize = search ? Number(new URLSearchParams(search).get('pageSize')) : defaultPageSize
-  const [selectedPageSize, setSelectedPageSize] = useState(defaultPageSize)
+  const [selectedPageSize, setSelectedPageSize] = useState<number>(defaultPageSize)
 
   const updateUrl = useCallback(
     (page: number, pageSize: number) => {
@@ -105,8 +105,10 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
   }, [page, pageIndex, updatePage])
 
   useEffect(() => {
-    if (pageSize) {
+    if (pageSize && pageSize !== defaultPageSize) {
+      console.log('pageSize', pageSize)
       setPageSize(Number(pageSize))
+      setSelectedPageSize(Number(pageSize))
     } else {
       setPageSize(defaultPageSize)
     }
