@@ -55,7 +55,7 @@ const HistoriquePaie: React.FC = () => {
   const cols = useMemo<ColumnDef<IHistoriquePaieTableProps>[]>(
     () => [
       columnHelper.accessor('date', {
-        cell: (info) => format(new Date(info.getValue()), 'dd MMMM yyyy', { locale: fr }),
+        cell: (info) => format(new Date(info.getValue()), 'MMMM yyyy', { locale: fr }),
         header: () => 'Date',
       }),
       columnHelper.accessor('salaire_brut', {
@@ -86,7 +86,7 @@ const HistoriquePaie: React.FC = () => {
           } else if (info.row.original.status === 'non') {
             return (
               <div className="flex justify-center">
-                <ButtonLink to={`valider/${info.row.original.date}`}>Valider</ButtonLink>
+                <ButtonLink to={`valider/${info.row.original.date}`}>A Valider</ButtonLink>
               </div>
             )
           }
