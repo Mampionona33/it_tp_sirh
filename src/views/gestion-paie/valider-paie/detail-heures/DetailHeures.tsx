@@ -6,6 +6,7 @@ import { addMonths, format, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import TableDetailHeures from './TableDetailHeures'
 
 const DetailHeures: React.FC = () => {
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
@@ -69,7 +70,7 @@ const DetailHeures: React.FC = () => {
 
   return (
     <div>
-      <p>Detail heures</p>
+      <TableDetailHeures />
     </div>
   )
 }

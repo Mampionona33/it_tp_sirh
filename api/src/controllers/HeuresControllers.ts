@@ -23,7 +23,7 @@ class HeuresControllers {
         const formatedEmployerDate = this.formatDate(employHrs.date)
 
         if (
-          String(employHrs.employee.matricule) === String(matricule) &&
+          String(employHrs.matricule) === String(matricule) &&
           formatedDateDebut <= formatedEmployerDate &&
           formatedDateFin >= formatedEmployerDate
         ) {

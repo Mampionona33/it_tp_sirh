@@ -7,7 +7,11 @@ const useEmployeeExists = (): boolean => {
   const listEmploye = useAppSelector((store) => store.employeesList.list)
 
   const isEmployeeExist = (): boolean => {
-    return listEmploye.some((employe: IEmploye) => employe.id === Number(id))
+    return (
+      listEmploye &&
+      listEmploye.length > 0 &&
+      listEmploye.some((employe: IEmploye) => employe.id === Number(id))
+    )
   }
 
   return isEmployeeExist()
