@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import useEmployeeExists from '@src/hooks/useEmployeeExists'
 import Page404 from '@src/views/pages/page404/Page404'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
-import { IEmploye } from '@src/interfaces/interfaceEmploye'
+import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'
 import { format, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { DDMMYYYYFormat } from '@src/types/DateType'
@@ -57,10 +57,10 @@ const ValidePaie = () => {
     return format(adjustedDate, 'dd/MM/yyyy') as DDMMYYYYFormat
   }
 
-  const matricule =
+  const { matricule, est_cadre, travail_de_nuit }: IEmploye =
     listEmploye &&
     listEmploye.length > 0 &&
-    listEmploye.filter((employe: IEmploye) => employe.id === parseInt(id, 10))[0]?.matricule
+    listEmploye.filter((employe: IEmploye) => employe.id === parseInt(id, 10))[0]
 
   const dateDebutFormated = formatDateDebut()
   const dateFinFormated = formatDateFin()
@@ -72,13 +72,17 @@ const ValidePaie = () => {
         console.log(data)
         setHeures(data)
         calculHeuresEmploye.setHeuresMonsuelEmploye(data)
-        console.log(calculHeuresEmploye.getTotalHnormale())
-        console.log(calculHeuresEmploye.getTotalHTravailEffectif())
-        console.log(calculHeuresEmploye.getTaleauHsParSemaine())
-        console.log(calculHeuresEmploye.getTableauHs130ParSemaine())
+        est_cadre === EnumBoolean.OUI && calculHeuresEmploye.setEstCadre(true)
+        travail_de_nuit === EnumBoolean.OUI && calculHeuresEmploye.setTravailDeNuit(true)
+        console.log('total h normale', calculHeuresEmploye.getTotalHnormale())
+        console.log('total h effectif', calculHeuresEmploye.getTotalHTravailEffectif())
+        console.log('tableau hs par semaine', calculHeuresEmploye.getTaleauHsParSemaine())
+        console.log('tableau hs130 par semaine', calculHeuresEmploye.getTableauHs130ParSemaine())
+        console.log('tableau hs150 par semaine', calculHeuresEmploye.getTableauHs150ParSemaine())
+        console.log('total travail de nuit 30%', calculHeuresEmploye.getTotalTravailDeNuit30())
       })
       .catch((err) => console.log(err))
-  }, [matricule, dateDebutFormated, dateFinFormated])
+  }, [matricule, dateDebutFormated, dateFinFormated, est_cadre, travail_de_nuit])
 
   return (
     <>
