@@ -4,9 +4,21 @@ import heureSerivice from '@src/services/HeureService'
 import { DDMMYYYYFormat } from '@src/types/DateType'
 import { addMonths, format, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import TableDetailHeures from './TableDetailHeures'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import TimeSheetTable from '@src/components/TimeSheetTable/TimeSheetTable_'
+import { IHeuresEmploye } from '@src/interfaces/interfaceHeuresEmploye'
+
+interface IColumnsTableHeures extends IHeuresEmploye {
+  jour: string
+  HS: number
+  HS130: number
+  HS150: number
+  HSN30: number
+  HS50: number
+}
 
 const DetailHeures: React.FC = () => {
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
@@ -68,9 +80,51 @@ const DetailHeures: React.FC = () => {
 
   console.log(heures)
 
+  const columnHelper = createColumnHelper<IColumnsTableHeures>()
+  // Date , jour, HN, HS, HS130, HS150, HSN30%, HS50%, Hdim, Hférié
+  const colums = useMemo<ColumnDef<IColumnsTableHeures>[]>(
+    () => [
+      columnHelper.accessor('date', {
+        cell: (info) => info.getValue(),
+        header: () => 'Date',
+      }),
+      columnHelper.accessor('jour', {
+        cell: (info) => info.getValue(),
+        header: () => 'Jour',
+      }),
+      columnHelper.accessor('hs_normale', {
+        cell: (info) => info.getValue(),
+        header: () => 'HN',
+      }),
+      columnHelper.accessor('HS', {
+        cell: (info) => info.getValue(),
+        header: () => 'HS',
+      }),
+      columnHelper.accessor('HS130', {
+        cell: (info) => info.getValue(),
+        header: () => 'HS130',
+      }),
+      columnHelper.accessor('HS150', {
+        cell: (info) => info.getValue(),
+        header: () => 'HS150',
+      }),
+      columnHelper.accessor('HSN30', { cell: (info) => info.getValue(), header: () => 'HSN 30%' }),
+      columnHelper.accessor('HS50', { cell: (info) => info.getValue(), header: () => 'HS 50%' }),
+      columnHelper.accessor('hs_de_dimanche', {
+        cell: (info) => info.getValue(),
+        header: () => 'H Dimanche',
+      }),
+      columnHelper.accessor('hs_jours_feries', {
+        cell: (info) => info.getValue(),
+        header: () => 'H férié',
+      }),
+    ],
+    [columnHelper],
+  )
+
   return (
     <div>
-      <TableDetailHeures />
+      <TableDetailHeures data={[]} columns={colums} />
     </div>
   )
 }

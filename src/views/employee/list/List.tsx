@@ -75,7 +75,7 @@ const List = () => {
     () => [
       columnHelper.accessor('matricule', {
         cell: (info) => info.getValue(),
-        header: () => 'Matricule',
+        header: () => <div className="my-1">Matricule</div>,
       }),
       columnHelper.accessor('nom', {
         cell: (info) => info.getValue(),
