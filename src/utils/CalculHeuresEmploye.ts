@@ -7,12 +7,13 @@ class CalculHeuresEmploye {
   private totalHnormale: number
   private totalHtravailEffectif: number
   private tableauTotalHsParSemaine: { jour: string; semaine: string; totalHsParSemaine: number }[]
-
+  private taleauHs130ParSemaine: { jour: string; semaine: string; totalHs130ParSemaine: number }[]
   constructor() {
     this.heuresMonsuelEmploye = []
     this.totalHnormale = 0
     this.totalHtravailEffectif = 0
     this.tableauTotalHsParSemaine = []
+    this.taleauHs130ParSemaine = []
   }
 
   setHeuresMonsuelEmploye(heuresMonsuelEmploye: IHeuresEmploye[]): void {
@@ -64,7 +65,6 @@ class CalculHeuresEmploye {
       const currentDate: Date = parse(item.date, 'dd/MM/yyyy', new Date())
       const jour = format(currentDate, 'EEEE', { locale: fr })
       const isLastDayOfMonth = index === this.heuresMonsuelEmploye.length - 1
-      //   console.log(item.date, jour)
 
       if (isMonday(currentDate) || index === 0) {
         currentWeekStartDate = currentDate
@@ -85,9 +85,53 @@ class CalculHeuresEmploye {
     })
   }
 
-  getHsParSemaine(): { semaine: string; totalHsParSemaine: number }[] {
-    this.calculateHsParSemaine()
+  private isTableauHsParSemaineVide(): boolean {
+    return this.tableauTotalHsParSemaine.length === 0
+  }
+
+  private isTableauHs130ParSemaineVide(): boolean {
+    return this.taleauHs130ParSemaine.length === 0
+  }
+
+  private calculateHs130ParSemaine() {
+    this.sorteHeuresMonsuelEmploye()
+    this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+
+    if (this.taleauHs130ParSemaine) {
+      // Ajout de cette vérification
+      this.tableauTotalHsParSemaine.forEach((item, index) => {
+        console.log(item)
+
+        const newItem = {
+          jour: item.jour,
+          semaine: item.semaine,
+          totalHs130ParSemaine: 0,
+        }
+
+        if (item.totalHsParSemaine >= 8) {
+          newItem.totalHs130ParSemaine = 8
+        } else {
+          newItem.totalHs130ParSemaine = item.totalHsParSemaine
+        }
+
+        this.taleauHs130ParSemaine.push(newItem)
+      })
+    }
+  }
+
+  public getTaleauHsParSemaine(): { semaine: string; totalHsParSemaine: number }[] {
+    this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
     return this.tableauTotalHsParSemaine
+  }
+
+  public getTableauHs130ParSemaine(): {
+    jour: string
+    semaine: string
+    totalHs130ParSemaine: number
+  }[] {
+    this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+    this.isTableauHs130ParSemaineVide() && this.calculateHs130ParSemaine()
+    return this.taleauHs130ParSemaine
   }
 }
 
