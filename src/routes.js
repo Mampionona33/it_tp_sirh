@@ -113,13 +113,13 @@ const routes = [
 
   // Gestion de paie path def
   {
-    path: '/gestion-de-paie/liste-employee',
+    path: '/gestion-de-paie',
     name: 'Liste employée (Gestion de paie)',
     element: GestionPaie,
     exact: true,
   },
   {
-    path: '/gestion-de-paie/liste-employee/historique/:id',
+    path: '/gestion-de-paie/historique/:id',
     name: 'Historique',
     element: HistoriquePaie,
     exact: true,
