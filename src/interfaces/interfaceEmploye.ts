@@ -6,7 +6,10 @@ export interface IEmploye {
   prenom: string
   date_naissance: string
   lieu_naissance: string
+  date_delivrance_cin: string
   adresse: string
+  nom_pere?: string
+  nom_mere?: string
   telephone?: string
   email?: string
   num_cin: string
@@ -24,7 +27,7 @@ export interface IEmploye {
   travail_de_nuit: EnumBoolean
   salaire_de_base: number
   rib?: string
-  mode_payement_salaire: string
+  mode_paiement_salaire: string
   num_cnaps?: string
   num_osie?: string
   prime_et_avantage_permanent?: PrimeEtAvantagePermanent[]

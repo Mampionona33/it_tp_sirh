@@ -6,12 +6,15 @@ import ButtonLink, { ButtonLinkVariant } from '@src/components/buttons/ButtonLin
 import { fr } from 'date-fns/locale'
 import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
 import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
+import Page404 from '@src/views/pages/page404/Page404'
+import useEmployeeExists from '@src/hooks/useEmployeeExists'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
   actions?: React.FC[]
 }
 
 const HistoriquePaie: React.FC = () => {
+  const isEmployeExist = useEmployeeExists()
   const historiquePaiement: IHistoriquePaieProps[] = [
     {
       id: 1,
@@ -40,7 +43,7 @@ const HistoriquePaie: React.FC = () => {
     {
       id: 3,
       id_employe: 1,
-      date: '2023-12-23',
+      date: '2023-01-22',
       salaire_brut: 1000,
       salaire_net: 900,
       status: EnumBoolean.NON,
@@ -52,7 +55,7 @@ const HistoriquePaie: React.FC = () => {
   const cols = useMemo<ColumnDef<IHistoriquePaieTableProps>[]>(
     () => [
       columnHelper.accessor('date', {
-        cell: (info) => format(new Date(info.getValue()), 'dd MMMM yyyy', { locale: fr }),
+        cell: (info) => format(new Date(info.getValue()), 'MMMM yyyy', { locale: fr }),
         header: () => 'Date',
       }),
       columnHelper.accessor('salaire_brut', {
@@ -83,7 +86,7 @@ const HistoriquePaie: React.FC = () => {
           } else if (info.row.original.status === 'non') {
             return (
               <div className="flex justify-center">
-                <ButtonLink to={`valider/${info.row.original.id}`}>Valider</ButtonLink>
+                <ButtonLink to={`valider/${info.row.original.date}`}>A Valider</ButtonLink>
               </div>
             )
           }
@@ -119,12 +122,16 @@ const HistoriquePaie: React.FC = () => {
 
   return (
     <div>
-      <ReusableTable
-        data={historiquePaiement}
-        columns={cols}
-        title="Historique de paie"
-        headerComponents={<DateFilter />}
-      />
+      {isEmployeExist ? (
+        <ReusableTable
+          data={historiquePaiement}
+          columns={cols}
+          title="Historique de paie"
+          headerComponents={<DateFilter />}
+        />
+      ) : (
+        <Page404 />
+      )}
     </div>
   )
 }

@@ -51,7 +51,10 @@ const AppHeaderDropdown = () => {
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
-        <CAvatar src={avatar8} size="md" />
+        {/* <CAvatar src={avatar8} size="md" /> */}
+        <div className="rounded-full bg-customBlue-400 p-1 items-center w-10 h-10 flex justify-center">
+          <CIcon icon={cilUser} size="lg" className="text-white" />
+        </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownHeader className="bg-light fw-semibold py-2">Account</CDropdownHeader>

@@ -74,7 +74,7 @@ const _nav = [
   {
     component: CNavItem,
     name: 'Gestion de paie',
-    to: '/gestion-de-paie/liste-employee',
+    to: '/gestion-de-paie',
     icon: <CIcon icon={cilEuro} customClassName="nav-icon" />,
   },
   {

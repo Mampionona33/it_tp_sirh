@@ -47,7 +47,7 @@ const initialState = {
       dateDebut: '22',
       dateFin: '21',
     },
-    dec: {
+    déc: {
       dateDebut: '22',
       dateFin: '21',
     },

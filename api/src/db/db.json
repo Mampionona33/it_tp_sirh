@@ -150,1516 +150,664 @@
   ],
   "/employeeHours": [
     {
-      "id": 1,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "15/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 2,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "16/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 3,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "17/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 4,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "18/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.5,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 5,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "19/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 5.3,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 6,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "20/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.1,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 7,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "21/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 8,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "22/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.5,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 9,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "23/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 10,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "24/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.2,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 11,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "25/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.15,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 12,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "26/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.02,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 13,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "27/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 14,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "28/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 15,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "29/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 16,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "30/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.4,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 17,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "31/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.13,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 18,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
+      "matricule": 345,
       "date": "01/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 19,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "02/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8.3,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 20,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "03/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 21,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "04/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 22,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "05/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 23,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "06/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 24,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "07/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 25,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "08/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 26,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "09/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8.1,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 27,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "10/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8.25,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 28,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "11/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8.1,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 29,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "12/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 9,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 30,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "13/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 31,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "14/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 32,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "15/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 10.2,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 33,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "16/01/2023",
-      "heure_normale": 8,
       "heure_de_travail": 12,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 34,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "17/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 6,
+      "hs_normale": 0
     },
     {
-      "id": 35,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "18/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 36,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "19/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 37,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "20/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 38,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "21/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 39,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "22/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 40,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "23/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 41,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "24/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 42,
-      "employee": {
-        "id": 1,
-        "matricule": 345
-      },
-      "date": "25/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": 10
-    },
-    {
-      "id": 43,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "15/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 44,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "16/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 45,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "17/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 46,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "18/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 47,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "19/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 48,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "20/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 49,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "21/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 50,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "22/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.2,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 51,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "23/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 52,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "24/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 53,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "25/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 54,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "26/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.2,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 55,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "27/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 56,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "28/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 57,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "29/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.3,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 58,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "30/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.5,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 59,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "31/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 60,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
-      "date": "01/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8.1,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 61,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "02/01/2023",
+      "heure_de_travail": 10,
       "heure_normale": 8,
-      "heure_de_travail": 8.6,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 62,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "03/01/2023",
+      "heure_de_travail": 11,
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 63,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "04/01/2023",
-      "heure_normale": 8,
       "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 64,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "05/01/2023",
+      "heure_de_travail": 12,
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 65,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "06/01/2023",
+      "heure_de_travail": 10,
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 66,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "07/01/2023",
+      "heure_de_travail": 12,
       "heure_normale": 8,
-      "heure_de_travail": 8.1,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 67,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "08/01/2023",
+      "heure_de_travail": 10,
       "heure_normale": 8,
-      "heure_de_travail": 8.3,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 68,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "09/01/2023",
+      "heure_de_travail": 12,
       "heure_normale": 8,
-      "heure_de_travail": 8.6,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 69,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "10/01/2023",
+      "heure_de_travail": 9,
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 70,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "11/01/2023",
+      "heure_de_travail": 8,
       "heure_normale": 8,
-      "heure_de_travail": 9,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 71,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "12/01/2023",
+      "heure_de_travail": 9,
       "heure_normale": 8,
-      "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 72,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "13/01/2023",
+      "heure_de_travail": 11,
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 5,
+      "hs_normale": 0
     },
     {
-      "id": 73,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "14/01/2023",
+      "heure_de_travail": 11,
       "heure_normale": 8,
-      "heure_de_travail": 8.7,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 74,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "15/01/2023",
+      "heure_de_travail": 12,
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 75,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "16/01/2023",
+      "heure_de_travail": 11,
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 76,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "17/01/2023",
+      "heure_de_travail": 11,
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 77,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "18/01/2023",
+      "heure_de_travail": 12,
       "heure_normale": 8,
-      "heure_de_travail": 9,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 78,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "19/01/2023",
+      "heure_de_travail": 9,
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 9,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 79,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "20/01/2023",
+      "heure_de_travail": 11,
       "heure_normale": 8,
-      "heure_de_travail": 8.4,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 80,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "21/01/2023",
+      "heure_de_travail": 10,
       "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 81,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "22/01/2023",
+      "heure_de_travail": 10,
       "heure_normale": 8,
-      "heure_de_travail": 8.2,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 82,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "23/01/2023",
+      "heure_de_travail": 11,
       "heure_normale": 8,
-      "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 83,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "24/01/2023",
+      "heure_de_travail": 9,
       "heure_normale": 8,
-      "heure_de_travail": 10.1,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 84,
-      "employee": {
-        "id": 2,
-        "matricule": 619
-      },
+      "matricule": 345,
       "date": "25/01/2023",
+      "heure_de_travail": 9,
       "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "26/01/2023",
+      "heure_de_travail": 12,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "27/01/2023",
+      "heure_de_travail": 10,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "28/01/2023",
+      "heure_de_travail": 10,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "29/01/2023",
       "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 85,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "15/12/2022",
-      "heure_normale": 8,
+      "matricule": 345,
+      "date": "30/01/2023",
       "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 86,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "16/12/2022",
+      "matricule": 345,
+      "date": "31/01/2023",
+      "heure_de_travail": 12,
       "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "01/02/2023",
+      "heure_de_travail": 8,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "02/02/2023",
+      "heure_de_travail": 9,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "03/02/2023",
       "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 87,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "17/12/2022",
+      "matricule": 345,
+      "date": "04/02/2023",
+      "heure_de_travail": 8,
       "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "05/02/2023",
+      "heure_de_travail": 8,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "06/02/2023",
+      "heure_de_travail": 12,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "07/02/2023",
+      "heure_de_travail": 12,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "08/02/2023",
+      "heure_de_travail": 10,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "09/02/2023",
+      "heure_de_travail": 12,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "10/02/2023",
+      "heure_de_travail": 9,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "11/02/2023",
+      "heure_de_travail": 9,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "12/02/2023",
       "heure_de_travail": 11,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 88,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "18/12/2022",
+      "matricule": 345,
+      "date": "13/02/2023",
+      "heure_de_travail": 12,
       "heure_normale": 8,
-      "heure_de_travail": 8.5,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 89,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "19/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 90,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "20/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 91,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "21/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.4,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 92,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "22/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 8.5,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 93,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "23/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 9,
-      "hs_de_nuit": 1,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 94,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "24/12/2022",
-      "heure_normale": 8,
+      "matricule": 345,
+      "date": "14/02/2023",
       "heure_de_travail": 10,
-      "hs_de_nuit": 2,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 95,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "25/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 9,
-      "hs_de_nuit": 1,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 96,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "26/12/2022",
-      "heure_normale": 8,
+      "matricule": 345,
+      "date": "15/02/2023",
       "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 97,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "27/12/2022",
+      "matricule": 345,
+      "date": "16/02/2023",
+      "heure_de_travail": 12,
       "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "17/02/2023",
+      "heure_de_travail": 10,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "18/02/2023",
+      "heure_de_travail": 8,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "19/02/2023",
+      "heure_de_travail": 12,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "20/02/2023",
+      "heure_de_travail": 10,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "21/02/2023",
+      "heure_de_travail": 9,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "22/02/2023",
+      "heure_de_travail": 9,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "23/02/2023",
+      "heure_de_travail": 12,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "24/02/2023",
+      "heure_de_travail": 10,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "25/02/2023",
+      "heure_de_travail": 8,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "26/02/2023",
+      "heure_de_travail": 10,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "27/02/2023",
       "heure_de_travail": 11,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 98,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "28/12/2022",
+      "matricule": 345,
+      "date": "28/02/2023",
+      "heure_de_travail": 8,
       "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "01/03/2023",
+      "heure_de_travail": 12,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "02/03/2023",
+      "heure_de_travail": 8,
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
+    },
+    {
+      "matricule": 345,
+      "date": "03/03/2023",
       "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 99,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "29/12/2022",
-      "heure_normale": 8,
-      "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 100,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "30/12/2022",
-      "heure_normale": 8,
+      "matricule": 345,
+      "date": "04/03/2023",
       "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 101,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "31/12/2022",
+      "matricule": 345,
+      "date": "05/03/2023",
+      "heure_de_travail": 13,
       "heure_normale": 8,
-      "heure_de_travail": 8.2,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 102,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "01/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8.4,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 103,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "02/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 9,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 104,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "03/01/2023",
-      "heure_normale": 8,
+      "matricule": 345,
+      "date": "06/03/2023",
       "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
+      "heure_normale": 8,
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     },
     {
-      "id": 105,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "04/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 10,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 106,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "05/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 11,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 107,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "06/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 9,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 108,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "07/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8.5,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 109,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "08/01/2023",
-      "heure_normale": 8,
+      "matricule": 345,
+      "date": "07/03/2023",
       "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 110,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "09/01/2023",
       "heure_normale": 8,
-      "heure_de_travail": 8.5,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 111,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "10/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": 8
-    },
-    {
-      "id": 112,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "11/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8.5,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 113,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "12/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 114,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "13/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 9,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 115,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "14/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 11,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 116,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "15/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 117,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "16/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 118,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "17/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 119,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "18/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 120,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "19/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 121,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "20/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 122,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "21/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 123,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "22/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 124,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "23/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 125,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "24/01/2023",
-      "heure_normale": 8,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": null
-    },
-    {
-      "id": 126,
-      "employee": {
-        "id": 4,
-        "matricule": 869
-      },
-      "date": "25/01/2023",
-      "heure_normale": null,
-      "heure_de_travail": 8,
-      "hs_de_nuit": null,
-      "hs_jours_feries": 10
+      "hs_de_dimanche": 0,
+      "hs_jours_feries": 0,
+      "hs_de_nuit": 0,
+      "hs_normale": 0
     }
   ],
   "/cotisations": [
@@ -1989,7 +1137,7 @@
         }
       ],
       "titre_poste": "Responsable Import et logistique ",
-      "matricule": "442",
+      "matricule": "345",
       "categorie": "1a",
       "date_embauche": "2016-04-16",
       "lieu_travail": "Toamasina",
@@ -2240,7 +1388,7 @@
       "date": "2023-01-24",
       "salaire_brut": 1000,
       "salaire_net": 900,
-      "status": "oui"
+      "valide": "oui"
     },
     {
       "id": 2,
@@ -2248,7 +1396,7 @@
       "date": "2023-02-22",
       "salaire_brut": 1000,
       "salaire_net": 900,
-      "status": "oui"
+      "valide": "oui"
     },
     {
       "id": 3,
@@ -2256,7 +1404,7 @@
       "date": "2023-03-23",
       "salaire_brut": 1000,
       "salaire_net": 900,
-      "status": "oui"
+      "valide": "oui"
     },
     {
       "id": 4,
@@ -2264,7 +1412,7 @@
       "date": "2023-12-23",
       "salaire_brut": 1000,
       "salaire_net": 900,
-      "status": "non"
+      "valide": "non"
     }
   ]
 }

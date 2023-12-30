@@ -9,8 +9,19 @@ const AppBreadcrumb = () => {
   const currentLocation = useLocation().pathname
 
   const getRouteName = (pathname, routes) => {
-    const currentRoute = routes.find((route) => route.path === pathname)
-    return currentRoute ? currentRoute.name : false
+    const pathSegments = pathname.split('/').filter((segment) => segment !== '') // Ignorer les segments vides
+    for (const route of routes) {
+      const routeSegments = route.path.split('/').filter((segment) => segment !== '')
+      if (pathSegments.length === routeSegments.length) {
+        const match = routeSegments.every((segment, index) => {
+          return segment.startsWith(':') || segment === pathSegments[index]
+        })
+        if (match) {
+          return route.name
+        }
+      }
+    }
+    return false
   }
 
   const getBreadcrumbs = (location) => {
@@ -34,12 +45,13 @@ const AppBreadcrumb = () => {
 
   return (
     <CBreadcrumb className="m-0 ms-2 ">
-      <CBreadcrumbItem className="text-orange-900" href="/">
+      <CBreadcrumbItem className="text-orange-900 text-sm" href="/">
         Home
       </CBreadcrumbItem>
       {breadcrumbs.map((breadcrumb, index) => {
         return (
           <CBreadcrumbItem
+            className="text-sm"
             {...(breadcrumb.active ? { active: true } : { href: breadcrumb.pathname })}
             key={index}
           >
