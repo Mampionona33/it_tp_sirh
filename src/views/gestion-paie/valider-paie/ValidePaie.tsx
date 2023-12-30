@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useEmployeeExists from '@src/hooks/useEmployeeExists'
 import Page404 from '@src/views/pages/page404/Page404'
@@ -7,7 +7,6 @@ import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'
 import { format, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { DDMMYYYYFormat } from '@src/types/DateType'
-import { IHeuresEmploye } from '@src/interfaces/interfaceHeuresEmploye'
 import heureSerivice from '@src/services/HeureService'
 import SalaryCalculation from '../../../components/SalaryCalculation/SalaryCalculation'
 import calculHeuresEmploye from '@src/utils/CalculHeuresEmploye'
@@ -15,7 +14,6 @@ import calculHeuresEmploye from '@src/utils/CalculHeuresEmploye'
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
   const { id, dateValidation } = useParams()
-  const [heures, setHeures] = useState<IHeuresEmploye[] | null>(null)
   const listEmploye = useAppSelector((store) => store.employeesList.list)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
   const getMonthValidation = (): string => {
@@ -79,7 +77,6 @@ const ValidePaie = () => {
       .getAll(matricule, dateDebutFormated, dateFinFormated)
       .then((data) => {
         console.log(data)
-        setHeures(data)
         calculHeuresEmploye.setHeuresMonsuelEmploye(data)
         est_cadre === EnumBoolean.OUI && calculHeuresEmploye.setEstCadre(true)
         travail_de_nuit === EnumBoolean.OUI && calculHeuresEmploye.setTravailDeNuit(true)
@@ -128,7 +125,7 @@ const ValidePaie = () => {
         {isEmployeExist ? (
           <div>
             <p>Valid paie</p>
-            <SalaryCalculation />
+            {/* <SalaryCalculation /> */}
           </div>
         ) : (
           <Page404 />
