@@ -10,6 +10,9 @@ import { DDMMYYYYFormat } from '@src/types/DateType'
 import heureSerivice from '@src/services/HeureService'
 import SalaryCalculation from '../../../components/SalaryCalculation/SalaryCalculation'
 import calculHeuresEmploye from '@src/utils/CalculHeuresEmploye'
+import CardSalaireBrut from './CardSalaireBrut'
+import CardSalaireNet from './CardSalaireNet'
+import CardSalaireNetAPayer from './CardSalaireNetAPayer'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
@@ -123,8 +126,10 @@ const ValidePaie = () => {
     <>
       <div>
         {isEmployeExist ? (
-          <div>
-            <p>Valid paie</p>
+          <div className="grid grid-cols-3 gap-4">
+            <CardSalaireBrut />
+            <CardSalaireNet />
+            <CardSalaireNetAPayer />
             {/* <SalaryCalculation /> */}
           </div>
         ) : (
