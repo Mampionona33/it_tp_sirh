@@ -271,6 +271,7 @@ class CalculHeuresEmploye {
 
   private calculateTotalHs130(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+    this.isTableauHs130ParSemaineVide() && this.calculateHs130ParSemaine()
     this.tableauHs130ParSemaine.forEach((element) => {
       this.totalHs130 += element.totalHs130ParSemaine
     })
@@ -282,6 +283,7 @@ class CalculHeuresEmploye {
 
   private calculateTotalHs150(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+    this.isTableauHs150ParSemaineVide() && this.calculateTableauHs150()
     this.tableauHs150ParSemaine.forEach((element) => {
       this.totalHs150 += element.totalHs150ParSemaine
     })
