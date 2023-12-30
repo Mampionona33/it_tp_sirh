@@ -156,7 +156,7 @@
       "heure_normale": 8,
       "hs_de_dimanche": 0,
       "hs_jours_feries": 0,
-      "hs_de_nuit": 0,
+      "hs_de_nuit": 6,
       "hs_normale": 0
     },
     {
@@ -276,7 +276,7 @@
       "heure_normale": 8,
       "hs_de_dimanche": 0,
       "hs_jours_feries": 0,
-      "hs_de_nuit": 0,
+      "hs_de_nuit": 5,
       "hs_normale": 0
     },
     {
@@ -335,7 +335,7 @@
       "heure_de_travail": 9,
       "heure_normale": 8,
       "hs_de_dimanche": 0,
-      "hs_jours_feries": 0,
+      "hs_jours_feries": 9,
       "hs_de_nuit": 0,
       "hs_normale": 0
     },

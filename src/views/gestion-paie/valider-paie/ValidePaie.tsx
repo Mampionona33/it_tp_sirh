@@ -57,10 +57,19 @@ const ValidePaie = () => {
     return format(adjustedDate, 'dd/MM/yyyy') as DDMMYYYYFormat
   }
 
-  const { matricule, est_cadre, travail_de_nuit }: IEmploye =
+  const matricule =
     listEmploye &&
     listEmploye.length > 0 &&
-    listEmploye.filter((employe: IEmploye) => employe.id === parseInt(id, 10))[0]
+    listEmploye.filter((item: IEmploye) => String(item.id) === String(id))[0]?.matricule
+
+  const est_cadre =
+    listEmploye &&
+    listEmploye.length > 0 &&
+    listEmploye.filter((item: IEmploye) => String(item.id) === String(id))[0]?.est_cadre
+
+  const travail_de_nuit =
+    listEmploye &&
+    listEmploye.filter((item: IEmploye) => String(item.id) === String(id))[0]?.travail_de_nuit
 
   const dateDebutFormated = formatDateDebut()
   const dateFinFormated = formatDateFin()
@@ -76,10 +85,16 @@ const ValidePaie = () => {
         travail_de_nuit === EnumBoolean.OUI && calculHeuresEmploye.setTravailDeNuit(true)
         console.log('total h normale', calculHeuresEmploye.getTotalHnormale())
         console.log('total h effectif', calculHeuresEmploye.getTotalHTravailEffectif())
+        console.log('total travail de nuit 30%', calculHeuresEmploye.getTotalTravailDeNuit30())
+        console.log('total travail de nuit 50%', calculHeuresEmploye.getTotalTravailDeNuit50())
+        console.log('total travail dimanche', calculHeuresEmploye.getTotalHdim())
+        console.log('total hs du mois', calculHeuresEmploye.getTotalHsDuMois())
+        console.log('total hs130 ', calculHeuresEmploye.getTotalHs130())
+        console.log('total hs 150', calculHeuresEmploye.getTotalHs150())
+        console.log('total h férié', calculHeuresEmploye.getTotalHFerie())
         console.log('tableau hs par semaine', calculHeuresEmploye.getTaleauHsParSemaine())
         console.log('tableau hs130 par semaine', calculHeuresEmploye.getTableauHs130ParSemaine())
         console.log('tableau hs150 par semaine', calculHeuresEmploye.getTableauHs150ParSemaine())
-        console.log('total travail de nuit 30%', calculHeuresEmploye.getTotalTravailDeNuit30())
       })
       .catch((err) => console.log(err))
   }, [matricule, dateDebutFormated, dateFinFormated, est_cadre, travail_de_nuit])
