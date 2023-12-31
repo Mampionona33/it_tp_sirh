@@ -67,6 +67,7 @@ const ValidePaie = () => {
   useEffect(() => {
     const salarie: IEmploye =
       id && listEmploye && listEmploye.filter((item: IEmploye) => String(item.id) === String(id))[0]
+    console.log(salarie)
 
     if (salarie && dateDebutFormated && dateFinFormated && mount.current) {
       heureSerivice

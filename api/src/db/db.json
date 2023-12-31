@@ -34,118 +34,48 @@
     },
     {
       "id": 3,
-      "value": "1a",
-      "label": "1A"
-    },
-    {
-      "id": 4,
-      "value": "1b",
-      "label": "1B"
-    },
-    {
-      "id": 5,
       "value": "os1",
       "label": "OS1"
     },
     {
-      "id": 6,
+      "id": 4,
       "value": "os2",
       "label": "OS2"
     },
     {
-      "id": 7,
+      "id": 5,
       "value": "os3",
       "label": "OS3"
     },
     {
+      "id": 6,
+      "value": "op1a",
+      "label": "OP1A"
+    },
+    {
+      "id": 7,
+      "value": "op1b",
+      "label": "OP1B"
+    },
+    {
       "id": 8,
-      "value": "op1",
-      "label": "OP1"
+      "value": "op2a",
+      "label": "OP2A"
     },
     {
       "id": 9,
-      "value": "2a",
-      "label": "2A"
+      "value": "op2b",
+      "label": "OP2B"
     },
     {
       "id": 10,
-      "value": "2b",
-      "label": "2B"
+      "value": "op3",
+      "label": "OP2B"
     },
     {
       "id": 11,
-      "value": "3a",
-      "label": "3A"
-    },
-    {
-      "id": 13,
-      "value": "3b",
-      "label": "3B"
-    },
-    {
-      "id": 14,
-      "value": "a1",
-      "label": "A1"
-    },
-    {
-      "id": 15,
-      "value": "a2",
-      "label": "A2"
-    },
-    {
-      "id": 16,
-      "value": "a3",
-      "label": "A3"
-    },
-    {
-      "id": 17,
-      "value": "b1",
-      "label": "B1"
-    },
-    {
-      "id": 18,
-      "value": "b2",
-      "label": "B2"
-    },
-    {
-      "id": 19,
-      "value": "b3",
-      "label": "B3"
-    },
-    {
-      "id": 20,
-      "value": "b4",
-      "label": "B4"
-    },
-    {
-      "id": 21,
-      "value": "c1",
-      "label": "C1"
-    },
-    {
-      "id": 22,
-      "value": "c2",
-      "label": "C2"
-    },
-    {
-      "id": 23,
-      "value": "c3",
-      "label": "C3"
-    },
-    {
-      "id": 24,
-      "value": "d1",
-      "label": "D1"
-    },
-    {
-      "id": 25,
-      "value": "d2",
-      "label": "D2"
-    },
-    {
-      "id": 26,
-      "value": "d3",
-      "label": "D3"
+      "value": "hc",
+      "label": "Hors échelle"
     }
   ],
   "/employeeHours": [
