@@ -65,6 +65,18 @@ const CardSalaireBrut = () => {
           cell1="HS 50%"
           cell2={bulletinDePaie.totalHs50}
           cell3={bulletinDePaie.valHs50}
+        />{' '}
+        <Row
+          className="border-b border-b-customBlue-930"
+          cell1="HFérié"
+          cell2={bulletinDePaie.totalHFerie}
+          cell3={bulletinDePaie.valHFerie}
+        />
+        <Row
+          className="border-b border-b-customBlue-930"
+          cell1="HDimanche"
+          cell2={bulletinDePaie.totalHDim}
+          cell3={bulletinDePaie.valHdim}
         />
         <div className="flex justify-between p-2 ">
           <div>Salaire de brut</div>

@@ -223,7 +223,7 @@ class CalculPaie {
     this.valHsni130 = valHsni130
   }
   private calculateValHsni130(): void {
-    if (this.hsni130 > 0) {
+    if (!this.est_cadre && this.hsni130 > 0) {
       this.valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * this.hsni130 * 130) / 100)
     }
   }
@@ -233,7 +233,7 @@ class CalculPaie {
   }
 
   private calculateValHsni150(): void {
-    if (this.hsni150 > 0) {
+    if (!this.est_cadre && this.hsni150 > 0) {
       this.valHsni150 = this.roundToTwoDecimal((this.tauxHoraire * this.hsni150 * 150) / 100)
     }
   }
@@ -243,7 +243,7 @@ class CalculPaie {
   }
 
   private calculateValHsi130(): void {
-    if (this.hsi130 > 0) {
+    if (!this.est_cadre && this.hsi130 > 0) {
       this.valHsi130 = this.roundToTwoDecimal((this.tauxHoraire * this.hsi130 * 130) / 100)
     }
   }
@@ -256,7 +256,7 @@ class CalculPaie {
     this.valHsi150 = valHsi150
   }
   private calculateValHsi150(): void {
-    if (this.hsi150 > 0) {
+    if (!this.est_cadre && this.hsi150 > 0) {
       this.valHsi150 = this.roundToTwoDecimal((this.tauxHoraire * this.hsi150 * 150) / 100)
     }
   }
@@ -266,7 +266,7 @@ class CalculPaie {
   }
 
   private calculateValHs30(): void {
-    if (this.totalHs30) {
+    if (!this.est_cadre && this.totalHs30) {
       this.valHs30 = this.roundToTwoDecimal((this.tauxHoraire * this.totalHs30 * 30) / 100)
     }
   }
@@ -276,7 +276,7 @@ class CalculPaie {
   }
 
   private calculValHs50(): void {
-    if (this.totalHs50) {
+    if (!this.est_cadre && this.totalHs50) {
       this.valHs50 = this.roundToTwoDecimal((this.tauxHoraire * this.totalHs50 * 50) / 100)
     }
   }
@@ -286,7 +286,7 @@ class CalculPaie {
   }
 
   private calculValHdim(): void {
-    if (this.totalHDim) {
+    if (!this.est_cadre && this.totalHDim) {
       this.valHdim = this.roundToTwoDecimal((this.tauxHoraire * this.totalHDim * 40) / 100)
     }
   }
@@ -296,7 +296,7 @@ class CalculPaie {
   }
 
   private calculValHFerie(): void {
-    if (this.totalHFerie) {
+    if (!this.est_cadre && this.totalHFerie) {
       this.valHFerie = this.roundToTwoDecimal((this.tauxHoraire * this.totalHFerie * 100) / 100)
     }
   }

@@ -76,7 +76,7 @@ const ValidePaie = () => {
           // console.log(data)
           calculHeuresEmploye.setHeuresMonsuelEmploye(data)
 
-          salarie.est_cadre === EnumBoolean.OUI && calculHeuresEmploye.setEstCadre(true)
+          salarie.categorie === 'hc' && calculHeuresEmploye.setEstCadre(true)
           salarie.travail_de_nuit === EnumBoolean.OUI && calculHeuresEmploye.setTravailDeNuit(true)
 
           const totalHn = calculHeuresEmploye.getTotalHnormale()
@@ -99,7 +99,7 @@ const ValidePaie = () => {
 
           if (salarie.salaire_de_base) {
             calculPaie.setSalaireBase(salarie.salaire_de_base)
-            salarie.est_cadre === EnumBoolean.OUI && calculPaie.setEstCadre(true)
+            salarie.categorie === 'hc' && calculPaie.setEstCadre(true)
             calculPaie.setHsni130(hsni130)
             calculPaie.setHsni150(hsni150)
             calculPaie.setHsi130(hsi130)
