@@ -1,10 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchAllCotisations } from '../cotisations/cotisationsActions'
-
-interface ICategorieEmployeState {
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed'
-  data: any
-}
+import { ICategorieEmployeState } from '@src/interfaces/intefaceCategorieEmploye'
 
 const initialState: ICategorieEmployeState = {
   loading: 'idle',

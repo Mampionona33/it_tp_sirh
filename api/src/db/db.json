@@ -75,7 +75,7 @@
     {
       "id": 11,
       "value": "hc",
-      "label": "Hors échelle"
+      "label": "Hors catégorie"
     }
   ],
   "/employeeHours": [
@@ -1044,6 +1044,40 @@
       ]
     }
   ],
+  "historiquePaie": [
+    {
+      "id": 1,
+      "id_employe": 1,
+      "date": "2023-01-24",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "valide": "oui"
+    },
+    {
+      "id": 2,
+      "id_employe": 1,
+      "date": "2023-02-22",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "valide": "oui"
+    },
+    {
+      "id": 3,
+      "id_employe": 1,
+      "date": "2023-03-23",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "valide": "oui"
+    },
+    {
+      "id": 4,
+      "id_employe": 1,
+      "date": "2023-12-23",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "valide": "non"
+    }
+  ],
   "salaries": [
     {
       "id": 1,
@@ -1068,7 +1102,7 @@
       ],
       "titre_poste": "Responsable Import et logistique ",
       "matricule": "345",
-      "categorie": "1a",
+      "categorie": "hc",
       "date_embauche": "2016-04-16",
       "lieu_travail": "Toamasina",
       "salaire_de_base": 800000,
@@ -1096,7 +1130,11 @@
       },
       "tel": "020 000211",
       "cin": "10126174565",
-      "cadre": true
+      "cadre": true,
+      "date_delivrance_cin": "2023-12-14",
+      "nom_mere": "",
+      "nom_pere": "",
+      "mode_paiement_salaire": "Virement banquaire"
     },
     {
       "id": 2,
@@ -1309,40 +1347,6 @@
       "rib": "",
       "prime_et_avantage_permanent": null,
       "depart": null
-    }
-  ],
-  "historiquePaie": [
-    {
-      "id": 1,
-      "id_employe": 1,
-      "date": "2023-01-24",
-      "salaire_brut": 1000,
-      "salaire_net": 900,
-      "valide": "oui"
-    },
-    {
-      "id": 2,
-      "id_employe": 1,
-      "date": "2023-02-22",
-      "salaire_brut": 1000,
-      "salaire_net": 900,
-      "valide": "oui"
-    },
-    {
-      "id": 3,
-      "id_employe": 1,
-      "date": "2023-03-23",
-      "salaire_brut": 1000,
-      "salaire_net": 900,
-      "valide": "oui"
-    },
-    {
-      "id": 4,
-      "id_employe": 1,
-      "date": "2023-12-23",
-      "salaire_brut": 1000,
-      "salaire_net": 900,
-      "valide": "non"
     }
   ]
 }

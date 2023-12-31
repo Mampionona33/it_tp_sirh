@@ -8,7 +8,7 @@ import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 const InfoPro = () => {
   const dispatch = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
-  const catOptions = useSelector((state: any) => state.cateogieEmploye.data)
+  const catOptions = useAppSelector((store) => store.cateogieEmploye.data)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { name, value } = event.target ?? { name: '', value: '' }
@@ -105,17 +105,6 @@ const InfoPro = () => {
       autoComplete: 'on',
       value: formEmploye.email,
       type: 'email',
-      onChange: handleInputChange,
-    },
-    {
-      id: 'est_cadre',
-      dynamiqueId: true,
-      label: 'Est cadre',
-      name: 'est_cadre',
-      value: formEmploye.est_cadre,
-      type: 'radio',
-      required: true,
-      options: radioOption,
       onChange: handleInputChange,
     },
     {
