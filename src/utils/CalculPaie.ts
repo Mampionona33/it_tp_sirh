@@ -33,9 +33,12 @@ class CalculPaie {
   private valHFerie: number
   private valHs30: number
   constructor() {
-    this.valHsni130 = 0
     this.plafondSME = 1910400
     this.tauxHoraire = 0
+    this.valHsni130 = 0
+    this.valHsni150 = 0
+    this.valHsi130 = 0
+    this.valHsi150 = 0
   }
   public setTotalHs50(totalHs50: number): void {
     this.totalHs50 = totalHs50
@@ -182,17 +185,45 @@ class CalculPaie {
     this.valHsni130 = valHsni130
   }
   private calculateValHsni130(): void {
-    this.valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * this.hsni130 * 130) / 100)
+    if (this.hsni130 > 0) {
+      this.valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * this.hsni130 * 130) / 100)
+    }
   }
   getValHsni130(): number {
     this.calculateValHsni130()
     return this.valHsni130
   }
 
+  private calculateValHsni150(): void {
+    if (this.hsni150 > 0) {
+      this.valHsni150 = this.roundToTwoDecimal((this.tauxHoraire * this.hsni150 * 150) / 100)
+    }
+  }
+  public getValHsni150(): number {
+    this.calculateValHsni150()
+    return this.valHsni150
+  }
+
+  private calculateValHsi130(): void {
+    if (this.hsi130 > 0) {
+      this.valHsi130 = this.roundToTwoDecimal((this.tauxHoraire * this.hsi130 * 130) / 100)
+    }
+  }
+  public getValHsi130(): number {
+    this.calculateValHsi130()
+    return this.valHsi130
+  }
+
   setValHsi150(valHsi150: number): void {
     this.valHsi150 = valHsi150
   }
+  private calculateValHsi150(): void {
+    if (this.hsi150 > 0) {
+      this.valHsi150 = this.roundToTwoDecimal((this.tauxHoraire * this.hsi150 * 150) / 100)
+    }
+  }
   getValHsi150(): number {
+    this.calculateValHsi150()
     return this.valHsi150
   }
 

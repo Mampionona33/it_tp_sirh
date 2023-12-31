@@ -111,10 +111,19 @@ const ValidePaie = () => {
         if (salaire_de_base) {
           calculPaie.setSalaireBase(salaire_de_base)
           calculPaie.setHsni130(hsni130)
+          calculPaie.setHsni150(hsni150)
+          calculPaie.setHsi130(hsi130)
+          calculPaie.setHsi150(hsi150)
 
           const valHsni130 = calculPaie.getValHsni130()
+          const valHsni150 = calculPaie.getValHsni150()
+          const valHsi130 = calculPaie.getValHsi130()
+          const valHsi150 = calculPaie.getValHsi150()
 
           console.log('valHsni130', valHsni130)
+          console.log('valHsni150', valHsni150)
+          console.log('valHsi130', valHsi130)
+          console.log('valHsi150', valHsi150)
         }
 
         // console.log('total h normale', total_h_normale)
