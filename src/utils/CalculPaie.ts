@@ -24,6 +24,7 @@ class CalculPaie {
   private valHsni130: number
   private valHsi150: number
   private valHdim: number
+  private avantageNature: number
   private valHs50: number
   private baseCnaps: number
   private cnaps: number
@@ -39,7 +40,24 @@ class CalculPaie {
     this.valHsni150 = 0
     this.valHsi130 = 0
     this.valHsi150 = 0
+    this.valHs30 = 0
+    this.valHs50 = 0
+    this.valHdim = 0
+    this.valHFerie = 0
+    this.salaireBrut = 0
+    this.avantageNature = 0
+    this.salaireBase = 0
+    this.totalDeduction = 0
+    this.totalPrimeEtAvantage = 0
   }
+
+  setAvantageNature(avantageNature: number): void {
+    this.avantageNature = avantageNature
+  }
+  getAvantageNature(): number {
+    return this.avantageNature
+  }
+
   public setTotalHs50(totalHs50: number): void {
     this.totalHs50 = totalHs50
   }
@@ -106,7 +124,27 @@ class CalculPaie {
   setSalaireBrut(salaireBrut: number): void {
     this.salaireBrut = salaireBrut
   }
+  private calculateSalaireBrut(): void {
+    if (this.salaireBase) {
+      this.salaireBrut = this.est_cadre
+        ? this.roundToTwoDecimal(this.salaireBase + this.valHdim + this.valHFerie)
+        : this.roundToTwoDecimal(
+            this.salaireBase +
+              this.valHsni130 +
+              this.valHsni150 +
+              this.valHsi130 +
+              this.valHsi150 +
+              this.valHdim +
+              this.valHFerie +
+              this.valHs30 +
+              this.valHs50 +
+              this.totalPrimeEtAvantage -
+              this.totalDeduction,
+          )
+    }
+  }
   getSalaireBrut(): number {
+    this.calculateSalaireBrut()
     return this.salaireBrut
   }
 
@@ -225,6 +263,46 @@ class CalculPaie {
   getValHsi150(): number {
     this.calculateValHsi150()
     return this.valHsi150
+  }
+
+  private calculateValHs30(): void {
+    if (this.totalHs30) {
+      this.valHs30 = this.roundToTwoDecimal((this.tauxHoraire * this.totalHs30 * 30) / 100)
+    }
+  }
+  public getValHs30(): number {
+    this.calculateValHs30()
+    return this.valHs30
+  }
+
+  private calculValHs50(): void {
+    if (this.totalHs50) {
+      this.valHs50 = this.roundToTwoDecimal((this.tauxHoraire * this.totalHs50 * 50) / 100)
+    }
+  }
+  public getValHs50(): number {
+    this.calculValHs50()
+    return this.valHs50
+  }
+
+  private calculValHdim(): void {
+    if (this.totalHDim) {
+      this.valHdim = this.roundToTwoDecimal((this.tauxHoraire * this.totalHDim * 40) / 100)
+    }
+  }
+  public getValHdim(): number {
+    this.calculValHdim()
+    return this.valHdim
+  }
+
+  private calculValHFerie(): void {
+    if (this.totalHFerie) {
+      this.valHFerie = this.roundToTwoDecimal((this.tauxHoraire * this.totalHFerie * 100) / 100)
+    }
+  }
+  public getValHFerie(): number {
+    this.calculValHFerie()
+    return this.valHFerie
   }
 
   setHsni130(hsni130: number): void {
