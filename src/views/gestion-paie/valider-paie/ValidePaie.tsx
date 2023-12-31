@@ -8,13 +8,12 @@ import { format, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { DDMMYYYYFormat } from '@src/types/DateType'
 import heureSerivice from '@src/services/HeureService'
-import SalaryCalculation from '../../../components/SalaryCalculation/SalaryCalculation'
 import calculHeuresEmploye from '@src/utils/CalculHeuresEmploye'
-import CardSalaireBrut from './CardSalaireBrut'
-import CardSalaireNet from './CardSalaireNet'
-import CardSalaireNetAPayer from './CardSalaireNetAPayer'
-import calculPaie from '../../../utils/CalculPaie'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import calculPaie from '@src/utils/CalculPaie'
+import CardSalaireBrut from './ValiderCalculPaie/CardSalaireBrut'
+import CardSalaireNet from './ValiderCalculPaie/CardSalaireNet'
+import CardSalaireNetAPayer from './ValiderCalculPaie/CardSalaireNetAPayer'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
@@ -67,7 +66,6 @@ const ValidePaie = () => {
   useEffect(() => {
     const salarie: IEmploye =
       id && listEmploye && listEmploye.filter((item: IEmploye) => String(item.id) === String(id))[0]
-    console.log(salarie)
 
     if (salarie && dateDebutFormated && dateFinFormated && mount.current) {
       heureSerivice
@@ -80,7 +78,6 @@ const ValidePaie = () => {
           salarie.travail_de_nuit === EnumBoolean.OUI && calculHeuresEmploye.setTravailDeNuit(true)
 
           const totalHn = calculHeuresEmploye.getTotalHnormale()
-          const total_travail_effectif = calculHeuresEmploye.getTotalHTravailEffectif()
           const totalHs30 = calculHeuresEmploye.getTotalTravailDeNuit30()
           const total_hs50 = calculHeuresEmploye.getTotalTravailDeNuit50()
           const totalHDim = calculHeuresEmploye.getTotalHdim()
@@ -93,6 +90,7 @@ const ValidePaie = () => {
           const hsi150 = calculHeuresEmploye.getHsi150()
           const totalHFerie = calculHeuresEmploye.getTotalHFerie()
 
+          const total_travail_effectif = calculHeuresEmploye.getTotalHTravailEffectif()
           const tableauHsParSemaine = calculHeuresEmploye.getTaleauHsParSemaine()
           const tableauHs130ParSemaine = calculHeuresEmploye.getTableauHs130ParSemaine()
           const tableauHs150ParSemaine = calculHeuresEmploye.getTableauHs150ParSemaine()
@@ -109,6 +107,7 @@ const ValidePaie = () => {
             calculPaie.setTotalHDim(totalHDim)
             calculPaie.setTotalHFerie(totalHFerie)
 
+            const cnaps = calculPaie.getCnaps()
             const valHsni130 = calculPaie.getValHsni130()
             const valHsni150 = calculPaie.getValHsni150()
             const valHsi130 = calculPaie.getValHsi130()
@@ -119,9 +118,12 @@ const ValidePaie = () => {
             const valHFerie = calculPaie.getValHFerie()
             const salaireBrut = calculPaie.getSalaireBrut()
 
+            console.log('cnaps', cnaps)
+
             dispatch(
               setBulletinDePaie({
                 ...bulletinDePaie,
+                cnaps: cnaps,
                 totalHn: totalHn,
                 totalHs: totalHs,
                 totalHFerie: totalHFerie,
@@ -145,34 +147,8 @@ const ValidePaie = () => {
                 totalHDim: totalHDim,
               }),
             )
-
-            console.log('valHsni130', valHsni130)
-            console.log('valHsni150', valHsni150)
-            console.log('valHsi130', valHsi130)
-            console.log('valHsi150', valHsi150)
-            console.log('valHs30', valHs30)
-            console.log('valHs50', valHs50)
-            console.log('valHdim', valHdim)
-            console.log('valHFerie', valHFerie)
-            console.log('salaireBrut', salaireBrut)
           }
           mount.current = false
-          // console.log('total h normale', totalHn)
-          // console.log('total h effectif', total_travail_effectif)
-          // console.log('total travail de nuit 30%', totalHs30)
-          // console.log('total travail de nuit 50%', total_hs50)
-          // console.log('total travail dimanche', totalHDim)
-          // console.log('total hs du mois', totalHs)
-          // console.log('total hs130 ', totalHs130)
-          // console.log('total hs 150', totalHs150)
-          // console.log('hsni130', hsni130)
-          // console.log('hsni150', hsni150)
-          // console.log('hsi130', hsi130)
-          // console.log('hsi150', hsi150)
-          // console.log('total h férié', totalHFerie)
-          // console.log('tableau hs par semaine', tableauHsParSemaine)
-          // console.log('tableau hs130 par semaine', tableauHs130ParSemaine)
-          // console.log('tableau hs150 par semaine', tableauHs150ParSemaine)
         })
         .catch((err) => console.log(err))
     }
@@ -185,7 +161,7 @@ const ValidePaie = () => {
     <>
       <div>
         {isEmployeExist ? (
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-2 sm:grid-cols-1">
             <CardSalaireBrut />
             <CardSalaireNet />
             <CardSalaireNetAPayer />

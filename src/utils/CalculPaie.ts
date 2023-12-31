@@ -49,6 +49,9 @@ class CalculPaie {
     this.salaireBase = 0
     this.totalDeduction = 0
     this.totalPrimeEtAvantage = 0
+    this.baseCnaps = 0
+    this.cnaps = 0
+    this.tauxCnaps = 0.01
   }
 
   setAvantageNature(avantageNature: number): void {
@@ -275,13 +278,13 @@ class CalculPaie {
     return this.valHs30
   }
 
-  private calculValHs50(): void {
+  private calculateValHs50(): void {
     if (!this.est_cadre && this.totalHs50) {
       this.valHs50 = this.roundToTwoDecimal((this.tauxHoraire * this.totalHs50 * 50) / 100)
     }
   }
   public getValHs50(): number {
-    this.calculValHs50()
+    this.calculateValHs50()
     return this.valHs50
   }
 
@@ -310,6 +313,48 @@ class CalculPaie {
   }
   getHsni130(): number {
     return this.hsni130
+  }
+
+  private calculBaseCnaps(): void {
+    if (this.salaireBrut >= this.plafondSME) {
+      this.baseCnaps = this.plafondSME
+    } else {
+      this.baseCnaps = this.salaireBrut
+    }
+  }
+
+  getBaseCnaps(): number {
+    this.salaireBrut === 0 && this.calculateSalaireBrut()
+    this.baseCnaps === 0 && this.calculBaseCnaps()
+    return this.baseCnaps
+  }
+
+  private isSalaireBrutSupPlfondSME(): boolean {
+    return this.salaireBrut >= this.plafondSME
+  }
+  private calculateCnaps(): void {
+    this.valHsni130 === 0 && this.calculateValHsni130()
+    this.valHsni150 === 0 && this.calculateValHsni150()
+    this.valHsi130 === 0 && this.calculateValHsi130()
+    this.valHsi150 === 0 && this.calculateValHsi150()
+    this.valHs30 === 0 && this.calculateValHs30()
+    this.valHs50 === 0 && this.calculateValHs50()
+    this.valHFerie === 0 && this.calculValHFerie()
+    this.valHdim === 0 && this.calculValHdim()
+    this.salaireBrut === 0 && this.calculateSalaireBrut()
+
+    if (this.isSalaireBrutSupPlfondSME()) {
+      this.cnaps = this.roundToTwoDecimal(this.plafondSME * this.tauxCnaps)
+    } else {
+      this.cnaps = this.roundToTwoDecimal(this.salaireBrut * this.tauxCnaps)
+    }
+  }
+  setCnaps(cnaps): void {
+    this.cnaps = cnaps
+  }
+  getCnaps(): number {
+    this.calculateCnaps()
+    return this.cnaps
   }
 
   //   UTILITYES
