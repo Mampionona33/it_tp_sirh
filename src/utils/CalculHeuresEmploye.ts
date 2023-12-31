@@ -141,7 +141,7 @@ class CalculHeuresEmploye {
     this.sorteHeuresMonsuelEmploye()
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
 
-    if (this.tableauHs130ParSemaine) {
+    if (!this.est_cadre && this.tableauHs130ParSemaine) {
       // Ajout de cette vérification
       this.tableauTotalHsParSemaine.forEach((item, index) => {
         const newItem = {
@@ -172,7 +172,7 @@ class CalculHeuresEmploye {
 
   private calculateTableauHs150(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
-    if (this.tableauHs150ParSemaine) {
+    if (!this.est_cadre && this.tableauHs150ParSemaine) {
       this.tableauTotalHsParSemaine.forEach((item, index) => {
         const newItem = {
           jour: item.jour,
@@ -215,7 +215,9 @@ class CalculHeuresEmploye {
         totalTravailleDeNuit30 += item.hs_de_nuit
       }
     })
-    this.totalTravailleDeNuit30 = totalTravailleDeNuit30
+    if (!this.est_cadre) {
+      this.totalTravailleDeNuit30 = totalTravailleDeNuit30
+    }
   }
   getTotalTravailDeNuit30(): number {
     this.calculTotalTravailleDeNuit30()
@@ -229,7 +231,10 @@ class CalculHeuresEmploye {
         totalHsDeNuit50 += item.hs_de_nuit
       }
     })
-    this.totalTravailDeNuit50 = totalHsDeNuit50
+
+    if (!this.est_cadre) {
+      this.totalTravailDeNuit50 = totalHsDeNuit50
+    }
   }
   getTotalTravailDeNuit50(): number {
     this.calculateTotalHsDeNuit50()
@@ -247,8 +252,9 @@ class CalculHeuresEmploye {
         totalHdim += item.heure_de_travail
       }
     })
-
-    this.totalHdim = totalHdim
+    if (!this.est_cadre) {
+      this.totalHdim = totalHdim
+    }
   }
   getTotalHdim(): number {
     this.calculateTotalHdim()
@@ -257,9 +263,11 @@ class CalculHeuresEmploye {
 
   private calculateTotalHs(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
-    this.tableauTotalHsParSemaine.forEach((element) => {
-      this.totalHsDuMois += element.totalHsParSemaine
-    })
+    if (!this.est_cadre) {
+      this.tableauTotalHsParSemaine.forEach((element) => {
+        this.totalHsDuMois += element.totalHsParSemaine
+      })
+    }
   }
   getTotalHsDuMois(): number {
     this.calculateTotalHs()
@@ -269,9 +277,11 @@ class CalculHeuresEmploye {
   private calculateTotalHs130(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
     this.isTableauHs130ParSemaineVide() && this.calculateHs130ParSemaine()
-    this.tableauHs130ParSemaine.forEach((element) => {
-      this.totalHs130 += element.totalHs130ParSemaine
-    })
+    if (!this.est_cadre) {
+      this.tableauHs130ParSemaine.forEach((element) => {
+        this.totalHs130 += element.totalHs130ParSemaine
+      })
+    }
   }
   getTotalHs130(): number {
     this.calculateTotalHs130()
@@ -281,9 +291,11 @@ class CalculHeuresEmploye {
   private calculateTotalHs150(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
     this.isTableauHs150ParSemaineVide() && this.calculateTableauHs150()
-    this.tableauHs150ParSemaine.forEach((element) => {
-      this.totalHs150 += element.totalHs150ParSemaine
-    })
+    if (!this.est_cadre) {
+      this.tableauHs150ParSemaine.forEach((element) => {
+        this.totalHs150 += element.totalHs150ParSemaine
+      })
+    }
   }
   public getTotalHs150(): number {
     this.calculateTotalHs150()
@@ -297,7 +309,9 @@ class CalculHeuresEmploye {
         totalHFerie += item.hs_jours_feries
       }
     })
-    this.totalHFerie = totalHFerie
+    if (!this.est_cadre) {
+      this.totalHFerie = totalHFerie
+    }
   }
   public getTotalHFerie(): number {
     this.claculateTotalHFerie()
