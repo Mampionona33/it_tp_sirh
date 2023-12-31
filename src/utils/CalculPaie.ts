@@ -1,38 +1,42 @@
 class CalculPaie {
   private salaireBase: number
-  private plafondSME: number = 1910400
-  private est_cadre: boolean = false
+  private plafondSME: number
+  private est_cadre: boolean
   private tauxHoraire: number
-  private valHsni130: number = 0
-  private hsni130: number = 0
-  private hsni150: number = 0
-  private hsi130: number = 0
-  private valHsi150: number = 0
-  private hsi150: number = 0
-  private totalHDim: number = 0
-  private totalPrimeEtAvantage: number = 0
-  private totalDeduction: number = 0
-  private salaireBrut: number = 0
-  private tauxOsie: number = 0.01
-  private tauxCnaps: number = 0.01
-  private baseIrsa: number = 0
-  private baseIrsaArrondi: number = 0
-  private irsaAPayer: number = 0
-  private avance: number = 0
-  private totalHs50: number = 0
-  private totalHs30: number = 0
-  private totalHFerie: number = 0
-  private valHsi130: number = 0
-  private valHdim: number = 0
-  private valHs50: number = 0
-  private baseCnaps: number = 0
-  private cnaps: number = 0
-  private salaireNetAPayer: number = 0
-  private salaireNet: number = 0
-  private valHsni150: number = 0
-  private valHFerie: number = 0
-  private valHs30: number = 0
-  constructor() {}
+  private hsni130: number
+  private hsni150: number
+  private hsi130: number
+  private hsi150: number
+  private totalHDim: number
+  private totalPrimeEtAvantage: number
+  private totalDeduction: number
+  private salaireBrut: number
+  private tauxOsie: number
+  private tauxCnaps: number
+  private baseIrsa: number
+  private baseIrsaArrondi: number
+  private irsaAPayer: number
+  private avance: number
+  private totalHs50: number
+  private totalHs30: number
+  private totalHFerie: number
+  private valHsi130: number
+  private valHsni130: number
+  private valHsi150: number
+  private valHdim: number
+  private valHs50: number
+  private baseCnaps: number
+  private cnaps: number
+  private salaireNetAPayer: number
+  private salaireNet: number
+  private valHsni150: number
+  private valHFerie: number
+  private valHs30: number
+  constructor() {
+    this.valHsni130 = 0
+    this.plafondSME = 1910400
+    this.tauxHoraire = 0
+  }
   public setTotalHs50(totalHs50: number): void {
     this.totalHs50 = totalHs50
   }
@@ -168,6 +172,7 @@ class CalculPaie {
 
   setSalaireBase(salaireBase: number): void {
     this.salaireBase = salaireBase
+    this.tauxHoraire = this.salaireBase / 173.33
   }
   getSalaireBase(): number {
     return this.salaireBase
@@ -176,7 +181,11 @@ class CalculPaie {
   setValHsni130(valHsni130: number): void {
     this.valHsni130 = valHsni130
   }
+  private calculateValHsni130(): void {
+    this.valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * this.hsni130 * 130) / 100)
+  }
   getValHsni130(): number {
+    this.calculateValHsni130()
     return this.valHsni130
   }
 
