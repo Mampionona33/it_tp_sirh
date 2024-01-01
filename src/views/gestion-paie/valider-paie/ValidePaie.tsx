@@ -14,9 +14,11 @@ import calculPaie from '@src/utils/CalculPaie'
 import CardSalaireBrut from './ValiderCalculPaie/CardSalaireBrut'
 import CardSalaireNet from './ValiderCalculPaie/CardSalaireNet'
 import CardSalaireNetAPayer from './ValiderCalculPaie/CardSalaireNetAPayer'
+import useDateValidationExist from '@src/hooks/useIsDateValidationExist'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
+  const isDateValidationexist = useDateValidationExist()
   const dispatch = useAppDispatch()
   const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
   const { id, dateValidation } = useParams()
@@ -45,8 +47,10 @@ const ValidePaie = () => {
       parsedDateValidation.getMonth(),
       dayOfMonth,
     )
-
-    return format(formattedDateFin, 'dd/MM/yyyy') as DDMMYYYYFormat
+    if (isDateValidationexist) {
+      return format(formattedDateFin, 'dd/MM/yyyy') as DDMMYYYYFormat
+    }
+    return '00/00/0000'
   }
 
   const formatDateDebut = (): DDMMYYYYFormat => {
@@ -55,8 +59,10 @@ const ValidePaie = () => {
     const adjustedDate = new Date(parsedDateValidation)
     adjustedDate.setDate(Number(dateDebut))
     adjustedDate.setMonth(parsedDateValidation.getMonth() - 1)
-
-    return format(adjustedDate, 'dd/MM/yyyy') as DDMMYYYYFormat
+    if (isDateValidationexist) {
+      return format(adjustedDate, 'dd/MM/yyyy') as DDMMYYYYFormat
+    }
+    return '00/00/0000'
   }
 
   const dateDebutFormated = formatDateDebut()
@@ -168,7 +174,7 @@ const ValidePaie = () => {
   return (
     <>
       <div>
-        {isEmployeExist ? (
+        {isEmployeExist && isDateValidationexist ? (
           <div className="grid lg:grid-cols-3 gap-4 md:grid-cols-2 sm:grid-cols-1">
             <CardSalaireBrut />
             <CardSalaireNet />
