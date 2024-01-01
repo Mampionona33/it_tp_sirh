@@ -25,7 +25,7 @@ const ValidePaie = () => {
   const listEmploye = useAppSelector((store) => store.employeesList.list)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
   const getMonthValidation = (): string => {
-    if (dateValidation) {
+    if (dateValidation && isDateValidationexist) {
       const month = format(new Date(dateValidation), 'MMM', { locale: fr })
       return month.slice(0, 3)
     }
@@ -36,7 +36,9 @@ const ValidePaie = () => {
 
     return listDateDebutDateFin && listDateDebutDateFin[actualMonth]
   }
-  const { dateDebut, dateFin } = getDateDebutDateFin()
+  const { dateDebut, dateFin } = isDateValidationexist
+    ? getDateDebutDateFin()
+    : { dateDebut: '00/00/0000', dateFin: '00/00/0000' }
 
   const formatDateFin = (): DDMMYYYYFormat => {
     const parsedDateValidation = parseISO(dateValidation)
