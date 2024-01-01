@@ -56,7 +56,8 @@ const CardSalaireNet = () => {
           <CardRow
             cell1="Salaire net"
             cell3={bulletinDePaie.salaireNet}
-            cell3ClassName="text-customRed-900"
+            cell3ClassName="text-customRed-900 "
+            className="border-b border-b-customBlue-100"
           />
         </div>
       </>

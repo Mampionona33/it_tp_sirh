@@ -65,6 +65,21 @@ const CardSalaireBrut = () => {
           cell2={formatCell2(bulletinDePaie.totalHDim)}
           cell3={bulletinDePaie.valHdim}
         />
+        <CardRow
+          className="border-b border-b-customBlue-100"
+          cell1="Rappel"
+          cell3={bulletinDePaie.valHdim}
+        />
+        <CardRow
+          className="border-b border-b-customBlue-100"
+          cell1="Primes Et Gratification"
+          cell3={bulletinDePaie.valHdim}
+        />
+        <CardRow
+          className="border-b border-b-customBlue-100"
+          cell1="Absence/Retard à Déduire"
+          cell3={bulletinDePaie.valHdim}
+        />
         <div className="flex justify-between px-4 py-2 ">
           <div>Salaire brut</div>
           <div className="text-customRed-900">{formatAriaryMga(bulletinDePaie.salaireBrut)}</div>

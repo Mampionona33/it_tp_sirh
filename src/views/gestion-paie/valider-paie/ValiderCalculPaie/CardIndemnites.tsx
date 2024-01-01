@@ -42,7 +42,7 @@ const CardIndemnites = () => {
     )
   }
 
-  return <CustomSection title="Indemnite" body={<Body />} />
+  return <CustomSection title="Indemnités" body={<Body />} />
 }
 
 export default CardIndemnites

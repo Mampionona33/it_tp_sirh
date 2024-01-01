@@ -20,6 +20,11 @@ const CardSalaireNetAPayer = () => {
         />
         <CardRow
           className="border-b border-b-customBlue-100"
+          cell1="Indemnité"
+          cell3={bulletinDePaie.salaireNet}
+        />
+        <CardRow
+          className="border-b border-b-customBlue-100"
           cell1="Avantage en nature"
           cell3={bulletinDePaie.salaireNet}
         />
@@ -27,6 +32,12 @@ const CardSalaireNetAPayer = () => {
           className="border-b border-b-customBlue-100"
           cell1="Allocation familialee"
           cell3={bulletinDePaie.salaireNet}
+        />
+        <CardRow
+          className="border-b border-b-customBlue-100"
+          cell1="Salaire net à payer"
+          cell3={bulletinDePaie.salaireNet}
+          cell3ClassName="text-customRed-900"
         />
       </div>
     )
