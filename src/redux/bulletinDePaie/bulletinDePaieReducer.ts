@@ -52,7 +52,7 @@ const initialState: IBulletinDePaieProps = {
   rappel: 0,
   indemnites: {
     transport: 0,
-    autres: 0,
+    autresIndemnite: 0,
   },
   primeEtGratification: {
     assiduite: 0,
@@ -81,7 +81,7 @@ const bulletinDePaieSlice = createSlice({
   name: 'bulletinDePaie',
   initialState,
   reducers: {
-    setBulletinDePaie: (state, action) => {
+    setBulletinDePaie: (state: IBulletinDePaieProps, action) => {
       return { ...state, ...action.payload }
     },
     resetBulletinDePaie: (state) => {

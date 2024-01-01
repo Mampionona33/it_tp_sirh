@@ -64,7 +64,7 @@ export interface IBulletinDePaieProps {
 
 export interface IIndemniteProps {
   transport?: number
-  autres?: number
+  autresIndemnite?: number
 }
 
 export interface IPrimeEtGratification {
