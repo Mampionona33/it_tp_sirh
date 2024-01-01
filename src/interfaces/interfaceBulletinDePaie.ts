@@ -48,7 +48,7 @@ export interface IBulletinDePaieProps {
   irsaAPayer: number
   cnaps: number
   indemnites: IIndemniteProps
-  totalIndemnits?: number
+  totalIndemnite?: number
   avance?: number
   rappel?: number
   primeEtGratification?: IPrimeEtGratification

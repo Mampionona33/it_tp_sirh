@@ -34,6 +34,7 @@ class CalculPaie {
   private valHsni150: number
   private valHFerie: number
   private valHs30: number
+  private totalIndemnite: number
   constructor() {
     this.plafondSME = 1910400
     this.tauxHoraire = 0
@@ -59,6 +60,14 @@ class CalculPaie {
     this.baseIrsaArrondi = 0
     this.irsaAPayer = 0
     this.salaireNet = 0
+    this.totalIndemnite = 0
+  }
+
+  setTotalIndemnite(totalIndemnite: number): void {
+    this.totalIndemnite = totalIndemnite
+  }
+  gettotalIndemnite(): number {
+    return this.totalIndemnite
   }
 
   setAvantageNature(avantageNature: number): void {
@@ -432,6 +441,19 @@ class CalculPaie {
   getSalaireNet(): number {
     this.calculateSalaireNet()
     return this.salaireNet
+  }
+
+  setSalaireNetAPayer(salaireNetAPayer: number): void {
+    this.salaireNetAPayer = salaireNetAPayer
+  }
+  private calculateSalaireNetAPayer(): void {
+    this.recalculateSalaieBrut()
+    this.calculateSalaireNet()
+    this.salaireNetAPayer = this.roundToTwoDecimal(this.salaireNet + this.totalIndemnite)
+  }
+  public getSalaireNetAPayer(): number {
+    this.calculateSalaireNetAPayer()
+    return this.salaireNetAPayer
   }
 
   //   UTILITYES

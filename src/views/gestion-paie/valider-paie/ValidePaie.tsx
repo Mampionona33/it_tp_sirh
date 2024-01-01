@@ -137,6 +137,7 @@ const ValidePaie = () => {
             const baseIrsaArrondi = calculPaie.getBaseIrsaArrondi()
             const irsaAPayer = calculPaie.getIrsaAPayer()
             const salaireNet = calculPaie.getSalaireNet()
+            const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
 
             dispatch(
               setBulletinDePaie({
@@ -168,6 +169,7 @@ const ValidePaie = () => {
                 valHFerie: valHFerie,
                 totalHDim: totalHDim,
                 salaireNet: salaireNet,
+                salaireNetAPayer: salaireNetAPayer,
               }),
             )
           }

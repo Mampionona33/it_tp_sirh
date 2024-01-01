@@ -63,7 +63,7 @@ const initialState: IBulletinDePaieProps = {
     absence: 0,
     retard: 0,
   },
-  totalIndemnits: 0,
+  totalIndemnite: 0,
   avantages: {
     domestique: 0,
     logement: 0,
