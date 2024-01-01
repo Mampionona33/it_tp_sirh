@@ -37,7 +37,6 @@ export interface IBulletinDePaieProps {
   totalDeduction: number
   tauxCnaps: number
   baseCnaps: number
-  avance: number
   reduChargeFamil: number
   baseIrsa: number
   baseIrsaArrondi: number
@@ -48,12 +47,39 @@ export interface IBulletinDePaieProps {
   plafondSME: number
   irsaAPayer: number
   cnaps: number
-  indemnites: {
-    transport: number
-    autres: number
-  }
-  ajoutSalaire: []
-  retenuSalaire: []
-  retenuSalaireBrut: []
-  cotisations: []
+  indemnites: IIndemniteProps
+  totalIndemnits?: number
+  avance?: number
+  rappel?: number
+  primeEtGratification?: IPrimeEtGratification
+  totalPrimeEtGratification?: number
+  deductions?: IDeductionProps
+  avantages?: IAvantageProps
+  totalAvantages?: number
+  ajoutSalaire?: []
+  retenuSalaire?: []
+  retenuSalaireBrut?: []
+  cotisations?: []
+}
+
+export interface IIndemniteProps {
+  transport?: number
+  autres?: number
+}
+
+export interface IPrimeEtGratification {
+  assiduite?: number
+  excellence?: number
+}
+
+export interface IAvantageProps {
+  vehicule?: number
+  logement?: number
+  domestique?: number
+  autres?: number
+}
+
+export interface IDeductionProps {
+  absence?: number
+  retard?: number
 }

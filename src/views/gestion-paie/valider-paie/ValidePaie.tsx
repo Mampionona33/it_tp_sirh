@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { FormEvent, useEffect, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import useEmployeeExists from '@src/hooks/useEmployeeExists'
 import Page404 from '@src/views/pages/page404/Page404'
@@ -21,6 +21,7 @@ import CardDeduction from './ValiderCalculPaie/CardDeduction'
 import CardIndemnites from './ValiderCalculPaie/CardIndemnites'
 import CardAvances from './ValiderCalculPaie/CardAvances'
 import CardRappel from './ValiderCalculPaie/CardRappel'
+import CardGroupeButtons from './ValiderCalculPaie/CardGroupeButtons'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
@@ -179,27 +180,35 @@ const ValidePaie = () => {
     }
   }, [dispatch, bulletinDePaie, dateDebutFormated, dateFinFormated, id, listEmploye])
 
+  const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault()
+    console.log(ev.target)
+  }
+
   return (
     <>
       <div>
         {isEmployeExist && isDateValidationexist ? (
           <>
-            <div className="flex flex-col gap-3 mt-2 mb-3">
-              <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
-                <CardIndemnites />
-                <CardAvances />
-                <CardRappel />
-                <CardPrimes />
-                <CardDeduction />
-                <CardAvantages />
+            <form action="" onSubmit={handleSubmit}>
+              <div className="flex flex-col gap-3 mt-2 mb-3">
+                <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
+                  <CardIndemnites />
+                  <CardAvances />
+                  <CardRappel />
+                  <CardPrimes />
+                  <CardDeduction />
+                  <CardAvantages />
+                </div>
+                <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
+                  <CardSalaireBrut />
+                  <CardSalaireNet />
+                  <CardSalaireNetAPayer />
+                  {/* <SalaryCalculation /> */}
+                </div>
+                <CardGroupeButtons />
               </div>
-              <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
-                <CardSalaireBrut />
-                <CardSalaireNet />
-                <CardSalaireNetAPayer />
-                {/* <SalaryCalculation /> */}
-              </div>
-            </div>
+            </form>
           </>
         ) : (
           <Page404 />

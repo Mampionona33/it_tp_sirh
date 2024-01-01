@@ -49,10 +49,28 @@ const initialState: IBulletinDePaieProps = {
   plafondSME: 0,
   irsaAPayer: 0,
   cnaps: 0,
+  rappel: 0,
   indemnites: {
     transport: 0,
     autres: 0,
   },
+  primeEtGratification: {
+    assiduite: 0,
+    excellence: 0,
+  },
+  totalPrimeEtGratification: 0,
+  deductions: {
+    absence: 0,
+    retard: 0,
+  },
+  totalIndemnits: 0,
+  avantages: {
+    domestique: 0,
+    logement: 0,
+    vehicule: 0,
+    autres: 0,
+  },
+  totalAvantages: 0,
   ajoutSalaire: [],
   retenuSalaire: [],
   retenuSalaireBrut: [],
