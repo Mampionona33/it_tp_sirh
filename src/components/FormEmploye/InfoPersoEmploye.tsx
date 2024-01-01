@@ -128,9 +128,9 @@ function InfoPersoEmploye() {
 
   return (
     <div className="my-3">
-      <h1 className="text-lg  text-customRed-930 uppercase m-3"> Informations personnelles</h1>
-      <div className="flex bg-customRed-25 mt-2 shadow-sm border-y">
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
+      <div className="flex flex-col border-y border-y-customBlue-200 mt-4 shadow-sm py-4">
+        <p className="text-lg text-customRed-930 uppercase mx-8 mb-3">Informations personnelles</p>
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 w-full">
           {inputs.map((input, index) => (
             <InputWithLabel key={index} {...input} />
           ))}

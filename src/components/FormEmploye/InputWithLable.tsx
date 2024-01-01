@@ -55,8 +55,8 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   const customSelectStyles = {
     control: (provided) => ({
       ...provided,
-      height: 28,
-      minHeight: 28,
+      height: 21,
+      minHeight: 21,
       border: 'none',
       outline: 'none',
       borderBottom: '1px solid #D6111E',
@@ -64,17 +64,21 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
     valueContainer: (style) => {
       return {
         ...style,
-        height: 28,
-        minHeight: 28,
+        paddingTop: 0,
+        paddingBottom: 0,
+        height: 21,
+        minHeight: 21,
       }
     },
     input: (style) => {
       return {
         ...style,
-        height: 26,
-        fontSize: '0.875rem',
-        minHeight: 26,
         margin: 0,
+        height: 21,
+        paddingTop: 0,
+        paddingBottom: 0,
+        minHeight: 21,
+        fontSize: '0.875rem',
       }
     },
     singleValue: (style) => {
@@ -97,8 +101,8 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
       return {
         ...style,
         fontSize: '0.875rem',
-        height: 28,
-        minHeight: 28,
+        height: 21,
+        minHeight: 21,
       }
     },
   }
@@ -171,6 +175,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
             onChange={handleSelectChange}
             onFocus={handleFocused}
             styles={customSelectStyles}
+            className="text-sm"
             // styles={{
             //   ...customSelectStyles,
             //   control: (base) => ({
@@ -208,7 +213,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           onInput={
             onInput ? (event) => onInput(event as ChangeEvent<HTMLInputElement>, index) : undefined
           }
-          className="border-b border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1 "
+          className="border-b border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1 text-sm"
           required={required}
         />
       )}
