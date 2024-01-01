@@ -2,11 +2,10 @@ import CustomSection from '@src/components/CustomSection'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import React, { useState } from 'react'
 
-const CardIndemnites = () => {
+const CardAvances = () => {
   const Body = () => {
     const [state, setState] = useState({
-      transport: 0,
-      autresIndemnite: 0,
+      avance: 0,
     })
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,27 +21,17 @@ const CardIndemnites = () => {
           type="number"
           min={0}
           required
-          id="transport"
-          name="transport"
-          label="Transport"
-          value={state.transport}
-          onChange={handleInputChange}
-        />
-        <CustomInputWithLabel
-          type="number"
-          min={0}
-          required
-          id="autresIndemnite"
-          name="autresIndemnite"
-          label="Autres"
-          value={state.autresIndemnite}
+          id="avance"
+          name="avance"
+          label="Avances"
+          value={state.avance}
           onChange={handleInputChange}
         />
       </div>
     )
   }
 
-  return <CustomSection title="Indemnite" body={<Body />} />
+  return <CustomSection title="Avances" body={<Body />} />
 }
 
-export default CardIndemnites
+export default CardAvances

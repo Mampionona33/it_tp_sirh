@@ -19,6 +19,8 @@ import CardPrimes from './ValiderCalculPaie/CardPrimes'
 import CardAvantages from './ValiderCalculPaie/CardAvantages'
 import CardDeduction from './ValiderCalculPaie/CardDeduction'
 import CardIndemnites from './ValiderCalculPaie/CardIndemnites'
+import CardAvances from './ValiderCalculPaie/CardAvances'
+import CardRappel from './ValiderCalculPaie/CardRappel'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
@@ -183,11 +185,13 @@ const ValidePaie = () => {
         {isEmployeExist && isDateValidationexist ? (
           <>
             <div className="flex flex-col gap-3">
-              <div className="grid lg:grid-cols-4 gap-3 md:grid-cols-2 sm:grid-cols-1">
+              <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
                 <CardPrimes />
                 <CardAvantages />
                 <CardDeduction />
                 <CardIndemnites />
+                <CardAvances />
+                <CardRappel />
               </div>
               <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
                 <CardSalaireBrut />

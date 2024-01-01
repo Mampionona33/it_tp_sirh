@@ -10,7 +10,7 @@ const CardAvantages = () => {
       vehicule: 0,
       logement: 0,
       domestique: 0,
-      autres: 0,
+      autresAvantages: 0,
     })
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,7 @@ const CardAvantages = () => {
           required
           id="domestique"
           name="domestique"
-          label="domestique"
+          label="Domestique"
           value={state.domestique}
           onChange={handleInputChange}
         />
@@ -56,10 +56,10 @@ const CardAvantages = () => {
           type="number"
           min={0}
           required
-          id="autres"
-          name="autres"
-          label="autres"
-          value={state.autres}
+          id="autresAvantages"
+          name="autresAvantages"
+          label="Autres"
+          value={state.autresAvantages}
           onChange={handleInputChange}
         />
       </div>
