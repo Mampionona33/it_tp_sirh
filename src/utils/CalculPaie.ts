@@ -1,38 +1,73 @@
 class CalculPaie {
   private salaireBase: number
-  private plafondSME: number = 1910400
-  private est_cadre: boolean = false
+  private plafondSME: number
+  private est_cadre: boolean
   private tauxHoraire: number
-  private valHsni130: number = 0
-  private hsni130: number = 0
-  private hsni150: number = 0
-  private hsi130: number = 0
-  private valHsi150: number = 0
-  private hsi150: number = 0
-  private totalHDim: number = 0
-  private totalPrimeEtAvantage: number = 0
-  private totalDeduction: number = 0
-  private salaireBrut: number = 0
-  private tauxOsie: number = 0.01
-  private tauxCnaps: number = 0.01
-  private baseIrsa: number = 0
-  private baseIrsaArrondi: number = 0
-  private irsaAPayer: number = 0
-  private avance: number = 0
-  private totalHs50: number = 0
-  private totalHs30: number = 0
-  private totalHFerie: number = 0
-  private valHsi130: number = 0
-  private valHdim: number = 0
-  private valHs50: number = 0
-  private baseCnaps: number = 0
-  private cnaps: number = 0
-  private salaireNetAPayer: number = 0
-  private salaireNet: number = 0
-  private valHsni150: number = 0
-  private valHFerie: number = 0
-  private valHs30: number = 0
-  constructor() {}
+  private hsni130: number
+  private hsni150: number
+  private hsi130: number
+  private hsi150: number
+  private totalHDim: number
+  private totalPrimeEtAvantage: number
+  private totalDeduction: number
+  private salaireBrut: number
+  private tauxOsie: number
+  private tauxCnaps: number
+  private baseIrsa: number
+  private baseIrsaArrondi: number
+  private irsaAPayer: number
+  private avance: number
+  private totalHs50: number
+  private totalHs30: number
+  private totalHFerie: number
+  private valHsi130: number
+  private valHsni130: number
+  private valHsi150: number
+  private valHdim: number
+  private avantageNature: number
+  private valHs50: number
+  private baseCnaps: number
+  private cnaps: number
+  private osie: number
+  private salaireNetAPayer: number
+  private salaireNet: number
+  private valHsni150: number
+  private valHFerie: number
+  private valHs30: number
+  constructor() {
+    this.plafondSME = 1910400
+    this.tauxHoraire = 0
+    this.valHsni130 = 0
+    this.valHsni150 = 0
+    this.valHsi130 = 0
+    this.valHsi150 = 0
+    this.valHs30 = 0
+    this.valHs50 = 0
+    this.valHdim = 0
+    this.valHFerie = 0
+    this.salaireBrut = 0
+    this.avantageNature = 0
+    this.salaireBase = 0
+    this.totalDeduction = 0
+    this.totalPrimeEtAvantage = 0
+    this.baseCnaps = 0
+    this.cnaps = 0
+    this.tauxCnaps = 0.01
+    this.tauxOsie = 0.01
+    this.osie = 0
+    this.baseIrsa = 0
+    this.baseIrsaArrondi = 0
+    this.irsaAPayer = 0
+    this.salaireNet = 0
+  }
+
+  setAvantageNature(avantageNature: number): void {
+    this.avantageNature = avantageNature
+  }
+  getAvantageNature(): number {
+    return this.avantageNature
+  }
+
   public setTotalHs50(totalHs50: number): void {
     this.totalHs50 = totalHs50
   }
@@ -61,27 +96,6 @@ class CalculPaie {
     return this.avance
   }
 
-  setIrsaAPayer(irsaAPayer: number): void {
-    this.irsaAPayer = irsaAPayer
-  }
-  getIrsaAPayer(): number {
-    return this.irsaAPayer
-  }
-
-  setBaseIrsaArrondi(baseIrsaArrondi: number): void {
-    this.baseIrsaArrondi = baseIrsaArrondi
-  }
-  getBaseIrsaArrondi(): number {
-    return this.baseIrsaArrondi
-  }
-
-  setBaseIrsa(baseIrsa: number): void {
-    this.baseIrsa = baseIrsa
-  }
-  getBaseIrsa(): number {
-    return this.baseIrsa
-  }
-
   setTauxCnaps(tauxCnaps: number): void {
     this.tauxCnaps = tauxCnaps
   }
@@ -99,7 +113,27 @@ class CalculPaie {
   setSalaireBrut(salaireBrut: number): void {
     this.salaireBrut = salaireBrut
   }
+  private calculateSalaireBrut(): void {
+    if (this.salaireBase) {
+      this.salaireBrut = this.est_cadre
+        ? this.roundToTwoDecimal(this.salaireBase + this.valHdim + this.valHFerie)
+        : this.roundToTwoDecimal(
+            this.salaireBase +
+              this.valHsni130 +
+              this.valHsni150 +
+              this.valHsi130 +
+              this.valHsi150 +
+              this.valHdim +
+              this.valHFerie +
+              this.valHs30 +
+              this.valHs50 +
+              this.totalPrimeEtAvantage -
+              this.totalDeduction,
+          )
+    }
+  }
   getSalaireBrut(): number {
+    this.calculateSalaireBrut()
     return this.salaireBrut
   }
 
@@ -168,6 +202,7 @@ class CalculPaie {
 
   setSalaireBase(salaireBase: number): void {
     this.salaireBase = salaireBase
+    this.tauxHoraire = this.salaireBase / 173.33
   }
   getSalaireBase(): number {
     return this.salaireBase
@@ -176,15 +211,87 @@ class CalculPaie {
   setValHsni130(valHsni130: number): void {
     this.valHsni130 = valHsni130
   }
+  private calculateValHsni130(): void {
+    if (!this.est_cadre && this.hsni130 > 0) {
+      this.valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * this.hsni130 * 130) / 100)
+    }
+  }
   getValHsni130(): number {
+    this.calculateValHsni130()
     return this.valHsni130
+  }
+
+  private calculateValHsni150(): void {
+    if (!this.est_cadre && this.hsni150 > 0) {
+      this.valHsni150 = this.roundToTwoDecimal((this.tauxHoraire * this.hsni150 * 150) / 100)
+    }
+  }
+  public getValHsni150(): number {
+    this.calculateValHsni150()
+    return this.valHsni150
+  }
+
+  private calculateValHsi130(): void {
+    if (!this.est_cadre && this.hsi130 > 0) {
+      this.valHsi130 = this.roundToTwoDecimal((this.tauxHoraire * this.hsi130 * 130) / 100)
+    }
+  }
+  public getValHsi130(): number {
+    this.calculateValHsi130()
+    return this.valHsi130
   }
 
   setValHsi150(valHsi150: number): void {
     this.valHsi150 = valHsi150
   }
+  private calculateValHsi150(): void {
+    if (!this.est_cadre && this.hsi150 > 0) {
+      this.valHsi150 = this.roundToTwoDecimal((this.tauxHoraire * this.hsi150 * 150) / 100)
+    }
+  }
   getValHsi150(): number {
+    this.calculateValHsi150()
     return this.valHsi150
+  }
+
+  private calculateValHs30(): void {
+    if (!this.est_cadre && this.totalHs30) {
+      this.valHs30 = this.roundToTwoDecimal((this.tauxHoraire * this.totalHs30 * 30) / 100)
+    }
+  }
+  public getValHs30(): number {
+    this.calculateValHs30()
+    return this.valHs30
+  }
+
+  private calculateValHs50(): void {
+    if (!this.est_cadre && this.totalHs50) {
+      this.valHs50 = this.roundToTwoDecimal((this.tauxHoraire * this.totalHs50 * 50) / 100)
+    }
+  }
+  public getValHs50(): number {
+    this.calculateValHs50()
+    return this.valHs50
+  }
+
+  private calculValHdim(): void {
+    if (!this.est_cadre && this.totalHDim) {
+      this.valHdim = this.roundToTwoDecimal((this.tauxHoraire * this.totalHDim * 40) / 100)
+    }
+  }
+  public getValHdim(): number {
+    this.calculValHdim()
+    return this.valHdim
+  }
+
+  private calculValHFerie(): void {
+    if (!this.est_cadre && this.totalHFerie) {
+      this.valHFerie = this.roundToTwoDecimal((this.tauxHoraire * this.totalHFerie * 100) / 100)
+    }
+  }
+  public getValHFerie(): number {
+    this.calculValHFerie()
+    return this.valHFerie
   }
 
   setHsni130(hsni130: number): void {
@@ -192,6 +299,139 @@ class CalculPaie {
   }
   getHsni130(): number {
     return this.hsni130
+  }
+
+  private calculBaseCnaps(): void {
+    if (this.salaireBrut >= this.plafondSME) {
+      this.baseCnaps = this.plafondSME
+    } else {
+      this.baseCnaps = this.salaireBrut
+    }
+  }
+  getBaseCnaps(): number {
+    this.salaireBrut === 0 && this.calculateSalaireBrut()
+    this.baseCnaps === 0 && this.calculBaseCnaps()
+    return this.baseCnaps
+  }
+
+  setCnaps(cnaps): void {
+    this.cnaps = cnaps
+  }
+  private isSalaireBrutSupPlfondSME(): boolean {
+    return this.salaireBrut >= this.plafondSME
+  }
+
+  private recalculateSalaieBrut(): void {
+    this.valHsni130 === 0 && this.calculateValHsni130()
+    this.valHsni150 === 0 && this.calculateValHsni150()
+    this.valHsi130 === 0 && this.calculateValHsi130()
+    this.valHsi150 === 0 && this.calculateValHsi150()
+    this.valHs30 === 0 && this.calculateValHs30()
+    this.valHs50 === 0 && this.calculateValHs50()
+    this.valHFerie === 0 && this.calculValHFerie()
+    this.valHdim === 0 && this.calculValHdim()
+    this.salaireBrut === 0 && this.calculateSalaireBrut()
+  }
+  private calculateCnaps(): void {
+    this.recalculateSalaieBrut()
+    if (this.isSalaireBrutSupPlfondSME()) {
+      this.cnaps = this.roundToTwoDecimal(this.plafondSME * this.tauxCnaps)
+    } else {
+      this.cnaps = this.roundToTwoDecimal(this.salaireBrut * this.tauxCnaps)
+    }
+  }
+  getCnaps(): number {
+    this.calculateCnaps()
+    return this.cnaps
+  }
+
+  private calculateOsie(): void {
+    this.recalculateSalaieBrut()
+    this.osie = this.roundToTwoDecimal(this.salaireBrut * this.tauxOsie)
+  }
+  setOsie(osie): void {
+    this.osie = osie
+  }
+  getOsie(): number {
+    this.osie === 0 && this.calculateOsie()
+    return this.osie
+  }
+
+  setBaseIrsa(baseIrsa: number): void {
+    this.baseIrsa = baseIrsa
+  }
+  private calculateBaseIrsa(): void {
+    this.recalculateSalaieBrut()
+    this.baseIrsa = this.roundToTwoDecimal(
+      this.salaireBrut - this.cnaps - this.osie - this.hsni130 - this.hsni150,
+    )
+  }
+  getBaseIrsa(): number {
+    this.calculateBaseIrsa()
+    return this.baseIrsa
+  }
+
+  setBaseIrsaArrondi(baseIrsaArrondi: number): void {
+    this.baseIrsaArrondi = baseIrsaArrondi
+  }
+  private calculateBaseIrsaArrondi(): void {
+    this.recalculateSalaieBrut()
+    this.calculateBaseIrsa()
+    this.baseIrsaArrondi = Math.floor(this.baseIrsa / 100) * 100
+  }
+  getBaseIrsaArrondi(): number {
+    this.calculateBaseIrsaArrondi()
+    return this.baseIrsaArrondi
+  }
+  // Calcul Irsa a payer
+  setIrsaAPayer(irsaAPayer: number): void {
+    this.irsaAPayer = irsaAPayer
+  }
+  private isTranche_1(): boolean {
+    this.calculateBaseIrsaArrondi()
+    return this.baseIrsaArrondi >= 350001 && this.baseIrsaArrondi <= 400000
+  }
+  private isTranche_2(): boolean {
+    this.calculateBaseIrsaArrondi()
+    return this.baseIrsaArrondi >= 400001 && this.baseIrsaArrondi <= 500000
+  }
+  private isTranche_3(): boolean {
+    this.calculateBaseIrsaArrondi()
+    return this.baseIrsaArrondi >= 500001 && this.baseIrsaArrondi <= 600000
+  }
+  private calculateIrsaAPayer(): void {
+    if (this.isTranche_1) {
+      this.irsaAPayer = (this.baseIrsaArrondi - 350000) * 0.05
+    } else if (this.isTranche_2()) {
+      this.irsaAPayer = 50000 * 0.05 + (this.baseIrsaArrondi - 400001) * 0.1
+    } else if (this.isTranche_3()) {
+      this.irsaAPayer = 50000 * 0.05 + 100000 * 0.1 + (this.baseIrsaArrondi - 500001) * 0.15
+    } else {
+      this.irsaAPayer =
+        50000 * 0.05 + 100000 * 0.1 + 100000 * 0.15 + (this.baseIrsaArrondi - 600001) * 0.2
+    }
+
+    if (this.irsaAPayer < 2000) {
+      this.irsaAPayer = 2000
+    }
+  }
+  getIrsaAPayer(): number {
+    this.calculateIrsaAPayer()
+    return this.irsaAPayer
+  }
+  // Calcul Irsa a payer
+  // ---------------------------------------------
+  setSalaireNet(salaireNet: number): void {
+    this.salaireNet = salaireNet
+  }
+  private calculateSalaireNet(): void {
+    this.recalculateSalaieBrut()
+    this.calculateIrsaAPayer()
+    this.salaireNet = this.roundToTwoDecimal(this.salaireBrut - this.irsaAPayer)
+  }
+  getSalaireNet(): number {
+    this.calculateSalaireNet()
+    return this.salaireNet
   }
 
   //   UTILITYES

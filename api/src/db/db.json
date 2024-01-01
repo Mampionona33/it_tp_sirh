@@ -34,118 +34,48 @@
     },
     {
       "id": 3,
-      "value": "1a",
-      "label": "1A"
-    },
-    {
-      "id": 4,
-      "value": "1b",
-      "label": "1B"
-    },
-    {
-      "id": 5,
       "value": "os1",
       "label": "OS1"
     },
     {
-      "id": 6,
+      "id": 4,
       "value": "os2",
       "label": "OS2"
     },
     {
-      "id": 7,
+      "id": 5,
       "value": "os3",
       "label": "OS3"
     },
     {
+      "id": 6,
+      "value": "op1a",
+      "label": "OP1A"
+    },
+    {
+      "id": 7,
+      "value": "op1b",
+      "label": "OP1B"
+    },
+    {
       "id": 8,
-      "value": "op1",
-      "label": "OP1"
+      "value": "op2a",
+      "label": "OP2A"
     },
     {
       "id": 9,
-      "value": "2a",
-      "label": "2A"
+      "value": "op2b",
+      "label": "OP2B"
     },
     {
       "id": 10,
-      "value": "2b",
-      "label": "2B"
+      "value": "op3",
+      "label": "OP2B"
     },
     {
       "id": 11,
-      "value": "3a",
-      "label": "3A"
-    },
-    {
-      "id": 13,
-      "value": "3b",
-      "label": "3B"
-    },
-    {
-      "id": 14,
-      "value": "a1",
-      "label": "A1"
-    },
-    {
-      "id": 15,
-      "value": "a2",
-      "label": "A2"
-    },
-    {
-      "id": 16,
-      "value": "a3",
-      "label": "A3"
-    },
-    {
-      "id": 17,
-      "value": "b1",
-      "label": "B1"
-    },
-    {
-      "id": 18,
-      "value": "b2",
-      "label": "B2"
-    },
-    {
-      "id": 19,
-      "value": "b3",
-      "label": "B3"
-    },
-    {
-      "id": 20,
-      "value": "b4",
-      "label": "B4"
-    },
-    {
-      "id": 21,
-      "value": "c1",
-      "label": "C1"
-    },
-    {
-      "id": 22,
-      "value": "c2",
-      "label": "C2"
-    },
-    {
-      "id": 23,
-      "value": "c3",
-      "label": "C3"
-    },
-    {
-      "id": 24,
-      "value": "d1",
-      "label": "D1"
-    },
-    {
-      "id": 25,
-      "value": "d2",
-      "label": "D2"
-    },
-    {
-      "id": 26,
-      "value": "d3",
-      "label": "D3"
+      "value": "hc",
+      "label": "Hors catégorie"
     }
   ],
   "/employeeHours": [
@@ -1114,6 +1044,40 @@
       ]
     }
   ],
+  "historiquePaie": [
+    {
+      "id": 1,
+      "id_employe": 1,
+      "date": "2023-01-24",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "valide": "oui"
+    },
+    {
+      "id": 2,
+      "id_employe": 1,
+      "date": "2023-02-22",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "valide": "oui"
+    },
+    {
+      "id": 3,
+      "id_employe": 1,
+      "date": "2023-03-23",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "valide": "oui"
+    },
+    {
+      "id": 4,
+      "id_employe": 1,
+      "date": "2023-12-23",
+      "salaire_brut": 1000,
+      "salaire_net": 900,
+      "valide": "non"
+    }
+  ],
   "salaries": [
     {
       "id": 1,
@@ -1138,10 +1102,10 @@
       ],
       "titre_poste": "Responsable Import et logistique ",
       "matricule": "345",
-      "categorie": "1a",
+      "categorie": "os2",
       "date_embauche": "2016-04-16",
       "lieu_travail": "Toamasina",
-      "salaire_de_base": 800000,
+      "salaire_de_base": 1500000,
       "travail_de_nuit": "oui",
       "mode_payement_salaire": "Virement banquaire",
       "actif": "oui",
@@ -1166,7 +1130,11 @@
       },
       "tel": "020 000211",
       "cin": "10126174565",
-      "cadre": true
+      "cadre": true,
+      "date_delivrance_cin": "2023-12-14",
+      "nom_mere": "",
+      "nom_pere": "",
+      "mode_paiement_salaire": "Virement banquaire"
     },
     {
       "id": 2,
@@ -1379,40 +1347,6 @@
       "rib": "",
       "prime_et_avantage_permanent": null,
       "depart": null
-    }
-  ],
-  "historiquePaie": [
-    {
-      "id": 1,
-      "id_employe": 1,
-      "date": "2023-01-24",
-      "salaire_brut": 1000,
-      "salaire_net": 900,
-      "valide": "oui"
-    },
-    {
-      "id": 2,
-      "id_employe": 1,
-      "date": "2023-02-22",
-      "salaire_brut": 1000,
-      "salaire_net": 900,
-      "valide": "oui"
-    },
-    {
-      "id": 3,
-      "id_employe": 1,
-      "date": "2023-03-23",
-      "salaire_brut": 1000,
-      "salaire_net": 900,
-      "valide": "oui"
-    },
-    {
-      "id": 4,
-      "id_employe": 1,
-      "date": "2023-12-23",
-      "salaire_brut": 1000,
-      "salaire_net": 900,
-      "valide": "non"
     }
   ]
 }

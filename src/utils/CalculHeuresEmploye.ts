@@ -18,6 +18,10 @@ class CalculHeuresEmploye {
   private totalHs130: number
   private totalHs150: number
   private totalHFerie: number
+  private hsni130: number
+  private hsni150: number
+  private hsi130: number
+  private hsi150: number
   constructor() {
     this.heuresMonsuelEmploye = []
     this.totalHnormale = 0
@@ -34,6 +38,10 @@ class CalculHeuresEmploye {
     this.totalHFerie = 0
     this.totalHs130 = 0
     this.totalHs150 = 0
+    this.hsni130 = 0
+    this.hsni150 = 0
+    this.hsi130 = 0
+    this.hsi150 = 0
   }
 
   setEstCadre(est_cadre: boolean): void {
@@ -42,11 +50,9 @@ class CalculHeuresEmploye {
   getEstCadre(): boolean {
     return this.est_cadre
   }
-
   setHeuresMonsuelEmploye(heuresMonsuelEmploye: IHeuresEmploye[]): void {
     this.heuresMonsuelEmploye = heuresMonsuelEmploye
   }
-
   getHeuresMonsuelEmploye(): IHeuresEmploye[] {
     return this.heuresMonsuelEmploye
   }
@@ -92,7 +98,6 @@ class CalculHeuresEmploye {
       return 0
     })
   }
-
   private calculateHsParSemaine(): void {
     this.sorteHeuresMonsuelEmploye()
     let currentWeekStartDate = null
@@ -121,20 +126,22 @@ class CalculHeuresEmploye {
       }
     })
   }
-
   private isTableauHsParSemaineVide(): boolean {
     return this.tableauTotalHsParSemaine.length === 0
+  }
+  public getTaleauHsParSemaine(): { semaine: string; totalHsParSemaine: number }[] {
+    this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+    return this.tableauTotalHsParSemaine
   }
 
   private isTableauHs130ParSemaineVide(): boolean {
     return this.tableauHs130ParSemaine.length === 0
   }
-
   private calculateHs130ParSemaine(): void {
     this.sorteHeuresMonsuelEmploye()
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
 
-    if (this.tableauHs130ParSemaine) {
+    if (!this.est_cadre && this.tableauHs130ParSemaine) {
       // Ajout de cette vérification
       this.tableauTotalHsParSemaine.forEach((item, index) => {
         const newItem = {
@@ -153,12 +160,6 @@ class CalculHeuresEmploye {
       })
     }
   }
-
-  public getTaleauHsParSemaine(): { semaine: string; totalHsParSemaine: number }[] {
-    this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
-    return this.tableauTotalHsParSemaine
-  }
-
   public getTableauHs130ParSemaine(): {
     jour: string
     semaine: string
@@ -171,7 +172,7 @@ class CalculHeuresEmploye {
 
   private calculateTableauHs150(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
-    if (this.tableauHs150ParSemaine) {
+    if (!this.est_cadre && this.tableauHs150ParSemaine) {
       this.tableauTotalHsParSemaine.forEach((item, index) => {
         const newItem = {
           jour: item.jour,
@@ -187,11 +188,9 @@ class CalculHeuresEmploye {
       })
     }
   }
-
   private isTableauHs150ParSemaineVide(): boolean {
     return this.tableauHs150ParSemaine.length === 0
   }
-
   public getTableauHs150ParSemaine(): {
     jour: string
     semaine: string
@@ -216,9 +215,10 @@ class CalculHeuresEmploye {
         totalTravailleDeNuit30 += item.hs_de_nuit
       }
     })
-    this.totalTravailleDeNuit30 = totalTravailleDeNuit30
+    if (!this.est_cadre) {
+      this.totalTravailleDeNuit30 = totalTravailleDeNuit30
+    }
   }
-
   getTotalTravailDeNuit30(): number {
     this.calculTotalTravailleDeNuit30()
     return this.totalTravailleDeNuit30
@@ -231,9 +231,11 @@ class CalculHeuresEmploye {
         totalHsDeNuit50 += item.hs_de_nuit
       }
     })
-    this.totalTravailDeNuit50 = totalHsDeNuit50
-  }
 
+    if (!this.est_cadre) {
+      this.totalTravailDeNuit50 = totalHsDeNuit50
+    }
+  }
   getTotalTravailDeNuit50(): number {
     this.calculateTotalHsDeNuit50()
     return this.totalTravailDeNuit50
@@ -250,8 +252,9 @@ class CalculHeuresEmploye {
         totalHdim += item.heure_de_travail
       }
     })
-
-    this.totalHdim = totalHdim
+    if (!this.est_cadre) {
+      this.totalHdim = totalHdim
+    }
   }
   getTotalHdim(): number {
     this.calculateTotalHdim()
@@ -260,9 +263,11 @@ class CalculHeuresEmploye {
 
   private calculateTotalHs(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
-    this.tableauTotalHsParSemaine.forEach((element) => {
-      this.totalHsDuMois += element.totalHsParSemaine
-    })
+    if (!this.est_cadre) {
+      this.tableauTotalHsParSemaine.forEach((element) => {
+        this.totalHsDuMois += element.totalHsParSemaine
+      })
+    }
   }
   getTotalHsDuMois(): number {
     this.calculateTotalHs()
@@ -271,9 +276,12 @@ class CalculHeuresEmploye {
 
   private calculateTotalHs130(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
-    this.tableauHs130ParSemaine.forEach((element) => {
-      this.totalHs130 += element.totalHs130ParSemaine
-    })
+    this.isTableauHs130ParSemaineVide() && this.calculateHs130ParSemaine()
+    if (!this.est_cadre) {
+      this.tableauHs130ParSemaine.forEach((element) => {
+        this.totalHs130 += element.totalHs130ParSemaine
+      })
+    }
   }
   getTotalHs130(): number {
     this.calculateTotalHs130()
@@ -282,9 +290,12 @@ class CalculHeuresEmploye {
 
   private calculateTotalHs150(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
-    this.tableauHs150ParSemaine.forEach((element) => {
-      this.totalHs150 += element.totalHs150ParSemaine
-    })
+    this.isTableauHs150ParSemaineVide() && this.calculateTableauHs150()
+    if (!this.est_cadre) {
+      this.tableauHs150ParSemaine.forEach((element) => {
+        this.totalHs150 += element.totalHs150ParSemaine
+      })
+    }
   }
   public getTotalHs150(): number {
     this.calculateTotalHs150()
@@ -298,11 +309,68 @@ class CalculHeuresEmploye {
         totalHFerie += item.hs_jours_feries
       }
     })
-    this.totalHFerie = totalHFerie
+    if (!this.est_cadre) {
+      this.totalHFerie = totalHFerie
+    }
   }
   public getTotalHFerie(): number {
     this.claculateTotalHFerie()
     return this.totalHFerie
+  }
+
+  private calculateHsni130(): void {
+    this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+    this.isTableauHs130ParSemaineVide() && this.calculateHs130ParSemaine()
+    if (this.totalHsDuMois >= 18) {
+      this.hsni130 = 18
+    } else {
+      this.hsni130 = this.totalHs130
+    }
+  }
+  public getHsni130(): number {
+    this.calculateHsni130()
+    return this.hsni130
+  }
+
+  private calculateHsni150(): void {
+    this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+    this.isTableauHs150ParSemaineVide() && this.calculateTableauHs150()
+
+    if (this.totalHsDuMois >= 20) {
+      this.hsni150 = 2
+    } else if (this.totalHsDuMois >= 18 && this.totalHsDuMois < 20) {
+      this.hsni150 = 20 - this.hsni130
+    } else {
+      this.hsni150 = 0
+    }
+  }
+  public getHsni150(): number {
+    this.calculateHsni150()
+    return this.hsni150
+  }
+
+  private calculateHsi130(): void {
+    this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+    if (this.totalHs130 >= 20) {
+      this.hsi130 = this.totalHs130 - 18
+    } else {
+      this.hsi130 = 0
+    }
+  }
+  public getHsi130(): number {
+    this.calculateHsi130()
+    return this.hsi130
+  }
+
+  private calculateHsi150(): void {
+    this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+    if (this.totalHsDuMois > 20 && this.totalHs150 > 0) {
+      this.hsi150 = this.totalHs150 - 2
+    }
+  }
+  public getHsi150(): number {
+    this.calculateHsi150()
+    return this.hsi150
   }
 }
 

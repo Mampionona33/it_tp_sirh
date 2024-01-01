@@ -43,13 +43,14 @@ const initialState = {
   baseIrsaArrondi: 0,
   salaireBrut: 0,
   salaireNet: 0,
-  omsi: 0,
+  osie: 0,
   salaireNetAPayer: 0,
   plafondSME: 0,
   irsaAPayer: 0,
   cnaps: 0,
   ajoutSalaire: [],
   retenuSalaire: [],
+  retenuSalaireBrut: [],
   cotisations: [],
 }
 

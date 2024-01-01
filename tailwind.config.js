@@ -28,6 +28,9 @@ module.exports = {
           50: '#FEBABA',
           25: '#FFF2F2',
         },
+        customGray: {
+          50: '#eeeded',
+        },
       },
       width: {
         '10/100': '10%',

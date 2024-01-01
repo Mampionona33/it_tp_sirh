@@ -21,7 +21,7 @@ function InfoPersoEmploye() {
   const inputs: IInputWithLabelProps[] = [
     {
       id: 'nom_employe',
-      label: 'Nom',
+      label: 'Nom employé',
       required: true,
       name: 'nom',
       type: 'text',
@@ -32,7 +32,7 @@ function InfoPersoEmploye() {
     },
     {
       id: 'prenom_employe',
-      label: 'Prénom',
+      label: 'Prénom employé',
       required: true,
       name: 'prenom',
       type: 'text',
@@ -50,14 +50,15 @@ function InfoPersoEmploye() {
       value: formEmploye.adresse,
       onInput: handleInputChange,
       onChange: handleInputChange,
-      placeholder: 'Toamasina ...',
+      placeholder: 'Adresse',
     },
     {
       id: 'date_naissance_employe',
-      label: 'Date de naissance',
-      required: true,
-      name: 'date_naissance',
       type: 'date',
+      required: true,
+      label: 'Date de naissance',
+      name: 'date_naissance',
+      placeholder: 'Date de naissance',
       value: formEmploye.date_naissance,
       onInput: handleInputChange,
       onChange: handleInputChange,
@@ -71,7 +72,7 @@ function InfoPersoEmploye() {
       value: formEmploye.lieu_naissance,
       onInput: handleInputChange,
       onChange: handleInputChange,
-      placeholder: 'Toamasina...',
+      placeholder: 'Lieu de naissance',
     },
     {
       id: 'num_cin_employe',
@@ -82,7 +83,7 @@ function InfoPersoEmploye() {
       value: formEmploye.num_cin,
       onInput: handleInputChange,
       onChange: handleInputChange,
-      placeholder: '000.000.000.000',
+      placeholder: 'N° CIN',
     },
     {
       id: 'date_delivrance_cin',
@@ -98,6 +99,7 @@ function InfoPersoEmploye() {
       label: 'Nom du père',
       name: 'nom_pere',
       type: 'text',
+      placeholder: 'Nom du père',
       value: formEmploye.nom_pere,
       onChange: handleInputChange,
     },
@@ -106,6 +108,7 @@ function InfoPersoEmploye() {
       label: 'Nom de la mère',
       name: 'nom_mere',
       type: 'text',
+      placeholder: 'Nom de la mère',
       value: formEmploye.nom_mere,
       onChange: handleInputChange,
     },
@@ -125,9 +128,9 @@ function InfoPersoEmploye() {
 
   return (
     <div className="my-3">
-      <h1 className="text-lg  text-customRed-930 uppercase m-3"> Informations personnelles</h1>
-      <div className="flex bg-customRed-25 mt-2 shadow-sm border-y">
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
+      <div className="flex flex-col border-y border-y-customBlue-200 mt-4 shadow-sm py-4">
+        <p className="text-lg text-customRed-930 uppercase mx-8 mb-3">Informations personnelles</p>
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 w-full">
           {inputs.map((input, index) => (
             <InputWithLabel key={index} {...input} />
           ))}

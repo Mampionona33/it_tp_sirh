@@ -14,8 +14,9 @@ const InformationPaie = () => {
       value: formEmploye.salaire_de_base,
       name: 'salaire_de_base',
       type: 'number',
-      required: true,
+      placeholder: 'Salaire de base',
       min: 0,
+      required: true,
     },
     {
       id: 'rib',
@@ -32,7 +33,7 @@ const InformationPaie = () => {
       name: 'mode_paiement_salaire',
       type: 'text',
       required: true,
-      placeholder: 'Virement bancaire...',
+      placeholder: 'Mode de paiement',
     },
     {
       id: 'num_cnaps',
@@ -40,6 +41,7 @@ const InformationPaie = () => {
       value: formEmploye.num_cnaps,
       name: 'num_cnaps',
       type: 'text',
+      placeholder: 'Numéros cnaps',
     },
     {
       id: 'num_osie',
@@ -47,6 +49,7 @@ const InformationPaie = () => {
       value: formEmploye.num_osie,
       name: 'num_osie',
       type: 'text',
+      placeholder: 'Numéros OSIE',
     },
   ]
 
@@ -62,11 +65,9 @@ const InformationPaie = () => {
   }
   return (
     <>
-      <h1 className="text-lg border-t text-customRed-930 ml-4 uppercase pt-3 mb-3">
-        Information sur la paie
-      </h1>
-      <div className="flex border-y bg-customRed-25 mt-2 shadow-sm">
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
+      <div className="flex flex-col border-y border-y-customBlue-200 mt-4 shadow-sm py-4">
+        <p className="text-lg ml-4 uppercase mx-8 mb-3">Information sur la paie</p>
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 w-full">
           {inputs.map((input, index) => (
             <InputWithLabel
               key={index}

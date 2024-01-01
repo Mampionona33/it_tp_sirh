@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import DetailHeures from './detail-heures/DetailHeures'
-import ValiderCalculPaie from './ValiderCalculPaie/ValiderCalculPaie'
 import ConfirmValidationPaie from './ConfirmValidationPaie/ConfirmValidationPaie'
 import BulletinDePaie from './BulletinDePaie/BulletinDePaie'
 
@@ -63,8 +62,6 @@ const ValidPaieOngletContainer: React.FC = () => {
       case 'detail-heures':
         return <DetailHeures />
       case 'valid-paie':
-        return <ValiderCalculPaie />
-      case 'confirm-valid-paie':
         return <ConfirmValidationPaie />
       case 'bullettin-paie':
         return <BulletinDePaie />

@@ -8,7 +8,7 @@ import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 const InfoPro = () => {
   const dispatch = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
-  const catOptions = useSelector((state: any) => state.cateogieEmploye.data)
+  const catOptions = useAppSelector((store) => store.cateogieEmploye.data)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { name, value } = event.target ?? { name: '', value: '' }
@@ -47,7 +47,7 @@ const InfoPro = () => {
       value: formEmploye.titre_poste,
       type: 'text',
       required: true,
-      placeholder: 'Directeur ...',
+      placeholder: 'Titre du poste',
       onChange: handleInputChange,
     },
     {
@@ -58,7 +58,7 @@ const InfoPro = () => {
       type: 'select',
       required: true,
       options: catOptions,
-      placeholder: 'Catégorie ...',
+      placeholder: 'Catégorie',
       onSelectChange: handleCategorieChange,
     },
     {
@@ -68,16 +68,17 @@ const InfoPro = () => {
       value: formEmploye.departement,
       type: 'text',
       required: true,
-      placeholder: 'Sérvice ...',
+      placeholder: 'Département',
       onChange: handleInputChange,
     },
     {
       id: 'date_embauche',
       label: "Date d'embauche",
       name: 'date_embauche',
-      value: formEmploye.date_embauche,
       type: 'date',
+      placeholder: "Date d'embauche",
       required: true,
+      value: formEmploye.date_embauche,
       onChange: handleInputChange,
     },
     {
@@ -87,7 +88,7 @@ const InfoPro = () => {
       label: 'Lieu de travail',
       type: 'text',
       value: formEmploye.lieu_travail,
-      placeholder: 'Toamasina...',
+      placeholder: 'Lieu de travail',
       onChange: handleInputChange,
     },
     {
@@ -96,6 +97,7 @@ const InfoPro = () => {
       name: 'telephone',
       value: formEmploye.telephone,
       type: 'text',
+      placeholder: 'Télephone',
       onChange: handleInputChange,
     },
     {
@@ -105,17 +107,7 @@ const InfoPro = () => {
       autoComplete: 'on',
       value: formEmploye.email,
       type: 'email',
-      onChange: handleInputChange,
-    },
-    {
-      id: 'est_cadre',
-      dynamiqueId: true,
-      label: 'Est cadre',
-      name: 'est_cadre',
-      value: formEmploye.est_cadre,
-      type: 'radio',
-      required: true,
-      options: radioOption,
+      placeholder: 'Email',
       onChange: handleInputChange,
     },
     {
@@ -126,6 +118,7 @@ const InfoPro = () => {
       value: formEmploye.travail_de_nuit,
       type: 'radio',
       required: true,
+      placeholder: 'Travail de nuit',
       options: radioOption,
       onChange: handleInputChange,
     },
@@ -133,9 +126,9 @@ const InfoPro = () => {
 
   return (
     <>
-      <h1 className="text-lg  text-customRed-930 uppercase m-3">Informations professionnelles</h1>
-      <div className="flex border-t bg-customRed-25 mt-2 shadow-sm">
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 py-3 w-full">
+      <div className="flex flex-col border-y border-y-customBlue-200 mt-4 py-4 shadow-sm">
+        <p className="text-lg  text-customRed-930 uppercase mx-8">Informations professionnelles</p>
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 w-full">
           {inputs.map((input, index) => (
             <InputWithLabel
               key={index}
