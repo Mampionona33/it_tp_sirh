@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
-const initialState = {
+const initialState: IBulletinDePaieProps = {
   employeur: {
     nom: ' LA LIGNE SCANDINAVE',
     adresse: ' 2 RUE LIEUTNANT BERARD',
@@ -48,6 +49,10 @@ const initialState = {
   plafondSME: 0,
   irsaAPayer: 0,
   cnaps: 0,
+  indemnites: {
+    transport: 0,
+    autres: 0,
+  },
   ajoutSalaire: [],
   retenuSalaire: [],
   retenuSalaireBrut: [],

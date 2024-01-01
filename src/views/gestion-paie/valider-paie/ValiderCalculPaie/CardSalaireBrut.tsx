@@ -72,12 +72,12 @@ const CardSalaireBrut = () => {
         />
         <CardRow
           className="border-b border-b-customBlue-100"
-          cell1="Primes Et Gratification"
+          cell1="Absence/Retard"
           cell3={bulletinDePaie.valHdim}
         />
         <CardRow
           className="border-b border-b-customBlue-100"
-          cell1="Absence/Retard à Déduire"
+          cell1="Primes Et Gratification"
           cell3={bulletinDePaie.valHdim}
         />
         <div className="flex justify-between px-4 py-2 ">

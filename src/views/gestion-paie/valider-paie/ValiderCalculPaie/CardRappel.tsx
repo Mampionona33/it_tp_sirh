@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 const CardRappel = () => {
   const Body = () => {
     const [state, setState] = useState({
-      avance: 0,
+      rappel: 0,
     })
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,10 +21,10 @@ const CardRappel = () => {
           type="number"
           min={0}
           required
-          id="avance"
-          name="avance"
-          label="Avances"
-          value={state.avance}
+          id="rappel"
+          name="rappel"
+          label="Rappel"
+          value={state.rappel}
           onChange={handleInputChange}
         />
       </div>

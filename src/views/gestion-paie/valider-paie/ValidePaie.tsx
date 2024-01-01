@@ -184,7 +184,7 @@ const ValidePaie = () => {
       <div>
         {isEmployeExist && isDateValidationexist ? (
           <>
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 mt-2 mb-3">
               <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
                 <CardIndemnites />
                 <CardAvances />
