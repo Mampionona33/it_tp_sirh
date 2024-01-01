@@ -190,8 +190,8 @@ const ValidePaie = () => {
                 <CardAvances />
                 <CardRappel />
                 <CardPrimes />
-                <CardAvantages />
                 <CardDeduction />
+                <CardAvantages />
               </div>
               <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
                 <CardSalaireBrut />
