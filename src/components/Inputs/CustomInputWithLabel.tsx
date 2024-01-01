@@ -45,7 +45,7 @@ const CustomInputWithLabel: React.FC<CustomInputProps> = ({
   return (
     <div className="flex flex-col">
       <label htmlFor={id} className={`text-sm h-6 text-zinc-500 p-1`}>
-        {(type === 'date' || focused) && label}
+        {type === 'date' || type === 'number' || focused ? label : ''}
       </label>
       <input
         id={id}
