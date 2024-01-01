@@ -6,6 +6,7 @@ const CardPrimes = () => {
   const Body = () => {
     const [state, setState] = useState({
       primeAssiduite: 0,
+      primeExcellence: 0,
     })
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,7 +17,7 @@ const CardPrimes = () => {
     }
 
     return (
-      <div className="w-full text-sm flex flex-col gap-2">
+      <div className="w-full text-sm flex flex-col gap-4 p-4 ">
         <CustomInputWithLabel
           type="number"
           min={0}
@@ -25,6 +26,16 @@ const CardPrimes = () => {
           name="primeAssiduite"
           label="Prime d’assiduité"
           value={state.primeAssiduite}
+          onChange={handleInputChange}
+        />
+        <CustomInputWithLabel
+          type="number"
+          min={0}
+          required
+          id="prime-excellence"
+          name="primeExcellence"
+          label="Prime d'excellence"
+          value={state.primeExcellence}
           onChange={handleInputChange}
         />
       </div>

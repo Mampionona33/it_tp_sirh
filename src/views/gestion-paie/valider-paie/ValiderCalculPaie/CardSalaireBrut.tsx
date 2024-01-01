@@ -13,7 +13,7 @@ const CardSalaireBrut = () => {
   const Body = () => {
     return (
       <div className="w-full text-sm">
-        <div className="flex justify-between p-2 border-b border-b-customBlue-100">
+        <div className="flex justify-between px-4 py-2 border-b border-b-customBlue-100">
           <div>Salaire de base</div>
           <div>{formatAriaryMga(bulletinDePaie.salaireDeBase)}</div>
         </div>
@@ -65,7 +65,7 @@ const CardSalaireBrut = () => {
           cell2={formatCell2(bulletinDePaie.totalHDim)}
           cell3={bulletinDePaie.valHdim}
         />
-        <div className="flex justify-between p-2 ">
+        <div className="flex justify-between px-4 py-2 ">
           <div>Salaire brut</div>
           <div className="text-customRed-900">{formatAriaryMga(bulletinDePaie.salaireBrut)}</div>
         </div>

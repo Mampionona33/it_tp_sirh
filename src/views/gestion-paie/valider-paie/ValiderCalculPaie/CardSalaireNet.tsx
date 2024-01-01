@@ -10,7 +10,7 @@ const CardSalaireNet = () => {
     return (
       <>
         <div className="w-full text-sm">
-          <div className="flex justify-between p-2 border-b border-b-customBlue-100">
+          <div className="flex justify-between px-4 py-2 border-b border-b-customBlue-100">
             <div>Salaire brut</div>
             <div>{formatAriaryMga(bulletinDePaie.salaireBrut)}</div>
           </div>
