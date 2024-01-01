@@ -108,6 +108,7 @@ const ValidePaie = () => {
             calculPaie.setTotalHFerie(totalHFerie)
 
             const cnaps = calculPaie.getCnaps()
+            const osie = calculPaie.getOsie()
             const valHsni130 = calculPaie.getValHsni130()
             const valHsni150 = calculPaie.getValHsni150()
             const valHsi130 = calculPaie.getValHsi130()
@@ -117,13 +118,19 @@ const ValidePaie = () => {
             const valHdim = calculPaie.getValHdim()
             const valHFerie = calculPaie.getValHFerie()
             const salaireBrut = calculPaie.getSalaireBrut()
-
-            console.log('cnaps', cnaps)
+            const baseIrsa = calculPaie.getBaseIrsa()
+            const baseIrsaArrondi = calculPaie.getBaseIrsaArrondi()
+            const irsaAPayer = calculPaie.getIrsaAPayer()
+            const salaireNet = calculPaie.getSalaireNet()
 
             dispatch(
               setBulletinDePaie({
                 ...bulletinDePaie,
+                osie: osie,
                 cnaps: cnaps,
+                baseIrsaArrondi: baseIrsaArrondi,
+                baseIrsa: baseIrsa,
+                irsaAPayer: irsaAPayer,
                 totalHn: totalHn,
                 totalHs: totalHs,
                 totalHFerie: totalHFerie,
@@ -145,6 +152,7 @@ const ValidePaie = () => {
                 valHdim: valHdim,
                 valHFerie: valHFerie,
                 totalHDim: totalHDim,
+                salaireNet: salaireNet,
               }),
             )
           }
