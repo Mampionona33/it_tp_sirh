@@ -1,7 +1,7 @@
 import React, { ChangeEvent } from 'react'
 import Select, { StylesConfig } from 'react-select'
 
-export interface IInputWithLabelProps {
+export interface IInputWithLabelProps extends React.HTMLProps<HTMLInputElement> {
   id: string
   dynamiqueId?: boolean
   label: string
@@ -43,11 +43,23 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   onInput,
   onSelectChange,
 }) => {
+  const [focused, setFocused] = React.useState<boolean>(false)
+
+  const handleFocused = (event) => {
+    event.preventDefault()
+    setFocused(true)
+  }
+
+  const placeHolder = focused ? '' : placeholder
+
   const customSelectStyles = {
     control: (provided) => ({
       ...provided,
       height: 28,
       minHeight: 28,
+      border: 'none',
+      outline: 'none',
+      borderBottom: '1px solid #D6111E',
     }),
     valueContainer: (style) => {
       return {
@@ -90,27 +102,37 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
       }
     },
   }
+
   const handleSelectChange = (selectedOption: { label: string; value: string } | undefined) => {
     if (onSelectChange) {
       onSelectChange(selectedOption)
     }
   }
 
+  React.useEffect(() => {
+    if (value) {
+      setFocused(true)
+    } else {
+      setFocused(false)
+    }
+  }, [value])
+
   return (
     <div className="flex flex-col mb-2">
       {type !== 'radio' && type !== 'select' && (
-        <label htmlFor={id} className="text-sm">
-          {label} {required ? '*' : ''}
+        <label htmlFor={id} className="text-sm h-4 mb-1">
+          {(focused || type === 'number' || type === 'date') && required && label}
+          {(focused || type === 'number' || type === 'date') && required ? ' *' : ''}
         </label>
       )}
       {type === 'radio' && options ? (
         // Render a fieldset for radio buttons
         <fieldset>
           <legend className="text-sm">{label}</legend>
-          {options.map((option, index) => {
+          {options.map((option, optionIndex) => {
             const optionID = dynamiqueId ? `${id}_${option.value}` : id
             return (
-              <div key={index} className="flex items-center">
+              <div key={optionIndex} className="flex items-center">
                 <div className="text-center mr-2">
                   <input
                     placeholder={placeholder}
@@ -118,9 +140,10 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
                     id={optionID}
                     name={name}
                     value={option.value}
+                    onFocus={handleFocused}
                     checked={value === option.value}
-                    onChange={(event) => onChange(event, index)}
-                    onInput={onInput ? (event) => onInput(event, index) : undefined}
+                    onChange={(event) => onChange(event, optionIndex)}
+                    onInput={onInput ? (event) => onInput(event, optionIndex) : undefined}
                     className="text-sm"
                   />
                 </div>
@@ -134,22 +157,29 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
       ) : type === 'select' && options ? (
         // Render a select dropdown using react-select
         <div className="flex flex-col mb-2">
-          <label htmlFor={name} className="text-sm">
-            {label} {required ? '*' : ''}
+          <label htmlFor={name} className="text-sm h-4 mb-1">
+            {focused && label} {required && focused ? ' *' : ''}
           </label>
           <Select
             inputId={id}
             aria-label={label}
-            placeholder={placeholder}
+            placeholder={placeHolder}
             name={name}
             required={required}
             options={options as { label: string; value: string }[]}
             value={options.find((opt: { label: string; value: string }) => opt.value === value)}
-            // onChange={(selectedOption: { label: string; value: string } | undefined) =>
-            //   onChange(selectedOption ? selectedOption.value : '', index)
-            // }
             onChange={handleSelectChange}
+            onFocus={handleFocused}
             styles={customSelectStyles}
+            // styles={{
+            //   ...customSelectStyles,
+            //   control: (base) => ({
+            //     ...customSelectStyles.control(base),
+            //     border: 'none',
+            //     outline: 'none',
+            //     borderBottom: '1px solid #D6111E',
+            //   }),
+            // }}
             theme={(theme) => ({
               ...theme,
               borderRadius: 0,
@@ -172,12 +202,13 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           value={value}
           min={min}
           max={max}
-          placeholder={placeholder}
+          placeholder={placeHolder}
+          onFocus={handleFocused}
           onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
           onInput={
             onInput ? (event) => onInput(event as ChangeEvent<HTMLInputElement>, index) : undefined
           }
-          className="border border-customRed-50 focus:outline-customRed-100 text-sm p-2 h-[28px]"
+          className="border-b border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1 "
           required={required}
         />
       )}

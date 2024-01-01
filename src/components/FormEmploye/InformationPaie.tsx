@@ -14,8 +14,9 @@ const InformationPaie = () => {
       value: formEmploye.salaire_de_base,
       name: 'salaire_de_base',
       type: 'number',
-      required: true,
+      placeholder: 'Salaire de base',
       min: 0,
+      required: true,
     },
     {
       id: 'rib',
@@ -32,7 +33,7 @@ const InformationPaie = () => {
       name: 'mode_paiement_salaire',
       type: 'text',
       required: true,
-      placeholder: 'Virement bancaire...',
+      placeholder: 'Mode de paiement',
     },
     {
       id: 'num_cnaps',
@@ -40,6 +41,7 @@ const InformationPaie = () => {
       value: formEmploye.num_cnaps,
       name: 'num_cnaps',
       type: 'text',
+      placeholder: 'Numéros cnaps',
     },
     {
       id: 'num_osie',
@@ -47,6 +49,7 @@ const InformationPaie = () => {
       value: formEmploye.num_osie,
       name: 'num_osie',
       type: 'text',
+      placeholder: 'Numéros OSIE',
     },
   ]
 

@@ -47,7 +47,7 @@ const InfoPro = () => {
       value: formEmploye.titre_poste,
       type: 'text',
       required: true,
-      placeholder: 'Directeur ...',
+      placeholder: 'Titre du poste',
       onChange: handleInputChange,
     },
     {
@@ -58,7 +58,7 @@ const InfoPro = () => {
       type: 'select',
       required: true,
       options: catOptions,
-      placeholder: 'Catégorie ...',
+      placeholder: 'Catégorie',
       onSelectChange: handleCategorieChange,
     },
     {
@@ -68,16 +68,17 @@ const InfoPro = () => {
       value: formEmploye.departement,
       type: 'text',
       required: true,
-      placeholder: 'Sérvice ...',
+      placeholder: 'Département',
       onChange: handleInputChange,
     },
     {
       id: 'date_embauche',
       label: "Date d'embauche",
       name: 'date_embauche',
-      value: formEmploye.date_embauche,
       type: 'date',
+      placeholder: "Date d'embauche",
       required: true,
+      value: formEmploye.date_embauche,
       onChange: handleInputChange,
     },
     {
@@ -87,7 +88,7 @@ const InfoPro = () => {
       label: 'Lieu de travail',
       type: 'text',
       value: formEmploye.lieu_travail,
-      placeholder: 'Toamasina...',
+      placeholder: 'Lieu de travail',
       onChange: handleInputChange,
     },
     {
@@ -96,6 +97,7 @@ const InfoPro = () => {
       name: 'telephone',
       value: formEmploye.telephone,
       type: 'text',
+      placeholder: 'Télephone',
       onChange: handleInputChange,
     },
     {
@@ -105,6 +107,7 @@ const InfoPro = () => {
       autoComplete: 'on',
       value: formEmploye.email,
       type: 'email',
+      placeholder: 'Email',
       onChange: handleInputChange,
     },
     {
@@ -115,6 +118,7 @@ const InfoPro = () => {
       value: formEmploye.travail_de_nuit,
       type: 'radio',
       required: true,
+      placeholder: 'Travail de nuit',
       options: radioOption,
       onChange: handleInputChange,
     },
