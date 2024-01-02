@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
+import { EnumBoolean, EnumGenre } from '@src/interfaces/interfaceEmploye'
 
 const initialState: IBulletinDePaieProps = {
   employeur: {
@@ -11,7 +12,40 @@ const initialState: IBulletinDePaieProps = {
     rcs: ' 2002B00608',
   },
   dateSelectionne: null,
-  salarie: {},
+  salarie: {
+    id: null,
+    nom: '',
+    prenom: '',
+    date_naissance: '',
+    lieu_naissance: '',
+    date_delivrance_cin: '',
+    adresse: '',
+    nom_pere: '',
+    nom_mere: '',
+    telephone: '',
+    email: '',
+    num_cin: '',
+    genre: EnumGenre.MASCULIN,
+    titre_poste: '',
+    matricule: '',
+    categorie: '',
+    date_embauche: '',
+    departement: '',
+    lieu_travail: '',
+    est_cadre: EnumBoolean.NON,
+    travail_de_nuit: EnumBoolean.NON,
+    salaire_de_base: 0,
+    rib: '',
+    mode_paiement_salaire: '',
+    num_cnaps: '',
+    num_osie: '',
+    actif: EnumBoolean.OUI,
+    indemnites: {
+      transport: 0,
+      autres: 0,
+    },
+    avance: 0,
+  },
   dateDeVirement: 0,
   salaireDeBase: 0,
   totalHn: 0,

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
 import { format } from 'date-fns'
@@ -8,6 +8,9 @@ import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
 import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 import Page404 from '@src/views/pages/page404/Page404'
 import useEmployeeExists from '@src/hooks/useEmployeeExists'
+import { useParams } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
   actions?: React.FC[]
@@ -15,6 +18,10 @@ interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
 
 const HistoriquePaie: React.FC = () => {
   const isEmployeExist = useEmployeeExists()
+  const dispatch = useAppDispatch()
+  const { id } = useParams()
+  const listeEmploye = useAppSelector((store) => store.employeesList.list)
+  const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
   const historiquePaiement: IHistoriquePaieProps[] = [
     {
       id: 1,
@@ -49,6 +56,23 @@ const HistoriquePaie: React.FC = () => {
       status: EnumBoolean.NON,
     },
   ]
+
+  const selectedEmploye =
+    listeEmploye && listeEmploye.length > 0
+      ? listeEmploye.find((emp) => emp.id === Number(id))
+      : null
+
+  useEffect(() => {
+    if (selectedEmploye) {
+      dispatch(
+        setBulletinDePaie({
+          ...bulletinDePaie,
+          salarie: selectedEmploye,
+          salaireDeBase: selectedEmploye.salaire_de_base,
+        }),
+      )
+    }
+  }, [selectedEmploye])
 
   const columnHelper = createColumnHelper<IHistoriquePaieTableProps>()
 

@@ -1,12 +1,14 @@
 import CustomSection from '@src/components/CustomSection'
-import React from 'react'
+import React, { useEffect } from 'react'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const Body = () => {
   const dispatch = useAppDispatch()
-  const { indemnites } = useAppSelector((store) => store.bulletinDePaie)
+  const { indemnites, salaireNetAPayer, totalIndemnite } = useAppSelector(
+    (store) => store.bulletinDePaie,
+  )
 
   const handleInputChange = (name: string, value: string) => {
     const updatedIndemnites = {
@@ -18,12 +20,17 @@ const Body = () => {
       (acc, currentValue) => acc + currentValue,
       0,
     )
+    console.log(totalIndemnite)
+
+    const updatedSalaireNetAPayer = totalIndemnite + (salaireNetAPayer || 0)
+    console.log(updatedSalaireNetAPayer)
 
     dispatch(
       setBulletinDePaie({
         ...indemnites,
         indemnites: updatedIndemnites,
         totalIndemnite,
+        salaireNetAPayer: updatedSalaireNetAPayer,
       }),
     )
   }

@@ -2,6 +2,7 @@ import CustomSection from '@src/components/CustomSection'
 import React, { useEffect } from 'react'
 import CardRow from './CardRow'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
+import calculPaie from '@src/utils/CalculPaie'
 
 const Body = () => {
   const { salaireNet, totalIndemnite, salaireNetAPayer, avance, totalAvantages } = useAppSelector(

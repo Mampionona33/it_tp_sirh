@@ -38,7 +38,7 @@ class CalculPaie {
   private rappel: number
   private totalPrimeEtGratification: number
   private totalAvantages: number
-  constructor() {
+  constructor(salaireDeBase) {
     this.plafondSME = 1910400
     this.tauxHoraire = 0
     this.valHsni130 = 0
@@ -51,7 +51,7 @@ class CalculPaie {
     this.valHFerie = 0
     this.salaireBrut = 0
     this.avantageNature = 0
-    this.salaireBase = 0
+    this.salaireBase = salaireDeBase || 0
     this.totalDeduction = 0
     this.totalPrimeEtAvantage = 0
     this.baseCnaps = 0
@@ -67,6 +67,8 @@ class CalculPaie {
     this.rappel = 0
     this.totalPrimeEtGratification = 0
     this.totalAvantages = 0
+    this.avance = 0
+    this.calculTauxHoraire()
   }
 
   setTotalAvantages(totalAvantages: number): void {
@@ -256,6 +258,7 @@ class CalculPaie {
     this.valHsni130 = valHsni130
   }
   private calculateValHsni130(): void {
+    console.log(this.hsni130, this.tauxHoraire)
     if (!this.est_cadre && this.hsni130 > 0) {
       this.valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * this.hsni130 * 130) / 100)
     }
@@ -502,12 +505,14 @@ class CalculPaie {
     return Math.round(nombre * facteur) / facteur
   }
   private calculTauxHoraire(): void {
-    this.tauxHoraire = this.salaireBrut / 173.33
+    if (this.salaireBase > 0) {
+      this.tauxHoraire = this.salaireBase / 173.33
+    }
   }
 
   //   CALCULATORS
 }
 
-const calculPaie = new CalculPaie()
+// const calculPaie = new CalculPaie()
 
-export default calculPaie
+export default CalculPaie

@@ -10,7 +10,7 @@ export interface IBulletinDePaieProps {
     rcs: string
   }
   dateSelectionne?: string
-  salarie?: IEmploye | {}
+  salarie?: IEmploye
   dateDeVirement: string | number
   salaireDeBase: number
   totalHn: number

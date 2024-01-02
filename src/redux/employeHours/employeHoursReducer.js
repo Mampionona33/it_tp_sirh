@@ -1,6 +1,9 @@
-const { createSlice } = require('@reduxjs/toolkit')
+import { createSlice } from '@reduxjs/toolkit'
+import { fetchHeureEmploye } from './employeHoursActions'
 
 const initialState = {
+  employeHours: null,
+  loading: 'idle',
   totalHNormal: null,
   totalHsJour: null,
   totalHs130: null,
@@ -47,6 +50,19 @@ const employeeHoursSlice = createSlice({
     setTotalHsni150: (state, action) => {
       state.hsni150 = action.payload
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchHeureEmploye.fulfilled, (state, action) => {
+        state.employeHours = action.payload
+        state.loading = 'succeeded'
+      })
+      .addCase(fetchHeureEmploye.rejected, (state) => {
+        state.loading = 'failed'
+      })
+      .addCase(fetchHeureEmploye.pending, (state) => {
+        state.loading = 'pending'
+      })
   },
 })
 
