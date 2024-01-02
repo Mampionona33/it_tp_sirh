@@ -35,6 +35,7 @@ class CalculPaie {
   private valHFerie: number
   private valHs30: number
   private totalIndemnite: number
+  private rappel: number
   constructor() {
     this.plafondSME = 1910400
     this.tauxHoraire = 0
@@ -61,6 +62,14 @@ class CalculPaie {
     this.irsaAPayer = 0
     this.salaireNet = 0
     this.totalIndemnite = 0
+    this.rappel = 0
+  }
+
+  setRappel(rappel: number): void {
+    this.rappel = rappel
+  }
+  getRappel(): number {
+    return this.rappel
   }
 
   setTotalIndemnite(totalIndemnite: number): void {
@@ -125,7 +134,7 @@ class CalculPaie {
   private calculateSalaireBrut(): void {
     if (this.salaireBase) {
       this.salaireBrut = this.est_cadre
-        ? this.roundToTwoDecimal(this.salaireBase + this.valHdim + this.valHFerie)
+        ? this.roundToTwoDecimal(this.salaireBase + this.valHdim + this.valHFerie + this.rappel)
         : this.roundToTwoDecimal(
             this.salaireBase +
               this.valHsni130 +
@@ -136,6 +145,7 @@ class CalculPaie {
               this.valHFerie +
               this.valHs30 +
               this.valHs50 +
+              this.rappel +
               this.totalPrimeEtAvantage -
               this.totalDeduction,
           )

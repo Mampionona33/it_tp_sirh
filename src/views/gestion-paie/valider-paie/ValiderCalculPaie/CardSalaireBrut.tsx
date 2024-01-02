@@ -68,7 +68,7 @@ const CardSalaireBrut = () => {
         <CardRow
           className="border-b border-b-customBlue-100"
           cell1="Rappel"
-          cell3={bulletinDePaie.valHdim}
+          cell3={bulletinDePaie.rappel}
         />
         <CardRow
           className="border-b border-b-customBlue-100"

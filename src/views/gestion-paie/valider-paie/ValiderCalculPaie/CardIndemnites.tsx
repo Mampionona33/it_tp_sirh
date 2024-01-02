@@ -3,11 +3,10 @@ import React from 'react'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
-import calculPaie from '@src/utils/CalculPaie'
 
 const Body = () => {
-  const { indemnites, salaireNet } = useAppSelector((store) => store.bulletinDePaie)
   const dispatch = useAppDispatch()
+  const { indemnites } = useAppSelector((store) => store.bulletinDePaie)
 
   const handleInputChange = (name: string, value: string) => {
     const updatedIndemnites = {
