@@ -22,6 +22,7 @@ import CardIndemnites from './ValiderCalculPaie/CardIndemnites'
 import CardAvances from './ValiderCalculPaie/CardAvances'
 import CardRappel from './ValiderCalculPaie/CardRappel'
 import CardGroupeButtons from './ValiderCalculPaie/CardGroupeButtons'
+import useSalaireNetAPayerUpdate from '@src/hooks/useSalaireNetAPayerUpdate'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
@@ -83,6 +84,7 @@ const ValidePaie = () => {
       id && listEmploye && listEmploye.filter((item: IEmploye) => String(item.id) === String(id))[0]
 
     if (salarie && dateDebutFormated && dateFinFormated && mount.current) {
+      dispatch(setBulletinDePaie({ salarie: salarie }))
       heureSerivice
         .getAll(salarie.matricule, dateDebutFormated, dateFinFormated)
         .then((data) => {
@@ -181,6 +183,27 @@ const ValidePaie = () => {
       mount.current = false
     }
   }, [dispatch, bulletinDePaie, dateDebutFormated, dateFinFormated, id, listEmploye])
+
+  /**
+   * Mise a jour du salaire net à payer et du salaire brut
+   */
+  // --------------------------------------------------------------------------
+  const { salaireNetAPayer: updatedSalaireNetAPayer } = useSalaireNetAPayerUpdate({
+    calculPaieSetters: [
+      () => calculPaie.setTotalIndemnite(bulletinDePaie.totalIndemnite),
+      () => calculPaie.setAvance(bulletinDePaie.avance),
+      () => calculPaie.setRappel(bulletinDePaie.rappel),
+      () => calculPaie.setTotalPrimeEtGratification(bulletinDePaie.totalPrimeEtGratification),
+      () => calculPaie.setTotalAvantages(bulletinDePaie.totalAvantages),
+    ],
+  })
+
+  useEffect(() => {
+    if (bulletinDePaie.salaireNetAPayer !== updatedSalaireNetAPayer) {
+      dispatch(setBulletinDePaie({ salaireNetAPayer: updatedSalaireNetAPayer }))
+    }
+  }, [dispatch, updatedSalaireNetAPayer, bulletinDePaie.salaireNetAPayer])
+  // --------------------------------------------------------------------------
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()

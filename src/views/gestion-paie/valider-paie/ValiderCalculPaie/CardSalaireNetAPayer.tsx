@@ -1,28 +1,12 @@
 import CustomSection from '@src/components/CustomSection'
 import React, { useEffect } from 'react'
 import CardRow from './CardRow'
-import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
-import calculPaie from '@src/utils/CalculPaie'
-import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
-import useSalaireNetAPayerUpdate from '@src/hooks/useSalaireNetAPayerUpdate'
+import { useAppSelector } from '@src/hooks/useAppDispatch'
 
 const Body = () => {
-  const dispatch = useAppDispatch()
-  const { salaireNet, totalIndemnite, salaireNetAPayer, avance } = useAppSelector(
+  const { salaireNet, totalIndemnite, salaireNetAPayer, avance, totalAvantages } = useAppSelector(
     (store) => store.bulletinDePaie,
   )
-  const { salaireNetAPayer: updatedSalaireNetAPayer } = useSalaireNetAPayerUpdate({
-    calculPaieSetters: [
-      () => calculPaie.setTotalIndemnite(totalIndemnite),
-      () => calculPaie.setAvance(avance),
-    ],
-  })
-
-  useEffect(() => {
-    if (salaireNetAPayer !== updatedSalaireNetAPayer) {
-      dispatch(setBulletinDePaie({ salaireNetAPayer: updatedSalaireNetAPayer }))
-    }
-  }, [dispatch, updatedSalaireNetAPayer, salaireNetAPayer])
 
   return (
     <div className="w-full text-sm">
@@ -40,7 +24,7 @@ const Body = () => {
       <CardRow
         className="border-b border-b-customBlue-100"
         cell1="Avantage en nature"
-        cell3={salaireNet}
+        cell3={totalAvantages}
       />
       <CardRow
         className="border-b border-b-customBlue-100"

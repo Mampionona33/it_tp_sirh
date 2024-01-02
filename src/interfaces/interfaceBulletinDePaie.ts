@@ -36,6 +36,7 @@ export interface IBulletinDePaieProps {
   totalPrimeEtAvantage: number
   totalDeduction: number
   tauxCnaps: number
+  tauxOsie: number
   baseCnaps: number
   reduChargeFamil: number
   baseIrsa: number
@@ -76,7 +77,7 @@ export interface IAvantageProps {
   vehicule?: number
   logement?: number
   domestique?: number
-  autres?: number
+  autresAvantages?: number
 }
 
 export interface IDeductionProps {

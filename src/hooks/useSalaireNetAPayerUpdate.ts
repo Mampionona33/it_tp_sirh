@@ -17,15 +17,20 @@ const useSalaireNetAPayerUpdate = ({ calculPaieSetters }: UseSalaireNetAPayerUpd
         calculPaie.setSalaireNet(salaireNet)
 
         // Execute all provided setter functions
-        calculPaieSetters.forEach((setter) => setter())
+        if (calculPaieSetters) {
+          calculPaieSetters.forEach((setter) => setter())
 
-        const updatedSalaireNetAPayer = calculPaie.getSalaireNetAPayer()
-        setUpdatedSalaireNetAPayer(updatedSalaireNetAPayer)
+          // Check if the value needs an update before setting the state
+          const updatedValue = calculPaie.getSalaireNetAPayer()
+          if (updatedValue !== updatedSalaireNetAPayer) {
+            setUpdatedSalaireNetAPayer(updatedValue)
+          }
+        }
       }
     }
 
     updateSalaireNetAPayer()
-  }, [salaireNet, calculPaieSetters])
+  }, [salaireNet, calculPaieSetters, updatedSalaireNetAPayer])
 
   return { salaireNetAPayer: updatedSalaireNetAPayer }
 }

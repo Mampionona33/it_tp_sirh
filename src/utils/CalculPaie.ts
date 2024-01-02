@@ -37,6 +37,7 @@ class CalculPaie {
   private totalIndemnite: number
   private rappel: number
   private totalPrimeEtGratification: number
+  private totalAvantages: number
   constructor() {
     this.plafondSME = 1910400
     this.tauxHoraire = 0
@@ -65,6 +66,14 @@ class CalculPaie {
     this.totalIndemnite = 0
     this.rappel = 0
     this.totalPrimeEtGratification = 0
+    this.totalAvantages = 0
+  }
+
+  setTotalAvantages(totalAvantages: number): void {
+    this.totalAvantages = totalAvantages
+  }
+  getTotalAvantages(): number {
+    return this.totalAvantages
   }
 
   setTotalPrimeEtGratification(totalPrimeEtGratification: number): void {
@@ -476,7 +485,7 @@ class CalculPaie {
     this.recalculateSalaieBrut()
     this.calculateSalaireNet()
     this.salaireNetAPayer = this.roundToTwoDecimal(
-      this.salaireNet + this.totalIndemnite + this.avance,
+      this.salaireNet + this.totalIndemnite + this.avance + this.totalAvantages,
     )
   }
   public getSalaireNetAPayer(): number {
