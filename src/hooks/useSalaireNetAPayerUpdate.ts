@@ -1,37 +1,33 @@
-import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import { useEffect, useState } from 'react'
+import { useAppSelector } from '@src/hooks/useAppDispatch'
 import calculPaie from '@src/utils/CalculPaie'
-import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 interface UseSalaireNetAPayerUpdateParams {
-  value: number
-  calculPaieSetter: (value: number | string) => void
+  calculPaieSetters: (() => void)[]
 }
 
-const useSalaireNetAPayerUpdate = ({
-  value,
-  calculPaieSetter,
-}: UseSalaireNetAPayerUpdateParams) => {
-  const { salaireNet, salaireNetAPayer } = useAppSelector((store) => store.bulletinDePaie)
-  const dispatch = useAppDispatch()
+const useSalaireNetAPayerUpdate = ({ calculPaieSetters }: UseSalaireNetAPayerUpdateParams) => {
+  const { salaireNet } = useAppSelector((store) => store.bulletinDePaie)
+
+  const [updatedSalaireNetAPayer, setUpdatedSalaireNetAPayer] = useState<number | null>(0)
 
   useEffect(() => {
     const updateSalaireNetAPayer = () => {
       if (salaireNet) {
         calculPaie.setSalaireNet(salaireNet)
-        calculPaieSetter(value)
-        const updatedSalaireNetAPayer = calculPaie.getSalaireNetAPayer()
 
-        if (salaireNetAPayer !== updatedSalaireNetAPayer) {
-          dispatch(setBulletinDePaie({ salaireNetAPayer: updatedSalaireNetAPayer }))
-        }
+        // Execute all provided setter functions
+        calculPaieSetters.forEach((setter) => setter())
+
+        const updatedSalaireNetAPayer = calculPaie.getSalaireNetAPayer()
+        setUpdatedSalaireNetAPayer(updatedSalaireNetAPayer)
       }
     }
 
     updateSalaireNetAPayer()
-  }, [dispatch, salaireNet, salaireNetAPayer, calculPaieSetter, value])
+  }, [salaireNet, calculPaieSetters])
 
-  return { salaireNetAPayer }
+  return { salaireNetAPayer: updatedSalaireNetAPayer }
 }
 
 export default useSalaireNetAPayerUpdate

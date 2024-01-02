@@ -449,7 +449,9 @@ class CalculPaie {
   private calculateSalaireNetAPayer(): void {
     this.recalculateSalaieBrut()
     this.calculateSalaireNet()
-    this.salaireNetAPayer = this.roundToTwoDecimal(this.salaireNet + this.totalIndemnite)
+    this.salaireNetAPayer = this.roundToTwoDecimal(
+      this.salaireNet + this.totalIndemnite + this.avance,
+    )
   }
   public getSalaireNetAPayer(): number {
     this.calculateSalaireNetAPayer()

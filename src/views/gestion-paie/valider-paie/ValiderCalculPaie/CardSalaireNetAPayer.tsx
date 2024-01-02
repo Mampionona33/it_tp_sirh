@@ -4,24 +4,43 @@ import CardRow from './CardRow'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import calculPaie from '@src/utils/CalculPaie'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import useSalaireNetAPayerUpdate from '@src/hooks/useSalaireNetAPayerUpdate'
 
 const Body = () => {
-  const { salaireNet, totalIndemnite, salaireNetAPayer } = useAppSelector(
+  const dispatch = useAppDispatch()
+  const { salaireNet, totalIndemnite, salaireNetAPayer, avance } = useAppSelector(
     (store) => store.bulletinDePaie,
   )
-  const dispatch = useAppDispatch()
+  const { salaireNetAPayer: updatedSalaireNetAPayer } = useSalaireNetAPayerUpdate({
+    calculPaieSetters: [
+      () => calculPaie.setTotalIndemnite(totalIndemnite),
+      () => calculPaie.setAvance(avance),
+    ],
+  })
 
   useEffect(() => {
-    if (salaireNet) {
-      calculPaie.setSalaireNet(salaireNet)
-      calculPaie.setTotalIndemnite(totalIndemnite)
-      const updatedSalaireNetAPayer = calculPaie.getSalaireNetAPayer()
+    if (salaireNetAPayer !== updatedSalaireNetAPayer) {
+      console.log(
+        salaireNetAPayer,
+        updatedSalaireNetAPayer,
+        salaireNetAPayer - updatedSalaireNetAPayer,
+      )
 
-      if (salaireNetAPayer !== updatedSalaireNetAPayer) {
-        dispatch(setBulletinDePaie({ salaireNetAPayer: updatedSalaireNetAPayer }))
-      }
+      dispatch(setBulletinDePaie({ salaireNetAPayer: updatedSalaireNetAPayer }))
     }
-  }, [dispatch, salaireNet, totalIndemnite, salaireNetAPayer])
+  }, [dispatch, updatedSalaireNetAPayer, salaireNetAPayer])
+
+  // useEffect(() => {
+  //   if (salaireNet) {
+  //     calculPaie.setSalaireNet(salaireNet)
+  //     calculPaie.setTotalIndemnite(totalIndemnite)
+  //     const updatedSalaireNetAPayer = calculPaie.getSalaireNetAPayer()
+
+  //     if (salaireNetAPayer !== updatedSalaireNetAPayer) {
+  //       dispatch(setBulletinDePaie({ salaireNetAPayer: updatedSalaireNetAPayer }))
+  //     }
+  //   }
+  // }, [dispatch, salaireNet, totalIndemnite, salaireNetAPayer])
 
   return (
     <div className="w-full text-sm">
@@ -30,7 +49,7 @@ const Body = () => {
         cell1="Salaire Net"
         cell3={salaireNet}
       />
-      <CardRow className="border-b border-b-customBlue-100" cell1="Avances" cell3={salaireNet} />
+      <CardRow className="border-b border-b-customBlue-100" cell1="Avances" cell3={avance} />
       <CardRow
         className="border-b border-b-customBlue-100"
         cell1="Indemnité"

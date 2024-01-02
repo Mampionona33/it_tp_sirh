@@ -1,36 +1,36 @@
 import CustomSection from '@src/components/CustomSection'
+import React from 'react'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
-import React, { useState } from 'react'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+
+const Body = () => {
+  const dispatch = useAppDispatch()
+  const { avance } = useAppSelector((store) => store.bulletinDePaie)
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setBulletinDePaie({ avance: parseInt(event.target.value) || 0 }))
+  }
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    event.target.select()
+  }
+  return (
+    <div className="w-full text-sm flex flex-col gap-4 p-4 ">
+      <CustomInputWithLabel
+        type="number"
+        min={0}
+        required
+        id="avance"
+        name="avance"
+        label="Avances"
+        value={avance}
+        onFocus={handleFocus}
+        onChange={handleInputChange}
+      />
+    </div>
+  )
+}
 
 const CardAvances = () => {
-  const Body = () => {
-    const [state, setState] = useState({
-      avance: 0,
-    })
-
-    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setState((prevState) => ({
-        ...prevState,
-        [event.target.name]: event.target.value,
-      }))
-    }
-
-    return (
-      <div className="w-full text-sm flex flex-col gap-4 p-4 ">
-        <CustomInputWithLabel
-          type="number"
-          min={0}
-          required
-          id="avance"
-          name="avance"
-          label="Avances"
-          value={state.avance}
-          onChange={handleInputChange}
-        />
-      </div>
-    )
-  }
-
   return <CustomSection title="Avances" body={<Body />} />
 }
 
