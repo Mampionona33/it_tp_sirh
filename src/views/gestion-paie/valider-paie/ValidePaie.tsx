@@ -83,8 +83,11 @@ const ValidePaie = () => {
     const salarie: IEmploye =
       id && listEmploye && listEmploye.filter((item: IEmploye) => String(item.id) === String(id))[0]
 
-    if (salarie && dateDebutFormated && dateFinFormated && mount.current) {
+    if (salarie && mount.current) {
       dispatch(setBulletinDePaie({ salarie: salarie }))
+    }
+
+    if (salarie && dateDebutFormated && dateFinFormated && mount.current) {
       heureSerivice
         .getAll(salarie.matricule, dateDebutFormated, dateFinFormated)
         .then((data) => {
