@@ -8,25 +8,18 @@ import useSalaireNetAPayerUpdate from '@src/hooks/useSalaireNetAPayerUpdate'
 
 const Body = () => {
   const dispatch = useAppDispatch()
-  const { salaireNet, totalIndemnite, salaireNetAPayer, avance, rappel } = useAppSelector(
+  const { salaireNet, totalIndemnite, salaireNetAPayer, avance } = useAppSelector(
     (store) => store.bulletinDePaie,
   )
   const { salaireNetAPayer: updatedSalaireNetAPayer } = useSalaireNetAPayerUpdate({
     calculPaieSetters: [
       () => calculPaie.setTotalIndemnite(totalIndemnite),
       () => calculPaie.setAvance(avance),
-      () => calculPaie.setRappel(rappel),
     ],
   })
 
   useEffect(() => {
     if (salaireNetAPayer !== updatedSalaireNetAPayer) {
-      console.log(
-        salaireNetAPayer,
-        updatedSalaireNetAPayer,
-        salaireNetAPayer - updatedSalaireNetAPayer,
-      )
-
       dispatch(setBulletinDePaie({ salaireNetAPayer: updatedSalaireNetAPayer }))
     }
   }, [dispatch, updatedSalaireNetAPayer, salaireNetAPayer])

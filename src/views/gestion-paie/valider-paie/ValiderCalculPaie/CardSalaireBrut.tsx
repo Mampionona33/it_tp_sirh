@@ -1,14 +1,30 @@
 import CustomSection from '@src/components/CustomSection'
-import { useAppSelector } from '@src/hooks/useAppDispatch'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import formatAriaryMga from '@src/utils/formatAriaryMga'
-import React from 'react'
+import React, { useEffect } from 'react'
 import CardRow from './CardRow'
+import useSalaireNetAPayerUpdate from '@src/hooks/useSalaireNetAPayerUpdate'
+import calculPaie from '@src/utils/CalculPaie'
+import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const CardSalaireBrut = () => {
+  const dispatch = useAppDispatch()
   const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
   const formatCell2 = (value: number) => {
     return value.toFixed(2).toString().padStart(2, '0') + ' H'
   }
+  const { salaireNetAPayer: updatedSalaireNetAPayer } = useSalaireNetAPayerUpdate({
+    calculPaieSetters: [
+      () => calculPaie.setRappel(bulletinDePaie.rappel),
+      () => calculPaie.setTotalPrimeEtGratification(bulletinDePaie.totalPrimeEtGratification),
+    ],
+  })
+
+  useEffect(() => {
+    if (bulletinDePaie.salaireNetAPayer !== updatedSalaireNetAPayer) {
+      dispatch(setBulletinDePaie({ salaireNetAPayer: updatedSalaireNetAPayer }))
+    }
+  })
 
   const Body = () => {
     return (
@@ -78,7 +94,7 @@ const CardSalaireBrut = () => {
         <CardRow
           className="border-b border-b-customBlue-100"
           cell1="Primes Et Gratification"
-          cell3={bulletinDePaie.valHdim}
+          cell3={bulletinDePaie.totalPrimeEtGratification}
         />
         <div className="flex justify-between px-4 py-2 ">
           <div>Salaire brut</div>
