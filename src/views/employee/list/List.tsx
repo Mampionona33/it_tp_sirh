@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import TableEmployee from 'src/components/TableEmployee/TableEmployee'
 import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
@@ -25,16 +25,17 @@ interface IDataWithActions extends IEmploye {
 const List = () => {
   const dispatch = useAppDispatch()
   const data = useAppSelector((store) => store.employeesList.list)
+  const [localData, setLocalData] = useState<IDataWithActions[]>([])
 
-  const formattedData: IDataWithActions[] =
-    data && data.length > 0
-      ? data
-          .filter((item: any) => item.actif === 'oui')
-          .map((item: any) => ({
-            ...item,
-            fullName: `${item.nom} ${item.prenom}`,
-          }))
-      : []
+  // const formattedData: IDataWithActions[] =
+  //   data && data.length > 0
+  //     ? data
+  //         .filter((item: any) => item.actif === 'oui')
+  //         .map((item: any) => ({
+  //           ...item,
+  //           fullName: `${item.nom} ${item.prenom}`,
+  //         }))
+  //     : []
 
   useEffect(() => {
     let mount = true
@@ -56,6 +57,17 @@ const List = () => {
       mount = false
     }
   }, [dispatch])
+
+  useEffect(() => {
+    setLocalData(
+      data
+        ?.filter((item: any) => item.actif === 'oui')
+        .map((item: any) => ({
+          ...item,
+          fullName: `${item.nom} ${item.prenom}`,
+        })) || [],
+    )
+  }, [data])
 
   const HeaderComponents: React.FC = () => {
     return (
@@ -101,7 +113,7 @@ const List = () => {
     <>
       {/* <TableEmployee /> */}
       <ReusableTable
-        data={formattedData}
+        data={localData}
         columns={cols}
         title="Liste des employés"
         searchBar
