@@ -27,15 +27,14 @@ const List = () => {
   const data = useAppSelector((store) => store.employeesList.list)
   const [localData, setLocalData] = useState<IDataWithActions[]>([])
 
-  // const formattedData: IDataWithActions[] =
-  //   data && data.length > 0
-  //     ? data
-  //         .filter((item: any) => item.actif === 'oui')
-  //         .map((item: any) => ({
-  //           ...item,
-  //           fullName: `${item.nom} ${item.prenom}`,
-  //         }))
-  //     : []
+  const formattedData: IDataWithActions[] = data
+    ? Object.values(data)
+        .filter((item: any) => item.actif === 'oui')
+        .map((item: any) => ({
+          ...item,
+          fullName: `${item.nom} ${item.prenom}`,
+        }))
+    : []
 
   useEffect(() => {
     let mount = true
@@ -57,17 +56,6 @@ const List = () => {
       mount = false
     }
   }, [dispatch])
-
-  useEffect(() => {
-    setLocalData(
-      data
-        ?.filter((item: any) => item.actif === 'oui')
-        .map((item: any) => ({
-          ...item,
-          fullName: `${item.nom} ${item.prenom}`,
-        })) || [],
-    )
-  }, [data])
 
   const HeaderComponents: React.FC = () => {
     return (
@@ -113,7 +101,7 @@ const List = () => {
     <>
       {/* <TableEmployee /> */}
       <ReusableTable
-        data={localData}
+        data={formattedData}
         columns={cols}
         title="Liste des employés"
         searchBar

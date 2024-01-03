@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { fetchAllEmployees } from './employeesAction'
 
 const initialState = {
-  list: [],
+  list: {},
   loading: 'idle',
 }
 
