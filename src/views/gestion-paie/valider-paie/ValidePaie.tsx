@@ -8,7 +8,6 @@ import { format, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { DDMMYYYYFormat } from '@src/types/DateType'
 import heureSerivice from '@src/services/HeureService'
-import calculHeuresEmploye from '@src/utils/CalculHeuresEmploye'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import CardSalaireBrut from './ValiderCalculPaie/CardSalaireBrut'
 import CardSalaireNet from './ValiderCalculPaie/CardSalaireNet'
@@ -26,6 +25,7 @@ import { fetchHeureEmploye } from '@src/redux/employeHours/employeHoursActions'
 import heureService from '@src/services/HeureService'
 import Loading from '@src/components/Loading'
 import CalculPaie from '@src/utils/CalculPaie'
+import CalculHeures_v2 from '@src/utils/CalculHeures_v2'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
@@ -85,94 +85,46 @@ const ValidePaie = () => {
   const dateFinFormated = formatDateFin()
 
   useEffect(() => {
-    if (salarie && dateFinFormated && dateDebutFormated) {
-      const matricule = salarie.matricule
-      dispatch(
-        fetchHeureEmploye({
-          matricule: matricule,
-          dateDebut: dateDebutFormated,
-          dateFin: dateFinFormated,
-        }),
-      )
+    const fetchData = async () => {
+      if (salarie && dateFinFormated && dateDebutFormated) {
+        const matricule = salarie.matricule
+
+        try {
+          const result = await dispatch(
+            fetchHeureEmploye({
+              matricule: matricule,
+              dateDebut: dateDebutFormated,
+              dateFin: dateFinFormated,
+            }),
+          )
+
+          // console.log('Dispatch réussi avec résultat :', result)
+          if (result.meta.requestStatus === 'fulfilled') {
+            const { payload } = result
+
+            if (payload) {
+              const estCadre = salarie.categorie === 'hc'
+
+              const heureCalculator = new CalculHeures_v2()
+              heureCalculator.setHeuresEmploye(payload)
+              heureCalculator.setEstCadre(estCadre)
+
+              const totalHnormal = heureCalculator.getTotalHnormale()
+              const totalHTravailEffectif = heureCalculator.getTotalHTravailEffectif()
+              const tableauHsHebdo = heureCalculator.getTableauHsHebdo()
+              const tableauHs130Hebdo = heureCalculator.getTableauHs130Hebdo()
+
+              console.log(totalHnormal, totalHTravailEffectif, tableauHsHebdo, tableauHs130Hebdo)
+            }
+          }
+        } catch (error) {
+          console.error('Erreur lors de la dispatch :', error)
+        }
+      }
     }
+
+    fetchData()
   }, [salarie, dateFinFormated, dateDebutFormated, dispatch])
-
-  // const calcul = useMemo(() => {
-  //   calculHeuresEmploye.setHeuresMonsuelEmploye(employeHours)
-  //   salarie.categorie == 'hc' && calculHeuresEmploye.setEstCadre(true)
-  //   salarie.travail_de_nuit === EnumBoolean.OUI && calculHeuresEmploye.setTravailDeNuit(true)
-  //   const totalHn = calculHeuresEmploye.getTotalHnormale()
-  //   const totalHs30 = calculHeuresEmploye.getTotalTravailDeNuit30()
-  //   const totalHs50 = calculHeuresEmploye.getTotalTravailDeNuit50()
-  //   const totalHDim = calculHeuresEmploye.getTotalHdim()
-  //   const totalHs = calculHeuresEmploye.getTotalHsDuMois()
-  //   const totalHs130 = calculHeuresEmploye.getTotalHs130()
-  //   const totalHs150 = calculHeuresEmploye.getTotalHs150()
-  //   const hsni130 = calculHeuresEmploye.getHsni130()
-  //   const hsni150 = calculHeuresEmploye.getHsni150()
-  //   const hsi130 = calculHeuresEmploye.getHsi130()
-  //   const hsi150 = calculHeuresEmploye.getHsi150()
-  //   const totalHFerie = calculHeuresEmploye.getTotalHFerie()
-
-  //   const calculPaie = new CalculPaie(salaireDeBase)
-  //   salarie.categorie === 'hc' && calculPaie.setEstCadre(true)
-  //   calculPaie.setHsni130(hsni130)
-  //   calculPaie.setHsni150(hsni150)
-  //   calculPaie.setHsi130(hsi130)
-  //   calculPaie.setHsi150(hsi150)
-  //   calculPaie.setTotalHs30(totalHs30)
-  //   calculPaie.setTotalHs50(totalHs50)
-  //   calculPaie.setTotalHDim(totalHDim)
-  //   calculPaie.setTotalHFerie(totalHFerie)
-
-  //   const cnaps = calculPaie.getCnaps()
-  //   const osie = calculPaie.getOsie()
-  //   const valHsni130 = calculPaie.getValHsni130()
-  //   const valHsni150 = calculPaie.getValHsni150()
-  //   const valHsi130 = calculPaie.getValHsi130()
-  //   const valHsi150 = calculPaie.getValHsi150()
-  //   const valHs30 = calculPaie.getValHs30()
-  //   const valHs50 = calculPaie.getValHs50()
-  //   const valHdim = calculPaie.getValHdim()
-  //   const valHFerie = calculPaie.getValHFerie()
-  //   const salaireBrut = calculPaie.getSalaireBrut()
-  //   const baseIrsa = calculPaie.getBaseIrsa()
-  //   const baseIrsaArrondi = calculPaie.getBaseIrsaArrondi()
-  //   const irsaAPayer = calculPaie.getIrsaAPayer()
-  //   const salaireNet = calculPaie.getSalaireNet()
-  //   const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
-
-  //   return {
-  //     cnaps,
-  //     osie,
-  //     valHsni130,
-  //     valHsni150,
-  //     valHsi130,
-  //     valHsi150,
-  //     valHs30,
-  //     valHs50,
-  //     valHdim,
-  //     valHFerie,
-  //     salaireBrut,
-  //     baseIrsa,
-  //     baseIrsaArrondi,
-  //     irsaAPayer,
-  //     salaireNet,
-  //     salaireNetAPayer,
-  //     totalHFerie,
-  //     totalHs,
-  //     totalHs130,
-  //     totalHs150,
-  //     totalHn,
-  //     totalHs30,
-  //     totalHs50,
-  //     totalHDim,
-  //     hsni130,
-  //     hsni150,
-  //     hsi130,
-  //     hsi150,
-  //   }
-  // }, [employeHours, salaireDeBase])
 
   // console.log(salaireBrut)
 

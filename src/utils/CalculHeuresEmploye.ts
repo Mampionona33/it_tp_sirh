@@ -399,8 +399,4 @@ class CalculHeuresEmploye {
   }
 }
 
-const employeHours = store.getState().employeHours.employeHours
-const calculHeuresEmploye = new CalculHeuresEmploye()
-calculHeuresEmploye.setHeuresMonsuelEmploye(employeHours)
-
-export default calculHeuresEmploye
+export default CalculHeuresEmploye
