@@ -595,32 +595,4 @@ class CalculPaie {
 
 const appStore = store
 
-// appStore.dispatch(
-//   setBulletinDePaie({
-//     salaireBrut: salaireBrut,
-//     salaireNet: salaireNet,
-//     salaireNetAPayer: salaireNetAPayer,
-//     baseIrsa: baseIrsa,
-//     baseIrsaArrondi: baseIrsaArrondi,
-//     irsaAPayer: irsaAPayer,
-//     cnaps: cnaps,
-//     osie: osie,
-//     totalHDim: totalHDim,
-//     totalHFerie: totalHFerie,
-//     totalHs30: totalHs30,
-//     totalHs50: totalHs50,
-//     hsi130: hsi130,
-//     hsi150: hsi150,
-//     hsni130: hsni130,
-//     hsni150: hsni150,
-//     valHsni130: valHsni130,
-//     valHsni150: valHsni150,
-//     valHsi130: valHsi130,
-//     valHsi150: valHsi150,
-//     valHs30: valHs30,
-//     valHs50: valHs50,
-//     valHdim: valHdim,
-//     valHFerie: valHFerie,
-//   }),
-// )
 export default CalculPaie
