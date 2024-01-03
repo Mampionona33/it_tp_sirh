@@ -104,10 +104,12 @@ const ValidePaie = () => {
 
             if (payload) {
               const estCadre = salarie.categorie === 'hc'
+              const travailleurDeNuit = salarie.travail_de_nuit === EnumBoolean.OUI
 
               const heureCalculator = new CalculHeures_v2()
               heureCalculator.setHeuresEmploye(payload)
               heureCalculator.setEstCadre(estCadre)
+              heureCalculator.setTravailleurDeNuit(travailleurDeNuit)
 
               const totalHnormal = heureCalculator.getTotalHnormale()
               const totalHTravailEffectif = heureCalculator.getTotalHTravailEffectif()
@@ -116,6 +118,10 @@ const ValidePaie = () => {
               const tableauHs150Hebdo = heureCalculator.getTableauHs150Hebdo()
               const totalHs130Monsuel = heureCalculator.getTotalHs130Monsuel()
               const totalHs150Monsuel = heureCalculator.getTotalHs150Monsuel()
+              const totalHsNuitHabit = heureCalculator.getTotalHsNuitHabit()
+              const totalHsNuitOccas = heureCalculator.getTotalHsNuitOccas()
+              const totalHdim = heureCalculator.getTotalHdim()
+              const totalHFerie = heureCalculator.getTotalHFerie()
 
               console.log(
                 totalHnormal,
@@ -125,6 +131,10 @@ const ValidePaie = () => {
                 tableauHs150Hebdo,
                 totalHs130Monsuel,
                 totalHs150Monsuel,
+                totalHsNuitHabit,
+                totalHsNuitOccas,
+                totalHdim,
+                totalHFerie,
               )
             }
           }

@@ -19,6 +19,11 @@ class CalculHeures_v2 {
   private totalHs130: number
   private totalHs130Monsuel: number
   private totalHs150Monsuel: number
+  private totalHsNuitHabit: number
+  private totalHsNuitOccas: number
+  private travailleurDeNuit: boolean
+  private totalHdim: number
+  private totalHFerie: number
 
   constructor() {
     this.heuresEmploye = []
@@ -32,6 +37,18 @@ class CalculHeures_v2 {
     this.totalHs130 = 0
     this.totalHs130Monsuel = 0
     this.totalHs150Monsuel = 0
+    this.totalHsNuitHabit = 0
+    this.travailleurDeNuit = false
+    this.totalHsNuitOccas = 0
+    this.totalHdim = 0
+    this.totalHFerie = 0
+  }
+
+  setTravailleurDeNuit(travailleurDeNuit: boolean): void {
+    this.travailleurDeNuit = travailleurDeNuit
+  }
+  getTravailleurDeNuit(): boolean {
+    return this.travailleurDeNuit
   }
 
   setEstCadre(est_cadre: boolean): void {
@@ -213,6 +230,71 @@ class CalculHeures_v2 {
   }
   getTotalHs150Monsuel(): number {
     return this.calculateTotalHs150Monsuel()
+  }
+
+  private calculateTotalHsNuitHabit(): number {
+    let totalHsNuitHabit = 0
+    for (const item of this.heuresEmploye) {
+      if (this.travailleurDeNuit) {
+        totalHsNuitHabit += item.hs_de_nuit
+      }
+    }
+    return totalHsNuitHabit
+  }
+  setTotalHsNuitHabit(totalHsNuitHabit: number): void {
+    this.totalHsNuitHabit = totalHsNuitHabit
+  }
+  getTotalHsNuitHabit(): number {
+    return this.calculateTotalHsNuitHabit()
+  }
+
+  private calculateTotalHsNuitOccas(): number {
+    let totalHs = 0
+    for (const item of this.heuresEmploye) {
+      if (!this.estCadre) {
+        totalHs += item.hs_de_nuit
+      }
+    }
+    return totalHs
+  }
+  setTotalHsNuitOccas(totalHsNuitOccas: number): void {
+    this.totalHsNuitOccas = totalHsNuitOccas
+  }
+  getTotalHsNuitOccas(): number {
+    return this.calculateTotalHsNuitOccas()
+  }
+
+  private calculateTotalHDimanche(): number {
+    let totalHdim = 0
+    for (const item of this.heuresEmploye) {
+      if (item.hs_de_dimanche === 0 && isSunday(parse(item.date, 'dd/MM/yyyy', new Date()))) {
+        totalHdim += item.heure_normale
+        totalHdim += item.heure_de_travail
+      } else {
+        totalHdim += item.hs_de_dimanche
+      }
+    }
+    return totalHdim
+  }
+  setTotalHDimanche(totalHdim: number): void {
+    this.totalHdim = totalHdim
+  }
+  getTotalHdim(): number {
+    return this.calculateTotalHDimanche()
+  }
+
+  private calculateTotalHFerie(): number {
+    let totalHFerie = 0
+    for (const item of this.heuresEmploye) {
+      totalHFerie += item.hs_jours_feries
+    }
+    return totalHFerie
+  }
+  setTotalHFerie(totalHFerie: number): void {
+    this.totalHFerie = totalHFerie
+  }
+  getTotalHFerie(): number {
+    return this.calculateTotalHFerie()
   }
 }
 
