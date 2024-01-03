@@ -14,16 +14,24 @@ class CalculHeures_v2 {
   private totalHsHebdo: number
   private tableauHsHebdo: ItableauHebdo[]
   private tableauHs130Hebdo: ItableauHebdo[]
+  private tableauHs150Hebdo: ItableauHebdo[]
   private estCadre: boolean
+  private totalHs130: number
+  private totalHs130Monsuel: number
+  private totalHs150Monsuel: number
 
   constructor() {
     this.heuresEmploye = []
+    this.estCadre = false
     this.totalHnormale = 0
     this.totalHTrailEffectif = 0
     this.totalHsHebdo = 0
     this.tableauHsHebdo = []
     this.tableauHs130Hebdo = []
-    this.estCadre = false
+    this.tableauHs150Hebdo = []
+    this.totalHs130 = 0
+    this.totalHs130Monsuel = 0
+    this.totalHs150Monsuel = 0
   }
 
   setEstCadre(est_cadre: boolean): void {
@@ -149,12 +157,62 @@ class CalculHeures_v2 {
 
     return tableauHs130Hebdo
   }
-
   setTableauHs130Hebdo(tableauHs130Hebdo: ItableauHebdo[]): void {
     this.tableauHs130Hebdo = tableauHs130Hebdo
   }
   getTableauHs130Hebdo(): ItableauHebdo[] {
     return this.calculateTableauHs130Hebdo()
+  }
+
+  private calculateTableauHs150Hebdo(): ItableauHebdo[] {
+    const tableauHs150Hebdo: ItableauHebdo[] = []
+    const tableauHsHebdo = this.calculateTableauHsHebdo()
+    for (const item of tableauHsHebdo) {
+      if (item.tolalHs >= 8) {
+        const totalHs = item.tolalHs >= 8 ? item.tolalHs - 8 : 0
+        tableauHs150Hebdo.push({ ...item, tolalHs: totalHs })
+      }
+    }
+    return tableauHs150Hebdo
+  }
+  setTableauHs150Hebdo(tableauHs150Hebdo: ItableauHebdo[]): void {
+    this.tableauHs150Hebdo = tableauHs150Hebdo
+  }
+  getTableauHs150Hebdo(): ItableauHebdo[] {
+    return this.calculateTableauHs150Hebdo()
+  }
+
+  private calculateTotalHs130Monsuel(): number {
+    let totalHs130 = 0
+    const tableauHs130Hebdo = this.calculateTableauHs130Hebdo()
+
+    for (const item of tableauHs130Hebdo) {
+      totalHs130 += item.tolalHs
+    }
+
+    return totalHs130
+  }
+  setTotalHs130Monsuel(totalHs130Monsuel: number): void {
+    this.totalHs130Monsuel = totalHs130Monsuel
+  }
+  getTotalHs130Monsuel(): number {
+    return this.calculateTotalHs130Monsuel()
+  }
+
+  private calculateTotalHs150Monsuel(): number {
+    let totalHs150 = 0
+    const tableauHs150Hebdo = this.calculateTableauHs150Hebdo()
+
+    for (const item of tableauHs150Hebdo) {
+      totalHs150 += item.tolalHs
+    }
+    return totalHs150
+  }
+  setTotalHs150Monsuel(totalHs150Monsuel: number): void {
+    this.totalHs150Monsuel = totalHs150Monsuel
+  }
+  getTotalHs150Monsuel(): number {
+    return this.calculateTotalHs150Monsuel()
   }
 }
 

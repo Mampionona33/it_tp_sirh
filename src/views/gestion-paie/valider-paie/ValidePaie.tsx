@@ -113,8 +113,19 @@ const ValidePaie = () => {
               const totalHTravailEffectif = heureCalculator.getTotalHTravailEffectif()
               const tableauHsHebdo = heureCalculator.getTableauHsHebdo()
               const tableauHs130Hebdo = heureCalculator.getTableauHs130Hebdo()
+              const tableauHs150Hebdo = heureCalculator.getTableauHs150Hebdo()
+              const totalHs130Monsuel = heureCalculator.getTotalHs130Monsuel()
+              const totalHs150Monsuel = heureCalculator.getTotalHs150Monsuel()
 
-              console.log(totalHnormal, totalHTravailEffectif, tableauHsHebdo, tableauHs130Hebdo)
+              console.log(
+                totalHnormal,
+                totalHTravailEffectif,
+                tableauHsHebdo,
+                tableauHs130Hebdo,
+                tableauHs150Hebdo,
+                totalHs130Monsuel,
+                totalHs150Monsuel,
+              )
             }
           }
         } catch (error) {
