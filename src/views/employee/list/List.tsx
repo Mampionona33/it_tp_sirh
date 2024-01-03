@@ -27,8 +27,6 @@ const List = () => {
   const data = useAppSelector((store) => store.employeesList.list)
   const [localData, setLocalData] = useState<IDataWithActions[]>([])
 
-  console.log(data)
-
   const formattedData: IDataWithActions[] =
     data && data.length > 0
       ? data
