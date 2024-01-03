@@ -1,3 +1,7 @@
+import { store } from '@src/redux/store'
+import calculHeuresEmploye from './CalculHeuresEmploye'
+import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+
 class CalculPaie {
   private salaireBase: number
   private plafondSME: number
@@ -258,7 +262,6 @@ class CalculPaie {
     this.valHsni130 = valHsni130
   }
   private calculateValHsni130(): void {
-    console.log(this.hsni130, this.tauxHoraire)
     if (!this.est_cadre && this.hsni130 > 0) {
       this.valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * this.hsni130 * 130) / 100)
     }
@@ -510,9 +513,114 @@ class CalculPaie {
     }
   }
 
-  //   CALCULATORS
+  private updateReduxStore(): void {
+    const bulletinDePaieData = {
+      salaireBrut: this.getSalaireBrut(),
+      salaireNet: this.getSalaireNet(),
+      salaireNetAPayer: this.getSalaireNetAPayer(),
+      baseIrsa: this.getBaseIrsa(),
+      baseIrsaArrondi: this.getBaseIrsaArrondi(),
+      irsaAPayer: this.getIrsaAPayer(),
+      cnaps: this.getCnaps(),
+      osie: this.getOsie(),
+      totalHDim: this.getTotalHDim(),
+      totalHFerie: this.getTotalHFerie(),
+      totalHs30: this.getTotalHs30(),
+      totalHs50: this.getTotalHs50(),
+      hsi130: this.getHsi130(),
+      hsi150: this.getHsi150(),
+      hsni130: this.getHsni130(),
+      hsni150: this.getHsni150(),
+      valHsni130: this.getValHsni130(),
+      valHsni150: this.getValHsni150(),
+      valHsi130: this.getValHsi130(),
+      valHsi150: this.getValHsi150(),
+      valHs30: this.getValHs30(),
+      valHs50: this.getValHs50(),
+      valHdim: this.getValHdim(),
+      valHFerie: this.getValHFerie(),
+    }
+    // Dispatchez ces valeurs vers le Redux store
+    store.dispatch(setBulletinDePaie(bulletinDePaieData))
+  }
+  public calculateAndDispatchToRedux(): void {
+    // Mise à jour du Redux store
+    this.updateReduxStore()
+  }
 }
 
-// const calculPaie = new CalculPaie()
+// const totalHn = calculHeuresEmploye.getTotalHnormale()
+// const totalHs = calculHeuresEmploye.getTotalHsDuMois()
+// const totalHs130 = calculHeuresEmploye.getTotalHs130()
+// const totalHs150 = calculHeuresEmploye.getTotalHs150()
+// const totalHs30 = calculHeuresEmploye.getTotalTravailDeNuit30()
+// const totalHs50 = calculHeuresEmploye.getTotalTravailDeNuit50()
+// const totalHDim = calculHeuresEmploye.getTotalHdim()
+// const hsni130 = calculHeuresEmploye.getHsni130()
+// const hsni150 = calculHeuresEmploye.getHsni150()
+// const hsi130 = calculHeuresEmploye.getHsi130()
+// const hsi150 = calculHeuresEmploye.getHsi150()
+// const totalHFerie = calculHeuresEmploye.getTotalHFerie()
 
+// const salaireBase = store.getState().bulletinDePaie.salaireDeBase
+// const totalIndemnite = store.getState().bulletinDePaie.totalIndemnite
+
+// const calculPaie = new CalculPaie(salaireBase)
+// calculPaie.setHsni130(hsni130)
+// calculPaie.setTotalIndemnite(totalIndemnite)
+// calculPaie.setHsni150(hsni150)
+// calculPaie.setHsi130(hsi130)
+// calculPaie.setHsi150(hsi150)
+// calculPaie.setTotalHs30(totalHs30)
+// calculPaie.setTotalHs50(totalHs50)
+// calculPaie.setTotalHDim(totalHDim)
+// calculPaie.setTotalHFerie(totalHFerie)
+
+// const cnaps = calculPaie.getCnaps()
+// const osie = calculPaie.getOsie()
+// const valHsni130 = calculPaie.getValHsni130()
+// const valHsni150 = calculPaie.getValHsni150()
+// const valHsi130 = calculPaie.getValHsi130()
+// const valHsi150 = calculPaie.getValHsi150()
+// const valHs30 = calculPaie.getValHs30()
+// const valHs50 = calculPaie.getValHs50()
+// const valHdim = calculPaie.getValHdim()
+// const valHFerie = calculPaie.getValHFerie()
+// const salaireBrut = calculPaie.getSalaireBrut()
+// const baseIrsa = calculPaie.getBaseIrsa()
+// const baseIrsaArrondi = calculPaie.getBaseIrsaArrondi()
+// const irsaAPayer = calculPaie.getIrsaAPayer()
+// const salaireNet = calculPaie.getSalaireNet()
+// const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
+
+const appStore = store
+
+// appStore.dispatch(
+//   setBulletinDePaie({
+//     salaireBrut: salaireBrut,
+//     salaireNet: salaireNet,
+//     salaireNetAPayer: salaireNetAPayer,
+//     baseIrsa: baseIrsa,
+//     baseIrsaArrondi: baseIrsaArrondi,
+//     irsaAPayer: irsaAPayer,
+//     cnaps: cnaps,
+//     osie: osie,
+//     totalHDim: totalHDim,
+//     totalHFerie: totalHFerie,
+//     totalHs30: totalHs30,
+//     totalHs50: totalHs50,
+//     hsi130: hsi130,
+//     hsi150: hsi150,
+//     hsni130: hsni130,
+//     hsni150: hsni150,
+//     valHsni130: valHsni130,
+//     valHsni150: valHsni150,
+//     valHsi130: valHsi130,
+//     valHsi150: valHsi150,
+//     valHs30: valHs30,
+//     valHs50: valHs50,
+//     valHdim: valHdim,
+//     valHFerie: valHFerie,
+//   }),
+// )
 export default CalculPaie

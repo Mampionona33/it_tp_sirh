@@ -10,7 +10,6 @@ import { DDMMYYYYFormat } from '@src/types/DateType'
 import heureSerivice from '@src/services/HeureService'
 import calculHeuresEmploye from '@src/utils/CalculHeuresEmploye'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
-import calculPaie from '@src/utils/CalculPaie'
 import CardSalaireBrut from './ValiderCalculPaie/CardSalaireBrut'
 import CardSalaireNet from './ValiderCalculPaie/CardSalaireNet'
 import CardSalaireNetAPayer from './ValiderCalculPaie/CardSalaireNetAPayer'
@@ -35,6 +34,7 @@ const ValidePaie = () => {
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
   const { employeHours } = useAppSelector((store) => store.employeHours)
   const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
+  const calculPaie = new CalculPaie(salaireDeBase)
 
   const dispatch = useAppDispatch()
   const { dateValidation } = useParams()
@@ -114,7 +114,6 @@ const ValidePaie = () => {
   const hsi150 = calculHeuresEmploye.getHsi150()
   const totalHFerie = calculHeuresEmploye.getTotalHFerie()
 
-  const calculPaie = new CalculPaie(salaireDeBase)
   salarie.categorie === 'hc' && calculPaie.setEstCadre(true)
   calculPaie.setHsni130(hsni130)
   calculPaie.setHsni150(hsni150)
@@ -141,6 +140,8 @@ const ValidePaie = () => {
   const irsaAPayer = calculPaie.getIrsaAPayer()
   const salaireNet = calculPaie.getSalaireNet()
   const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
+
+  // console.log(salaireBrut)
 
   useEffect(() => {
     if (osie) {

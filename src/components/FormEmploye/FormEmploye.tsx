@@ -38,12 +38,12 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         }
       } else {
         // console.log(formEmploye.depart)
-        if (!formEmploye.depart.date && !formEmploye.depart.motif) {
-          const updateEmploye = await employeService.update(formEmploye.id, requestData)
-          if (updateEmploye.status === 200) {
-            dispacth(resetFormEmploye())
-          }
+        // if (!formEmploye.depart.date && !formEmploye.depart.motif) {
+        const updateEmploye = await employeService.update(formEmploye.id, requestData)
+        if (updateEmploye.status === 200) {
+          dispacth(resetFormEmploye())
         }
+        // }
       }
       navigate('/employees/list')
     } catch (error) {

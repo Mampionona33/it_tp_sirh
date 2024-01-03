@@ -5,9 +5,13 @@ import { useAppSelector } from '@src/hooks/useAppDispatch'
 import calculPaie from '@src/utils/CalculPaie'
 
 const Body = () => {
-  const { salaireNet, totalIndemnite, salaireNetAPayer, avance, totalAvantages } = useAppSelector(
+  const { salaireNet, totalIndemnite, avance, totalAvantages, salaireNetAPayer } = useAppSelector(
     (store) => store.bulletinDePaie,
   )
+
+  // calculPaie.setTotalIndemnite(totalIndemnite)
+  // calculPaie.setAvance(avance)
+  // const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
 
   return (
     <div className="w-full text-sm">
