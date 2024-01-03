@@ -3,10 +3,11 @@ import React, { useEffect } from 'react'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import CalculPaie from '@src/utils/CalculPaie'
 
 const Body = () => {
   const dispatch = useAppDispatch()
-  const { indemnites, salaireNetAPayer, totalIndemnite } = useAppSelector(
+  const { indemnites, salaireNetAPayer, totalIndemnite, salaireDeBase } = useAppSelector(
     (store) => store.bulletinDePaie,
   )
 
@@ -20,10 +21,18 @@ const Body = () => {
       (acc, currentValue) => acc + currentValue,
       0,
     )
-    console.log(totalIndemnite)
 
-    const updatedSalaireNetAPayer = totalIndemnite + (salaireNetAPayer || 0)
-    console.log(updatedSalaireNetAPayer)
+    let updatedSalaireNetAPayer
+
+    if (value === '') {
+      // Réinitialiser les valeurs ou effectuer d'autres actions si nécessaire
+      // Cela peut être ajusté en fonction de vos besoins
+      const calculPaie = new CalculPaie(salaireDeBase)
+      const totalSalaireNetAPayer = calculPaie.getSalaireNetAPayer()
+      updatedSalaireNetAPayer = totalSalaireNetAPayer
+    } else {
+      updatedSalaireNetAPayer = totalIndemnite + (salaireNetAPayer || 0)
+    }
 
     dispatch(
       setBulletinDePaie({
