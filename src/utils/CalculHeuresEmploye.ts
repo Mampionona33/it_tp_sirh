@@ -303,7 +303,6 @@ class CalculHeuresEmploye {
   private calculateTotalHs150(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
     this.isTableauHs150ParSemaineVide() && this.calculateTableauHs150()
-    console.log(this.totalHs150, this.tableauHs150ParSemaine)
     if (!this.est_cadre) {
       this.tableauHs150ParSemaine.forEach((element) => {
         this.totalHs150 += element.totalHs150ParSemaine
