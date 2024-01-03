@@ -33,6 +33,11 @@ export interface IEmploye {
   prime_et_avantage_permanent?: PrimeEtAvantagePermanent[]
   depart?: Depart
   actif: EnumBoolean
+  indemnites?: {
+    transport: number
+    autres: number
+  }
+  avance?: number
 }
 
 export enum EnumBoolean {

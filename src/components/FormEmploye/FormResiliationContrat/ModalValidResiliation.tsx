@@ -33,7 +33,7 @@ const ModalValidResiliation: React.FC<IModalValidResiliation> = ({ motif }) => {
     }
 
     try {
-      const response = await employeService.update(formEmploye.id, dataToPost)
+      const response = await employeService.delete(formEmploye.id, dataToPost)
 
       if (response.status === 200) {
         dispatch(setModalClose())

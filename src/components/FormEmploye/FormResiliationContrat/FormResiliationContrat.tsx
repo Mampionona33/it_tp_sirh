@@ -89,6 +89,7 @@ const FormResiliationContrat = () => {
             <ButtonWithIcon
               type="submit"
               label="Résilier"
+              name="submit-resiliation"
               icon={<UserMinusIcon width={20} height={20} />}
             />
           </div>

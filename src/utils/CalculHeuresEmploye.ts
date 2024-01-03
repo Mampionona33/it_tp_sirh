@@ -1,4 +1,5 @@
 import { IHeuresEmploye } from '@src/interfaces/interfaceHeuresEmploye'
+import { store } from '@src/redux/store'
 import { format, isMonday, isSaturday, isSunday, parse } from 'date-fns'
 import { fr } from 'date-fns/locale'
 
@@ -87,19 +88,21 @@ class CalculHeuresEmploye {
     return this.totalHtravailEffectif
   }
 
-  private sorteHeuresMonsuelEmploye(): void {
-    this.heuresMonsuelEmploye.sort((a, b) => {
-      if (a.date < b.date) {
-        return -1
-      }
-      if (a.date > b.date) {
-        return 1
-      }
-      return 0
-    })
-  }
+  // private sorteHeuresMonsuelEmploye(): void {
+  //   console.log(this.heuresMonsuelEmploye)
+
+  //   // this.heuresMonsuelEmploye.sort((a, b) => {
+  //   //   if (a.date < b.date) {
+  //   //     return -1
+  //   //   }
+  //   //   if (a.date > b.date) {
+  //   //     return 1
+  //   //   }
+  //   //   return 0
+  //   // })
+  // }
   private calculateHsParSemaine(): void {
-    this.sorteHeuresMonsuelEmploye()
+    // this.sorteHeuresMonsuelEmploye()
     let currentWeekStartDate = null
     let hsParSemaine: number = 0
 
@@ -138,7 +141,7 @@ class CalculHeuresEmploye {
     return this.tableauHs130ParSemaine.length === 0
   }
   private calculateHs130ParSemaine(): void {
-    this.sorteHeuresMonsuelEmploye()
+    // this.sorteHeuresMonsuelEmploye()
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
 
     if (!this.est_cadre && this.tableauHs130ParSemaine) {
@@ -171,7 +174,9 @@ class CalculHeuresEmploye {
   }
 
   private calculateTableauHs150(): void {
+    this.calculateTotalHs()
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+
     if (!this.est_cadre && this.tableauHs150ParSemaine) {
       this.tableauTotalHsParSemaine.forEach((item, index) => {
         const newItem = {
@@ -210,15 +215,20 @@ class CalculHeuresEmploye {
 
   private calculTotalTravailleDeNuit30(): void {
     let totalTravailleDeNuit30 = 0
-    this.heuresMonsuelEmploye.forEach((item) => {
-      if (item.heure_de_travail > 0 && this.travail_de_nuit) {
-        totalTravailleDeNuit30 += item.hs_de_nuit
+
+    if (this.heuresMonsuelEmploye && this.heuresMonsuelEmploye.length > 0) {
+      this.heuresMonsuelEmploye.forEach((item) => {
+        if (item.heure_de_travail > 0 && this.travail_de_nuit) {
+          totalTravailleDeNuit30 += item.hs_de_nuit
+        }
+      })
+
+      if (!this.est_cadre) {
+        this.totalTravailleDeNuit30 = totalTravailleDeNuit30
       }
-    })
-    if (!this.est_cadre) {
-      this.totalTravailleDeNuit30 = totalTravailleDeNuit30
     }
   }
+
   getTotalTravailDeNuit30(): number {
     this.calculTotalTravailleDeNuit30()
     return this.totalTravailleDeNuit30
@@ -263,6 +273,7 @@ class CalculHeuresEmploye {
 
   private calculateTotalHs(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+
     if (!this.est_cadre) {
       this.tableauTotalHsParSemaine.forEach((element) => {
         this.totalHsDuMois += element.totalHsParSemaine
@@ -277,6 +288,7 @@ class CalculHeuresEmploye {
   private calculateTotalHs130(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
     this.isTableauHs130ParSemaineVide() && this.calculateHs130ParSemaine()
+
     if (!this.est_cadre) {
       this.tableauHs130ParSemaine.forEach((element) => {
         this.totalHs130 += element.totalHs130ParSemaine
@@ -291,6 +303,7 @@ class CalculHeuresEmploye {
   private calculateTotalHs150(): void {
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
     this.isTableauHs150ParSemaineVide() && this.calculateTableauHs150()
+    console.log(this.totalHs150, this.tableauHs150ParSemaine)
     if (!this.est_cadre) {
       this.tableauHs150ParSemaine.forEach((element) => {
         this.totalHs150 += element.totalHs150ParSemaine
@@ -319,8 +332,10 @@ class CalculHeuresEmploye {
   }
 
   private calculateHsni130(): void {
+    this.calculateTotalHs()
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
     this.isTableauHs130ParSemaineVide() && this.calculateHs130ParSemaine()
+
     if (this.totalHsDuMois >= 18) {
       this.hsni130 = 18
     } else {
@@ -333,6 +348,7 @@ class CalculHeuresEmploye {
   }
 
   private calculateHsni150(): void {
+    this.calculateTotalHs()
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
     this.isTableauHs150ParSemaineVide() && this.calculateTableauHs150()
 
@@ -350,7 +366,11 @@ class CalculHeuresEmploye {
   }
 
   private calculateHsi130(): void {
+    this.calculateTotalHs()
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+    this.isTableauHs130ParSemaineVide() && this.calculateHs130ParSemaine()
+    this.calculateTotalHs130()
+
     if (this.totalHs130 >= 20) {
       this.hsi130 = this.totalHs130 - 18
     } else {
@@ -363,7 +383,13 @@ class CalculHeuresEmploye {
   }
 
   private calculateHsi150(): void {
+    this.calculateTotalHs()
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
+    this.isTableauHs150ParSemaineVide() && this.calculateTableauHs150()
+    this.calculateTotalHs150()
+
+    // console.log(this.totalHs150, this.tableauHs150ParSemaine)
+
     if (this.totalHsDuMois > 20 && this.totalHs150 > 0) {
       this.hsi150 = this.totalHs150 - 2
     }
@@ -374,6 +400,8 @@ class CalculHeuresEmploye {
   }
 }
 
+const employeHours = store.getState().employeHours.employeHours
 const calculHeuresEmploye = new CalculHeuresEmploye()
+calculHeuresEmploye.setHeuresMonsuelEmploye(employeHours)
 
 export default calculHeuresEmploye

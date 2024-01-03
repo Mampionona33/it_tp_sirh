@@ -63,6 +63,25 @@ class EmployeeService {
       // throw error
     }
   }
+
+  async delete(id: string | number, data: IEmploye): Promise<AxiosResponse> {
+    try {
+      const response = await axios.post(
+        `${this.REACT_APP_API_BASE_URL}/deletepersonnel/${id}`,
+        data,
+        {
+          auth: {
+            username: this.login,
+            password: this.pass,
+          },
+        },
+      )
+      return response
+    } catch (error) {
+      console.error("Une erreur s'est produite lors de la requête :", error)
+      // throw error
+    }
+  }
 }
 
 const employeService = new EmployeeService()

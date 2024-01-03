@@ -1,3 +1,7 @@
+import { store } from '@src/redux/store'
+import calculHeuresEmploye from './CalculHeuresEmploye'
+import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+
 class CalculPaie {
   private salaireBase: number
   private plafondSME: number
@@ -34,7 +38,11 @@ class CalculPaie {
   private valHsni150: number
   private valHFerie: number
   private valHs30: number
-  constructor() {
+  private totalIndemnite: number
+  private rappel: number
+  private totalPrimeEtGratification: number
+  private totalAvantages: number
+  constructor(salaireDeBase) {
     this.plafondSME = 1910400
     this.tauxHoraire = 0
     this.valHsni130 = 0
@@ -47,7 +55,7 @@ class CalculPaie {
     this.valHFerie = 0
     this.salaireBrut = 0
     this.avantageNature = 0
-    this.salaireBase = 0
+    this.salaireBase = salaireDeBase || 0
     this.totalDeduction = 0
     this.totalPrimeEtAvantage = 0
     this.baseCnaps = 0
@@ -59,6 +67,40 @@ class CalculPaie {
     this.baseIrsaArrondi = 0
     this.irsaAPayer = 0
     this.salaireNet = 0
+    this.totalIndemnite = 0
+    this.rappel = 0
+    this.totalPrimeEtGratification = 0
+    this.totalAvantages = 0
+    this.avance = 0
+    this.calculTauxHoraire()
+  }
+
+  setTotalAvantages(totalAvantages: number): void {
+    this.totalAvantages = totalAvantages
+  }
+  getTotalAvantages(): number {
+    return this.totalAvantages
+  }
+
+  setTotalPrimeEtGratification(totalPrimeEtGratification: number): void {
+    this.totalPrimeEtGratification = totalPrimeEtGratification
+  }
+  getTotalPrimeEtGratification(): number {
+    return this.totalPrimeEtGratification
+  }
+
+  setRappel(rappel: number): void {
+    this.rappel = rappel
+  }
+  getRappel(): number {
+    return this.rappel
+  }
+
+  setTotalIndemnite(totalIndemnite: number): void {
+    this.totalIndemnite = totalIndemnite
+  }
+  gettotalIndemnite(): number {
+    return this.totalIndemnite
   }
 
   setAvantageNature(avantageNature: number): void {
@@ -116,7 +158,14 @@ class CalculPaie {
   private calculateSalaireBrut(): void {
     if (this.salaireBase) {
       this.salaireBrut = this.est_cadre
-        ? this.roundToTwoDecimal(this.salaireBase + this.valHdim + this.valHFerie)
+        ? this.roundToTwoDecimal(
+            this.salaireBase +
+              this.valHdim +
+              this.valHFerie +
+              this.rappel +
+              this.totalPrimeEtGratification -
+              this.totalDeduction,
+          )
         : this.roundToTwoDecimal(
             this.salaireBase +
               this.valHsni130 +
@@ -127,7 +176,8 @@ class CalculPaie {
               this.valHFerie +
               this.valHs30 +
               this.valHs50 +
-              this.totalPrimeEtAvantage -
+              this.rappel +
+              this.totalPrimeEtGratification -
               this.totalDeduction,
           )
     }
@@ -434,6 +484,21 @@ class CalculPaie {
     return this.salaireNet
   }
 
+  setSalaireNetAPayer(salaireNetAPayer: number): void {
+    this.salaireNetAPayer = salaireNetAPayer
+  }
+  private calculateSalaireNetAPayer(): void {
+    this.recalculateSalaieBrut()
+    this.calculateSalaireNet()
+    this.salaireNetAPayer = this.roundToTwoDecimal(
+      this.salaireNet + this.totalIndemnite + this.avance + this.totalAvantages,
+    )
+  }
+  public getSalaireNetAPayer(): number {
+    this.calculateSalaireNetAPayer()
+    return this.salaireNetAPayer
+  }
+
   //   UTILITYES
   private roundToTwoDecimal(val) {
     return Math.round(val * 100) / 100
@@ -443,12 +508,119 @@ class CalculPaie {
     return Math.round(nombre * facteur) / facteur
   }
   private calculTauxHoraire(): void {
-    this.tauxHoraire = this.salaireBrut / 173.33
+    if (this.salaireBase > 0) {
+      this.tauxHoraire = this.salaireBase / 173.33
+    }
   }
 
-  //   CALCULATORS
+  private updateReduxStore(): void {
+    const bulletinDePaieData = {
+      salaireBrut: this.getSalaireBrut(),
+      salaireNet: this.getSalaireNet(),
+      salaireNetAPayer: this.getSalaireNetAPayer(),
+      baseIrsa: this.getBaseIrsa(),
+      baseIrsaArrondi: this.getBaseIrsaArrondi(),
+      irsaAPayer: this.getIrsaAPayer(),
+      cnaps: this.getCnaps(),
+      osie: this.getOsie(),
+      totalHDim: this.getTotalHDim(),
+      totalHFerie: this.getTotalHFerie(),
+      totalHs30: this.getTotalHs30(),
+      totalHs50: this.getTotalHs50(),
+      hsi130: this.getHsi130(),
+      hsi150: this.getHsi150(),
+      hsni130: this.getHsni130(),
+      hsni150: this.getHsni150(),
+      valHsni130: this.getValHsni130(),
+      valHsni150: this.getValHsni150(),
+      valHsi130: this.getValHsi130(),
+      valHsi150: this.getValHsi150(),
+      valHs30: this.getValHs30(),
+      valHs50: this.getValHs50(),
+      valHdim: this.getValHdim(),
+      valHFerie: this.getValHFerie(),
+    }
+    // Dispatchez ces valeurs vers le Redux store
+    store.dispatch(setBulletinDePaie(bulletinDePaieData))
+  }
+  public calculateAndDispatchToRedux(): void {
+    // Mise à jour du Redux store
+    this.updateReduxStore()
+  }
 }
 
-const calculPaie = new CalculPaie()
+// const totalHn = calculHeuresEmploye.getTotalHnormale()
+// const totalHs = calculHeuresEmploye.getTotalHsDuMois()
+// const totalHs130 = calculHeuresEmploye.getTotalHs130()
+// const totalHs150 = calculHeuresEmploye.getTotalHs150()
+// const totalHs30 = calculHeuresEmploye.getTotalTravailDeNuit30()
+// const totalHs50 = calculHeuresEmploye.getTotalTravailDeNuit50()
+// const totalHDim = calculHeuresEmploye.getTotalHdim()
+// const hsni130 = calculHeuresEmploye.getHsni130()
+// const hsni150 = calculHeuresEmploye.getHsni150()
+// const hsi130 = calculHeuresEmploye.getHsi130()
+// const hsi150 = calculHeuresEmploye.getHsi150()
+// const totalHFerie = calculHeuresEmploye.getTotalHFerie()
 
-export default calculPaie
+// const salaireBase = store.getState().bulletinDePaie.salaireDeBase
+// const totalIndemnite = store.getState().bulletinDePaie.totalIndemnite
+
+// const calculPaie = new CalculPaie(salaireBase)
+// calculPaie.setHsni130(hsni130)
+// calculPaie.setTotalIndemnite(totalIndemnite)
+// calculPaie.setHsni150(hsni150)
+// calculPaie.setHsi130(hsi130)
+// calculPaie.setHsi150(hsi150)
+// calculPaie.setTotalHs30(totalHs30)
+// calculPaie.setTotalHs50(totalHs50)
+// calculPaie.setTotalHDim(totalHDim)
+// calculPaie.setTotalHFerie(totalHFerie)
+
+// const cnaps = calculPaie.getCnaps()
+// const osie = calculPaie.getOsie()
+// const valHsni130 = calculPaie.getValHsni130()
+// const valHsni150 = calculPaie.getValHsni150()
+// const valHsi130 = calculPaie.getValHsi130()
+// const valHsi150 = calculPaie.getValHsi150()
+// const valHs30 = calculPaie.getValHs30()
+// const valHs50 = calculPaie.getValHs50()
+// const valHdim = calculPaie.getValHdim()
+// const valHFerie = calculPaie.getValHFerie()
+// const salaireBrut = calculPaie.getSalaireBrut()
+// const baseIrsa = calculPaie.getBaseIrsa()
+// const baseIrsaArrondi = calculPaie.getBaseIrsaArrondi()
+// const irsaAPayer = calculPaie.getIrsaAPayer()
+// const salaireNet = calculPaie.getSalaireNet()
+// const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
+
+const appStore = store
+
+// appStore.dispatch(
+//   setBulletinDePaie({
+//     salaireBrut: salaireBrut,
+//     salaireNet: salaireNet,
+//     salaireNetAPayer: salaireNetAPayer,
+//     baseIrsa: baseIrsa,
+//     baseIrsaArrondi: baseIrsaArrondi,
+//     irsaAPayer: irsaAPayer,
+//     cnaps: cnaps,
+//     osie: osie,
+//     totalHDim: totalHDim,
+//     totalHFerie: totalHFerie,
+//     totalHs30: totalHs30,
+//     totalHs50: totalHs50,
+//     hsi130: hsi130,
+//     hsi150: hsi150,
+//     hsni130: hsni130,
+//     hsni150: hsni150,
+//     valHsni130: valHsni130,
+//     valHsni150: valHsni150,
+//     valHsi130: valHsi130,
+//     valHsi150: valHsi150,
+//     valHs30: valHs30,
+//     valHs50: valHs50,
+//     valHdim: valHdim,
+//     valHFerie: valHFerie,
+//   }),
+// )
+export default CalculPaie

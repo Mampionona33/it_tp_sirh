@@ -1,32 +1,65 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface CustomInputProps extends React.HTMLProps<HTMLInputElement> {
-  // Add any specific props you need for your CustomInputWithLabel component
   label: string
   name: string
   id: string
+  value: string | number
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void
 }
 
-const CustomInputWithLabel: React.FC<CustomInputProps> = (props) => {
+const CustomInputWithLabel: React.FC<CustomInputProps> = ({
+  label,
+  id,
+  type,
+  name,
+  required,
+  autoComplete,
+  value,
+  min,
+  max,
+  onChange,
+  onFocus,
+}) => {
   const [focused, setFocused] = React.useState(false)
-  const placeHolder = focused ? '' : props.label
+  const placeHolder = focused ? '' : label
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(event)
+  }
+
+  const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+    setFocused(true)
+    onFocus && onFocus(event)
+  }
+
+  useEffect(() => {
+    if (value) {
+      setFocused(true)
+    } else {
+      setFocused(false)
+    }
+  }, [value])
+
   return (
     <div className="flex flex-col">
-      <label htmlFor={props.id} className={`text-sm h-4 text-zinc-500 px-1`}>
-        {focused && props.label}
+      <label htmlFor={id} className={`text-sm h-6 text-zinc-500 p-1`}>
+        {type === 'date' || type === 'number' || focused ? label : ''}
       </label>
       <input
-        {...props}
-        id={props.id}
-        min={props.min}
-        max={props.max}
-        type={props.type}
-        name={props.name}
-        required={props.required}
+        id={id}
+        type={type}
+        name={name}
+        required={required}
         placeholder={placeHolder}
-        autoComplete={props.autoComplete}
-        onFocus={() => setFocused(true)}
-        className="border-b border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1 "
+        autoComplete={autoComplete}
+        min={min}
+        max={max}
+        onFocus={handleFocus}
+        onChange={handleChange}
+        value={value}
+        className="border-b border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1"
       />
     </div>
   )

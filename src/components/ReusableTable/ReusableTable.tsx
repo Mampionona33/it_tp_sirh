@@ -102,21 +102,27 @@ const ReusableTable = <T extends object>({
                     ))}
                   </thead>
                   <tbody>
-                    {table.getRowModel().rows.map((row, index) => (
-                      <tr
-                        key={row.id}
-                        className={`border-b ${index % 2 === 0 ? 'bg-white' : 'bg-customRed-25'}`}
-                      >
-                        {row.getVisibleCells().map((cell) => (
-                          <td
-                            className="whitespace-nowrap px-2 py-1 text-sm font-light text-gray-900"
-                            key={cell.id}
-                          >
-                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                          </td>
-                        ))}
+                    {table.getRowModel().rows.length > 0 ? (
+                      table.getRowModel().rows.map((row, index) => (
+                        <tr
+                          key={row.id}
+                          className={`border-b ${index % 2 === 0 ? 'bg-white' : 'bg-customRed-25'}`}
+                        >
+                          {row.getVisibleCells().map((cell) => (
+                            <td
+                              className="whitespace-nowrap px-2 py-1 text-sm font-light text-gray-900"
+                              key={cell.id}
+                            >
+                              {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                            </td>
+                          ))}
+                        </tr>
+                      ))
+                    ) : (
+                      <tr className="bg-white p-4">
+                        <td colSpan={table.getAllColumns().length}>Aucune donnée disponible</td>
                       </tr>
-                    ))}
+                    )}
                   </tbody>
                 </table>
               </div>

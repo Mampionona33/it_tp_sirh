@@ -25,7 +25,7 @@ const FormEmployeGroupButton = () => {
           label="Recommencer"
           variant={ButtonWithIconVariant.Secondary}
         />
-        <ButtonWithIcon type="submit" label="Enregistrer" />
+        <ButtonWithIcon name="submit-update-or-add" type="submit" label="Enregistrer" />
       </div>
     </>
   )

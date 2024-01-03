@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import TableEmployee from 'src/components/TableEmployee/TableEmployee'
 import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
@@ -25,6 +25,9 @@ interface IDataWithActions extends IEmploye {
 const List = () => {
   const dispatch = useAppDispatch()
   const data = useAppSelector((store) => store.employeesList.list)
+  const [localData, setLocalData] = useState<IDataWithActions[]>([])
+
+  console.log(data)
 
   const formattedData: IDataWithActions[] =
     data && data.length > 0
@@ -56,6 +59,17 @@ const List = () => {
       mount = false
     }
   }, [dispatch])
+
+  // useEffect(() => {
+  //   setLocalData(
+  //     data
+  //       ?.filter((item: any) => item.actif === 'oui')
+  //       .map((item: any) => ({
+  //         ...item,
+  //         fullName: `${item.nom} ${item.prenom}`,
+  //       })) || [],
+  //   )
+  // }, [data])
 
   const HeaderComponents: React.FC = () => {
     return (

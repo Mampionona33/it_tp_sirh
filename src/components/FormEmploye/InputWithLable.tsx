@@ -50,8 +50,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
     setFocused(true)
   }
 
-  const placeHolder = focused ? '' : placeholder
-
+  const placeHolder = focused ? '' : required ? placeholder + ' *' : placeholder
   const customSelectStyles = {
     control: (provided) => ({
       ...provided,
@@ -125,7 +124,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
     <div className="flex flex-col mb-2">
       {type !== 'radio' && type !== 'select' && (
         <label htmlFor={id} className="text-sm h-4 mb-1">
-          {(focused || type === 'number' || type === 'date') && required && label}
+          {(focused || type === 'number' || type === 'date') && label}
           {(focused || type === 'number' || type === 'date') && required ? ' *' : ''}
         </label>
       )}
@@ -144,7 +143,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
                     id={optionID}
                     name={name}
                     value={option.value}
-                    onFocus={handleFocused}
+                    onFocus={() => setFocused(true)}
                     checked={value === option.value}
                     onChange={(event) => onChange(event, optionIndex)}
                     onInput={onInput ? (event) => onInput(event, optionIndex) : undefined}
@@ -208,7 +207,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           min={min}
           max={max}
           placeholder={placeHolder}
-          onFocus={handleFocused}
+          onFocus={() => setFocused(true)}
           onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
           onInput={
             onInput ? (event) => onInput(event as ChangeEvent<HTMLInputElement>, index) : undefined

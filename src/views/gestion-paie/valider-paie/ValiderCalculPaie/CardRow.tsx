@@ -33,7 +33,7 @@ const CardRow = ({
   cell2ClassName,
   cell3ClassName,
 }: IRowProps) => {
-  const rowClasses = `grid p-2 ${className || ''} ${!cell2 ? 'grid-cols-2' : 'grid-cols-3'}`
+  const rowClasses = `grid px-4 py-2 ${className || ''} ${!cell2 ? 'grid-cols-2' : 'grid-cols-3'}`
   const cell1Classes = `flex ${cell1ClassName || ''}`
   const cell2Classes = `flex justify-center ${cell2ClassName || ''}`
   const cell3Classes = `flex justify-end ${cell3ClassName || ''}`

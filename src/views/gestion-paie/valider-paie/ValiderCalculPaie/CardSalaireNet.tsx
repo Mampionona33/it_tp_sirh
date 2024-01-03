@@ -10,7 +10,7 @@ const CardSalaireNet = () => {
     return (
       <>
         <div className="w-full text-sm">
-          <div className="flex justify-between p-2 border-b border-b-customBlue-100">
+          <div className="flex justify-between px-4 py-2 border-b border-b-customBlue-100">
             <div>Salaire brut</div>
             <div>{formatAriaryMga(bulletinDePaie.salaireBrut)}</div>
           </div>
@@ -56,7 +56,8 @@ const CardSalaireNet = () => {
           <CardRow
             cell1="Salaire net"
             cell3={bulletinDePaie.salaireNet}
-            cell3ClassName="text-customRed-900"
+            cell3ClassName="text-customRed-900 "
+            className="border-b border-b-customBlue-100"
           />
         </div>
       </>
