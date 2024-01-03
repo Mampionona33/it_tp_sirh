@@ -119,7 +119,7 @@ const ReusableTable = <T extends object>({
                         </tr>
                       ))
                     ) : (
-                      <tr>
+                      <tr className='bg-white'>
                         <td colSpan={table.getAllColumns().length}>Aucune donnée disponible</td>
                       </tr>
                     )}
