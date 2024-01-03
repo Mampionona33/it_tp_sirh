@@ -22,16 +22,21 @@ class CalculPaie_v2 {
   private totalHs50: number
   private totalHs30: number
   private valHsni130: number
-  constructor(salaireDeBase: number) {
-    this.salaireBase = salaireDeBase || 0
-    this.tauxHoraire = this.salaireBase / 173.33
+  constructor() {
+    this.salaireBase = 0
+    this.tauxHoraire = 0
     this.valHsni130 = 0
+    this.est_cadre = false
   }
 
+  private calculateTauxHoraire(): number {
+    return this.tauxHoraire > 0 ? this.salaireBase / this.tauxHoraire : 0
+  }
   setTauxHoraire(tauxHoraire: number): void {
     this.tauxHoraire = tauxHoraire
   }
   getTauxHoraire(): number {
+    this.calculateTauxHoraire()
     return this.tauxHoraire
   }
 
@@ -43,11 +48,13 @@ class CalculPaie_v2 {
    * @return {number} The calculated value of Hsni130.
    */
   public calculateValHsni130(hsni130: number): number {
-    this.valHsni130 = 0
-    if (!est_cadre && hsni130 > 0) {
-      this.valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * hsni130 * 130) / 100)
+    let valHsni130 = 0
+
+    if (hsni130 > 0) {
+      valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * hsni130 * 130) / 100)
     }
-    return this.valHsni130
+
+    return this.est_cadre ? valHsni130 : 0
   }
 
   //   UTILITYES

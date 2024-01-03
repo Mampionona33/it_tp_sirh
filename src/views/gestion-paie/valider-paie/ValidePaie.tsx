@@ -26,6 +26,7 @@ import heureService from '@src/services/HeureService'
 import Loading from '@src/components/Loading'
 import CalculPaie from '@src/utils/CalculPaie'
 import CalculHeures_v2 from '@src/utils/CalculHeures_v2'
+import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
@@ -136,6 +137,10 @@ const ValidePaie = () => {
                 totalHdim,
                 totalHFerie,
               )
+
+              const calculPaie = new CalculPaie_v2()
+              const salaireDeBase = salarie.salaire_de_base
+              calculPaie.setTauxHoraire(173.33)
             }
           }
         } catch (error) {
