@@ -42,7 +42,7 @@ class CalculPaie_v2 {
    * @param {boolean} est_cadre - Indicates whether the person is a cadre.
    * @return {number} The calculated value of Hsni130.
    */
-  public calculateValHsni130(hsni130: number, est_cadre: boolean): number {
+  public calculateValHsni130(hsni130: number): number {
     this.valHsni130 = 0
     if (!est_cadre && hsni130 > 0) {
       this.valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * hsni130 * 130) / 100)

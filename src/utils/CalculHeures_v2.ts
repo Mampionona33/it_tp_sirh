@@ -76,7 +76,7 @@ class CalculHeures_v2 {
         totalHnormale += item.heure_normale
       }
     }
-    return totalHnormale
+    return this.estCadre ? 0 : totalHnormale
   }
 
   getTotalHnormale(): number {
@@ -87,15 +87,15 @@ class CalculHeures_v2 {
   }
 
   private calculateTotalHTravailEffectif(): number {
-    this.totalHTrailEffectif = 0
+    let totalHTrailEffectif = 0
     if (this.heuresEmploye && this.heuresEmploye.length > 0) {
       for (const item of this.heuresEmploye) {
         if (item.hs_jours_feries === 0) {
-          this.totalHTrailEffectif += item.heure_de_travail
+          totalHTrailEffectif += item.heure_de_travail
         }
       }
     }
-    return this.totalHTrailEffectif
+    return this.estCadre ? 0 : totalHTrailEffectif
   }
   getTotalHTravailEffectif(): number {
     return this.calculateTotalHTravailEffectif()
@@ -141,7 +141,7 @@ class CalculHeures_v2 {
         }
       })
     }
-    return tableauHsHebdo
+    return this.estCadre ? [] : tableauHsHebdo
   }
   /**
    * Sets the value of the "tableauHsHebdo" property.
@@ -172,7 +172,7 @@ class CalculHeures_v2 {
       }
     }
 
-    return tableauHs130Hebdo
+    return this.estCadre ? [] : tableauHs130Hebdo
   }
   setTableauHs130Hebdo(tableauHs130Hebdo: ItableauHebdo[]): void {
     this.tableauHs130Hebdo = tableauHs130Hebdo
@@ -190,7 +190,7 @@ class CalculHeures_v2 {
         tableauHs150Hebdo.push({ ...item, tolalHs: totalHs })
       }
     }
-    return tableauHs150Hebdo
+    return this.estCadre ? [] : tableauHs150Hebdo
   }
   setTableauHs150Hebdo(tableauHs150Hebdo: ItableauHebdo[]): void {
     this.tableauHs150Hebdo = tableauHs150Hebdo
@@ -207,7 +207,7 @@ class CalculHeures_v2 {
       totalHs130 += item.tolalHs
     }
 
-    return totalHs130
+    return this.estCadre ? 0 : totalHs130
   }
   setTotalHs130Monsuel(totalHs130Monsuel: number): void {
     this.totalHs130Monsuel = totalHs130Monsuel
@@ -223,7 +223,7 @@ class CalculHeures_v2 {
     for (const item of tableauHs150Hebdo) {
       totalHs150 += item.tolalHs
     }
-    return totalHs150
+    return this.estCadre ? 0 : totalHs150
   }
   setTotalHs150Monsuel(totalHs150Monsuel: number): void {
     this.totalHs150Monsuel = totalHs150Monsuel
@@ -239,7 +239,7 @@ class CalculHeures_v2 {
         totalHsNuitHabit += item.hs_de_nuit
       }
     }
-    return totalHsNuitHabit
+    return this.estCadre ? 0 : totalHsNuitHabit
   }
   setTotalHsNuitHabit(totalHsNuitHabit: number): void {
     this.totalHsNuitHabit = totalHsNuitHabit
@@ -255,7 +255,7 @@ class CalculHeures_v2 {
         totalHs += item.hs_de_nuit
       }
     }
-    return totalHs
+    return this.estCadre ? 0 : totalHs
   }
   setTotalHsNuitOccas(totalHsNuitOccas: number): void {
     this.totalHsNuitOccas = totalHsNuitOccas
@@ -274,7 +274,7 @@ class CalculHeures_v2 {
         totalHdim += item.hs_de_dimanche
       }
     }
-    return totalHdim
+    return this.estCadre ? 0 : totalHdim
   }
   setTotalHDimanche(totalHdim: number): void {
     this.totalHdim = totalHdim
@@ -288,7 +288,7 @@ class CalculHeures_v2 {
     for (const item of this.heuresEmploye) {
       totalHFerie += item.hs_jours_feries
     }
-    return totalHFerie
+    return this.estCadre ? 0 : totalHFerie
   }
   setTotalHFerie(totalHFerie: number): void {
     this.totalHFerie = totalHFerie
