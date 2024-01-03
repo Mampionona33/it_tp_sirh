@@ -68,6 +68,7 @@ const HistoriquePaie: React.FC = () => {
 
   useEffect(() => {
     if (selectedEmploye !== null && selectedEmploye !== undefined) {
+      console.log(selectedEmploye)
       dispatch(
         setBulletinDePaie({
           salarie: selectedEmploye,

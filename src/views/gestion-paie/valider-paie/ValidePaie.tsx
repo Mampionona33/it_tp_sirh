@@ -97,159 +97,159 @@ const ValidePaie = () => {
     }
   }, [salarie, dateFinFormated, dateDebutFormated, dispatch])
 
-  const calcul = useMemo(() => {
-    calculHeuresEmploye.setHeuresMonsuelEmploye(employeHours)
-    salarie.categorie == 'hc' && calculHeuresEmploye.setEstCadre(true)
-    salarie.travail_de_nuit === EnumBoolean.OUI && calculHeuresEmploye.setTravailDeNuit(true)
-    const totalHn = calculHeuresEmploye.getTotalHnormale()
-    const totalHs30 = calculHeuresEmploye.getTotalTravailDeNuit30()
-    const totalHs50 = calculHeuresEmploye.getTotalTravailDeNuit50()
-    const totalHDim = calculHeuresEmploye.getTotalHdim()
-    const totalHs = calculHeuresEmploye.getTotalHsDuMois()
-    const totalHs130 = calculHeuresEmploye.getTotalHs130()
-    const totalHs150 = calculHeuresEmploye.getTotalHs150()
-    const hsni130 = calculHeuresEmploye.getHsni130()
-    const hsni150 = calculHeuresEmploye.getHsni150()
-    const hsi130 = calculHeuresEmploye.getHsi130()
-    const hsi150 = calculHeuresEmploye.getHsi150()
-    const totalHFerie = calculHeuresEmploye.getTotalHFerie()
+  // const calcul = useMemo(() => {
+  //   calculHeuresEmploye.setHeuresMonsuelEmploye(employeHours)
+  //   salarie.categorie == 'hc' && calculHeuresEmploye.setEstCadre(true)
+  //   salarie.travail_de_nuit === EnumBoolean.OUI && calculHeuresEmploye.setTravailDeNuit(true)
+  //   const totalHn = calculHeuresEmploye.getTotalHnormale()
+  //   const totalHs30 = calculHeuresEmploye.getTotalTravailDeNuit30()
+  //   const totalHs50 = calculHeuresEmploye.getTotalTravailDeNuit50()
+  //   const totalHDim = calculHeuresEmploye.getTotalHdim()
+  //   const totalHs = calculHeuresEmploye.getTotalHsDuMois()
+  //   const totalHs130 = calculHeuresEmploye.getTotalHs130()
+  //   const totalHs150 = calculHeuresEmploye.getTotalHs150()
+  //   const hsni130 = calculHeuresEmploye.getHsni130()
+  //   const hsni150 = calculHeuresEmploye.getHsni150()
+  //   const hsi130 = calculHeuresEmploye.getHsi130()
+  //   const hsi150 = calculHeuresEmploye.getHsi150()
+  //   const totalHFerie = calculHeuresEmploye.getTotalHFerie()
 
-    const calculPaie = new CalculPaie(salaireDeBase)
-    salarie.categorie === 'hc' && calculPaie.setEstCadre(true)
-    calculPaie.setHsni130(hsni130)
-    calculPaie.setHsni150(hsni150)
-    calculPaie.setHsi130(hsi130)
-    calculPaie.setHsi150(hsi150)
-    calculPaie.setTotalHs30(totalHs30)
-    calculPaie.setTotalHs50(totalHs50)
-    calculPaie.setTotalHDim(totalHDim)
-    calculPaie.setTotalHFerie(totalHFerie)
+  //   const calculPaie = new CalculPaie(salaireDeBase)
+  //   salarie.categorie === 'hc' && calculPaie.setEstCadre(true)
+  //   calculPaie.setHsni130(hsni130)
+  //   calculPaie.setHsni150(hsni150)
+  //   calculPaie.setHsi130(hsi130)
+  //   calculPaie.setHsi150(hsi150)
+  //   calculPaie.setTotalHs30(totalHs30)
+  //   calculPaie.setTotalHs50(totalHs50)
+  //   calculPaie.setTotalHDim(totalHDim)
+  //   calculPaie.setTotalHFerie(totalHFerie)
 
-    const cnaps = calculPaie.getCnaps()
-    const osie = calculPaie.getOsie()
-    const valHsni130 = calculPaie.getValHsni130()
-    const valHsni150 = calculPaie.getValHsni150()
-    const valHsi130 = calculPaie.getValHsi130()
-    const valHsi150 = calculPaie.getValHsi150()
-    const valHs30 = calculPaie.getValHs30()
-    const valHs50 = calculPaie.getValHs50()
-    const valHdim = calculPaie.getValHdim()
-    const valHFerie = calculPaie.getValHFerie()
-    const salaireBrut = calculPaie.getSalaireBrut()
-    const baseIrsa = calculPaie.getBaseIrsa()
-    const baseIrsaArrondi = calculPaie.getBaseIrsaArrondi()
-    const irsaAPayer = calculPaie.getIrsaAPayer()
-    const salaireNet = calculPaie.getSalaireNet()
-    const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
+  //   const cnaps = calculPaie.getCnaps()
+  //   const osie = calculPaie.getOsie()
+  //   const valHsni130 = calculPaie.getValHsni130()
+  //   const valHsni150 = calculPaie.getValHsni150()
+  //   const valHsi130 = calculPaie.getValHsi130()
+  //   const valHsi150 = calculPaie.getValHsi150()
+  //   const valHs30 = calculPaie.getValHs30()
+  //   const valHs50 = calculPaie.getValHs50()
+  //   const valHdim = calculPaie.getValHdim()
+  //   const valHFerie = calculPaie.getValHFerie()
+  //   const salaireBrut = calculPaie.getSalaireBrut()
+  //   const baseIrsa = calculPaie.getBaseIrsa()
+  //   const baseIrsaArrondi = calculPaie.getBaseIrsaArrondi()
+  //   const irsaAPayer = calculPaie.getIrsaAPayer()
+  //   const salaireNet = calculPaie.getSalaireNet()
+  //   const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
 
-    return {
-      cnaps,
-      osie,
-      valHsni130,
-      valHsni150,
-      valHsi130,
-      valHsi150,
-      valHs30,
-      valHs50,
-      valHdim,
-      valHFerie,
-      salaireBrut,
-      baseIrsa,
-      baseIrsaArrondi,
-      irsaAPayer,
-      salaireNet,
-      salaireNetAPayer,
-      totalHFerie,
-      totalHs,
-      totalHs130,
-      totalHs150,
-      totalHn,
-      totalHs30,
-      totalHs50,
-      totalHDim,
-      hsni130,
-      hsni150,
-      hsi130,
-      hsi150,
-    }
-  }, [employeHours, salaireDeBase])
+  //   return {
+  //     cnaps,
+  //     osie,
+  //     valHsni130,
+  //     valHsni150,
+  //     valHsi130,
+  //     valHsi150,
+  //     valHs30,
+  //     valHs50,
+  //     valHdim,
+  //     valHFerie,
+  //     salaireBrut,
+  //     baseIrsa,
+  //     baseIrsaArrondi,
+  //     irsaAPayer,
+  //     salaireNet,
+  //     salaireNetAPayer,
+  //     totalHFerie,
+  //     totalHs,
+  //     totalHs130,
+  //     totalHs150,
+  //     totalHn,
+  //     totalHs30,
+  //     totalHs50,
+  //     totalHDim,
+  //     hsni130,
+  //     hsni150,
+  //     hsi130,
+  //     hsi150,
+  //   }
+  // }, [employeHours, salaireDeBase])
 
   // console.log(salaireBrut)
 
-  useEffect(() => {
-    if (calcul.osie) {
-      dispatch(setBulletinDePaie({ osie: calcul.osie }))
-    }
-    if (calcul.cnaps) {
-      dispatch(setBulletinDePaie({ cnaps: calcul.cnaps }))
-    }
-    if (calcul.hsni130) {
-      dispatch(setBulletinDePaie({ hsni130: calcul.hsni130 }))
-    }
-    if (calcul.hsni150) {
-      dispatch(setBulletinDePaie({ hsni150: calcul.hsni150 }))
-    }
-    if (calcul.hsi130) {
-      dispatch(setBulletinDePaie({ hsi130: calcul.hsi130 }))
-    }
-    if (calcul.hsi150) {
-      dispatch(setBulletinDePaie({ hsi150: calcul.hsi150 }))
-    }
-    if (calcul.totalHs30) {
-      dispatch(setBulletinDePaie({ totalHs30: calcul.totalHs30 }))
-    }
-    if (calcul.totalHs50) {
-      dispatch(setBulletinDePaie({ totalHs50: calcul.totalHs50 }))
-    }
-    if (calcul.totalHDim) {
-      dispatch(setBulletinDePaie({ totalHDim: calcul.totalHDim }))
-    }
-    if (calcul.totalHFerie) {
-      dispatch(setBulletinDePaie({ totalHFerie: calcul.totalHFerie }))
-    }
-    if (calcul.valHsni130) {
-      dispatch(setBulletinDePaie({ valHsni130: calcul.valHsni130 }))
-    }
-    if (calcul.valHsni150) {
-      dispatch(setBulletinDePaie({ valHsni150: calcul.valHsni150 }))
-    }
-    if (calcul.valHsi130) {
-      dispatch(setBulletinDePaie({ valHsi130: calcul.valHsi130 }))
-    }
-    if (calcul.valHsi150) {
-      dispatch(setBulletinDePaie({ valHsi150: calcul.valHsi150 }))
-    }
-    if (calcul.valHs30) {
-      dispatch(setBulletinDePaie({ valHs30: calcul.valHs30 }))
-    }
-    if (calcul.valHs50) {
-      dispatch(setBulletinDePaie({ valHs50: calcul.valHs50 }))
-    }
-    if (calcul.valHdim) {
-      dispatch(setBulletinDePaie({ valHdim: calcul.valHdim }))
-    }
-    if (calcul.valHFerie) {
-      dispatch(setBulletinDePaie({ valHFerie: calcul.valHFerie }))
-    }
-    if (calcul.salaireBrut) {
-      dispatch(setBulletinDePaie({ salaireBrut: calcul.salaireBrut }))
-    }
-    if (calcul.baseIrsa) {
-      dispatch(setBulletinDePaie({ baseIrsa: calcul.baseIrsa }))
-    }
-    if (calcul.baseIrsaArrondi) {
-      dispatch(setBulletinDePaie({ baseIrsaArrondi: calcul.baseIrsaArrondi }))
-    }
-    if (calcul.irsaAPayer) {
-      dispatch(setBulletinDePaie({ irsaAPayer: calcul.irsaAPayer }))
-    }
-    if (calcul.salaireNet) {
-      dispatch(setBulletinDePaie({ salaireNet: calcul.salaireNet }))
-    }
-    if (calcul.salaireNetAPayer) {
-      dispatch(setBulletinDePaie({ salaireNetAPayer: calcul.salaireNetAPayer }))
-    }
-  }, [calcul])
+  // useEffect(() => {
+  //   if (calcul.osie) {
+  //     dispatch(setBulletinDePaie({ osie: calcul.osie }))
+  //   }
+  //   if (calcul.cnaps) {
+  //     dispatch(setBulletinDePaie({ cnaps: calcul.cnaps }))
+  //   }
+  //   if (calcul.hsni130) {
+  //     dispatch(setBulletinDePaie({ hsni130: calcul.hsni130 }))
+  //   }
+  //   if (calcul.hsni150) {
+  //     dispatch(setBulletinDePaie({ hsni150: calcul.hsni150 }))
+  //   }
+  //   if (calcul.hsi130) {
+  //     dispatch(setBulletinDePaie({ hsi130: calcul.hsi130 }))
+  //   }
+  //   if (calcul.hsi150) {
+  //     dispatch(setBulletinDePaie({ hsi150: calcul.hsi150 }))
+  //   }
+  //   if (calcul.totalHs30) {
+  //     dispatch(setBulletinDePaie({ totalHs30: calcul.totalHs30 }))
+  //   }
+  //   if (calcul.totalHs50) {
+  //     dispatch(setBulletinDePaie({ totalHs50: calcul.totalHs50 }))
+  //   }
+  //   if (calcul.totalHDim) {
+  //     dispatch(setBulletinDePaie({ totalHDim: calcul.totalHDim }))
+  //   }
+  //   if (calcul.totalHFerie) {
+  //     dispatch(setBulletinDePaie({ totalHFerie: calcul.totalHFerie }))
+  //   }
+  //   if (calcul.valHsni130) {
+  //     dispatch(setBulletinDePaie({ valHsni130: calcul.valHsni130 }))
+  //   }
+  //   if (calcul.valHsni150) {
+  //     dispatch(setBulletinDePaie({ valHsni150: calcul.valHsni150 }))
+  //   }
+  //   if (calcul.valHsi130) {
+  //     dispatch(setBulletinDePaie({ valHsi130: calcul.valHsi130 }))
+  //   }
+  //   if (calcul.valHsi150) {
+  //     dispatch(setBulletinDePaie({ valHsi150: calcul.valHsi150 }))
+  //   }
+  //   if (calcul.valHs30) {
+  //     dispatch(setBulletinDePaie({ valHs30: calcul.valHs30 }))
+  //   }
+  //   if (calcul.valHs50) {
+  //     dispatch(setBulletinDePaie({ valHs50: calcul.valHs50 }))
+  //   }
+  //   if (calcul.valHdim) {
+  //     dispatch(setBulletinDePaie({ valHdim: calcul.valHdim }))
+  //   }
+  //   if (calcul.valHFerie) {
+  //     dispatch(setBulletinDePaie({ valHFerie: calcul.valHFerie }))
+  //   }
+  //   if (calcul.salaireBrut) {
+  //     dispatch(setBulletinDePaie({ salaireBrut: calcul.salaireBrut }))
+  //   }
+  //   if (calcul.baseIrsa) {
+  //     dispatch(setBulletinDePaie({ baseIrsa: calcul.baseIrsa }))
+  //   }
+  //   if (calcul.baseIrsaArrondi) {
+  //     dispatch(setBulletinDePaie({ baseIrsaArrondi: calcul.baseIrsaArrondi }))
+  //   }
+  //   if (calcul.irsaAPayer) {
+  //     dispatch(setBulletinDePaie({ irsaAPayer: calcul.irsaAPayer }))
+  //   }
+  //   if (calcul.salaireNet) {
+  //     dispatch(setBulletinDePaie({ salaireNet: calcul.salaireNet }))
+  //   }
+  //   if (calcul.salaireNetAPayer) {
+  //     dispatch(setBulletinDePaie({ salaireNetAPayer: calcul.salaireNetAPayer }))
+  //   }
+  // }, [calcul])
 
   return (
     <>
