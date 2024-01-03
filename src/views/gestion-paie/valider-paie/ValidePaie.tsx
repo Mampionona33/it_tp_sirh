@@ -96,7 +96,7 @@ const ValidePaie = () => {
         }),
       )
     }
-  }, [salarie, dateFinFormated, dateDebutFormated])
+  }, [salarie, dateFinFormated, dateDebutFormated, dispatch])
 
   calculHeuresEmploye.setHeuresMonsuelEmploye(employeHours)
   salarie.categorie == 'hc' && calculHeuresEmploye.setEstCadre(true)
@@ -142,7 +142,6 @@ const ValidePaie = () => {
   const salaireNet = calculPaie.getSalaireNet()
   const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
 
-  
   useEffect(() => {
     if (osie) {
       dispatch(setBulletinDePaie({ osie: osie }))

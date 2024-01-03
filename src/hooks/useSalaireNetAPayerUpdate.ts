@@ -14,17 +14,17 @@ const useSalaireNetAPayerUpdate = ({ calculPaieSetters }: UseSalaireNetAPayerUpd
   useEffect(() => {
     const updateSalaireNetAPayer = () => {
       if (salaireNet) {
-        calculPaie.setSalaireNet(salaireNet)
+        // calculPaie.setSalaireNet(salaireNet)
 
         // Execute all provided setter functions
         if (calculPaieSetters) {
           calculPaieSetters.forEach((setter) => setter())
 
           // Check if the value needs an update before setting the state
-          const updatedValue = calculPaie.getSalaireNetAPayer()
-          if (updatedValue !== updatedSalaireNetAPayer) {
-            setUpdatedSalaireNetAPayer(updatedValue)
-          }
+          // // const updatedValue = calculPaie.getSalaireNetAPayer()
+          // if (updatedValue !== updatedSalaireNetAPayer) {
+          //   setUpdatedSalaireNetAPayer(updatedValue)
+          // }
         }
       }
     }

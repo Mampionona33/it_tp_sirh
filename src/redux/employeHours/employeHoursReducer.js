@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { fetchHeureEmploye } from './employeHoursActions'
 
 const initialState = {
-  employeHours: null,
+  employeHours: [],
   loading: 'idle',
   totalHNormal: null,
   totalHsJour: null,
@@ -20,35 +20,9 @@ const employeeHoursSlice = createSlice({
   name: 'employeeTotalHours',
   initialState,
   reducers: {
-    setTotalHNormal: (state, action) => {
-      state.totalHNormal = action.payload
-    },
-    setTotalHsJour: (state, action) => {
-      state.totalHsJour = action.payload
-    },
-    setTotalHs130: (state, action) => {
-      state.totalHs130 = action.payload
-    },
-    setTotalHs150: (state, action) => {
-      state.totalHs150 = action.payload
-    },
-    setTotalHs30: (state, action) => {
-      state.totalHs30 = action.payload
-    },
-    setTotalHs50: (state, action) => {
-      state.totalHs50 = action.payload
-    },
-    setTotalHdim: (state, action) => {
-      state.totalHdim = action.payload
-    },
-    setTotalHferier: (state, action) => {
-      state.totalHferier = action.payload
-    },
-    setTotalHsni130: (state, action) => {
-      state.hsni130 = action.payload
-    },
-    setTotalHsni150: (state, action) => {
-      state.hsni150 = action.payload
+    resetEmployHours: (state) => initialState,
+    setEmployHours: (state, action) => {
+      state.employeHours = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -66,17 +40,6 @@ const employeeHoursSlice = createSlice({
   },
 })
 
-export const {
-  setTotalHNormal,
-  setTotalHsJour,
-  setTotalHs130,
-  setTotalHs150,
-  setTotalHs30,
-  setTotalHs50,
-  setTotalHdim,
-  setTotalHferier,
-  setTotalHsni130,
-  setTotalHsni150,
-} = employeeHoursSlice.actions
+export const { setEmployHours, resetEmployHours } = employeeHoursSlice.actions
 
 export default employeeHoursSlice.reducer

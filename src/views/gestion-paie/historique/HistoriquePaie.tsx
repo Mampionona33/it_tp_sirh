@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
 import { format } from 'date-fns'
@@ -21,7 +21,6 @@ const HistoriquePaie: React.FC = () => {
   const dispatch = useAppDispatch()
   const { id } = useParams()
   const listeEmploye = useAppSelector((store) => store.employeesList.list)
-  const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
   const historiquePaiement: IHistoriquePaieProps[] = [
     {
       id: 1,
@@ -57,22 +56,27 @@ const HistoriquePaie: React.FC = () => {
     },
   ]
 
-  const selectedEmploye =
-    listeEmploye && listeEmploye.length > 0
-      ? listeEmploye.find((emp) => emp.id === Number(id))
-      : null
+  const selectedEmploye = useMemo(
+    () =>
+      listeEmploye && listeEmploye.length > 0
+        ? listeEmploye.find((emp) => emp.id === Number(id))
+        : null,
+    [listeEmploye, id],
+  )
+
+  // const selectemp = selectedEmploye()
 
   useEffect(() => {
-    if (selectedEmploye) {
+    if (selectedEmploye !== null && selectedEmploye !== undefined) {
+      console.log(selectedEmploye)
       dispatch(
         setBulletinDePaie({
-          ...bulletinDePaie,
           salarie: selectedEmploye,
           salaireDeBase: selectedEmploye.salaire_de_base,
         }),
       )
     }
-  }, [selectedEmploye])
+  }, [selectedEmploye, dispatch])
 
   const columnHelper = createColumnHelper<IHistoriquePaieTableProps>()
 

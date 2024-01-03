@@ -32,6 +32,7 @@ import { useNavigate } from 'react-router-dom'
 import { resetDns } from 'src/redux/dns/dnsReducers'
 import { resetEmployeur } from 'src/redux/employeur/employeurReducer'
 import { resetCotisation } from 'src/redux/cotisations/cotisationsReducer'
+import { resetEmployHours } from '@src/redux/employeHours/employeHoursReducer'
 
 const AppHeaderDropdown = () => {
   const dispatch = useDispatch()
@@ -45,6 +46,7 @@ const AppHeaderDropdown = () => {
     dispatch(resetParametreCalendrier())
     dispatch(resetCotisation())
     dispatch(setUserLoggedOut())
+    dispatch(resetEmployHours())
     navigate('/login')
   }
 

@@ -87,19 +87,21 @@ class CalculHeuresEmploye {
     return this.totalHtravailEffectif
   }
 
-  private sorteHeuresMonsuelEmploye(): void {
-    this.heuresMonsuelEmploye.sort((a, b) => {
-      if (a.date < b.date) {
-        return -1
-      }
-      if (a.date > b.date) {
-        return 1
-      }
-      return 0
-    })
-  }
+  // private sorteHeuresMonsuelEmploye(): void {
+  //   console.log(this.heuresMonsuelEmploye)
+
+  //   // this.heuresMonsuelEmploye.sort((a, b) => {
+  //   //   if (a.date < b.date) {
+  //   //     return -1
+  //   //   }
+  //   //   if (a.date > b.date) {
+  //   //     return 1
+  //   //   }
+  //   //   return 0
+  //   // })
+  // }
   private calculateHsParSemaine(): void {
-    this.sorteHeuresMonsuelEmploye()
+    // this.sorteHeuresMonsuelEmploye()
     let currentWeekStartDate = null
     let hsParSemaine: number = 0
 
@@ -138,7 +140,7 @@ class CalculHeuresEmploye {
     return this.tableauHs130ParSemaine.length === 0
   }
   private calculateHs130ParSemaine(): void {
-    this.sorteHeuresMonsuelEmploye()
+    // this.sorteHeuresMonsuelEmploye()
     this.isTableauHsParSemaineVide() && this.calculateHsParSemaine()
 
     if (!this.est_cadre && this.tableauHs130ParSemaine) {
@@ -210,15 +212,20 @@ class CalculHeuresEmploye {
 
   private calculTotalTravailleDeNuit30(): void {
     let totalTravailleDeNuit30 = 0
-    this.heuresMonsuelEmploye.forEach((item) => {
-      if (item.heure_de_travail > 0 && this.travail_de_nuit) {
-        totalTravailleDeNuit30 += item.hs_de_nuit
+
+    if (this.heuresMonsuelEmploye && this.heuresMonsuelEmploye.length > 0) {
+      this.heuresMonsuelEmploye.forEach((item) => {
+        if (item.heure_de_travail > 0 && this.travail_de_nuit) {
+          totalTravailleDeNuit30 += item.hs_de_nuit
+        }
+      })
+
+      if (!this.est_cadre) {
+        this.totalTravailleDeNuit30 = totalTravailleDeNuit30
       }
-    })
-    if (!this.est_cadre) {
-      this.totalTravailleDeNuit30 = totalTravailleDeNuit30
     }
   }
+
   getTotalTravailDeNuit30(): number {
     this.calculTotalTravailleDeNuit30()
     return this.totalTravailleDeNuit30
