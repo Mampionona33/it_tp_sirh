@@ -28,7 +28,6 @@ class CalculHeures_v2 {
   private totalHsni150: number
   private totalHsi130: number
   private totalHsi150: number
-  private totalHdim: number
 
   constructor() {
     this.heuresEmploye = []
@@ -364,6 +363,14 @@ class CalculHeures_v2 {
   }
   getTotalHsi150(): number {
     return this.calculateTotalHsi150()
+  }
+
+  private calculateTotalHs30NuitHabit(): number {
+    let totalHs30 = 0
+    for(const item in this.heuresEmploye){
+      totalHs30 += item.hs_de_nuit
+    }
+    return totalHs30 
   }
 }
 
