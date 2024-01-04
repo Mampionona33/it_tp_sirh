@@ -3,6 +3,8 @@ import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import { EnumBoolean, EnumGenre } from '@src/interfaces/interfaceEmploye'
 
 const initialState: IBulletinDePaieProps = {
+  validate: EnumBoolean.NON,
+  validationDate: null,
   employeur: {
     nom: ' LA LIGNE SCANDINAVE',
     adresse: ' 2 RUE LIEUTNANT BERARD',

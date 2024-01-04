@@ -332,7 +332,6 @@ class CalculPaie_v2 {
     let nombreEnfantEligible = this.calculateNombreEnfantEligible(params.salarie)
 
     allocation = params.montantAllocationParEnfant * nombreEnfantEligible
-    console.log(allocation)
     return allocation
   }
 

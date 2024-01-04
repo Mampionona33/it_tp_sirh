@@ -1,6 +1,8 @@
-import { IEmploye } from './interfaceEmploye'
+import { EnumBoolean, IEmploye } from './interfaceEmploye'
 
 export interface IBulletinDePaieProps {
+  validate: EnumBoolean
+  validationDate?: string
   employeur: {
     nom: string
     adresse: string
