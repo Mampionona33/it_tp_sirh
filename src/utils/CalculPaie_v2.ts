@@ -36,6 +36,14 @@ export interface calculBaseIrsaParams {
   salaireBrute?: number
 }
 
+export interface calculSalaireNetAPayerParams {
+  salaireNet: number
+  avance: number
+  totalIndemnite: number
+  totalAvantagesNature: number
+  allocationFamille: number
+}
+
 class CalculPaie_v2 {
   private salaireBase: number
   private plafondSME: number
@@ -53,6 +61,7 @@ class CalculPaie_v2 {
   private valHdim: number
   private valHFerie: number
   private salaireBrut: number
+  private salaireNet: number
 
   constructor() {
     this.salaireBase = 0
@@ -60,6 +69,13 @@ class CalculPaie_v2 {
     this.est_cadre = false
     this.plafondSME = 1910400
     this.salaireBrut = 0
+    this.salaireNet = 0
+  }
+  setSalaireNet(salaireNet: number): void {
+    this.salaireNet = salaireNet
+  }
+  getSalaireNet(): number {
+    return this.salaireNet
   }
 
   setSalaireBrut(salaireBrut: number): void {
@@ -262,6 +278,20 @@ class CalculPaie_v2 {
 
   public caluclateSalaireNet(irsaAPayer: number): number {
     return this.roundToTwoDecimal(this.salaireBrut - irsaAPayer)
+  }
+
+  public calculSalaireNetAPayer(params: calculSalaireNetAPayerParams): number {
+    let salaireNetAPayer = 0
+
+    salaireNetAPayer = this.roundToTwoDecimal(
+      params.salaireNet +
+        params.totalIndemnite +
+        params.totalAvantagesNature +
+        params.allocationFamille -
+        params.avance,
+    )
+
+    return salaireNetAPayer
   }
 
   //   UTILITYES

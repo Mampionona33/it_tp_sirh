@@ -1,17 +1,32 @@
 import CustomSection from '@src/components/CustomSection'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import CardRow from './CardRow'
-import { useAppSelector } from '@src/hooks/useAppDispatch'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import calculPaie from '@src/utils/CalculPaie'
+import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
+import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const Body = () => {
   const { salaireNet, totalIndemnite, avance, totalAvantages, salaireNetAPayer } = useAppSelector(
     (store) => store.bulletinDePaie,
   )
+  const dispatch = useAppDispatch()
 
-  // calculPaie.setTotalIndemnite(totalIndemnite)
-  // calculPaie.setAvance(avance)
-  // const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
+  const updateBulletinDePaie = useCallback(() => {
+    const calculPaie = new CalculPaie_v2()
+    const salaireNetAPayer = calculPaie.calculSalaireNetAPayer({
+      salaireNet: salaireNet,
+      totalIndemnite: totalIndemnite,
+      avance: avance,
+      totalAvantagesNature: totalAvantages,
+      allocationFamille: 0,
+    })
+    dispatch(setBulletinDePaie({ salaireNetAPayer: salaireNetAPayer }))
+  }, [salaireNet, totalIndemnite, avance, totalAvantages, dispatch])
+
+  useEffect(() => {
+    updateBulletinDePaie()
+  }, [updateBulletinDePaie])
 
   return (
     <div className="w-full text-sm">
