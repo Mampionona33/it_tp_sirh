@@ -68,6 +68,15 @@ class CalculPaie_v2 {
     return this.est_cadre ? 0 : valHsi130
   }
 
+  public calculateValHsi150(hsi150: number): number {
+    let valHsi150 = 0
+    let tauxHoraire = this.calculateTauxHoraire()
+
+    valHsi150 = this.roundToTwoDecimal((tauxHoraire * hsi150 * 150) / 100)
+
+    return this.est_cadre ? 0 : valHsi150
+  }
+
   //   UTILITYES
   private roundToTwoDecimal(val) {
     return Math.round(val * 100) / 100
