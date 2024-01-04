@@ -24,6 +24,7 @@ class CalculHeures_v2 {
   private travailleurDeNuit: boolean
   private totalHdim: number
   private totalHFerie: number
+  private totalHsni130: number
 
   constructor() {
     this.heuresEmploye = []
@@ -42,6 +43,7 @@ class CalculHeures_v2 {
     this.totalHsNuitOccas = 0
     this.totalHdim = 0
     this.totalHFerie = 0
+    this.totalHsni130 = 0
   }
 
   setTravailleurDeNuit(travailleurDeNuit: boolean): void {
@@ -295,6 +297,19 @@ class CalculHeures_v2 {
   }
   getTotalHFerie(): number {
     return this.calculateTotalHFerie()
+  }
+
+  private calculateTotalHsni130(): number {
+    let totalHsni130 = 0
+    let totalHs130Monsuel = this.calculateTotalHs130Monsuel()
+    totalHsni130 = totalHs130Monsuel >= 18 ? 18 : totalHs130Monsuel
+    return this.estCadre ? 0 : totalHsni130
+  }
+  setTotalHsni130(totalHsni130: number): void {
+    this.totalHsni130 = totalHsni130
+  }
+  getTotalHsni130(): number {
+    return this.calculateTotalHsni130()
   }
 }
 

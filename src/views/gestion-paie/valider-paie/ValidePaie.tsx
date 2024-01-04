@@ -123,24 +123,31 @@ const ValidePaie = () => {
               const totalHsNuitOccas = heureCalculator.getTotalHsNuitOccas()
               const totalHdim = heureCalculator.getTotalHdim()
               const totalHFerie = heureCalculator.getTotalHFerie()
+              const totalHsni130 = heureCalculator.getTotalHsni130()
 
               console.log(
-                totalHnormal,
-                totalHTravailEffectif,
-                tableauHsHebdo,
-                tableauHs130Hebdo,
-                tableauHs150Hebdo,
-                totalHs130Monsuel,
-                totalHs150Monsuel,
-                totalHsNuitHabit,
-                totalHsNuitOccas,
-                totalHdim,
-                totalHFerie,
+                // totalHnormal,
+                // totalHTravailEffectif,
+                // tableauHsHebdo,
+                // tableauHs130Hebdo,
+                // tableauHs150Hebdo,
+                // totalHs130Monsuel,
+                // totalHs150Monsuel,
+                // totalHsNuitHabit,
+                // totalHsNuitOccas,
+                // totalHdim,
+                // totalHFerie,
+                totalHsni130,
               )
 
               const calculPaie = new CalculPaie_v2()
               const salaireDeBase = salarie.salaire_de_base
+              calculPaie.setSalaireBase(salaireDeBase)
               calculPaie.setTauxHoraire(173.33)
+
+              const valHsni130 = calculPaie.calculateValHsni130(totalHsni130)
+
+              console.log(valHsni130)
             }
           }
         } catch (error) {

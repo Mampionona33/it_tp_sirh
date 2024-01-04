@@ -28,6 +28,12 @@ class CalculPaie_v2 {
     this.valHsni130 = 0
     this.est_cadre = false
   }
+  setSalaireBase(salaireBase: number): void {
+    this.salaireBase = salaireBase
+  }
+  getSalaireBase(): number {
+    return this.salaireBase
+  }
 
   private calculateTauxHoraire(): number {
     return this.tauxHoraire > 0 ? this.salaireBase / this.tauxHoraire : 0
@@ -49,12 +55,12 @@ class CalculPaie_v2 {
    */
   public calculateValHsni130(hsni130: number): number {
     let valHsni130 = 0
-
+    let tauxHoraire = this.calculateTauxHoraire()
     if (hsni130 > 0) {
-      valHsni130 = this.roundToTwoDecimal((this.tauxHoraire * hsni130 * 130) / 100)
+      valHsni130 = this.roundToTwoDecimal((tauxHoraire * hsni130 * 130) / 100)
     }
 
-    return this.est_cadre ? valHsni130 : 0
+    return this.est_cadre ? 0 : valHsni130
   }
 
   //   UTILITYES
