@@ -1,13 +1,12 @@
-import React, { FormEvent, useEffect, useMemo, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useEmployeeExists from '@src/hooks/useEmployeeExists'
 import Page404 from '@src/views/pages/page404/Page404'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
-import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'
+import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 import { format, parseISO } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { DDMMYYYYFormat } from '@src/types/DateType'
-import heureSerivice from '@src/services/HeureService'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import CardSalaireBrut from './ValiderCalculPaie/CardSalaireBrut'
 import CardSalaireNet from './ValiderCalculPaie/CardSalaireNet'
@@ -20,11 +19,7 @@ import CardIndemnites from './ValiderCalculPaie/CardIndemnites'
 import CardAvances from './ValiderCalculPaie/CardAvances'
 import CardRappel from './ValiderCalculPaie/CardRappel'
 import CardGroupeButtons from './ValiderCalculPaie/CardGroupeButtons'
-import useSalaireNetAPayerUpdate from '@src/hooks/useSalaireNetAPayerUpdate'
 import { fetchHeureEmploye } from '@src/redux/employeHours/employeHoursActions'
-import heureService from '@src/services/HeureService'
-import Loading from '@src/components/Loading'
-import CalculPaie from '@src/utils/CalculPaie'
 import CalculHeures_v2 from '@src/utils/CalculHeures_v2'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
@@ -32,11 +27,8 @@ import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
   const isDateValidationexist = useDateValidationExist()
-  const { salaireDeBase, salarie, rappel, totalPrimeEtGratification, totalDeduction } =
-    useAppSelector((store) => store.bulletinDePaie)
+  const { salarie } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
-  const { employeHours } = useAppSelector((store) => store.employeHours)
-  const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
 
   const dispatch = useAppDispatch()
   const { dateValidation } = useParams()
@@ -115,14 +107,14 @@ const ValidePaie = () => {
               heureCalculator.setTravailleurDeNuit(travailleurDeNuit)
 
               const totalHnormal = heureCalculator.getTotalHnormale()
-              const totalHTravailEffectif = heureCalculator.getTotalHTravailEffectif()
-              const tableauHsHebdo = heureCalculator.getTableauHsHebdo()
-              const tableauHs130Hebdo = heureCalculator.getTableauHs130Hebdo()
-              const tableauHs150Hebdo = heureCalculator.getTableauHs150Hebdo()
-              const totalHs130Monsuel = heureCalculator.getTotalHs130Monsuel()
-              const totalHs150Monsuel = heureCalculator.getTotalHs150Monsuel()
-              const totalHsNuitHabit = heureCalculator.getTotalHsNuitHabit()
-              const totalHsNuitOccas = heureCalculator.getTotalHsNuitOccas()
+              // const totalHTravailEffectif = heureCalculator.getTotalHTravailEffectif()
+              // const tableauHsHebdo = heureCalculator.getTableauHsHebdo()
+              // const tableauHs130Hebdo = heureCalculator.getTableauHs130Hebdo()
+              // const tableauHs150Hebdo = heureCalculator.getTableauHs150Hebdo()
+              // const totalHs130Monsuel = heureCalculator.getTotalHs130Monsuel()
+              // const totalHs150Monsuel = heureCalculator.getTotalHs150Monsuel()
+              // const totalHsNuitHabit = heureCalculator.getTotalHsNuitHabit()
+              // const totalHsNuitOccas = heureCalculator.getTotalHsNuitOccas()
               const totalHdim = heureCalculator.getTotalHdim()
               const totalHFerie = heureCalculator.getTotalHFerie()
               const totalHsni130 = heureCalculator.getTotalHsni130()
@@ -182,18 +174,7 @@ const ValidePaie = () => {
                   valHsi150: valHsi150,
                   valHsni130: valHsni130,
                   valHsni150: valHsni150,
-
-                  // salaireBrut: salaireBrut,
                 } as IBulletinDePaieProps),
-              )
-
-              console.log(
-                // valHsni130,
-                // valHsni150,
-                // valHsi130,
-                // valHsi150,
-                // valHdim,
-                valHs30,
               )
             }
           }
