@@ -124,6 +124,7 @@ const ValidePaie = () => {
               const totalHdim = heureCalculator.getTotalHdim()
               const totalHFerie = heureCalculator.getTotalHFerie()
               const totalHsni130 = heureCalculator.getTotalHsni130()
+              const totalHsni150 = heureCalculator.getTotalHsni150()
 
               console.log(
                 // totalHnormal,
@@ -137,7 +138,8 @@ const ValidePaie = () => {
                 // totalHsNuitOccas,
                 // totalHdim,
                 // totalHFerie,
-                totalHsni130,
+                // totalHsni130,
+                totalHsni150,
               )
 
               const calculPaie = new CalculPaie_v2()
@@ -146,8 +148,12 @@ const ValidePaie = () => {
               calculPaie.setTauxHoraire(173.33)
 
               const valHsni130 = calculPaie.calculateValHsni130(totalHsni130)
+              const valHsni150 = calculPaie.calculateValHsni150(totalHsni150)
 
-              console.log(valHsni130)
+              console.log(
+                // valHsni130,
+                valHsni150,
+              )
             }
           }
         } catch (error) {

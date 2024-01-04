@@ -62,6 +62,21 @@ class CalculPaie_v2 {
 
     return this.est_cadre ? 0 : valHsni130
   }
+  setValHsni130(valHsni130: number): void {
+    this.valHsni130 = valHsni130
+  }
+  getValHsni130(): number {
+    return this.valHsni130
+  }
+
+  public calculateValHsni150(hsni150: number): number {
+    let valHsni150 = 0
+    let tauxHoraire = this.calculateTauxHoraire()
+    if (hsni150 > 0) {
+      valHsni150 = this.roundToTwoDecimal((tauxHoraire * hsni150 * 150) / 100)
+    }
+    return valHsni150
+  }
 
   //   UTILITYES
   private roundToTwoDecimal(val) {
