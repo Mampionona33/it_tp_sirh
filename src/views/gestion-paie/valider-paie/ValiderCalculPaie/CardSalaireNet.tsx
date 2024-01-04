@@ -39,10 +39,23 @@ const Body = () => {
       osie: osie,
       valHsni130: valHsni130,
       valHsni150: valHsni150,
-      salaireBrute: salaireBrut,
     })
+    const baseIrsaArrondi = calculPaie.calculateBaseIrsaArrondi(baseIrsa)
 
-    dispatch(setBulletinDePaie({ cnaps: cnaps, osie: osie, baseIrsa: baseIrsa }))
+    const irsaAPayer = calculPaie.calculateIrsaParTranche(baseIrsaArrondi)
+
+    const salaireNet = calculPaie.caluclateSalaireNet(irsaAPayer)
+
+    dispatch(
+      setBulletinDePaie({
+        cnaps: cnaps,
+        osie: osie,
+        baseIrsa: baseIrsa,
+        baseIrsaArrondi: baseIrsaArrondi,
+        irsaAPayer: irsaAPayer,
+        salaireNet: salaireNet,
+      }),
+    )
   }, [plafondSME, salaireBrut, tauxCnaps, valHsni130, valHsni150, dispatch])
 
   useEffect(() => {

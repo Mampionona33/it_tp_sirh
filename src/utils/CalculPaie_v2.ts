@@ -230,6 +230,42 @@ class CalculPaie_v2 {
     return baseIrsa
   }
 
+  public calculateBaseIrsaArrondi(baseIrsa: number): number {
+    return Math.floor(baseIrsa / 100) * 100
+  }
+
+  // Calcul IRSA
+  private isTranche_1(baseIrsaArrondi: number): boolean {
+    return baseIrsaArrondi >= 350001 && baseIrsaArrondi <= 400000
+  }
+  private isTranche_2(baseIrsaArrondi: number): boolean {
+    return baseIrsaArrondi >= 400001 && baseIrsaArrondi <= 500000
+  }
+  private isTranche_3(baseIrsaArrondi: number): boolean {
+    return baseIrsaArrondi >= 500001 && baseIrsaArrondi <= 600000
+  }
+  public calculateIrsaParTranche(baseIrsaArrondi: number): number {
+    let irsaParTranche = 0
+    if (this.isTranche_1(baseIrsaArrondi)) {
+      irsaParTranche = (baseIrsaArrondi - 350000) * 0.05
+    } else if (this.isTranche_2(baseIrsaArrondi)) {
+      irsaParTranche = 50000 * 0.05 + (baseIrsaArrondi - 400001) * 0.1
+    } else if (this.isTranche_3(baseIrsaArrondi)) {
+      irsaParTranche = 50000 * 0.05 + 100000 * 0.1 + (baseIrsaArrondi - 500001) * 0.15
+    } else {
+      irsaParTranche =
+        50000 * 0.05 + 100000 * 0.1 + 100000 * 0.15 + (baseIrsaArrondi - 600001) * 0.2
+    }
+    if (irsaParTranche < 2000) {
+      irsaParTranche = 2000
+    }
+    return irsaParTranche
+  }
+
+  public caluclateSalaireNet(irsaAPayer: number): number {
+    return this.roundToTwoDecimal(this.salaireBrut - irsaAPayer)
+  }
+
   //   UTILITYES
   private roundToTwoDecimal(val) {
     return Math.round(val * 100) / 100
