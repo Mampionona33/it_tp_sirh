@@ -6,9 +6,13 @@ import { addNotification } from 'src/redux/notificationStack/notificationStackRe
 import { fetchAllCotisations } from 'src/redux/cotisations/cotisationsActions'
 import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
 import { fetchCategorieEmployes } from '@src/redux/categorieEmploye/CategorieEmployeActions'
+import { useLocation } from 'react-router-dom'
+import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
 const DefaultLayout = () => {
   const dispatch = useDispatch()
+  const location = useLocation()
+  const pathName = location.pathname
   const employeur = useSelector((store) => store.employeur.employeur)
   const errorOnFetchEmployeur = useSelector((store) => store.employeur.error)
   const [createErrorNotification, setCreateErrorNotification] = useState(false)

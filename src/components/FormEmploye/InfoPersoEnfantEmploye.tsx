@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
@@ -23,18 +23,7 @@ interface IFormEnfantsProps {
 const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
   const dispatch = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
-
-  const [formData, setFormData] = useState<IEnfantEmploye>(
-    formEmploye.enfant.find((enfant) => enfant.id === index) || {
-      id: index,
-      nom: '',
-      prenom: '',
-      date_naissance: '',
-      lieu_naissance: '',
-      genre_enfant: EnumGenre.MASCULIN,
-      certificat: EnumCertificatEnfant.AUCUN,
-    },
-  )
+  const enfant = formEmploye.enfant.find((enfant) => enfant.id === index)
 
   const idEnfant = formEmploye.enfant.find((enfant) => enfant.id === index).id
 
@@ -75,12 +64,41 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
     )
   }
 
+  const initialFormData: IEnfantEmploye = useMemo(() => {
+    return {
+      id: index,
+      nom: '',
+      prenom: '',
+      date_naissance: '',
+      lieu_naissance: '',
+      genre_enfant: EnumGenre.MASCULIN,
+      certificat: EnumCertificatEnfant.AUCUN,
+    }
+  }, [index])
+
+  const [formData, setFormData] = useState<IEnfantEmploye>(enfant || initialFormData)
+
+  useEffect(() => {
+    setFormData(enfant)
+  }, [enfant])
+
   const optionCertificat: { label: string; value: EnumCertificatEnfant }[] = [
     { label: '---', value: EnumCertificatEnfant.AUCUN },
     { label: 'Certificat de vie', value: EnumCertificatEnfant.VIE },
     { label: 'Certificat de scolarité', value: EnumCertificatEnfant.SCOLARITE },
     { label: 'Certificat de médical', value: EnumCertificatEnfant.MEDICAL },
   ]
+
+  const handleCertificatChange = (selectedOption: {
+    label: string
+    value: EnumCertificatEnfant
+  }) => {
+    dispatch(
+      setFormEmploye({
+        enfant: formEmploye.enfant.map((enf) => ({ ...enf, certificat: selectedOption.value })),
+      }),
+    )
+  }
 
   const inputs: IInputWithLabelProps[] = [
     {
@@ -129,12 +147,12 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
     {
       id: `certificat_${idEnfant}`,
       label: 'Certificat',
-      name: 'certificat',
-      value: formData.certificat,
+      name: `certificat_enfant_${idEnfant}`,
+      value: formData.certificat || EnumCertificatEnfant.AUCUN,
       type: 'select',
       placeholder: 'Certificat',
       options: optionCertificat,
-      onChange: (ev) => handleInputChange(ev, index),
+      onSelectChange: handleCertificatChange,
     },
     {
       id: `genre_enfant_${idEnfant}`,
