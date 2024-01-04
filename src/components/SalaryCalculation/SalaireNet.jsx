@@ -1,21 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector } from 'react-redux'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
 import useFetchCotisations from 'src/assets/hooks/useFetchCotisations'
+import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 
-const SalaireNet = () => {
-  useFetchCotisations()
-  const title = 'Salaire net'
-  const salaireBrut = useSelector((state) => state.bulletinDePaie.salaireBrut)
-  const cnaps = useSelector((state) => state.bulletinDePaie.cnaps)
-  const omsi = useSelector((state) => state.bulletinDePaie.omsi)
-  const valHsni130 = useSelector((state) => state.bulletinDePaie.valHsni130)
-  const valHsni150 = useSelector((state) => state.bulletinDePaie.valHsni150)
-  const baseIrsa = useSelector((state) => state.bulletinDePaie.baseIrsa)
-  const baseIrsaArrondi = useSelector((state) => state.bulletinDePaie.baseIrsaArrondi)
-  const irsaAPayer = useSelector((state) => state.bulletinDePaie.irsaAPayer)
-  const salaireNet = useSelector((state) => state.bulletinDePaie.salaireNet)
+const Body = () => {
+  const { salaireBrut, cnaps, omsi, baseIrsa, valHsni130, valHsni150, baseIrsaArrondi } =
+    useSelector((state) => state.bulletinDePaie)
+
+  useEffect(() => {
+    const calculPaie = new CalculPaie_v2()
+    calculPaie.setSalaireBrut(salaireBrut)
+    
+  }, [salaireBrut])
 
   const data =
     [
@@ -62,26 +60,28 @@ const SalaireNet = () => {
         ),
       },
     ] || []
+  return (
+    <>
+      <table className="table-auto">
+        <tbody>
+          {data.map((item, index) => (
+            <tr
+              className="flex flex-wrap justify-between border-b border-customRed-100"
+              key={index}
+            >
+              <td className="text-left py-2 px-4 font-medium">{item.title}</td>
+              <td className="py-2 pl-8 px-4 text-right">{item.value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
+}
 
-  const Body = () => {
-    return (
-      <>
-        <table className="table-auto">
-          <tbody>
-            {data.map((item, index) => (
-              <tr
-                className="flex flex-wrap justify-between border-b border-customRed-100"
-                key={index}
-              >
-                <td className="text-left py-2 px-4 font-medium">{item.title}</td>
-                <td className="py-2 pl-8 px-4 text-right">{item.value}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </>
-    )
-  }
+const SalaireNet = () => {
+  useFetchCotisations()
+  const title = 'Salaire net'
 
   return (
     <>

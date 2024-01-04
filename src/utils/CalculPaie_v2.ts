@@ -14,7 +14,12 @@ export interface CalculateSalaireBrutParams {
   totalDeduction: number
   rappel: number
 }
-
+export interface calculateCnapsParams {
+  salaireBrut: number
+  plafondSME: number
+  taux: number
+  
+}
 class CalculPaie_v2 {
   private salaireBase: number
   private plafondSME: number
@@ -165,6 +170,12 @@ class CalculPaie_v2 {
     }
 
     return salaireBrut
+  }
+
+  public calulateCnaps(): number {
+    let cnaps = 0
+
+    return cnaps
   }
 
   //   UTILITYES
