@@ -18,21 +18,32 @@ const Body = () => {
     irsaAPayer,
     salaireNet,
     plafondSME,
+    tauxCnaps,
   } = useAppSelector((store) => store.bulletinDePaie)
 
   const dispatch = useAppDispatch()
 
   const updateBulletinDePaie = useCallback(() => {
     const calculPaie = new CalculPaie_v2()
+    calculPaie.setSalaireBrut(salaireBrut)
 
     const cnaps = calculPaie.calulateCnaps({
-      taux: 0.1,
-      plafondSME: plafondSME || 1940000,
-      salaireBrut: salaireBrut,
+      taux: tauxCnaps || 0.01,
+      plafondSME: plafondSME || 1910400,
+    })
+    const osie = calculPaie.calculOsie({
+      taux: 0.01,
+    })
+    const baseIrsa = calculPaie.calculBaseIrsa({
+      cnaps: cnaps,
+      osie: osie,
+      valHsni130: valHsni130,
+      valHsni150: valHsni150,
+      salaireBrute: salaireBrut,
     })
 
-    dispatch(setBulletinDePaie({ cnaps: cnaps }))
-  }, [plafondSME, salaireBrut, dispatch])
+    dispatch(setBulletinDePaie({ cnaps: cnaps, osie: osie, baseIrsa: baseIrsa }))
+  }, [plafondSME, salaireBrut, tauxCnaps, valHsni130, valHsni150, dispatch])
 
   useEffect(() => {
     updateBulletinDePaie()

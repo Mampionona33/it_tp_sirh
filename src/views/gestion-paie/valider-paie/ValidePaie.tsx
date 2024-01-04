@@ -188,24 +188,6 @@ const ValidePaie = () => {
               )
 
               console.log(
-                // totalHnormal,
-                // totalHTravailEffectif,
-                // tableauHsHebdo,
-                // tableauHs130Hebdo,
-                // tableauHs150Hebdo,
-                // totalHs130Monsuel,
-                // totalHs150Monsuel,
-                // totalHsNuitHabit,
-                // totalHsNuitOccas,
-                // totalHdim,
-                // totalHFerie,
-                // totalHsni130,
-                // totalHsni150,
-                // totalHsi130,
-                // totalHsi150,
-                totalHs30,
-              )
-              console.log(
                 // valHsni130,
                 // valHsni150,
                 // valHsi130,

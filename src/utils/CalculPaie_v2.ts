@@ -20,10 +20,22 @@ export interface calculateCnapsParams {
   taux: number
 }
 export interface calculcnapsParams {
-  salaireBrut: number
   plafondSME: number
   taux: number
 }
+
+export interface calculOsieParams {
+  taux: number
+}
+
+export interface calculBaseIrsaParams {
+  cnaps: number
+  osie: number
+  valHsni130: number
+  valHsni150: number
+  salaireBrute?: number
+}
+
 class CalculPaie_v2 {
   private salaireBase: number
   private plafondSME: number
@@ -47,6 +59,14 @@ class CalculPaie_v2 {
     this.tauxHoraire = 173.33
     this.est_cadre = false
     this.plafondSME = 1910400
+    this.salaireBrut = 0
+  }
+
+  setSalaireBrut(salaireBrut: number): void {
+    this.salaireBrut = salaireBrut
+  }
+  getSalaireBrut(): number {
+    return this.salaireBrut
   }
 
   setPlafondSME(plafondSME: number): void {
@@ -178,12 +198,36 @@ class CalculPaie_v2 {
 
   public calulateCnaps(params: calculcnapsParams): number {
     let cnaps = 0
-    if (params.salaireBrut >= params.plafondSME) {
-      cnaps = params.plafondSME
+    if (this.salaireBrut >= params.plafondSME) {
+      cnaps = this.roundToTwoDecimal(params.plafondSME * params.taux)
     } else {
-      cnaps = this.roundToTwoDecimal(params.salaireBrut * params.taux)
+      cnaps = this.roundToTwoDecimal(this.salaireBrut * params.taux)
     }
     return cnaps
+  }
+
+  public calculOsie(params: calculOsieParams): number {
+    return this.roundToTwoDecimal(this.salaireBrut * params.taux)
+  }
+
+  public calculBaseIrsa(params: calculBaseIrsaParams): number {
+    console.log(this.salaireBrut, params.cnaps, params.osie, params.valHsni130, params.valHsni150)
+
+    let baseIrsa = 0
+
+    if (params.salaireBrute) {
+      baseIrsa = this.roundToTwoDecimal(
+        params.salaireBrute - params.cnaps - params.osie - params.valHsni130 - params.valHsni150,
+      )
+      baseIrsa = Math.max(baseIrsa, 0)
+    } else if (this.salaireBrut) {
+      baseIrsa = this.roundToTwoDecimal(
+        this.salaireBrut - params.cnaps - params.osie - params.valHsni130 - params.valHsni150,
+      )
+      baseIrsa = Math.max(baseIrsa, 0)
+    }
+
+    return baseIrsa
   }
 
   //   UTILITYES
