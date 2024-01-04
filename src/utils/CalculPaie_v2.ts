@@ -211,8 +211,6 @@ class CalculPaie_v2 {
   }
 
   public calculBaseIrsa(params: calculBaseIrsaParams): number {
-    console.log(this.salaireBrut, params.cnaps, params.osie, params.valHsni130, params.valHsni150)
-
     let baseIrsa = 0
 
     if (params.salaireBrute) {
