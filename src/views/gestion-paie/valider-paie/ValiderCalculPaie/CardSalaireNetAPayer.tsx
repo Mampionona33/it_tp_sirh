@@ -54,8 +54,6 @@ const Body = () => {
     updateBulletinDePaie()
   }, [updateBulletinDePaie])
 
-  // console.log(valAllocationEnfantsEmploye)
-
   return (
     <div className="w-full text-sm">
       <CardRow
