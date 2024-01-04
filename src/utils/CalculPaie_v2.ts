@@ -77,6 +77,22 @@ class CalculPaie_v2 {
     return this.est_cadre ? 0 : valHsi150
   }
 
+  public calculateValHs30(hs30: number): number {
+    let valHs30 = 0
+    let tauxHoraire = this.calculateTauxHoraire()
+    valHs30 = this.roundToTwoDecimal((tauxHoraire * hs30 * 30) / 100)
+    return this.est_cadre ? 0 : valHs30
+  }
+
+  public calculateValHdim(totalHdim: number): number {
+    let valHdim = 0
+    let tauxHoraire = this.calculateTauxHoraire()
+
+    valHdim = this.roundToTwoDecimal((tauxHoraire * totalHdim * 40) / 100)
+
+    return this.est_cadre ? 0 : valHdim
+  }
+
   //   UTILITYES
   private roundToTwoDecimal(val) {
     return Math.round(val * 100) / 100

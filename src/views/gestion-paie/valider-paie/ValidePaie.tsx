@@ -138,12 +138,12 @@ const ValidePaie = () => {
                 // totalHs150Monsuel,
                 // totalHsNuitHabit,
                 // totalHsNuitOccas,
-                // totalHdim,
+                totalHdim,
                 // totalHFerie,
                 // totalHsni130,
                 // totalHsni150,
                 // totalHsi130,
-                totalHsi150,
+                // totalHsi150,
               )
 
               const calculPaie = new CalculPaie_v2()
@@ -155,12 +155,14 @@ const ValidePaie = () => {
               const valHsni150 = calculPaie.calculateValHsni150(totalHsni150)
               const valHsi130 = calculPaie.calculateValHsi130(totalHsi130)
               const valHsi150 = calculPaie.calculateValHsi150(totalHsi150)
+              const valHdim = calculPaie.calculateValHdim(totalHdim)
 
               console.log(
                 // valHsni130,
                 // valHsni150,
                 // valHsi130,
-                valHsi150,
+                // valHsi150,
+                valHdim,
               )
             }
           }

@@ -28,6 +28,7 @@ class CalculHeures_v2 {
   private totalHsni150: number
   private totalHsi130: number
   private totalHsi150: number
+  private totalHdim: number
 
   constructor() {
     this.heuresEmploye = []
@@ -50,6 +51,7 @@ class CalculHeures_v2 {
     this.totalHsni150 = 0
     this.totalHsi130 = 0
     this.totalHsi150 = 0
+    this.totalHdim = 0
   }
 
   setTravailleurDeNuit(travailleurDeNuit: boolean): void {
