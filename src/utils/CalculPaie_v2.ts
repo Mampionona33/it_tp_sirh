@@ -1,3 +1,4 @@
+import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import { IHeuresEmploye } from '@src/interfaces/interfaceHeuresEmploye'
 import { es } from 'date-fns/locale'
 
@@ -292,6 +293,12 @@ class CalculPaie_v2 {
     )
 
     return salaireNetAPayer
+  }
+
+  public calculAllocationFamilliale(salarie: IEmploye): number {
+    let allocationFamilliale = 0
+    console.log(salarie)
+    return allocationFamilliale
   }
 
   //   UTILITYES
