@@ -1,5 +1,6 @@
-import { IEmploye } from '@src/interfaces/interfaceEmploye'
+import { EnumCertificatEnfant, IEmploye } from '@src/interfaces/interfaceEmploye'
 import { IHeuresEmploye } from '@src/interfaces/interfaceHeuresEmploye'
+import { differenceInYears, intervalToDuration, parse } from 'date-fns'
 import { es } from 'date-fns/locale'
 
 export interface CalculateSalaireBrutParams {
@@ -43,6 +44,11 @@ export interface calculSalaireNetAPayerParams {
   totalIndemnite: number
   totalAvantagesNature: number
   allocationFamille: number
+}
+
+export interface calculAllocationParams {
+  salarie: IEmploye
+  montantAllocationParEnfant: number
 }
 
 class CalculPaie_v2 {
@@ -295,10 +301,40 @@ class CalculPaie_v2 {
     return salaireNetAPayer
   }
 
-  public calculAllocationFamilliale(salarie: IEmploye): number {
-    let allocationFamilliale = 0
-    console.log(salarie)
-    return allocationFamilliale
+  private calculateNombreEnfantEligible(salarie: IEmploye): number {
+    let nombreEnfantEligible = 0
+
+    if (salarie.enfant) {
+      for (const enfant of salarie.enfant) {
+        const dateNaissance = parse(enfant.date_naissance, 'yyyy-MM-dd', new Date())
+        const age = differenceInYears(new Date(), dateNaissance)
+
+        if (enfant.certificat === EnumCertificatEnfant.VIE && age < 6) {
+          nombreEnfantEligible++
+        } else if (enfant.certificat === EnumCertificatEnfant.SCOLARITE && age >= 6 && age <= 21) {
+          nombreEnfantEligible++
+        } else if (enfant.certificat === EnumCertificatEnfant.MEDICAL && age > 6 && age <= 21) {
+          nombreEnfantEligible++
+        }
+      }
+    }
+
+    return nombreEnfantEligible
+  }
+  /**
+   * Calculates the allocation based on the given parameters.
+   *
+   * @param {calculAllocationParams} params - The parameters for the calculation.
+   * @return {number} The calculated allocation.
+   */
+  public calculateAllocationFamilliale(params: calculAllocationParams): number {
+    let allocation = 0
+    let nombreEnfantEligible = this.calculateNombreEnfantEligible(params.salarie)
+    // console.log(nombreEnfantEligible)
+
+    allocation = params.montantAllocationParEnfant * nombreEnfantEligible
+    console.log(allocation)
+    return allocation
   }
 
   //   UTILITYES

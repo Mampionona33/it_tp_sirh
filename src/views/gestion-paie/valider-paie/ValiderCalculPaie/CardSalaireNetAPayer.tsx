@@ -7,13 +7,21 @@ import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const Body = () => {
-  const { salaireNet, totalIndemnite, avance, totalAvantages, salaireNetAPayer, salarie } =
-    useAppSelector((store) => store.bulletinDePaie)
+  const {
+    salaireNet,
+    totalIndemnite,
+    avance,
+    totalAvantages,
+    salaireNetAPayer,
+    salarie,
+    montantAllocationParEnfant,
+    valAllocationEnfantsEmploye,
+  } = useAppSelector((store) => store.bulletinDePaie)
   const dispatch = useAppDispatch()
 
   const updateBulletinDePaie = useCallback(() => {
     const calculPaie = new CalculPaie_v2()
-    const allocationFamille: number = calculPaie.calculAllocationFamilliale(salarie)
+
     const salaireNetAPayer = calculPaie.calculSalaireNetAPayer({
       salaireNet: salaireNet,
       totalIndemnite: totalIndemnite,
@@ -21,12 +29,32 @@ const Body = () => {
       totalAvantagesNature: totalAvantages,
       allocationFamille: 0,
     })
-    dispatch(setBulletinDePaie({ salaireNetAPayer: salaireNetAPayer }))
-  }, [salaireNet, totalIndemnite, avance, totalAvantages, salarie, dispatch])
+    const allocation = calculPaie.calculateAllocationFamilliale({
+      salarie: salarie,
+      montantAllocationParEnfant: montantAllocationParEnfant,
+    })
+
+    dispatch(
+      setBulletinDePaie({
+        salaireNetAPayer: salaireNetAPayer,
+        valAllocationEnfantsEmploye: allocation,
+      }),
+    )
+  }, [
+    salaireNet,
+    totalIndemnite,
+    avance,
+    totalAvantages,
+    salarie,
+    montantAllocationParEnfant,
+    dispatch,
+  ])
 
   useEffect(() => {
     updateBulletinDePaie()
   }, [updateBulletinDePaie])
+
+  // console.log(valAllocationEnfantsEmploye)
 
   return (
     <div className="w-full text-sm">
@@ -49,7 +77,7 @@ const Body = () => {
       <CardRow
         className="border-b border-b-customBlue-100"
         cell1="Allocation familiale"
-        cell3={salaireNet}
+        cell3={valAllocationEnfantsEmploye}
       />
       <CardRow
         className="border-b border-b-customBlue-100"

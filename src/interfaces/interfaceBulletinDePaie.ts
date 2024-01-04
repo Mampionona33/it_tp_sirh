@@ -11,9 +11,11 @@ export interface IBulletinDePaieProps {
   }
   dateSelectionne?: string
   salarie?: IEmploye
+  montantAllocationParEnfant?: number
   dateDeVirement: string | number
   salaireDeBase: number
   totalHn: number
+  valAllocationEnfantsEmploye?: number
   totalHs: number
   totalHs130: number
   totalHs150: number
