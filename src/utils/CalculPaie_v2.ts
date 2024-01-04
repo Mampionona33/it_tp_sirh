@@ -19,6 +19,11 @@ export interface calculateCnapsParams {
   plafondSME: number
   taux: number
 }
+export interface calculcnapsParams {
+  salaireBrut: number
+  plafondSME: number
+  taux: number
+}
 class CalculPaie_v2 {
   private salaireBase: number
   private plafondSME: number
@@ -171,9 +176,13 @@ class CalculPaie_v2 {
     return salaireBrut
   }
 
-  public calulateCnaps(): number {
+  public calulateCnaps(params: calculcnapsParams): number {
     let cnaps = 0
-
+    if (params.salaireBrut >= params.plafondSME) {
+      cnaps = params.plafondSME
+    } else {
+      cnaps = this.roundToTwoDecimal(params.salaireBrut * params.taux)
+    }
     return cnaps
   }
 
