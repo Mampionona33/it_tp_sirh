@@ -18,7 +18,6 @@ export interface calculateCnapsParams {
   salaireBrut: number
   plafondSME: number
   taux: number
-  
 }
 class CalculPaie_v2 {
   private salaireBase: number

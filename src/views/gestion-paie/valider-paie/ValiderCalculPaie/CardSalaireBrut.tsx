@@ -1,18 +1,14 @@
 import CustomSection from '@src/components/CustomSection'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import formatAriaryMga from '@src/utils/formatAriaryMga'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import CardRow from './CardRow'
-import useSalaireNetAPayerUpdate from '@src/hooks/useSalaireNetAPayerUpdate'
-import calculPaie from '@src/utils/CalculPaie'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
-import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 
 const Body = () => {
   const { employeHours } = useAppSelector((store) => store.employeHours)
   const {
-    salarie,
     totalPrimeEtGratification,
     salaireDeBase,
     totalDeduction,
@@ -33,7 +29,6 @@ const Body = () => {
     totalHs50,
     totalHDim,
     totalHFerie,
-    totalIndemnite,
     salaireBrut,
   } = useAppSelector((store) => store.bulletinDePaie)
   const dispatch = useAppDispatch()
@@ -42,25 +37,45 @@ const Body = () => {
     return value.toFixed(2).toString().padStart(2, '0') + ' H'
   }
 
-  useEffect(() => {
-    const calculPaie = new CalculPaie_v2()
-    calculPaie.setSalaireBase(salaireDeBase)
-    const salaireBrut = calculPaie.calculateSalaireBrut({
-      rappel: rappel,
-      totalPrimeEtGratification: totalPrimeEtGratification,
-      totalDeduction: totalDeduction,
-      valHdim: valHdim,
-      valHs30: valHs30,
-      valHs50: valHs50,
-      valHFerie: valHFerie,
-      valHsi130: valHsi130,
-      valHsi150: valHsi150,
-      valHsni130: valHsni130,
-      valHsni150: valHsni150,
-    })
+  const updateBulletinDePaie = useCallback(() => {
+    return () => {
+      const calculPaie = new CalculPaie_v2()
+      calculPaie.setSalaireBase(salaireDeBase)
+      const salaireBrut = calculPaie.calculateSalaireBrut({
+        rappel,
+        totalPrimeEtGratification,
+        totalDeduction,
+        valHdim,
+        valHs30,
+        valHs50,
+        valHFerie,
+        valHsi130,
+        valHsi150,
+        valHsni130,
+        valHsni150,
+      })
 
-    dispatch(setBulletinDePaie({ salaireBrut: salaireBrut }))
-  }, [rappel, salaireDeBase, totalDeduction, totalPrimeEtGratification])
+      dispatch(setBulletinDePaie({ salaireBrut }))
+    }
+  }, [
+    rappel,
+    salaireDeBase,
+    totalDeduction,
+    totalPrimeEtGratification,
+    dispatch,
+    valHdim,
+    valHs30,
+    valHs50,
+    valHFerie,
+    valHsi130,
+    valHsi150,
+    valHsni130,
+    valHsni150,
+  ])
+
+  useEffect(() => {
+    updateBulletinDePaie()()
+  }, [updateBulletinDePaie])
 
   return (
     <div className="w-full text-sm">
