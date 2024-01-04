@@ -69,6 +69,15 @@ export interface IEnfantEmploye {
   date_naissance: string
   lieu_naissance: string
   genre_enfant: EnumGenre
+  certificat?: EnumCertificatEnfant
+}
+
+export enum EnumCertificatEnfant {
+  AUCUN = '',
+  VIE = 'vie',
+  DECE = 'dece',
+  SCOLARITE = 'scolarite',
+  MEDICAL = 'medical',
 }
 
 export enum EnumGenre {

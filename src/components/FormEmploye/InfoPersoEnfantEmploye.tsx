@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
-import { EnumGenre, IEnfantEmploye, genreOptions } from '@src/interfaces/interfaceEmploye'
+import {
+  EnumCertificatEnfant,
+  EnumGenre,
+  IEnfantEmploye,
+  genreOptions,
+} from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import {
   formEmployeAjoutEnfant,
@@ -27,6 +32,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       date_naissance: '',
       lieu_naissance: '',
       genre_enfant: EnumGenre.MASCULIN,
+      certificat: EnumCertificatEnfant.AUCUN,
     },
   )
 
@@ -68,6 +74,13 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       }),
     )
   }
+
+  const optionCertificat: { label: string; value: EnumCertificatEnfant }[] = [
+    { label: '---', value: EnumCertificatEnfant.AUCUN },
+    { label: 'Certificat de vie', value: EnumCertificatEnfant.VIE },
+    { label: 'Certificat de scolarité', value: EnumCertificatEnfant.SCOLARITE },
+    { label: 'Certificat de médical', value: EnumCertificatEnfant.MEDICAL },
+  ]
 
   const inputs: IInputWithLabelProps[] = [
     {
@@ -112,6 +125,16 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       onChange: (ev) => handleInputChange(ev, index),
       onInput: (ev) => handleInputChange(ev, index),
       placeholder: 'Toamasina...',
+    },
+    {
+      id: `certificat_${idEnfant}`,
+      label: 'Certificat',
+      name: 'certificat',
+      value: formData.certificat,
+      type: 'select',
+      placeholder: 'Certificat',
+      options: optionCertificat,
+      onChange: (ev) => handleInputChange(ev, index),
     },
     {
       id: `genre_enfant_${idEnfant}`,
