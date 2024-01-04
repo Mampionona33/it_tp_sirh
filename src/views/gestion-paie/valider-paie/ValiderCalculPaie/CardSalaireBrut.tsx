@@ -8,7 +8,6 @@ import calculPaie from '@src/utils/CalculPaie'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
-import CalculPaie from '@src/utils/CalculPaie'
 
 const Body = () => {
   const { employeHours } = useAppSelector((store) => store.employeHours)
@@ -37,122 +36,31 @@ const Body = () => {
     totalIndemnite,
     salaireBrut,
   } = useAppSelector((store) => store.bulletinDePaie)
+  const dispatch = useAppDispatch()
+
   const formatCell2 = (value: number) => {
     return value.toFixed(2).toString().padStart(2, '0') + ' H'
   }
 
-  // const calcul = useMemo(() => {
-  //   const calculPaie = new CalculPaie_v2(salaireDeBase)
-  //   const hsni130 = calculHeuresEmploye.getHsni130()
-  //   const est_cadre: boolean = salarie.categorie === 'hc'
+  useEffect(() => {
+    const calculPaie = new CalculPaie_v2()
+    calculPaie.setSalaireBase(salaireDeBase)
+    const salaireBrut = calculPaie.calculateSalaireBrut({
+      rappel: rappel,
+      totalPrimeEtGratification: totalPrimeEtGratification,
+      totalDeduction: totalDeduction,
+      valHdim: valHdim,
+      valHs30: valHs30,
+      valHs50: valHs50,
+      valHFerie: valHFerie,
+      valHsi130: valHsi130,
+      valHsi150: valHsi150,
+      valHsni130: valHsni130,
+      valHsni150: valHsni150,
+    })
 
-  //   const valHsni130 = calculPaie.calculateValHsni130(hsni130, est_cadre)
-
-  //   return {
-  //     hsni130,
-  //     valHsni130,
-  //   }
-  // }, [salaireDeBase, salarie])
-
-  // useEffect(() => {
-  //   const updateBulletinDePaie = async () => {
-  //     if (calcul) {
-  //       console.log(calcul.hsni130, calcul.valHsni130)
-
-  //       // Dispatch les mises à jour
-  //       // await dispatch(setBulletinDePaie({ hsni130: calcul.hsni130 }))
-  //       // await dispatch(setBulletinDePaie({ valHsni130: calcul.valHsni130 }))
-
-  //       // Votre logique supplémentaire ici, si nécessaire
-  //     }
-  //   }
-
-  //   updateBulletinDePaie()
-  // }, [calcul])
-
-  // const calcul = useMemo(() => {
-  //   calculHeuresEmploye.setHeuresMonsuelEmploye(employeHours)
-  //   salarie.categorie === 'hc' && calculHeuresEmploye.setEstCadre(true)
-  //   salarie.travail_de_nuit === EnumBoolean.OUI && calculHeuresEmploye.setTravailDeNuit(true)
-  //   const totalHn = calculHeuresEmploye.getTotalHnormale()
-  //   const totalHs30 = calculHeuresEmploye.getTotalTravailDeNuit30()
-  //   const totalHs50 = calculHeuresEmploye.getTotalTravailDeNuit50()
-  //   const totalHDim = calculHeuresEmploye.getTotalHdim()
-  //   const totalHs = calculHeuresEmploye.getTotalHsDuMois()
-  //   const totalHs130 = calculHeuresEmploye.getTotalHs130()
-  //   const totalHs150 = calculHeuresEmploye.getTotalHs150()
-  //   const hsni130 = calculHeuresEmploye.getHsni130()
-  //   const hsni150 = calculHeuresEmploye.getHsni150()
-  //   const hsi130 = calculHeuresEmploye.getHsi130()
-  //   const hsi150 = calculHeuresEmploye.getHsi150()
-  //   const totalHFerie = calculHeuresEmploye.getTotalHFerie()
-
-  //   const calculPaie = new CalculPaie(salaireDeBase)
-  //   salarie.categorie === 'hc' && calculPaie.setEstCadre(true)
-  //   calculPaie.setHsni130(hsni130)
-  //   calculPaie.setHsni150(hsni150)
-  //   calculPaie.setHsi130(hsi130)
-  //   calculPaie.setHsi150(hsi150)
-  //   calculPaie.setTotalHs30(totalHs30)
-  //   calculPaie.setTotalHs50(totalHs50)
-  //   calculPaie.setTotalHDim(totalHDim)
-  //   calculPaie.setTotalHFerie(totalHFerie)
-
-  //   const cnaps = calculPaie.getCnaps()
-  //   const osie = calculPaie.getOsie()
-  //   const valHsni130 = calculPaie.getValHsni130()
-  //   const valHsni150 = calculPaie.getValHsni150()
-  //   const valHsi130 = calculPaie.getValHsi130()
-  //   const valHsi150 = calculPaie.getValHsi150()
-  //   const valHs30 = calculPaie.getValHs30()
-  //   const valHs50 = calculPaie.getValHs50()
-  //   const valHdim = calculPaie.getValHdim()
-  //   const valHFerie = calculPaie.getValHFerie()
-  //   const salaireBrut = calculPaie.getSalaireBrut()
-  //   const baseIrsa = calculPaie.getBaseIrsa()
-  //   const baseIrsaArrondi = calculPaie.getBaseIrsaArrondi()
-  //   const irsaAPayer = calculPaie.getIrsaAPayer()
-  //   const salaireNet = calculPaie.getSalaireNet()
-  //   const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
-
-  //   return {
-  //     cnaps,
-  //     osie,
-  //     valHsni130,
-  //     valHsni150,
-  //     valHsi130,
-  //     valHsi150,
-  //     valHs30,
-  //     valHs50,
-  //     valHdim,
-  //     valHFerie,
-  //     salaireBrut,
-  //     baseIrsa,
-  //     baseIrsaArrondi,
-  //     irsaAPayer,
-  //     salaireNet,
-  //     salaireNetAPayer,
-  //     totalHFerie,
-  //     totalHs,
-  //     totalHs130,
-  //     totalHs150,
-  //     totalHn,
-  //     totalHs30,
-  //     totalHs50,
-  //     totalHDim,
-  //     hsni130,
-  //     hsni150,
-  //     hsi130,
-  //     hsi150,
-  //   }
-  // }, [employeHours, salaireDeBase, salarie])
-
-  // useEffect(() => {
-  //   const updateBulletindDePaie = async () => {}
-  //   if (calcul) {
-  //     updateBulletindDePaie()
-  //   }
-  // }, [calcul])
+    dispatch(setBulletinDePaie({ salaireBrut: salaireBrut }))
+  }, [rappel, salaireDeBase, totalDeduction, totalPrimeEtGratification])
 
   return (
     <div className="w-full text-sm">

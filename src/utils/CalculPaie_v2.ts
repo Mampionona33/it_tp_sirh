@@ -1,10 +1,37 @@
 import { IHeuresEmploye } from '@src/interfaces/interfaceHeuresEmploye'
+import { es } from 'date-fns/locale'
+
+export interface CalculateSalaireBrutParams {
+  valHsni130: number
+  valHsni150: number
+  valHsi130: number
+  valHsi150: number
+  valHs30: number
+  valHs50: number
+  valHdim: number
+  valHFerie: number
+  totalPrimeEtGratification: number
+  totalDeduction: number
+  rappel: number
+}
 
 class CalculPaie_v2 {
   private salaireBase: number
   private plafondSME: number
   private est_cadre: boolean
   private tauxHoraire: number
+  private rappel: number
+  private totalPrimeEtGratification: number
+  private totalDeduction: number
+  private valHsni130: number
+  private valHsni150: number
+  private valHsi130: number
+  private valHsi150: number
+  private valHs30: number
+  private valHs50: number
+  private valHdim: number
+  private valHFerie: number
+  private salaireBrut: number
 
   constructor() {
     this.salaireBase = 0
@@ -91,6 +118,53 @@ class CalculPaie_v2 {
     valHdim = this.roundToTwoDecimal((tauxHoraire * totalHdim * 40) / 100)
 
     return this.est_cadre ? 0 : valHdim
+  }
+
+  public calculateValHs50(totalHs50: number): number {
+    let valHs50 = 0
+    let tauxHoraire = this.calculateTauxHoraire()
+    valHs50 = this.est_cadre ? 0 : this.roundToTwoDecimal((tauxHoraire * totalHs50 * 50) / 100)
+
+    return valHs50
+  }
+
+  public calculateValHFerie(totalHFerie: number): number {
+    let valHFerie = 0
+    let tauxHoraire = this.calculateTauxHoraire()
+
+    valHFerie = this.est_cadre ? 0 : this.roundToTwoDecimal((tauxHoraire * totalHFerie * 100) / 100)
+    return valHFerie
+  }
+
+  /**
+   * Calculates the gross salary based on various input values.
+   *
+   * @param {CalculateSalaireBrutParams} params - Object containing the input values.
+   * @return {number} The calculated gross salary.
+   */
+  public calculateSalaireBrut(params: CalculateSalaireBrutParams): number {
+    let salaireBrut = 0
+
+    if (this.est_cadre) {
+      salaireBrut =
+        this.salaireBase + params.rappel + params.totalPrimeEtGratification - params.totalDeduction
+    } else {
+      salaireBrut =
+        this.salaireBase +
+        params.rappel +
+        params.valHsni130 +
+        params.valHsni150 +
+        params.valHsi130 +
+        params.valHsi150 +
+        params.valHs30 +
+        params.valHs50 +
+        params.valHdim +
+        params.valHFerie +
+        params.totalPrimeEtGratification -
+        params.totalDeduction
+    }
+
+    return salaireBrut
   }
 
   //   UTILITYES

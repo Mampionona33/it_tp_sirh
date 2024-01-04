@@ -28,6 +28,9 @@ class CalculHeures_v2 {
   private totalHsni150: number
   private totalHsi130: number
   private totalHsi150: number
+  private totalHs30NuitHabit: number
+  private totalHs50NuitOccas: number
+  private totalHsMonsuel: number
 
   constructor() {
     this.heuresEmploye = []
@@ -51,6 +54,9 @@ class CalculHeures_v2 {
     this.totalHsi130 = 0
     this.totalHsi150 = 0
     this.totalHdim = 0
+    this.totalHs30NuitHabit = 0
+    this.totalHs50NuitOccas = 0
+    this.totalHsMonsuel = 0
   }
 
   setTravailleurDeNuit(travailleurDeNuit: boolean): void {
@@ -367,10 +373,49 @@ class CalculHeures_v2 {
 
   private calculateTotalHs30NuitHabit(): number {
     let totalHs30 = 0
-    for(const item in this.heuresEmploye){
-      totalHs30 += item.hs_de_nuit
+    for (const item of this.heuresEmploye) {
+      if (this.travailleurDeNuit) {
+        totalHs30 += item.hs_de_nuit
+      }
     }
-    return totalHs30 
+    return this.estCadre ? 0 : totalHs30
+  }
+  setTotalHs30NuitHabit(totalHs30: number): void {
+    this.totalHs30NuitHabit = totalHs30
+  }
+  getTotalHs30NuitHabit(): number {
+    return this.calculateTotalHs30NuitHabit()
+  }
+
+  private calculateTotalHs50NuitOccas(): number {
+    let totalHs50 = 0
+    for (const item of this.heuresEmploye) {
+      if (!this.travailleurDeNuit) {
+        totalHs50 += item.hs_de_nuit
+      }
+    }
+    return this.estCadre ? 0 : totalHs50
+  }
+  setTotalHs50NuitOccas(totalHs50: number): void {
+    this.totalHs50NuitOccas = totalHs50
+  }
+  getTotalHs50NuitHabit(): number {
+    return this.calculateTotalHs50NuitOccas()
+  }
+
+  private calculateTotalHsMonsuel(): number {
+    let totalHsMonsuel = 0
+    for (const item of this.heuresEmploye) {
+      totalHsMonsuel +=
+        item.heure_de_travail > item.heure_normale ? item.heure_de_travail - item.heure_normale : 0
+    }
+    return this.estCadre ? 0 : totalHsMonsuel
+  }
+  setTotalHsMonsuel(totalHsMonsuel: number): void {
+    this.totalHsMonsuel = totalHsMonsuel
+  }
+  getTotalHsMonsuel(): number {
+    return this.calculateTotalHsMonsuel()
   }
 }
 

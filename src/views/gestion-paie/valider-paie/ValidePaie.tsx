@@ -27,11 +27,13 @@ import Loading from '@src/components/Loading'
 import CalculPaie from '@src/utils/CalculPaie'
 import CalculHeures_v2 from '@src/utils/CalculHeures_v2'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
   const isDateValidationexist = useDateValidationExist()
-  const { salaireDeBase, salarie } = useAppSelector((store) => store.bulletinDePaie)
+  const { salaireDeBase, salarie, rappel, totalPrimeEtGratification, totalDeduction } =
+    useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
   const { employeHours } = useAppSelector((store) => store.employeHours)
   const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
@@ -127,24 +129,9 @@ const ValidePaie = () => {
               const totalHsni150 = heureCalculator.getTotalHsni150()
               const totalHsi130 = heureCalculator.getTotalHsi130()
               const totalHsi150 = heureCalculator.getTotalHsi150()
-
-              console.log(
-                // totalHnormal,
-                // totalHTravailEffectif,
-                // tableauHsHebdo,
-                // tableauHs130Hebdo,
-                // tableauHs150Hebdo,
-                // totalHs130Monsuel,
-                // totalHs150Monsuel,
-                // totalHsNuitHabit,
-                // totalHsNuitOccas,
-                totalHdim,
-                // totalHFerie,
-                // totalHsni130,
-                // totalHsni150,
-                // totalHsi130,
-                // totalHsi150,
-              )
+              const totalHs30 = heureCalculator.getTotalHs30NuitHabit()
+              const totalHs50 = heureCalculator.getTotalHs50NuitHabit()
+              const totalHs = heureCalculator.getTotalHsMonsuel()
 
               const calculPaie = new CalculPaie_v2()
               const salaireDeBase = salarie.salaire_de_base
@@ -156,13 +143,75 @@ const ValidePaie = () => {
               const valHsi130 = calculPaie.calculateValHsi130(totalHsi130)
               const valHsi150 = calculPaie.calculateValHsi150(totalHsi150)
               const valHdim = calculPaie.calculateValHdim(totalHdim)
+              const valHs30 = calculPaie.calculateValHs30(totalHs30)
+              const valHs50 = calculPaie.calculateValHs50(totalHs50)
+              const valHFerie = calculPaie.calculateValHFerie(totalHFerie)
 
+              // const salaireBrut = calculPaie.calculateSalaireBrut({
+              //   rappel: rappel,
+              //   totalPrimeEtGratification: totalPrimeEtGratification,
+              //   totalDeduction: totalDeduction,
+              //   valHdim: valHdim,
+              //   valHs30: valHs30,
+              //   valHs50: valHs50,
+              //   valHFerie: valHFerie,
+              //   valHsi130: valHsi130,
+              //   valHsi150: valHsi150,
+              //   valHsni130: valHsni130,
+              //   valHsni150: valHsni150,
+              // })
+
+              dispatch(
+                setBulletinDePaie({
+                  totalHn: totalHnormal,
+                  totalHs: totalHs,
+                  hsi130: totalHsi130,
+                  hsi150: totalHsi150,
+                  hsni130: totalHsni130,
+                  hsni150: totalHsni150,
+                  totalHDim: totalHdim,
+                  totalHs30: totalHs30,
+                  totalHs50: totalHs50,
+                  totalHFerie: totalHFerie,
+
+                  valHdim: valHdim,
+                  valHs30: valHs30,
+                  valHs50: valHs50,
+                  valHFerie: valHFerie,
+                  valHsi130: valHsi130,
+                  valHsi150: valHsi150,
+                  valHsni130: valHsni130,
+                  valHsni150: valHsni150,
+
+                  // salaireBrut: salaireBrut,
+                } as IBulletinDePaieProps),
+              )
+
+              console.log(
+                // totalHnormal,
+                // totalHTravailEffectif,
+                // tableauHsHebdo,
+                // tableauHs130Hebdo,
+                // tableauHs150Hebdo,
+                // totalHs130Monsuel,
+                // totalHs150Monsuel,
+                // totalHsNuitHabit,
+                // totalHsNuitOccas,
+                // totalHdim,
+                // totalHFerie,
+                // totalHsni130,
+                // totalHsni150,
+                // totalHsi130,
+                // totalHsi150,
+                totalHs30,
+              )
               console.log(
                 // valHsni130,
                 // valHsni150,
                 // valHsi130,
                 // valHsi150,
-                valHdim,
+                // valHdim,
+                valHs30,
               )
             }
           }
