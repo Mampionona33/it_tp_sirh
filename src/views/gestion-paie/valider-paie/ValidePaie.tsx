@@ -125,6 +125,7 @@ const ValidePaie = () => {
               const totalHFerie = heureCalculator.getTotalHFerie()
               const totalHsni130 = heureCalculator.getTotalHsni130()
               const totalHsni150 = heureCalculator.getTotalHsni150()
+              const totalHsi130 = heureCalculator.getTotalHsi130()
 
               console.log(
                 // totalHnormal,
@@ -132,14 +133,15 @@ const ValidePaie = () => {
                 // tableauHsHebdo,
                 // tableauHs130Hebdo,
                 // tableauHs150Hebdo,
-                // totalHs130Monsuel,
+                totalHs130Monsuel,
                 // totalHs150Monsuel,
                 // totalHsNuitHabit,
                 // totalHsNuitOccas,
                 // totalHdim,
                 // totalHFerie,
-                // totalHsni130,
-                totalHsni150,
+                totalHsni130,
+                // totalHsni150,
+                totalHsi130,
               )
 
               const calculPaie = new CalculPaie_v2()
@@ -149,10 +151,12 @@ const ValidePaie = () => {
 
               const valHsni130 = calculPaie.calculateValHsni130(totalHsni130)
               const valHsni150 = calculPaie.calculateValHsni150(totalHsni150)
+              const valHsi130 = calculPaie.calculateValHsi130(totalHsi130)
 
               console.log(
                 // valHsni130,
-                valHsni150,
+                // valHsni150,
+                valHsi130,
               )
             }
           }

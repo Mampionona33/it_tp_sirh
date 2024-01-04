@@ -5,29 +5,21 @@ class CalculPaie_v2 {
   private plafondSME: number
   private est_cadre: boolean
   private tauxHoraire: number
-  private hsni130: number
-  private hsni150: number
-  private hsi130: number
-  private hsi150: number
-  private totalHDim: number
-  private totalPrimeEtAvantage: number
-  private totalDeduction: number
-  private salaireBrut: number
-  private tauxOsie: number
-  private tauxCnaps: number
-  private baseIrsa: number
-  private baseIrsaArrondi: number
-  private irsaAPayer: number
-  private avance: number
-  private totalHs50: number
-  private totalHs30: number
-  private valHsni130: number
+
   constructor() {
     this.salaireBase = 0
-    this.tauxHoraire = 0
-    this.valHsni130 = 0
+    this.tauxHoraire = 173.33
     this.est_cadre = false
+    this.plafondSME = 1910400
   }
+
+  setPlafondSME(plafondSME: number): void {
+    this.plafondSME = plafondSME
+  }
+  getPlafondSME(): number {
+    return this.plafondSME
+  }
+
   setSalaireBase(salaireBase: number): void {
     this.salaireBase = salaireBase
   }
@@ -56,26 +48,24 @@ class CalculPaie_v2 {
   public calculateValHsni130(hsni130: number): number {
     let valHsni130 = 0
     let tauxHoraire = this.calculateTauxHoraire()
-    if (hsni130 > 0) {
-      valHsni130 = this.roundToTwoDecimal((tauxHoraire * hsni130 * 130) / 100)
-    }
+    valHsni130 = this.roundToTwoDecimal((tauxHoraire * hsni130 * 130) / 100)
 
     return this.est_cadre ? 0 : valHsni130
-  }
-  setValHsni130(valHsni130: number): void {
-    this.valHsni130 = valHsni130
-  }
-  getValHsni130(): number {
-    return this.valHsni130
   }
 
   public calculateValHsni150(hsni150: number): number {
     let valHsni150 = 0
     let tauxHoraire = this.calculateTauxHoraire()
-    if (hsni150 > 0) {
-      valHsni150 = this.roundToTwoDecimal((tauxHoraire * hsni150 * 150) / 100)
-    }
-    return valHsni150
+    valHsni150 = this.roundToTwoDecimal((tauxHoraire * hsni150 * 150) / 100)
+
+    return this.est_cadre ? 0 : valHsni150
+  }
+
+  public calculateValHsi130(hsi130: number): number {
+    let valHsi130 = 0
+    let tauxHoraire = this.calculateTauxHoraire()
+    valHsi130 = this.roundToTwoDecimal((tauxHoraire * hsi130 * 130) / 100)
+    return this.est_cadre ? 0 : valHsi130
   }
 
   //   UTILITYES
