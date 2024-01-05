@@ -23,6 +23,9 @@ import { fetchHeureEmploye } from '@src/redux/employeHours/employeHoursActions'
 import CalculHeures_v2 from '@src/utils/CalculHeures_v2'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
+import AppModal from '@src/components/Modal/AppModal'
+import FormValidateCalculPaie from './FormValidateCalculPaie'
+import { setModalOpen } from '@src/redux/modal/modalReducer'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
@@ -177,11 +180,15 @@ const ValidePaie = () => {
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
     console.log(bulletinDePaie)
+    dispatch(setModalOpen())
   }
 
   return (
     <>
       <div>
+        <AppModal>
+          <FormValidateCalculPaie />
+        </AppModal>
         {isEmployeExist && isDateValidationexist ? (
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3 mt-2 mb-3">
