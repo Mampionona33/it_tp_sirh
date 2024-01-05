@@ -22,7 +22,7 @@ const employeesSlice = createSlice({
           const newEmployees = Object.values(action.payload)
 
           if (newEmployees.length > 0) {
-            state.list = state.list ? [...state.list, ...newEmployees] : newEmployees
+            state.list = state.list ? [...newEmployees] : newEmployees
             state.loading = 'succeeded'
           } else {
             state.loading = 'emptyList'
