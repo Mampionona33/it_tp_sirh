@@ -111,10 +111,6 @@ const ValidePaie = () => {
               const tableauHsHebdo = heureCalculator.getTableauHsHebdo()
               const tableauHs130Hebdo = heureCalculator.getTableauHs130Hebdo()
               const tableauHs150Hebdo = heureCalculator.getTableauHs150Hebdo()
-              const totalHs130Monsuel = heureCalculator.getTotalHs130Monsuel()
-              const totalHs150Monsuel = heureCalculator.getTotalHs150Monsuel()
-              // const totalHsNuitHabit = heureCalculator.getTotalHsNuitHabit()
-              // const totalHsNuitOccas = heureCalculator.getTotalHsNuitOccas()
               const totalHdim = heureCalculator.getTotalHdim()
               const totalHFerie = heureCalculator.getTotalHFerie()
               const totalHsni130 = heureCalculator.getTotalHsni130()
@@ -155,7 +151,7 @@ const ValidePaie = () => {
                   totalHTravailEffectif: totalHTravailEffectif,
                   tableauHsHebdo: tableauHsHebdo,
                   tableauHs130Hebdo: tableauHs130Hebdo,
-
+                  tableauHs150Hebdo: tableauHs150Hebdo,
                   valHdim: valHdim,
                   valHs30: valHs30,
                   valHs50: valHs50,
