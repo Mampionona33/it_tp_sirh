@@ -65,6 +65,10 @@ export interface IBulletinDePaieProps {
   retenuSalaire?: []
   retenuSalaireBrut?: []
   cotisations?: []
+  totalHTravailEffectif?: number
+  tableauHsHebdo?: []
+  tableauHs130Hebdo?: []
+  tableauHs150Hebdo?: []
 }
 
 export interface IIndemniteProps {

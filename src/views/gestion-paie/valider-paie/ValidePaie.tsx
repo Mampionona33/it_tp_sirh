@@ -107,12 +107,12 @@ const ValidePaie = () => {
               heureCalculator.setTravailleurDeNuit(travailleurDeNuit)
 
               const totalHnormal = heureCalculator.getTotalHnormale()
-              // const totalHTravailEffectif = heureCalculator.getTotalHTravailEffectif()
-              // const tableauHsHebdo = heureCalculator.getTableauHsHebdo()
-              // const tableauHs130Hebdo = heureCalculator.getTableauHs130Hebdo()
-              // const tableauHs150Hebdo = heureCalculator.getTableauHs150Hebdo()
-              // const totalHs130Monsuel = heureCalculator.getTotalHs130Monsuel()
-              // const totalHs150Monsuel = heureCalculator.getTotalHs150Monsuel()
+              const totalHTravailEffectif = heureCalculator.getTotalHTravailEffectif()
+              const tableauHsHebdo = heureCalculator.getTableauHsHebdo()
+              const tableauHs130Hebdo = heureCalculator.getTableauHs130Hebdo()
+              const tableauHs150Hebdo = heureCalculator.getTableauHs150Hebdo()
+              const totalHs130Monsuel = heureCalculator.getTotalHs130Monsuel()
+              const totalHs150Monsuel = heureCalculator.getTotalHs150Monsuel()
               // const totalHsNuitHabit = heureCalculator.getTotalHsNuitHabit()
               // const totalHsNuitOccas = heureCalculator.getTotalHsNuitOccas()
               const totalHdim = heureCalculator.getTotalHdim()
@@ -139,20 +139,6 @@ const ValidePaie = () => {
               const valHs50 = calculPaie.calculateValHs50(totalHs50)
               const valHFerie = calculPaie.calculateValHFerie(totalHFerie)
 
-              // const salaireBrut = calculPaie.calculateSalaireBrut({
-              //   rappel: rappel,
-              //   totalPrimeEtGratification: totalPrimeEtGratification,
-              //   totalDeduction: totalDeduction,
-              //   valHdim: valHdim,
-              //   valHs30: valHs30,
-              //   valHs50: valHs50,
-              //   valHFerie: valHFerie,
-              //   valHsi130: valHsi130,
-              //   valHsi150: valHsi150,
-              //   valHsni130: valHsni130,
-              //   valHsni150: valHsni150,
-              // })
-
               dispatch(
                 setBulletinDePaie({
                   totalHn: totalHnormal,
@@ -165,6 +151,10 @@ const ValidePaie = () => {
                   totalHs30: totalHs30,
                   totalHs50: totalHs50,
                   totalHFerie: totalHFerie,
+
+                  totalHTravailEffectif: totalHTravailEffectif,
+                  tableauHsHebdo: tableauHsHebdo,
+                  tableauHs130Hebdo: tableauHs130Hebdo,
 
                   valHdim: valHdim,
                   valHs30: valHs30,
