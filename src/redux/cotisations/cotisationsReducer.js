@@ -15,10 +15,17 @@ const cotisationSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAllCotisations.fulfilled, (state, action) => {
-      state.liste = action.payload
-      state.loadin = 'succeeded'
-    })
+    builder
+      .addCase(fetchAllCotisations.fulfilled, (state, action) => {
+        state.liste = action.payload
+        state.loading = 'succeeded'
+      })
+      .addCase(fetchAllCotisations.pending, (state) => {
+        state.loading = 'pending'
+      })
+      .addCase(fetchAllCotisations.rejected, (state) => {
+        state.loading = 'failed'
+      })
   },
 })
 

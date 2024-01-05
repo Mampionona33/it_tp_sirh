@@ -8,40 +8,57 @@ import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
 import { fetchCategorieEmployes } from '@src/redux/categorieEmploye/CategorieEmployeActions'
 import { useLocation } from 'react-router-dom'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
+import { useAppSelector } from '@src/hooks/useAppDispatch'
 
 const DefaultLayout = () => {
   const dispatch = useDispatch()
   const location = useLocation()
   const pathName = location.pathname
-  const employeur = useSelector((store) => store.employeur.employeur)
-  const errorOnFetchEmployeur = useSelector((store) => store.employeur.error)
-  const [createErrorNotification, setCreateErrorNotification] = useState(false)
+  const {
+    employeur,
+    loading: loadingEmployeur,
+    error: errorOnFetchEmployeur,
+  } = useAppSelector((store) => store.employeur)
+  const { loading: loadingCotisation, error: errorOnFetchCotisation } = useAppSelector(
+    (store) => store.cotisations,
+  )
+  const { list: listEmployees, loading: loadingListEmployees } = useAppSelector(
+    (store) => store.employeesList,
+  )
+  const { loading: loadingCategorieEmploye, error: errorOnFetchCategorieEmploye } = useAppSelector(
+    (store) => store.cateogieEmploye,
+  )
 
   useEffect(() => {
     let mount = true
 
     const fetchAllData = async () => {
       try {
-        const respEmployeur = await dispatch(fetcheEmpoyeur())
-        const respAllCotisations = await dispatch(fetchAllCotisations())
-        const respAllEmployees = await dispatch(fetchAllEmployees())
-        const respAllCategorieEmployes = await dispatch(fetchCategorieEmployes())
-
-        if (respEmployeur && respAllCotisations && respAllEmployees && respAllCategorieEmployes) {
-          console.log(respEmployeur, respAllCotisations, respAllEmployees, respAllCategorieEmployes)
+        if (loadingListEmployees === 'idle') {
+          const respAllEmployees = await dispatch(fetchAllEmployees())
+        }
+        if (loadingEmployeur === 'idle') {
+          const respCategorieEmployes = await dispatch(fetchCategorieEmployes())
+        }
+        if (loadingCotisation === 'idle') {
+          const respAllCotisations = await dispatch(fetchAllCotisations())
+        }
+        if (loadingCategorieEmploye === 'idle' && mount) {
+          const respAllCategorieEmployes = await dispatch(fetchCategorieEmployes())
         }
       } catch (error) {
         console.log(error)
       }
     }
-    if (mount && employeur.) {
+
+    if (mount) {
       fetchAllData()
     }
 
     return () => {
       mount = false
     }
-  }, [dispatch, employeur])
+  }, [dispatch, loadingListEmployees, loadingEmployeur, loadingCotisation, loadingCategorieEmploye])
 
   return (
     <div>
