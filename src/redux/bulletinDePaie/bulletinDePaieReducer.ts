@@ -110,10 +110,10 @@ const initialState: IBulletinDePaieProps = {
     autresAvantages: 0,
   },
   totalAvantages: 0,
-  ajoutSalaire: [],
-  retenuSalaire: [],
-  retenuSalaireBrut: [],
-  cotisations: [],
+  // ajoutSalaire: [],
+  // retenuSalaire: [],
+  // retenuSalaireBrut: [],
+  // cotisations: [],
 }
 
 const bulletinDePaieSlice = createSlice({

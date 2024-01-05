@@ -44,7 +44,6 @@ const List = () => {
         await dispatch(fetchAllEmployees())
         dispatch(resetBulletinDePaie())
         dispatch(resetParametreCalendrier())
-        dispatch(setBulletinDePaie({ ajoutSalaire: [] }))
         dispatch(setBulletinDePaie({ retenuSalaire: [] }))
         dispatch(fetchAllMouvementSalaire())
         dispatch(resetFormEmploye())

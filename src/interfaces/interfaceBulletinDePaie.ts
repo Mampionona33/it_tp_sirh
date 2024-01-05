@@ -61,10 +61,10 @@ export interface IBulletinDePaieProps {
   deductions?: IDeductionProps
   avantages?: IAvantageProps
   totalAvantages?: number
-  ajoutSalaire?: []
-  retenuSalaire?: []
-  retenuSalaireBrut?: []
-  cotisations?: []
+  // ajoutSalaire?: []
+  // retenuSalaire?: []
+  // retenuSalaireBrut?: []
+  // cotisations?: []
   totalHTravailEffectif?: number
   tableauHsHebdo?: []
   tableauHs130Hebdo?: []

@@ -29,6 +29,7 @@ const ValidePaie = () => {
   const isDateValidationexist = useDateValidationExist()
   const { salarie } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
+  const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
 
   const dispatch = useAppDispatch()
   const { dateValidation } = useParams()
@@ -173,11 +174,16 @@ const ValidePaie = () => {
     fetchData()
   }, [salarie, dateFinFormated, dateDebutFormated, dispatch])
 
+  const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault()
+    console.log(bulletinDePaie)
+  }
+
   return (
     <>
       <div>
         {isEmployeExist && isDateValidationexist ? (
-          <form action="">
+          <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3 mt-2 mb-3">
               <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
                 <CardIndemnites />
