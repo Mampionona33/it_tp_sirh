@@ -5,9 +5,7 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import CustomPagination from '../CustomPagination'
 import { IDataTableEmploye } from './interfaceDataTableEmploy'
-import TableHead from './TableHead'
 
 import { DebounceInput } from 'react-debounce-input'
 

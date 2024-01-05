@@ -41,12 +41,18 @@ const List = () => {
     let mount = true
     const fetchData = async () => {
       if (mount && dispatch) {
-        await dispatch(fetchAllEmployees())
         dispatch(resetBulletinDePaie())
         dispatch(resetParametreCalendrier())
         dispatch(setBulletinDePaie({ retenuSalaire: [] }))
         dispatch(fetchAllMouvementSalaire())
         dispatch(resetFormEmploye())
+
+        try {
+          // const response = await dispatch(fetchAllEmployees())
+          // console.log(response)
+        } catch (error) {
+          console.log(error)
+        }
       }
     }
 

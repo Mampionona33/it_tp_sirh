@@ -19,15 +19,23 @@ const DefaultLayout = () => {
 
   useEffect(() => {
     let mount = true
-    if (employeur.length === 0) {
-      if (mount) {
-        dispatch(fetcheEmpoyeur())
+
+    const fetchAllData = async () => {
+      try {
+        const respEmployeur = await dispatch(fetcheEmpoyeur())
+        const respAllCotisations = await dispatch(fetchAllCotisations())
+        const respAllEmployees = await dispatch(fetchAllEmployees())
+        const respAllCategorieEmployes = await dispatch(fetchCategorieEmployes())
+
+        if (respEmployeur && respAllCotisations && respAllEmployees && respAllCategorieEmployes) {
+          console.log(respEmployeur, respAllCotisations, respAllEmployees, respAllCategorieEmployes)
+        }
+      } catch (error) {
+        console.log(error)
       }
     }
-    if (mount) {
-      dispatch(fetchAllCotisations())
-      dispatch(fetchAllEmployees())
-      dispatch(fetchCategorieEmployes())
+    if (mount && employeur.) {
+      fetchAllData()
     }
 
     return () => {
