@@ -1,5 +1,3 @@
-import path from 'path'
-import fs from 'fs'
 import { Request, Response } from 'express'
 import { IBulletinDePaieProps } from 'interfaces/interfaceBulletinDePaie'
 
