@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { fetchHistoriquesPaie } from './historiqueDePaieAction'
 
 const initialState = {
   historiques: [],
+  annee: new Date().getFullYear(),
   loading: 'idle',
 }
 
@@ -14,8 +15,8 @@ const historiqueDePaieSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchHistoriquesPaie.fulfilled, (state, action) => {
-        state.historiques = action.payload.data
+      .addCase(fetchHistoriquesPaie.fulfilled, (state, action: PayloadAction<any>) => {
+        state.historiques = action.payload
         state.loading = 'succeeded'
       })
       .addCase(fetchHistoriquesPaie.pending, (state) => {
@@ -26,3 +27,5 @@ const historiqueDePaieSlice = createSlice({
       })
   },
 })
+
+export default historiqueDePaieSlice.reducer

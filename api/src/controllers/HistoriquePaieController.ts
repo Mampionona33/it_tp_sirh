@@ -8,10 +8,14 @@ class HistoriquePaieController {
   }
 
   getOne = (req: Request, res: Response) => {
-    const { id } = req.params
+    const { id, annee } = req.params
     const listBulletinDePaie: IBulletinDePaieProps[] = this.db['bulletinDePaie']
 
-    const data = listBulletinDePaie.filter((blt) => String(blt.salarie?.id) === id)
+    const data = listBulletinDePaie.filter(
+      (blt) =>
+        String(blt.salarie?.id) === id &&
+        new Date(blt.validation?.date ?? '').getFullYear() === parseInt(annee, 10),
+    )
 
     return res.status(200).send(data)
   }

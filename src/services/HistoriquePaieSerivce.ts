@@ -1,5 +1,10 @@
 import axios from 'axios'
 
+export interface IGetOneProps {
+  id: string | number
+  annee?: number
+}
+
 class HistoriquePaieService {
   private REACT_APP_API_BASE_URL: string
   private REACT_APP_API_BASE_URL_DEV: string
@@ -13,9 +18,10 @@ class HistoriquePaieService {
     this.login = 'lslisteemployes'
   }
 
-  async getOne(id: string | number) {
+  async getOne(params: IGetOneProps) {
+    const { id, annee = new Date().getFullYear() } = params
     try {
-      const resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/historique-paie/${id}`)
+      const resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/historique-paie/${id}/${annee}`)
       console.log(resp)
       return resp
     } catch (error) {

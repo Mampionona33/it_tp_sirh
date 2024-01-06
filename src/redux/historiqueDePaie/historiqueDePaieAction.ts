@@ -4,15 +4,16 @@ import { AxiosResponse } from 'axios'
 
 export interface IFetchHistoriqueBltnP {
   id: number | string
+  annee?: number
 }
 
 export const fetchHistoriquesPaie = createAsyncThunk(
   'historiques/fetch',
   async (params: IFetchHistoriqueBltnP, thunkAPI) => {
-    const { id } = params
+    const { id, annee = new Date().getFullYear() } = params
     try {
-      const res: AxiosResponse = await historiquePaieService.getOne(id)
-      return res
+      const response: AxiosResponse = await historiquePaieService.getOne({ id, annee })
+      return response.data // Retournez les données directement
     } catch (error) {
       throw error
     }
