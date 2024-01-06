@@ -83,6 +83,11 @@ export enum EnumGenre {
   FEMININ = 'feminin',
 }
 
+export interface IInputWithLabelOptionsProps {
+  label: string | number
+  value: string | number
+}
+
 export const genreOptions: IInputWithLabelOptionsProps[] = [
   { label: 'Masculin', value: EnumGenre.MASCULIN },
   { label: 'Feminin', value: EnumGenre.FEMININ },
@@ -92,11 +97,6 @@ export interface PrimeEtAvantagePermanent {
   id: number
   libelle: string
   montant: number
-}
-
-export interface IInputWithLabelOptionsProps {
-  label: string | number
-  value: string | number
 }
 
 export interface Depart {

@@ -1,15 +1,21 @@
+import path from 'path'
+import fs from 'fs'
 import { Request, Response } from 'express'
+import { IBulletinDePaieProps } from 'interfaces/interfaceBulletinDePaie'
 
 class HistoriquePaieController {
   private db: any
-  constructor(db: any) {
+  constructor(db: Object) {
     this.db = db
   }
 
-  getOne(req: Request, res: Response) {
-    console.log(req.params)
+  getOne = (req: Request, res: Response) => {
+    const { id } = req.params
+    const listBulletinDePaie: IBulletinDePaieProps[] = this.db['bulletinDePaie']
 
-    return res.status(200).send('ok')
+    const data = listBulletinDePaie.filter((blt) => String(blt.salarie?.id) === id)
+
+    return res.status(200).send(data)
   }
 }
 
