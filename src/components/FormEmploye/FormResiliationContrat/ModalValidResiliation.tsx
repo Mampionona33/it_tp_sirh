@@ -37,7 +37,7 @@ const ModalValidResiliation: React.FC<IModalValidResiliation> = ({ motif }) => {
       if (response) {
         dispatch(setModalClose())
         console.log(response.data)
-        // navigate('/employees/list')
+        navigate('/employees/list')
       }
     } catch (error) {
       console.error(error)
