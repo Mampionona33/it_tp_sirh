@@ -76,6 +76,7 @@ class EmployeeService {
           },
         },
       )
+      console.log(response.data)
       return response
     } catch (error) {
       console.error("Une erreur s'est produite lors de la requête :", error)
