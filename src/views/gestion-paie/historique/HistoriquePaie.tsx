@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from 'react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
-import { format } from 'date-fns'
+import { format, isExists } from 'date-fns'
 import ButtonLink, { ButtonLinkVariant } from '@src/components/buttons/ButtonLink'
 import { fr } from 'date-fns/locale'
 import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
@@ -75,9 +75,9 @@ const HistoriquePaie: React.FC = () => {
         }
       } catch (error) {}
     }
+    isEmployeExist && fetchHistorique()
 
     if (selectedEmploye !== null && selectedEmploye !== undefined) {
-      fetchHistorique()
       // console.log(selectedEmploye)
       dispatch(
         setBulletinDePaie({
@@ -86,7 +86,7 @@ const HistoriquePaie: React.FC = () => {
         } as IBulletinDePaieProps),
       )
     }
-  }, [selectedEmploye, dispatch, id])
+  }, [selectedEmploye, dispatch, id, isEmployeExist])
 
   const columnHelper = createColumnHelper<IHistoriquePaieTableProps>()
 
