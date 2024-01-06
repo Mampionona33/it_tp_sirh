@@ -3,12 +3,14 @@ import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/B
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import React, { useEffect } from 'react'
 import bulletinDePaieService from '@src/services/BulletinDePaieService'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { resetBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const FormValidateCalculPaie = () => {
   const dispatch = useAppDispatch()
   const { id } = useParams()
   const bullettinDePaie = useAppSelector((store) => store.bulletinDePaie)
+  const navigate = useNavigate()
 
   useEffect(() => {
     console.log(bullettinDePaie)
@@ -20,7 +22,11 @@ const FormValidateCalculPaie = () => {
       const resp = await bulletinDePaieService.create({ id, data: bullettinDePaie })
       console.log(resp)
 
-      dispatch(setModalClose())
+      if (resp.status === 201) {
+        dispatch(resetBulletinDePaie())
+        dispatch(setModalClose())
+        navigate(`/gestion-de-paie/historique/${id}`)
+      }
     } catch (error) {
       console.log(error)
       dispatch(setModalClose())

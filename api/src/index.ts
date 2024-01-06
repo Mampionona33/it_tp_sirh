@@ -7,6 +7,7 @@ import EmployeurControllers from '@controllers/EmployeurControllers'
 import SalaierControllers from '@controllers/SalariesControllers'
 import HeuresControllers from '@controllers/HeuresControllers'
 import CategorieEmployeControllers from '@controllers/CategorieEmployeControllers'
+import BulletinDePaieControllers from '@controllers/BulletinDePaieControllers'
 const cors = require('cors')
 
 const app = express()
@@ -29,6 +30,7 @@ const employeurController = new EmployeurControllers(db)
 const salarieController = new SalaierControllers(db)
 const heuresController = new HeuresControllers(db)
 const categorieEmployeController = new CategorieEmployeControllers(db)
+const bulletinDePaieController = new BulletinDePaieControllers(db)
 
 router.route('/login').post(authController.login)
 router.route('/mouvement-salaire').get(mouvementSalaireController.getAll)
@@ -41,6 +43,8 @@ router.route('/updatepersonnel/:id').post(salarieController.update)
 
 router.route('/heuressupplementaires').post(heuresController.getOne)
 router.route('/categorie-employe').get(categorieEmployeController.getAll)
+
+router.route('/bulletin-de-paie/ajout/:id').post(bulletinDePaieController.create)
 
 const PORT = process.env.PORT || 8000
 
