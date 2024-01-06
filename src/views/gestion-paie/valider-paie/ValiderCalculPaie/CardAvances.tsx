@@ -3,12 +3,15 @@ import React from 'react'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const Body = () => {
   const dispatch = useAppDispatch()
   const { avance } = useAppSelector((store) => store.bulletinDePaie)
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(setBulletinDePaie({ avance: parseInt(event.target.value) || 0 }))
+    dispatch(
+      setBulletinDePaie({ avance: parseInt(event.target.value) || 0 } as IBulletinDePaieProps),
+    )
   }
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     event.target.select()

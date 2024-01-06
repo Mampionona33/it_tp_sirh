@@ -5,6 +5,7 @@ import React, { useCallback, useEffect } from 'react'
 import CardRow from './CardRow'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const Body = () => {
   const {
@@ -54,7 +55,7 @@ const Body = () => {
         baseIrsaArrondi: baseIrsaArrondi,
         irsaAPayer: irsaAPayer,
         salaireNet: salaireNet,
-      }),
+      } as IBulletinDePaieProps),
     )
   }, [plafondSME, salaireBrut, tauxCnaps, valHsni130, valHsni150, dispatch])
 

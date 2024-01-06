@@ -3,6 +3,7 @@ import CustomSection from '@src/components/CustomSection'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const Body = () => {
   const dispatch = useAppDispatch()
@@ -22,7 +23,7 @@ const Body = () => {
         ...updatedAvantages,
         avantages: updatedAvantages,
         totalAvantages,
-      }),
+      } as IBulletinDePaieProps),
     )
   }
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {

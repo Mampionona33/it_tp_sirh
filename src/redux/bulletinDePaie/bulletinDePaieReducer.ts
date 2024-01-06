@@ -1,10 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import { EnumBoolean, EnumGenre } from '@src/interfaces/interfaceEmploye'
 
 const initialState: IBulletinDePaieProps = {
-  validate: EnumBoolean.NON,
-  validationDate: null,
+  validation: {
+    status: EnumBoolean.NON,
+    date: null,
+  },
   employeur: {
     nom: ' LA LIGNE SCANDINAVE',
     adresse: ' 2 RUE LIEUTNANT BERARD',
@@ -13,7 +15,6 @@ const initialState: IBulletinDePaieProps = {
     stat: ' 50121 11 2003 0 00475',
     rcs: ' 2002B00608',
   },
-  dateSelectionne: null,
   salarie: {
     id: null,
     nom: '',
@@ -120,7 +121,7 @@ const bulletinDePaieSlice = createSlice({
   name: 'bulletinDePaie',
   initialState,
   reducers: {
-    setBulletinDePaie: (state: IBulletinDePaieProps, action) => {
+    setBulletinDePaie: (state, action: PayloadAction<IBulletinDePaieProps>) => {
       return { ...state, ...action.payload }
     },
     resetBulletinDePaie: (state) => {

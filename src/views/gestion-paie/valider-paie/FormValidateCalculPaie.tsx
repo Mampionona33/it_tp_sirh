@@ -1,14 +1,17 @@
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
-import { useAppDispatch } from '@src/hooks/useAppDispatch'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 import { setModalClose, setModalOpen } from '@src/redux/modal/modalReducer'
+import { format } from 'date-fns'
 import React from 'react'
 
 const FormValidateCalculPaie = () => {
   const dispatch = useAppDispatch()
+  const bullettinDePaie = useAppSelector((store) => store.bulletinDePaie)
+  console.log(bullettinDePaie)
 
-  const handleValidation = () => {
-    // Ajoutez la logique de validation ici
-  }
+  const handleValidation = async () => {}
+
   const handleCancel = () => {
     dispatch(setModalClose())
   }
@@ -24,8 +27,13 @@ const FormValidateCalculPaie = () => {
           les modifications ne pourront pas être révoquées.
         </p>
         <div className="flex justify-end gap-3">
-          <ButtonWithIcon type="submit" label="Valider" variant={ButtonWithIconVariant.Secondary} />
-          <ButtonWithIcon type="button" label="Annuler" onClick={handleCancel} />
+          <ButtonWithIcon type="submit" label="Valider" />
+          <ButtonWithIcon
+            type="button"
+            label="Annuler"
+            onClick={handleCancel}
+            variant={ButtonWithIconVariant.Secondary}
+          />
         </div>
       </form>
     </div>

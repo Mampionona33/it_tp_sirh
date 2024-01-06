@@ -541,7 +541,7 @@ class CalculPaie {
       valHFerie: this.getValHFerie(),
     }
     // Dispatchez ces valeurs vers le Redux store
-    store.dispatch(setBulletinDePaie(bulletinDePaieData))
+    // store.dispatch(setBulletinDePaie(bulletinDePaieData))
   }
   public calculateAndDispatchToRedux(): void {
     // Mise à jour du Redux store

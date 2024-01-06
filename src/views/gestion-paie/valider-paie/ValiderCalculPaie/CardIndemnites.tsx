@@ -1,15 +1,13 @@
+import React from 'react'
 import CustomSection from '@src/components/CustomSection'
-import React, { useEffect } from 'react'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
-import calculPaie from '@src/utils/CalculPaie'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const Body = () => {
   const dispatch = useAppDispatch()
-  const { indemnites, salaireNetAPayer, totalIndemnite, salaireDeBase } = useAppSelector(
-    (store) => store.bulletinDePaie,
-  )
+  const { indemnites } = useAppSelector((store) => store.bulletinDePaie)
 
   const handleInputChange = (name: string, value: string) => {
     const updatedIndemnites = {
@@ -22,18 +20,13 @@ const Body = () => {
       0,
     )
 
-    const updatedSalaireNetAPayer = totalIndemnite + (salaireNetAPayer || 0)
-
     dispatch(
       setBulletinDePaie({
         ...indemnites,
         indemnites: updatedIndemnites,
         totalIndemnite,
-        // salaireNetAPayer: updatedSalaireNetAPayer,
-      }),
+      } as IBulletinDePaieProps),
     )
-    // calculPaie.setTotalIndemnite(updatedSalaireNetAPayer)
-    // calculPaie.calculateAndDispatchToRedux()
   }
 
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {

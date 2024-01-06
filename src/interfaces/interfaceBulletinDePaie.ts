@@ -1,8 +1,7 @@
 import { EnumBoolean, IEmploye } from './interfaceEmploye'
 
 export interface IBulletinDePaieProps {
-  validate: EnumBoolean
-  validationDate?: string
+  validation: IValidationProps
   employeur: {
     nom: string
     adresse: string
@@ -11,7 +10,6 @@ export interface IBulletinDePaieProps {
     stat: string
     rcs: string
   }
-  dateSelectionne?: string
   salarie?: IEmploye
   montantAllocationParEnfant?: number
   dateDeVirement: string | number
@@ -86,6 +84,11 @@ export interface IAvantageProps {
   logement?: number
   domestique?: number
   autresAvantages?: number
+}
+
+export interface IValidationProps {
+  status: EnumBoolean
+  date?: string
 }
 
 export interface IDeductionProps {

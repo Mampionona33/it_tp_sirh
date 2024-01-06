@@ -32,7 +32,7 @@ const ValidePaie = () => {
   const isDateValidationexist = useDateValidationExist()
   const { salarie } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
-  const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
+  const bulletinDePaie: IBulletinDePaieProps = useAppSelector((store) => store.bulletinDePaie)
 
   const dispatch = useAppDispatch()
   const { dateValidation } = useParams()
@@ -179,7 +179,15 @@ const ValidePaie = () => {
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
-    console.log(bulletinDePaie)
+
+    const validationStatus = EnumBoolean.OUI
+    const validationDate = format(new Date(), 'yyyy-MM-dd')
+    dispatch(
+      setBulletinDePaie({
+        validation: { status: validationStatus, date: validationDate },
+      } as IBulletinDePaieProps),
+    )
+
     dispatch(setModalOpen())
   }
 

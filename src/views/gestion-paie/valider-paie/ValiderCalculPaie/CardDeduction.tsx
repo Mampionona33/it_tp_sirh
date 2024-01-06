@@ -1,6 +1,7 @@
 import CustomSection from '@src/components/CustomSection'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import React, { useState } from 'react'
 
@@ -21,7 +22,7 @@ const Body = () => {
         ...updatedDeductions,
         deductions: updatedDeductions,
         totalDeduction,
-      }),
+      } as IBulletinDePaieProps),
     )
   }
 

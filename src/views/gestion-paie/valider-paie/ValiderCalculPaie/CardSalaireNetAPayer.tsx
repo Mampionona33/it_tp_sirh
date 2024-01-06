@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import calculPaie from '@src/utils/CalculPaie'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const Body = () => {
   const {
@@ -38,7 +39,7 @@ const Body = () => {
       setBulletinDePaie({
         salaireNetAPayer: salaireNetAPayer,
         valAllocationEnfantsEmploye: allocation,
-      }),
+      } as IBulletinDePaieProps),
     )
   }, [
     salaireNet,

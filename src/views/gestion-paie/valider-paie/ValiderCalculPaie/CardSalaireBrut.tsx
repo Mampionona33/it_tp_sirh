@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useMemo } from 'react'
 import CardRow from './CardRow'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const Body = () => {
   const { employeHours } = useAppSelector((store) => store.employeHours)
@@ -55,7 +56,7 @@ const Body = () => {
         valHsni150,
       })
 
-      dispatch(setBulletinDePaie({ salaireBrut }))
+      dispatch(setBulletinDePaie({ salaireBrut } as IBulletinDePaieProps))
     }
   }, [
     rappel,

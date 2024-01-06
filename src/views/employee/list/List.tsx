@@ -43,7 +43,6 @@ const List = () => {
       if (mount && dispatch) {
         dispatch(resetBulletinDePaie())
         dispatch(resetParametreCalendrier())
-        dispatch(setBulletinDePaie({ retenuSalaire: [] }))
         dispatch(fetchAllMouvementSalaire())
         dispatch(resetFormEmploye())
 

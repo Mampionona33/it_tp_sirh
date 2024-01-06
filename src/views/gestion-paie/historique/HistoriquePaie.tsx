@@ -11,6 +11,7 @@ import useEmployeeExists from '@src/hooks/useEmployeeExists'
 import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
   actions?: React.FC[]
@@ -71,7 +72,7 @@ const HistoriquePaie: React.FC = () => {
         setBulletinDePaie({
           salarie: selectedEmploye,
           salaireDeBase: selectedEmploye.salaire_de_base,
-        }),
+        } as IBulletinDePaieProps),
       )
     }
   }, [selectedEmploye, dispatch])
