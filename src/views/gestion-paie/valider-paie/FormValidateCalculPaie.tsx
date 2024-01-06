@@ -1,16 +1,32 @@
+import { setModalClose } from '@src/redux/modal/modalReducer'
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
-import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
-import { setModalClose, setModalOpen } from '@src/redux/modal/modalReducer'
-import { format } from 'date-fns'
-import React from 'react'
+import React, { useEffect } from 'react'
+import bulletinDePaieService from '@src/services/BulletinDePaieService'
+import { useParams } from 'react-router-dom'
 
 const FormValidateCalculPaie = () => {
   const dispatch = useAppDispatch()
+  const { id } = useParams()
   const bullettinDePaie = useAppSelector((store) => store.bulletinDePaie)
-  console.log(bullettinDePaie)
 
-  const handleValidation = async () => {}
+  useEffect(() => {
+    console.log(bullettinDePaie)
+  }, [bullettinDePaie])
+
+  const handleValidation = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    try {
+      const resp = await bulletinDePaieService.create({ id, data: bullettinDePaie })
+      console.log(resp)
+
+      dispatch(setModalClose())
+    } catch (error) {
+      console.log(error)
+      dispatch(setModalClose())
+      throw error
+    }
+  }
 
   const handleCancel = () => {
     dispatch(setModalClose())

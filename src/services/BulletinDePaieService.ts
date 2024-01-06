@@ -1,8 +1,9 @@
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import axios from 'axios'
 
 export interface IBltndPaieCreateParams {
   id: string | number
-  data: object
+  data: IBulletinDePaieProps
 }
 class BulletinDePaieService {
   private REACT_APP_API_BASE_URL: string
@@ -20,12 +21,16 @@ class BulletinDePaieService {
   async create(params: IBltndPaieCreateParams) {
     const { id, data } = params
     try {
-      const response = await axios.post(`${this.REACT_APP_API_BASE_URL}/bltndpaies/${id}`, data, {
-        auth: {
-          username: this.login,
-          password: this.pass,
+      const response = await axios.post(
+        `${this.REACT_APP_API_BASE_URL}/bulletin-de-paie/ajout/${id}`,
+        data,
+        {
+          auth: {
+            username: this.login,
+            password: this.pass,
+          },
         },
-      })
+      )
       return response
     } catch (error) {
       console.log(error)
@@ -34,4 +39,6 @@ class BulletinDePaieService {
   }
 }
 
-export default BulletinDePaieService
+const bulletinDePaieService = new BulletinDePaieService()
+
+export default bulletinDePaieService
