@@ -14,9 +14,9 @@ class BulletinDePaieControllers {
 
       const dbContent = JSON.parse(fs.readFileSync(dbFilePath, 'utf-8'))
 
-      const idBltnPaie = dbContent.bulletinDePaie.length + 1
+      const id = dbContent.bulletinDePaie.length + 1
 
-      dbContent.bulletinDePaie.push({ ...req.body, idBltnPaie })
+      dbContent.bulletinDePaie.push({ ...req.body, id })
 
       fs.writeFileSync(dbFilePath, JSON.stringify(dbContent, null, 2), 'utf-8')
 
