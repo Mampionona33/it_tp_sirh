@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import heureService from '@src/services/HeureService'
 import { DDMMYYYYFormat } from '@src/types/DateType'
 
-interface FetchHeureParams {
+export interface FetchHeureParams {
   matricule: string
   dateDebut: DDMMYYYYFormat
   dateFin: DDMMYYYYFormat

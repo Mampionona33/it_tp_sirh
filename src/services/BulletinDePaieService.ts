@@ -5,6 +5,7 @@ export interface IBltndPaieCreateParams {
   id: string | number
   data: IBulletinDePaieProps
 }
+
 class BulletinDePaieService {
   private REACT_APP_API_BASE_URL: string
   private REACT_APP_API_BASE_URL_DEV: string

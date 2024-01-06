@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
+import { fetchHistoriquesPaie } from '@src/redux/historiqueDePaie/historiqueDePaieAction'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
   actions?: React.FC[]
@@ -66,7 +67,17 @@ const HistoriquePaie: React.FC = () => {
   )
 
   useEffect(() => {
+    const fetchHistorique = async () => {
+      try {
+        const resp = await dispatch(fetchHistoriquesPaie({ id }))
+        if (resp.payload) {
+          console.log(resp.payload)
+        }
+      } catch (error) {}
+    }
+
     if (selectedEmploye !== null && selectedEmploye !== undefined) {
+      fetchHistorique()
       // console.log(selectedEmploye)
       dispatch(
         setBulletinDePaie({
@@ -75,7 +86,7 @@ const HistoriquePaie: React.FC = () => {
         } as IBulletinDePaieProps),
       )
     }
-  }, [selectedEmploye, dispatch])
+  }, [selectedEmploye, dispatch, id])
 
   const columnHelper = createColumnHelper<IHistoriquePaieTableProps>()
 

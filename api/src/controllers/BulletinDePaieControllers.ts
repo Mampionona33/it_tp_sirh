@@ -26,8 +26,6 @@ class BulletinDePaieControllers {
       res.status(500).send('Erreur serveur')
     }
   }
-
-  getAll = (req: Request, res: Response) => {}
 }
 
 export default BulletinDePaieControllers
