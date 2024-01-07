@@ -38,11 +38,6 @@ const HistoriquePaie = () => {
     dispatch(setHistoriqueDePaie({ anneeSectionne: date }))
   }
 
-  // Ensure that anneeSectionne is a Date object
-  // const an = anneeSectionne instanceof Date ? anneeSectionne : new Date(anneeSectionne)
-
-  console.log(typeof anneeSectionne)
-
   return (
     <div>
       {isEmloyExist ? (
