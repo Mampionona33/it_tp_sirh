@@ -1078,6 +1078,198 @@
       "valide": "non"
     }
   ],
+  "bulletinDePaie": [
+    {
+      "validation": {
+        "status": "oui",
+        "date": "2023-01-22",
+        "day": "2024-01-07"
+      },
+      "employeur": {
+        "nom": " LA LIGNE SCANDINAVE",
+        "adresse": " 2 RUE LIEUTNANT BERARD",
+        "CP_et_Ville": " 501 - TOAMASINA",
+        "nif": " 3000000581",
+        "stat": " 50121 11 2003 0 00475",
+        "rcs": " 2002B00608"
+      },
+      "salarie": {
+        "id": 1,
+        "nom": "RAKOTOZANANY",
+        "prenom": "Benjaminator",
+        "date_naissance": "2016-04-16",
+        "lieu_naissance": "Toamasina",
+        "adresse": "2 RUE LIEUTNANT BERARD",
+        "telephone": "",
+        "email": "sealtmm@seal.mg",
+        "num_cin": "fdsffsdfdf",
+        "genre": "masculin",
+        "enfant": [
+          {
+            "id": 1,
+            "nom": "Rosali ",
+            "prenom": "Bambini",
+            "date_naissance": "2023-11-15",
+            "lieu_naissance": "Petronum",
+            "genre_enfant": "masculin",
+            "certificat": "vie"
+          }
+        ],
+        "titre_poste": "Responsable Import et logistique ",
+        "matricule": "345",
+        "categorie": "os2",
+        "date_embauche": "2016-04-16",
+        "lieu_travail": "Toamasina",
+        "salaire_de_base": 200000,
+        "travail_de_nuit": "non",
+        "mode_payement_salaire": "Virement banquaire",
+        "actif": "oui",
+        "departement": "Logistique",
+        "num_cnaps": "960101059745",
+        "num_osie": "96010105hjod4",
+        "est_cadre": "non",
+        "rib": "454787f7dsf787878fd",
+        "prime_et_avantage_permanent": [
+          {
+            "libelle": "Carburant",
+            "montant": 450000
+          },
+          {
+            "libelle": "gas",
+            "montant": 100000
+          }
+        ],
+        "depart": {
+          "date": null,
+          "motif": null
+        },
+        "tel": "020 000211",
+        "cin": "10126174565",
+        "cadre": true,
+        "date_delivrance_cin": "2023-12-14",
+        "nom_mere": "dffs",
+        "nom_pere": "Razanajafy",
+        "mode_paiement_salaire": "Virement banquaire"
+      },
+      "dateDeVirement": 0,
+      "salaireDeBase": 200000,
+      "montantAllocationParEnfant": 7000,
+      "totalHn": 160,
+      "totalHs": 53,
+      "totalHs130": 0,
+      "totalHs150": 0,
+      "hsni130": 18,
+      "hsni150": 8,
+      "hsi130": 6,
+      "hsi150": 2,
+      "totalHs30": 0,
+      "totalHs50": 11,
+      "totalHDim": 58,
+      "totalHFerie": 9,
+      "valHsni130": 27000.52,
+      "valHsni150": 13846.42,
+      "valHsi130": 9000.17,
+      "valHsi150": 3461.61,
+      "valAllocationEnfantsEmploye": 7000,
+      "valHs30": 0,
+      "valHs50": 6346.28,
+      "valHdim": 26769.75,
+      "valHFerie": 10384.82,
+      "totalPrimeEtAvantage": 0,
+      "totalDeduction": 0,
+      "tauxCnaps": 0.01,
+      "tauxOsie": 0.01,
+      "baseCnaps": 0,
+      "avance": 0,
+      "reduChargeFamil": 0,
+      "baseIrsa": 250026.43,
+      "baseIrsaArrondi": 250000,
+      "salaireBrut": 296809.57,
+      "salaireNet": 294809.57,
+      "osie": 2968.1,
+      "salaireNetAPayer": 394809.57,
+      "plafondSME": 1910400,
+      "irsaAPayer": 2000,
+      "cnaps": 2968.1,
+      "rappel": 0,
+      "indemnites": {
+        "transport": 100000,
+        "autresIndemnite": 0
+      },
+      "totalIndemnite": 100000,
+      "primeEtGratification": {
+        "assiduite": 0,
+        "excellence": 0
+      },
+      "totalPrimeEtGratification": 0,
+      "deductions": {
+        "absence": 0,
+        "retard": 0
+      },
+      "avantages": {
+        "domestique": 0,
+        "logement": 0,
+        "vehicule": 0,
+        "autresAvantages": 0
+      },
+      "totalAvantages": 0,
+      "totalHTravailEffectif": 212,
+      "tableauHsHebdo": [
+        {
+          "jour": "samedi",
+          "semaineDu": "02/01/2023",
+          "tolalHs": 11
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "09/01/2023",
+          "tolalHs": 9
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "16/01/2023",
+          "tolalHs": 14
+        }
+      ],
+      "tableauHs130Hebdo": [
+        {
+          "jour": "samedi",
+          "semaineDu": "02/01/2023",
+          "tolalHs": 8
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "09/01/2023",
+          "tolalHs": 8
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "16/01/2023",
+          "tolalHs": 8
+        }
+      ],
+      "tableauHs150Hebdo": [
+        {
+          "jour": "samedi",
+          "semaineDu": "02/01/2023",
+          "tolalHs": 3
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "09/01/2023",
+          "tolalHs": 1
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "16/01/2023",
+          "tolalHs": 6
+        }
+      ],
+      "transport": 10000,
+      "autresIndemnite": 0,
+      "id": 1
+    }
+  ],
   "salaries": [
     {
       "id": 1,
@@ -1106,7 +1298,7 @@
       "categorie": "os2",
       "date_embauche": "2016-04-16",
       "lieu_travail": "Toamasina",
-      "salaire_de_base": 1500000,
+      "salaire_de_base": 250000,
       "travail_de_nuit": "non",
       "mode_payement_salaire": "Virement banquaire",
       "actif": "oui",
@@ -1319,980 +1511,6 @@
       "rib": "",
       "prime_et_avantage_permanent": null,
       "depart": null
-    }
-  ],
-  "bulletinDePaie": [
-    {
-      "validation": {
-        "status": "oui",
-        "date": "2023-01-22",
-        "day": "2024-01-07"
-      },
-      "employeur": {
-        "nom": " LA LIGNE SCANDINAVE",
-        "adresse": " 2 RUE LIEUTNANT BERARD",
-        "CP_et_Ville": " 501 - TOAMASINA",
-        "nif": " 3000000581",
-        "stat": " 50121 11 2003 0 00475",
-        "rcs": " 2002B00608"
-      },
-      "salarie": {
-        "id": 1,
-        "nom": "RAKOTOZANANY",
-        "prenom": "Benjaminator",
-        "date_naissance": "2016-04-16",
-        "lieu_naissance": "Toamasina",
-        "adresse": "2 RUE LIEUTNANT BERARD",
-        "telephone": "",
-        "email": "sealtmm@seal.mg",
-        "num_cin": "fdsffsdfdf",
-        "genre": "masculin",
-        "enfant": [
-          {
-            "id": 1,
-            "nom": "Rosali ",
-            "prenom": "Bambini",
-            "date_naissance": "2023-11-15",
-            "lieu_naissance": "Petronum",
-            "genre_enfant": "masculin",
-            "certificat": "vie"
-          }
-        ],
-        "titre_poste": "Responsable Import et logistique ",
-        "matricule": "345",
-        "categorie": "os2",
-        "date_embauche": "2016-04-16",
-        "lieu_travail": "Toamasina",
-        "salaire_de_base": 1500000,
-        "travail_de_nuit": "non",
-        "mode_payement_salaire": "Virement banquaire",
-        "actif": "oui",
-        "departement": "Logistique",
-        "num_cnaps": "960101059745",
-        "num_osie": "96010105hjod4",
-        "est_cadre": "non",
-        "rib": "454787f7dsf787878fd",
-        "prime_et_avantage_permanent": [
-          {
-            "libelle": "Carburant",
-            "montant": 450000
-          },
-          {
-            "libelle": "gas",
-            "montant": 100000
-          }
-        ],
-        "depart": {
-          "date": null,
-          "motif": null
-        },
-        "tel": "020 000211",
-        "cin": "10126174565",
-        "cadre": true,
-        "date_delivrance_cin": "2023-12-14",
-        "nom_mere": "dffs",
-        "nom_pere": "Razanajafy",
-        "mode_paiement_salaire": "Virement banquaire"
-      },
-      "dateDeVirement": 0,
-      "salaireDeBase": 1500000,
-      "montantAllocationParEnfant": 7000,
-      "totalHn": 160,
-      "totalHs": 53,
-      "totalHs130": 0,
-      "totalHs150": 0,
-      "hsni130": 18,
-      "hsni150": 8,
-      "hsi130": 6,
-      "hsi150": 2,
-      "totalHs30": 0,
-      "totalHs50": 11,
-      "totalHDim": 58,
-      "totalHFerie": 9,
-      "valHsni130": 202503.89,
-      "valHsni150": 103848.15,
-      "valHsi130": 67501.3,
-      "valHsi150": 25962.04,
-      "valAllocationEnfantsEmploye": 7000,
-      "valHs30": 0,
-      "valHs50": 47597.07,
-      "valHdim": 200773.09,
-      "valHFerie": 77886.11,
-      "totalPrimeEtAvantage": 0,
-      "totalDeduction": 0,
-      "tauxCnaps": 0.01,
-      "tauxOsie": 0.01,
-      "baseCnaps": 0,
-      "avance": 10000,
-      "reduChargeFamil": 0,
-      "baseIrsa": 11877354.89,
-      "baseIrsaArrondi": 11877300,
-      "salaireBrut": 12326071.65,
-      "salaireNet": 10043111.85,
-      "osie": 123260.72,
-      "salaireNetAPayer": 10713111.85,
-      "plafondSME": 1910400,
-      "irsaAPayer": 2282959.8000000003,
-      "cnaps": 19104,
-      "rappel": 0,
-      "indemnites": {
-        "transport": 10000,
-        "autresIndemnite": 120000
-      },
-      "totalIndemnite": 130000,
-      "primeEtGratification": {
-        "assiduite": 100000,
-        "excellence": 10000000
-      },
-      "totalPrimeEtGratification": 10100000,
-      "deductions": {
-        "absence": 0,
-        "retard": 0
-      },
-      "avantages": {
-        "domestique": 0,
-        "logement": 450000,
-        "vehicule": 100000,
-        "autresAvantages": 0
-      },
-      "totalAvantages": 550000,
-      "totalHTravailEffectif": 212,
-      "tableauHsHebdo": [
-        {
-          "jour": "samedi",
-          "semaineDu": "02/01/2023",
-          "tolalHs": 11
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "09/01/2023",
-          "tolalHs": 9
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "16/01/2023",
-          "tolalHs": 14
-        }
-      ],
-      "tableauHs130Hebdo": [
-        {
-          "jour": "samedi",
-          "semaineDu": "02/01/2023",
-          "tolalHs": 8
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "09/01/2023",
-          "tolalHs": 8
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "16/01/2023",
-          "tolalHs": 8
-        }
-      ],
-      "tableauHs150Hebdo": [
-        {
-          "jour": "samedi",
-          "semaineDu": "02/01/2023",
-          "tolalHs": 3
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "09/01/2023",
-          "tolalHs": 1
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "16/01/2023",
-          "tolalHs": 6
-        }
-      ],
-      "transport": 10000,
-      "autresIndemnite": 12000,
-      "assiduite": 100000,
-      "excellence": 10000000,
-      "domestique": 0,
-      "logement": 450000,
-      "vehicule": 100000,
-      "autresAvantages": 0,
-      "id": 1
-    },
-    {
-      "validation": {
-        "status": "oui",
-        "date": "2023-02-22",
-        "day": "2024-01-07"
-      },
-      "employeur": {
-        "nom": " LA LIGNE SCANDINAVE",
-        "adresse": " 2 RUE LIEUTNANT BERARD",
-        "CP_et_Ville": " 501 - TOAMASINA",
-        "nif": " 3000000581",
-        "stat": " 50121 11 2003 0 00475",
-        "rcs": " 2002B00608"
-      },
-      "salarie": {
-        "id": 1,
-        "nom": "RAKOTOZANANY",
-        "prenom": "Benjaminator",
-        "date_naissance": "2016-04-16",
-        "lieu_naissance": "Toamasina",
-        "adresse": "2 RUE LIEUTNANT BERARD",
-        "telephone": "",
-        "email": "sealtmm@seal.mg",
-        "num_cin": "fdsffsdfdf",
-        "genre": "masculin",
-        "enfant": [
-          {
-            "id": 1,
-            "nom": "Rosali ",
-            "prenom": "Bambini",
-            "date_naissance": "2023-11-15",
-            "lieu_naissance": "Petronum",
-            "genre_enfant": "masculin",
-            "certificat": "vie"
-          }
-        ],
-        "titre_poste": "Responsable Import et logistique ",
-        "matricule": "345",
-        "categorie": "os2",
-        "date_embauche": "2016-04-16",
-        "lieu_travail": "Toamasina",
-        "salaire_de_base": 1500000,
-        "travail_de_nuit": "non",
-        "mode_payement_salaire": "Virement banquaire",
-        "actif": "oui",
-        "departement": "Logistique",
-        "num_cnaps": "960101059745",
-        "num_osie": "96010105hjod4",
-        "est_cadre": "non",
-        "rib": "454787f7dsf787878fd",
-        "prime_et_avantage_permanent": [
-          {
-            "libelle": "Carburant",
-            "montant": 450000
-          },
-          {
-            "libelle": "gas",
-            "montant": 100000
-          }
-        ],
-        "depart": {
-          "date": null,
-          "motif": null
-        },
-        "tel": "020 000211",
-        "cin": "10126174565",
-        "cadre": true,
-        "date_delivrance_cin": "2023-12-14",
-        "nom_mere": "dffs",
-        "nom_pere": "Razanajafy",
-        "mode_paiement_salaire": "Virement banquaire"
-      },
-      "dateDeVirement": 0,
-      "salaireDeBase": 1500000,
-      "montantAllocationParEnfant": 7000,
-      "totalHn": 248,
-      "totalHs": 64,
-      "totalHs130": 0,
-      "totalHs150": 0,
-      "hsni130": 18,
-      "hsni150": 1,
-      "hsi130": 14,
-      "hsi150": 16,
-      "totalHs30": 0,
-      "totalHs50": 0,
-      "totalHDim": 89,
-      "totalHFerie": 0,
-      "valHsni130": 202503.89,
-      "valHsni150": 12981.02,
-      "valHsi130": 157503.03,
-      "valHsi150": 207696.3,
-      "valAllocationEnfantsEmploye": 7000,
-      "valHs30": 0,
-      "valHs50": 0,
-      "valHdim": 308082.85,
-      "valHFerie": 0,
-      "totalPrimeEtAvantage": 0,
-      "totalDeduction": 0,
-      "tauxCnaps": 0.01,
-      "tauxOsie": 0.01,
-      "baseCnaps": 0,
-      "avance": 0,
-      "reduChargeFamil": 0,
-      "baseIrsa": 2130290.51,
-      "baseIrsaArrondi": 2130200,
-      "salaireBrut": 2388767.0900000003,
-      "salaireNet": 2055227.29,
-      "osie": 23887.67,
-      "salaireNetAPayer": 2055227.29,
-      "plafondSME": 1910400,
-      "irsaAPayer": 333539.8,
-      "cnaps": 19104,
-      "rappel": 0,
-      "indemnites": {
-        "transport": 0,
-        "autresIndemnite": 0
-      },
-      "totalIndemnite": 0,
-      "primeEtGratification": {
-        "assiduite": 0,
-        "excellence": 0
-      },
-      "totalPrimeEtGratification": 0,
-      "deductions": {
-        "absence": 0,
-        "retard": 0
-      },
-      "avantages": {
-        "domestique": 0,
-        "logement": 0,
-        "vehicule": 0,
-        "autresAvantages": 0
-      },
-      "totalAvantages": 0,
-      "totalHTravailEffectif": 312,
-      "tableauHsHebdo": [
-        {
-          "jour": "samedi",
-          "semaineDu": "23/01/2023",
-          "tolalHs": 11
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "30/01/2023",
-          "tolalHs": 9
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "06/02/2023",
-          "tolalHs": 15
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "13/02/2023",
-          "tolalHs": 14
-        },
-        {
-          "jour": "mardi",
-          "semaineDu": "20/02/2023",
-          "tolalHs": 2
-        }
-      ],
-      "tableauHs130Hebdo": [
-        {
-          "jour": "samedi",
-          "semaineDu": "23/01/2023",
-          "tolalHs": 8
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "30/01/2023",
-          "tolalHs": 8
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "06/02/2023",
-          "tolalHs": 8
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "13/02/2023",
-          "tolalHs": 8
-        }
-      ],
-      "tableauHs150Hebdo": [
-        {
-          "jour": "samedi",
-          "semaineDu": "23/01/2023",
-          "tolalHs": 3
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "30/01/2023",
-          "tolalHs": 1
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "06/02/2023",
-          "tolalHs": 7
-        },
-        {
-          "jour": "samedi",
-          "semaineDu": "13/02/2023",
-          "tolalHs": 6
-        }
-      ],
-      "id": 2
-    },
-    {
-      "validation": {
-        "status": "oui",
-        "date": "2023-01-22",
-        "day": "2024-01-07"
-      },
-      "employeur": {
-        "nom": " LA LIGNE SCANDINAVE",
-        "adresse": " 2 RUE LIEUTNANT BERARD",
-        "CP_et_Ville": " 501 - TOAMASINA",
-        "nif": " 3000000581",
-        "stat": " 50121 11 2003 0 00475",
-        "rcs": " 2002B00608"
-      },
-      "salarie": {
-        "id": 2,
-        "actif": "oui",
-        "nom": "Rabezavana",
-        "prenom": "Tsihoarana Martin",
-        "date_naissance": "2016-04-16",
-        "lieu_naissance": "Toamasina",
-        "adresse": "2 RUE LIEUTNANT BERARD",
-        "tel": "020 000211",
-        "email": "sealtmm@seal.mg",
-        "cin": "10126174565",
-        "genre": "masculin",
-        "enfant": [
-          {
-            "nom": "Bambini",
-            "prenom": "Rosam",
-            "date_naissance": "2022-04-16",
-            "lieu_naissance": "Toamasina",
-            "genre": "feminin",
-            "age": 1
-          },
-          {
-            "nom": "Bambini",
-            "prenom": "Didié",
-            "date_naissance": "2017-04-16",
-            "lieu_naissance": "Toamasina",
-            "genre": "masculin",
-            "age": 6
-          }
-        ],
-        "titre_poste": "Responsable Import et logistique ",
-        "matricule": "523",
-        "categorie": "B5",
-        "date_embauche": "2016-04-16",
-        "departement": "Logistique",
-        "lieu_travail": "Toamasina",
-        "est_cadre": "non",
-        "travail_de_nuit": "oui",
-        "salaire_de_base": 800000,
-        "rib": "454787f7dsf787878fd",
-        "mode_payement_salaire": "Virement banquaire",
-        "num_cnaps": "960101059745",
-        "num_osie": "96010105hjod4",
-        "prime_et_avantage_permanent": [
-          {
-            "libelle": "Carburant",
-            "montant": 450000
-          },
-          {
-            "libelle": "gas",
-            "montant": 100000
-          }
-        ],
-        "depart": {
-          "date": null,
-          "motif": null
-        }
-      },
-      "dateDeVirement": 0,
-      "salaireDeBase": 800000,
-      "montantAllocationParEnfant": 7000,
-      "totalHn": 0,
-      "totalHs": 0,
-      "totalHs130": 0,
-      "totalHs150": 0,
-      "hsni130": 0,
-      "hsni150": 18,
-      "hsi130": 0,
-      "hsi150": 0,
-      "totalHs30": 0,
-      "totalHs50": 0,
-      "totalHDim": 0,
-      "totalHFerie": 0,
-      "valHsni130": 0,
-      "valHsni150": 124617.78,
-      "valHsi130": 0,
-      "valHsi150": 0,
-      "valAllocationEnfantsEmploye": 0,
-      "valHs30": 0,
-      "valHs50": 0,
-      "valHdim": 0,
-      "valHFerie": 0,
-      "totalPrimeEtAvantage": 0,
-      "totalDeduction": 24000,
-      "tauxCnaps": 0.01,
-      "tauxOsie": 0.01,
-      "baseCnaps": 0,
-      "avance": 0,
-      "reduChargeFamil": 0,
-      "baseIrsa": 757987.64,
-      "baseIrsaArrondi": 757900,
-      "salaireBrut": 900617.78,
-      "salaireNet": 841537.98,
-      "osie": 9006.18,
-      "salaireNetAPayer": 841537.98,
-      "plafondSME": 1910400,
-      "irsaAPayer": 59079.8,
-      "cnaps": 9006.18,
-      "rappel": 0,
-      "indemnites": {
-        "transport": 0,
-        "autresIndemnite": 0
-      },
-      "totalIndemnite": 0,
-      "primeEtGratification": {
-        "assiduite": 0,
-        "excellence": 0
-      },
-      "totalPrimeEtGratification": 0,
-      "deductions": {
-        "absence": 10000,
-        "retard": 14000
-      },
-      "avantages": {
-        "domestique": 0,
-        "logement": 0,
-        "vehicule": 0,
-        "autresAvantages": 0
-      },
-      "totalAvantages": 0,
-      "totalHTravailEffectif": 0,
-      "tableauHsHebdo": [],
-      "tableauHs130Hebdo": [],
-      "tableauHs150Hebdo": [],
-      "absence": 10000,
-      "retard": 14000,
-      "id": 3
-    },
-    {
-      "validation": {
-        "status": "oui",
-        "date": "2023-03-22",
-        "day": "2024-01-07"
-      },
-      "employeur": {
-        "nom": " LA LIGNE SCANDINAVE",
-        "adresse": " 2 RUE LIEUTNANT BERARD",
-        "CP_et_Ville": " 501 - TOAMASINA",
-        "nif": " 3000000581",
-        "stat": " 50121 11 2003 0 00475",
-        "rcs": " 2002B00608"
-      },
-      "salarie": {
-        "id": 2,
-        "actif": "oui",
-        "nom": "Rabezavana",
-        "prenom": "Tsihoarana Martin",
-        "date_naissance": "2016-04-16",
-        "lieu_naissance": "Toamasina",
-        "adresse": "2 RUE LIEUTNANT BERARD",
-        "tel": "020 000211",
-        "email": "sealtmm@seal.mg",
-        "cin": "10126174565",
-        "genre": "masculin",
-        "enfant": [
-          {
-            "nom": "Bambini",
-            "prenom": "Rosam",
-            "date_naissance": "2022-04-16",
-            "lieu_naissance": "Toamasina",
-            "genre": "feminin",
-            "age": 1
-          },
-          {
-            "nom": "Bambini",
-            "prenom": "Didié",
-            "date_naissance": "2017-04-16",
-            "lieu_naissance": "Toamasina",
-            "genre": "masculin",
-            "age": 6
-          }
-        ],
-        "titre_poste": "Responsable Import et logistique ",
-        "matricule": "523",
-        "categorie": "B5",
-        "date_embauche": "2016-04-16",
-        "departement": "Logistique",
-        "lieu_travail": "Toamasina",
-        "est_cadre": "non",
-        "travail_de_nuit": "oui",
-        "salaire_de_base": 800000,
-        "rib": "454787f7dsf787878fd",
-        "mode_payement_salaire": "Virement banquaire",
-        "num_cnaps": "960101059745",
-        "num_osie": "96010105hjod4",
-        "prime_et_avantage_permanent": [
-          {
-            "libelle": "Carburant",
-            "montant": 450000
-          },
-          {
-            "libelle": "gas",
-            "montant": 100000
-          }
-        ],
-        "depart": {
-          "date": null,
-          "motif": null
-        }
-      },
-      "dateDeVirement": 0,
-      "salaireDeBase": 800000,
-      "montantAllocationParEnfant": 7000,
-      "totalHn": 0,
-      "totalHs": 0,
-      "totalHs130": 0,
-      "totalHs150": 0,
-      "hsni130": 0,
-      "hsni150": 18,
-      "hsi130": 0,
-      "hsi150": 0,
-      "totalHs30": 0,
-      "totalHs50": 0,
-      "totalHDim": 0,
-      "totalHFerie": 0,
-      "valHsni130": 0,
-      "valHsni150": 124617.78,
-      "valHsi130": 0,
-      "valHsi150": 0,
-      "valAllocationEnfantsEmploye": 0,
-      "valHs30": 0,
-      "valHs50": 0,
-      "valHdim": 0,
-      "valHFerie": 0,
-      "totalPrimeEtAvantage": 0,
-      "totalDeduction": 0,
-      "tauxCnaps": 0.01,
-      "tauxOsie": 0.01,
-      "baseCnaps": 0,
-      "avance": 0,
-      "reduChargeFamil": 0,
-      "baseIrsa": 781507.64,
-      "baseIrsaArrondi": 781500,
-      "salaireBrut": 924617.78,
-      "salaireNet": 860817.98,
-      "osie": 9246.18,
-      "salaireNetAPayer": 860817.98,
-      "plafondSME": 1910400,
-      "irsaAPayer": 63799.8,
-      "cnaps": 9246.18,
-      "rappel": 0,
-      "indemnites": {
-        "transport": 0,
-        "autresIndemnite": 0
-      },
-      "totalIndemnite": 0,
-      "primeEtGratification": {
-        "assiduite": 0,
-        "excellence": 0
-      },
-      "totalPrimeEtGratification": 0,
-      "deductions": {
-        "absence": 0,
-        "retard": 0
-      },
-      "avantages": {
-        "domestique": 0,
-        "logement": 0,
-        "vehicule": 0,
-        "autresAvantages": 0
-      },
-      "totalAvantages": 0,
-      "totalHTravailEffectif": 0,
-      "tableauHsHebdo": [],
-      "tableauHs130Hebdo": [],
-      "tableauHs150Hebdo": [],
-      "id": 4
-    },
-    {
-      "validation": {
-        "status": "oui",
-        "date": "2023-07-22",
-        "day": "2024-01-07"
-      },
-      "employeur": {
-        "nom": " LA LIGNE SCANDINAVE",
-        "adresse": " 2 RUE LIEUTNANT BERARD",
-        "CP_et_Ville": " 501 - TOAMASINA",
-        "nif": " 3000000581",
-        "stat": " 50121 11 2003 0 00475",
-        "rcs": " 2002B00608"
-      },
-      "salarie": {
-        "id": 2,
-        "actif": "oui",
-        "nom": "Rabezavana",
-        "prenom": "Tsihoarana Martin",
-        "date_naissance": "2016-04-16",
-        "lieu_naissance": "Toamasina",
-        "adresse": "2 RUE LIEUTNANT BERARD",
-        "tel": "020 000211",
-        "email": "sealtmm@seal.mg",
-        "cin": "10126174565",
-        "genre": "masculin",
-        "enfant": [
-          {
-            "nom": "Bambini",
-            "prenom": "Rosam",
-            "date_naissance": "2022-04-16",
-            "lieu_naissance": "Toamasina",
-            "genre": "feminin",
-            "age": 1
-          },
-          {
-            "nom": "Bambini",
-            "prenom": "Didié",
-            "date_naissance": "2017-04-16",
-            "lieu_naissance": "Toamasina",
-            "genre": "masculin",
-            "age": 6
-          }
-        ],
-        "titre_poste": "Responsable Import et logistique ",
-        "matricule": "523",
-        "categorie": "B5",
-        "date_embauche": "2016-04-16",
-        "departement": "Logistique",
-        "lieu_travail": "Toamasina",
-        "est_cadre": "non",
-        "travail_de_nuit": "oui",
-        "salaire_de_base": 800000,
-        "rib": "454787f7dsf787878fd",
-        "mode_payement_salaire": "Virement banquaire",
-        "num_cnaps": "960101059745",
-        "num_osie": "96010105hjod4",
-        "prime_et_avantage_permanent": [
-          {
-            "libelle": "Carburant",
-            "montant": 450000
-          },
-          {
-            "libelle": "gas",
-            "montant": 100000
-          }
-        ],
-        "depart": {
-          "date": null,
-          "motif": null
-        }
-      },
-      "dateDeVirement": 0,
-      "salaireDeBase": 800000,
-      "montantAllocationParEnfant": 7000,
-      "totalHn": 0,
-      "totalHs": 0,
-      "totalHs130": 0,
-      "totalHs150": 0,
-      "hsni130": 0,
-      "hsni150": 18,
-      "hsi130": 0,
-      "hsi150": 0,
-      "totalHs30": 0,
-      "totalHs50": 0,
-      "totalHDim": 0,
-      "totalHFerie": 0,
-      "valHsni130": 0,
-      "valHsni150": 124617.78,
-      "valHsi130": 0,
-      "valHsi150": 0,
-      "valAllocationEnfantsEmploye": 0,
-      "valHs30": 0,
-      "valHs50": 0,
-      "valHdim": 0,
-      "valHFerie": 0,
-      "totalPrimeEtAvantage": 0,
-      "totalDeduction": 0,
-      "tauxCnaps": 0.01,
-      "tauxOsie": 0.01,
-      "baseCnaps": 0,
-      "avance": 0,
-      "reduChargeFamil": 0,
-      "baseIrsa": 781507.64,
-      "baseIrsaArrondi": 781500,
-      "salaireBrut": 924617.78,
-      "salaireNet": 860817.98,
-      "osie": 9246.18,
-      "salaireNetAPayer": 860817.98,
-      "plafondSME": 1910400,
-      "irsaAPayer": 63799.8,
-      "cnaps": 9246.18,
-      "rappel": 0,
-      "indemnites": {
-        "transport": 0,
-        "autresIndemnite": 0
-      },
-      "totalIndemnite": 0,
-      "primeEtGratification": {
-        "assiduite": 0,
-        "excellence": 0
-      },
-      "totalPrimeEtGratification": 0,
-      "deductions": {
-        "absence": 0,
-        "retard": 0
-      },
-      "avantages": {
-        "domestique": 0,
-        "logement": 0,
-        "vehicule": 0,
-        "autresAvantages": 0
-      },
-      "totalAvantages": 0,
-      "totalHTravailEffectif": 0,
-      "tableauHsHebdo": [],
-      "tableauHs130Hebdo": [],
-      "tableauHs150Hebdo": [],
-      "id": 5
-    },
-    {
-      "validation": {
-        "status": "oui",
-        "date": "2024-01-22",
-        "day": "2024-01-07"
-      },
-      "employeur": {
-        "nom": " LA LIGNE SCANDINAVE",
-        "adresse": " 2 RUE LIEUTNANT BERARD",
-        "CP_et_Ville": " 501 - TOAMASINA",
-        "nif": " 3000000581",
-        "stat": " 50121 11 2003 0 00475",
-        "rcs": " 2002B00608"
-      },
-      "salarie": {
-        "id": 1,
-        "nom": "RAKOTOZANANY",
-        "prenom": "Benjaminator",
-        "date_naissance": "2016-04-16",
-        "lieu_naissance": "Toamasina",
-        "adresse": "2 RUE LIEUTNANT BERARD",
-        "telephone": "",
-        "email": "sealtmm@seal.mg",
-        "num_cin": "fdsffsdfdf",
-        "genre": "masculin",
-        "enfant": [
-          {
-            "id": 1,
-            "nom": "Rosali ",
-            "prenom": "Bambini",
-            "date_naissance": "2023-11-15",
-            "lieu_naissance": "Petronum",
-            "genre_enfant": "masculin",
-            "certificat": "vie"
-          }
-        ],
-        "titre_poste": "Responsable Import et logistique ",
-        "matricule": "345",
-        "categorie": "os2",
-        "date_embauche": "2016-04-16",
-        "lieu_travail": "Toamasina",
-        "salaire_de_base": 1500000,
-        "travail_de_nuit": "non",
-        "mode_payement_salaire": "Virement banquaire",
-        "actif": "oui",
-        "departement": "Logistique",
-        "num_cnaps": "960101059745",
-        "num_osie": "96010105hjod4",
-        "est_cadre": "non",
-        "rib": "454787f7dsf787878fd",
-        "prime_et_avantage_permanent": [
-          {
-            "libelle": "Carburant",
-            "montant": 450000
-          },
-          {
-            "libelle": "gas",
-            "montant": 100000
-          }
-        ],
-        "depart": {
-          "date": null,
-          "motif": null
-        },
-        "tel": "020 000211",
-        "cin": "10126174565",
-        "cadre": true,
-        "date_delivrance_cin": "2023-12-14",
-        "nom_mere": "dffs",
-        "nom_pere": "Razanajafy",
-        "mode_paiement_salaire": "Virement banquaire"
-      },
-      "dateDeVirement": 0,
-      "salaireDeBase": 1500000,
-      "montantAllocationParEnfant": 7000,
-      "totalHn": 0,
-      "totalHs": 0,
-      "totalHs130": 0,
-      "totalHs150": 0,
-      "hsni130": 0,
-      "hsni150": 18,
-      "hsi130": 0,
-      "hsi150": 0,
-      "totalHs30": 0,
-      "totalHs50": 0,
-      "totalHDim": 0,
-      "totalHFerie": 0,
-      "valHsni130": 0,
-      "valHsni150": 233658.34,
-      "valHsi130": 0,
-      "valHsi150": 0,
-      "valAllocationEnfantsEmploye": 7000,
-      "valHs30": 0,
-      "valHs50": 0,
-      "valHdim": 0,
-      "valHFerie": 0,
-      "totalPrimeEtAvantage": 0,
-      "totalDeduction": 0,
-      "tauxCnaps": 0.01,
-      "tauxOsie": 0.01,
-      "baseCnaps": 0,
-      "avance": 110000,
-      "reduChargeFamil": 0,
-      "baseIrsa": 1465326.84,
-      "baseIrsaArrondi": 1465300,
-      "salaireBrut": 1733658.34,
-      "salaireNet": 1533098.54,
-      "osie": 17336.58,
-      "salaireNetAPayer": 2544098.54,
-      "plafondSME": 1910400,
-      "irsaAPayer": 200559.80000000002,
-      "cnaps": 17336.58,
-      "rappel": 0,
-      "indemnites": {
-        "transport": 1000,
-        "autresIndemnite": 100000
-      },
-      "totalIndemnite": 101000,
-      "primeEtGratification": {
-        "assiduite": 0,
-        "excellence": 0
-      },
-      "totalPrimeEtGratification": 0,
-      "deductions": {
-        "absence": 0,
-        "retard": 0
-      },
-      "avantages": {
-        "domestique": 0,
-        "logement": 1000000,
-        "vehicule": 20000,
-        "autresAvantages": 0
-      },
-      "totalAvantages": 1020000,
-      "totalHTravailEffectif": 0,
-      "tableauHsHebdo": [],
-      "tableauHs130Hebdo": [],
-      "tableauHs150Hebdo": [],
-      "transport": 1000,
-      "autresIndemnite": 10000,
-      "domestique": 0,
-      "logement": 1000000,
-      "vehicule": 20000,
-      "autresAvantages": 0,
-      "id": 6
     }
   ]
 }

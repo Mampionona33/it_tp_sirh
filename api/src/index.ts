@@ -48,7 +48,10 @@ router.route('/categorie-employe').get(categorieEmployeController.getAll)
 
 router.route('/bulletin-de-paie/ajout/:id').post(bulletinDePaieController.create)
 
-router.route('/historique-paie/:id/:annee').get(historiquePaieController.getOne)
+router.route('/historique-paie/:id/:annee').get(historiquePaieController.getAllByIdEmployeAndDate)
+router
+  .route('/historique-paie/:id/details/:idValidation')
+  .get(historiquePaieController.getDetailsById)
 
 const PORT = process.env.PORT || 8000
 

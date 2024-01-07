@@ -5,6 +5,11 @@ export interface IGetByUserIDAndDate {
   annee?: number
 }
 
+export interface IGetByUserIdAndBulletin {
+  id: string | number
+  idValidation: string | number
+}
+
 class HistoriquePaieService {
   private REACT_APP_API_BASE_URL: string
   private REACT_APP_API_BASE_URL_DEV: string
@@ -18,7 +23,7 @@ class HistoriquePaieService {
     this.login = 'lslisteemployes'
   }
 
-  async getByUserIDAndDate(params: IGetByUserIDAndDate) {
+  async getAllByUserIDAndDate(params: IGetByUserIDAndDate) {
     /**
      * Récupère l'historique de paie pour un employé spécifique et une année donnée.
      *
@@ -31,6 +36,18 @@ class HistoriquePaieService {
     try {
       const resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/historique-paie/${id}/${annee}`)
       console.log(resp)
+      return resp
+    } catch (error) {
+      throw error
+    }
+  }
+
+  async getOnByUserIdAndBltinPaieId(params: IGetByUserIdAndBulletin) {
+    const { id, idValidation } = params
+    try {
+      const resp = await axios.get(
+        `${this.REACT_APP_API_BASE_URL}/historique-paie/${id}/details/${idValidation}`,
+      )
       return resp
     } catch (error) {
       throw error

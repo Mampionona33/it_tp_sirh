@@ -16,7 +16,7 @@ class HistoriquePaieController {
     this.db = db
   }
 
-  getOne = (req: Request, res: Response) => {
+  getAllByIdEmployeAndDate = (req: Request, res: Response) => {
     const { id, annee } = req.params
     const listBulletinDePaie: IBulletinDePaieProps[] = this.db['bulletinDePaie']
     const resp: IGetOneProps[] = []
@@ -40,6 +40,19 @@ class HistoriquePaieController {
     }
 
     return res.status(200).send(resp)
+  }
+
+  getDetailsById = (req: Request, res: Response) => {
+    const { id, idValidation } = req.params
+    const listBulletinDePaie: IBulletinDePaieProps[] = this.db['bulletinDePaie']
+
+    console.log(id, idValidation)
+
+    const data = listBulletinDePaie.filter(
+      (blt) => String(blt.id) === String(idValidation) && String(blt.salarie?.id) === String(id),
+    )[0]
+
+    res.status(200).send(data)
   }
 }
 

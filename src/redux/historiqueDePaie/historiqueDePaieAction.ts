@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import historiquePaieService from '@src/services/HistoriquePaieSerivce'
+import historiquePaieService, { IGetByUserIdAndBulletin } from '@src/services/HistoriquePaieSerivce'
 import { AxiosResponse } from 'axios'
 
 export interface IFetchHistoriqueBltnP {
@@ -12,8 +12,27 @@ export const fetchHistoriquesPaie = createAsyncThunk(
   async (params: IFetchHistoriqueBltnP, thunkAPI) => {
     const { id, annee = new Date().getFullYear() } = params
     try {
-      const response: AxiosResponse = await historiquePaieService.getByUserIDAndDate({ id, annee })
-      return response.data // Retournez les données directement
+      const response: AxiosResponse = await historiquePaieService.getAllByUserIDAndDate({
+        id,
+        annee,
+      })
+      return response.data
+    } catch (error) {
+      throw error
+    }
+  },
+)
+
+export const fetchDetailsHistoriquePaie = createAsyncThunk(
+  'historiques/fetch/details',
+  async (params: IGetByUserIdAndBulletin, thunkAPI) => {
+    const { id, idValidation } = params
+    try {
+      const response: AxiosResponse = await historiquePaieService.getOnByUserIdAndBltinPaieId({
+        id,
+        idValidation,
+      })
+      return response.data
     } catch (error) {
       throw error
     }
