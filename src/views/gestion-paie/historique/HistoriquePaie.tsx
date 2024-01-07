@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import useEmployeeExists from '@src/hooks/useEmployeeExists'
 import { fetchHistoriquesPaie } from '@src/redux/historiqueDePaie/historiqueDePaieAction'
 import Page404 from '@src/views/pages/page404/Page404'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import SelectAnnee from './SelectAnnee'
 import { setHistoriqueDePaie } from '@src/redux/historiqueDePaie/historiqueDePaieReducer'
@@ -13,24 +13,35 @@ import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
 import { format } from 'date-fns'
 import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 import { fr } from 'date-fns/locale'
+import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
   actions?: React.FC[]
 }
 const HistoriquePaie = () => {
-  const isEmloyExist = useEmployeeExists()
+  const isEmployeExist = useEmployeeExists()
   const { id } = useParams()
   const dispatch = useAppDispatch()
-  // const [history, setHistory] = useState([])
+  const { salaireBrut } = useAppSelector((store) => store.bulletinDePaie)
+  const { list: listeEmploye } = useAppSelector((store) => store.employeesList)
   const {
     loading: loadinHistoriquePaie,
     anneeSectionne,
     historiques,
   } = useAppSelector((store) => store.historiquePaie)
 
+  const selectedEmploye = useMemo(
+    () =>
+      listeEmploye && listeEmploye.length > 0
+        ? listeEmploye.find((emp) => emp.id === Number(id))
+        : null,
+    [listeEmploye, id],
+  )
+
   useEffect(() => {
     const fetchHistory = async () => {
-      if (isEmloyExist && id) {
+      if (isEmployeExist && id) {
         try {
           const resp = await dispatch(
             fetchHistoriquesPaie({ id, annee: new Date(anneeSectionne).getFullYear() }),
@@ -43,8 +54,15 @@ const HistoriquePaie = () => {
         }
       }
     }
-    fetchHistory()
-  }, [id, isEmloyExist, dispatch, anneeSectionne])
+    isEmployeExist && fetchHistory()
+    isEmployeExist &&
+      dispatch(
+        setBulletinDePaie({
+          salarie: selectedEmploye,
+          salaireDeBase: selectedEmploye.salaire_de_base,
+        } as IBulletinDePaieProps),
+      )
+  }, [id, isEmployeExist, dispatch, anneeSectionne, selectedEmploye])
 
   const handleDateChange = (date: Date) => {
     dispatch(setHistoriqueDePaie({ anneeSectionne: date }))
@@ -146,7 +164,7 @@ const HistoriquePaie = () => {
 
   return (
     <div>
-      {isEmloyExist ? (
+      {isEmployeExist ? (
         <div>
           <div>
             <div className="flex p-2 justify-end">
