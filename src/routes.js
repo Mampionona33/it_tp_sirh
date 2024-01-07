@@ -1,3 +1,4 @@
+import { exact } from 'prop-types'
 import lazyWithRetry from './utils/lazyWithRetry'
 
 // const Dashboard = lazyWithRetry(() => import('./views/dashboard/Dashboard'))
@@ -21,6 +22,9 @@ const ValidePaie = lazyWithRetry(() => import('@views/gestion-paie/valider-paie/
 // Etat divers
 const DeclarationCnaps = lazyWithRetry(() =>
   import('src/views/etats_divers/declarationCnaps/DeclarationCnaps'),
+)
+const DetailPaieValide = lazyWithRetry(() =>
+  import('src/views/gestion-paie/details/DetailPaieValide'),
 )
 
 // Administration
@@ -130,9 +134,9 @@ const routes = [
     exact: true,
   },
   {
-    path: 'gestion-de-paie/liste-employee/historique/:id/valider/:dateValidation/:activeTabParam',
-    element: ValidePaie,
-    name: 'Valider paie',
+    path: '/gestion-de-paie/historique/:id/details/:idValidation',
+    name: 'Details',
+    element: DetailPaieValide,
     exact: true,
   },
 
