@@ -124,14 +124,14 @@ const HistoriquePaie = () => {
 
         header: () => 'Date',
       }),
-      columnHelper.accessor('salaire_brut', {
-        cell: (info) => info.getValue(),
-        header: () => 'Salaire brut',
-      }),
-      columnHelper.accessor('salaire_net', {
-        cell: (info) => info.getValue(),
-        header: () => 'Salaire net',
-      }),
+      // columnHelper.accessor('salaire_brut', {
+      //   cell: (info) => info.getValue(),
+      //   header: () => 'Salaire brut',
+      // }),
+      // columnHelper.accessor('salaire_net', {
+      //   cell: (info) => info.getValue(),
+      //   header: () => 'Salaire net',
+      // }),
       columnHelper.accessor('status', {
         cell: (info) => <span className="font-medium">{info.getValue()}</span>,
         header: () => 'Validée',
@@ -160,7 +160,7 @@ const HistoriquePaie = () => {
             )
           }
         },
-        header: () => 'Actions',
+        header: () => <div className="flex justify-center ">Actions</div>,
       }),
     ],
     [columnHelper],
