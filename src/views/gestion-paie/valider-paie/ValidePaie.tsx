@@ -5,7 +5,7 @@ import Page404 from '@src/views/pages/page404/Page404'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 import { format, parseISO } from 'date-fns'
-import { fr } from 'date-fns/locale'
+import { enGB, fr } from 'date-fns/locale'
 import { DDMMYYYYFormat } from '@src/types/DateType'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import CardSalaireBrut from './ValiderCalculPaie/CardSalaireBrut'
@@ -39,13 +39,14 @@ const ValidePaie = () => {
 
   const getMonthValidation = (): string => {
     if (dateValidation && isDateValidationexist) {
-      const month = format(new Date(dateValidation), 'MMM', { locale: fr })
-      return month.slice(0, 3)
+      const month = format(new Date(dateValidation), 'MMM', { locale: enGB })
+      return month.slice(0, 3).toLowerCase()
     }
     return ''
   }
   const getDateDebutDateFin = (): { dateDebut: string; dateFin: string } | undefined => {
     const actualMonth = getMonthValidation()
+    console.log(actualMonth)
 
     return listDateDebutDateFin && listDateDebutDateFin[actualMonth]
   }
