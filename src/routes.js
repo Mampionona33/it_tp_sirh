@@ -10,7 +10,9 @@ const Typography = lazyWithRetry(() => import('./views/theme/typography/Typograp
 // const ListEmployes = lazyWithRetry(() => import('./views/employee/list/List'))
 const ListEmployes = lazyWithRetry(() => import('@views/employee/list/List'))
 const FicheEmploye = lazyWithRetry(() => import('src/views/employee/fiche/Fiche'))
-const BulletinPaie = lazyWithRetry(() => import('src/views/employee/bulletinPaie/BulletinPaie'))
+const BulletinPaie = lazyWithRetry(() =>
+  import('src/views/gestion-paie/bulletinDePaie/BulletinPaie'),
+)
 const AjoutEmploye = lazyWithRetry(() => import('@views/employee/ajout/AjoutEmploye'))
 
 // Gestion de paie
@@ -107,12 +109,6 @@ const routes = [
     element: DeclarationCnaps,
     exact: true,
   },
-  {
-    path: '/bulletin-de-paie/:id',
-    name: 'Bulletin de paie',
-    element: BulletinPaie,
-    exact: true,
-  },
 
   // Gestion de paie path def
   {
@@ -137,6 +133,12 @@ const routes = [
     path: '/gestion-de-paie/historique/:id/details/:idValidation',
     name: 'Détail sur la paie',
     element: DetailPaieValide,
+    exact: true,
+  },
+  {
+    path: '/gestion-de-paie/historique/:id/details/:idValidation/imprimer',
+    name: 'Bulletin de paie',
+    element: BulletinPaie,
     exact: true,
   },
 
