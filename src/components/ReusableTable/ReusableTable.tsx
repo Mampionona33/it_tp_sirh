@@ -44,9 +44,6 @@ const ReusableTable = <T extends object>({
     getPaginationRowModel: getPaginationRowModel(),
   })
 
-  // console.log(data)
-  console.log(table.getRowModel().rows)
-
   return (
     <div>
       <div className="flex flex-col">

@@ -143,7 +143,6 @@ const HistoriquePaie = () => {
     ],
     [columnHelper],
   )
-  // console.log(historiquePaiement)
 
   return (
     <div>
