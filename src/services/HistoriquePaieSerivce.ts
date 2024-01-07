@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export interface IGetOneProps {
+export interface IGetByUserIDAndDate {
   id: string | number
   annee?: number
 }
@@ -18,7 +18,15 @@ class HistoriquePaieService {
     this.login = 'lslisteemployes'
   }
 
-  async getOne(params: IGetOneProps) {
+  async getByUserIDAndDate(params: IGetByUserIDAndDate) {
+    /**
+     * Récupère l'historique de paie pour un employé spécifique et une année donnée.
+     *
+     * @param params - Les paramètres de la requête.
+     * @param params.id - L'identifiant de l'employé.
+     * @param params.annee - L'année sélectionnée. Par défaut, c'est l'année en cours.
+     * @returns Promise<Array<{ date: string, id: number, status: string }>> - Un tableau d'objets représentant l'historique de paie.
+     */
     const { id, annee = new Date().getFullYear() } = params
     try {
       const resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/historique-paie/${id}/${annee}`)
