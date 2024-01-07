@@ -67,6 +67,7 @@ export interface IBulletinDePaieProps {
   tableauHsHebdo?: []
   tableauHs130Hebdo?: []
   tableauHs150Hebdo?: []
+  id?: number
 }
 
 export interface IIndemniteProps {
@@ -89,6 +90,7 @@ export interface IAvantageProps {
 export interface IValidationProps {
   status: EnumBoolean
   date?: string
+  day?: string
 }
 
 export interface IDeductionProps {

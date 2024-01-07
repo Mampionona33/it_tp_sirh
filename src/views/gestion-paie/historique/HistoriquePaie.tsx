@@ -77,7 +77,7 @@ const HistoriquePaie = () => {
 
     const getEmptyRow = (month) => ({
       id: month - 1,
-      id_employe: 0,
+      id_employe: id,
       date: `${selectedYear}-${month.toString().padStart(2, '0')}-22`,
       salaireBrut: 0,
       salaireNet: 0,

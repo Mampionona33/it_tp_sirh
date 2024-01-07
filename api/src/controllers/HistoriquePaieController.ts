@@ -2,9 +2,10 @@ import { Request, Response } from 'express'
 import { IBulletinDePaieProps } from 'interfaces/interfaceBulletinDePaie'
 
 export interface IGetOneProps {
-  id: number
+  id?: number
   id_employe?: number | string
   date?: string
+  validationDay?: string
   salaireBrut?: number
   salaireNet?: number
   status?: string
@@ -28,8 +29,9 @@ class HistoriquePaieController {
 
     for (let i = 0; i < data.length; i++) {
       resp.push({
-        id: i,
+        id: data[i].id,
         id_employe: data[i].salarie?.id,
+        validationDay: data[i].validation.day,
         date: data[i].validation?.date,
         salaireBrut: data[i].salaireBrut,
         salaireNet: data[i].salaireNet,
