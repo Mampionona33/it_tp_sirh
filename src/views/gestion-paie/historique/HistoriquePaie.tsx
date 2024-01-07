@@ -108,7 +108,7 @@ const HistoriquePaie = () => {
     }
 
     return rows
-  }, [anneeSectionne, historiques])
+  }, [anneeSectionne, historiques, id])
 
   const historiquePaiement = generateRows()
 
