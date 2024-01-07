@@ -1,9 +1,9 @@
+import React, { useCallback, useEffect, useMemo } from 'react'
+import { useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import useEmployeeExists from '@src/hooks/useEmployeeExists'
 import { fetchHistoriquesPaie } from '@src/redux/historiqueDePaie/historiqueDePaieAction'
 import Page404 from '@src/views/pages/page404/Page404'
-import React, { useCallback, useEffect, useMemo } from 'react'
-import { useParams } from 'react-router-dom'
 import SelectAnnee from './SelectAnnee'
 import { setHistoriqueDePaie } from '@src/redux/historiqueDePaie/historiqueDePaieReducer'
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
@@ -19,6 +19,7 @@ import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
   actions?: React.FC[]
 }
+
 const HistoriquePaie = () => {
   const isEmployeExist = useEmployeeExists()
   const { id } = useParams()
@@ -54,7 +55,9 @@ const HistoriquePaie = () => {
         }
       }
     }
+
     isEmployeExist && fetchHistory()
+
     isEmployeExist &&
       dispatch(
         setBulletinDePaie({
@@ -72,20 +75,16 @@ const HistoriquePaie = () => {
     const currentYear = new Date().getFullYear()
     const selectedYear = new Date(anneeSectionne).getFullYear()
 
-    const getEmptyRow = (month) => {
-      const date = `${selectedYear}-${month.toString().padStart(2, '0')}-01`
-      return {
-        id: month - 1,
-        id_employe: 0,
-        date,
-        salaireBrut: 0,
-        salaireNet: 0,
-        status: 'non',
-      }
-    }
+    const getEmptyRow = (month) => ({
+      id: month - 1,
+      id_employe: 0,
+      date: `${selectedYear}-${month.toString().padStart(2, '0')}-22`,
+      salaireBrut: 0,
+      salaireNet: 0,
+      status: 'non',
+    })
 
     const mergeWithHistoricalData = (row) => {
-      const selectedYear = new Date(anneeSectionne).getFullYear()
       const matchingHistoricalData = historiques.find(
         (data) =>
           new Date(data.date).getFullYear() === selectedYear &&
@@ -107,7 +106,7 @@ const HistoriquePaie = () => {
         mergeWithHistoricalData(getEmptyRow(month + 1)),
       )
     }
-    // console.log(rows)
+
     return rows
   }, [anneeSectionne, historiques])
 

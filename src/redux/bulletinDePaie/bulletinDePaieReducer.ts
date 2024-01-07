@@ -6,6 +6,7 @@ const initialState: IBulletinDePaieProps = {
   validation: {
     status: EnumBoolean.NON,
     date: null,
+    day: null,
   },
   employeur: {
     nom: ' LA LIGNE SCANDINAVE',

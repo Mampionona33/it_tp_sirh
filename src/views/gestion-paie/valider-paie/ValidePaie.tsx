@@ -46,7 +46,6 @@ const ValidePaie = () => {
   }
   const getDateDebutDateFin = (): { dateDebut: string; dateFin: string } | undefined => {
     const actualMonth = getMonthValidation()
-    console.log(actualMonth)
 
     return listDateDebutDateFin && listDateDebutDateFin[actualMonth]
   }
@@ -182,10 +181,11 @@ const ValidePaie = () => {
     ev.preventDefault()
 
     const validationStatus = EnumBoolean.OUI
-    const validationDate = format(new Date(), 'yyyy-MM-dd')
+    const validationDate = dateValidation
+    const validationDay = format(new Date(), 'yyyy-MM-dd')
     dispatch(
       setBulletinDePaie({
-        validation: { status: validationStatus, date: validationDate },
+        validation: { status: validationStatus, date: validationDate, day: validationDay },
       } as IBulletinDePaieProps),
     )
 
