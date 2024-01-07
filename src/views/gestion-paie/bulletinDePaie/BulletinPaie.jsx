@@ -58,8 +58,8 @@ const BulletinPaie = () => {
 
   return (
     <>
-      <div className="h-screen">
-        <PDFViewer showToolbar={false} width="100%" height="100%">
+      <div className="h-screen w-full">
+        <PDFViewer width="100%" height="100%">
           <MyDocument salarie={salarie} bulletinDePaie={bulletinDePaie} />
         </PDFViewer>
       </div>
