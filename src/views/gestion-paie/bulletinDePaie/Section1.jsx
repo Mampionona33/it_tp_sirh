@@ -3,11 +3,13 @@ import { Text, View } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import registerFonts from './font'
 import { styles } from './styles'
+import { format } from 'date-fns'
+import { fr } from 'date-fns/locale'
 
 registerFonts()
 
 const Section1 = (props) => {
-  const dateSelectionne = props.data.dateSelectionne
+  const dateSelectionne = format(new Date(props.data.validation.date), 'MMM yyyy', { locale: fr })
   const nomEmployeur = props.data.employeur.nom
   const addresseEmployeur = props.data.employeur.adresse
   const CP_et_VilleEmployeur = props.data.employeur.CP_et_Ville
@@ -16,9 +18,9 @@ const Section1 = (props) => {
   const rcs = props.data.employeur.rcs
   const nomPrenomSalarie = props.data.salarie.nom
   const prenomSalarie = props.data.salarie.prenom
-  const fonction = props.data.salarie.poste
+  const fonction = props.data.salarie.titre_poste
   const numMatriculSalarie = props.data.salarie.matricule
-  const catSalarie = props.data.salarie.cat
+  const catSalarie = props.data.salarie.categorie
 
   const Line = ({ label, value, valueBold, marginBottom }) => {
     return (

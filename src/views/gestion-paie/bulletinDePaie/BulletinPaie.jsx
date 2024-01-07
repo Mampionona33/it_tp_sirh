@@ -8,6 +8,7 @@ import Section2 from './Section2'
 import Section3 from './Section3'
 import { FolderArrowDownIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom'
+import { useAppSelector } from '@src/hooks/useAppDispatch'
 
 // Create Document Component
 const MyDocument = ({ salarie, bulletinDePaie }) => {
@@ -32,7 +33,7 @@ MyDocument.propTypes = {
 const BulletinPaie = () => {
   const navigate = useNavigate()
   const selectedEmploye = useSelector((state) => state.selectedEmploye.employe)
-  const bulletinDePaie = useSelector((state) => state.bulletinDePaie)
+  const bulletinDePaie = useAppSelector((state) => state.bulletinDePaie)
   const salarie = useSelector((state) => state.bulletinDePaie.salarie)
 
   useEffect(() => {
@@ -52,6 +53,8 @@ const BulletinPaie = () => {
       .toBlob()
       .then((blob) => saveAs(blob, `${salarie.nom}_${salarie.prenom}.pdf`))
   }
+
+  console.log(bulletinDePaie)
 
   return (
     <>

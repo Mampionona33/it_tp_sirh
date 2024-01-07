@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
 })
 
 const Section2 = (props) => {
-  const salaireBase = props.data.salarie.salaireBase
-    ? formatNumberWithSpaces(props.data.salarie.salaireBase) + ' Ar'
+  const salaireDeBase = props.data.salaireDeBase
+    ? formatNumberWithSpaces(props.data.salaireDeBase) + ' Ar'
     : '-'
   const valHs30 = props.data.valHs30 ? formatNumberWithSpaces(props.data.valHs30) + ' Ar' : '-'
   const valHs50 = props.data.valHs50 ? formatNumberWithSpaces(props.data.valHs50) + ' Ar' : '-'
@@ -61,7 +61,7 @@ const Section2 = (props) => {
             { marginTop: 20, fontSize: 10, textAlign: 'right', paddingLeft: 2, paddingRight: 3 },
           ]}
         >
-          <Text>{salaireBase}</Text>
+          <Text>{salaireDeBase}</Text>
         </View>
         <View style={[styles.tableCell15, { paddingLeft: 2, marginTop: 20, fontSize: 10 }]}>
           <Text>Plafond SME :</Text>
