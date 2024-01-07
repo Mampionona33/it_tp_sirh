@@ -135,7 +135,7 @@ const routes = [
   },
   {
     path: '/gestion-de-paie/historique/:id/details/:idValidation',
-    name: 'Details',
+    name: 'Détail sur la paie',
     element: DetailPaieValide,
     exact: true,
   },
