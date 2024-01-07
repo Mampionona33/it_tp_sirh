@@ -9,6 +9,7 @@ import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReduc
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import ButtonLink from '@src/components/buttons/ButtonLink'
 import { format } from 'date-fns'
+import { fr } from 'date-fns/locale'
 
 const DetailPaieValide = () => {
   const dispatch = useAppDispatch()
@@ -28,19 +29,19 @@ const DetailPaieValide = () => {
     }
     fetchDetailsBltnPaie()
   }, [idValidation, id, dispatch])
-  const moisDeValidation = format(new Date(validation.date), 'MMMM yyyy')
+  const moisDeValidation = format(new Date(validation.date), 'MMMM yyyy', { locale: fr })
 
   return (
     <div className="w-full mb-3 mr-3 mt-3">
       <div className="flex gap-3 flex-wrap">
         <div className="pt-4 pl-4 pr-4 pb-2 w-full bg-white shadow-sm rounded-sm">
           <p className="text-customRed-900 capitalize border-b border-b-customRed-900">
-            Détails sur la paie {moisDeValidation}
+            Détails sur la paie: {moisDeValidation}
           </p>
           <div className="text-sm">
-            <p>Nom : {salarie.nom}</p>
-            <p>Prenom : {salarie.prenom}</p>
-            <p>Matricule : {salarie.matricule}</p>
+            <p className="mb-1">Nom : {salarie.nom}</p>
+            <p className="mb-1">Prenom : {salarie.prenom}</p>
+            <p className="mb-1">Matricule : {salarie.matricule}</p>
           </div>
         </div>
         <div className="grid w-full lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
