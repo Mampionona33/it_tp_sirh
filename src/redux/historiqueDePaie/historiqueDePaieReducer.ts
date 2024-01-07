@@ -3,7 +3,7 @@ import { fetchHistoriquesPaie } from './historiqueDePaieAction'
 
 const initialState = {
   historiques: [],
-  annee: new Date().getFullYear(),
+  anneeSectionne: new Date().toString(),
   loading: 'idle',
 }
 
@@ -12,6 +12,9 @@ const historiqueDePaieSlice = createSlice({
   initialState,
   reducers: {
     resetHistoriqueDePaie: (state) => initialState,
+    setHistoriqueDePaie: (state, action: PayloadAction<any>) => {
+      return { ...state, ...action.payload }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -27,5 +30,7 @@ const historiqueDePaieSlice = createSlice({
       })
   },
 })
+
+export const { resetHistoriqueDePaie, setHistoriqueDePaie } = historiqueDePaieSlice.actions
 
 export default historiqueDePaieSlice.reducer
