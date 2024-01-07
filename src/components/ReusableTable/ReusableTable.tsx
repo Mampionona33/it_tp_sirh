@@ -35,11 +35,17 @@ const ReusableTable = <T extends object>({
     data,
     columns,
     state: { globalFilter },
+    initialState: {
+      pagination: { pageSize: pagination ? pageSizeOptions[0] : data.length },
+    },
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   })
+
+  // console.log(data)
+  console.log(table.getRowModel().rows)
 
   return (
     <div>
@@ -47,8 +53,8 @@ const ReusableTable = <T extends object>({
         {(title || searchBar) && (
           <div className="overflow-x-auto sm:-mx-2 lg:-mx-4">
             <div className="inline-block min-w-full py-1 sm:px-2 lg:px-4">
-              <div className="overflow-hidden p-2">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="overflow-x-hidden p-2">
+                <div className="flex gap-3">
                   <div className="flex gap-3 justify-start items-start w-full">
                     {title && (
                       <div>
@@ -86,7 +92,7 @@ const ReusableTable = <T extends object>({
         <div className="flex flex-col">
           <div className="overflow-x-auto sm:-mx-2 lg:-mx-4">
             <div className="inline-block min-w-full py-1 sm:px-2 lg:px-4">
-              <div className="overflow-hidden p-2">
+              <div className="overflow-x-hidden p-2">
                 <table className="min-w-full">
                   <thead className="border-b bg-customRed-900">
                     {table.getHeaderGroups().map((headerGroup) => (

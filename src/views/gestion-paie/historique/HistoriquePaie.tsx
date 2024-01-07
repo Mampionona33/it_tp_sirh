@@ -2,19 +2,31 @@ import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import useEmployeeExists from '@src/hooks/useEmployeeExists'
 import { fetchHistoriquesPaie } from '@src/redux/historiqueDePaie/historiqueDePaieAction'
 import Page404 from '@src/views/pages/page404/Page404'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import SelectAnnee from './SelectAnnee'
 import { setHistoriqueDePaie } from '@src/redux/historiqueDePaie/historiqueDePaieReducer'
+import ReusableTable from '@src/components/ReusableTable/ReusableTable'
+import ButtonLink, { ButtonLinkVariant } from '@src/components/buttons/ButtonLink'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
+import { format } from 'date-fns'
+import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
+import { fr } from 'date-fns/locale'
 
+interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
+  actions?: React.FC[]
+}
 const HistoriquePaie = () => {
   const isEmloyExist = useEmployeeExists()
   const { id } = useParams()
   const dispatch = useAppDispatch()
-  const [history, setHistory] = useState([])
-  const { loading: loadinHistoriquePaie, anneeSectionne } = useAppSelector(
-    (store) => store.historiquePaie,
-  )
+  // const [history, setHistory] = useState([])
+  const {
+    loading: loadinHistoriquePaie,
+    anneeSectionne,
+    historiques,
+  } = useAppSelector((store) => store.historiquePaie)
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -38,12 +50,114 @@ const HistoriquePaie = () => {
     dispatch(setHistoriqueDePaie({ anneeSectionne: date }))
   }
 
+  const generateRows = useCallback(() => {
+    const currentYear = new Date().getFullYear()
+    const selectedYear = new Date(anneeSectionne).getFullYear()
+
+    const getEmptyRow = (month) => {
+      const date = `${selectedYear}-${month.toString().padStart(2, '0')}-01`
+      return {
+        id: month - 1,
+        id_employe: 0,
+        date,
+        salaireBrut: 0,
+        salaireNet: 0,
+        status: 'non',
+      }
+    }
+
+    const mergeWithHistoricalData = (row) => {
+      const selectedYear = new Date(anneeSectionne).getFullYear()
+      const matchingHistoricalData = historiques.find(
+        (data) =>
+          new Date(data.date).getFullYear() === selectedYear &&
+          new Date(data.date).getMonth() === row.id,
+      )
+
+      return matchingHistoricalData ? matchingHistoricalData : row
+    }
+
+    let rows = []
+
+    if (selectedYear === currentYear) {
+      const currentMonth = new Date().getMonth() + 1
+      rows = Array.from({ length: currentMonth }, (_, month) =>
+        mergeWithHistoricalData(getEmptyRow(month + 1)),
+      )
+    } else {
+      rows = Array.from({ length: 12 }, (_, month) =>
+        mergeWithHistoricalData(getEmptyRow(month + 1)),
+      )
+    }
+    // console.log(rows)
+    return rows
+  }, [anneeSectionne, historiques])
+
+  const historiquePaiement = generateRows()
+
+  const columnHelper = createColumnHelper<IHistoriquePaieTableProps>()
+  const cols = useMemo<ColumnDef<IHistoriquePaieTableProps>[]>(
+    () => [
+      columnHelper.accessor('date', {
+        cell: (info) => format(new Date(info.getValue()), 'MMMM yyyy', { locale: fr }),
+        header: () => 'Date',
+      }),
+      columnHelper.accessor('salaire_brut', {
+        cell: (info) => info.getValue(),
+        header: () => 'Salaire brut',
+      }),
+      columnHelper.accessor('salaire_net', {
+        cell: (info) => info.getValue(),
+        header: () => 'Salaire net',
+      }),
+      columnHelper.accessor('status', {
+        cell: (info) => <span className="font-medium">{info.getValue()}</span>,
+        header: () => 'Validée',
+      }),
+      columnHelper.accessor('actions', {
+        cell: (info) => {
+          if (info.row.original.status === EnumBoolean.OUI) {
+            return (
+              <div className="flex justify-center ">
+                <ButtonLink
+                  className="w-24"
+                  variant={ButtonLinkVariant.Secondary}
+                  to={`details/${info.row.original.id}`}
+                >
+                  Détails
+                </ButtonLink>
+              </div>
+            )
+          } else if (info.row.original.status === 'non') {
+            return (
+              <div className="flex justify-center">
+                <ButtonLink className="w-24" to={`valider/${info.row.original.date}`}>
+                  A Valider
+                </ButtonLink>
+              </div>
+            )
+          }
+        },
+        header: () => 'Actions',
+      }),
+    ],
+    [columnHelper],
+  )
+  // console.log(historiquePaiement)
+
   return (
     <div>
       {isEmloyExist ? (
         <div>
-          <SelectAnnee selectedDate={new Date(anneeSectionne)} onDateChange={handleDateChange} />
-          <div>Historique</div>
+          <div>
+            <div className="flex p-2 justify-end">
+              <SelectAnnee
+                selectedDate={new Date(anneeSectionne)}
+                onDateChange={handleDateChange}
+              />
+            </div>
+            <ReusableTable data={historiquePaiement} columns={cols} />
+          </div>
         </div>
       ) : (
         <Page404 />
