@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import DetailHeures from './detail-heures/DetailHeures'
-import ConfirmValidationPaie from './ConfirmValidationPaie/ConfirmValidationPaie'
 import BulletinDePaie from './BulletinDePaie/BulletinDePaie'
 
 interface ITabListProps {
@@ -62,7 +61,6 @@ const ValidPaieOngletContainer: React.FC = () => {
       case 'detail-heures':
         return <DetailHeures />
       case 'valid-paie':
-        return <ConfirmValidationPaie />
       case 'bullettin-paie':
         return <BulletinDePaie />
       default:

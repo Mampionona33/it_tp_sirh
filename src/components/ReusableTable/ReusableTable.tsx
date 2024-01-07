@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   ColumnDef,
   useReactTable,
@@ -31,8 +31,9 @@ const ReusableTable = <T extends object>({
 }: IReusableTableProps<T>) => {
   const [globalFilter, setGlobalFilter] = React.useState('')
   const pageSizeOptions = [5, 10, 15, 20, 25, 30]
+  const [tableData, setTableData] = useState(data)
   const table = useReactTable({
-    data,
+    data: tableData,
     columns,
     state: { globalFilter },
     initialState: {
@@ -43,6 +44,13 @@ const ReusableTable = <T extends object>({
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   })
+  // console.log(data)
+
+  useEffect(() => {
+    table.setGlobalFilter(globalFilter || '')
+    table.setPageSize(data.length)
+    setTableData(data)
+  }, [data, globalFilter, table])
 
   return (
     <div>
