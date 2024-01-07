@@ -116,7 +116,12 @@ const HistoriquePaie = () => {
   const cols = useMemo<ColumnDef<IHistoriquePaieTableProps>[]>(
     () => [
       columnHelper.accessor('date', {
-        cell: (info) => format(new Date(info.getValue()), 'MMMM yyyy', { locale: fr }),
+        cell: (info) => (
+          <span className="capitalize">
+            {format(new Date(info.getValue()), 'MMMM yyyy', { locale: fr })}
+          </span>
+        ),
+
         header: () => 'Date',
       }),
       columnHelper.accessor('salaire_brut', {
