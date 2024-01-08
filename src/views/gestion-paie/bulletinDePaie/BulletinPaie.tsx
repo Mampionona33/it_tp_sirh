@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { Document, PDFViewer, pdf, Page } from '@react-pdf/renderer'
-import { PropTypes } from 'prop-types'
 import { saveAs } from 'file-saver'
 import Section1 from './Section1'
 import Section2 from './Section2'
@@ -9,32 +8,27 @@ import Section3 from './Section3'
 import { FolderArrowDownIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 // Create Document Component
-const MyDocument = ({ salarie, bulletinDePaie }) => {
+interface IMydocumentProps {
+  data: IBulletinDePaieProps
+}
+const MyDocument = ({ data }: IMydocumentProps) => {
   return (
-    <Document
-      title={`Bulletin de paie ${bulletinDePaie.salarie.nom} ${bulletinDePaie.salarie.prenom}`}
-    >
+    <Document title={`Bulletin de paie ${data.salarie.nom} ${data.salarie.prenom}`}>
       <Page size="A4">
-        <Section1 data={bulletinDePaie} />
-        <Section2 data={bulletinDePaie} />
-        <Section3 data={bulletinDePaie} />
+        <Section1 data={data} />
+        <Section2 data={data} />
+        <Section3 data={data} />
       </Page>
     </Document>
   )
 }
 
-MyDocument.propTypes = {
-  salarie: PropTypes.object,
-  bulletinDePaie: PropTypes.object,
-}
-
 const BulletinPaie = () => {
   const navigate = useNavigate()
-  const selectedEmploye = useSelector((state) => state.selectedEmploye.employe)
   const bulletinDePaie = useAppSelector((state) => state.bulletinDePaie)
-  const salarie = useSelector((state) => state.bulletinDePaie.salarie)
 
   useEffect(() => {
     let mount = true
@@ -49,18 +43,18 @@ const BulletinPaie = () => {
   }, [bulletinDePaie.salarie, navigate])
 
   const handleclickDownload = () => {
-    const pdfBlob = pdf(<MyDocument salarie={selectedEmploye} bulletinDePaie={bulletinDePaie} />)
+    const pdfBlob = pdf(<MyDocument data={bulletinDePaie} />)
       .toBlob()
-      .then((blob) => saveAs(blob, `${salarie.nom}_${salarie.prenom}.pdf`))
+      .then((blob) =>
+        saveAs(blob, `${bulletinDePaie.salarie.nom}_${bulletinDePaie.salarie.prenom}.pdf`),
+      )
   }
-
-  console.log(bulletinDePaie)
 
   return (
     <>
       <div className="h-screen w-full">
         <PDFViewer width="100%" height="100%">
-          <MyDocument salarie={salarie} bulletinDePaie={bulletinDePaie} />
+          <MyDocument data={bulletinDePaie} />
         </PDFViewer>
       </div>
       <div className="flex fixed top-[15%] right-0">
