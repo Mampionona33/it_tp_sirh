@@ -137,6 +137,7 @@ const Body = ({ data }: IBodyProps) => {
   const vehicule = formatNumberWithSpaces(data.avantages.vehicule) || '-'
   const logement = formatNumberWithSpaces(data.avantages.logement) || '-'
   const autresAvantages = formatNumberWithSpaces(data.avantages.autresAvantages) || '-'
+  const rappel = formatNumberWithSpaces(data.rappel) || '-'
 
   return (
     <View style={[styles.row, { width: '100%' }]}>
@@ -149,6 +150,7 @@ const Body = ({ data }: IBodyProps) => {
         <Row cell1="Avantages en nature (Véhicules)" cell7={vehicule} />
         <Row cell1="Avantages en nature (Logement)" cell7={logement} />
         <Row cell1="Autres avantages" cell7={autresAvantages} />
+        <Row cell1="Rappel" cell7={rappel} />
       </View>
     </View>
   )
