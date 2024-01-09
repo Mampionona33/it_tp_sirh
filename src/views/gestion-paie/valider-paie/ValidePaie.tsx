@@ -26,16 +26,19 @@ import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import AppModal from '@src/components/Modal/AppModal'
 import FormValidateCalculPaie from './FormValidateCalculPaie'
 import { setModalOpen } from '@src/redux/modal/modalReducer'
+import useValidMonthFrMMMM from '@src/hooks/useValidMonth'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
   const isDateValidationexist = useDateValidationExist()
   const { salarie } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
-  const bulletinDePaie: IBulletinDePaieProps = useAppSelector((store) => store.bulletinDePaie)
 
   const dispatch = useAppDispatch()
+
   const { validationYear, validationMonth } = useParams()
+
+  const isMonthValid = useValidMonthFrMMMM(validationMonth)
 
   const convetMonthFrToNumber = (monthFr: string): number => {
     let monthNumber = 0
@@ -210,7 +213,7 @@ const ValidePaie = () => {
         <AppModal>
           <FormValidateCalculPaie />
         </AppModal>
-        {isEmployeExist ? (
+        {isEmployeExist && isMonthValid ? (
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3 mt-2 mb-3">
               <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
