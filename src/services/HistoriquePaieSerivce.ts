@@ -34,7 +34,15 @@ class HistoriquePaieService {
      */
     const { id, annee = new Date().getFullYear() } = params
     try {
-      const resp = await axios.get(`${this.REACT_APP_API_BASE_URL}/historique-paie/${id}/${annee}`)
+      const resp = await axios.get(
+        `${this.REACT_APP_API_BASE_URL}/historique-paie/${id}/${annee}`,
+        {
+          auth: {
+            username: this.login,
+            password: this.pass,
+          },
+        },
+      )
       console.log(resp)
       return resp
     } catch (error) {
