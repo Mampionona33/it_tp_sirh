@@ -42,15 +42,25 @@ const ValidePaie = () => {
 
   const convetMonthFrToNumber = (monthFr: string): number => {
     let monthNumber = 0
-    monthNumber = format(new Date(), 'MMM', { locale: fr }).indexOf(monthFr)
+    const tempDate = new Date()
+    for (let i = 0; i < 12; i++) {
+      tempDate.setMonth(i)
+      const tempDateMonthFr = format(tempDate, 'MMMM', { locale: fr })
+      if (tempDateMonthFr === monthFr) {
+        monthNumber = i + 1
+      }
+    }
     return monthNumber
   }
 
   const formatValidationDate = (): string => {
-    return `${validationYear}-${convetMonthFrToNumber(validationMonth)}-01`
+    const convertedMonthToNumber = convetMonthFrToNumber(validationMonth)
+    return `${validationYear}-${convertedMonthToNumber.toString().padStart(2, '0')}-01`
   }
 
   const dateValidation = formatValidationDate()
+
+  console.log(dateValidation)
 
   const getMonthValidation = (): string => {
     if (dateValidation && isDateValidationexist) {
@@ -198,6 +208,8 @@ const ValidePaie = () => {
     const validationStatus = EnumBoolean.OUI
     const validationDate = dateValidation
     const validationDay = format(new Date(), 'yyyy-MM-dd')
+    console.log(validationDate, validationDay)
+
     dispatch(
       setBulletinDePaie({
         validation: { status: validationStatus, date: validationDate, day: validationDay },

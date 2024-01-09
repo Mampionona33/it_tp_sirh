@@ -13,7 +13,10 @@ import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
 import { format } from 'date-fns'
 import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 import { fr } from 'date-fns/locale'
-import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import {
+  resetBulletinDePaie,
+  setBulletinDePaie,
+} from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
@@ -24,7 +27,6 @@ const HistoriquePaie = () => {
   const isEmployeExist = useEmployeeExists()
   const { id } = useParams()
   const dispatch = useAppDispatch()
-  const { salaireBrut } = useAppSelector((store) => store.bulletinDePaie)
   const { list: listeEmploye } = useAppSelector((store) => store.employeesList)
   const {
     loading: loadinHistoriquePaie,
@@ -42,6 +44,8 @@ const HistoriquePaie = () => {
   )
 
   useEffect(() => {
+    dispatch(resetBulletinDePaie())
+
     const fetchHistory = async () => {
       if (isEmployeExist && id) {
         try {
@@ -104,7 +108,7 @@ const HistoriquePaie = () => {
     }
 
     return rows
-  }, [anneeSectionne, historiques, id])
+  }, [anneeSectionne, historiques, id, selectedEmploye])
 
   const historiquePaiement = generateRows()
 
