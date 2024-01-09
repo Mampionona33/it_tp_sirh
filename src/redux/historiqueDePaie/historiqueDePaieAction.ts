@@ -26,11 +26,12 @@ export const fetchHistoriquesPaie = createAsyncThunk(
 export const fetchDetailsHistoriquePaie = createAsyncThunk(
   'historiques/fetch/details',
   async (params: IGetByUserIdAndBulletin, thunkAPI) => {
-    const { id, idValidation } = params
+    const { id, annee, mois } = params
     try {
       const response: AxiosResponse = await historiquePaieService.getOnByUserIdAndBltinPaieId({
         id,
-        idValidation,
+        annee,
+        mois,
       })
       return response.data
     } catch (error) {

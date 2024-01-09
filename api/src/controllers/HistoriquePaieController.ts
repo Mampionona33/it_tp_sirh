@@ -44,14 +44,26 @@ class HistoriquePaieController {
   }
 
   getDetailsById = (req: Request, res: Response) => {
-    const { id, idValidation } = req.params
+    const { id, annee, mois } = req.params
     const listBulletinDePaie: IBulletinDePaieProps[] = this.db['bulletinDePaie']
 
-    console.log(id, idValidation)
+    console.log(id, annee)
 
-    const data = listBulletinDePaie.filter(
-      (blt) => String(blt.id) === String(idValidation) && String(blt.salarie?.id) === String(id),
-    )[0]
+    const data = listBulletinDePaie.filter((blt) => {
+      const salarieId = String(blt.salarie?.id)
+      const validationDate = blt.validation?.date || ''
+
+      const validAnne = new Date(validationDate).getFullYear()
+      const validMonth = format(new Date(validationDate).getMonth() - 1, 'MMMM', { locale: fr })
+      console.log(validationDate)
+
+      if (salarieId === String(id) && validAnne === Number(annee) && validMonth === mois) {
+        return true
+      }
+
+      return false
+    })[0]
+    console.log(data)
 
     res.status(200).send(data)
   }
