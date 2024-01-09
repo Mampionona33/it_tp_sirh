@@ -102,12 +102,12 @@ const Row = (props: IRowProps) => {
           style={[
             RowStyle.cellStyle,
             styles.borderRight,
-            { width: '33.3%', textAlign: 'left', paddingLeft: 2 , styleCell1},
+            { width: '33.3%', textAlign: 'left', paddingLeft: 2 },
           ]}
         >
           {props.cell1}
         </Text>
-        <Text style={[RowStyle.cellStyle, styles.borderRight, { width: '11.1%' }]}>
+        <Text style={[RowStyle.cellStyle, styles.borderRight,styleCell1, { width: '11.1%' }]}>
           {props.cell2}
         </Text>
         <Text style={[RowStyle.cellStyle, styles.borderRight, { width: '11.1%' }]}>
