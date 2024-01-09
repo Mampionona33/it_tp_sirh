@@ -10,7 +10,6 @@ class AuthController {
   }
 
   login = (req: Request, res: Response): void => {
-    // Vérifiez si req.body est défini et non vide
     if (!req.body || Object.keys(req.body).length === 0) {
       res.status(400).json({ success: false, message: 'Invalid request body' })
       return
