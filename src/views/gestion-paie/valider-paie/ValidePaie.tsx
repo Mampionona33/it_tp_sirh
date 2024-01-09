@@ -30,7 +30,7 @@ import useValidMonthFrMMMM from '@src/hooks/useValidMonth'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
-  const isDateValidationexist = useDateValidationExist()
+  // const isDateValidationexist = useDateValidationExist()
   const { salarie } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
 
@@ -61,7 +61,7 @@ const ValidePaie = () => {
   const dateValidation = formatValidationDate()
 
   const getMonthValidation = (): string => {
-    if (dateValidation && isDateValidationexist) {
+    if (dateValidation && isMonthValid) {
       const month = format(new Date(dateValidation), 'MMM', { locale: enGB })
       return month.slice(0, 3).toLowerCase()
     }
@@ -72,7 +72,7 @@ const ValidePaie = () => {
 
     return listDateDebutDateFin && listDateDebutDateFin[actualMonth]
   }
-  const { dateDebut, dateFin } = isDateValidationexist
+  const { dateDebut, dateFin } = isMonthValid
     ? getDateDebutDateFin()
     : { dateDebut: '00/00/0000', dateFin: '00/00/0000' }
 
@@ -85,7 +85,7 @@ const ValidePaie = () => {
       parsedDateValidation.getMonth(),
       dayOfMonth,
     )
-    if (isDateValidationexist) {
+    if (isMonthValid) {
       return format(formattedDateFin, 'dd/MM/yyyy') as DDMMYYYYFormat
     }
     return '00/00/0000'
@@ -97,7 +97,7 @@ const ValidePaie = () => {
     const adjustedDate = new Date(parsedDateValidation)
     adjustedDate.setDate(Number(dateDebut))
     adjustedDate.setMonth(parsedDateValidation.getMonth() - 1)
-    if (isDateValidationexist) {
+    if (isMonthValid) {
       return format(adjustedDate, 'dd/MM/yyyy') as DDMMYYYYFormat
     }
     return '00/00/0000'
