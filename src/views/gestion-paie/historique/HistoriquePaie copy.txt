@@ -31,7 +31,6 @@ const HistoriquePaie = () => {
     anneeSectionne,
     historiques,
   } = useAppSelector((store) => store.historiquePaie)
-  const anneeSectionneNumber: number | undefined = new Date(anneeSectionne).getFullYear()
 
   const selectedEmploye = useMemo(
     () =>
@@ -45,7 +44,9 @@ const HistoriquePaie = () => {
     const fetchHistory = async () => {
       if (isEmployeExist && id) {
         try {
-          const resp = await dispatch(fetchHistoriquesPaie({ id, annee: anneeSectionneNumber }))
+          const resp = await dispatch(
+            fetchHistoriquesPaie({ id, annee: new Date(anneeSectionne).getFullYear() }),
+          )
           if (resp.meta.requestStatus === 'fulfilled') {
             console.log(resp.payload)
           }
@@ -64,7 +65,7 @@ const HistoriquePaie = () => {
           salaireDeBase: selectedEmploye.salaire_de_base,
         } as IBulletinDePaieProps),
       )
-  }, [id, isEmployeExist, dispatch, anneeSectionne, selectedEmploye, anneeSectionneNumber])
+  }, [id, isEmployeExist, dispatch, anneeSectionne, selectedEmploye])
 
   const handleDateChange = (date: Date) => {
     dispatch(setHistoriqueDePaie({ anneeSectionne: date }))
@@ -74,18 +75,21 @@ const HistoriquePaie = () => {
     const currentYear = new Date().getFullYear()
     const selectedYear = new Date(anneeSectionne).getFullYear()
 
-    const getEmptyRow = (month): IHistoriquePaieProps => ({
-      mois: format(new Date(Number(selectedYear), month - 1, 1), 'MMMM', { locale: fr }),
-      salarie_id: id,
-      annee: selectedYear,
-      matricule: selectedEmploye?.matricule,
-      validation_status: EnumBoolean.NON,
+    const getEmptyRow = (month) => ({
+      id: month - 1,
+      id_employe: id,
+      date: `${selectedYear}-${month.toString().padStart(2, '0')}-22`,
+      salaireBrut: 0,
+      salaireNet: 0,
+      status: 'non',
     })
 
     const mergeWithHistoricalData = (row) => {
-      const matchingHistoricalData = historiques.find((data) => {
-        return Number(new Date(data.annee).getFullYear()) === selectedYear && data.mois === row.mois
-      })
+      const matchingHistoricalData = historiques.find(
+        (data) =>
+          new Date(data.date).getFullYear() === selectedYear &&
+          new Date(data.date).getMonth() === row.id,
+      )
 
       return matchingHistoricalData ? matchingHistoricalData : row
     }
@@ -111,37 +115,45 @@ const HistoriquePaie = () => {
   const columnHelper = createColumnHelper<IHistoriquePaieTableProps>()
   const cols = useMemo<ColumnDef<IHistoriquePaieTableProps>[]>(
     () => [
-      columnHelper.accessor('mois', {
-        cell: (info) => <span className="capitalize">{info.getValue()}</span>,
+      columnHelper.accessor('date', {
+        cell: (info) => (
+          <span className="capitalize">
+            {format(new Date(info.getValue()), 'MMMM yyyy', { locale: fr })}
+          </span>
+        ),
 
-        header: () => 'Mois',
+        header: () => 'Date',
       }),
-
-      columnHelper.accessor('validation_status', {
+      // columnHelper.accessor('salaire_brut', {
+      //   cell: (info) => info.getValue(),
+      //   header: () => 'Salaire brut',
+      // }),
+      // columnHelper.accessor('salaire_net', {
+      //   cell: (info) => info.getValue(),
+      //   header: () => 'Salaire net',
+      // }),
+      columnHelper.accessor('status', {
         cell: (info) => <span className="font-medium">{info.getValue()}</span>,
         header: () => 'Validée',
       }),
       columnHelper.accessor('actions', {
         cell: (info) => {
-          if (info.row.original.validation_status === EnumBoolean.OUI) {
+          if (info.row.original.status === EnumBoolean.OUI) {
             return (
               <div className="flex justify-center ">
                 <ButtonLink
                   className="w-24"
                   variant={ButtonLinkVariant.Secondary}
-                  to={`details/${info.row.original.mois}`}
+                  to={`details/${info.row.original.id}`}
                 >
                   Détails
                 </ButtonLink>
               </div>
             )
-          } else if (info.row.original.validation_status === 'non') {
+          } else if (info.row.original.status === 'non') {
             return (
               <div className="flex justify-center">
-                <ButtonLink
-                  className="w-24"
-                  to={`valider/${anneeSectionneNumber}/${info.row.original.mois}`}
-                >
+                <ButtonLink className="w-24" to={`valider/${info.row.original.date}`}>
                   A Valider
                 </ButtonLink>
               </div>
@@ -151,7 +163,7 @@ const HistoriquePaie = () => {
         header: () => <div className="flex justify-center ">Actions</div>,
       }),
     ],
-    [columnHelper, anneeSectionneNumber],
+    [columnHelper],
   )
 
   return (

@@ -124,7 +124,7 @@ const routes = [
     exact: true,
   },
   {
-    path: '/gestion-de-paie/historique/:id/valider/:dateValidation',
+    path: '/gestion-de-paie/historique/:id/valider/:validationYear/:validationMonth',
     element: ValidePaie,
     name: 'Validation paie',
     exact: true,

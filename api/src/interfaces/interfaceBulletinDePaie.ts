@@ -89,7 +89,7 @@ export interface IAvantageProps {
 
 export interface IValidationProps {
   status: EnumBoolean
-  date?: string
+  date?: string | number | Date
   day?: string
 }
 

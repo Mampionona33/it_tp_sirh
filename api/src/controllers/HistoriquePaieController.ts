@@ -1,14 +1,14 @@
+import { format } from 'date-fns'
+import { fr } from 'date-fns/locale'
 import { Request, Response } from 'express'
 import { IBulletinDePaieProps } from 'interfaces/interfaceBulletinDePaie'
 
 export interface IGetOneProps {
-  id?: number
-  id_employe?: number | string
-  date?: string
-  validationDay?: string
-  salaireBrut?: number
-  salaireNet?: number
-  status?: string
+  salarie_id?: number
+  annee?: string | number | Date
+  matricule?: string
+  mois?: string | number | Date
+  validation_status?: string
 }
 class HistoriquePaieController {
   private db: any
@@ -29,13 +29,14 @@ class HistoriquePaieController {
 
     for (let i = 0; i < data.length; i++) {
       resp.push({
-        id: data[i].id,
-        id_employe: data[i].salarie?.id,
-        validationDay: data[i].validation.day,
-        date: data[i].validation?.date,
-        salaireBrut: data[i].salaireBrut,
-        salaireNet: data[i].salaireNet,
-        status: data[i].validation?.status,
+        salarie_id: data[i].salarie?.id,
+        annee: data[i].validation?.date,
+        matricule: data[i].salarie?.matricule,
+        mois: data[i].validation?.date
+          ? format(new Date(data[i].validation.date as string | number), 'MMMM', { locale: fr })
+          : 'Date non définie',
+
+        validation_status: data[i].validation?.status,
       })
     }
 
