@@ -60,8 +60,6 @@ const ValidePaie = () => {
 
   const dateValidation = formatValidationDate()
 
-  console.log(dateValidation)
-
   const getMonthValidation = (): string => {
     if (dateValidation && isDateValidationexist) {
       const month = format(new Date(dateValidation), 'MMM', { locale: enGB })
