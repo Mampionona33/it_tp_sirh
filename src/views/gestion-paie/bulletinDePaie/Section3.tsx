@@ -81,6 +81,8 @@ interface IRowProps {
   cell5?: any
   cell6?: any
   cell7?: any
+
+  styleCell1?:string
 }
 const Row = (props: IRowProps) => {
   const RowStyle = StyleSheet.create({
@@ -91,6 +93,7 @@ const Row = (props: IRowProps) => {
       textAlign: 'right',
     },
   })
+  const styleCell1 = props.styleCell1 ? props.styleCell1 : ''
 
   return (
     <>
@@ -99,7 +102,7 @@ const Row = (props: IRowProps) => {
           style={[
             RowStyle.cellStyle,
             styles.borderRight,
-            { width: '33.3%', textAlign: 'left', paddingLeft: 2 },
+            { width: '33.3%', textAlign: 'left', paddingLeft: 2 , styleCell1},
           ]}
         >
           {props.cell1}
