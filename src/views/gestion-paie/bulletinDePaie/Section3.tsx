@@ -228,7 +228,7 @@ const Body = ({ data }: IBodyProps) => {
           styleCell7={[{ paddingBottom: 10 }, styles.borderBottom]}
         />
         <Row
-          styleCell1={[styles.borderBottom, styles.borderRight, { height: 12 }]}
+          styleCell1={[styles.borderBottom, styles.borderRight]}
           styleCell2={[{ borderRight: 0 }]}
           styleCell4={[styles.borderBottom]}
           styleCell5={[{ borderRight: 0 }]}
