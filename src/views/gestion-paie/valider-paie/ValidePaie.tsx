@@ -26,31 +26,42 @@ import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import AppModal from '@src/components/Modal/AppModal'
 import FormValidateCalculPaie from './FormValidateCalculPaie'
 import { setModalOpen } from '@src/redux/modal/modalReducer'
+import useValidMonthFrMMMM from '@src/hooks/useValidMonth'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
-  const isDateValidationexist = useDateValidationExist()
+  // const isDateValidationexist = useDateValidationExist()
   const { salarie } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
-  const bulletinDePaie: IBulletinDePaieProps = useAppSelector((store) => store.bulletinDePaie)
 
   const dispatch = useAppDispatch()
+
   const { validationYear, validationMonth } = useParams()
+
+  const isMonthValid = useValidMonthFrMMMM(validationMonth)
 
   const convetMonthFrToNumber = (monthFr: string): number => {
     let monthNumber = 0
-    monthNumber = format(new Date(), 'MMM', { locale: fr }).indexOf(monthFr)
+    const tempDate = new Date()
+    for (let i = 0; i < 12; i++) {
+      tempDate.setMonth(i)
+      const tempDateMonthFr = format(tempDate, 'MMMM', { locale: fr })
+      if (tempDateMonthFr === monthFr) {
+        monthNumber = i + 1
+      }
+    }
     return monthNumber
   }
 
   const formatValidationDate = (): string => {
-    return `${validationYear}-${convetMonthFrToNumber(validationMonth)}-01`
+    const convertedMonthToNumber = convetMonthFrToNumber(validationMonth)
+    return `${validationYear}-${convertedMonthToNumber.toString().padStart(2, '0')}-01`
   }
 
   const dateValidation = formatValidationDate()
 
   const getMonthValidation = (): string => {
-    if (dateValidation && isDateValidationexist) {
+    if (dateValidation && isMonthValid) {
       const month = format(new Date(dateValidation), 'MMM', { locale: enGB })
       return month.slice(0, 3).toLowerCase()
     }
@@ -61,7 +72,7 @@ const ValidePaie = () => {
 
     return listDateDebutDateFin && listDateDebutDateFin[actualMonth]
   }
-  const { dateDebut, dateFin } = isDateValidationexist
+  const { dateDebut, dateFin } = isMonthValid
     ? getDateDebutDateFin()
     : { dateDebut: '00/00/0000', dateFin: '00/00/0000' }
 
@@ -74,7 +85,7 @@ const ValidePaie = () => {
       parsedDateValidation.getMonth(),
       dayOfMonth,
     )
-    if (isDateValidationexist) {
+    if (isMonthValid) {
       return format(formattedDateFin, 'dd/MM/yyyy') as DDMMYYYYFormat
     }
     return '00/00/0000'
@@ -86,7 +97,7 @@ const ValidePaie = () => {
     const adjustedDate = new Date(parsedDateValidation)
     adjustedDate.setDate(Number(dateDebut))
     adjustedDate.setMonth(parsedDateValidation.getMonth() - 1)
-    if (isDateValidationexist) {
+    if (isMonthValid) {
       return format(adjustedDate, 'dd/MM/yyyy') as DDMMYYYYFormat
     }
     return '00/00/0000'
@@ -195,6 +206,8 @@ const ValidePaie = () => {
     const validationStatus = EnumBoolean.OUI
     const validationDate = dateValidation
     const validationDay = format(new Date(), 'yyyy-MM-dd')
+    console.log(validationDate, validationDay)
+
     dispatch(
       setBulletinDePaie({
         validation: { status: validationStatus, date: validationDate, day: validationDay },
@@ -210,7 +223,7 @@ const ValidePaie = () => {
         <AppModal>
           <FormValidateCalculPaie />
         </AppModal>
-        {isEmployeExist ? (
+        {isEmployeExist && isMonthValid ? (
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3 mt-2 mb-3">
               <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">

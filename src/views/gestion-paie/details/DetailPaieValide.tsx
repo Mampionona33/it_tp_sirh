@@ -13,13 +13,15 @@ import { fr } from 'date-fns/locale'
 
 const DetailPaieValide = () => {
   const dispatch = useAppDispatch()
-  const { id, idValidation } = useParams()
+  const { id, idValidation, validationYear, validationMonth } = useParams()
   const { salarie, validation } = useAppSelector((store) => store.bulletinDePaie)
 
   useEffect(() => {
     const fetchDetailsBltnPaie = async () => {
       try {
-        const resp = await dispatch(fetchDetailsHistoriquePaie({ id, idValidation }))
+        const resp = await dispatch(
+          fetchDetailsHistoriquePaie({ id, annee: validationYear, mois: validationMonth }),
+        )
         if (resp.meta.requestStatus === 'fulfilled') {
           dispatch(setBulletinDePaie(resp.payload))
         }

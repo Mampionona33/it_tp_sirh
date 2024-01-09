@@ -1,15 +1,20 @@
-import React, { useMemo } from 'react'
-import { useAppSelector } from '@src/hooks/useAppDispatch'
+import React, { useEffect, useMemo } from 'react'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import ButtonLink from '@src/components/buttons/ButtonLink'
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
+import { resetBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 
 const GestionPaie: React.FC = () => {
   const listeEmploye = useAppSelector((store) => store.employeesList.list)
   const actifEmployes = listeEmploye.filter(
     (employe: IEmploye) => employe.actif === EnumBoolean.OUI,
   )
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(resetBulletinDePaie())
+  }, [dispatch])
   //   formatage des colonnes
   const columnHelper = createColumnHelper<IEmploye>()
 

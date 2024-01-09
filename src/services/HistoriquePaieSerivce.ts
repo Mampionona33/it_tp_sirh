@@ -7,7 +7,8 @@ export interface IGetByUserIDAndDate {
 
 export interface IGetByUserIdAndBulletin {
   id: string | number
-  idValidation: string | number
+  annee: string | number
+  mois: string | number
 }
 
 class HistoriquePaieService {
@@ -55,14 +56,14 @@ class HistoriquePaieService {
    *
    * @param {IGetByUserIdAndBulletin} params - An object containing the user ID and bulletin ID.
    * @param params.id - L'identifiant de l'employé.
-   * @param params.idValidation - L'identifiant du bulletin de paie.
+   * @param params.annee - L'identifiant du bulletin de paie.
    * @returns {Promise<any>} - A promise that resolves to the response object from the API call.
    */
   async getOnByUserIdAndBltinPaieId(params: IGetByUserIdAndBulletin) {
-    const { id, idValidation } = params
+    const { id, annee, mois } = params
     try {
       const resp = await axios.get(
-        `${this.REACT_APP_API_BASE_URL}/historique-paie/${id}/details/${idValidation}`,
+        `${this.REACT_APP_API_BASE_URL}/historique-paie/${id}/${annee}/${mois}`,
       )
       return resp
     } catch (error) {
