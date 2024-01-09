@@ -64,6 +64,12 @@ class HistoriquePaieService {
     try {
       const resp = await axios.get(
         `${this.REACT_APP_API_BASE_URL}/historique-paie/${id}/${annee}/${mois}`,
+        {
+          auth: {
+            username: this.login,
+            password: this.pass,
+          },
+        },
       )
       return resp
     } catch (error) {
