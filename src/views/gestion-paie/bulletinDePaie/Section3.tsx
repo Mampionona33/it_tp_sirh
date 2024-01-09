@@ -81,6 +81,14 @@ interface IRowProps {
   cell6?: any
   cell7?: any
 
+  cell1CustomWidth?: string
+  cell2CustomWidth?: string
+  cell3CustomWidth?: string
+  cell4CustomWidth?: string
+  cell5CustomWidth?: string
+  cell6CustomWidth?: string
+  cell7CustomWidth?: string
+
   styleCell1?: (ReactPDF.Styles | { [key: string]: any })[]
   styleCell2?: (ReactPDF.Styles | { [key: string]: any })[]
   styleCell3?: (ReactPDF.Styles | { [key: string]: any })[]
@@ -130,31 +138,62 @@ const Row = (props: IRowProps) => {
           {props.cell1}
         </Text>
         <Text
-          style={[RowStyle.cellStyle, styles.borderRight, ...customStyleCell2, { width: '11.1%' }]}
+          style={[
+            RowStyle.cellStyle,
+            styles.borderRight,
+            ...customStyleCell2,
+            { width: `${props.cell2CustomWidth ? props.cell2CustomWidth : '11.1%'}` },
+          ]}
         >
           {props.cell2}
         </Text>
         <Text
-          style={[RowStyle.cellStyle, styles.borderRight, ...customStyleCell3, { width: '11.1%' }]}
+          style={[
+            RowStyle.cellStyle,
+            styles.borderRight,
+            ...customStyleCell3,
+            { width: `${props.cell3CustomWidth ? props.cell3CustomWidth : '11.1%'}` },
+          ]}
         >
           {props.cell3}
         </Text>
         <Text
-          style={[RowStyle.cellStyle, styles.borderRight, ...customStyleCell4, { width: '11.1%' }]}
+          style={[
+            RowStyle.cellStyle,
+            styles.borderRight,
+            ...customStyleCell4,
+            { width: `${props.cell4CustomWidth ? props.cell4CustomWidth : '11.1%'}` },
+          ]}
         >
           {props.cell4}
         </Text>
         <Text
-          style={[RowStyle.cellStyle, styles.borderRight, ...customStyleCell5, { width: '11.1%' }]}
+          style={[
+            RowStyle.cellStyle,
+            styles.borderRight,
+            ...customStyleCell5,
+            { width: `${props.cell5CustomWidth ? props.cell5CustomWidth : '11.1%'}` },
+          ]}
         >
           {props.cell5}
         </Text>
         <Text
-          style={[RowStyle.cellStyle, styles.borderRight, ...customStyleCell6, { width: '11.1%' }]}
+          style={[
+            RowStyle.cellStyle,
+            styles.borderRight,
+            ...customStyleCell6,
+            { width: `${props.cell6CustomWidth ? props.cell6CustomWidth : '11.1%'}` },
+          ]}
         >
           {props.cell6}
         </Text>
-        <Text style={[RowStyle.cellStyle, ...customStyleCell7, { width: '11.1%' }]}>
+        <Text
+          style={[
+            RowStyle.cellStyle,
+            ...customStyleCell7,
+            { width: `${props.cell7CustomWidth ? props.cell7CustomWidth : '11.1%'}` },
+          ]}
+        >
           {props.cell7}
         </Text>
       </View>
@@ -165,6 +204,28 @@ const Row = (props: IRowProps) => {
 interface IBodyProps {
   data: IBulletinDePaieProps
 }
+
+const Divider = () => {
+  const rows = []
+
+  for (let i = 0; i < 3; i++) {
+    rows.push(
+      <Row
+        key={i}
+        styleCell1={[styles.borderBottom, { height: 12, borderRight: 0 }]}
+        styleCell2={[styles.borderBottom, { borderRight: 0 }]}
+        styleCell3={[styles.borderBottom, { borderRight: 0 }]}
+        styleCell4={[styles.borderBottom, { borderRight: 0 }]}
+        styleCell5={[styles.borderBottom, { borderRight: 0 }]}
+        styleCell6={[styles.borderBottom, { borderRight: 0 }]}
+        styleCell7={[styles.borderBottom]}
+      />,
+    )
+  }
+
+  return rows
+}
+
 const Body = ({ data }: IBodyProps) => {
   const assiduite = formatNumberWithSpaces(data.primeEtGratification.assiduite) || '-'
   const excellence = formatNumberWithSpaces(data.primeEtGratification.excellence) || '-'
@@ -181,7 +242,9 @@ const Body = ({ data }: IBodyProps) => {
   const osie = formatNumberWithSpaces(data.osie) || '-'
   const tauxOsie = data.tauxOsie || 0.01
   const irsaAPayer = formatNumberWithSpaces(data.irsaAPayer) || '-'
-  const salaireBrut = formatNumberWithSpaces(data.salaireBrut) || '-'
+  const salaireNet = formatNumberWithSpaces(data.salaireNet) || '-'
+  const valAllocationEnfantsEmploye =
+    formatNumberWithSpaces(data.valAllocationEnfantsEmploye) || '-'
 
   const totalRetenu =
     formatNumberWithSpaces(data.totalDeduction + data.cnaps + data.osie + data.irsaAPayer) || '-'
@@ -196,6 +259,7 @@ const Body = ({ data }: IBodyProps) => {
         data.avantages.vehicule +
         data.avantages.logement +
         data.avantages.autresAvantages +
+        data.valAllocationEnfantsEmploye +
         data.rappel,
     ) || '-'
 
@@ -214,7 +278,11 @@ const Body = ({ data }: IBodyProps) => {
         <Row cell1="Aide au logement" styleCell1={[styles.textBold]} />
         <Row cell1="Cnaps" cell2={cnaps} cell3={tauxCnaps} cell4={montantCnaps} />
         <Row cell1="Retenue sur organisme sanitaire" cell3={tauxOsie} cell4={osie} />
-        <Row cell1="Cotisation sociale" styleCell1={[styles.textBold]} />
+        <Row
+          cell1="Cotisation sociale"
+          styleCell1={[styles.textBold]}
+          cell7={valAllocationEnfantsEmploye}
+        />
         <Row cell1="Aide au logement" styleCell1={[styles.textBold]} />
         <Row
           cell1="IRSA"
@@ -235,6 +303,19 @@ const Body = ({ data }: IBodyProps) => {
           styleCell7={[styles.borderBottom]}
           cell4={totalRetenu}
           cell7={totalIndemniteEtAvantage}
+        />
+        <Divider />
+        <Row
+          cell4={'Salaire Net'}
+          cell7={salaireNet}
+          styleCell1={[{ borderRight: 0 }]}
+          styleCell2={[{ borderRight: 0 }]}
+          styleCell4={[styles.textBold, styles.borderBottom, { borderRight: 0, textAlign: 'left' }]}
+          cell4CustomWidth="22.2%"
+          cell5CustomWidth="0%"
+          styleCell5={[styles.borderBottom, { borderRight: 0 }]}
+          styleCell6={[styles.borderBottom, { borderRight: 0 }]}
+          styleCell7={[styles.borderBottom]}
         />
       </View>
     </View>
