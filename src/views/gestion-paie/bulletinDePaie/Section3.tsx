@@ -245,6 +245,8 @@ const Body = ({ data }: IBodyProps) => {
   const salaireNet = formatNumberWithSpaces(data.salaireNet) || '-'
   const valAllocationEnfantsEmploye =
     formatNumberWithSpaces(data.valAllocationEnfantsEmploye) || '-'
+  const avance = formatNumberWithSpaces(data.avance) || '-'
+  const salaireNetAPayer = formatNumberWithSpaces(data.salaireNetAPayer) || '-'
 
   const totalRetenu =
     formatNumberWithSpaces(data.totalDeduction + data.cnaps + data.osie + data.irsaAPayer) || '-'
@@ -317,6 +319,49 @@ const Body = ({ data }: IBodyProps) => {
           styleCell6={[styles.borderBottom, { borderRight: 0 }]}
           styleCell7={[styles.borderBottom]}
         />
+        <Row
+          cell4={'Avance sur salaire'}
+          cell7={avance}
+          styleCell1={[{ borderRight: 0 }]}
+          styleCell2={[{ borderRight: 0 }]}
+          styleCell3={[{ borderRight: 0 }]}
+          styleCell4={[styles.textBold, { borderRight: 0, textAlign: 'left' }]}
+          cell4CustomWidth="22.2%"
+          cell5CustomWidth="0%"
+          styleCell5={[{ borderRight: 0 }]}
+          styleCell6={[{ borderRight: 0 }]}
+        />
+
+        <Row
+          cell4={'Net à payer'}
+          cell1="Payé par virement bancaire le :"
+          cell7={salaireNetAPayer}
+          styleCell1={[styles.textItalic, { borderRight: 0 }]}
+          styleCell2={[{ borderRight: 0 }]}
+          styleCell3={[{ borderRight: 0 }]}
+          styleCell4={[styles.textBold, { borderRight: 0, textAlign: 'left' }]}
+          cell4CustomWidth="22.2%"
+          cell5CustomWidth="0%"
+          styleCell5={[{ borderRight: 0 }]}
+          styleCell6={[{ borderRight: 0 }]}
+        />
+        <Text
+          style={[
+            styles.textItalic,
+            styles.borderBottom,
+            styles.borderTop,
+            {
+              width: '100%',
+              textAlign: 'center',
+              alignItems: 'center',
+              paddingTop: 5,
+              fontSize: 11,
+              marginTop: 12,
+            },
+          ]}
+        >
+          A CONSERVER SANS LIMITATION DE DUREE
+        </Text>
       </View>
     </View>
   )

@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
   justifyBetween: {
     justifyContent: 'space-between',
   },
-  textBoldItalic: {
+  textItalic: {
     fontFamily: 'Roboto',
     fontStyle: 'italic',
   },
