@@ -50,6 +50,14 @@ class HistoriquePaieService {
     }
   }
 
+  /**
+   * Retrieves the pay history details for a user based on their ID and bulletin ID.
+   *
+   * @param {IGetByUserIdAndBulletin} params - An object containing the user ID and bulletin ID.
+   * @param params.id - L'identifiant de l'employé.
+   * @param params.idValidation - L'identifiant du bulletin de paie.
+   * @returns {Promise<any>} - A promise that resolves to the response object from the API call.
+   */
   async getOnByUserIdAndBltinPaieId(params: IGetByUserIdAndBulletin) {
     const { id, idValidation } = params
     try {
