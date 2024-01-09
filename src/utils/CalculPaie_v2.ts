@@ -51,22 +51,15 @@ export interface calculAllocationParams {
   montantAllocationParEnfant: number
 }
 
+export interface caclulBaseCnapsParams {
+  salaireBrut: number
+}
+
 class CalculPaie_v2 {
   private salaireBase: number
   private plafondSME: number
   private est_cadre: boolean
   private tauxHoraire: number
-  private rappel: number
-  private totalPrimeEtGratification: number
-  private totalDeduction: number
-  private valHsni130: number
-  private valHsni150: number
-  private valHsi130: number
-  private valHsi150: number
-  private valHs30: number
-  private valHs50: number
-  private valHdim: number
-  private valHFerie: number
   private salaireBrut: number
   private salaireNet: number
 
@@ -333,6 +326,16 @@ class CalculPaie_v2 {
 
     allocation = params.montantAllocationParEnfant * nombreEnfantEligible
     return allocation
+  }
+
+  public calculBaseCnaps(params: caclulBaseCnapsParams): number {
+    let baseCnaps = 0
+    if (params.salaireBrut >= this.plafondSME) {
+      baseCnaps = this.roundToTwoDecimal(this.plafondSME)
+    } else {
+      baseCnaps = this.roundToTwoDecimal(params.salaireBrut)
+    }
+    return baseCnaps
   }
 
   //   UTILITYES

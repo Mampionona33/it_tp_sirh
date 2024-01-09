@@ -56,7 +56,11 @@ const Body = () => {
         valHsni150,
       })
 
-      dispatch(setBulletinDePaie({ salaireBrut } as IBulletinDePaieProps))
+      const baseCnaps = calculPaie.calculBaseCnaps({
+        salaireBrut,
+      })
+
+      dispatch(setBulletinDePaie({ salaireBrut, baseCnaps } as IBulletinDePaieProps))
     }
   }, [
     rappel,
