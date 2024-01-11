@@ -59,7 +59,7 @@ const CustomInputWithLabel: React.FC<CustomInputProps> = ({
         onFocus={handleFocus}
         onChange={handleChange}
         value={value}
-        className="border-b border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1"
+        className="border-b text-sm border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1"
       />
     </div>
   )
