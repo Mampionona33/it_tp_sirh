@@ -414,7 +414,6 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
           ]}
         >
           {` Arrêtée le présent état à la somme de: ${
-            // salaireNetAPayer ? toWord.convert(avance) : ''
             salaireNetAPayer ? toWord.convert(salaireNetAPayer) : ''
           }`}
         </Text>
