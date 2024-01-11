@@ -9,6 +9,7 @@ import { FolderArrowDownIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
+import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 
 // Create Document Component
 interface IMydocumentProps {
@@ -46,32 +47,27 @@ const BulletinPaie = () => {
     const pdfBlob = pdf(<MyDocument data={bulletinDePaie} />)
       .toBlob()
       .then((blob) =>
-        saveAs(blob, `${bulletinDePaie.salarie.nom}_${bulletinDePaie.salarie.prenom}.pdf`),
+        saveAs(
+          blob,
+          `${bulletinDePaie.salarie.nom}_${bulletinDePaie.salarie.prenom}_${bulletinDePaie.salarie.matricule}.pdf`,
+        ),
       )
   }
 
   return (
     <>
-      <div className="h-screen w-full">
+      <div className="h-screen w-full flex gap-3 flex-col">
         <PDFViewer width="100%" height="100%">
           <MyDocument data={bulletinDePaie} />
         </PDFViewer>
-      </div>
-      {/* <div className="flex fixed top-[15%] right-0">
-        <button type="button" className="btn btn-primary p-1" onClick={handleclickDownload}>
-          <span className="group flex flex-row items-center">
-            <FolderArrowDownIcon className="w-6 h-6" />
-            <span className="ml-2 hidden group-hover:flex capitalize">Valider et télécharger</span>
-          </span>
-        </button>
-      </div> */}
-      <div className="flex ">
-        <button type="button" className="btn btn-primary p-1" onClick={handleclickDownload}>
-          <span className="group flex flex-row items-center">
-            <FolderArrowDownIcon className="w-6 h-6" />
-            <span className="ml-2 hidden group-hover:flex capitalize">Valider et télécharger</span>
-          </span>
-        </button>
+        <div className="flex w-full shadow-sm justify-end p-3 bg-white rounded-sm mb-3">
+          <ButtonWithIcon
+            type="submit"
+            icon={<FolderArrowDownIcon className="w-6 h-6" />}
+            label="Télécharger"
+            onClick={handleclickDownload}
+          />
+        </div>
       </div>
     </>
   )

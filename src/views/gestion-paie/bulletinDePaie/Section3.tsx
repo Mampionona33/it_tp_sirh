@@ -361,7 +361,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
           cell7CustomWidth="22.2%"
           cell4CustomWidth="22.2%"
           cell5CustomWidth="0%"
-          styleCell7={[styles.borderBottom, { textAlign: 'right', backgroundColor: 'red' }]}
+          styleCell7={[styles.borderBottom, { textAlign: 'right' }]}
         />
         <Row
           cell4={'Avance sur salaire'}
