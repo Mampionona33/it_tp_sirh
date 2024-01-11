@@ -57,7 +57,15 @@ const BulletinPaie = () => {
           <MyDocument data={bulletinDePaie} />
         </PDFViewer>
       </div>
-      <div className="flex fixed top-[15%] right-0">
+      {/* <div className="flex fixed top-[15%] right-0">
+        <button type="button" className="btn btn-primary p-1" onClick={handleclickDownload}>
+          <span className="group flex flex-row items-center">
+            <FolderArrowDownIcon className="w-6 h-6" />
+            <span className="ml-2 hidden group-hover:flex capitalize">Valider et télécharger</span>
+          </span>
+        </button>
+      </div> */}
+      <div className="flex ">
         <button type="button" className="btn btn-primary p-1" onClick={handleclickDownload}>
           <span className="group flex flex-row items-center">
             <FolderArrowDownIcon className="w-6 h-6" />

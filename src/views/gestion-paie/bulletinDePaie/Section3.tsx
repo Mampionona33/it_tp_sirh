@@ -4,9 +4,8 @@ import { styles } from './styles'
 import { format, isValid, setDefaultOptions } from 'date-fns'
 import ReactPDF, { Text, View, StyleSheet } from '@react-pdf/renderer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
-import { useAppSelector } from '@src/hooks/useAppDispatch'
 import formatNumberWithSpaces from '@src/utils/formatNumberWithSpaces'
-import formatAriaryMga from '@src/utils/formatAriaryMga'
+import { ToWords } from 'to-words'
 
 const Header = () => {
   return (
@@ -132,7 +131,11 @@ const Row = (props: IRowProps) => {
             RowStyle.cellStyle,
             styles.borderRight,
             ...customStyleCell1,
-            { width: `${props.cell1CustomWidth ? props.cell1CustomWidth : '33.3%'}` },
+            {
+              width: `${props.cell1CustomWidth ? props.cell1CustomWidth : '33.3%'}`,
+              textAlign: 'left',
+              paddingLeft: 2,
+            },
           ]}
         >
           {props.cell1}
@@ -287,6 +290,23 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
         rappel,
     ) || '-'
 
+  const toWord = new ToWords({
+    localeCode: 'fr-FR',
+    converterOptions: {
+      currency: true,
+      currencyOptions: {
+        name: 'Ariary',
+        plural: 'Ariary',
+        symbol: '',
+        fractionalUnit: {
+          name: '',
+          plural: '',
+          symbol: '',
+        },
+      },
+    },
+  })
+
   return (
     <View style={[styles.row, { width: '100%' }]}>
       <View style={{ width: '100%' }}>
@@ -335,11 +355,13 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
           styleCell1={[{ borderRight: 0 }]}
           styleCell2={[{ borderRight: 0 }]}
           styleCell4={[styles.textBold, styles.borderBottom, { borderRight: 0, textAlign: 'left' }]}
-          cell4CustomWidth="22.2%"
-          cell5CustomWidth="0%"
           styleCell5={[styles.borderBottom, { borderRight: 0 }]}
           styleCell6={[styles.borderBottom, { borderRight: 0 }]}
-          styleCell7={[styles.borderBottom]}
+          cell6CustomWidth="0%"
+          cell7CustomWidth="22.2%"
+          cell4CustomWidth="22.2%"
+          cell5CustomWidth="0%"
+          styleCell7={[styles.borderBottom, { textAlign: 'right', backgroundColor: 'red' }]}
         />
         <Row
           cell4={'Avance sur salaire'}
@@ -350,8 +372,11 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
           styleCell4={[styles.textBold, { borderRight: 0, textAlign: 'left' }]}
           cell4CustomWidth="22.2%"
           cell5CustomWidth="0%"
+          cell6CustomWidth="0%"
+          cell7CustomWidth="22.2%"
           styleCell5={[{ borderRight: 0 }]}
           styleCell6={[{ borderRight: 0 }]}
+          styleCell7={[{ textAlign: 'right' }]}
         />
 
         <Row
@@ -369,23 +394,29 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
           cell2CustomWidth="0%"
           cell4CustomWidth="22.2%"
           cell5CustomWidth="0%"
+          cell6CustomWidth="0%"
+          cell7CustomWidth="22.2%"
           styleCell5={[{ borderRight: 0 }]}
           styleCell6={[{ borderRight: 0 }]}
+          styleCell7={[{ textAlign: 'right' }]}
         />
         <Text
           style={[
             styles.textItalic,
-            styles.borderBottom,
-            styles.borderTop,
+
             {
               width: '100%',
               textAlign: 'left',
               alignItems: 'center',
               paddingTop: 2,
+              fontSize: 9,
             },
           ]}
         >
-          {` Arrêtée le présent état à la somme de :`}
+          {` Arrêtée le présent état à la somme de: ${
+            // salaireNetAPayer ? toWord.convert(avance) : ''
+            salaireNetAPayer ? toWord.convert(salaireNetAPayer) : ''
+          }`}
         </Text>
         <Text
           style={[
