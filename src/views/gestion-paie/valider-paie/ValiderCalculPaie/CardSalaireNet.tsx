@@ -45,7 +45,7 @@ const Body = () => {
 
     const irsaAPayer = calculPaie.calculateIrsaParTranche(baseIrsaArrondi)
 
-    const salaireNet = calculPaie.caluclateSalaireNet(irsaAPayer)
+    const salaireNet = calculPaie.caluclateSalaireNet({ osie, cnaps, irsaAPayer })
 
     dispatch(
       setBulletinDePaie({

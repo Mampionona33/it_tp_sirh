@@ -8,7 +8,6 @@ import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const Body = () => {
-  const { employeHours } = useAppSelector((store) => store.employeHours)
   const {
     totalPrimeEtGratification,
     salaireDeBase,
@@ -43,9 +42,6 @@ const Body = () => {
       const calculPaie = new CalculPaie_v2()
       calculPaie.setSalaireBase(salaireDeBase)
       const salaireBrut = calculPaie.calculateSalaireBrut({
-        rappel,
-        totalPrimeEtGratification,
-        totalDeduction,
         valHdim,
         valHs30,
         valHs50,
@@ -63,10 +59,7 @@ const Body = () => {
       dispatch(setBulletinDePaie({ salaireBrut, baseCnaps } as IBulletinDePaieProps))
     }
   }, [
-    rappel,
     salaireDeBase,
-    totalDeduction,
-    totalPrimeEtGratification,
     dispatch,
     valHdim,
     valHs30,
@@ -136,7 +129,7 @@ const Body = () => {
         cell2={formatCell2(totalHDim)}
         cell3={valHdim}
       />
-      <CardRow className="border-b border-b-customBlue-100" cell1="Rappel" cell3={rappel} />
+      {/* <CardRow className="border-b border-b-customBlue-100" cell1="Rappel" cell3={rappel} />
       <CardRow
         className="border-b border-b-customBlue-100"
         cell1="Absence/Retard"
@@ -146,7 +139,7 @@ const Body = () => {
         className="border-b border-b-customBlue-100"
         cell1="Primes Et Gratification"
         cell3={totalPrimeEtGratification}
-      />
+      /> */}
       <div className="flex justify-between px-4 py-2 ">
         <div>Salaire brut</div>
         <div className="text-customRed-900">{formatAriaryMga(salaireBrut)}</div>

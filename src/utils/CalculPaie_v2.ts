@@ -1,7 +1,5 @@
 import { EnumCertificatEnfant, IEmploye } from '@src/interfaces/interfaceEmploye'
-import { IHeuresEmploye } from '@src/interfaces/interfaceHeuresEmploye'
-import { differenceInYears, intervalToDuration, parse } from 'date-fns'
-import { es } from 'date-fns/locale'
+import { differenceInYears, parse } from 'date-fns'
 
 export interface CalculateSalaireBrutParams {
   valHsni130: number
@@ -12,9 +10,6 @@ export interface CalculateSalaireBrutParams {
   valHs50: number
   valHdim: number
   valHFerie: number
-  totalPrimeEtGratification: number
-  totalDeduction: number
-  rappel: number
 }
 export interface calculateCnapsParams {
   salaireBrut: number
@@ -53,6 +48,12 @@ export interface calculAllocationParams {
 
 export interface caclulBaseCnapsParams {
   salaireBrut: number
+}
+
+export interface calculSalaireNetParams {
+  cnaps: number
+  osie: number
+  irsaAPayer: number
 }
 
 class CalculPaie_v2 {
@@ -191,12 +192,10 @@ class CalculPaie_v2 {
     let salaireBrut = 0
 
     if (this.est_cadre) {
-      salaireBrut =
-        this.salaireBase + params.rappel + params.totalPrimeEtGratification - params.totalDeduction
+      salaireBrut = this.salaireBase
     } else {
       salaireBrut =
         this.salaireBase +
-        params.rappel +
         params.valHsni130 +
         params.valHsni150 +
         params.valHsi130 +
@@ -204,9 +203,7 @@ class CalculPaie_v2 {
         params.valHs30 +
         params.valHs50 +
         params.valHdim +
-        params.valHFerie +
-        params.totalPrimeEtGratification -
-        params.totalDeduction
+        params.valHFerie
     }
 
     return salaireBrut
@@ -226,6 +223,17 @@ class CalculPaie_v2 {
     return this.roundToTwoDecimal(this.salaireBrut * params.taux)
   }
 
+  /**
+   * Calculates the base IRSa based on the given parameters.
+   *
+   * @param {calculBaseIrsaParams} params - The parameters for calculating the base IRSa.
+   * @param {number} params.salaireBrute - The gross salary.
+   * @param {number} params.cnaps - The CNAPS value.
+   * @param {number} params.osie - The OSIE value.
+   * @param {number} params.valHsni130 - The value of HSNI 130.
+   * @param {number} params.valHsni150 - The value of HSNI 150.
+   * @return {number} The calculated base IRSa.
+   */
   public calculBaseIrsa(params: calculBaseIrsaParams): number {
     let baseIrsa = 0
 
@@ -276,8 +284,24 @@ class CalculPaie_v2 {
     return irsaParTranche
   }
 
-  public caluclateSalaireNet(irsaAPayer: number): number {
-    return this.roundToTwoDecimal(this.salaireBrut - irsaAPayer)
+  /**
+   * Calculates the net salary based on the given parameters.
+   *
+   * @param {calculSalaireNetParams} params - The parameters for calculating the net salary.
+   * @param {number} params.cnaps - The CNAPS amount.
+   * @param {number} params.irsaAPayer - The IRS to be paid.
+   * @param {number} params.osie - The OSIE amount.
+   * @return {number} The calculated net salary.
+   */
+  public caluclateSalaireNet(params: calculSalaireNetParams): number {
+    const { cnaps, irsaAPayer, osie } = params
+    let salaireNet = 0
+
+    if (this.salaireBrut) {
+      salaireNet = this.salaireBrut - (cnaps + irsaAPayer + osie)
+    }
+
+    return salaireNet
   }
 
   public calculSalaireNetAPayer(params: calculSalaireNetAPayerParams): number {
