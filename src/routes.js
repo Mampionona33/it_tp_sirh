@@ -136,7 +136,7 @@ const routes = [
     exact: true,
   },
   {
-    path: '/gestion-de-paie/historique/:id/details/:idValidation/imprimer',
+    path: '/gestion-de-paie/historique/:id/details/:validationYear/:validationMonth/imprimer',
     name: 'Bulletin de paie',
     element: BulletinPaie,
     exact: true,
