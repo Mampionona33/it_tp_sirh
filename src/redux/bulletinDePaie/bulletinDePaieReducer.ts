@@ -50,7 +50,6 @@ const initialState: IBulletinDePaieProps = {
     },
     avance: 0,
   },
-  dateDeVirementBancaire: '',
   dateDeVirement: 0,
   salaireDeBase: 0,
   montantAllocationParEnfant: 7000,

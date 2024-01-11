@@ -10,7 +10,6 @@ export interface IBulletinDePaieProps {
     stat: string
     rcs: string
   }
-  dateDeVirementBancaire?: string
   salarie?: IEmploye
   montantAllocationParEnfant?: number
   dateDeVirement: string | number

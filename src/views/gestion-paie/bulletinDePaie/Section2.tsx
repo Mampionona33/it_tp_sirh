@@ -1,15 +1,15 @@
 import React from 'react'
 import { Text, View, StyleSheet } from '@react-pdf/renderer'
-import { PropTypes } from 'prop-types'
 import registerFonts from './font'
 import formatNumberWithSpaces from 'src/utils/formatNumberWithSpaces'
+import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 // Chager les fontes personnalisées
 registerFonts()
 
 const styles = StyleSheet.create({
   table: {
-    display: 'table',
+    display: 'flex',
     width: 'auto',
     border: 'collapse',
   },
@@ -33,20 +33,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
 })
+export interface Section2Props {
+  data: IBulletinDePaieProps
+}
+const Section2 = ({ data }: Section2Props) => {
+  const salaireDeBase = data.salaireDeBase
+    ? formatNumberWithSpaces(data.salaireDeBase) + ' Ar'
+    : '-'
+  const valHsni130 = data.valHsni130 ? formatNumberWithSpaces(data.valHsni130) + ' Ar' : '-'
+  const valHsni150 = data.valHsni150 ? formatNumberWithSpaces(data.valHsni150) + ' Ar' : '-'
+  const salaireBrut = data.salaireBrut ? formatNumberWithSpaces(data.salaireBrut) + ' Ar' : '-'
 
-const Section2 = (props) => {
-  const salaireDeBase = props.data.salaireDeBase
-    ? formatNumberWithSpaces(props.data.salaireDeBase) + ' Ar'
-    : '-'
-  const valHs30 = props.data.valHs30 ? formatNumberWithSpaces(props.data.valHs30) + ' Ar' : '-'
-  const valHs50 = props.data.valHs50 ? formatNumberWithSpaces(props.data.valHs50) + ' Ar' : '-'
-  const salaireBrut = props.data.salaireBrut
-    ? formatNumberWithSpaces(props.data.salaireBrut) + ' Ar'
-    : '-'
-
-  const plafondSME = props.data.plafondSME
-    ? formatNumberWithSpaces(props.data.plafondSME) + ' Ar'
-    : '-'
+  const plafondSME = data.plafondSME ? formatNumberWithSpaces(data.plafondSME) + ' Ar' : '-'
 
   return (
     <View style={[styles.table]}>
@@ -82,7 +80,7 @@ const Section2 = (props) => {
           <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 30%</Text>
         </View>
         <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
-          <Text style={{ textAlign: 'right', fontSize: 10 }}>{valHs30}</Text>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>{valHsni130}</Text>
         </View>
       </View>
 
@@ -91,7 +89,7 @@ const Section2 = (props) => {
           <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 50%</Text>
         </View>
         <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
-          <Text style={{ textAlign: 'right', fontSize: 10 }}>{valHs50}</Text>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>{valHsni150}</Text>
         </View>
       </View>
 
@@ -130,8 +128,8 @@ const Section2 = (props) => {
   )
 }
 
-Section2.propTypes = {
-  data: PropTypes.object,
-}
+// Section2.propTypes = {
+//   data: PropTypes.object,
+// }
 
 export default Section2

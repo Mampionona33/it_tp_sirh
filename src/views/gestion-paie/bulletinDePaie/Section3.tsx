@@ -1,7 +1,7 @@
 import React from 'react'
 import { fr } from 'date-fns/locale'
 import { styles } from './styles'
-import { format, setDefaultOptions } from 'date-fns'
+import { format, isValid, setDefaultOptions } from 'date-fns'
 import ReactPDF, { Text, View, StyleSheet } from '@react-pdf/renderer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
@@ -132,7 +132,7 @@ const Row = (props: IRowProps) => {
             RowStyle.cellStyle,
             styles.borderRight,
             ...customStyleCell1,
-            { width: '33.3%', textAlign: 'left', paddingLeft: 2 },
+            { width: `${props.cell1CustomWidth ? props.cell1CustomWidth : '33.3%'}` },
           ]}
         >
           {props.cell1}
@@ -226,43 +226,65 @@ const Divider = () => {
   return rows
 }
 
-const Body = ({ data }: IBodyProps) => {
-  const assiduite = formatNumberWithSpaces(data.primeEtGratification.assiduite) || '-'
-  const excellence = formatNumberWithSpaces(data.primeEtGratification.excellence) || '-'
-  const totalDeduction = formatNumberWithSpaces(data.totalDeduction) || '-'
-  const transport = formatNumberWithSpaces(data.indemnites.transport) || '-'
-  const autresIndemnite = formatNumberWithSpaces(data.indemnites.autresIndemnite) || '-'
-  const vehicule = formatNumberWithSpaces(data.avantages.vehicule) || '-'
-  const logement = formatNumberWithSpaces(data.avantages.logement) || '-'
-  const autresAvantages = formatNumberWithSpaces(data.avantages.autresAvantages) || '-'
-  const rappel = formatNumberWithSpaces(data.rappel) || '-'
-  const cnaps = formatNumberWithSpaces(data.baseCnaps) || '-'
-  const tauxCnaps = data.tauxCnaps || 0.01
-  const montantCnaps = formatNumberWithSpaces(data.cnaps) || '-'
-  const osie = formatNumberWithSpaces(data.osie) || '-'
-  const tauxOsie = data.tauxOsie || 0.01
-  const irsaAPayer = formatNumberWithSpaces(data.irsaAPayer) || '-'
-  const salaireNet = formatNumberWithSpaces(data.salaireNet) || '-'
-  const valAllocationEnfantsEmploye =
-    formatNumberWithSpaces(data.valAllocationEnfantsEmploye) || '-'
-  const avance = formatNumberWithSpaces(data.avance) || '-'
-  const salaireNetAPayer = formatNumberWithSpaces(data.salaireNetAPayer) || '-'
-
-  const totalRetenu =
-    formatNumberWithSpaces(data.totalDeduction + data.cnaps + data.osie + data.irsaAPayer) || '-'
+const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) => {
+  const {
+    primeEtGratification,
+    totalDeduction,
+    indemnites,
+    avantages,
+    rappel,
+    baseCnaps,
+    tauxCnaps,
+    cnaps,
+    osie,
+    tauxOsie,
+    valAllocationEnfantsEmploye,
+    irsaAPayer,
+    salaireNet,
+    avance,
+    salaireNetAPayer,
+    salaireBrut,
+    dateDeVirement,
+  } = bodyData
+  const assiduite = formatNumberWithSpaces(primeEtGratification.assiduite) || '-'
+  const excellence = formatNumberWithSpaces(primeEtGratification.excellence) || '-'
+  const totalDeductionRender = formatNumberWithSpaces(totalDeduction) || '-'
+  const transport = formatNumberWithSpaces(indemnites.transport) || '-'
+  const autresIndemnite = formatNumberWithSpaces(indemnites.autresIndemnite) || '-'
+  const vehicule = formatNumberWithSpaces(avantages.vehicule) || '-'
+  const logement = formatNumberWithSpaces(avantages.logement) || '-'
+  const autresAvantages = formatNumberWithSpaces(avantages.autresAvantages) || '-'
+  const rappelRender = formatNumberWithSpaces(rappel) || '-'
+  const baseCnapsRender = formatNumberWithSpaces(baseCnaps) || '-'
+  const montantCnaps = formatNumberWithSpaces(cnaps) || '-'
+  const osieRender = formatNumberWithSpaces(osie) || '-'
+  const tauxCnapsRender = `${formatNumberWithSpaces(tauxCnaps * 100)}%`
+  const tauxOsieRender = `${formatNumberWithSpaces(tauxOsie * 100)}%`
+  const irsaAPayerRender = formatNumberWithSpaces(irsaAPayer) || '-'
+  const salaireNetRender = formatNumberWithSpaces(salaireNet) || '-'
+  const valAllocationEnfantsEmployeRender =
+    formatNumberWithSpaces(valAllocationEnfantsEmploye) || '-'
+  const avanceRender = formatNumberWithSpaces(avance) || '-'
+  const salaireNetAPayerRender = formatNumberWithSpaces(salaireNetAPayer) || '-'
+  const totalRetenu = formatNumberWithSpaces(totalDeduction + cnaps + osie + irsaAPayer) || '-'
+  const dateDeVirementRender = format(
+    isValid(new Date(dateDeVirement)) ? new Date(dateDeVirement) : new Date(),
+    'dd MMMM yyyy',
+    { locale: fr },
+  )
 
   const totalIndemniteEtAvantage =
     formatNumberWithSpaces(
-      data.salaireBrut +
-        data.primeEtGratification.assiduite +
-        data.primeEtGratification.excellence +
-        data.indemnites.transport +
-        data.indemnites.autresIndemnite +
-        data.avantages.vehicule +
-        data.avantages.logement +
-        data.avantages.autresAvantages +
-        data.valAllocationEnfantsEmploye +
-        data.rappel,
+      salaireBrut +
+        primeEtGratification.assiduite +
+        primeEtGratification.excellence +
+        indemnites.transport +
+        indemnites.autresIndemnite +
+        avantages.vehicule +
+        avantages.logement +
+        avantages.autresAvantages +
+        valAllocationEnfantsEmploye +
+        rappel,
     ) || '-'
 
   return (
@@ -270,25 +292,25 @@ const Body = ({ data }: IBodyProps) => {
       <View style={{ width: '100%' }}>
         <Row cell1="Prime d'assiduité" cell7={assiduite} />
         <Row cell1="Prime d'excellence" cell7={excellence} />
-        <Row cell1="Absence/Retard à Déduire" cell4={totalDeduction} />
+        <Row cell1="Absence/Retard à Déduire" cell4={totalDeductionRender} />
         <Row cell1="Indemnité de Transport" cell7={transport} />
         <Row cell1="Autres indemnités" cell7={autresIndemnite} />
         <Row cell1="Avantages en nature (Véhicules)" cell7={vehicule} />
         <Row cell1="Avantages en nature (Logement)" cell7={logement} />
         <Row cell1="Autres avantages" cell7={autresAvantages} />
-        <Row cell1="Rappel" cell7={rappel} />
+        <Row cell1="Rappel" cell7={rappelRender} />
         <Row cell1="Aide au logement" styleCell1={[styles.textBold]} />
-        <Row cell1="Cnaps" cell2={cnaps} cell3={tauxCnaps} cell4={montantCnaps} />
-        <Row cell1="Retenue sur organisme sanitaire" cell3={tauxOsie} cell4={osie} />
+        <Row cell1="Cnaps" cell2={baseCnapsRender} cell3={tauxCnapsRender} cell4={montantCnaps} />
+        <Row cell1="Retenue sur organisme sanitaire" cell3={tauxOsieRender} cell4={osieRender} />
         <Row
           cell1="Cotisation sociale"
           styleCell1={[styles.textBold]}
-          cell7={valAllocationEnfantsEmploye}
+          cell7={valAllocationEnfantsEmployeRender}
         />
         <Row cell1="Aide au logement" styleCell1={[styles.textBold]} />
         <Row
           cell1="IRSA"
-          cell4={irsaAPayer}
+          cell4={irsaAPayerRender}
           styleCell1={[{ paddingBottom: 10 }, styles.borderBottom]}
           styleCell2={[{ paddingBottom: 10 }, styles.borderBottom]}
           styleCell3={[{ paddingBottom: 10 }, styles.borderBottom]}
@@ -309,7 +331,7 @@ const Body = ({ data }: IBodyProps) => {
         <Divider />
         <Row
           cell4={'Salaire Net'}
-          cell7={salaireNet}
+          cell7={salaireNetRender}
           styleCell1={[{ borderRight: 0 }]}
           styleCell2={[{ borderRight: 0 }]}
           styleCell4={[styles.textBold, styles.borderBottom, { borderRight: 0, textAlign: 'left' }]}
@@ -321,7 +343,7 @@ const Body = ({ data }: IBodyProps) => {
         />
         <Row
           cell4={'Avance sur salaire'}
-          cell7={avance}
+          cell7={avanceRender}
           styleCell1={[{ borderRight: 0 }]}
           styleCell2={[{ borderRight: 0 }]}
           styleCell3={[{ borderRight: 0 }]}
@@ -334,17 +356,37 @@ const Body = ({ data }: IBodyProps) => {
 
         <Row
           cell4={'Net à payer'}
-          cell1="Payé par virement bancaire le :"
-          cell7={salaireNetAPayer}
-          styleCell1={[styles.textItalic, { borderRight: 0 }]}
+          cell1={`Payé par virement bancaire le : ${dateDeVirementRender}`}
+          cell7={salaireNetAPayerRender}
+          styleCell1={[
+            styles.textItalic,
+            { borderRight: 0, textAlign: 'left', paddingLeft: '2px' },
+          ]}
           styleCell2={[{ borderRight: 0 }]}
           styleCell3={[{ borderRight: 0 }]}
           styleCell4={[styles.textBold, { borderRight: 0, textAlign: 'left' }]}
+          cell1CustomWidth="44.4%"
+          cell2CustomWidth="0%"
           cell4CustomWidth="22.2%"
           cell5CustomWidth="0%"
           styleCell5={[{ borderRight: 0 }]}
           styleCell6={[{ borderRight: 0 }]}
         />
+        <Text
+          style={[
+            styles.textItalic,
+            styles.borderBottom,
+            styles.borderTop,
+            {
+              width: '100%',
+              textAlign: 'left',
+              alignItems: 'center',
+              paddingTop: 2,
+            },
+          ]}
+        >
+          {` Arrêtée le présent état à la somme de :`}
+        </Text>
         <Text
           style={[
             styles.textItalic,

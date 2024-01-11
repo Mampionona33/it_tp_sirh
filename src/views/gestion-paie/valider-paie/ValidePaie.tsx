@@ -31,8 +31,7 @@ import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
-  // const isDateValidationexist = useDateValidationExist()
-  const { salarie, dateDeVirementBancaire } = useAppSelector((store) => store.bulletinDePaie)
+  const { salarie, dateDeVirement } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
 
   const dispatch = useAppDispatch()
@@ -220,9 +219,7 @@ const ValidePaie = () => {
 
   const handleDateVirBancChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
-    dispatch(
-      setBulletinDePaie({ dateDeVirementBancaire: event.target.value } as IBulletinDePaieProps),
-    )
+    dispatch(setBulletinDePaie({ dateDeVirement: event.target.value } as IBulletinDePaieProps))
   }
 
   return (
@@ -246,7 +243,7 @@ const ValidePaie = () => {
                     id="dateVirementBancaire"
                     name="dateVirementBancaire"
                     type="date"
-                    value={dateDeVirementBancaire}
+                    value={dateDeVirement}
                     onChange={handleDateVirBancChange}
                   />
                 </div>
