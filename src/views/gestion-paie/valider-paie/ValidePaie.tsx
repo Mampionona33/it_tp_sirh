@@ -27,11 +27,12 @@ import AppModal from '@src/components/Modal/AppModal'
 import FormValidateCalculPaie from './FormValidateCalculPaie'
 import { setModalOpen } from '@src/redux/modal/modalReducer'
 import useValidMonthFrMMMM from '@src/hooks/useValidMonth'
+import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
   // const isDateValidationexist = useDateValidationExist()
-  const { salarie } = useAppSelector((store) => store.bulletinDePaie)
+  const { salarie, dateDeVirementBancaire } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
 
   const dispatch = useAppDispatch()
@@ -217,6 +218,13 @@ const ValidePaie = () => {
     dispatch(setModalOpen())
   }
 
+  const handleDateVirBancChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    dispatch(
+      setBulletinDePaie({ dateDeVirementBancaire: event.target.value } as IBulletinDePaieProps),
+    )
+  }
+
   return (
     <>
       <div>
@@ -226,6 +234,23 @@ const ValidePaie = () => {
         {isEmployeExist && isMonthValid ? (
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3 mt-2 mb-3">
+              <div className="flex flex-row justify-between pt-2 pl-4 pr-4 pb-2 w-full bg-white shadow-sm rounded-sm">
+                <div className="text-sm mt-1">
+                  <p className="mb-1">Nom : {salarie.nom}</p>
+                  <p className="mb-1">Prenom : {salarie.prenom}</p>
+                  <p className="mb-1">Matricule : {salarie.matricule}</p>
+                </div>
+                <div className="w-fit">
+                  <CustomInputWithLabel
+                    label="Date de virement bancaire"
+                    id="dateVirementBancaire"
+                    name="dateVirementBancaire"
+                    type="date"
+                    value={dateDeVirementBancaire}
+                    onChange={handleDateVirBancChange}
+                  />
+                </div>
+              </div>
               <div className="grid lg:grid-cols-3 gap-3 md:grid-cols-2 sm:grid-cols-1">
                 <CardIndemnites />
                 <CardAvances />

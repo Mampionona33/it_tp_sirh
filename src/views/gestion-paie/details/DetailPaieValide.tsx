@@ -30,7 +30,7 @@ const DetailPaieValide = () => {
       }
     }
     fetchDetailsBltnPaie()
-  }, [idValidation, id, dispatch])
+  }, [idValidation, id, dispatch, validationMonth, validationYear])
   const moisDeValidation = format(new Date(validation.date), 'MMMM yyyy', { locale: fr })
 
   return (
