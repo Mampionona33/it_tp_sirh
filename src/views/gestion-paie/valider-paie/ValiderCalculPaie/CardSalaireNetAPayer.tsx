@@ -138,7 +138,6 @@ const Body = () => {
         cell3={deductions.retard}
       />
       <CardRow
-        className="border-b border-b-customBlue-100"
         cell1="Salaire net à payer"
         cell3={salaireNetAPayer}
         cell3ClassName="text-customRed-900"
