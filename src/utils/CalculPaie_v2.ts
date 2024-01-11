@@ -35,9 +35,18 @@ export interface calculBaseIrsaParams {
 
 export interface calculSalaireNetAPayerParams {
   salaireNet: number
+  primeAssiduite: number
+  primeExcellence: number
+  absence: number
+  retard: number
+  indemniteTransport: number
+  indeminiteAutres: number
+  avantageVehicule: number
+  avantageLogement: number
+  avantageDomestique: number
+  avantageAutre: number
+  rappel: number
   avance: number
-  totalIndemnite: number
-  totalAvantagesNature: number
   allocationFamille: number
 }
 
@@ -306,13 +315,36 @@ class CalculPaie_v2 {
 
   public calculSalaireNetAPayer(params: calculSalaireNetAPayerParams): number {
     let salaireNetAPayer = 0
-
+    const {
+      absence,
+      allocationFamille,
+      avance,
+      avantageAutre,
+      avantageLogement,
+      avantageVehicule,
+      indeminiteAutres,
+      indemniteTransport,
+      primeAssiduite,
+      primeExcellence,
+      avantageDomestique,
+      rappel,
+      retard,
+      salaireNet,
+    } = params
     salaireNetAPayer = this.roundToTwoDecimal(
-      params.salaireNet +
-        params.totalIndemnite +
-        params.totalAvantagesNature +
-        params.allocationFamille -
-        params.avance,
+      salaireNet +
+        (primeAssiduite +
+          primeExcellence +
+          indemniteTransport +
+          indeminiteAutres +
+          avantageVehicule +
+          avantageAutre +
+          avantageVehicule +
+          rappel +
+          allocationFamille +
+          avantageDomestique +
+          avantageLogement) -
+        (absence + retard + avance),
     )
 
     return salaireNetAPayer
