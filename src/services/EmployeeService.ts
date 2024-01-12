@@ -1,5 +1,3 @@
-import { createEmploye } from '@src/redux/employe/employeReducer'
-import { store } from '@src/redux/store'
 import axios, { AxiosResponse } from 'axios'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 

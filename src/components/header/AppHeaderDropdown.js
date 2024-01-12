@@ -1,25 +1,25 @@
 import React from 'react'
 import {
-  CAvatar,
-  CBadge,
   CDropdown,
   CDropdownDivider,
   CDropdownHeader,
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
+  // CAvatar,
+  // CBadge,
 } from '@coreui/react'
 import {
-  cilBell,
-  cilCreditCard,
-  cilCommentSquare,
-  cilEnvelopeOpen,
-  cilFile,
-  cilLockLocked,
   cilAccountLogout,
-  cilSettings,
-  cilTask,
   cilUser,
+  // cilBell,
+  // cilCreditCard,
+  // cilCommentSquare,
+  // cilEnvelopeOpen,
+  // cilFile,
+  // cilLockLocked,
+  // cilSettings,
+  // cilTask,
 } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 

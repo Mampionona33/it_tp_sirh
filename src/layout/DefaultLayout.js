@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { AppContent, AppSidebar, AppFooter, AppHeader } from '../components/index'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetcheEmpoyeur } from '../redux/employeur/employeurAction'
-import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
+import { useDispatch } from 'react-redux'
 import { fetchAllCotisations } from 'src/redux/cotisations/cotisationsActions'
 import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
 import { fetchCategorieEmployes } from '@src/redux/categorieEmploye/CategorieEmployeActions'
 import { useLocation } from 'react-router-dom'
-import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
+// import { fetcheEmpoyeur } from '../redux/employeur/employeurAction'
+// import { addNotification } from 'src/redux/notificationStack/notificationStackReducer'
+// import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
 const DefaultLayout = () => {
   const dispatch = useDispatch()

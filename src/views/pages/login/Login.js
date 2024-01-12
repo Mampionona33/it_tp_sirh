@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+// import { Link } from 'react-router-dom'
 import Logo from 'src/assets/images/LogoLs.png'
 import {
-  CButton,
+  // CButton,
   CCard,
   CCardBody,
   CCardGroup,

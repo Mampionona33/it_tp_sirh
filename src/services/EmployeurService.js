@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { store } from 'src/redux/store'
 
 class EmployeurService {
   constructor() {

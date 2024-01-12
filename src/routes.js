@@ -1,4 +1,4 @@
-import { exact } from 'prop-types'
+// import { exact } from 'prop-types'
 import lazyWithRetry from './utils/lazyWithRetry'
 
 // const Dashboard = lazyWithRetry(() => import('./views/dashboard/Dashboard'))

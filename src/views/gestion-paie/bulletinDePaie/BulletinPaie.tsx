@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { Document, PDFViewer, pdf, Page } from '@react-pdf/renderer'
 import { saveAs } from 'file-saver'
 import Section1 from './Section1'

@@ -7,7 +7,6 @@ import { addNotification } from 'src/redux/notificationStack/notificationStackRe
 
 function ImportHS() {
   const [heures, setHeures] = useState([])
-  const [search, setSearch] = useState('')
   const dispatch = useDispatch()
 
   function handleUpload(e) {

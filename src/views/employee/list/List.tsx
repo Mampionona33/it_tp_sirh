@@ -1,15 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import TableEmployee from 'src/components/TableEmployee/TableEmployee'
-import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
-import {
-  resetBulletinDePaie,
-  setBulletinDePaie,
-} from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
+import React, { useEffect, useMemo } from 'react'
+import { resetBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametreCalendrierReducer'
 import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
-import TableListeEmploye from '@components/TableListeEmploye/TableListeEmploye'
-import { Link } from 'react-router-dom'
 import ButtonLink from '@src/components/buttons/ButtonLink'
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
 import { PlusIcon } from '@heroicons/react/24/outline'
@@ -17,6 +9,11 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
+// import { useDispatch } from 'react-redux'
+// import TableEmployee from 'src/components/TableEmployee/TableEmployee'
+// import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
+// import TableListeEmploye from '@components/TableListeEmploye/TableListeEmploye'
+// import { Link } from 'react-router-dom'
 
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
@@ -25,7 +22,6 @@ interface IDataWithActions extends IEmploye {
 const List = () => {
   const dispatch = useAppDispatch()
   const data = useAppSelector((store) => store.employeesList.list)
-  const [localData, setLocalData] = useState<IDataWithActions[]>([])
 
   const formattedData: IDataWithActions[] =
     data && data.length > 0

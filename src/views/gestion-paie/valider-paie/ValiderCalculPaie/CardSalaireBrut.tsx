@@ -1,7 +1,7 @@
 import CustomSection from '@src/components/CustomSection'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import formatAriaryMga from '@src/utils/formatAriaryMga'
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import CardRow from './CardRow'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
@@ -9,10 +9,7 @@ import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const Body = () => {
   const {
-    totalPrimeEtGratification,
     salaireDeBase,
-    totalDeduction,
-    rappel,
     valHsni150,
     valHsni130,
     valHFerie,

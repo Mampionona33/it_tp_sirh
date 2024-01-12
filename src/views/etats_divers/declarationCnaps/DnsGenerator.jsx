@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import ExcelJS from 'exceljs'
-import PropTypes from 'prop-types'
 import { store } from 'src/redux/store'
 import EmployerWorksheet from './EmployerWorksheet'
 import MonthWorksheet from './MonthWorksheet'

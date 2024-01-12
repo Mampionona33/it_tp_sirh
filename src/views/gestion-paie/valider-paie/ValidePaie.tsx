@@ -11,7 +11,6 @@ import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReduc
 import CardSalaireBrut from './ValiderCalculPaie/CardSalaireBrut'
 import CardSalaireNet from './ValiderCalculPaie/CardSalaireNet'
 import CardSalaireNetAPayer from './ValiderCalculPaie/CardSalaireNetAPayer'
-import useDateValidationExist from '@src/hooks/useIsDateValidationExist'
 import CardPrimes from './ValiderCalculPaie/CardPrimes'
 import CardAvantages from './ValiderCalculPaie/CardAvantages'
 import CardDeduction from './ValiderCalculPaie/CardDeduction'
