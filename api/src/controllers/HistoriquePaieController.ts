@@ -40,14 +40,14 @@ class HistoriquePaieController {
       })
     }
 
-    return res.status(200).send(resp)
+    setTimeout(() => {
+      return res.status(200).send(resp)
+    }, 5000)
   }
 
   getDetailsById = (req: Request, res: Response) => {
     const { id, annee, mois } = req.params
     const listBulletinDePaie: IBulletinDePaieProps[] = this.db['bulletinDePaie']
-
-    console.log(id, annee)
 
     const data = listBulletinDePaie.filter((blt) => {
       const salarieId = String(blt.salarie?.id)

@@ -18,6 +18,7 @@ import {
   setBulletinDePaie,
 } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
+import Loading from '@src/components/Loading'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
   actions?: React.FC[]
@@ -156,6 +157,14 @@ const HistoriquePaie = () => {
     ],
     [columnHelper, anneeSectionneNumber],
   )
+
+  if (loadinHistoriquePaie === 'pending' || loadinHistoriquePaie === 'idle') {
+    return (
+      <div>
+        <Loading />
+      </div>
+    )
+  }
 
   return (
     <div>

@@ -1519,6 +1519,156 @@
       "vehicule": 45000,
       "autresAvantages": 1000,
       "id": 1
+    },
+    {
+      "validation": {
+        "status": "oui",
+        "date": "2024-01-01",
+        "day": "2024-01-13"
+      },
+      "employeur": {
+        "nom": " LA LIGNE SCANDINAVE",
+        "adresse": " 2 RUE LIEUTNANT BERARD",
+        "CP_et_Ville": " 501 - TOAMASINA",
+        "nif": " 3000000581",
+        "stat": " 50121 11 2003 0 00475",
+        "rcs": " 2002B00608"
+      },
+      "salarie": {
+        "id": 1,
+        "nom": "RAKOTOZANANY",
+        "prenom": "Benjaminator",
+        "date_naissance": "2016-04-16",
+        "lieu_naissance": "Toamasina",
+        "adresse": "2 RUE LIEUTNANT BERARD",
+        "telephone": "",
+        "email": "sealtmm@seal.mg",
+        "num_cin": "fdsffsdfdf",
+        "genre": "masculin",
+        "enfant": [
+          {
+            "id": 1,
+            "nom": "Rosali ",
+            "prenom": "Bambini",
+            "date_naissance": "2023-11-15",
+            "lieu_naissance": "Petronum",
+            "genre_enfant": "masculin",
+            "certificat": "vie"
+          }
+        ],
+        "titre_poste": "Responsable Import et logistique ",
+        "matricule": "345",
+        "categorie": "os2",
+        "date_embauche": "2016-04-16",
+        "lieu_travail": "Toamasina",
+        "salaire_de_base": 250000,
+        "travail_de_nuit": "non",
+        "mode_payement_salaire": "Virement banquaire",
+        "actif": "oui",
+        "departement": "Logistique",
+        "num_cnaps": "960101059745",
+        "num_osie": "96010105hjod4",
+        "est_cadre": "non",
+        "rib": "454787f7dsf787878fd",
+        "prime_et_avantage_permanent": [
+          {
+            "libelle": "Carburant",
+            "montant": 450000
+          },
+          {
+            "libelle": "gas",
+            "montant": 100000
+          }
+        ],
+        "depart": {
+          "date": null,
+          "motif": null
+        },
+        "tel": "020 000211",
+        "cin": "10126174565",
+        "cadre": true,
+        "date_delivrance_cin": "2023-12-14",
+        "nom_mere": "dffs",
+        "nom_pere": "Razanajafy",
+        "mode_paiement_salaire": "Virement banquaire"
+      },
+      "dateDeVirement": "2024-01-10",
+      "salaireDeBase": 250000,
+      "montantAllocationParEnfant": 7000,
+      "totalHn": 0,
+      "totalHs": 0,
+      "totalHs130": 0,
+      "totalHs150": 0,
+      "hsni130": 0,
+      "hsni150": 18,
+      "hsi130": 0,
+      "hsi150": 0,
+      "totalHs30": 0,
+      "totalHs50": 0,
+      "totalHDim": 0,
+      "totalHFerie": 0,
+      "valHsni130": 0,
+      "valHsni150": 38943.06,
+      "valHsi130": 0,
+      "valHsi150": 0,
+      "valAllocationEnfantsEmploye": 7000,
+      "valHs30": 0,
+      "valHs50": 0,
+      "valHdim": 0,
+      "valHFerie": 0,
+      "totalPrimeEtAvantage": 0,
+      "totalDeduction": 2000,
+      "tauxCnaps": 0.01,
+      "tauxOsie": 0.01,
+      "baseCnaps": 288943.06,
+      "avance": 300000,
+      "reduChargeFamil": 0,
+      "baseIrsa": 244221.14,
+      "baseIrsaArrondi": 244200,
+      "salaireBrut": 288943.06,
+      "salaireNet": 281164.2,
+      "osie": 2889.43,
+      "salaireNetAPayer": 680820.2,
+      "plafondSME": 1910400,
+      "irsaAPayer": 2000,
+      "cnaps": 2889.43,
+      "rappel": 500000,
+      "indemnites": {
+        "transport": 1000,
+        "autresIndemnite": 2000
+      },
+      "totalIndemnite": 3000,
+      "primeEtGratification": {
+        "assiduite": 45000,
+        "excellence": 50000
+      },
+      "totalPrimeEtGratification": 95000,
+      "deductions": {
+        "absence": 1000,
+        "retard": 1000
+      },
+      "avantages": {
+        "domestique": 2444,
+        "logement": 3000,
+        "vehicule": 45000,
+        "autresAvantages": 1212
+      },
+      "totalAvantages": 51656,
+      "totalHTravailEffectif": 0,
+      "tableauHsHebdo": [],
+      "tableauHs130Hebdo": [],
+      "tableauHs150Hebdo": [],
+      "transport": 1000,
+      "autresIndemnite": 200,
+      "assiduite": 45000,
+      "excellence": 50000,
+      "absence": 1000,
+      "retard": 1000,
+      "domestique": 2444,
+      "logement": 3000,
+      "vehicule": 45000,
+      "autresAvantages": 1212,
+      "id": 2
     }
   ]
 }
