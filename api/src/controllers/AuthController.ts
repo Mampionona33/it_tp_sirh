@@ -17,21 +17,26 @@ class AuthController {
 
     const { email, password } = req.body
     console.log(req.body)
+    const shouldConnect = this.isValidCredential(email, password)
+    console.log(shouldConnect)
 
-    if (this.isValidCredential(email, password)) {
-      // res.status(200).json({ success: true })
-      // res.status(200).send('Connecté')
+    if (shouldConnect) {
       setTimeout(() => {
-        // res.status(200).json({ success: true })
         res.status(200).send('Connecté')
       }, 5000)
     } else {
-      res.status(401).json({ success: false })
+      res.status(401).json({ success: false, message: 'Invalid credentials' })
     }
   }
 
   isValidCredential(email: string, password: string): boolean {
-    return this.db.users.some((user: IUser) => user.email === email && user.password === password)
+    let isValid = false
+    if (email && password) {
+      isValid = this.db.users.some(
+        (user: IUser): boolean => user.email === email && user.password === password,
+      )
+    }
+    return isValid
   }
 }
 

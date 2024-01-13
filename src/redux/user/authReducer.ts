@@ -5,6 +5,7 @@ const initialState = {
   isAuthenticated: false,
   user: null,
   loading: 'idle',
+  error: null,
 }
 
 const authSlice = createSlice({
@@ -24,10 +25,13 @@ const authSlice = createSlice({
         state.isAuthenticated = true
       })
       .addCase(loggedUser.pending, (state) => {
+        state.isAuthenticated = false
         state.loading = 'pending'
       })
-      .addCase(loggedUser.rejected, (state) => {
+      .addCase(loggedUser.rejected, (state, action) => {
         state.loading = 'failed'
+        state.isAuthenticated = false
+        state.error = action.error
       })
   },
 })

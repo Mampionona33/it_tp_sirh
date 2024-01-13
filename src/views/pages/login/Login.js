@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 // import { Link } from 'react-router-dom'
 import Logo from 'src/assets/images/LogoLs.png'
 import {
+  CAlert,
   // CButton,
   CCard,
   CCardBody,
@@ -18,7 +19,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
 import { useDispatch } from 'react-redux'
-import { setUserLoggedIn } from 'src/redux/user/authReducer'
+import { setUserLoggedIn, setUserLoggedOut } from 'src/redux/user/authReducer'
 import { useNavigate } from 'react-router-dom'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import { loggedUser } from '@src/redux/user/authActions'
@@ -28,7 +29,9 @@ import Loading from '@src/components/Loading'
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const { loading } = useAppSelector((store) => store.auth)
+  const [erroNotificationOpen, seterroNotificationOpen] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const { loading, error } = useAppSelector((store) => store.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -36,30 +39,43 @@ const Login = () => {
     ev.preventDefault()
 
     try {
-      // const resp = await authService.login(username, password)
-      const resp = await dispatch(loggedUser({ email: username, password: password }))
-      console.log(resp)
-      if (resp && resp.meta.requestStatus === 'fulfilled') {
-        dispatch(setUserLoggedIn({ email: username, password: password }))
-        navigate('/dashboard')
-      } else {
-        alert('Mots de passe ou identifiant incorrect')
-      }
+      await dispatch(loggedUser({ email: username, password: password }))
     } catch (error) {
-      console.log(error)
+      throw error
     }
 
     setUsername('')
     setPassword('')
   }
 
-  // if (loading === 'pending') {
-  //   return <p>Loading...</p>
-  // }
+  useEffect(() => {
+    if (loading === 'succeeded') {
+      dispatch(setUserLoggedIn({ email: username, password: password }))
+      navigate('/dashboard')
+    }
+    if (loading === 'failed') {
+      seterroNotificationOpen(true)
+    }
+    if (error && error.code === 'ERR_BAD_REQUEST') {
+      setErrorMessage("Informations d'identification invalides. Veuillez réessayer.")
+    }
+  }, [loading, dispatch, navigate, username, password, seterroNotificationOpen, error])
+
+  const handleClickNotification = (ev) => {
+    ev.preventDefault()
+    seterroNotificationOpen(false)
+    setErrorMessage('')
+    dispatch(setUserLoggedOut())
+  }
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
+        {erroNotificationOpen && (
+          <CAlert color="danger" onClick={handleClickNotification}>
+            {errorMessage}
+          </CAlert>
+        )}
         <CRow className="justify-content-center">
           <CCol md={8}>
             <CCardGroup>

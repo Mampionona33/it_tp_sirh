@@ -15,9 +15,9 @@ class AuthService {
         email: email,
         password: password,
       })
-      return resp.data
+      return resp
     } catch (error) {
-      console.log(error)
+      throw error
     }
   }
 }
