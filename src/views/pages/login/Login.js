@@ -56,7 +56,7 @@ const Login = () => {
     if (loading === 'failed') {
       seterroNotificationOpen(true)
     }
-    if (error && error.code === 'ERR_BAD_REQUEST') {
+    if (error) {
       setErrorMessage("Informations d'identification invalides. Veuillez réessayer.")
     }
   }, [loading, dispatch, navigate, username, password, seterroNotificationOpen, error])
