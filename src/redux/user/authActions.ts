@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ILoginProps } from './logginInterface'
-import AuthService from '@src/services/AuthService'
+import AuthService from '../../services/AuthService'
 
 const authService = new AuthService()
 

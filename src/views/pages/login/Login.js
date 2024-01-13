@@ -17,12 +17,11 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import AuthService from 'src/services/AuthService'
 import { useDispatch } from 'react-redux'
 import { setUserLoggedIn } from 'src/redux/user/authReducer'
 import { useNavigate } from 'react-router-dom'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
-import { loggedUser } from '@src/redux/user/autActions'
+import { loggedUser } from '@src/redux/user/authActions'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
 import Loading from '@src/components/Loading'
 
@@ -30,7 +29,6 @@ const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const { loading } = useAppSelector((store) => store.auth)
-  const authService = new AuthService()
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -101,22 +99,18 @@ const Login = () => {
                     <CRow>
                       <CCol xs={6}>
                         {loading === 'pending' ? (
-                          <p>Loading...</p>
+                          <div className="w-5 h-5">
+                            <Loading />
+                          </div>
                         ) : (
                           <ButtonWithIcon type="submit" label="Login" />
                         )}
-                        {/* <ButtonWithIcon type="submit" label="Login" /> */}
                       </CCol>
-                      {/* <CCol xs={6} className="text-right">
-                        <CButton color="link" className="px-0">
-                          Forgot password?
-                        </CButton>
-                      </CCol> */}
                     </CRow>
                   </CForm>
                 </CCardBody>
               </CCard>
-              <CCard className="text-white bg-primary py-5" style={{ width: '44%' }}>
+              <CCard className="text-white bg-primary py-5 w-full">
                 <CCardBody className="text-center">
                   <div>
                     <h2 className="capitalize text-lg">la ligne scandinave</h2>

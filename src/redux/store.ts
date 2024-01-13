@@ -10,7 +10,6 @@ import storage from 'redux-persist/lib/storage'
 import { persistStore, persistReducer } from 'redux-persist'
 import mouvementSalaireReducer from './mouvementSalaire/mouvementSalaireReducer'
 import parametreCalendrierReducer from './parametreCalendrier/parametreCalendrierReducer'
-import authReducer from 'src/redux/user/authReducer'
 import notificationStackReducer from './notificationStack/notificationStackReducer'
 import dnsReducers from './dns/dnsReducers'
 import employeurReducer from './employeur/employeurReducer'
@@ -18,6 +17,7 @@ import categorieEmployeReducer from './categorieEmploye/CategorieEmployeReducer'
 import formEmployeReducer from './FormEmploye/formEmployeReducer'
 import modalReducer from './modal/modalReducer'
 import historiqueDePaieReducer from './historiqueDePaie/historiqueDePaieReducer'
+import authReducer from './user/authReducer'
 
 const persistConfig = {
   key: 'root',
