@@ -1,19 +1,19 @@
+import { ILoginProps } from '@src/redux/user/logginInterface'
 import axios from 'axios'
 
 class AuthService {
+  private REACT_APP_API_BASE_URL: string
   constructor() {
     this.REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
-    this.email = null
-    this.password = null
   }
 
-  async login(email, password) {
-    this.email = email
-    this.password = password
+  async login(params: ILoginProps) {
+    const { email, password } = params
+
     try {
       const resp = await axios.post(`${this.REACT_APP_API_BASE_URL}/login`, {
-        email: this.email,
-        password: this.password,
+        email: email,
+        password: password,
       })
       return resp.data
     } catch (error) {

@@ -22,10 +22,14 @@ import { useDispatch } from 'react-redux'
 import { setUserLoggedIn } from 'src/redux/user/authReducer'
 import { useNavigate } from 'react-router-dom'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
+import { loggedUser } from '@src/redux/user/autActions'
+import { useAppSelector } from '@src/hooks/useAppDispatch'
+import Loading from '@src/components/Loading'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const { loading } = useAppSelector((store) => store.auth)
   const authService = new AuthService()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -34,8 +38,10 @@ const Login = () => {
     ev.preventDefault()
 
     try {
-      const resp = await authService.login(username, password)
-      if (resp && resp === 'Connecté') {
+      // const resp = await authService.login(username, password)
+      const resp = await dispatch(loggedUser({ email: username, password: password }))
+      console.log(resp)
+      if (resp && resp.meta.requestStatus === 'fulfilled') {
         dispatch(setUserLoggedIn({ email: username, password: password }))
         navigate('/dashboard')
       } else {
@@ -48,6 +54,10 @@ const Login = () => {
     setUsername('')
     setPassword('')
   }
+
+  // if (loading === 'pending') {
+  //   return <p>Loading...</p>
+  // }
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
@@ -90,7 +100,12 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        <ButtonWithIcon type="submit" label="Login" />
+                        {loading === 'pending' ? (
+                          <p>Loading...</p>
+                        ) : (
+                          <ButtonWithIcon type="submit" label="Login" />
+                        )}
+                        {/* <ButtonWithIcon type="submit" label="Login" /> */}
                       </CCol>
                       {/* <CCol xs={6} className="text-right">
                         <CButton color="link" className="px-0">

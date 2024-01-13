@@ -20,7 +20,11 @@ class AuthController {
 
     if (this.isValidCredential(email, password)) {
       // res.status(200).json({ success: true })
-      res.status(200).send('Connecté')
+      // res.status(200).send('Connecté')
+      setTimeout(() => {
+        // res.status(200).json({ success: true })
+        res.status(200).send('Connecté')
+      }, 5000)
     } else {
       res.status(401).json({ success: false })
     }
