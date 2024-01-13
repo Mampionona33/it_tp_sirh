@@ -98,13 +98,13 @@ const Login = () => {
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
-                        {loading === 'pending' ? (
-                          <div className="w-5 h-5">
+                        <div className="flex items-center">
+                          {loading === 'pending' ? (
                             <Loading />
-                          </div>
-                        ) : (
-                          <ButtonWithIcon type="submit" label="Login" />
-                        )}
+                          ) : (
+                            <ButtonWithIcon type="submit" label="Login" className="w-full" />
+                          )}
+                        </div>
                       </CCol>
                     </CRow>
                   </CForm>
