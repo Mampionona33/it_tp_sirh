@@ -116,7 +116,7 @@ const Login = () => {
                       <CCol xs={6}>
                         <div className="flex items-center">
                           {loading === 'pending' ? (
-                            <Loading />
+                            <Loading width="w-6" height="h-6" />
                           ) : (
                             <ButtonWithIcon type="submit" label="Login" className="w-full" />
                           )}
