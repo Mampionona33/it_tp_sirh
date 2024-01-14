@@ -45,7 +45,7 @@ const DeclarationCnaps = () => {
 
     useEffect(() => {
       dispatch(fetchDnsData({ periode: periodSelectionne, annee: anneeSelectionne }))
-    }, [])
+    }, [dispatch, periodSelectionne, anneeSelectionne])
 
     // Générer la liste d'années de 1900 à l'année actuelle
     const currentYear = new Date().getFullYear()
@@ -66,6 +66,61 @@ const DeclarationCnaps = () => {
       }
     }
 
+    const customSelectStyles = {
+      control: (provided) => ({
+        ...provided,
+        height: 21,
+        minHeight: 21,
+        border: 'none',
+        outline: 'none',
+        borderBottom: '1px solid #D6111E',
+      }),
+      valueContainer: (style) => {
+        return {
+          ...style,
+          paddingTop: 0,
+          paddingBottom: 0,
+          height: 21,
+          minHeight: 21,
+        }
+      },
+      input: (style) => {
+        return {
+          ...style,
+          margin: 0,
+          height: 21,
+          paddingTop: 0,
+          paddingBottom: 0,
+          minHeight: 21,
+          fontSize: '0.875rem',
+        }
+      },
+      singleValue: (style) => {
+        return {
+          ...style,
+          fontSize: '0.875rem',
+        }
+      },
+      placeholder: (style) => {
+        return {
+          ...style,
+          fontSize: '0.875rem',
+        }
+      },
+      menu: (style) => ({
+        ...style,
+        fontSize: '0.875rem',
+      }),
+      indicatorsContainer: (style) => {
+        return {
+          ...style,
+          fontSize: '0.875rem',
+          height: 21,
+          minHeight: 21,
+        }
+      },
+    }
+
     return (
       <>
         <form action="post" className="w-full flex flex-col gap-2 p-4">
@@ -82,7 +137,17 @@ const DeclarationCnaps = () => {
                   handleInputChange(selectedOption, actionMeta)
                 }
                 value={periodesOptions.find((option) => option.value === periode)}
-                styles={selectCustomStyles}
+                styles={customSelectStyles}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 0,
+                  height: 28,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#FFF2F2',
+                    primary: '#FEBABA',
+                  },
+                })}
               />
             </div>
             <div>
@@ -97,7 +162,17 @@ const DeclarationCnaps = () => {
                   handleInputChange(selectedOption, actionMeta)
                 }
                 value={years.find((option) => option.value === annee)}
-                styles={selectCustomStyles}
+                styles={customSelectStyles}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 0,
+                  height: 28,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#FFF2F2',
+                    primary: '#FEBABA',
+                  },
+                })}
               />
             </div>
             <div className="flex">

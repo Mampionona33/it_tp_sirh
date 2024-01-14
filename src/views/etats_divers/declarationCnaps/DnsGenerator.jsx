@@ -4,6 +4,7 @@ import { store } from 'src/redux/store'
 import EmployerWorksheet from './EmployerWorksheet'
 import MonthWorksheet from './MonthWorksheet'
 import * as FileSaver from 'file-saver'
+import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 
 class DnsGenerator extends Component {
   constructor(props) {
@@ -182,13 +183,7 @@ class DnsGenerator extends Component {
     return (
       <>
         <div>
-          <button
-            type="submit"
-            className="bg-customRed-900 text-white hover:bg-customRed-200 py-2 px-3 hover:text-slate-200"
-            onClick={this.handleExport}
-          >
-            Générer
-          </button>
+          <ButtonWithIcon label="Générer" onClick={this.handleExport} />
         </div>
       </>
     )
