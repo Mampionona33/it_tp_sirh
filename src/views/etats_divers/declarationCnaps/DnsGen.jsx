@@ -119,23 +119,6 @@ class DnsGen extends Component {
     }
   }
 
-  // handleExport(ev) {
-  //   ev.preventDefault()
-  //   this.formatPeriod()
-  //   this.employerSheet.createSheetContent()
-  //   this.mois1.createSheetContent()
-
-  //   this.wb.xlsx.writeBuffer().then((buffer) => {
-  //     const blob = new Blob([buffer], { type: 'application/octet-stream' })
-  //     FileSaver.saveAs(
-  //       blob,
-  //       `declaration_CNAPS_${this.periodSelectionne.toLocaleUpperCase()}_${
-  //         this.anneeSelectionne
-  //       }.xlsx`,
-  //     )
-  //   })
-  // }
-
   handleExport(ev) {
     ev.preventDefault()
 
