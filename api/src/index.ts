@@ -9,6 +9,7 @@ import HeuresControllers from '@controllers/HeuresControllers'
 import CategorieEmployeControllers from '@controllers/CategorieEmployeControllers'
 import BulletinDePaieControllers from '@controllers/BulletinDePaieControllers'
 import HistoriquePaieController from '@controllers/HistoriquePaieController'
+import DnsControllers from '@controllers/DnsControllers'
 const cors = require('cors')
 
 const app = express()
@@ -33,6 +34,7 @@ const heuresController = new HeuresControllers(db)
 const categorieEmployeController = new CategorieEmployeControllers(db)
 const bulletinDePaieController = new BulletinDePaieControllers(db)
 const historiquePaieController = new HistoriquePaieController(db)
+const dnsControllers = new DnsControllers(db)
 
 router.route('/login').post(authController.login)
 router.route('/mouvement-salaire').get(mouvementSalaireController.getAll)
@@ -50,6 +52,8 @@ router.route('/bulletin-de-paie/ajout/:id').post(bulletinDePaieController.create
 
 router.route('/historique-paie/:id/:annee').get(historiquePaieController.getAllByIdEmployeAndDate)
 router.route('/historique-paie/:id/:annee/:mois').get(historiquePaieController.getDetailsById)
+
+router.route('/dns/:annee/:periode').get(dnsControllers.fetchDns)
 
 const PORT = process.env.PORT || 8000
 
