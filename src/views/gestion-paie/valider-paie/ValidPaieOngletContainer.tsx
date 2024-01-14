@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import DetailHeures from './detail-heures/DetailHeures'
-import BulletinDePaie from './BulletinDePaie/BulletinDePaie'
 
 interface ITabListProps {
   key: string
@@ -60,9 +59,6 @@ const ValidPaieOngletContainer: React.FC = () => {
     switch (tabKey) {
       case 'detail-heures':
         return <DetailHeures />
-      case 'valid-paie':
-      case 'bullettin-paie':
-        return <BulletinDePaie />
       default:
         return null
     }
