@@ -126,7 +126,7 @@ const DeclarationCnaps = () => {
         <form action="post" className="w-full flex flex-col gap-2 p-4">
           <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
             <div>
-              <label className="form-label" htmlFor="periode">
+              <label className="form-label text-sm" htmlFor="periode">
                 Période
               </label>
               <Select
@@ -151,7 +151,7 @@ const DeclarationCnaps = () => {
               />
             </div>
             <div>
-              <label className="form-label" htmlFor="annee">
+              <label className="form-label text-sm" htmlFor="annee">
                 Année
               </label>
               <Select
