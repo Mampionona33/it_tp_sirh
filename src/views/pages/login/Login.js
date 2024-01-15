@@ -96,6 +96,7 @@ const Login = () => {
                         autoComplete="username"
                         id="username"
                         value={username}
+                        required
                         onChange={(e) => setUsername(e.target.value)}
                       />
                     </CInputGroup>
@@ -106,6 +107,7 @@ const Login = () => {
                       <CFormInput
                         type="password"
                         id="password"
+                        required
                         placeholder="Password"
                         autoComplete="current-password"
                         value={password}
