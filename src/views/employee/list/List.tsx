@@ -21,6 +21,28 @@ interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
 }
 
+const HeaderComponents: React.FC = () => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const handleClickButtonAdd = (ev: React.MouseEvent<HTMLElement>) => {
+    ev.preventDefault()
+    dispatch(resetFormEmploye())
+    navigate('/employees/ajout')
+  }
+
+  return (
+    <>
+      <ButtonLink
+        icon={<PlusIcon width={20} height={20} fontWeight={'bold'} />}
+        to="/employees/ajout"
+        onClick={handleClickButtonAdd}
+      >
+        Ajouter
+      </ButtonLink>
+    </>
+  )
+}
+
 const List = () => {
   const dispatch = useAppDispatch()
   const { list: data } = useAppSelector((store) => store.employeesList)
@@ -62,27 +84,6 @@ const List = () => {
     }
   }, [dispatch])
 
-  const HeaderComponents: React.FC = () => {
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
-    const handleClickButtonAdd = (ev: React.MouseEvent<HTMLElement>) => {
-      ev.preventDefault()
-      dispatch(resetFormEmploye())
-      navigate('/employees/ajout')
-    }
-
-    return (
-      <>
-        <ButtonLink
-          icon={<PlusIcon width={20} height={20} fontWeight={'bold'} />}
-          to="/employees/ajout"
-          onClick={handleClickButtonAdd}
-        >
-          Ajouter
-        </ButtonLink>
-      </>
-    )
-  }
   const columnHelper = createColumnHelper<IDataWithActions>()
 
   const cols = useMemo<ColumnDef<IDataWithActions>[]>(
