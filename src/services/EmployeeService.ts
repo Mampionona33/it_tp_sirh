@@ -46,7 +46,6 @@ class EmployeeService {
   }
 
   async update(id: string | number, data: IEmploye): Promise<AxiosResponse> {
-    console.log(data)
     try {
       const response = await axios.post(
         `${this.REACT_APP_API_BASE_URL}/updatepersonnel/${id}`,
@@ -61,8 +60,8 @@ class EmployeeService {
       console.log(response)
       return response
     } catch (error) {
-      console.error("Une erreur s'est produite lors de la requête :", error)
-      // throw error
+      // console.error("Une erreur s'est produite lors de la requête :", error)
+      throw error
     }
   }
 

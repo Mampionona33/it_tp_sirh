@@ -40,11 +40,9 @@ const ModalValidResiliation: React.FC<IModalValidResiliation> = ({ motif }) => {
       const response = await dispatch(deleteEmployee({ id: formEmploye.id, data: dataToPost }))
       if (response.meta.requestStatus === 'fulfilled') {
         dispatch(setModalClose())
-        console.log(response)
         navigate('/employees/list')
       }
     } catch (error) {
-      console.error(error)
       dispatch(setModalClose())
     }
   }

@@ -42,6 +42,7 @@ router.route('/cotisations/all').get(cotisationController.getAll)
 router.route('/employeurs').get(employeurController.getAll)
 
 router.route('/personnels').get(salarieController.getAll)
+router.route('/personnels/:id').get(salarieController.getOne)
 router.route('/personnels/ajout').post(salarieController.create)
 router.route('/updatepersonnel/:id').post(salarieController.update)
 router.route('/deletepersonnel/:id').post(salarieController.update)

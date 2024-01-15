@@ -4,10 +4,11 @@ import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import FormEmploye from '@src/components/FormEmploye/FormEmploye'
 import Page404 from '@src/views/pages/page404/Page404'
 import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
+import Loading from '@src/components/Loading'
 
 const Fiche: React.FC = () => {
   const { id } = useParams()
-  const listEmploye = useAppSelector((store) => store.employeesList.list)
+  const { list: listEmploye, loading: loadingList } = useAppSelector((store) => store.employeesList)
   const formEmploye = useAppSelector((store) => store.formEmploye)
   const dispatch = useAppDispatch()
 
@@ -27,11 +28,14 @@ const Fiche: React.FC = () => {
         dispatch(setFormEmploye({ ...selectedEmploye, id: parsedEmployeeId }))
       }
     }
-
     if (id) {
       setFormEmployeID(id)
     }
   }, [id, formEmploye, isValidID, dispatch, selectedEmploye])
+
+  if (loadingList === 'loading') {
+    return <Loading />
+  }
 
   const renderContent = (): JSX.Element => {
     return isValidID() ? <FormEmploye id={id} /> : <Page404 />

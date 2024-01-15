@@ -8,9 +8,10 @@ import { PlusIcon } from '@heroicons/react/24/outline'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
-import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
+import { resetFormEmploye, setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
 import { useNavigate } from 'react-router-dom'
+import Loading from '@src/components/Loading'
 // import { useDispatch } from 'react-redux'
 // import TableEmployee from 'src/components/TableEmployee/TableEmployee'
 // import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
@@ -45,7 +46,7 @@ const HeaderComponents: React.FC = () => {
 
 const List = () => {
   const dispatch = useAppDispatch()
-  const { list: data } = useAppSelector((store) => store.employeesList)
+  const { list: data, loading: loadingList } = useAppSelector((store) => store.employeesList)
 
   const formattedData: IDataWithActions[] = useMemo(() => {
     return data && data.length > 0
@@ -65,14 +66,14 @@ const List = () => {
         dispatch(resetBulletinDePaie())
         dispatch(resetParametreCalendrier())
         dispatch(fetchAllMouvementSalaire())
-        await dispatch(fetchAllEmployees())
-        // dispatch(resetFormEmploye())
-
+        dispatch(resetFormEmploye())
         try {
-          // const response = await dispatch(fetchAllEmployees())
-          // console.log(response)
+          const res = await dispatch(fetchAllEmployees())
+          if (res.meta.requestStatus === 'fulfilled') {
+            // console.log(res)
+          }
         } catch (error) {
-          console.log(error)
+          throw error
         }
       }
     }
@@ -111,6 +112,10 @@ const List = () => {
     ],
     [columnHelper],
   )
+
+  if (loadingList === 'loading') {
+    return <Loading />
+  }
 
   return (
     <>

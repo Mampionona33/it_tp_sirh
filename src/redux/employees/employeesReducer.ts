@@ -1,9 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { deleteEmployee, fetchAllEmployees } from './employeesAction'
+import {
+  createEmployee,
+  deleteEmployee,
+  fetchAllEmployees,
+  updateEmployee,
+} from './employeesAction'
+import { IEmploye } from '@src/interfaces/interfaceEmploye'
 
 const initialState = {
   list: [],
   loading: 'idle',
+  loadingUpdate: 'idle',
   error: null,
 }
 
@@ -26,14 +33,15 @@ const employeesSlice = createSlice({
             state.list = state.list ? [...newEmployees] : newEmployees
             state.loading = 'succeeded'
           } else {
-            state.loading = 'emptyList'
+            state.loading = 'loading'
           }
         } else {
-          state.error = 'error'
+          state.error = null
         }
       })
       .addCase(fetchAllEmployees.pending, (state, action) => {
         state.loading = 'loading'
+        state.error = null
       })
       .addCase(fetchAllEmployees.rejected, (state, action) => {
         state.loading = 'reject'
@@ -50,6 +58,33 @@ const employeesSlice = createSlice({
       })
       .addCase(deleteEmployee.pending, (state, action) => {
         state.loading = 'loading'
+        state.error = null
+      })
+      .addCase(createEmployee.fulfilled, (state, action) => {
+        state.list = [...state.list, action.payload]
+        state.loading = 'succeeded'
+        state.error = null
+      })
+      .addCase(createEmployee.rejected, (state, action) => {
+        state.loading = 'reject'
+        state.error = action.error
+      })
+      .addCase(createEmployee.pending, (state, action) => {
+        state.loading = 'loading'
+        state.error = null
+      })
+      .addCase(updateEmployee.fulfilled, (state, action) => {
+        state.loading = 'idle'
+        state.list = []
+        state.loadingUpdate = 'succeeded'
+        state.error = null
+      })
+      .addCase(updateEmployee.rejected, (state, action) => {
+        state.loadingUpdate = 'reject'
+        state.error = action.error
+      })
+      .addCase(updateEmployee.pending, (state, action) => {
+        state.loadingUpdate = 'loading'
         state.error = null
       })
   },

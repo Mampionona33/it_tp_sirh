@@ -27,7 +27,7 @@ const FormResiliationContrat = () => {
   const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault()
     if (isNomMatriculeValid()) {
-      console.log('Formulaire soumis avec succès', formData)
+      // console.log('Formulaire soumis avec succès', formData)
       dispatch(setModalOpen())
     } else {
       setAppModalError(true)

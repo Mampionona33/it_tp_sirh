@@ -9,6 +9,13 @@ import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import employeService from '@src/services/EmployeeService'
 import { useNavigate } from 'react-router-dom'
+import {
+  createEmployee,
+  fetchAllEmployees,
+  updateEmployee,
+} from '@src/redux/employees/employeesAction'
+import Loading from '../Loading'
+import { resetListEmployees } from '@src/redux/employees/employeesReducer'
 
 interface IFormEmploye {
   id?: string | number
@@ -16,8 +23,10 @@ interface IFormEmploye {
 
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   const navigate = useNavigate()
-  const dispacth = useAppDispatch()
+  const dispatch = useAppDispatch()
+
   const formEmploye = useAppSelector((state) => state.formEmploye)
+  const { loading } = useAppSelector((state) => state.employeesList)
 
   const isEmployeExist = (): boolean => {
     return formEmploye.id !== null
@@ -32,20 +41,21 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         salaire_de_base: parseFloat(String(formEmploye.salaire_de_base)),
       }
       if (!isEmployeExist()) {
-        const createEmploye = await employeService.create(requestData)
-        if (createEmploye.status === 201) {
-          dispacth(resetFormEmploye())
+        const createEmploye = await dispatch(createEmployee(requestData))
+        if (createEmploye.meta.requestStatus === 'fulfilled') {
+          navigate('/employees/list')
         }
       } else {
-        // console.log(formEmploye.depart)
-        // if (!formEmploye.depart.date && !formEmploye.depart.motif) {
-        const updateEmploye = await employeService.update(formEmploye.id, requestData)
-        if (updateEmploye.status === 200) {
-          dispacth(resetFormEmploye())
+        // const updateEmploye = await employeService.update(formEmploye.id, requestData)
+        const updateEmploye = await dispatch(
+          updateEmployee({ id: formEmploye.id, data: requestData }),
+        )
+        if (updateEmploye.meta.requestStatus === 'fulfilled') {
+          dispatch(resetListEmployees())
+          navigate('/employees/list')
         }
-        // }
       }
-      navigate('/employees/list')
+      // navigate('/employees/list')
     } catch (error) {
       throw error
     }
@@ -53,7 +63,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
 
   const handleReset = (ev: React.FormEvent) => {
     ev.preventDefault()
-    dispacth(resetFormEmploye())
+    dispatch(resetFormEmploye())
   }
 
   return (
