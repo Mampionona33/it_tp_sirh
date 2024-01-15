@@ -1568,7 +1568,7 @@
       ],
       "titre_poste": "dfsddfsd",
       "matricule": "454d",
-      "categorie": "1a",
+      "categorie": "os3",
       "date_embauche": "2023-12-28",
       "lieu_travail": "fdfds",
       "salaire_de_base": 4564678,
@@ -1581,7 +1581,11 @@
       "est_cadre": "non",
       "rib": "fsdfds",
       "prime_et_avantage_permanent": null,
-      "depart": null
+      "depart": null,
+      "date_delivrance_cin": "2024-01-05",
+      "nom_mere": "",
+      "nom_pere": "",
+      "mode_paiement_salaire": "fdff"
     },
     {
       "id": 4,
