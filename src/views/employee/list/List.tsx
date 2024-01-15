@@ -12,6 +12,7 @@ import { resetFormEmploye, setFormEmploye } from '@src/redux/FormEmploye/formEmp
 import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
 import { useNavigate } from 'react-router-dom'
 import Loading from '@src/components/Loading'
+import { CAlert } from '@coreui/react'
 
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
@@ -41,7 +42,11 @@ const HeaderComponents: React.FC = () => {
 
 const List = () => {
   const dispatch = useAppDispatch()
-  const { list: data, loading: loadingList } = useAppSelector((store) => store.employeesList)
+  const {
+    list: data,
+    loading: loadingList,
+    error: errorLoadingList,
+  } = useAppSelector((store) => store.employeesList)
 
   const formattedData: IDataWithActions[] = useMemo(() => {
     return data && data.length > 0
@@ -115,6 +120,7 @@ const List = () => {
   return (
     <>
       {/* <TableEmployee /> */}
+      {errorLoadingList && <CAlert color="danger">{errorLoadingList.message}</CAlert>}
       <ReusableTable
         data={formattedData}
         columns={cols}
