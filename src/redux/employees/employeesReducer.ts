@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { fetchAllEmployees } from './employeesAction'
+import { deleteEmployee, fetchAllEmployees } from './employeesAction'
 
 const initialState = {
   list: [],
@@ -38,6 +38,19 @@ const employeesSlice = createSlice({
       .addCase(fetchAllEmployees.rejected, (state, action) => {
         state.loading = 'reject'
         state.error = action.error
+      })
+      .addCase(deleteEmployee.fulfilled, (state, action) => {
+        state.list = state.list.filter((employee) => employee.id !== action.payload)
+        state.loading = 'succeeded'
+        state.error = null
+      })
+      .addCase(deleteEmployee.rejected, (state, action) => {
+        state.loading = 'reject'
+        state.error = action.error
+      })
+      .addCase(deleteEmployee.pending, (state, action) => {
+        state.loading = 'loading'
+        state.error = null
       })
   },
 })

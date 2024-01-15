@@ -1,9 +1,10 @@
 import { UserMinusIcon } from '@heroicons/react/24/outline'
+import Loading from '@src/components/Loading'
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'
+import { deleteEmployee } from '@src/redux/employees/employeesAction'
 import { setModalClose } from '@src/redux/modal/modalReducer'
-import employeService from '@src/services/EmployeeService'
 import { format } from 'date-fns'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -13,6 +14,7 @@ interface IModalValidResiliation {
 }
 
 const ModalValidResiliation: React.FC<IModalValidResiliation> = ({ motif }) => {
+  const { loading: loadingListEmployee } = useAppSelector((store) => store.employeesList)
   const formEmploye = useAppSelector((store) => store.formEmploye)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -23,6 +25,7 @@ const ModalValidResiliation: React.FC<IModalValidResiliation> = ({ motif }) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
     const dataToPost: IEmploye = {
       ...formEmploye,
       actif: EnumBoolean.NON,
@@ -33,10 +36,11 @@ const ModalValidResiliation: React.FC<IModalValidResiliation> = ({ motif }) => {
     }
 
     try {
-      const response = await employeService.delete(formEmploye.id, dataToPost)
-      if (response) {
+      // const response = await employeService.delete(formEmploye.id, dataToPost)
+      const response = await dispatch(deleteEmployee({ id: formEmploye.id, data: dataToPost }))
+      if (response.meta.requestStatus === 'fulfilled') {
         dispatch(setModalClose())
-        console.log(response.data)
+        console.log(response)
         navigate('/employees/list')
       }
     } catch (error) {
@@ -44,6 +48,8 @@ const ModalValidResiliation: React.FC<IModalValidResiliation> = ({ motif }) => {
       dispatch(setModalClose())
     }
   }
+
+  if (loadingListEmployee === 'pending') return <Loading />
 
   return (
     <div className="flex justify-center bg-white p-4">

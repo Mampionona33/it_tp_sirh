@@ -1,6 +1,10 @@
 import axios, { AxiosResponse } from 'axios'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 
+export interface updateEmployeeProps {
+  id: number | string
+  data: IEmploye
+}
 class EmployeeService {
   REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
 
