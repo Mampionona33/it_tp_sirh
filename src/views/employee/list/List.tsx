@@ -9,6 +9,8 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
+import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
+import { useNavigate } from 'react-router-dom'
 // import { useDispatch } from 'react-redux'
 // import TableEmployee from 'src/components/TableEmployee/TableEmployee'
 // import { fetchAllEmployees } from 'src/redux/employees/employeesAction'
@@ -21,10 +23,10 @@ interface IDataWithActions extends IEmploye {
 
 const List = () => {
   const dispatch = useAppDispatch()
-  const data = useAppSelector((store) => store.employeesList.list)
+  const { list: data } = useAppSelector((store) => store.employeesList)
 
-  const formattedData: IDataWithActions[] =
-    data && data.length > 0
+  const formattedData: IDataWithActions[] = useMemo(() => {
+    return data && data.length > 0
       ? data
           .filter((item: any) => item.actif === 'oui')
           .map((item: any) => ({
@@ -32,6 +34,7 @@ const List = () => {
             fullName: `${item.nom} ${item.prenom}`,
           }))
       : []
+  }, [data])
 
   useEffect(() => {
     let mount = true
@@ -40,7 +43,8 @@ const List = () => {
         dispatch(resetBulletinDePaie())
         dispatch(resetParametreCalendrier())
         dispatch(fetchAllMouvementSalaire())
-        dispatch(resetFormEmploye())
+        await dispatch(fetchAllEmployees())
+        // dispatch(resetFormEmploye())
 
         try {
           // const response = await dispatch(fetchAllEmployees())
@@ -58,23 +62,21 @@ const List = () => {
     }
   }, [dispatch])
 
-  // useEffect(() => {
-  //   setLocalData(
-  //     data
-  //       ?.filter((item: any) => item.actif === 'oui')
-  //       .map((item: any) => ({
-  //         ...item,
-  //         fullName: `${item.nom} ${item.prenom}`,
-  //       })) || [],
-  //   )
-  // }, [data])
-
   const HeaderComponents: React.FC = () => {
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+    const handleClickButtonAdd = (ev: React.MouseEvent<HTMLElement>) => {
+      ev.preventDefault()
+      dispatch(resetFormEmploye())
+      navigate('/employees/ajout')
+    }
+
     return (
       <>
         <ButtonLink
           icon={<PlusIcon width={20} height={20} fontWeight={'bold'} />}
           to="/employees/ajout"
+          onClick={handleClickButtonAdd}
         >
           Ajouter
         </ButtonLink>

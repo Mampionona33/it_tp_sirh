@@ -4,6 +4,7 @@ import { fetchAllEmployees } from './employeesAction'
 const initialState = {
   list: [],
   loading: 'idle',
+  error: null,
 }
 
 const employeesSlice = createSlice({
@@ -28,7 +29,7 @@ const employeesSlice = createSlice({
             state.loading = 'emptyList'
           }
         } else {
-          state.loading = 'error'
+          state.error = 'error'
         }
       })
       .addCase(fetchAllEmployees.pending, (state, action) => {
@@ -36,6 +37,7 @@ const employeesSlice = createSlice({
       })
       .addCase(fetchAllEmployees.rejected, (state, action) => {
         state.loading = 'reject'
+        state.error = action.error
       })
   },
 })
