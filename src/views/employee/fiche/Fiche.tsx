@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import FormEmploye from '@src/components/FormEmploye/FormEmploye'
 import Page404 from '@src/views/pages/page404/Page404'
 import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
-import Loading from '@src/components/Loading'
+import Loading from '@src/components/loadings/Loading'
 
 const Fiche: React.FC = () => {
   const { id } = useParams()

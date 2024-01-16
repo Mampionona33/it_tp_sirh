@@ -1,11 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { fetchDnsData } from './dnsActions'
+import { BaseReduxState } from '@src/interfaces/interfaceDeBaseReduxState'
 
-const initialState = {
+export interface IDnsState extends BaseReduxState {
+  periodSelectionne: string
+  anneeSelectionne: number
+  dnsData: any
+}
+
+const initialState: IDnsState = {
   periodSelectionne: 't1',
   anneeSelectionne: new Date().getFullYear(),
   dnsData: null,
-  loading: 'idle',
+  loading: 'loading',
 }
 
 const dnsSlice = createSlice({
@@ -27,7 +34,7 @@ const dnsSlice = createSlice({
         state.loading = 'loading'
       })
       .addCase(fetchDnsData.rejected, (state, action) => {
-        state.loading = 'reject'
+        state.loading = 'failed'
       })
   },
 })

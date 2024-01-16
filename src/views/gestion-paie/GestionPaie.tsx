@@ -5,7 +5,7 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import ButtonLink from '@src/components/buttons/ButtonLink'
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
 import { resetBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
-import Loading from '@src/components/Loading'
+import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
 

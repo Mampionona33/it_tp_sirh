@@ -1,5 +1,5 @@
 import { UserMinusIcon } from '@heroicons/react/24/outline'
-import Loading from '@src/components/Loading'
+import Loading from '@src/components/loadings/Loading'
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'

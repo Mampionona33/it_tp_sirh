@@ -14,7 +14,7 @@ import {
   fetchAllEmployees,
   updateEmployee,
 } from '@src/redux/employees/employeesAction'
-import Loading from '../Loading'
+import Loading from '../loadings/Loading'
 import { resetListEmployees } from '@src/redux/employees/employeesReducer'
 
 interface IFormEmploye {

@@ -24,7 +24,7 @@ import { useNavigate } from 'react-router-dom'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import { loggedUser } from '@src/redux/user/authActions'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
-import Loading from '@src/components/Loading'
+import Loading from '@src/components/loadings/Loading'
 import { AxiosError } from 'axios'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
 

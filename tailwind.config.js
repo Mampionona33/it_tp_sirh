@@ -38,6 +38,22 @@ module.exports = {
       screens: {
         mobile: '320px',
       },
+      keyframes: {
+        bounce: {
+          '0%, 100%': {
+            transform: 'translateY(0)',
+            'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)',
+          },
+          '50%': {
+            transform: 'translateY(-20px)',
+            'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
+          },
+        },
+      },
+      animation: {
+        'bounce-200': 'bounce 1s infinite 200ms',
+        'bounce-400': 'bounce 1s infinite 400ms',
+      },
     },
   },
   plugins: [],

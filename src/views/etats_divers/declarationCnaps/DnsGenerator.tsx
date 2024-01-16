@@ -6,6 +6,8 @@ import MonthWorksheet from './MonthWorksheet'
 import * as FileSaver from 'file-saver'
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
 import { Store } from 'redux'
+import Loading from '@src/components/loadings/Loading'
+import InlineLoading from '@src/components/loadings/InlineLoading'
 
 class DnsGenerator extends Component {
   private store: Store
@@ -18,6 +20,7 @@ class DnsGenerator extends Component {
   private mois2List: string[]
   private mois3List: string[]
   private dnsData: any[] | null
+  private loadingDnsData: string
   constructor(props) {
     super(props)
     this.wb = new ExcelJS.Workbook()
@@ -33,17 +36,22 @@ class DnsGenerator extends Component {
 
     this.store = store
     this.dnsData = store.getState().dns.dnsData
+    this.loadingDnsData = store.getState().dns.loading
   }
 
   render() {
     return (
       <>
-        <div>
-          <ButtonWithIcon
-            label="Télécharger"
-            variant={ButtonWithIconVariant.Secondary}
-            disabled={this.dnsData === null}
-          />
+        <div className="flex items-center">
+          {this.loadingDnsData === 'loading' ? (
+            <InlineLoading />
+          ) : (
+            <ButtonWithIcon
+              label="Télécharger"
+              variant={ButtonWithIconVariant.Secondary}
+              disabled={this.dnsData === null}
+            />
+          )}
         </div>
       </>
     )

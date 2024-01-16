@@ -3,7 +3,7 @@ import Select from 'react-select'
 import { employeesCategories } from 'src/db/db'
 import { format } from 'date-fns'
 import { useSelector } from 'react-redux'
-import Loading from './Loading'
+import Loading from './loadings/Loading'
 import PropTypes from 'prop-types'
 
 const FormInfoGalEmployee = (props) => {

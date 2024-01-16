@@ -18,7 +18,7 @@ import {
   setBulletinDePaie,
 } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
-import Loading from '@src/components/Loading'
+import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {

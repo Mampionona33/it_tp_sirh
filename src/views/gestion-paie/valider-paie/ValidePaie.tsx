@@ -27,7 +27,7 @@ import FormValidateCalculPaie from './FormValidateCalculPaie'
 import { setModalOpen } from '@src/redux/modal/modalReducer'
 import useValidMonthFrMMMM from '@src/hooks/useValidMonth'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
-import Loading from '@src/components/Loading'
+import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
 

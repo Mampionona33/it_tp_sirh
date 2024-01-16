@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye, setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
 import { useNavigate } from 'react-router-dom'
-import Loading from '@src/components/Loading'
+import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 
 interface IDataWithActions extends IEmploye {
