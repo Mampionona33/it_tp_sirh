@@ -27,11 +27,14 @@ import FormValidateCalculPaie from './FormValidateCalculPaie'
 import { setModalOpen } from '@src/redux/modal/modalReducer'
 import useValidMonthFrMMMM from '@src/hooks/useValidMonth'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
+import Loading from '@src/components/Loading'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
   const { salarie, dateDeVirement } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
+  const { loading: loadingListEmploye } = useAppSelector((store) => store.employeesList)
+  const { loading: loadingHours } = useAppSelector((store) => store.employeHours)
 
   const dispatch = useAppDispatch()
 
@@ -219,6 +222,10 @@ const ValidePaie = () => {
   const handleDateVirBancChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     dispatch(setBulletinDePaie({ dateDeVirement: event.target.value } as IBulletinDePaieProps))
+  }
+
+  if (loadingListEmploye === 'loading' || loadingHours === 'loading') {
+    return <Loading />
   }
 
   return (

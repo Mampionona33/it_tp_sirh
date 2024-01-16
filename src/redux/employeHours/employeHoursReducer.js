@@ -35,7 +35,7 @@ const employeeHoursSlice = createSlice({
         state.loading = 'failed'
       })
       .addCase(fetchHeureEmploye.pending, (state) => {
-        state.loading = 'pending'
+        state.loading = 'loading'
       })
   },
 })
