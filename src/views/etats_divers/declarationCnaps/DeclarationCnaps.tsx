@@ -4,6 +4,7 @@ import Select from 'react-select'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setDns } from '@src/redux/dns/dnsReducers'
 import CustomSection from '@src/components/CustomSection'
+import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 
 const Body = () => {
   const dispatch = useAppDispatch()
@@ -143,7 +144,8 @@ const Body = () => {
               })}
             />
           </div>
-          <div className="flex">
+          <div className="flex gap-2">
+            <ButtonWithIcon label="Générer" />
             <DnsGenerator />
           </div>
         </div>
