@@ -22,13 +22,11 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loggedUser.fulfilled, (state, action) => {
-
         /**
          * Je dois faire cette modification car le backend envoie
          * un statut 204 avec un message d'erreur 'Vérifier les identifications'
          * pour indiquer que l'authentification est incorrecte.
          */
-
         if (action.payload.data === 'Vérifier les identifications') {
           state.isAuthenticated = false
           const error = new AxiosError()
