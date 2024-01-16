@@ -39,12 +39,28 @@ class DnsGenerator extends Component {
     this.loadingDnsData = store.getState().dns.loading
   }
 
+  componentDidMount(): void {
+    this.store.subscribe(() => {
+      this.dnsData = store.getState().dns.dnsData
+      this.loadingDnsData = store.getState().dns.loading
+    })
+  }
+
+  componentDidUpdate(): void {
+    this.store.subscribe(() => {
+      this.dnsData = store.getState().dns.dnsData
+      this.loadingDnsData = store.getState().dns.loading
+    })
+  }
+
   render() {
     return (
       <>
         <div className="flex items-center">
           {this.loadingDnsData === 'loading' ? (
-            <InlineLoading />
+            <div className="flex justify-center w-24">
+              <InlineLoading />
+            </div>
           ) : (
             <ButtonWithIcon
               label="Télécharger"

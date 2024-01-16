@@ -1,13 +1,18 @@
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 
+export interface IDnsFetchAllProps {
+  annee: number
+  periode: string
+}
 class DnsService {
   static REACT_APP_API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000'
-
+  private resp: AxiosResponse | null
   constructor() {
     this.resp = null
   }
 
-  async fetch(periode, annee) {
+  async fetch(props: IDnsFetchAllProps) {
+    const { annee, periode } = props
     const email = 'lslisteemployes'
     const password = '20lsliste23'
     try {

@@ -17,7 +17,9 @@ class DnsControllers {
       return { travailleurs, employeur: dns.employeur, cotisation: dns.cotisation }
     })
 
-    res.status(200).json(data)
+    setTimeout(() => {
+      res.status(200).json(data)
+    }, 3000)
   }
 }
 

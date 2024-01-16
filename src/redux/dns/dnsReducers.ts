@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { fetchDnsData } from './dnsActions'
 import { BaseReduxState } from '@src/interfaces/interfaceDeBaseReduxState'
 
@@ -19,7 +19,7 @@ const dnsSlice = createSlice({
   name: 'dns',
   initialState,
   reducers: {
-    setDns: (state, action) => {
+    setDns: (state, action: PayloadAction<IDnsState>) => {
       return { ...state, ...action.payload }
     },
     resetDns: (state) => initialState,
@@ -30,10 +30,10 @@ const dnsSlice = createSlice({
         state.dnsData = action.payload.data
         state.loading = 'succeeded'
       })
-      .addCase(fetchDnsData.pending, (state, action) => {
+      .addCase(fetchDnsData.pending, (state) => {
         state.loading = 'loading'
       })
-      .addCase(fetchDnsData.rejected, (state, action) => {
+      .addCase(fetchDnsData.rejected, (state) => {
         state.loading = 'failed'
       })
   },

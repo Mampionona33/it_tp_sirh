@@ -2,9 +2,10 @@ import React from 'react'
 import DnsGenerator from './DnsGenerator'
 import Select from 'react-select'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
-import { setDns } from '@src/redux/dns/dnsReducers'
+import { IDnsState, setDns } from '@src/redux/dns/dnsReducers'
 import CustomSection from '@src/components/CustomSection'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
+import { fetchDnsData } from '@src/redux/dns/dnsActions'
 
 const Body = () => {
   const dispatch = useAppDispatch()
@@ -74,12 +75,22 @@ const Body = () => {
 
   const handleInputChange = (selectedOption, actionMeta) => {
     if (actionMeta.name === 'periode') {
-      dispatch(setDns({ periodSelectionne: selectedOption.value }))
-      //   setPeriode(selectedOption.value)
+      dispatch(
+        setDns({
+          periodSelectionne: selectedOption.value,
+          dnsData: null,
+          loading: 'idle',
+        } as IDnsState),
+      )
       //   dispatch(fetchDnsData({ periode: selectedOption.value, annee: annee }))
     } else if (actionMeta.name === 'annee') {
-      dispatch(setDns({ anneeSelectionne: Number(selectedOption.value) }))
-      //   setAnnee(selectedOption.value)
+      dispatch(
+        setDns({
+          anneeSelectionne: Number(selectedOption.value),
+          dnsData: null,
+          loading: 'idle',
+        } as IDnsState),
+      )
       //   dispatch(fetchDnsData({ periode: periode, annee: selectedOption.value }))
     }
   }
@@ -90,62 +101,73 @@ const Body = () => {
     label: (currentYear - index).toString(),
   }))
 
+  const handleGenerate = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    try {
+      await dispatch(fetchDnsData({ periode, annee }))
+    } catch (error) {
+      throw error
+    }
+  }
+
   return (
     <>
       <form action="post" className="w-full flex flex-col gap-2 p-4">
         <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
-          <div>
-            <label className="form-label text-sm" htmlFor="periode">
-              Période
-            </label>
-            <Select
-              className="basic-multi-select"
-              name="periode"
-              options={periodesOptions}
-              onChange={(selectedOption, actionMeta) =>
-                handleInputChange(selectedOption, actionMeta)
-              }
-              value={periodesOptions.find((option) => option.value === periode)}
-              styles={customSelectStyles}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-                height: 28,
-                colors: {
-                  ...theme.colors,
-                  primary25: '#FFF2F2',
-                  primary: '#FEBABA',
-                },
-              })}
-            />
-          </div>
-          <div>
-            <label className="form-label text-sm" htmlFor="annee">
-              Année
-            </label>
-            <Select
-              className="basic-multi-select"
-              name="annee"
-              options={years}
-              onChange={(selectedOption, actionMeta) =>
-                handleInputChange(selectedOption, actionMeta)
-              }
-              value={years.find((option) => option.value === annee)}
-              styles={customSelectStyles}
-              theme={(theme) => ({
-                ...theme,
-                borderRadius: 0,
-                height: 28,
-                colors: {
-                  ...theme.colors,
-                  primary25: '#FFF2F2',
-                  primary: '#FEBABA',
-                },
-              })}
-            />
+          <div className="flex justify-between gap-2">
+            <div>
+              <label className="form-label text-sm" htmlFor="periode">
+                Période
+              </label>
+              <Select
+                className="basic-multi-select"
+                name="periode"
+                options={periodesOptions}
+                onChange={(selectedOption, actionMeta) =>
+                  handleInputChange(selectedOption, actionMeta)
+                }
+                value={periodesOptions.find((option) => option.value === periode)}
+                styles={customSelectStyles}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 0,
+                  height: 28,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#FFF2F2',
+                    primary: '#FEBABA',
+                  },
+                })}
+              />
+            </div>
+            <div>
+              <label className="form-label text-sm" htmlFor="annee">
+                Année
+              </label>
+              <Select
+                className="basic-multi-select"
+                name="annee"
+                options={years}
+                onChange={(selectedOption, actionMeta) =>
+                  handleInputChange(selectedOption, actionMeta)
+                }
+                value={years.find((option) => option.value === annee)}
+                styles={customSelectStyles}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 0,
+                  height: 28,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#FFF2F2',
+                    primary: '#FEBABA',
+                  },
+                })}
+              />
+            </div>
           </div>
           <div className="flex gap-2">
-            <ButtonWithIcon label="Générer" />
+            <ButtonWithIcon label="Générer" onClick={handleGenerate} />
             <DnsGenerator />
           </div>
         </div>
