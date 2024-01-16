@@ -12,18 +12,12 @@ const FormValidateCalculPaie = () => {
   const bullettinDePaie = useAppSelector((store) => store.bulletinDePaie)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    console.log(bullettinDePaie)
-  }, [bullettinDePaie])
-
   const handleValidation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
       const resp = await bulletinDePaieService.create({ id, data: bullettinDePaie })
-      console.log(resp)
 
       if (resp.data.message === 'Paie enregistrée') {
-        // Paie enregistrée
         dispatch(resetBulletinDePaie())
         dispatch(setModalClose())
         navigate(`/gestion-de-paie/historique/${id}`)

@@ -22,7 +22,6 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loggedUser.fulfilled, (state, action) => {
-        // console.log(action.payload.data)
 
         /**
          * Je dois faire cette modification car le backend envoie
