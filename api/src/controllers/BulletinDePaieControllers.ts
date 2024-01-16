@@ -20,7 +20,7 @@ class BulletinDePaieControllers {
 
       fs.writeFileSync(dbFilePath, JSON.stringify(dbContent, null, 2), 'utf-8')
 
-      res.status(201).json(req.body)
+      res.status(201).json({ message: 'Paie enregistrée' })
     } catch (error) {
       console.error("Une erreur s'est produite lors de l'écriture dans le fichier db.json :", error)
       res.status(500).send('Erreur serveur')

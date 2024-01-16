@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 // import { Link } from 'react-router-dom'
 import Logo from 'src/assets/images/LogoLs.png'
 import {
@@ -25,15 +25,16 @@ import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import { loggedUser } from '@src/redux/user/authActions'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
 import Loading from '@src/components/Loading'
+import { AxiosError } from 'axios'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 const Login = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [erroNotificationOpen, seterroNotificationOpen] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
   const { loading, error } = useAppSelector((store) => store.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const errorMessageFormatter = useErrorFormatter()
 
   const handleSubmit = async (ev) => {
     ev.preventDefault()
@@ -53,29 +54,12 @@ const Login = () => {
       dispatch(setUserLoggedIn({ email: username, password: password }))
       navigate('/dashboard')
     }
-    if (loading === 'failed') {
-      seterroNotificationOpen(true)
-    }
-    if (error) {
-      setErrorMessage("Informations d'identification invalides. Veuillez réessayer.")
-    }
-  }, [loading, dispatch, navigate, username, password, seterroNotificationOpen, error])
-
-  const handleClickNotification = (ev) => {
-    ev.preventDefault()
-    seterroNotificationOpen(false)
-    setErrorMessage('')
-    dispatch(setUserLoggedOut())
-  }
+  }, [loading, dispatch, navigate, username, password, error])
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
-        {erroNotificationOpen && (
-          <CAlert color="danger" onClick={handleClickNotification}>
-            {errorMessage}
-          </CAlert>
-        )}
+        {error && <CAlert color="danger">{errorMessageFormatter(error)}</CAlert>}
         <CRow className="justify-content-center">
           <CCol md={8}>
             <CCardGroup>
@@ -141,11 +125,6 @@ const Login = () => {
                       (CNAPS, OMSI, Impôts)`}
                       </p>
                     </div>
-                    {/* <Link to="/register">
-                      <CButton color="danger" className="mt-3 " active tabIndex={-1}>
-                        Register Now!
-                      </CButton>
-                    </Link> */}
                   </div>
                 </CCardBody>
               </CCard>

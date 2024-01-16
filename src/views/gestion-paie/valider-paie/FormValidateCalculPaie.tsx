@@ -22,13 +22,13 @@ const FormValidateCalculPaie = () => {
       const resp = await bulletinDePaieService.create({ id, data: bullettinDePaie })
       console.log(resp)
 
-      if (resp.status === 201) {
+      if (resp.data.message === 'Paie enregistrée') {
+        // Paie enregistrée
         dispatch(resetBulletinDePaie())
         dispatch(setModalClose())
         navigate(`/gestion-de-paie/historique/${id}`)
       }
     } catch (error) {
-      console.log(error)
       dispatch(setModalClose())
       throw error
     }

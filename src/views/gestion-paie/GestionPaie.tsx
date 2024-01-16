@@ -5,12 +5,22 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import ButtonLink from '@src/components/buttons/ButtonLink'
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
 import { resetBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import Loading from '@src/components/Loading'
+import { CAlert } from '@coreui/react'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 const GestionPaie: React.FC = () => {
-  const listeEmploye = useAppSelector((store) => store.employeesList.list)
-  const actifEmployes = listeEmploye.filter(
-    (employe: IEmploye) => employe.actif === EnumBoolean.OUI,
-  )
+  const {
+    list: listeEmploye,
+    loading: loadingListEmployee,
+    error,
+  } = useAppSelector((store) => store.employeesList)
+  const errorMessageFormatter = useErrorFormatter()
+
+  const actifEmployes = useMemo(() => {
+    return listeEmploye.filter((employe: IEmploye) => employe.actif === EnumBoolean.OUI)
+  }, [listeEmploye])
+
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(resetBulletinDePaie())
@@ -44,8 +54,13 @@ const GestionPaie: React.FC = () => {
     [columnHelper],
   )
 
+  if (loadingListEmployee === 'loading') {
+    return <Loading />
+  }
+
   return (
     <div>
+      {error && <CAlert color="danger">{errorMessageFormatter(error)}</CAlert>}
       <div>
         <ReusableTable data={actifEmployes} columns={cols} searchBar pagination />
       </div>
