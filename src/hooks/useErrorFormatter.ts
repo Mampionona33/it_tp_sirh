@@ -3,7 +3,6 @@ import { useCallback } from 'react'
 
 const useErrorFormatter = () => {
   const formatErrorMessage = useCallback((error: AxiosError): string => {
-    console.log(error)
     if (error.code) {
       switch (error.code) {
         case 'ERR_BAD_REQUEST':
