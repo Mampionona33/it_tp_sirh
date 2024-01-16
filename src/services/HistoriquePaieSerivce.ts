@@ -44,7 +44,7 @@ class HistoriquePaieService {
           },
         },
       )
-      console.log(resp)
+      // console.log(resp)
       return resp
     } catch (error) {
       throw error

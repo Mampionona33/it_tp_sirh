@@ -50,9 +50,9 @@ const HistoriquePaie = () => {
       if (isEmployeExist && id) {
         try {
           const resp = await dispatch(fetchHistoriquesPaie({ id, annee: anneeSectionneNumber }))
-          if (resp.meta.requestStatus === 'fulfilled') {
-            console.log(resp.payload)
-          }
+          // if (resp.meta.requestStatus === 'fulfilled') {
+          //   // console.log(resp.payload)
+          // }
         } catch (error) {
           throw error
         }
