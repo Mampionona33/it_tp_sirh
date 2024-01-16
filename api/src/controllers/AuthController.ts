@@ -25,7 +25,8 @@ class AuthController {
         res.status(200).send('Connecté')
       }, 5000)
     } else {
-      res.status(401).json({ success: false, message: 'Invalid credentials' })
+      // res.status(401).json({ success: false, message: 'Vérifier les identifications' })
+      res.send('Vérifier les identifications')
     }
   }
 

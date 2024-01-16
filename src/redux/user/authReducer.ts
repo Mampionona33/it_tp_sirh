@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { loggedUser } from './authActions'
+import { AxiosError } from 'axios'
 
 const initialState = {
   isAuthenticated: false,
@@ -21,11 +22,28 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(loggedUser.fulfilled, (state, action) => {
+        // console.log(action.payload.data)
+
+        /**
+         * Je dois faire cette modification car le backend envoie
+         * un statut 204 avec un message d'erreur 'Vérifier les identifications'
+         * pour indiquer que l'authentification est incorrecte.
+         */
+
+        if (action.payload.data === 'Vérifier les identifications') {
+          state.isAuthenticated = false
+          const error = new AxiosError()
+          error.message = action.payload.data
+          error.code = 'ERR_BAD_REQUEST'
+          state.error = error
+          state.loading = 'failed'
+        }
+
         if (action.payload.data === 'Connecté') {
           state.loading = 'succeeded'
           state.isAuthenticated = true
+          state.error = null
         }
-        state.error = null
       })
       .addCase(loggedUser.pending, (state) => {
         state.isAuthenticated = false

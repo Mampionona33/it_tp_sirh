@@ -50,9 +50,14 @@ const Login = () => {
   }
 
   useEffect(() => {
+    let mount = true
     if (loading === 'succeeded') {
       dispatch(setUserLoggedIn({ email: username, password: password }))
       navigate('/dashboard')
+    }
+
+    return () => {
+      mount = false
     }
   }, [loading, dispatch, navigate, username, password, error])
 
