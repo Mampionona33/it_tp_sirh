@@ -260,6 +260,7 @@ const ValidePaie = () => {
                     name="dateVirementBancaire"
                     type="date"
                     value={dateDeVirement}
+                    required
                     onChange={handleDateVirBancChange}
                   />
                 </div>
