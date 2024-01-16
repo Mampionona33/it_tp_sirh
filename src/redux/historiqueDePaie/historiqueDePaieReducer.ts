@@ -5,6 +5,7 @@ const initialState = {
   historiques: [],
   anneeSectionne: new Date().toString(),
   loading: 'idle',
+  error: null,
 }
 
 const historiqueDePaieSlice = createSlice({
@@ -21,12 +22,15 @@ const historiqueDePaieSlice = createSlice({
       .addCase(fetchHistoriquesPaie.fulfilled, (state, action: PayloadAction<any>) => {
         state.historiques = action.payload
         state.loading = 'succeeded'
+        state.error = null
       })
       .addCase(fetchHistoriquesPaie.pending, (state) => {
         state.loading = 'pending'
+        state.error = null
       })
-      .addCase(fetchHistoriquesPaie.rejected, (state) => {
+      .addCase(fetchHistoriquesPaie.rejected, (state, action) => {
         state.loading = 'failed'
+        state.error = action.error
       })
   },
 })

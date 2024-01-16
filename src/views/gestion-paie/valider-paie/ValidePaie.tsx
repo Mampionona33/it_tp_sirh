@@ -28,13 +28,20 @@ import { setModalOpen } from '@src/redux/modal/modalReducer'
 import useValidMonthFrMMMM from '@src/hooks/useValidMonth'
 import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import Loading from '@src/components/Loading'
+import { CAlert } from '@coreui/react'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
   const { salarie, dateDeVirement } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
-  const { loading: loadingListEmploye } = useAppSelector((store) => store.employeesList)
-  const { loading: loadingHours } = useAppSelector((store) => store.employeHours)
+  const { loading: loadingListEmploye, error: errorFetchingListEmployee } = useAppSelector(
+    (store) => store.employeesList,
+  )
+  const { loading: loadingHours, error: errorFetchingHours } = useAppSelector(
+    (store) => store.employeHours,
+  )
+  const formatErrorMessage = useErrorFormatter()
 
   const dispatch = useAppDispatch()
 
@@ -234,6 +241,9 @@ const ValidePaie = () => {
         <AppModal>
           <FormValidateCalculPaie />
         </AppModal>
+        {errorFetchingHours && (
+          <CAlert color="danger">{formatErrorMessage(errorFetchingHours)}</CAlert>
+        )}
         {isEmployeExist && isMonthValid ? (
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3 mt-2 mb-3">
@@ -272,7 +282,7 @@ const ValidePaie = () => {
             </div>
           </form>
         ) : (
-          <Page404 />
+          !errorFetchingHours && <Page404 />
         )}
       </div>
     </>

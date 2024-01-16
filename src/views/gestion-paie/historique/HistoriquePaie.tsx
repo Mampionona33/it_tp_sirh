@@ -19,6 +19,7 @@ import {
 } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import Loading from '@src/components/Loading'
+import { CAlert } from '@coreui/react'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
   actions?: React.FC[]
@@ -33,6 +34,7 @@ const HistoriquePaie = () => {
     loading: loadinHistoriquePaie,
     anneeSectionne,
     historiques,
+    error: errorFetchingHistorique,
   } = useAppSelector((store) => store.historiquePaie)
   const anneeSectionneNumber: number | undefined = new Date(anneeSectionne).getFullYear()
 
@@ -49,10 +51,7 @@ const HistoriquePaie = () => {
     const fetchHistory = async () => {
       if (isEmployeExist && id) {
         try {
-          const resp = await dispatch(fetchHistoriquesPaie({ id, annee: anneeSectionneNumber }))
-          // if (resp.meta.requestStatus === 'fulfilled') {
-          //   // console.log(resp.payload)
-          // }
+          await dispatch(fetchHistoriquesPaie({ id, annee: anneeSectionneNumber }))
         } catch (error) {
           throw error
         }
@@ -174,6 +173,9 @@ const HistoriquePaie = () => {
 
   return (
     <div>
+      {errorFetchingHistorique && (
+        <CAlert color="danger">${errorFetchingHistorique.message}</CAlert>
+      )}
       {isEmployeExist ? (
         <div>
           <div>

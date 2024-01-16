@@ -14,6 +14,7 @@ const initialState = {
   totalHferier: null,
   hsni130: null,
   hsni150: null,
+  error: null,
 }
 
 const employeeHoursSlice = createSlice({
@@ -30,12 +31,15 @@ const employeeHoursSlice = createSlice({
       .addCase(fetchHeureEmploye.fulfilled, (state, action) => {
         state.employeHours = action.payload
         state.loading = 'succeeded'
+        state.error = null
       })
-      .addCase(fetchHeureEmploye.rejected, (state) => {
+      .addCase(fetchHeureEmploye.rejected, (state, action) => {
         state.loading = 'failed'
+        state.error = action.error
       })
       .addCase(fetchHeureEmploye.pending, (state) => {
         state.loading = 'loading'
+        state.error = null
       })
   },
 })
