@@ -12,7 +12,7 @@ const initialState: IDnsState = {
   periodSelectionne: 't1',
   anneeSelectionne: new Date().getFullYear(),
   dnsData: null,
-  loading: 'loading',
+  loading: 'idle',
 }
 
 const dnsSlice = createSlice({
