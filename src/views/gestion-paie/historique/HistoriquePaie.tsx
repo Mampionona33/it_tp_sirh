@@ -87,11 +87,17 @@ const HistoriquePaie = () => {
     })
 
     const mergeWithHistoricalData = (row) => {
-      const matchingHistoricalData = historiques.find((data) => {
-        return Number(new Date(data.annee).getFullYear()) === selectedYear && data.mois === row.mois
-      })
+      if (historiques) {
+        const matchingHistoricalData = historiques.find((data) => {
+          return (
+            Number(new Date(data.annee).getFullYear()) === selectedYear && data.mois === row.mois
+          )
+        })
 
-      return matchingHistoricalData ? matchingHistoricalData : row
+        return matchingHistoricalData ? matchingHistoricalData : row
+      } else {
+        return row
+      }
     }
 
     let rows = []
