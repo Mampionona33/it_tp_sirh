@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
+import AxiosErrorHandler from './AxiosErrorHandler'
 
 export interface IDnsFetchAllProps {
   annee: number
@@ -26,7 +27,14 @@ class DnsService {
       // console.log(this.resp) change
       return this.resp
     } catch (error) {
-      throw error
+      console.log(error, typeof error)
+      if (axios.isAxiosError(error)) {
+        AxiosErrorHandler.handle(error)
+      }
+
+      const newError = error as AxiosError
+
+      throw newError
     }
   }
 }

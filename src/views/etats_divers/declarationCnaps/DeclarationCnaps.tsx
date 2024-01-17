@@ -6,6 +6,9 @@ import { IDnsState, setDns } from '@src/redux/dns/dnsReducers'
 import CustomSection from '@src/components/CustomSection'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import { fetchDnsData } from '@src/redux/dns/dnsActions'
+import { CAlert } from '@coreui/react'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
+import axios from 'axios'
 
 const Body = () => {
   const dispatch = useAppDispatch()
@@ -177,8 +180,11 @@ const Body = () => {
 }
 
 const DeclarationCnaps = () => {
+  const { error: errorLoadingDns } = useAppSelector((state) => state.dns)
+  const formatErrorMessage = useErrorFormatter()
   return (
     <div>
+      {errorLoadingDns && <CAlert color="danger">{formatErrorMessage(errorLoadingDns)}</CAlert>}
       <CustomSection body={<Body />} title="Déclaration nominative de salaires" />
     </div>
   )
