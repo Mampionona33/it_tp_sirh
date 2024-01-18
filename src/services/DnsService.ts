@@ -39,5 +39,5 @@ class DnsService {
   }
 }
 
-const InstaceDnsService = new DnsService()
-export default InstaceDnsService
+const dnsService = new DnsService()
+export default dnsService

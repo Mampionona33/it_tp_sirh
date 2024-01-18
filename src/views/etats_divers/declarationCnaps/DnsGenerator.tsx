@@ -6,7 +6,6 @@ import MonthWorksheet from './MonthWorksheet'
 import * as FileSaver from 'file-saver'
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
 import { Store } from 'redux'
-import Loading from '@src/components/loadings/Loading'
 import InlineLoading from '@src/components/loadings/InlineLoading'
 
 class DnsGenerator extends Component {

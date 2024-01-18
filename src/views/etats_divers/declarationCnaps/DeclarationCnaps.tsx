@@ -8,13 +8,16 @@ import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import { fetchDnsData } from '@src/redux/dns/dnsActions'
 import { CAlert } from '@coreui/react'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
-import axios from 'axios'
+import { useQuery } from '@tanstack/react-query'
+import Loading from '@src/components/loadings/Loading'
+import dnsService from '@src/services/DnsService'
 
 const Body = () => {
   const dispatch = useAppDispatch()
   const { anneeSelectionne: annee, periodSelectionne: periode } = useAppSelector(
     (store) => store.dns,
   )
+
   const customSelectStyles = {
     control: (provided) => ({
       ...provided,
@@ -180,11 +183,22 @@ const Body = () => {
 }
 
 const DeclarationCnaps = () => {
-  const { error: errorLoadingDns } = useAppSelector((state) => state.dns)
-  const formatErrorMessage = useErrorFormatter()
+  const { anneeSelectionne: annee, periodSelectionne: periode } = useAppSelector(
+    (state) => state.dns,
+  )
+
+  const { isPending, error, data, isError } = useQuery({
+    queryKey: ['dns'],
+    queryFn: () => dnsService.fetch({ annee, periode }),
+  })
+
+  isError && console.log(error.stack)
+
+  if (isPending) return <Loading />
+
   return (
     <div>
-      {errorLoadingDns && <CAlert color="danger">{formatErrorMessage(errorLoadingDns)}</CAlert>}
+      {isError && <CAlert color="danger">{error.message}</CAlert>}
       <CustomSection body={<Body />} title="Déclaration nominative de salaires" />
     </div>
   )

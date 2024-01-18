@@ -55,7 +55,7 @@ router.route('/bulletin-de-paie/ajout/:id').post(bulletinDePaieController.create
 router.route('/historique-paie/:id/:annee').get(historiquePaieController.getAllByIdEmployeAndDate)
 router.route('/historique-paie/:id/:annee/:mois').get(historiquePaieController.getDetailsById)
 
-// router.route('/dns/:annee/:periode').get(dnsControllers.fetchDns)
+router.route('/dns/:annee/:periode').get(dnsControllers.fetchDns)
 
 const PORT = process.env.PORT || 8000
 

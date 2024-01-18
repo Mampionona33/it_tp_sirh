@@ -3,9 +3,9 @@ import { BrowserRouter, Route, Routes, Navigate, HashRouter } from 'react-router
 import PrivateRoute from './PrivateRoute'
 import './scss/style.scss'
 import NotificationStack from './components/NotificationStack/NotificationStack'
-import { QueryClient, QueryClientProvider } from 'react-query'
 import { store } from './redux/store'
 import lazyWithRetry from './utils/lazyWithRetry'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 const loading = (
   <div className="pt-3 text-center">
     <div className="sk-spinner sk-spinner-pulse"></div>
@@ -26,8 +26,10 @@ class App extends Component {
     super(props)
     this.pathname = window.location.pathname
     this.isAuth = store.getState().auth.isAuthenticated
+
     this.queryClient = new QueryClient()
   }
+
   render() {
     // ajout comment
     return (
