@@ -27,7 +27,7 @@ class DnsService {
       // console.log(this.resp) change
       return this.resp
     } catch (error) {
-      console.log(error, typeof error)
+      // console.log(error, typeof error)
       if (axios.isAxiosError(error)) {
         AxiosErrorHandler.handle(error)
       }

@@ -187,12 +187,10 @@ const DeclarationCnaps = () => {
     (state) => state.dns,
   )
 
-  const { isPending, error, data, isError } = useQuery({
+  const { isPending, error, isError } = useQuery({
     queryKey: ['dns'],
     queryFn: () => dnsService.fetch({ annee, periode }),
   })
-
-  isError && console.log(error.stack)
 
   if (isPending) return <Loading />
 
