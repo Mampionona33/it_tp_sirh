@@ -7,7 +7,12 @@ import * as FileSaver from 'file-saver'
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
 import { Store } from 'redux'
 import InlineLoading from '@src/components/loadings/InlineLoading'
-import { IDnsGeneratorRootProps } from '@src/interfaces/interfaceDnsGenerator'
+import {
+  IDnsGeneratorEmployeurData,
+  IDnsGeneratorRootProps,
+  IDnsGeneratorTravailleurProps,
+} from '@src/interfaces/interfaceDnsGenerator'
+import { IDnsState, setDns } from '@src/redux/dns/dnsReducers'
 
 class DnsGenerator extends Component {
   private store: Store
@@ -21,6 +26,8 @@ class DnsGenerator extends Component {
   private mois3List: string[]
   private dnsData: IDnsGeneratorRootProps | null
   private loadingDnsData: string
+  private anneeSelectionne: number
+  private periodSelectionne: string
   constructor(props) {
     super(props)
     this.wb = new ExcelJS.Workbook()
@@ -36,6 +43,8 @@ class DnsGenerator extends Component {
 
     this.store = store
     this.dnsData = store.getState().dns.dnsData
+    this.anneeSelectionne = store.getState().dns.anneeSelectionne
+    this.periodSelectionne = store.getState().dns.periodSelectionne
     this.loadingDnsData = store.getState().dns.loading
   }
 
@@ -53,12 +62,22 @@ class DnsGenerator extends Component {
     })
   }
 
+  private getEmployeurData = (): IDnsGeneratorEmployeurData[] | [] => {
+    let data: IDnsGeneratorEmployeurData[] = []
+
+    if (this.dnsData.data[0].employeur.length > 0) {
+      data = this.dnsData.data[0].employeur
+    }
+
+    return data
+  }
+
   private isSalariesDataExist = (): boolean => {
     return this.dnsData !== null && this.dnsData.data[0].travailleurs.length > 0
   }
 
-  private getListSalarieMois1 = () => {
-    let listSalarieMois1 = []
+  private getListSalarieMois1 = (): IDnsGeneratorTravailleurProps[] => {
+    let listSalarieMois1: IDnsGeneratorTravailleurProps[] = []
     if (this.isSalariesDataExist()) {
       listSalarieMois1 = this.dnsData.data[0].travailleurs.filter(
         (salarieData) =>
@@ -69,8 +88,8 @@ class DnsGenerator extends Component {
     return listSalarieMois1
   }
 
-  private getListSalarieMois2 = () => {
-    let listSalarieMois2 = []
+  private getListSalarieMois2 = (): IDnsGeneratorTravailleurProps[] => {
+    let listSalarieMois2: IDnsGeneratorTravailleurProps[] = []
     if (this.isSalariesDataExist()) {
       listSalarieMois2 = this.dnsData.data[0].travailleurs.filter(
         (salarieData) =>
@@ -81,8 +100,8 @@ class DnsGenerator extends Component {
     return listSalarieMois2
   }
 
-  private getListSalarieMois3 = () => {
-    let listSalarieMois3 = []
+  private getListSalarieMois3 = (): IDnsGeneratorTravailleurProps[] => {
+    let listSalarieMois3: IDnsGeneratorTravailleurProps[] = []
     if (this.isSalariesDataExist()) {
       listSalarieMois3 = this.dnsData.data[0].travailleurs.filter(
         (salarieData) =>
@@ -93,14 +112,69 @@ class DnsGenerator extends Component {
     return listSalarieMois3
   }
 
-  render() {
-    const salarieMois1 = this.getListSalarieMois1()
-    const salarieMois2 = this.getListSalarieMois2()
-    const salarieMois3 = this.getListSalarieMois3()
+  private formatPeriod = (): string => {
+    let periode = ''
+    switch (this.periodSelectionne) {
+      case 't1':
+        periode = '01-' + String(this.anneeSelectionne)
+        break
+      case 't2':
+        periode = '02-' + String(this.anneeSelectionne)
+        break
+      case 't3':
+        periode = '03-' + String(this.anneeSelectionne)
+        break
+      case 't4':
+        periode = '04-' + String(this.anneeSelectionne)
+        break
+      default:
+        break
+    }
+    return periode
+  }
 
-    console.log(salarieMois1)
-    console.log(salarieMois2)
-    console.log(salarieMois3)
+  private handelDownload = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    const employeurData = this.getEmployeurData()
+
+    const periode = this.formatPeriod()
+
+    const listSalarieMois1 = this.getListSalarieMois1()
+    const listSalarieMois2 = this.getListSalarieMois2()
+    const listSalarieMois3 = this.getListSalarieMois3()
+
+    this.mois1WorkSheet.setTravailleurData(listSalarieMois1)
+    this.mois2WorkSheet.setTravailleurData(listSalarieMois2)
+    this.mois3WorkSheet.setTravailleurData(listSalarieMois3)
+
+    this.employeurSheet.setPeriod(periode)
+    this.employeurSheet.setEmployeurData(employeurData)
+
+    this.mois1WorkSheet.createSheetContent()
+    this.mois2WorkSheet.createSheetContent()
+    this.mois3WorkSheet.createSheetContent()
+    this.employeurSheet.createSheetContent()
+
+    this.wb.xlsx.writeBuffer().then((data) => {
+      const blob = new Blob([data], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      })
+      FileSaver.saveAs(
+        blob,
+        `declaration_CNAPS_${String(this.periodSelectionne).toUpperCase()}_${String(
+          this.anneeSelectionne,
+        )}.xlsx`,
+      )
+    })
+
+    this.store.dispatch(setDns({ loading: 'idle', dnsData: null } as IDnsState))
+
+    this.mois1WorkSheet.resetData()
+    this.mois2WorkSheet.resetData()
+    this.mois3WorkSheet.resetData()
+  }
+
+  render() {
     return (
       <>
         <div className="flex items-center">
@@ -113,6 +187,7 @@ class DnsGenerator extends Component {
               label="Télécharger"
               variant={ButtonWithIconVariant.Secondary}
               disabled={this.dnsData === null}
+              onClick={this.handelDownload}
             />
           )}
         </div>

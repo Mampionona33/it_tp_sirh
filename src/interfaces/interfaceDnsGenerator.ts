@@ -8,14 +8,14 @@ export interface IDnsGeneratorRootProps {
 }
 
 export interface IDnsGeneratorDataProps {
-  travailleurs: Travailleur[]
-  employeur: Employeur[]
+  travailleurs: IDnsGeneratorTravailleurProps[]
+  employeur: IDnsGeneratorEmployeurData[]
 }
 
-export interface Travailleur {
+export interface IDnsGeneratorTravailleurProps {
   id: number
   annee: string
-  trimestre: string
+  trimestre: 't1' | 't2' | 't3' | 't4'
   mois: string
   matricule: string
   nom: string
@@ -36,7 +36,7 @@ export interface Travailleur {
   updated_at: any
 }
 
-export interface Employeur {
+export interface IDnsGeneratorEmployeurData {
   id: number
   nom: string
   numero_rcs: string
