@@ -51,6 +51,8 @@ class DnsGenerator extends Component {
   componentDidMount(): void {
     this.store.subscribe(() => {
       this.dnsData = store.getState().dns.dnsData
+      this.anneeSelectionne = store.getState().dns.anneeSelectionne
+      this.periodSelectionne = store.getState().dns.periodSelectionne
       this.loadingDnsData = store.getState().dns.loading
     })
   }
@@ -58,6 +60,8 @@ class DnsGenerator extends Component {
   componentDidUpdate(): void {
     this.store.subscribe(() => {
       this.dnsData = store.getState().dns.dnsData
+      this.anneeSelectionne = store.getState().dns.anneeSelectionne
+      this.periodSelectionne = store.getState().dns.periodSelectionne
       this.loadingDnsData = store.getState().dns.loading
     })
   }
@@ -147,13 +151,13 @@ class DnsGenerator extends Component {
     this.mois2WorkSheet.setTravailleurData(listSalarieMois2)
     this.mois3WorkSheet.setTravailleurData(listSalarieMois3)
 
-    this.employeurSheet.setPeriod(periode)
-    this.employeurSheet.setEmployeurData(employeurData)
+    // this.employeurSheet.setPeriod(periode)
+    // this.employeurSheet.setEmployeurData(employeurData)
 
     this.mois1WorkSheet.createSheetContent()
     this.mois2WorkSheet.createSheetContent()
     this.mois3WorkSheet.createSheetContent()
-    this.employeurSheet.createSheetContent()
+    // this.employeurSheet.createSheetContent()
 
     this.wb.xlsx.writeBuffer().then((data) => {
       const blob = new Blob([data], {
