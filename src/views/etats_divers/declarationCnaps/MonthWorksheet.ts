@@ -87,7 +87,7 @@ class MonthWorksheet {
       'ref_employeur',
       'date_embauche',
       'date_depart',
-      'salaire_de_base',
+      'salaire_du_mois',
       'avantage_du_mois',
       'temps_presence',
       'non_plafonne',
@@ -186,7 +186,9 @@ class MonthWorksheet {
 
       for (let i = 0; i < formatedData.length; i++) {
         const rowNumber = i + 3
-        this.worksheet.getCell(`${colName}${rowNumber}`).value = formatedData[i][dataKey]
+        const cellValue = formatedData[i][dataKey]
+        // console.table([dataKey, colName, rowNumber, cellValue])
+        this.worksheet.getCell(`${colName}${rowNumber}`).value = cellValue
       }
     }
   }
