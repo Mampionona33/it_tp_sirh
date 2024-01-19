@@ -3,7 +3,7 @@
 // }
 
 export interface IDnsGeneratorDataProps {
-  travailleurs: IDnsGeneratorTravailleurProps[]
+  travailleur: IDnsGeneratorTravailleurProps[]
   employeur: IDnsGeneratorEmployeurData[]
 }
 

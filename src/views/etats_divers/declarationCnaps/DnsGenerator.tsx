@@ -73,13 +73,13 @@ class DnsGenerator extends Component {
   }
 
   private isSalariesDataExist = (): boolean => {
-    return this.dnsData !== null && this.dnsData.travailleurs.length > 0
+    return this.dnsData !== null
   }
 
   private getListSalarieMois1 = (): IDnsGeneratorTravailleurProps[] => {
     let listSalarieMois1: IDnsGeneratorTravailleurProps[] = []
     if (this.isSalariesDataExist()) {
-      listSalarieMois1 = this.dnsData.travailleurs.filter(
+      listSalarieMois1 = this.dnsData.travailleur.filter(
         (salarieData) =>
           this.mois1List.includes(salarieData.mois) &&
           this.store.getState().dns.periodSelectionne === salarieData.trimestre,
@@ -91,7 +91,7 @@ class DnsGenerator extends Component {
   private getListSalarieMois2 = (): IDnsGeneratorTravailleurProps[] => {
     let listSalarieMois2: IDnsGeneratorTravailleurProps[] = []
     if (this.isSalariesDataExist()) {
-      listSalarieMois2 = this.dnsData.travailleurs.filter(
+      listSalarieMois2 = this.dnsData.travailleur.filter(
         (salarieData) =>
           this.mois2List.includes(salarieData.mois) &&
           this.store.getState().dns.periodSelectionne === salarieData.trimestre,
@@ -103,7 +103,7 @@ class DnsGenerator extends Component {
   private getListSalarieMois3 = (): IDnsGeneratorTravailleurProps[] => {
     let listSalarieMois3: IDnsGeneratorTravailleurProps[] = []
     if (this.isSalariesDataExist()) {
-      listSalarieMois3 = this.dnsData.travailleurs.filter(
+      listSalarieMois3 = this.dnsData.travailleur.filter(
         (salarieData) =>
           this.mois3List.includes(salarieData.mois) &&
           this.store.getState().dns.periodSelectionne === salarieData.trimestre,
