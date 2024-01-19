@@ -1,11 +1,6 @@
-export interface IDnsGeneratorRootProps {
-  data: IDnsGeneratorDataProps[]
-  status: number
-  statusText: string
-  headers?: IDnsHeadersProps
-  config?: IDnsConfigProps
-  request?: Request
-}
+// export interface IDnsGeneratorRootProps {
+//   data: IDnsGeneratorDataProps[]
+// }
 
 export interface IDnsGeneratorDataProps {
   travailleurs: IDnsGeneratorTravailleurProps[]
@@ -48,46 +43,6 @@ export interface IDnsGeneratorEmployeurData {
   telephone: string
   created_at: any
   updated_at: any
-}
-
-export interface IDnsHeadersProps {
-  'content-length': string
-  'content-type': string
-}
-
-export interface IDnsConfigProps {
-  transitional: Transitional
-  adapter: string[]
-  transformRequest: any[]
-  transformResponse: any[]
-  timeout: number
-  xsrfCookieName: string
-  xsrfHeaderName: string
-  maxContentLength: number
-  maxBodyLength: number
-  env: Env
-  headers: Headers2
-  auth: Auth
-  method: string
-  url: string
-}
-
-export interface Transitional {
-  silentJSONParsing: boolean
-  forcedJSONParsing: boolean
-  clarifyTimeoutError: boolean
-}
-
-export interface Env {}
-
-export interface Headers2 {
-  Accept: string
-  Authorization: string
-}
-
-export interface Auth {
-  username: string
-  password: string
 }
 
 export interface Request {}

@@ -2,11 +2,12 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { fetchDnsData } from './dnsActions'
 import { BaseReduxState } from '@src/interfaces/interfaceDeBaseReduxState'
 import { AxiosError } from 'axios'
+import { IDnsGeneratorDataProps } from '@src/interfaces/interfaceDnsGenerator'
 
 export interface IDnsState extends BaseReduxState {
   periodSelectionne: string
   anneeSelectionne: number
-  dnsData: any
+  dnsData: IDnsGeneratorDataProps | null
 }
 
 const initialState: IDnsState = {
@@ -29,7 +30,7 @@ const dnsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchDnsData.fulfilled, (state, action) => {
-        state.dnsData = action.payload
+        state.dnsData = action.payload.data
         state.loading = 'succeeded'
         state.error = null
       })

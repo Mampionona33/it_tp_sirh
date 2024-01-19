@@ -18,6 +18,8 @@ const Body = () => {
     (store) => store.dns,
   )
 
+  // console.log('dnsData', dnsData)
+
   const customSelectStyles = {
     control: (provided) => ({
       ...provided,

@@ -18,7 +18,7 @@ class DnsControllers {
     })
 
     setTimeout(() => {
-      res.status(200).json(data)
+      res.status(200).json(data[0])
     }, 3000)
   }
 }
