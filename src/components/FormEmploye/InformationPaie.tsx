@@ -43,14 +43,6 @@ const InformationPaie = () => {
       type: 'text',
       placeholder: 'Numéros cnaps',
     },
-    // {
-    //   id: 'num_osie',
-    //   label: 'Numéros OSIE',
-    //   value: formEmploye.num_osie,
-    //   name: 'num_osie',
-    //   type: 'text',
-    //   placeholder: 'Numéros OSIE',
-    // },
   ]
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
