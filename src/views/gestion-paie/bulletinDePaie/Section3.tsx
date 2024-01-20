@@ -241,7 +241,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
     cnaps,
     osie,
     tauxOsie,
-    valAllocationEnfantsEmploye,
+    valReductionChargeEnfants,
     irsaAPayer,
     salaireNet,
     avance,
@@ -249,6 +249,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
     salaireBrut,
     dateDeVirement,
   } = bodyData
+
   const assiduite = formatNumberWithSpaces(primeEtGratification.assiduite) || '-'
   const excellence = formatNumberWithSpaces(primeEtGratification.excellence) || '-'
   const totalDeductionRender = formatNumberWithSpaces(totalDeduction) || '-'
@@ -265,8 +266,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
   const tauxOsieRender = `${formatNumberWithSpaces(tauxOsie * 100)}%`
   const irsaAPayerRender = formatNumberWithSpaces(irsaAPayer) || '-'
   const salaireNetRender = formatNumberWithSpaces(salaireNet) || '-'
-  const valAllocationEnfantsEmployeRender =
-    formatNumberWithSpaces(valAllocationEnfantsEmploye) || '-'
+  const valReductionChargeFamilialeRender = formatNumberWithSpaces(valReductionChargeEnfants) || '-'
   const avanceRender = formatNumberWithSpaces(avance) || '-'
   const salaireNetAPayerRender = formatNumberWithSpaces(salaireNetAPayer) || '-'
   const totalRetenu = formatNumberWithSpaces(totalDeduction + cnaps + osie + irsaAPayer) || '-'
@@ -286,7 +286,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
         avantages.vehicule +
         avantages.logement +
         avantages.autresAvantages +
-        valAllocationEnfantsEmploye +
+        valReductionChargeEnfants +
         rappel,
     ) || '-'
 
@@ -325,7 +325,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
         <Row
           cell1="Cotisation sociale"
           styleCell1={[styles.textBold]}
-          cell7={valAllocationEnfantsEmployeRender}
+          cell7={valReductionChargeFamilialeRender}
         />
         <Row cell1="Aide au logement" styleCell1={[styles.textBold]} />
         <Row

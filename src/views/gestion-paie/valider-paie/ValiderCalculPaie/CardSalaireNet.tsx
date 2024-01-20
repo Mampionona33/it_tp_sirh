@@ -20,12 +20,17 @@ const Body = () => {
     salaireNet,
     plafondSME,
     tauxCnaps,
+    tauxOsie,
+    salaireDeBase,
+    valMinIrsaParTranche,
+    valReductionChargeEnfants,
   } = useAppSelector((store) => store.bulletinDePaie)
 
   const dispatch = useAppDispatch()
 
   const updateBulletinDePaie = useCallback(() => {
     const calculPaie = new CalculPaie_v2()
+    calculPaie.setSalaireBase(salaireDeBase)
     calculPaie.setSalaireBrut(salaireBrut)
 
     const cnaps = calculPaie.calulateCnaps({
@@ -33,7 +38,7 @@ const Body = () => {
       plafondSME: plafondSME || 1910400,
     })
     const osie = calculPaie.calculOsie({
-      taux: 0.01,
+      taux: tauxOsie || 0.01,
     })
     const baseIrsa = calculPaie.calculBaseIrsa({
       cnaps: cnaps,
@@ -43,9 +48,14 @@ const Body = () => {
     })
     const baseIrsaArrondi = calculPaie.calculateBaseIrsaArrondi(baseIrsa)
 
-    const irsaAPayer = calculPaie.calculateIrsaParTranche(baseIrsaArrondi)
+    const irsaAPayer = calculPaie.calculateIrsaParTranche(baseIrsaArrondi, valMinIrsaParTranche)
 
-    const salaireNet = calculPaie.caluclateSalaireNet({ osie, cnaps, irsaAPayer })
+    const salaireNet = calculPaie.caluclateSalaireNet({
+      osie,
+      cnaps,
+      irsaAPayer,
+      valReductionChargeEnfants,
+    })
 
     dispatch(
       setBulletinDePaie({
@@ -57,7 +67,18 @@ const Body = () => {
         salaireNet: salaireNet,
       } as IBulletinDePaieProps),
     )
-  }, [plafondSME, salaireBrut, tauxCnaps, valHsni130, valHsni150, dispatch])
+  }, [
+    plafondSME,
+    salaireBrut,
+    tauxCnaps,
+    valHsni130,
+    valHsni150,
+    salaireDeBase,
+    valMinIrsaParTranche,
+    valReductionChargeEnfants,
+    tauxOsie,
+    dispatch,
+  ])
 
   useEffect(() => {
     updateBulletinDePaie()
@@ -72,7 +93,7 @@ const Body = () => {
         </div>
         <CardRow className="border-b border-b-customBlue-100" cell1="cnaps" cell3={cnaps} />
         <CardRow className="border-b border-b-customBlue-100" cell1="osie" cell3={osie} />
-        <CardRow className="border-b border-b-customBlue-100" cell3={salaireBrut + cnaps + osie} />
+        <CardRow className="border-b border-b-customBlue-100" cell3={salaireBrut - cnaps - osie} />
         <CardRow className="border-b border-b-customBlue-100" cell1="HSNI 130" cell3={valHsni130} />
         <CardRow className="border-b border-b-customBlue-100" cell1="HSNI 150" cell3={valHsni150} />
         <CardRow className="border-b border-b-customBlue-100" cell1="Base Irsa" cell3={baseIrsa} />
@@ -85,6 +106,11 @@ const Body = () => {
           className="border-b border-b-customBlue-100"
           cell1="IRSA  - PAR TRANCHE"
           cell3={irsaAPayer}
+        />{' '}
+        <CardRow
+          className="border-b border-b-customBlue-100"
+          cell1="Réduction par enfant"
+          cell3={valReductionChargeEnfants}
         />
         <CardRow
           cell1="Salaire net"

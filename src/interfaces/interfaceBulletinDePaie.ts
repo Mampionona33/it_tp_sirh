@@ -11,11 +11,11 @@ export interface IBulletinDePaieProps {
     rcs: string
   }
   salarie?: IEmploye
-  montantAllocationParEnfant?: number
+  montanReductionChargeParEnfant?: number
   dateDeVirement: string | number
   salaireDeBase: number
   totalHn: number
-  valAllocationEnfantsEmploye?: number
+  valReductionChargeEnfants: number
   totalHs: number
   totalHs130: number
   totalHs150: number
@@ -59,11 +59,8 @@ export interface IBulletinDePaieProps {
   deductions?: IDeductionProps
   avantages?: IAvantageProps
   totalAvantages?: number
-  // ajoutSalaire?: []
-  // retenuSalaire?: []
-  // retenuSalaireBrut?: []
-  // cotisations?: []
   totalHTravailEffectif?: number
+  valMinIrsaParTranche: number // ajout
   tableauHsHebdo?: []
   tableauHs130Hebdo?: []
   tableauHs150Hebdo?: []

@@ -59,7 +59,7 @@ export interface calculSalaireNetAPayerParams {
 
 export interface calculAllocationParams {
   salarie: IEmploye
-  montantAllocationParEnfant: number
+  montanReductionChargeParEnfant: number
 }
 
 export interface caclulBaseCnapsParams {
@@ -70,6 +70,12 @@ export interface calculSalaireNetParams {
   cnaps: number
   osie: number
   irsaAPayer: number
+  valReductionChargeEnfants: number
+}
+
+export interface ICalculateIrsaParTrancheParams {
+  baseIrsaArrondi: number
+  valMinIrsaParTranche: number
 }
 
 class CalculPaie_v2 {
@@ -262,7 +268,11 @@ class CalculPaie_v2 {
   }
 
   public calculOsie(params: calculOsieParams): number {
-    return this.roundToTwoDecimal(this.salaireBrut * params.taux)
+    let osie = 0
+    if (this.salaireBase && params.taux) {
+      osie = this.roundToTwoDecimal(this.salaireBase * params.taux)
+    }
+    return osie
   }
 
   /**
@@ -308,7 +318,7 @@ class CalculPaie_v2 {
   private isTranche_3(baseIrsaArrondi: number): boolean {
     return baseIrsaArrondi >= 500001 && baseIrsaArrondi <= 600000
   }
-  public calculateIrsaParTranche(baseIrsaArrondi: number): number {
+  public calculateIrsaParTranche(baseIrsaArrondi: number, valMinIrsaParTranche: number): number {
     let irsaParTranche = 0
     if (this.isTranche_1(baseIrsaArrondi)) {
       irsaParTranche = (baseIrsaArrondi - 350000) * 0.05
@@ -320,8 +330,8 @@ class CalculPaie_v2 {
       irsaParTranche =
         50000 * 0.05 + 100000 * 0.1 + 100000 * 0.15 + (baseIrsaArrondi - 600001) * 0.2
     }
-    if (irsaParTranche < 2000) {
-      irsaParTranche = 2000
+    if (irsaParTranche < valMinIrsaParTranche) {
+      irsaParTranche = valMinIrsaParTranche
     }
     return irsaParTranche
   }
@@ -336,11 +346,11 @@ class CalculPaie_v2 {
    * @return {number} The calculated net salary.
    */
   public caluclateSalaireNet(params: calculSalaireNetParams): number {
-    const { cnaps, irsaAPayer, osie } = params
+    const { cnaps, irsaAPayer, osie, valReductionChargeEnfants } = params
     let salaireNet = 0
 
     if (this.salaireBrut) {
-      salaireNet = this.salaireBrut - (cnaps + irsaAPayer + osie)
+      salaireNet = this.salaireBrut - (cnaps + irsaAPayer + osie + valReductionChargeEnfants)
     }
 
     return salaireNet
@@ -409,11 +419,11 @@ class CalculPaie_v2 {
    * @param {calculAllocationParams} params - The parameters for the calculation.
    * @return {number} The calculated allocation.
    */
-  public calculateAllocationFamilliale(params: calculAllocationParams): number {
+  public calculateReductionChargeFamiliale(params: calculAllocationParams): number {
     let allocation = 0
     let nombreEnfantEligible = this.calculateNombreEnfantEligible(params.salarie)
 
-    allocation = params.montantAllocationParEnfant * nombreEnfantEligible
+    allocation = params.montanReductionChargeParEnfant * nombreEnfantEligible
     return allocation
   }
 

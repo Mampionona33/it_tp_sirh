@@ -15,8 +15,8 @@ const Body = () => {
     salarie,
     primeEtGratification,
     indemnites,
-    montantAllocationParEnfant,
-    valAllocationEnfantsEmploye,
+    montanReductionChargeParEnfant,
+    valReductionChargeEnfants,
     avantages,
     deductions,
     rappel,
@@ -26,9 +26,9 @@ const Body = () => {
   const updateBulletinDePaie = useCallback(() => {
     const calculPaie = new CalculPaie_v2()
 
-    const allocationFamille = calculPaie.calculateAllocationFamilliale({
+    const allocationFamille = calculPaie.calculateReductionChargeFamiliale({
       salarie: salarie,
-      montantAllocationParEnfant: montantAllocationParEnfant,
+      montanReductionChargeParEnfant: montanReductionChargeParEnfant,
     })
 
     const salaireNetAPayer = calculPaie.calculSalaireNetAPayer({
@@ -51,14 +51,14 @@ const Body = () => {
     dispatch(
       setBulletinDePaie({
         salaireNetAPayer: salaireNetAPayer,
-        valAllocationEnfantsEmploye: allocationFamille,
+        valReductionChargeEnfants: allocationFamille,
       } as IBulletinDePaieProps),
     )
   }, [
     salaireNet,
     avance,
     salarie,
-    montantAllocationParEnfant,
+    montanReductionChargeParEnfant,
     dispatch,
     primeEtGratification,
     indemnites,
@@ -123,7 +123,7 @@ const Body = () => {
       <CardRow
         className="border-b border-b-customBlue-100"
         cell1="Allocation Familliale"
-        cell3={valAllocationEnfantsEmploye}
+        cell3={valReductionChargeEnfants}
       />
       <CardRow
         className="border-b border-b-customBlue-100"

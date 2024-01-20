@@ -1098,7 +1098,16 @@
           "prenom": "Bambini",
           "date_naissance": "2023-11-15",
           "lieu_naissance": "Petronum",
-          "genre_enfant": "masculin",
+          "genre_enfant": "feminin",
+          "certificat": "vie"
+        },
+        {
+          "id": 2,
+          "nom": "Rosa",
+          "prenom": "Garcya",
+          "date_naissance": "2023-02-02",
+          "lieu_naissance": "Antananarivo",
+          "genre_enfant": "feminin",
           "certificat": "vie"
         }
       ],
