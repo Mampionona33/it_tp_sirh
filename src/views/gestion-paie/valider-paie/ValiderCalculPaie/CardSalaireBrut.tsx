@@ -28,6 +28,7 @@ const Body = () => {
     totalHFerie,
     salaireBrut,
     primeEtGratification,
+    indemnites,
   } = useAppSelector((store) => store.bulletinDePaie)
   const dispatch = useAppDispatch()
 
@@ -39,6 +40,11 @@ const Body = () => {
     return () => {
       const calculPaie = new CalculPaie_v2()
       calculPaie.setSalaireBase(salaireDeBase)
+
+      const totalIndemnite: number = Object.values(indemnites).reduce(
+        (acc, currentValue) => acc + currentValue,
+      )
+
       const salaireBrut = calculPaie.calculateSalaireBrut({
         valHdim,
         valHs30,
@@ -50,6 +56,7 @@ const Body = () => {
         valHsni150,
         primeAssiduite: primeEtGratification.assiduite,
         primeExcellence: primeEtGratification.excellence,
+        totalIndemnite,
       })
 
       const baseCnaps = calculPaie.calculBaseCnaps({
@@ -70,6 +77,7 @@ const Body = () => {
     valHsni130,
     valHsni150,
     primeEtGratification,
+    indemnites,
   ])
 
   useEffect(() => {
@@ -138,6 +146,11 @@ const Body = () => {
       <CardRow
         cell1="Autres primes"
         cell3={primeEtGratification.excellence}
+        className="border-b border-b-customBlue-100"
+      />
+      <CardRow
+        cell1="Total indémnités"
+        cell3={Object.values(indemnites).reduce((acc, currentValue) => acc + currentValue)}
         className="border-b border-b-customBlue-100"
       />
 

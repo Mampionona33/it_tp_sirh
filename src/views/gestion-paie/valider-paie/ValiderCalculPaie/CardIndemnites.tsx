@@ -41,7 +41,7 @@ const Body = () => {
         required
         id="transport"
         name="transport"
-        label="Transport"
+        label="Indemnités"
         value={indemnites.transport}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
