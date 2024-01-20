@@ -8,26 +8,47 @@ import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 const Body = () => {
   const dispatch = useAppDispatch()
   const { avance } = useAppSelector((store) => store.bulletinDePaie)
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const handleInputChange = (name: string, value: string) => {
+    const updatedAvance = {
+      ...avance,
+      [name]: parseInt(value) || 0,
+    }
+
     dispatch(
-      setBulletinDePaie({ avance: parseInt(event.target.value) || 0 } as IBulletinDePaieProps),
+      setBulletinDePaie({
+        avance: updatedAvance,
+      } as IBulletinDePaieProps),
     )
   }
+
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     event.target.select()
   }
+
   return (
-    <div className="w-full text-sm flex flex-col gap-4 p-4 ">
+    <div className="w-full text-sm flex flex-col gap-4 p-4">
       <CustomInputWithLabel
         type="number"
         min={0}
         required
-        id="avance"
-        name="avance"
-        label="Avances"
-        value={avance}
+        id="quinzaine"
+        name="quinzaine"
+        label="Avances quinzaine"
+        value={avance.quinzaine}
         onFocus={handleFocus}
-        onChange={handleInputChange}
+        onChange={(event) => handleInputChange(event.target.name, event.target.value)}
+      />
+      <CustomInputWithLabel
+        type="number"
+        min={0}
+        required
+        id="speciale"
+        name="speciale"
+        label="Avances spéciale"
+        value={avance.speciale}
+        onFocus={handleFocus}
+        onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
     </div>
   )

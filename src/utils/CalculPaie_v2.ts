@@ -10,6 +10,7 @@ export interface CalculateSalaireBrutParams {
   valHs50: number
   valHdim: number
   valHFerie: number
+  rappel: number
   primeAssiduite: number
   primeExcellence: number
   totalIndemnite: number
@@ -17,6 +18,8 @@ export interface CalculateSalaireBrutParams {
   avantageVehicule: number
   avantageDomestique: number
   avantageAutre: number
+  absence: number
+  retard: number
 }
 export interface calculateCnapsParams {
   salaireBrut: number
@@ -42,19 +45,8 @@ export interface calculBaseIrsaParams {
 
 export interface calculSalaireNetAPayerParams {
   salaireNet: number
-  primeAssiduite: number
-  primeExcellence: number
-  absence: number
-  retard: number
-  indemniteTransport: number
-  indeminiteAutres: number
-  avantageVehicule: number
-  avantageLogement: number
-  avantageDomestique: number
-  avantageAutre: number
-  rappel: number
-  avance: number
-  allocationFamille: number
+  avanceQuinzaine: number
+  avanceSpeciale: number
 }
 
 export interface calculAllocationParams {
@@ -227,6 +219,9 @@ class CalculPaie_v2 {
       avantageVehicule,
       avantageDomestique,
       avantageAutre,
+      rappel,
+      retard,
+      absence,
     } = params
 
     let salaireBrut = 0
@@ -239,7 +234,9 @@ class CalculPaie_v2 {
       avantageLogement +
       avantageVehicule +
       avantageDomestique +
-      avantageAutre
+      avantageAutre +
+      rappel -
+      (retard + absence)
 
     if (!this.est_cadre) {
       salaireBrut =
@@ -358,37 +355,8 @@ class CalculPaie_v2 {
 
   public calculSalaireNetAPayer(params: calculSalaireNetAPayerParams): number {
     let salaireNetAPayer = 0
-    const {
-      absence,
-      allocationFamille,
-      avance,
-      avantageAutre,
-      avantageLogement,
-      avantageVehicule,
-      indeminiteAutres,
-      indemniteTransport,
-      primeAssiduite,
-      primeExcellence,
-      avantageDomestique,
-      rappel,
-      retard,
-      salaireNet,
-    } = params
-    salaireNetAPayer = this.roundToTwoDecimal(
-      salaireNet +
-        (primeAssiduite +
-          primeExcellence +
-          indemniteTransport +
-          indeminiteAutres +
-          avantageVehicule +
-          avantageAutre +
-          avantageVehicule +
-          rappel +
-          allocationFamille +
-          avantageDomestique +
-          avantageLogement) -
-        (absence + retard + avance),
-    )
+    const { avanceQuinzaine, avanceSpeciale, salaireNet } = params
+    salaireNetAPayer = this.roundToTwoDecimal(salaireNet - (avanceQuinzaine + avanceSpeciale))
 
     return salaireNetAPayer
   }

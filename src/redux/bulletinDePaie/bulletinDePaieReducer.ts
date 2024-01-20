@@ -79,7 +79,10 @@ const initialState: IBulletinDePaieProps = {
   tauxCnaps: 0.01,
   tauxOsie: 0.01,
   baseCnaps: 0,
-  avance: 0,
+  avance: {
+    quinzaine: 0,
+    speciale: 0,
+  },
   reduChargeFamil: 0,
   baseIrsa: 0,
   baseIrsaArrondi: 0,
@@ -113,10 +116,6 @@ const initialState: IBulletinDePaieProps = {
     autresAvantages: 0,
   },
   totalAvantages: 0,
-  // ajoutSalaire: [],
-  // retenuSalaire: [],
-  // retenuSalaireBrut: [],
-  // cotisations: [],
 }
 
 const bulletinDePaieSlice = createSlice({

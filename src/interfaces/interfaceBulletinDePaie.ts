@@ -52,7 +52,7 @@ export interface IBulletinDePaieProps {
   cnaps: number
   indemnites: IIndemniteProps
   totalIndemnite?: number
-  avance?: number
+  avance: IAvanceProps
   rappel?: number
   primeEtGratification?: IPrimeEtGratification
   totalPrimeEtGratification?: number
@@ -64,6 +64,11 @@ export interface IBulletinDePaieProps {
   tableauHsHebdo?: []
   tableauHs130Hebdo?: []
   tableauHs150Hebdo?: []
+}
+
+export interface IAvanceProps {
+  quinzaine: number
+  speciale: number
 }
 
 export interface IIndemniteProps {

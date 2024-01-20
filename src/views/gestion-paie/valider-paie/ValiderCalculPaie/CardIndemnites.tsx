@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
-const Body = () => {
+const Body: React.FC = () => {
   const dispatch = useAppDispatch()
   const { indemnites } = useAppSelector((store) => store.bulletinDePaie)
 
@@ -15,7 +15,7 @@ const Body = () => {
       [name]: parseInt(value) || 0,
     }
 
-    const totalIndemnite = Object.values(updatedIndemnites).reduce(
+    const totalIndemnite: number = Object.values(updatedIndemnites).reduce(
       (acc, currentValue) => acc + currentValue,
       0,
     )
@@ -53,15 +53,15 @@ const Body = () => {
         id="autresIndemnite"
         name="autresIndemnite"
         label="Autres"
-        onFocus={handleFocus}
         value={indemnites.autresIndemnite}
+        onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
     </div>
   )
 }
 
-const CardIndemnites = () => {
+const CardIndemnites: React.FC = () => {
   return <CustomSection title="Indemnités" body={<Body />} />
 }
 

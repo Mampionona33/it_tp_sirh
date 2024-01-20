@@ -30,6 +30,8 @@ const Body = () => {
     primeEtGratification,
     indemnites,
     avantages,
+    rappel,
+    deductions,
   } = useAppSelector((store) => store.bulletinDePaie)
   const dispatch = useAppDispatch()
 
@@ -55,6 +57,7 @@ const Body = () => {
         valHsi150,
         valHsni130,
         valHsni150,
+        rappel,
         primeAssiduite: primeEtGratification.assiduite,
         primeExcellence: primeEtGratification.excellence,
         totalIndemnite,
@@ -62,6 +65,8 @@ const Body = () => {
         avantageVehicule: avantages.vehicule,
         avantageDomestique: avantages.domestique,
         avantageAutre: avantages.autresAvantages,
+        retard: deductions.retard,
+        absence: deductions.absence,
       })
 
       const baseCnaps = calculPaie.calculBaseCnaps({
@@ -72,6 +77,8 @@ const Body = () => {
     }
   }, [
     salaireDeBase,
+    deductions,
+    rappel,
     dispatch,
     valHdim,
     valHs30,
@@ -163,7 +170,7 @@ const Body = () => {
         cell1="Avantage logement"
         cell3={avantages.logement}
         className="border-b border-b-customBlue-100"
-      />{' '}
+      />
       <CardRow
         cell1="Avantage véhicule"
         cell3={avantages.vehicule}
@@ -173,12 +180,24 @@ const Body = () => {
         cell1="Avantage domestique"
         cell3={avantages.domestique}
         className="border-b border-b-customBlue-100"
-      />{' '}
+      />
       <CardRow
         cell1="Avantage autres"
         cell3={avantages.autresAvantages}
         className="border-b border-b-customBlue-100"
       />
+      <CardRow cell1="Rappel" cell3={rappel} className="border-b border-b-customBlue-100" />
+      <CardRow
+        cell1="Retard"
+        cell3={deductions.retard}
+        className="border-b border-b-customBlue-100"
+      />
+      <CardRow
+        cell1="Absence"
+        cell3={deductions.absence}
+        className="border-b border-b-customBlue-100"
+      />
+
       <div className="flex justify-between px-4 py-2 ">
         <div>Salaire brut</div>
         <div className="text-customRed-900">{formatAriaryMga(salaireBrut)}</div>
