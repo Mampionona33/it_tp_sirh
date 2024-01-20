@@ -10,6 +10,8 @@ export interface CalculateSalaireBrutParams {
   valHs50: number
   valHdim: number
   valHFerie: number
+  primeAssiduite: number
+  primeExcellence: number
 }
 export interface calculateCnapsParams {
   salaireBrut: number
@@ -201,7 +203,7 @@ class CalculPaie_v2 {
     let salaireBrut = 0
 
     if (this.est_cadre) {
-      salaireBrut = this.salaireBase
+      salaireBrut = this.salaireBase + params.primeAssiduite + params.primeExcellence
     } else {
       salaireBrut =
         this.salaireBase +
@@ -212,7 +214,9 @@ class CalculPaie_v2 {
         params.valHs30 +
         params.valHs50 +
         params.valHdim +
-        params.valHFerie
+        params.valHFerie +
+        params.primeAssiduite +
+        params.primeExcellence
     }
 
     return salaireBrut
