@@ -2,10 +2,6 @@ import React, { useState } from 'react'
 import ButtonWithIcon, { ButtonWithIconVariant } from '../../buttons/ButtonWithIcon'
 import { UserMinusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
-import { Alert } from '@material-tailwind/react'
-import employeService from '@src/services/EmployeeService'
-import { format } from 'date-fns'
-import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'
 import { setModalOpen } from '@src/redux/modal/modalReducer'
 import AppModal from '../../Modal/AppModal'
 import ModalValidResiliation from './ModalValidResiliation'
@@ -51,8 +47,8 @@ const FormResiliationContrat = () => {
         <h1 className="text-lg text-customRed-930">Résiliation du contrat</h1>
         <p className="text-base text-customRed-930">
           {`Veuillez confirmer la résiliation en saisissant les informations suivantes : nom,
-          matricule de l'employé, ainsi que le motif de la résiliation. Merci de noter que cette
-          actif:EnumBoolean.NON,on est permanente et irréversible. Assurez-vous de suivre le format suivant: `}
+          matricule de lemployé, ainsi que le motif de la résiliation. Merci de noter que
+          cette action est permanente et irréversible. Assurez-vous de suivre le format suivant:`}
           <span className="font-bold">nom matricule</span> .
         </p>
         <form action="" className="flex flex-col gap-2" onSubmit={handleSubmit}>
