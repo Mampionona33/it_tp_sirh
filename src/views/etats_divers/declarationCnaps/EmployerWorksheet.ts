@@ -115,8 +115,15 @@ class EmployerWorksheet implements Partial<Worksheet> {
     const row21 = ['C21', 'D21', 'E21']
     row21.forEach((element, index) => {
       this.sheet.getCell(element).value = `Mois ${index + 1}`
+
       this.sheet.getCell(element).font = { bold: true, size: 10, name: 'Arial' }
       this.sheet.getCell(element).alignment = { vertical: 'middle', horizontal: 'center' }
+      this.sheet.getCell(element).border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' },
+      }
     })
 
     this.sheet.getCell('F22').value = 'TOTAUX'
@@ -125,6 +132,24 @@ class EmployerWorksheet implements Partial<Worksheet> {
     for (let i = 23; i <= 25; i++) {
       this.sheet.getCell(`F${i}`).value = { formula: `SUM(C${i}:E${i})` }
       this.sheet.getCell(`F${i}`).font = { size: 10, name: 'Arial' }
+    }
+
+    for (let i = 12; i < 17; i++) {
+      this.sheet.getCell(`C${i}`).border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' },
+      }
+    }
+
+    for (let i = 4; i < 10; i++) {
+      this.sheet.getCell(`C${i}`).border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' },
+      }
     }
 
     this.sheet.getCell('F26').value = { formula: 'SUM(F23:F25)' }
