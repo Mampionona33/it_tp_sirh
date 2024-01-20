@@ -29,6 +29,7 @@ const Body = () => {
     salaireBrut,
     primeEtGratification,
     indemnites,
+    avantages,
   } = useAppSelector((store) => store.bulletinDePaie)
   const dispatch = useAppDispatch()
 
@@ -57,6 +58,10 @@ const Body = () => {
         primeAssiduite: primeEtGratification.assiduite,
         primeExcellence: primeEtGratification.excellence,
         totalIndemnite,
+        avantageLogement: avantages.logement,
+        avantageVehicule: avantages.vehicule,
+        avantageDomestique: avantages.domestique,
+        avantageAutre: avantages.autresAvantages,
       })
 
       const baseCnaps = calculPaie.calculBaseCnaps({
@@ -78,6 +83,7 @@ const Body = () => {
     valHsni150,
     primeEtGratification,
     indemnites,
+    avantages,
   ])
 
   useEffect(() => {
@@ -153,7 +159,26 @@ const Body = () => {
         cell3={Object.values(indemnites).reduce((acc, currentValue) => acc + currentValue)}
         className="border-b border-b-customBlue-100"
       />
-
+      <CardRow
+        cell1="Avantage logement"
+        cell3={avantages.logement}
+        className="border-b border-b-customBlue-100"
+      />{' '}
+      <CardRow
+        cell1="Avantage véhicule"
+        cell3={avantages.vehicule}
+        className="border-b border-b-customBlue-100"
+      />
+      <CardRow
+        cell1="Avantage domestique"
+        cell3={avantages.domestique}
+        className="border-b border-b-customBlue-100"
+      />{' '}
+      <CardRow
+        cell1="Avantage autres"
+        cell3={avantages.autresAvantages}
+        className="border-b border-b-customBlue-100"
+      />
       <div className="flex justify-between px-4 py-2 ">
         <div>Salaire brut</div>
         <div className="text-customRed-900">{formatAriaryMga(salaireBrut)}</div>

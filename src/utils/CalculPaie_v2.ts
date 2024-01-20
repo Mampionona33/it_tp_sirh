@@ -13,6 +13,10 @@ export interface CalculateSalaireBrutParams {
   primeAssiduite: number
   primeExcellence: number
   totalIndemnite: number
+  avantageLogement: number
+  avantageVehicule: number
+  avantageDomestique: number
+  avantageAutre: number
 }
 export interface calculateCnapsParams {
   salaireBrut: number
@@ -201,25 +205,47 @@ class CalculPaie_v2 {
    * @return {number} The calculated gross salary.
    */
   public calculateSalaireBrut(params: CalculateSalaireBrutParams): number {
+    const {
+      primeAssiduite,
+      primeExcellence,
+      totalIndemnite,
+      avantageLogement,
+      valHsni130,
+      valHsni150,
+      valHsi130,
+      valHsi150,
+      valHs30,
+      valHs50,
+      valHdim,
+      valHFerie,
+      avantageVehicule,
+      avantageDomestique,
+      avantageAutre,
+    } = params
+
     let salaireBrut = 0
 
-    if (this.est_cadre) {
+    salaireBrut =
+      this.salaireBase +
+      primeAssiduite +
+      primeExcellence +
+      totalIndemnite +
+      avantageLogement +
+      avantageVehicule +
+      avantageDomestique +
+      avantageAutre
+
+    if (!this.est_cadre) {
       salaireBrut =
-        this.salaireBase + params.primeAssiduite + params.primeExcellence + params.totalIndemnite
-    } else {
-      salaireBrut =
-        this.salaireBase +
-        params.valHsni130 +
-        params.valHsni150 +
-        params.valHsi130 +
-        params.valHsi150 +
-        params.valHs30 +
-        params.valHs50 +
-        params.valHdim +
-        params.valHFerie +
-        params.primeAssiduite +
-        params.primeExcellence +
-        params.totalIndemnite
+        salaireBrut +
+        valHsni130 +
+        valHsni150 +
+        valHsi130 +
+        valHsi150 +
+        valHs30 +
+        valHs50 +
+        valHdim +
+        valHFerie
     }
 
     return salaireBrut
