@@ -248,8 +248,10 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
     salaireNetAPayer,
     salaireBrut,
     dateDeVirement,
+    salaireDeBase,
   } = bodyData
 
+  const salaireDeBaseRender = salaireDeBase ? formatNumberWithSpaces(salaireDeBase) || '-' : '-'
   const assiduite = formatNumberWithSpaces(primeEtGratification.assiduite) || '-'
   const excellence = formatNumberWithSpaces(primeEtGratification.excellence) || '-'
   const totalDeductionRender = formatNumberWithSpaces(totalDeduction) || '-'
@@ -321,7 +323,12 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
         <Row cell1="Rappel" cell7={rappelRender} />
         <Row cell1="Aide au logement" styleCell1={[styles.textBold]} />
         <Row cell1="Cnaps" cell2={baseCnapsRender} cell3={tauxCnapsRender} cell4={montantCnaps} />
-        <Row cell1="Retenue sur organisme sanitaire" cell3={tauxOsieRender} cell4={osieRender} />
+        <Row
+          cell1="Retenue sur organisme sanitaire"
+          cell2={salaireDeBaseRender}
+          cell3={tauxOsieRender}
+          cell4={osieRender}
+        />
         <Row
           cell1="Cotisation sociale"
           styleCell1={[styles.textBold]}
