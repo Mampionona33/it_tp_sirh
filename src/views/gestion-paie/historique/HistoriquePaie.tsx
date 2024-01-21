@@ -9,7 +9,10 @@ import { setHistoriqueDePaie } from '@src/redux/historiqueDePaie/historiqueDePai
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
 import ButtonLink, { ButtonLinkVariant } from '@src/components/buttons/ButtonLink'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
-import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
+import {
+  IHistoriquePaieDataProps,
+  IHistoriquePaieProps,
+} from '@src/interfaces/interfaceHistoriquePaie'
 import { format } from 'date-fns'
 import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 import { fr } from 'date-fns/locale'
@@ -21,7 +24,7 @@ import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 
-interface IHistoriquePaieTableProps extends IHistoriquePaieProps {
+interface IHistoriquePaieTableProps extends IHistoriquePaieDataProps {
   actions?: React.FC[]
 }
 
@@ -70,14 +73,14 @@ const HistoriquePaie = () => {
   }, [id, isEmployeExist, dispatch, anneeSectionne, selectedEmploye, anneeSectionneNumber])
 
   const handleDateChange = (date: Date) => {
-    dispatch(setHistoriqueDePaie({ anneeSectionne: date }))
+    dispatch(setHistoriqueDePaie({ anneeSectionne: date.toString() } as IHistoriquePaieProps))
   }
 
   const generateRows = useCallback(() => {
     const currentYear = new Date().getFullYear()
     const selectedYear = new Date(anneeSectionne).getFullYear()
 
-    const getEmptyRow = (month): IHistoriquePaieProps => ({
+    const getEmptyRow = (month): IHistoriquePaieDataProps => ({
       mois: format(new Date(Number(selectedYear), month - 1, 1), 'MMMM', { locale: fr }),
       salarie_id: id,
       annee: selectedYear,
@@ -163,7 +166,7 @@ const HistoriquePaie = () => {
     [columnHelper, anneeSectionneNumber],
   )
 
-  if (loadinHistoriquePaie === 'pending' || loadinHistoriquePaie === 'idle') {
+  if (loadinHistoriquePaie === 'loading' || loadinHistoriquePaie === 'idle') {
     return (
       <div>
         <Loading />

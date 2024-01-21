@@ -1,6 +1,7 @@
+import { BaseReduxState } from './interfaceDeBaseReduxState'
 import { EnumBoolean } from './interfaceEmploye'
 
-export interface IHistoriquePaieProps {
+export interface IHistoriquePaieDataProps {
   annee?: number
   matricule?: string
   mois?: string
@@ -8,12 +9,7 @@ export interface IHistoriquePaieProps {
   validation_status?: EnumBoolean
 }
 
-// export interface IHistoriquePaieProps {
-//   id: number
-//   id_employe: number | string
-//   date: string
-//   validationDay?: string
-//   salaire_brut: number
-//   salaire_net: number
-//   status: EnumBoolean
-// }
+export interface IHistoriquePaieProps extends BaseReduxState {
+  historiques: IHistoriquePaieDataProps[]
+  anneeSectionne: string
+}
