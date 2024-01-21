@@ -28,13 +28,17 @@ const GestionPaie: React.FC = () => {
   })
 
   const actifEmployes = useMemo(() => {
-    return (
-      !isError &&
-      data &&
-      Array.isArray(data) &&
-      data.filter((employe: IEmploye) => employe.actif === EnumBoolean.OUI)
-    )
-  }, [data, isError])
+    let result: IEmploye[] = []
+
+    if (data) {
+      console.log(data)
+      result = Object.values(data).filter(
+        (employe: IEmploye) => employe.actif === EnumBoolean.OUI,
+      ) as IEmploye[]
+    }
+
+    return result
+  }, [data])
 
   useEffect(() => {
     dispatch(resetBulletinDePaie())
@@ -81,9 +85,11 @@ const GestionPaie: React.FC = () => {
           {errorMessageFormatter(errorLoadingListEmployee as AxiosError)}
         </CAlert>
       )}
-      <div>
-        <ReusableTable data={actifEmployes} columns={cols} searchBar pagination />
-      </div>
+      {data && (
+        <div>
+          <ReusableTable data={actifEmployes} columns={cols} searchBar pagination />
+        </div>
+      )}
     </div>
   )
 }
