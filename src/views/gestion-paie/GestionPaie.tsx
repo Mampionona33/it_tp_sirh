@@ -8,20 +8,37 @@ import { resetBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieRed
 import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
+import { useQuery } from '@tanstack/react-query'
+import employeService from '@src/services/EmployeeService'
+import { AxiosError } from 'axios'
 
 const GestionPaie: React.FC = () => {
-  const {
-    list: listeEmploye,
-    loading: loadingListEmployee,
-    error,
-  } = useAppSelector((store) => store.employeesList)
   const errorMessageFormatter = useErrorFormatter()
 
-  const actifEmployes = useMemo(() => {
-    return listeEmploye.filter((employe: IEmploye) => employe.actif === EnumBoolean.OUI)
-  }, [listeEmploye])
-
   const dispatch = useAppDispatch()
+
+  const {
+    data,
+    isLoading,
+    isError,
+    error: errorLoadingListEmployee,
+  } = useQuery({
+    queryKey: ['employes'],
+    queryFn: () => employeService.getAll(),
+    refetchInterval: 30000,
+    refetchOnMount: true,
+    refetchOnWindowFocus: 'always',
+  })
+
+  const actifEmployes = useMemo(() => {
+    return (
+      !isError &&
+      data &&
+      Array.isArray(data) &&
+      data.filter((employe: IEmploye) => employe.actif === EnumBoolean.OUI)
+    )
+  }, [data, isError])
+
   useEffect(() => {
     dispatch(resetBulletinDePaie())
   }, [dispatch])
@@ -54,13 +71,19 @@ const GestionPaie: React.FC = () => {
     [columnHelper],
   )
 
-  if (loadingListEmployee === 'loading') {
+  if (isLoading) {
     return <Loading />
   }
 
+  errorLoadingListEmployee && console.log('errorLoadingListEmployee', errorLoadingListEmployee)
+
   return (
     <div>
-      {error && <CAlert color="danger">{errorMessageFormatter(error)}</CAlert>}
+      {isError && (
+        <CAlert color="danger">
+          {errorMessageFormatter(errorLoadingListEmployee as AxiosError)}
+        </CAlert>
+      )}
       <div>
         <ReusableTable data={actifEmployes} columns={cols} searchBar pagination />
       </div>
