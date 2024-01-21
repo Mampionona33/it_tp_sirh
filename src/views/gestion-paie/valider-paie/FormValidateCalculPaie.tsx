@@ -20,7 +20,7 @@ const FormValidateCalculPaie = () => {
       if (resp.data === 'Paie enregistrée') {
         dispatch(resetBulletinDePaie())
         dispatch(setModalClose())
-        navigate(`/gestion-de-paie/historique/${id}`)
+        navigate(`/gestion-de-paie`)
       }
     } catch (error) {
       dispatch(setModalClose())
