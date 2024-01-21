@@ -31,7 +31,6 @@ const GestionPaie: React.FC = () => {
     let result: IEmploye[] = []
 
     if (data) {
-      console.log(data)
       result = Object.values(data).filter(
         (employe: IEmploye) => employe.actif === EnumBoolean.OUI,
       ) as IEmploye[]
