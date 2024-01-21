@@ -411,6 +411,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
           styleCell6={[{ borderRight: 0 }]}
           styleCell7={[{ textAlign: 'right' }]}
         />
+
         <Text
           style={[
             styles.textItalic,
@@ -419,7 +420,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
               width: '100%',
               textAlign: 'left',
               alignItems: 'center',
-              paddingTop: 2,
+              paddingTop: 10,
               fontSize: 9,
             },
           ]}
@@ -428,16 +429,34 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
             salaireNetAPayer ? toWord.convert(salaireNetAPayer) : ''
           }`}
         </Text>
+
+        <Text
+          style={[
+            {
+              width: '100%',
+              textAlign: 'right',
+              paddingRight: 50,
+              paddingTop: 25,
+              paddingBottom: 72.7,
+              fontSize: 10,
+            },
+          ]}
+        >
+          Emargement du Salarié
+        </Text>
+
         <Text
           style={[
             styles.textItalic,
-            styles.borderBottom,
-            styles.borderTop,
+
             {
               width: '100%',
               textAlign: 'center',
               alignItems: 'center',
-              paddingTop: 5,
+              backgroundColor: '#031F79',
+              color: 'white',
+              paddingTop: 3,
+              paddingBottom: 3,
               fontSize: 11,
               marginTop: 12,
             },
