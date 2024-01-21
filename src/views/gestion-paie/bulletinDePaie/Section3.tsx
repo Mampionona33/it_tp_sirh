@@ -275,6 +275,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
     'dd MMMM yyyy',
     { locale: fr },
   )
+  const totalAvances = formatNumberWithSpaces(avance.quinzaine + avance.speciale) || '-'
 
   const totalIndemniteEtAvantage =
     formatNumberWithSpaces(
@@ -350,11 +351,15 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
         />
         <Divider />
         <Row
-          cell4={'Salaire Net'}
+          cell4={'Salaire Net après impots'}
           cell7={salaireNetRender}
           styleCell1={[{ borderRight: 0 }]}
           styleCell2={[{ borderRight: 0 }]}
-          styleCell4={[styles.textBold, styles.borderBottom, { borderRight: 0, textAlign: 'left' }]}
+          styleCell4={[
+            styles.textBold,
+            styles.borderBottom,
+            { borderRight: 0, textAlign: 'left', paddingLeft: 2 },
+          ]}
           styleCell5={[styles.borderBottom, { borderRight: 0 }]}
           styleCell6={[styles.borderBottom, { borderRight: 0 }]}
           cell6CustomWidth="0%"
@@ -365,7 +370,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
         />
         <Row
           cell4={'Avance sur salaire'}
-          cell7={avanceRender}
+          cell7={totalAvances}
           styleCell1={[{ borderRight: 0 }]}
           styleCell2={[{ borderRight: 0 }]}
           styleCell3={[{ borderRight: 0 }]}

@@ -29,6 +29,10 @@ const MyDocument = ({ data }: IMydocumentProps) => {
 const BulletinPaie = () => {
   const navigate = useNavigate()
   const bulletinDePaie = useAppSelector((state) => state.bulletinDePaie)
+  const MM_TO_PIXEL_CONVERSION = 3.78
+  const A4_HEIGHT_MM = 297
+  // const A4_WIDTH_MM = 210
+  const a4HeightInPixels = A4_HEIGHT_MM * MM_TO_PIXEL_CONVERSION
 
   useEffect(() => {
     let mount = true
@@ -55,8 +59,8 @@ const BulletinPaie = () => {
 
   return (
     <>
-      <div className="h-screen w-full flex gap-3 flex-col">
-        <PDFViewer width="100%" height="100%">
+      <div className="min-h-full w-full flex gap-3 flex-col">
+        <PDFViewer width="100%" height={a4HeightInPixels}>
           <MyDocument data={bulletinDePaie} />
         </PDFViewer>
         <div className="flex w-full shadow-sm justify-end p-3 bg-white rounded-sm mb-3">
