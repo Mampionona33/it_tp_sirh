@@ -255,11 +255,11 @@ const ValidePaie = () => {
                 </div>
                 <div className="w-fit">
                   <CustomInputWithLabel
-                    label="Date de virement bancaire"
+                    label="Date du bulletin de paie"
                     id="dateVirementBancaire"
                     name="dateVirementBancaire"
                     type="date"
-                    value={dateDeVirement}
+                    value={dateDeVirement || format(new Date(), 'yyyy-MM-dd')}
                     required
                     onChange={handleDateVirBancChange}
                   />
