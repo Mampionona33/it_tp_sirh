@@ -37,11 +37,16 @@ export interface Section2Props {
   data: IBulletinDePaieProps
 }
 const Section2 = ({ data }: Section2Props) => {
+  const { valHsi130, valHsi150, valHs30, valHs50, valHdim, valHFerie, valHsni130, valHsni150 } =
+    data
   const salaireDeBase = data.salaireDeBase
     ? formatNumberWithSpaces(data.salaireDeBase) + ' Ar'
     : '-'
-  const valHsni130 = data.valHsni130 ? formatNumberWithSpaces(data.valHsni130) + ' Ar' : '-'
-  const valHsni150 = data.valHsni150 ? formatNumberWithSpaces(data.valHsni150) + ' Ar' : '-'
+  const hsExoneree = data.valHsni130 ? formatNumberWithSpaces(valHsni130 + valHsni150) + ' Ar' : '-'
+  const hsImposables = data.valHsni150
+    ? formatNumberWithSpaces(valHsi130 + valHsi150 + valHs30 + valHs50 + valHdim + valHFerie) +
+      ' Ar'
+    : '-'
   const salaireBrut = data.salaireBrut ? formatNumberWithSpaces(data.salaireBrut) + ' Ar' : '-'
 
   const plafondSME = data.plafondSME ? formatNumberWithSpaces(data.plafondSME) + ' Ar' : '-'
@@ -77,19 +82,19 @@ const Section2 = ({ data }: Section2Props) => {
 
       <View style={styles.tableRow}>
         <View style={styles.tableCell50}>
-          <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 30%</Text>
+          <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS exonérée</Text>
         </View>
         <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
-          <Text style={{ textAlign: 'right', fontSize: 10 }}>{valHsni130}</Text>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>{hsExoneree}</Text>
         </View>
       </View>
 
       <View style={styles.tableRow}>
         <View style={styles.tableCell50}>
-          <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS à 50%</Text>
+          <Text style={{ fontSize: 10, paddingLeft: 2 }}>HS imposable</Text>
         </View>
         <View style={[styles.bordered, styles.tableCell15, { paddingRight: 3 }]}>
-          <Text style={{ textAlign: 'right', fontSize: 10 }}>{valHsni150}</Text>
+          <Text style={{ textAlign: 'right', fontSize: 10 }}>{hsImposables}</Text>
         </View>
       </View>
 
