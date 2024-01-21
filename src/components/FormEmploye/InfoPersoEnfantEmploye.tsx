@@ -22,10 +22,10 @@ interface IFormEnfantsProps {
 
 const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
   const dispatch = useAppDispatch()
-  const formEmploye = useAppSelector((state) => state.formEmploye)
-  const enfant = formEmploye.enfant.find((enfant) => enfant.id === index)
+  const { enfant: listEnfant } = useAppSelector((state) => state.formEmploye)
+  const enfant = listEnfant.find((enfant) => enfant.id === index)
 
-  const idEnfant = formEmploye.enfant.find((enfant) => enfant.id === index).id
+  const idEnfant = listEnfant.find((enfant) => enfant.id === index).id
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { name, value } = event.target
@@ -44,8 +44,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
     // Mette à jour le stat global
     dispatch(
       setFormEmploye({
-        ...formEmploye,
-        enfant: formEmploye.enfant.map((enf) => {
+        enfant: listEnfant.map((enf) => {
           if (enf.id === index) {
             if (name === `genre_enfant_${idEnfant}`) {
               return {
@@ -95,7 +94,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
   }) => {
     dispatch(
       setFormEmploye({
-        enfant: formEmploye.enfant.map((enf) => ({ ...enf, certificat: selectedOption.value })),
+        enfant: listEnfant.map((enf) => ({ ...enf, certificat: selectedOption.value })),
       }),
     )
   }

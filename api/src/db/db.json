@@ -1100,15 +1100,6 @@
           "lieu_naissance": "Petronum",
           "genre_enfant": "feminin",
           "certificat": "vie"
-        },
-        {
-          "id": 2,
-          "nom": "Rosa",
-          "prenom": "Garcya",
-          "date_naissance": "2023-02-02",
-          "lieu_naissance": "Antananarivo",
-          "genre_enfant": "feminin",
-          "certificat": "vie"
         }
       ],
       "titre_poste": "Responsable Import et logistique ",
