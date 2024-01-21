@@ -1,12 +1,46 @@
 import React from 'react'
-import { Text, View } from '@react-pdf/renderer'
+import { Text, View, Image } from '@react-pdf/renderer'
 import { PropTypes } from 'prop-types'
 import registerFonts from './font'
 import { styles } from './styles'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
+// import Logo from '@images/LogoLs.png'
+import Logo from 'src/assets/images/LogoLs.png'
 
 registerFonts()
+
+const Line = ({ label, value, valueBold, marginBottom }) => {
+  return (
+    <View style={[styles.row, { width: '100%' }]}>
+      <Text
+        style={[styles.cell, styles.textBoldItalic, styles.textBold, { width: '45%', padding: 2 }]}
+      >
+        {label}
+      </Text>
+      <Text
+        style={[
+          styles.cell,
+          valueBold && styles.textBold,
+          {
+            width: '65%',
+            textAlign: 'center',
+            padding: 2,
+            marginBottom: marginBottom ? marginBottom : 0,
+          },
+        ]}
+      >
+        {value}
+      </Text>
+    </View>
+  )
+}
+Line.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  valueBold: PropTypes.bool,
+  marginBottom: PropTypes.number,
+}
 
 const Section1 = (props) => {
   const dateSelectionne = format(new Date(props.data.validation.date), 'MMM yyyy', { locale: fr })
@@ -21,43 +55,6 @@ const Section1 = (props) => {
   const fonction = props.data.salarie.titre_poste
   const numMatriculSalarie = props.data.salarie.matricule
   const catSalarie = props.data.salarie.categorie
-
-  const Line = ({ label, value, valueBold, marginBottom }) => {
-    return (
-      <View style={[styles.row, { width: '100%' }]}>
-        <Text
-          style={[
-            styles.cell,
-            styles.textBoldItalic,
-            styles.textBold,
-            { width: '45%', padding: 2 },
-          ]}
-        >
-          {label}
-        </Text>
-        <Text
-          style={[
-            styles.cell,
-            valueBold && styles.textBold,
-            {
-              width: '65%',
-              textAlign: 'center',
-              padding: 2,
-              marginBottom: marginBottom ? marginBottom : 0,
-            },
-          ]}
-        >
-          {value}
-        </Text>
-      </View>
-    )
-  }
-  Line.propTypes = {
-    label: PropTypes.string,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    valueBold: PropTypes.bool,
-    marginBottom: PropTypes.number,
-  }
 
   const Employeur = () => {
     return (
@@ -86,15 +83,31 @@ const Section1 = (props) => {
 
   return (
     <>
-      <View style={[{ width: '100%' }]}>
-        <Text
+      <View style={[styles.row, { width: '100%', backgroundColor: '#031F79' }]}>
+        <View
           style={[
-            styles.textBold,
-            { textTransform: 'uppercase', textAlign: 'center', fontSize: 11, padding: 1 },
+            styles.row,
+            { width: '30%', alignItems: 'center', paddingLeft: 5, paddingTop: 5, paddingBottom: 5 },
           ]}
         >
-          bulletin de paie
-        </Text>
+          <Image src={Logo} style={{ width: 80 }} />
+        </View>
+        <View style={[styles.row, { width: '70%', alignItems: 'center', paddingLeft: 75 }]}>
+          <Text
+            style={[
+              styles.textBold,
+              {
+                color: 'white',
+                textTransform: 'uppercase',
+                fontSize: 14,
+                padding: 1,
+                width: '100%',
+              },
+            ]}
+          >
+            bulletin de paie
+          </Text>
+        </View>
       </View>
       <View style={[styles.row, styles.borderTop, styles.borderBottom, { width: '100%' }]}>
         <Text

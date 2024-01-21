@@ -9,6 +9,7 @@
     "paths": {
       "@src/*": ["src/*"],
       "@components/*": ["src/components/*"],
+      "@images/*": ["src/assets/images/*"],
       "@layout/*": ["src/layout/*"],
       "@interfaces/*": ["src/interfaces/*"],
       "@redux/*": ["src/redux/*"],
