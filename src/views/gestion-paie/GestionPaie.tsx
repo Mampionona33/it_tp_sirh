@@ -25,9 +25,6 @@ const GestionPaie: React.FC = () => {
   } = useQuery({
     queryKey: ['employes'],
     queryFn: () => employeService.getAll(),
-    refetchInterval: 30000,
-    refetchOnMount: true,
-    refetchOnWindowFocus: 'always',
   })
 
   const actifEmployes = useMemo(() => {

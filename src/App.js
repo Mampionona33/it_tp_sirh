@@ -27,7 +27,11 @@ class App extends Component {
     this.pathname = window.location.pathname
     this.isAuth = store.getState().auth.isAuthenticated
 
-    this.queryClient = new QueryClient()
+    this.queryClient = new QueryClient({
+      defaultOptions: {
+        queries: { refetchOnMount: true, refetchOnWindowFocus: 'always', refetchInterval: 30000 },
+      },
+    })
   }
 
   render() {
