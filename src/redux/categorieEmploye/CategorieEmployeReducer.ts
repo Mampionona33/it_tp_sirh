@@ -1,10 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { fetchAllCotisations } from '../cotisations/cotisationsActions'
 import { ICategorieEmployeState } from '@src/interfaces/intefaceCategorieEmploye'
 
 const initialState: ICategorieEmployeState = {
-  loading: 'idle',
   data: [],
+  loading: 'idle',
 }
 
 const categorieEmployeSlice = createSlice({
@@ -12,6 +12,9 @@ const categorieEmployeSlice = createSlice({
   initialState,
   reducers: {
     resetCategorieEmployeState: (state) => initialState,
+    setCategorieEmployeState: (state, action: PayloadAction<ICategorieEmployeState>) => {
+      return { ...state, ...action.payload }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -20,7 +23,7 @@ const categorieEmployeSlice = createSlice({
         state.loading = 'succeeded'
       })
       .addCase(fetchAllCotisations.pending, (state) => {
-        state.loading = 'pending'
+        state.loading = 'loading'
       })
       .addCase(fetchAllCotisations.rejected, (state) => {
         state.loading = 'failed'
@@ -28,6 +31,7 @@ const categorieEmployeSlice = createSlice({
   },
 })
 
-export const { resetCategorieEmployeState } = categorieEmployeSlice.actions
+export const { resetCategorieEmployeState, setCategorieEmployeState } =
+  categorieEmployeSlice.actions
 
 export default categorieEmployeSlice.reducer

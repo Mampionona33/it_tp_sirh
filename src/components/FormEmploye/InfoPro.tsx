@@ -4,11 +4,41 @@ import { useSelector } from 'react-redux'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
+import { useQuery } from '@tanstack/react-query'
+import categorieEmployeService from '@src/services/CategorieEmployeService'
+import { ICategorieEmployeState } from '@src/interfaces/intefaceCategorieEmploye'
+import { setCategorieEmployeState } from '@src/redux/categorieEmploye/CategorieEmployeReducer'
+import Loading from '../loadings/Loading'
 
 const InfoPro = () => {
   const dispatch = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
-  const catOptions = useAppSelector((store) => store.cateogieEmploye.data)
+  const { data: catOptions } = useAppSelector((store) => store.cateogieEmploye)
+
+  const { isLoading } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () =>
+      categorieEmployeService
+        .getAll()
+        .then((resp) =>
+          dispatch(
+            setCategorieEmployeState({
+              data: [...resp.data],
+              error: null,
+              loading: 'succeeded',
+            } as ICategorieEmployeState),
+          ),
+        )
+        .catch((error) => {
+          dispatch(
+            setCategorieEmployeState({
+              data: [],
+              error: error,
+              loading: 'failed',
+            } as ICategorieEmployeState),
+          )
+        }),
+  })
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const { name, value } = event.target ?? { name: '', value: '' }
@@ -123,6 +153,10 @@ const InfoPro = () => {
       onChange: handleInputChange,
     },
   ]
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <>
