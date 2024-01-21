@@ -27,42 +27,6 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
 
   const idEnfant = listEnfant.find((enfant) => enfant.id === index).id
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const { name, value } = event.target
-    // Mettre à jour l'état local avec useState
-
-    if (name === `genre_enfant_${idEnfant}`) {
-      setFormData({
-        ...formData,
-        [name]: value as EnumGenre,
-      })
-    }
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
-    // Mette à jour le stat global
-    dispatch(
-      setFormEmploye({
-        enfant: listEnfant.map((enf) => {
-          if (enf.id === index) {
-            if (name === `genre_enfant_${idEnfant}`) {
-              return {
-                ...enf,
-                genre_enfant: value as EnumGenre,
-              }
-            }
-            return {
-              ...enf,
-              [name]: value,
-            }
-          }
-          return enf
-        }),
-      }),
-    )
-  }
-
   const initialFormData: IEnfantEmploye = useMemo(() => {
     return {
       id: index,
@@ -95,6 +59,42 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
     dispatch(
       setFormEmploye({
         enfant: listEnfant.map((enf) => ({ ...enf, certificat: selectedOption.value })),
+      }),
+    )
+  }
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const { name, value } = event.target
+    // Mettre à jour l'état local avec useState
+
+    if (name === `genre_enfant_${idEnfant}`) {
+      setFormData({
+        ...formData,
+        [name]: value as EnumGenre,
+      })
+    }
+    setFormData({
+      ...formData,
+      [name]: value,
+    })
+    // Mette à jour le stat global
+    dispatch(
+      setFormEmploye({
+        enfant: listEnfant.map((enf) => {
+          if (enf.id === index) {
+            if (name === `genre_enfant_${idEnfant}`) {
+              return {
+                ...enf,
+                genre_enfant: value as EnumGenre,
+              }
+            }
+            return {
+              ...enf,
+              [name]: value,
+            }
+          }
+          return enf
+        }),
       }),
     )
   }
@@ -161,7 +161,7 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       name: `genre_enfant_${idEnfant}`, // Dynamic property name
       type: 'radio',
       options: genreOptions,
-      value: formData[`genre_enfant_${idEnfant}`] || EnumGenre.MASCULIN, // Dynamic property name
+      value: formData[`genre_enfant`] || EnumGenre.MASCULIN, // Dynamic property name
       onChange: (ev) => handleInputChange(ev, index),
     },
   ]
