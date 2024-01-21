@@ -29,7 +29,7 @@ class App extends Component {
 
     this.queryClient = new QueryClient({
       defaultOptions: {
-        queries: { refetchOnMount: true, refetchOnWindowFocus: 'always', refetchInterval: 30000 },
+        queries: { refetchOnMount: true, refetchOnWindowFocus: 'always' },
       },
     })
   }
