@@ -23,6 +23,8 @@ import {
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
+import historiquePaieService from '@src/services/HistoriquePaieSerivce'
+import { useQuery } from '@tanstack/react-query'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieDataProps {
   actions?: React.FC[]
@@ -34,7 +36,6 @@ const HistoriquePaie = () => {
   const dispatch = useAppDispatch()
   const { list: listeEmploye } = useAppSelector((store) => store.employeesList)
   const {
-    loading: loadinHistoriquePaie,
     anneeSectionne,
     historiques,
     error: errorFetchingHistorique,
@@ -49,19 +50,35 @@ const HistoriquePaie = () => {
     [listeEmploye, id],
   )
 
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ['historiques'],
+    queryFn: () =>
+      historiquePaieService
+        .getAllByUserIDAndDate({ id, annee: anneeSectionneNumber })
+        .then((resp) => {
+          dispatch(
+            setHistoriqueDePaie({
+              historiques: resp.data,
+              loading: 'succeeded',
+              error: null,
+            } as IHistoriquePaieProps),
+          )
+        })
+        .catch((error) => {
+          dispatch(
+            setHistoriqueDePaie({
+              error: error,
+              loading: 'failed',
+              historiques: [],
+            } as IHistoriquePaieProps),
+          )
+          // Throwing the error here to propagate it to the parent component
+          throw error
+        }),
+  })
+
   useEffect(() => {
     dispatch(resetBulletinDePaie())
-    const fetchHistory = async () => {
-      if (isEmployeExist && id) {
-        try {
-          await dispatch(fetchHistoriquesPaie({ id, annee: anneeSectionneNumber }))
-        } catch (error) {
-          throw error
-        }
-      }
-    }
-
-    isEmployeExist && fetchHistory()
 
     isEmployeExist &&
       dispatch(
@@ -166,7 +183,7 @@ const HistoriquePaie = () => {
     [columnHelper, anneeSectionneNumber],
   )
 
-  if (loadinHistoriquePaie === 'loading' || loadinHistoriquePaie === 'idle') {
+  if (isLoading) {
     return (
       <div>
         <Loading />
@@ -176,20 +193,14 @@ const HistoriquePaie = () => {
 
   return (
     <div>
-      {errorFetchingHistorique && (
-        <CAlert color="danger">${errorFetchingHistorique.message}</CAlert>
-      )}
-      {isEmployeExist ? (
+      {errorFetchingHistorique ? (
+        <CAlert color="danger">{errorFetchingHistorique.message}</CAlert>
+      ) : isEmployeExist ? (
         <div>
-          <div>
-            <div className="flex p-2 justify-end">
-              <SelectAnnee
-                selectedDate={new Date(anneeSectionne)}
-                onDateChange={handleDateChange}
-              />
-            </div>
-            <ReusableTable data={historiquePaiement} columns={cols} />
+          <div className="flex p-2 justify-end">
+            <SelectAnnee selectedDate={new Date(anneeSectionne)} onDateChange={handleDateChange} />
           </div>
+          <ReusableTable data={historiquePaiement} columns={cols} />
         </div>
       ) : (
         <Page404 />
