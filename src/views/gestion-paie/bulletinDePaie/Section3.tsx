@@ -267,7 +267,6 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
   const irsaAPayerRender = formatNumberWithSpaces(irsaAPayer) || '-'
   const salaireNetRender = formatNumberWithSpaces(salaireNet) || '-'
   const valReductionChargeFamilialeRender = formatNumberWithSpaces(valReductionChargeEnfants) || '-'
-  const avanceRender = formatNumberWithSpaces(avance) || '-'
   const salaireNetAPayerRender = formatNumberWithSpaces(salaireNetAPayer) || '-'
   const totalRetenu = formatNumberWithSpaces(totalDeduction + cnaps + osie + irsaAPayer) || '-'
   const dateDeVirementRender = format(
