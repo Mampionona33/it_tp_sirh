@@ -3,8 +3,6 @@ import { useCallback } from 'react'
 
 const useErrorFormatter = () => {
   const formatErrorMessage = useCallback((error: unknown): string => {
-    console.log(error)
-
     if (error instanceof AxiosError) {
       if (error.response) {
         if (error.response.status) {
