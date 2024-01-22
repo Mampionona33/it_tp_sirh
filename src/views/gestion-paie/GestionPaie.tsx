@@ -11,10 +11,7 @@ import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import { useQuery } from '@tanstack/react-query'
 import employeService from '@src/services/EmployeeService'
 import { AxiosError } from 'axios'
-import { setHistoriqueDePaie } from '@src/redux/historiqueDePaie/historiqueDePaieReducer'
-import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
 import { setListEmployees } from '@src/redux/employees/employeesReducer'
-import { list } from '@material-tailwind/react'
 
 const GestionPaie: React.FC = () => {
   const errorMessageFormatter = useErrorFormatter()

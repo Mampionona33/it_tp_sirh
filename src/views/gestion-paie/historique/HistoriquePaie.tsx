@@ -23,8 +23,8 @@ import {
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
-import historiquePaieService from '@src/services/HistoriquePaieSerivce'
-import { useQuery } from '@tanstack/react-query'
+import useFetchHistorique from '@src/assets/hooks/useFetchHistorique'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieDataProps {
   actions?: React.FC[]
@@ -35,12 +35,20 @@ const HistoriquePaie = () => {
   const { id } = useParams()
   const dispatch = useAppDispatch()
   const { list: listeEmploye } = useAppSelector((store) => store.employeesList)
+  const { anneeSectionne } = useAppSelector((store) => store.historiquePaie)
+
+  const anneeSectionneNumber: number | undefined = useMemo(() => {
+    return new Date(anneeSectionne).getFullYear()
+  }, [anneeSectionne])
+
   const {
-    anneeSectionne,
-    // historiques,
-    error: errorFetchingHistorique,
-  } = useAppSelector((store) => store.historiquePaie)
-  const anneeSectionneNumber: number | undefined = new Date(anneeSectionne).getFullYear()
+    historiques,
+    isLoading,
+    refetch: refetchHistorique,
+    errors,
+  } = useFetchHistorique(id as string, anneeSectionneNumber)
+
+  const formatErrorMessage = useErrorFormatter()
 
   const selectedEmploye = useMemo(
     () =>
@@ -50,59 +58,31 @@ const HistoriquePaie = () => {
     [listeEmploye, id],
   )
 
-  const {
-    data: historiques,
-    isLoading,
-    isError,
-    refetch,
-  } = useQuery({
-    queryKey: ['historiques'],
-    queryFn: async () => {
-      try {
-        const historiques = await historiquePaieService.getAllByUserIDAndDate({
-          id,
-          annee: anneeSectionneNumber,
-        })
-        dispatch(setHistoriqueDePaie({ historiques: historiques.data } as IHistoriquePaieProps))
-        return historiques
-      } catch (error) {
-        dispatch(
-          setHistoriqueDePaie({
-            error: error,
-            loading: 'failed',
-            historiques: [],
-          } as IHistoriquePaieProps),
-        )
-        // Throwing the error here to propagate it to the parent component
-        throw error
-      }
-    },
-    // historiquePaieService
-    //   .getAllByUserIDAndDate({ id, annee: anneeSectionneNumber })
-    //   .then((resp) => {
-    //     dispatch(
-    //       setHistoriqueDePaie({
-    //         historiques: resp.data,
-    //         loading: 'succeeded',
-    //         error: null,
-    //       } as IHistoriquePaieProps),
-    //     )
-    //   })
-    //   .catch((error) => {
-    //     dispatch(
-    //       setHistoriqueDePaie({
-    //         error: error,
-    //         loading: 'failed',
-    //         historiques: [],
-    //       } as IHistoriquePaieProps),
-    //     )
-    //     // Throwing the error here to propagate it to the parent component
-    //     throw error
-    //   }),
-  })
+  const updateHistoriqueStore = useCallback(() => {
+    if (historiques) {
+      dispatch(
+        setHistoriqueDePaie({
+          historiques: historiques,
+          anneeSectionne: anneeSectionne,
+          loading: 'succeeded',
+          error: null,
+        } as IHistoriquePaieProps),
+      )
+    }
+    if (errors) {
+      dispatch(
+        setHistoriqueDePaie({
+          historiques: [],
+          loading: 'failed',
+          error: errors,
+        } as IHistoriquePaieProps),
+      )
+    }
+  }, [dispatch, historiques, anneeSectionne, errors])
 
   useEffect(() => {
     dispatch(resetBulletinDePaie())
+    updateHistoriqueStore()
 
     isEmployeExist &&
       dispatch(
@@ -111,10 +91,19 @@ const HistoriquePaie = () => {
           salaireDeBase: selectedEmploye.salaire_de_base,
         } as IBulletinDePaieProps),
       )
-  }, [id, isEmployeExist, dispatch, anneeSectionne, selectedEmploye, anneeSectionneNumber])
+  }, [
+    id,
+    isEmployeExist,
+    dispatch,
+    anneeSectionne,
+    selectedEmploye,
+    anneeSectionneNumber,
+    updateHistoriqueStore,
+  ])
 
   const handleDateChange = (date: Date) => {
     dispatch(setHistoriqueDePaie({ anneeSectionne: date.toString() } as IHistoriquePaieProps))
+    refetchHistorique()
   }
 
   const generateRows = useCallback(() => {
@@ -131,11 +120,13 @@ const HistoriquePaie = () => {
 
     const mergeWithHistoricalData = (row) => {
       if (historiques) {
-        const matchingHistoricalData = Object.values(historiques).find((data) => {
-          return (
-            Number(new Date(data.annee).getFullYear()) === selectedYear && data.mois === row.mois
-          )
-        })
+        const matchingHistoricalData = Object.values(historiques).find(
+          (data: IHistoriquePaieDataProps) => {
+            return (
+              Number(new Date(data.annee).getFullYear()) === selectedYear && data.mois === row.mois
+            )
+          },
+        )
 
         return matchingHistoricalData ? matchingHistoricalData : row
       } else {
@@ -215,10 +206,14 @@ const HistoriquePaie = () => {
     )
   }
 
+  // if (errors) {
+  //   console.error('Une erreur est survenue :', errors)
+  // }
+
   return (
     <div>
-      {errorFetchingHistorique ? (
-        <CAlert color="danger">{errorFetchingHistorique.message}</CAlert>
+      {errors ? (
+        <CAlert color="danger">{formatErrorMessage(errors)}</CAlert>
       ) : isEmployeExist ? (
         <div>
           <div className="flex p-2 justify-end">
