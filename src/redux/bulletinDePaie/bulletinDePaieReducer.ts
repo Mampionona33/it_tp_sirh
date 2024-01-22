@@ -50,7 +50,7 @@ const initialState: IBulletinDePaieProps = {
     },
     avance: 0,
   },
-  dateDeVirement: 0,
+  dateDeVirement: null,
   salaireDeBase: 0,
   valReductionChargeEnfants: 0,
   montanReductionChargeParEnfant: 2000,

@@ -1188,7 +1188,7 @@
       "validation": {
         "status": "oui",
         "date": "2023-01-01",
-        "day": "2024-01-21"
+        "day": "2024-01-23"
       },
       "employeur": {
         "nom": " LA LIGNE SCANDINAVE",
@@ -1256,7 +1256,7 @@
         "nom_pere": "Razanajafy",
         "mode_paiement_salaire": "Virement banquaire"
       },
-      "dateDeVirement": 0,
+      "dateDeVirement": "2024-01-23",
       "salaireDeBase": 250000,
       "valReductionChargeEnfants": 2000,
       "montanReductionChargeParEnfant": 2000,
@@ -1281,47 +1281,47 @@
       "valHdim": 33462.18,
       "valHFerie": 12981.02,
       "totalPrimeEtAvantage": 0,
-      "totalDeduction": 15000,
+      "totalDeduction": 0,
       "tauxCnaps": 0.01,
       "tauxOsie": 0.01,
-      "baseCnaps": 509011.95,
+      "baseCnaps": 371011.95,
       "avance": {
-        "quinzaine": 100000,
+        "quinzaine": 0,
         "speciale": 0
       },
       "reduChargeFamil": 0,
-      "baseIrsa": 450363.15,
-      "baseIrsaArrondi": 450300,
-      "salaireBrut": 509011.95000000007,
-      "salaireNet": 491891.93000000005,
+      "baseIrsa": 313743.15,
+      "baseIrsaArrondi": 313700,
+      "salaireBrut": 371011.95000000007,
+      "salaireNet": 359801.8300000001,
       "osie": 2500,
-      "salaireNetAPayer": 391891.93,
+      "salaireNetAPayer": 359801.83,
       "valMinIrsaParTranche": 3000,
       "plafondSME": 1910400,
-      "irsaAPayer": 7529.900000000001,
-      "cnaps": 5090.12,
-      "rappel": 50000,
+      "irsaAPayer": 3000,
+      "cnaps": 3710.12,
+      "rappel": 0,
       "indemnites": {
-        "transport": 10000,
-        "autresIndemnite": 3000
+        "transport": 0,
+        "autresIndemnite": 0
       },
-      "totalIndemnite": 13000,
+      "totalIndemnite": 0,
       "primeEtGratification": {
-        "assiduite": 50000,
-        "excellence": 14000
+        "assiduite": 0,
+        "excellence": 0
       },
-      "totalPrimeEtGratification": 64000,
+      "totalPrimeEtGratification": 0,
       "deductions": {
-        "absence": 10000,
-        "retard": 5000
+        "absence": 0,
+        "retard": 0
       },
       "avantages": {
-        "domestique": 3000,
-        "logement": 12000,
-        "vehicule": 7000,
-        "autresAvantages": 4000
+        "domestique": 0,
+        "logement": 0,
+        "vehicule": 0,
+        "autresAvantages": 0
       },
-      "totalAvantages": 26000,
+      "totalAvantages": 0,
       "totalHTravailEffectif": 212,
       "tableauHsHebdo": [
         {
@@ -1374,16 +1374,6 @@
           "tolalHs": 6
         }
       ],
-      "transport": 10000,
-      "autresIndemnite": 300,
-      "assiduite": 50000,
-      "excellence": 14000,
-      "absence": 10000,
-      "retard": 5000,
-      "domestique": 3000,
-      "logement": 12000,
-      "vehicule": 7000,
-      "autresAvantages": 4000,
       "id": 1
     }
   ],

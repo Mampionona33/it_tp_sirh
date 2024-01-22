@@ -12,7 +12,7 @@ export interface IBulletinDePaieProps {
   }
   salarie?: IEmploye
   montanReductionChargeParEnfant?: number
-  dateDeVirement?: string | number | null
+  dateDeVirement?: string | null
   salaireDeBase: number
   totalHn: number
   valReductionChargeEnfants: number
