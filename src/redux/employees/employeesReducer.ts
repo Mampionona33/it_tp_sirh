@@ -5,7 +5,6 @@ import {
   fetchAllEmployees,
   updateEmployee,
 } from './employeesAction'
-import { IEmploye } from '@src/interfaces/interfaceEmploye'
 
 const initialState = {
   list: [],

@@ -11,6 +11,10 @@ import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import { useQuery } from '@tanstack/react-query'
 import employeService from '@src/services/EmployeeService'
 import { AxiosError } from 'axios'
+import { setHistoriqueDePaie } from '@src/redux/historiqueDePaie/historiqueDePaieReducer'
+import { IHistoriquePaieProps } from '@src/interfaces/interfaceHistoriquePaie'
+import { setListEmployees } from '@src/redux/employees/employeesReducer'
+import { list } from '@material-tailwind/react'
 
 const GestionPaie: React.FC = () => {
   const errorMessageFormatter = useErrorFormatter()
@@ -24,7 +28,30 @@ const GestionPaie: React.FC = () => {
     error: errorLoadingListEmployee,
   } = useQuery({
     queryKey: ['employes'],
-    queryFn: () => employeService.getAll(),
+    queryFn: async () => {
+      try {
+        const list = await employeService.getAll()
+        if (list) {
+          dispatch(
+            setListEmployees({
+              list: Object.values(list),
+              loading: 'success',
+              error: null,
+            }),
+          )
+        }
+        return list
+      } catch (error) {
+        dispatch(
+          setListEmployees({
+            list: [],
+            loading: 'failed',
+            error: error as AxiosError,
+          }),
+        )
+        throw error
+      }
+    },
   })
 
   const actifEmployes = useMemo(() => {
@@ -74,8 +101,6 @@ const GestionPaie: React.FC = () => {
   if (isLoading) {
     return <Loading />
   }
-
-  errorLoadingListEmployee && console.log('errorLoadingListEmployee', errorLoadingListEmployee)
 
   return (
     <div>

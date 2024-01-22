@@ -37,7 +37,7 @@ const HistoriquePaie = () => {
   const { list: listeEmploye } = useAppSelector((store) => store.employeesList)
   const {
     anneeSectionne,
-    historiques,
+    // historiques,
     error: errorFetchingHistorique,
   } = useAppSelector((store) => store.historiquePaie)
   const anneeSectionneNumber: number | undefined = new Date(anneeSectionne).getFullYear()
@@ -50,31 +50,55 @@ const HistoriquePaie = () => {
     [listeEmploye, id],
   )
 
-  const { data, isLoading, isError, refetch } = useQuery({
+  const {
+    data: historiques,
+    isLoading,
+    isError,
+    refetch,
+  } = useQuery({
     queryKey: ['historiques'],
-    queryFn: () =>
-      historiquePaieService
-        .getAllByUserIDAndDate({ id, annee: anneeSectionneNumber })
-        .then((resp) => {
-          dispatch(
-            setHistoriqueDePaie({
-              historiques: resp.data,
-              loading: 'succeeded',
-              error: null,
-            } as IHistoriquePaieProps),
-          )
+    queryFn: async () => {
+      try {
+        const historiques = await historiquePaieService.getAllByUserIDAndDate({
+          id,
+          annee: anneeSectionneNumber,
         })
-        .catch((error) => {
-          dispatch(
-            setHistoriqueDePaie({
-              error: error,
-              loading: 'failed',
-              historiques: [],
-            } as IHistoriquePaieProps),
-          )
-          // Throwing the error here to propagate it to the parent component
-          throw error
-        }),
+        dispatch(setHistoriqueDePaie({ historiques: historiques.data } as IHistoriquePaieProps))
+        return historiques
+      } catch (error) {
+        dispatch(
+          setHistoriqueDePaie({
+            error: error,
+            loading: 'failed',
+            historiques: [],
+          } as IHistoriquePaieProps),
+        )
+        // Throwing the error here to propagate it to the parent component
+        throw error
+      }
+    },
+    // historiquePaieService
+    //   .getAllByUserIDAndDate({ id, annee: anneeSectionneNumber })
+    //   .then((resp) => {
+    //     dispatch(
+    //       setHistoriqueDePaie({
+    //         historiques: resp.data,
+    //         loading: 'succeeded',
+    //         error: null,
+    //       } as IHistoriquePaieProps),
+    //     )
+    //   })
+    //   .catch((error) => {
+    //     dispatch(
+    //       setHistoriqueDePaie({
+    //         error: error,
+    //         loading: 'failed',
+    //         historiques: [],
+    //       } as IHistoriquePaieProps),
+    //     )
+    //     // Throwing the error here to propagate it to the parent component
+    //     throw error
+    //   }),
   })
 
   useEffect(() => {
@@ -107,7 +131,7 @@ const HistoriquePaie = () => {
 
     const mergeWithHistoricalData = (row) => {
       if (historiques) {
-        const matchingHistoricalData = historiques.find((data) => {
+        const matchingHistoricalData = Object.values(historiques).find((data) => {
           return (
             Number(new Date(data.annee).getFullYear()) === selectedYear && data.mois === row.mois
           )
