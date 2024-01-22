@@ -47,23 +47,39 @@ class HistoriquePaieController {
 
   getDetailsById = (req: Request, res: Response) => {
     const { id, annee, mois } = req.params
+
+    // Vérifier si les paramètres nécessaires sont fournis et valides
+    if (!id || isNaN(Number(id)) || !annee || isNaN(Number(annee)) || !mois) {
+      return res.status(400).send({ error: 'Paramètres invalides ou manquants.' })
+    }
+
     const listBulletinDePaie: IBulletinDePaieProps[] = this.db['bulletinDePaie']
 
-    const data = listBulletinDePaie.filter((blt) => {
+    let data: IBulletinDePaieProps | undefined
+
+    listBulletinDePaie.forEach((blt) => {
       const salarieId = String(blt.salarie?.id)
       const validationDate = blt.validation?.date || ''
 
       const validAnne = new Date(validationDate).getFullYear()
-      const validMonth = format(new Date(validationDate).getMonth() - 1, 'MMMM', { locale: fr })
-      console.log(validationDate)
+      const validMonth = format(new Date(validationDate), 'MMMM', { locale: fr })
 
-      if (salarieId === String(id) && validAnne === Number(annee) && validMonth === mois) {
-        return true
+      if (
+        salarieId === String(id) &&
+        validAnne === Number(annee) &&
+        validMonth.toLowerCase() === mois.toLowerCase()
+      ) {
+        data = blt
+        return
       }
+    })
 
-      return false
-    })[0]
     console.log(data)
+
+    if (!data) {
+      // Aucun bulletin de paie correspondant trouvé
+      return res.status(404).send({ error: 'Bulletin de paie non trouvé.' })
+    }
 
     res.status(200).send(data)
   }

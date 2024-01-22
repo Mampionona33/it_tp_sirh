@@ -33,7 +33,7 @@ import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
-  const { salarie, dateDeVirement } = useAppSelector((store) => store.bulletinDePaie)
+  const { salarie, dateDeVirement, validation } = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
   const { loading: loadingListEmploye, error: errorFetchingListEmployee } = useAppSelector(
     (store) => store.employeesList,
@@ -214,12 +214,17 @@ const ValidePaie = () => {
 
     const validationStatus = EnumBoolean.OUI
     const validationDate = dateValidation
-    const validationDay = format(new Date(), 'yyyy-MM-dd')
-    console.log(validationDate, validationDay)
+    const validationDay = validation.day ?? format(new Date(), 'yyyy-MM-dd')
+    const validDateDevirement = dateDeVirement ?? format(new Date(), 'yyyy-MM-dd')
 
     dispatch(
       setBulletinDePaie({
-        validation: { status: validationStatus, date: validationDate, day: validationDay },
+        dateDeVirement: validDateDevirement,
+        validation: {
+          status: validationStatus,
+          date: validationDate,
+          day: validationDay,
+        },
       } as IBulletinDePaieProps),
     )
 

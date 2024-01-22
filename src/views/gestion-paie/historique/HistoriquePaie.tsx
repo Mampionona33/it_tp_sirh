@@ -206,10 +206,6 @@ const HistoriquePaie = () => {
     )
   }
 
-  // if (errors) {
-  //   console.error('Une erreur est survenue :', errors)
-  // }
-
   return (
     <div>
       {errors ? (
