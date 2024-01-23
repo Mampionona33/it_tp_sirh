@@ -39,7 +39,7 @@ const BulletinPaie = () => {
   const A4_HEIGHT_MM = 297
   // const A4_WIDTH_MM = 210
   const a4HeightInPixels = A4_HEIGHT_MM * MM_TO_PIXEL_CONVERSION
-  const mode_paiement_salaire = bulletinDePaie.salarie.mode_payement_salaire
+  const mode_paiement_salaire = bulletinDePaie.salarie.mode_paiement_salaire
   const { modeDePayement, errors, isLoading, isError, refetch } =
     useFetchModeDePayement(mode_paiement_salaire)
 

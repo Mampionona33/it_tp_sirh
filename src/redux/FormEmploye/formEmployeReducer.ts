@@ -24,7 +24,7 @@ export const initialState: IEmploye = {
   lieu_travail: '',
   salaire_de_base: 0,
   travail_de_nuit: EnumBoolean.NON,
-  mode_payement_salaire: '',
+  mode_paiement_salaire: '',
   actif: EnumBoolean.OUI,
   departement: '',
   num_cnaps: '',

@@ -1227,7 +1227,7 @@
         "lieu_travail": "Toamasina",
         "salaire_de_base": 250000,
         "travail_de_nuit": "non",
-        "mode_payement_salaire": "cheque",
+        "mode_paiement_salaire": "cheque",
         "actif": "oui",
         "departement": "Logistique",
         "num_cnaps": "960101059745",

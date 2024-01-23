@@ -54,7 +54,7 @@ const InformationPaie = () => {
       name: 'mode_paiement_salaire',
       type: 'select',
       required: true,
-      value: formEmploye.mode_payement_salaire,
+      value: formEmploye.mode_paiement_salaire,
       options: listModeDePayement,
       placeholder: 'Mode de paiement',
       onSelectChange: handleModePaiementChange,
