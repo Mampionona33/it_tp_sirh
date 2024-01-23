@@ -26,7 +26,7 @@ const InformationPaie = () => {
   }
 
   const handleModePaiementChange = (selectedOption: IInputWithLabelOptionsProps) => {
-    dispatch(setFormEmploye({ ...formEmploye, mode_payement_salaire: selectedOption.value }))
+    dispatch(setFormEmploye({ ...formEmploye, mode_paiement_salaire: selectedOption.value }))
   }
 
   const inputs: IInputWithLabelProps[] = [
