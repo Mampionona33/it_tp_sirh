@@ -6,7 +6,20 @@ export interface IInputWithLabelProps extends React.HTMLProps<HTMLInputElement> 
   dynamiqueId?: boolean
   label: string
   name: string
-  type: string
+  type:
+    | 'select'
+    | 'text'
+    | 'number'
+    | 'email'
+    | 'password'
+    | 'file'
+    | 'radio'
+    | 'checkbox'
+    | 'submit'
+    | 'reset'
+    | 'button'
+    | 'hidden'
+    | 'date'
   required?: boolean
   autoComplete?: string
   value?: any
@@ -21,6 +34,7 @@ export interface IInputWithLabelProps extends React.HTMLProps<HTMLInputElement> 
 }
 
 export interface IInputWithLabelOptionsProps {
+  id?: number | string
   label: string | number
   value: string | number
 }
@@ -191,7 +205,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
               colors: {
                 ...theme.colors,
                 primary25: '#FFF2F2',
-                primary: '#FEBABA',
+                primary: '#da200d',
               },
             })}
           />

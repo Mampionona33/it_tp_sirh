@@ -1,11 +1,33 @@
 import React from 'react'
-import InputWithLabel, { IInputWithLabelProps } from './InputWithLable'
+import InputWithLabel, { IInputWithLabelOptionsProps, IInputWithLabelProps } from './InputWithLable'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 
 const InformationPaie = () => {
   const dispatch = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
+
+  const modeDePayementOptions: IInputWithLabelOptionsProps[] = [
+    { id: 1, label: 'Espece', value: 'espece' },
+    { id: 2, label: 'Cheque', value: 'cheque' },
+    { id: 3, label: 'Virement bancaire', value: 'virement_bancaire' },
+    { id: 4, label: 'Mobile money', value: 'mobile_money' },
+  ]
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
+    const { name, value } = event.target ?? { name: '', value: '' }
+
+    dispatch(
+      setFormEmploye({
+        ...formEmploye,
+        [name]: value,
+      }),
+    )
+  }
+
+  const handleModePaiementChange = (selectedOption: IInputWithLabelOptionsProps) => {
+    dispatch(setFormEmploye({ ...formEmploye, mode_paiement_salaire: selectedOption.value }))
+  }
 
   const inputs: IInputWithLabelProps[] = [
     {
@@ -29,11 +51,13 @@ const InformationPaie = () => {
     {
       id: 'mode_paiement_salaire',
       label: 'Mode de paiement',
-      value: formEmploye.mode_paiement_salaire,
       name: 'mode_paiement_salaire',
-      type: 'text',
+      type: 'select',
       required: true,
+      value: formEmploye.mode_paiement_salaire,
+      options: modeDePayementOptions,
       placeholder: 'Mode de paiement',
+      onSelectChange: handleModePaiementChange,
     },
     {
       id: 'num_cnaps',
@@ -45,16 +69,6 @@ const InformationPaie = () => {
     },
   ]
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const { name, value } = event.target ?? { name: '', value: '' }
-
-    dispatch(
-      setFormEmploye({
-        ...formEmploye,
-        [name]: value,
-      }),
-    )
-  }
   return (
     <>
       <div className="flex flex-col border-y border-y-customBlue-200 mt-4 shadow-sm py-4">
