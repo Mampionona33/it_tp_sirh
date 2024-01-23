@@ -23,12 +23,15 @@ class ModeDePayementService {
 
   getOneByVal = async (value: string) => {
     try {
-      const response = await axios.get(`${this.REACT_APP_API_BASE_URL}/mode-de-payement/${value}`, {
-        auth: {
-          username: this.login,
-          password: this.pass,
+      const response = await axios.get(
+        `${this.REACT_APP_API_BASE_URL_DEV}/mode-de-payement/${value}`,
+        {
+          auth: {
+            username: this.login,
+            password: this.pass,
+          },
         },
-      })
+      )
       return response
     } catch (error) {
       throw error
