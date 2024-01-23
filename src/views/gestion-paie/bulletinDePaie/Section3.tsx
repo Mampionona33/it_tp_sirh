@@ -6,6 +6,8 @@ import ReactPDF, { Text, View, StyleSheet } from '@react-pdf/renderer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import formatNumberWithSpaces from '@src/utils/formatNumberWithSpaces'
 import { ToWords } from 'to-words'
+import SlugUtility from '@src/utils/SlugUtility'
+import { IInputWithLabelOptionsProps } from '@src/interfaces/interfaceEmploye'
 
 const Header = () => {
   return (
@@ -206,6 +208,7 @@ const Row = (props: IRowProps) => {
 
 interface IBodyProps {
   data: IBulletinDePaieProps
+  modeDePayment: IInputWithLabelOptionsProps
 }
 
 const Divider = () => {
@@ -229,7 +232,7 @@ const Divider = () => {
   return rows
 }
 
-const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) => {
+const Body = ({ data: bodyData, modeDePayment }: IBodyProps & { data: IBulletinDePaieProps }) => {
   const {
     primeEtGratification,
     totalDeduction,
@@ -249,6 +252,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
     salaireBrut,
     dateDeVirement,
     salaireDeBase,
+    salarie,
   } = bodyData
 
   const salaireDeBaseRender = salaireDeBase ? formatNumberWithSpaces(salaireDeBase) || '-' : '-'
@@ -291,6 +295,8 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
         valReductionChargeEnfants +
         rappel,
     ) || '-'
+
+  const modeDePayementRender = modeDePayment.label.toString().toLowerCase()
 
   const toWord = new ToWords({
     localeCode: 'fr-FR',
@@ -392,7 +398,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
 
         <Row
           cell4={'Net à payer'}
-          cell1={`Payé par virement bancaire le : ${dateDeVirementRender}`}
+          cell1={`Payé par ${modeDePayementRender} le : ${dateDeVirementRender}`}
           cell7={salaireNetAPayerRender}
           styleCell1={[
             styles.textItalic,
@@ -471,14 +477,15 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
 
 interface ISection3 {
   data: IBulletinDePaieProps
+  modeDePayment: IInputWithLabelOptionsProps
 }
-const Section3 = ({ data }: ISection3) => {
+const Section3 = ({ data, modeDePayment }: ISection3) => {
   setDefaultOptions({ locale: fr })
 
   return (
     <View>
       <Header />
-      <Body data={data} />
+      <Body data={data} modeDePayment={modeDePayment} />
     </View>
   )
 }

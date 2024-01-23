@@ -1188,7 +1188,7 @@
       "validation": {
         "status": "oui",
         "date": "2023-01-01",
-        "day": "2024-01-23"
+        "day": "2024-01-24"
       },
       "employeur": {
         "nom": " LA LIGNE SCANDINAVE",
@@ -1227,7 +1227,7 @@
         "lieu_travail": "Toamasina",
         "salaire_de_base": 250000,
         "travail_de_nuit": "non",
-        "mode_payement_salaire": "Virement banquaire",
+        "mode_payement_salaire": "cheque",
         "actif": "oui",
         "departement": "Logistique",
         "num_cnaps": "960101059745",
@@ -1253,10 +1253,9 @@
         "cadre": true,
         "date_delivrance_cin": "2023-12-14",
         "nom_mere": "dffs",
-        "nom_pere": "Razanajafy",
-        "mode_paiement_salaire": "Virement banquaire"
+        "nom_pere": "Razanajafy"
       },
-      "dateDeVirement": "2024-01-23",
+      "dateDeVirement": "2024-01-24",
       "salaireDeBase": 250000,
       "valReductionChargeEnfants": 2000,
       "montanReductionChargeParEnfant": 2000,
@@ -1407,7 +1406,7 @@
       "lieu_travail": "Toamasina",
       "salaire_de_base": 250000,
       "travail_de_nuit": "non",
-      "mode_payement_salaire": "virement_bancaire",
+      "mode_payement_salaire": "cheque",
       "actif": "oui",
       "departement": "Logistique",
       "num_cnaps": "960101059745",
@@ -1433,8 +1432,7 @@
       "cadre": true,
       "date_delivrance_cin": "2023-12-14",
       "nom_mere": "dffs",
-      "nom_pere": "Razanajafy",
-      "mode_paiement_salaire": "virement_bancaire"
+      "nom_pere": "Razanajafy"
     },
     {
       "id": 2,
@@ -1640,6 +1638,28 @@
       "nom_mere": "",
       "nom_pere": "",
       "mode_paiement_salaire": ""
+    }
+  ],
+  "modeDePayement": [
+    {
+      "id": 1,
+      "label": "Espece",
+      "value": "espece"
+    },
+    {
+      "id": 2,
+      "label": "Chèque",
+      "value": "cheque"
+    },
+    {
+      "id": 3,
+      "label": "Virement bancaire",
+      "value": "virement_bancaire"
+    },
+    {
+      "id": 4,
+      "label": "Mobile money",
+      "value": "mobile_money"
     }
   ]
 }
