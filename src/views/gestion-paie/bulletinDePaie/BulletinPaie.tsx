@@ -10,7 +10,6 @@ import { useAppSelector } from '@src/hooks/useAppDispatch'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 
-
 // Create Document Component
 interface IMydocumentProps {
   data: IBulletinDePaieProps

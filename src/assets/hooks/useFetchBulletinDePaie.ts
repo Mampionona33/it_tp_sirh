@@ -1,0 +1,59 @@
+import historiquePaieService from '@src/services/HistoriquePaieSerivce'
+import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
+
+export interface useFetchBulletinDePaieProps {
+  id: string
+  annee: number
+  mois:
+    | 'janvier'
+    | 'février'
+    | 'mars'
+    | 'avril'
+    | 'mai'
+    | 'juin'
+    | 'juillet'
+    | 'aôut'
+    | 'septembre'
+    | 'octobre'
+    | 'novembre'
+    | 'décembre'
+}
+
+const useFetchBulletinDePaie = (params: useFetchBulletinDePaieProps) => {
+  const { id, annee, mois } = params
+  const [bulletinDePaie, setBulletinDePaie] = useState(null)
+
+  const { data, isLoading, refetch, isError, error } = useQuery({
+    queryKey: ['bulletinDePaie', id, annee, mois],
+    queryFn: async () => {
+      try {
+        const response = await historiquePaieService.getOnByUserIdAndBltinPaieId({
+          id,
+          annee,
+          mois,
+        })
+        setBulletinDePaie(response.data)
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
+  })
+
+  useEffect(() => {
+    if (data) {
+      setBulletinDePaie(data.data)
+    }
+  }, [data])
+
+  return {
+    bulletinDePaie,
+    isLoading,
+    refetch,
+    isError,
+    error,
+  }
+}
+
+export default useFetchBulletinDePaie
