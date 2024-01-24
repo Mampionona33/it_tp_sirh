@@ -155,6 +155,33 @@ class EmployerWorksheet implements Partial<Worksheet> {
     this.sheet.getCell('F26').value = { formula: 'SUM(F23:F25)' }
     this.sheet.getCell('F26').font = { size: 10, name: 'Arial' }
 
+    Array.from(['C18', 'D18', 'E18']).forEach((cell) => {
+      this.sheet.getCell(cell).border = {
+        top: { style: 'thin' },
+        left: { style: 'thin' },
+        bottom: { style: 'thin' },
+        right: { style: 'thin' },
+      }
+    })
+
+    for (let i = 22; i <= 25; i++) {
+      Array.from([`B${i}`, `C${i}`, `D${i}`, `E${i}`, `F${i}`]).forEach((cell) => {
+        this.sheet.getCell(cell).border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' },
+          right: { style: 'thin' },
+        }
+      })
+    }
+
+    this.sheet.getCell('F26').border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' },
+    }
+
     this.sheet.getColumn('A').width = 5.5
     this.sheet.getColumn('B').width = 25.5
     this.sheet.getColumn('C').width =
