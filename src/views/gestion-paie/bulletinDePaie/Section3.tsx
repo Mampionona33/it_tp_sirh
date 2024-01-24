@@ -208,7 +208,6 @@ const Row = (props: IRowProps) => {
 
 interface IBodyProps {
   data: IBulletinDePaieProps
-  modeDePayment: IInputWithLabelOptionsProps
 }
 
 const Divider = () => {
@@ -232,7 +231,7 @@ const Divider = () => {
   return rows
 }
 
-const Body = ({ data: bodyData, modeDePayment }: IBodyProps & { data: IBulletinDePaieProps }) => {
+const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) => {
   const {
     primeEtGratification,
     totalDeduction,
@@ -296,7 +295,7 @@ const Body = ({ data: bodyData, modeDePayment }: IBodyProps & { data: IBulletinD
         rappel,
     ) || '-'
 
-  const modeDePayementRender = modeDePayment.label.toString().toLowerCase()
+  const modeDePayementRender = salarie.mode_paiement_salaire || 'virement bancaire'
 
   const toWord = new ToWords({
     localeCode: 'fr-FR',
@@ -477,15 +476,14 @@ const Body = ({ data: bodyData, modeDePayment }: IBodyProps & { data: IBulletinD
 
 interface ISection3 {
   data: IBulletinDePaieProps
-  modeDePayment: IInputWithLabelOptionsProps
 }
-const Section3 = ({ data, modeDePayment }: ISection3) => {
+const Section3 = ({ data }: ISection3) => {
   setDefaultOptions({ locale: fr })
 
   return (
     <View>
       <Header />
-      <Body data={data} modeDePayment={modeDePayment} />
+      <Body data={data} />
     </View>
   )
 }
