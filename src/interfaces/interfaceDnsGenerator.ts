@@ -17,10 +17,11 @@ export interface IDnsGeneratorTravailleurProps {
   prenom: string
   date_embauche: string
   date_depart: any
-  salaire_de_base: number
+  salaire_du_mois: number
   avantage_du_mois: number
   temps_presence: number
   hs_non_plafonne: number
+  plafondSme?: number
   hs_plafonne: number
   num_cnaps: string
   cin: string

@@ -13,6 +13,8 @@ import {
   IDnsGeneratorTravailleurProps,
 } from '@src/interfaces/interfaceDnsGenerator'
 import { IDnsState, setDns } from '@src/redux/dns/dnsReducers'
+import { format, getMonth, parse } from 'date-fns'
+import { fr } from 'date-fns/locale'
 
 class DnsGenerator extends Component {
   private store: Store
@@ -66,15 +68,15 @@ class DnsGenerator extends Component {
     })
   }
 
-  private getEmployeurData = (): IDnsGeneratorEmployeurData[] | [] => {
-    let data: IDnsGeneratorEmployeurData[] = []
+  // private getEmployeurData = (): IDnsGeneratorEmployeurData[] | [] => {
+  //   let data: IDnsGeneratorEmployeurData[] = []
 
-    if (this.dnsData.employeur.length > 0) {
-      data = this.dnsData.employeur
-    }
+  //   if (this.dnsData.employeur.length > 0) {
+  //     data = this.dnsData.employeur
+  //   }
 
-    return data
-  }
+  //   return data
+  // }
 
   private isSalariesDataExist = (): boolean => {
     return this.dnsData !== null
@@ -116,48 +118,122 @@ class DnsGenerator extends Component {
     return listSalarieMois3
   }
 
-  private formatPeriod = (): string => {
-    let periode = ''
-    switch (this.periodSelectionne) {
-      case 't1':
-        periode = '01-' + String(this.anneeSelectionne)
-        break
-      case 't2':
-        periode = '02-' + String(this.anneeSelectionne)
-        break
-      case 't3':
-        periode = '03-' + String(this.anneeSelectionne)
-        break
-      case 't4':
-        periode = '04-' + String(this.anneeSelectionne)
-        break
-      default:
-        break
+  // private formatPeriod = (): string => {
+  //   let periode = ''
+  //   switch (this.periodSelectionne) {
+  //     case 't1':
+  //       periode = '01-' + String(this.anneeSelectionne)
+  //       break
+  //     case 't2':
+  //       periode = '02-' + String(this.anneeSelectionne)
+  //       break
+  //     case 't3':
+  //       periode = '03-' + String(this.anneeSelectionne)
+  //       break
+  //     case 't4':
+  //       periode = '04-' + String(this.anneeSelectionne)
+  //       break
+  //     default:
+  //       break
+  //   }
+  //   return periode
+  // }
+
+  private formateAnneMois = (mois: string, annee: string): string => {
+    let moisNumber = ''
+    if (mois && annee) {
+      const moisEnDate = parse(`${mois} ${annee}`, 'MMMM yyyy', new Date(), { locale: fr })
+      moisNumber = format(moisEnDate, 'yyyyMM', { locale: fr })
     }
-    return periode
+    return moisNumber
   }
+
+  private writeSalarieDataToWorksheet(
+    salaries: IDnsGeneratorTravailleurProps[],
+    monthWorksheet: MonthWorksheet,
+  ): void {
+    salaries.forEach((salarie, index) => {
+      if (salarie.mois && salarie.annee) {
+        const anneeMois = this.formateAnneMois(salarie.mois, salarie.annee)
+        monthWorksheet.workSheet.getCell(`A${index + 3}`).value = anneeMois
+      }
+      if (salarie.nom) {
+        monthWorksheet.workSheet.getCell(`B${index + 3}`).value = salarie.nom.toUpperCase()
+      }
+      if (salarie.prenom) {
+        monthWorksheet.workSheet.getCell(`C${index + 3}`).value = salarie.prenom.toUpperCase()
+      }
+      if (salarie.num_cnaps) {
+        monthWorksheet.workSheet.getCell(`D${index + 3}`).value = salarie.num_cnaps
+      }
+      if (salarie.ref_employeur) {
+        monthWorksheet.workSheet.getCell(`E${index + 3}`).value = salarie.ref_employeur
+      }
+      if (salarie.date_embauche) {
+        monthWorksheet.workSheet.getCell(`F${index + 3}`).value = salarie.date_embauche
+      }
+      if (salarie.date_depart) {
+        monthWorksheet.workSheet.getCell(`G${index + 3}`).value = salarie.date_depart
+      }
+      if (salarie.salaire_du_mois) {
+        monthWorksheet.workSheet.getCell(`H${index + 3}`).value = salarie.salaire_du_mois
+      }
+      if (salarie.avantage_du_mois) {
+        monthWorksheet.workSheet.getCell(`I${index + 3}`).value = salarie.avantage_du_mois
+      }
+      if (salarie.temps_presence) {
+        monthWorksheet.workSheet.getCell(`J${index + 3}`).value = salarie.temps_presence
+      }
+      if (salarie.hs_non_plafonne) {
+        monthWorksheet.workSheet.getCell(`K${index + 3}`).value = {
+          formula: `=H${index + 3} - I${index + 3}`,
+        }
+      }
+      if (salarie.hs_plafonne && salarie.hs_plafonne) {
+        const plafondSme = salarie.plafondSme || 1940000
+        monthWorksheet.workSheet.getCell(`L${index + 3}`).value = {
+          formula: `=IF(K${index + 3} <= ${plafondSme}, K${index + 3}, ${plafondSme})`,
+        }
+      }
+      if (salarie.hs_plafonne && salarie.taux_cotisation_cnaps_employeur) {
+        const tauxCotisationEmployeur = salarie.taux_cotisation_cnaps_employeur || 0.13
+        monthWorksheet.workSheet.getCell(`M${index + 3}`).value = {
+          formula: `=L${index + 3} * ${tauxCotisationEmployeur}`,
+        }
+      }
+      if (salarie.hs_non_plafonne) {
+        const tauxCotisationSalarie = salarie.taux_cotisation_cnaps_salarie || 0.01
+        monthWorksheet.workSheet.getCell(`N${index + 3}`).value = {
+          formula: `=L${index + 3} * ${tauxCotisationSalarie}`,
+        }
+      }
+      if (salarie.hs_plafonne && salarie.taux_cotisation_cnaps_salarie) {
+        monthWorksheet.workSheet.getCell(`O${index + 3}`).value = {
+          formula: `=M${index + 3} + N${index + 3}`,
+        }
+      }
+      if (salarie.cin) {
+        monthWorksheet.workSheet.getCell(`P${index + 3}`).value = salarie.cin
+      }
+    })
+  }
+
+  private writeDataToSheet1 = () => {}
 
   private handelDownload = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    const employeurData = this.getEmployeurData()
-
-    const periode = this.formatPeriod()
 
     const listSalarieMois1 = this.getListSalarieMois1()
     const listSalarieMois2 = this.getListSalarieMois2()
     const listSalarieMois3 = this.getListSalarieMois3()
 
-    this.mois1WorkSheet.setTravailleurData(listSalarieMois1)
-    this.mois2WorkSheet.setTravailleurData(listSalarieMois2)
-    this.mois3WorkSheet.setTravailleurData(listSalarieMois3)
+    console.log(listSalarieMois1)
+    console.log(listSalarieMois2)
+    console.log(listSalarieMois3)
 
-    // this.employeurSheet.setPeriod(periode)
-    // this.employeurSheet.setEmployeurData(employeurData)
-
-    this.mois1WorkSheet.createSheetContent()
-    this.mois2WorkSheet.createSheetContent()
-    this.mois3WorkSheet.createSheetContent()
-    // this.employeurSheet.createSheetContent()
+    this.writeSalarieDataToWorksheet(listSalarieMois1, this.mois1WorkSheet)
+    this.writeSalarieDataToWorksheet(listSalarieMois2, this.mois2WorkSheet)
+    this.writeSalarieDataToWorksheet(listSalarieMois3, this.mois3WorkSheet)
 
     this.wb.xlsx.writeBuffer().then((data) => {
       const blob = new Blob([data], {
@@ -172,10 +248,6 @@ class DnsGenerator extends Component {
     })
 
     this.store.dispatch(setDns({ loading: 'idle', dnsData: null } as IDnsState))
-
-    this.mois1WorkSheet.resetData()
-    this.mois2WorkSheet.resetData()
-    this.mois3WorkSheet.resetData()
   }
 
   render() {
