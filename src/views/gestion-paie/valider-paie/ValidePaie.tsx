@@ -34,6 +34,7 @@ import useErrorFormatter from '@src/hooks/useErrorFormatter'
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
   const { salarie, dateDeVirement, validation } = useAppSelector((store) => store.bulletinDePaie)
+  const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
   const { loading: loadingListEmploye, error: errorFetchingListEmployee } = useAppSelector(
     (store) => store.employeesList,
@@ -227,6 +228,8 @@ const ValidePaie = () => {
         },
       } as IBulletinDePaieProps),
     )
+
+    console.log('Bulletin de paie :', bulletinDePaie)
 
     dispatch(setModalOpen())
   }
