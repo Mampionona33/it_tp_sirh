@@ -99,6 +99,16 @@ class MonthWorksheet implements Partial<Worksheet> {
       this.workSheet.getColumn(i).width = 15
     }
   }
+
+  resetData = () => {
+    this.workSheet.eachRow((row) => {
+      if (row.number > 2) {
+        row.eachCell({ includeEmpty: false }, (cell) => {
+          cell.value = null
+        })
+      }
+    })
+  }
 }
 
 export default MonthWorksheet

@@ -248,6 +248,9 @@ class DnsGenerator extends Component {
     })
 
     this.store.dispatch(setDns({ loading: 'idle', dnsData: null } as IDnsState))
+    this.mois1WorkSheet.resetData()
+    this.mois2WorkSheet.resetData()
+    this.mois3WorkSheet.resetData()
   }
 
   render() {
