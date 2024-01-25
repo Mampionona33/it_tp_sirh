@@ -90,7 +90,6 @@ const Body = () => {
           loading: 'idle',
         } as IDnsState),
       )
-      //   dispatch(fetchDnsData({ periode: selectedOption.value, annee: annee }))
     } else if (actionMeta.name === 'annee') {
       dispatch(
         setDns({
@@ -99,7 +98,6 @@ const Body = () => {
           loading: 'idle',
         } as IDnsState),
       )
-      //   dispatch(fetchDnsData({ periode: periode, annee: selectedOption.value }))
     }
   }
 

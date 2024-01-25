@@ -30,7 +30,11 @@ const dnsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchDnsData.fulfilled, (state, action) => {
-        state.dnsData = action.payload.data
+        console.log(Object.values(action.payload.data.travailleur))
+        state.dnsData = {
+          ...action.payload.data,
+          travailleur: Object.values(action.payload.data.travailleur) as IDnsGeneratorDataProps[],
+        }
         state.loading = 'succeeded'
         state.error = null
       })
