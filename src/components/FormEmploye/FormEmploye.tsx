@@ -61,7 +61,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           updateEmployee({ id: formEmploye.id, data: requestData }),
         )
         if (updateEmploye.meta.requestStatus === 'fulfilled') {
-          dispatch(resetListEmployees())
+          // dispatch(resetListEmployees())
           // navigate('/employees/list')
           setNotification({
             type: 'success',
