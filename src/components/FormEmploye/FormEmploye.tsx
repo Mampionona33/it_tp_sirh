@@ -53,6 +53,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             type: 'success',
             message: 'Employe ajoute avec succes',
           })
+          dispatch(resetFormEmploye())
         }
       } else {
         // const updateEmploye = await employeService.update(formEmploye.id, requestData)
