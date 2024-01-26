@@ -16,6 +16,7 @@ import {
 } from '@src/redux/employees/employeesAction'
 import Loading from '../loadings/Loading'
 import { resetListEmployees } from '@src/redux/employees/employeesReducer'
+import { CAlert } from '@coreui/react'
 
 interface IFormEmploye {
   id?: string | number
@@ -24,6 +25,10 @@ interface IFormEmploye {
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
+  const [notification, setNotification] = React.useState({
+    type: '',
+    message: '',
+  })
 
   const formEmploye = useAppSelector((state) => state.formEmploye)
   const { loading } = useAppSelector((state) => state.employeesList)
@@ -43,7 +48,11 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
       if (!isEmployeExist()) {
         const createEmploye = await dispatch(createEmployee(requestData))
         if (createEmploye.meta.requestStatus === 'fulfilled') {
-          navigate('/employees/list')
+          // navigate('/employees/list')
+          setNotification({
+            type: 'success',
+            message: 'Employe ajoute avec succes',
+          })
         }
       } else {
         // const updateEmploye = await employeService.update(formEmploye.id, requestData)
@@ -52,11 +61,19 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         )
         if (updateEmploye.meta.requestStatus === 'fulfilled') {
           dispatch(resetListEmployees())
-          navigate('/employees/list')
+          // navigate('/employees/list')
+          setNotification({
+            type: 'success',
+            message: 'Employe modifie avec succes',
+          })
         }
       }
       // navigate('/employees/list')
     } catch (error) {
+      setNotification({
+        type: 'danger',
+        message: 'Une erreur est survenue',
+      })
       throw error
     }
   }
@@ -68,6 +85,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
 
   return (
     <>
+      {notification.type && <CAlert color={notification.type}>{notification.message}</CAlert>}
       <div>
         <>
           <div className="bg-white flex flex-col">
