@@ -45,6 +45,41 @@ class MonthWorksheet implements Partial<Worksheet> {
     this.createHeader()
   }
 
+  private adjustColumnWidths = () => {
+    const headerRow = this.workSheet.getRow(2)
+    headerRow.eachCell((cell) => {
+      const column = this.workSheet.getColumn(cell.col)
+      let headerLength = cell.text.length
+      const currentWidth = column.width || 15
+
+      const estimatedWidth = headerLength * 1.2
+
+      column.width = Math.max(currentWidth, estimatedWidth)
+    })
+  }
+
+  public addBorder = (rowCount: number) => {
+    const rows = this.workSheet.getRows(3, rowCount)
+    rows.forEach((row) => {
+      row.eachCell((cell) => {
+        cell.border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' },
+          right: { style: 'thin' },
+        }
+      })
+      row.eachCell({ includeEmpty: true }, (cell) => {
+        cell.border = {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' },
+          right: { style: 'thin' },
+        }
+      })
+    })
+  }
+
   private createHeader = () => {
     this.workSheet.mergeCells('A1:A2')
     this.workSheet.mergeCells('B1:C1')
@@ -95,9 +130,7 @@ class MonthWorksheet implements Partial<Worksheet> {
       })
     })
 
-    for (let i = 1; i <= 16; i++) {
-      this.workSheet.getColumn(i).width = 15
-    }
+    this.adjustColumnWidths()
   }
 
   resetData = () => {

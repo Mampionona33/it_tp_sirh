@@ -39,9 +39,9 @@ class DnsGenerator extends Component {
     this.mois2WorkSheet = new MonthWorksheet(this.wb, 'Mois 2', '99ccff')
     this.mois3WorkSheet = new MonthWorksheet(this.wb, 'Mois 3', '00ccff')
 
-    this.mois1List = ['janvier', 'avril', 'juillet']
-    this.mois2List = ['fevrier', 'mai', 'août']
-    this.mois3List = ['mars', 'juin', 'septembre']
+    this.mois1List = ['01', '04', '07']
+    this.mois2List = ['02', '05', '08']
+    this.mois3List = ['03', '06', '09']
 
     this.store = store
     this.dnsData = store.getState().dns.dnsData
@@ -68,18 +68,8 @@ class DnsGenerator extends Component {
     })
   }
 
-  // private getEmployeurData = (): IDnsGeneratorEmployeurData[] | [] => {
-  //   let data: IDnsGeneratorEmployeurData[] = []
-
-  //   if (this.dnsData.employeur.length > 0) {
-  //     data = this.dnsData.employeur
-  //   }
-
-  //   return data
-  // }
-
   private isSalariesDataExist = (): boolean => {
-    return this.dnsData !== null
+    return this.dnsData.travailleur !== null && this.dnsData.travailleur !== undefined
   }
 
   private getListSalarieMois1 = (): IDnsGeneratorTravailleurProps[] => {
@@ -118,32 +108,10 @@ class DnsGenerator extends Component {
     return listSalarieMois3
   }
 
-  // private formatPeriod = (): string => {
-  //   let periode = ''
-  //   switch (this.periodSelectionne) {
-  //     case 't1':
-  //       periode = '01-' + String(this.anneeSelectionne)
-  //       break
-  //     case 't2':
-  //       periode = '02-' + String(this.anneeSelectionne)
-  //       break
-  //     case 't3':
-  //       periode = '03-' + String(this.anneeSelectionne)
-  //       break
-  //     case 't4':
-  //       periode = '04-' + String(this.anneeSelectionne)
-  //       break
-  //     default:
-  //       break
-  //   }
-  //   return periode
-  // }
-
   private formateAnneMois = (mois: string, annee: string): string => {
     let moisNumber = ''
     if (mois && annee) {
-      const moisEnDate = parse(`${mois} ${annee}`, 'MMMM yyyy', new Date(), { locale: fr })
-      moisNumber = format(moisEnDate, 'yyyyMM', { locale: fr })
+      moisNumber = format(new Date(`${annee}-${mois}-01`), 'yyyyMM', { locale: fr })
     }
     return moisNumber
   }
@@ -226,14 +194,17 @@ class DnsGenerator extends Component {
     const listSalarieMois1 = this.getListSalarieMois1()
     const listSalarieMois2 = this.getListSalarieMois2()
     const listSalarieMois3 = this.getListSalarieMois3()
-
-    console.log(listSalarieMois1)
-    console.log(listSalarieMois2)
-    console.log(listSalarieMois3)
+    const numberSalarieMois1 = listSalarieMois1.length
+    const numberSalarieMois2 = listSalarieMois2.length
+    const numberSalarieMois3 = listSalarieMois3.length
 
     this.writeSalarieDataToWorksheet(listSalarieMois1, this.mois1WorkSheet)
     this.writeSalarieDataToWorksheet(listSalarieMois2, this.mois2WorkSheet)
     this.writeSalarieDataToWorksheet(listSalarieMois3, this.mois3WorkSheet)
+
+    this.mois1WorkSheet.addBorder(numberSalarieMois1)
+    this.mois2WorkSheet.addBorder(numberSalarieMois2)
+    this.mois3WorkSheet.addBorder(numberSalarieMois3)
 
     this.wb.xlsx.writeBuffer().then((data) => {
       const blob = new Blob([data], {
