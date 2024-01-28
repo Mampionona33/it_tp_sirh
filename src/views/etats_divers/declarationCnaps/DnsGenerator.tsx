@@ -154,7 +154,7 @@ class DnsGenerator extends Component {
       }
       if (salarie.hs_non_plafonne) {
         monthWorksheet.workSheet.getCell(`K${index + 3}`).value = {
-          formula: `=H${index + 3} - I${index + 3}`,
+          formula: `=H${index + 3} + I${index + 3}`,
         }
       }
       if (salarie.hs_plafonne && salarie.hs_plafonne) {
