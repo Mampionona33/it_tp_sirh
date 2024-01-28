@@ -41,3 +41,7 @@ class TauxCnapsService {
     }
   }
 }
+
+const tauxCnapsService = new TauxCnapsService()
+
+export default tauxCnapsService
