@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 type CallbackFunction = () => Promise<any>
 
-const useGenericQuery = (callback: CallbackFunction) => {
+const useAppQuery = (callback: CallbackFunction) => {
   const [data, setData] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [errors, setErrors] = useState(null)
@@ -34,4 +34,4 @@ const useGenericQuery = (callback: CallbackFunction) => {
   return { data, isLoading, refetch, isError, errors }
 }
 
-export default useGenericQuery
+export default useAppQuery
