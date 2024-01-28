@@ -7,16 +7,33 @@ class TauxCnapsController {
   }
 
   getTauxEmployeur = (req: Request, res: Response) => {
-    const tauxCnaps = Array(this.db['tauxCnaps']).filter((tauxCnaps) => {
-      return tauxCnaps.type === 'employeur'
-    })
-    return res.status(200).json(tauxCnaps)
+    try {
+      const tauxCnaps = this.db['tauxCnaps'].filter((tnCnaps: any) => {
+        return tnCnaps.type === 'employeur'
+      })
+
+      return res.status(200).json(...tauxCnaps)
+    } catch (error) {
+      console.error("Erreur lors de la récupération des taux CNAPS pour l'employeur :", error)
+      return res
+        .status(500)
+        .json({ message: "Erreur lors de la récupération des taux CNAPS pour l'employeur" })
+    }
   }
+
   getTauxSalarie = (req: Request, res: Response) => {
-    const tauxCnaps = Array(this.db['tauxCnaps']).filter((tauxCnaps) => {
-      return tauxCnaps.type === 'salarie'
-    })
-    return res.status(200).json(tauxCnaps)
+    try {
+      const tauxCnaps = this.db['tauxCnaps'].filter((tnCnaps: any) => {
+        return tnCnaps.type === 'salarie'
+      })
+
+      return res.status(200).json(...tauxCnaps)
+    } catch (error) {
+      console.error("Erreur lors de la récupération des taux CNAPS pour l'employeur :", error)
+      return res
+        .status(500)
+        .json({ message: "Erreur lors de la récupération des taux CNAPS pour l'employeur" })
+    }
   }
 }
 

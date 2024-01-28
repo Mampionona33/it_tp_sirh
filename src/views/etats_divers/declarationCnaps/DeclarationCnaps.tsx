@@ -11,12 +11,24 @@ import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import { useQuery } from '@tanstack/react-query'
 import Loading from '@src/components/loadings/Loading'
 import dnsService from '@src/services/DnsService'
+import useAppQuery from '@src/hooks/useAppQuery'
+import tauxCnapsService from '@src/services/TauxCnapsService'
+import useGetTauxCnapsEmployeur from '@src/hooks/useGetTauxCnapsEmployeur'
 
 const Body = () => {
   const dispatch = useAppDispatch()
+
   const { anneeSelectionne: annee, periodSelectionne: periode } = useAppSelector(
     (store) => store.dns,
   )
+
+  const {
+    data: tauxEmployeurData,
+    errors: tauxEmployeurErrors,
+    isLoading: isLoadingTauxEmployeur,
+    isError: isErrorTauxEmployeur,
+    refetch: refetchTauxEmployeur,
+  } = useGetTauxCnapsEmployeur()
 
   // console.log('dnsData', dnsData)
 
@@ -107,8 +119,13 @@ const Body = () => {
     label: (currentYear - index).toString(),
   }))
 
+  if (tauxEmployeurData) {
+    console.log(tauxEmployeurData)
+  }
+
   const handleGenerate = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
+
     try {
       await dispatch(fetchDnsData({ periode, annee }))
     } catch (error) {

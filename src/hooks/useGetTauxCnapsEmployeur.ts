@@ -3,10 +3,16 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 
 const useGetTauxCnapsEmployeur = () => {
-  const [tauxCnapsEmployeur, setTauxCnapsEmployeur] = useState(null)
+  const [data, setTauxCnapsEmployeur] = useState(null)
   const [errors, setErrors] = useState(null)
 
-  const { data, isLoading, refetch, isError, error } = useQuery({
+  const {
+    data: tauxCnapsEmployeur,
+    isLoading,
+    refetch,
+    isError,
+    error,
+  } = useQuery({
     queryKey: ['tauxCnapsEmployeur'],
     queryFn: async () => {
       try {
@@ -25,7 +31,7 @@ const useGetTauxCnapsEmployeur = () => {
       setTauxCnapsEmployeur(data.data)
     }
   }, [data])
-  return { tauxCnapsEmployeur, isLoading, refetch, isError, errors }
+  return { data, isLoading, refetch, isError, errors }
 }
 
 export default useGetTauxCnapsEmployeur
