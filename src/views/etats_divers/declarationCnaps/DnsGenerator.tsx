@@ -72,6 +72,10 @@ class DnsGenerator extends Component {
     return this.dnsData.travailleur !== null && this.dnsData.travailleur !== undefined
   }
 
+  private isEmployeurDataExist = (): boolean => {
+    return this.dnsData.employeur !== null && this.dnsData.employeur !== undefined
+  }
+
   private getListSalarieMois1 = (): IDnsGeneratorTravailleurProps[] => {
     let listSalarieMois1: IDnsGeneratorTravailleurProps[] = []
     if (this.isSalariesDataExist()) {
@@ -186,7 +190,14 @@ class DnsGenerator extends Component {
     })
   }
 
-  private writeDataToSheet1 = () => {}
+  private writeDataToSheet1 = (employeurData: IDnsGeneratorEmployeurData) => {
+    this.employeurSheet.sheet.getCell('C4').value = employeurData.numero_rcs
+    this.employeurSheet.sheet.getCell('C5').value = employeurData.nom
+    this.employeurSheet.sheet.getCell('C6').value = employeurData.numero_nif
+    this.employeurSheet.sheet.getCell('C7').value = employeurData.telephone
+    this.employeurSheet.sheet.getCell('C8').value = employeurData.adresse
+    this.employeurSheet.sheet.getCell('C9').value = employeurData.email
+  }
 
   private handelDownload = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -205,6 +216,10 @@ class DnsGenerator extends Component {
     this.mois1WorkSheet.addBorder(numberSalarieMois1)
     this.mois2WorkSheet.addBorder(numberSalarieMois2)
     this.mois3WorkSheet.addBorder(numberSalarieMois3)
+
+    if (this.isEmployeurDataExist()) {
+      this.writeDataToSheet1(this.dnsData.employeur[0])
+    }
 
     this.wb.xlsx.writeBuffer().then((data) => {
       const blob = new Blob([data], {
