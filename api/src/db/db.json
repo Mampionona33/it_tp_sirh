@@ -1663,5 +1663,17 @@
       "label": "Mobile money",
       "value": "mobile_money"
     }
+  ],
+  "tauxCnaps": [
+    {
+      "id": 1,
+      "type": "employeur",
+      "value": 0.13
+    },
+    {
+      "id": 2,
+      "type": "salarie",
+      "value": 0.01
+    }
   ]
 }

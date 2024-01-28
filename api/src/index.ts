@@ -11,6 +11,7 @@ import BulletinDePaieControllers from '@controllers/BulletinDePaieControllers'
 import HistoriquePaieController from '@controllers/HistoriquePaieController'
 import DnsControllers from '@controllers/DnsControllers'
 import ModeDePayementControllers from '@controllers/ModeDePayementControllers'
+import TauxCnapsController from '@controllers/TauxCnapsController'
 const cors = require('cors')
 
 const app = express()
@@ -37,6 +38,7 @@ const bulletinDePaieController = new BulletinDePaieControllers(db)
 const historiquePaieController = new HistoriquePaieController(db)
 const dnsControllers = new DnsControllers(db)
 const modeDePayementControllers = new ModeDePayementControllers(db)
+const tauxCnapsController = new TauxCnapsController(db)
 
 router.route('/login').post(authController.login)
 router.route('/mouvement-salaire').get(mouvementSalaireController.getAll)
@@ -61,6 +63,9 @@ router.route('/dns/:annee/:periode').get(dnsControllers.fetchDns)
 
 router.route('/mode-de-payement').get(modeDePayementControllers.getAll)
 router.route('/mode-de-payement/:value').get(modeDePayementControllers.getOneByVal)
+
+router.route('/taux-cnaps/employeur').get(tauxCnapsController.getTauxEmployeur)
+router.route('/taux-cnaps/salarie').get(tauxCnapsController.getTauxSalarie)
 
 const PORT = process.env.PORT || 8000
 
