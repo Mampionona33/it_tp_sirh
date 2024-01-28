@@ -23,7 +23,7 @@ import {
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
-import useFetchHistorique from '@src/assets/hooks/useFetchHistorique'
+import useFetchHistorique from '@src/hooks/useFetchHistorique'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 interface IHistoriquePaieTableProps extends IHistoriquePaieDataProps {

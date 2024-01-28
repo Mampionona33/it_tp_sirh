@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import CustomSection from 'src/components/CustomSection'
 import { useSelector } from 'react-redux'
 import formatAriaryMga from 'src/utils/formatAriaryMga'
-import useFetchCotisations from 'src/assets/hooks/useFetchCotisations'
+import useFetchCotisations from '@src/hooks/useFetchCotisations'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 
 const Body = () => {
@@ -12,7 +12,6 @@ const Body = () => {
   useEffect(() => {
     const calculPaie = new CalculPaie_v2()
     calculPaie.setSalaireBrut(salaireBrut)
-    
   }, [salaireBrut])
 
   const data =
@@ -49,16 +48,16 @@ const Body = () => {
         title: 'Imposable arrondi',
         value: `${formatAriaryMga(baseIrsaArrondi)}`,
       },
-      {
-        title: 'IRSA à payer',
-        value: <span className="font-medium">{formatAriaryMga(irsaAPayer)}</span>,
-      },
-      {
-        title: 'Salaire net',
-        value: (
-          <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNet)}</span>
-        ),
-      },
+      // {
+      //   title: 'IRSA à payer',
+      //   value: <span className="font-medium">{formatAriaryMga(irsaAPayer)}</span>,
+      // },
+      // {
+      //   title: 'Salaire net',
+      //   value: (
+      //     <span className="font-medium text-customRed-900">{formatAriaryMga(salaireNet)}</span>
+      //   ),
+      // },
     ] || []
   return (
     <>

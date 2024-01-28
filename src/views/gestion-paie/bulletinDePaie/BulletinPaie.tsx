@@ -11,7 +11,7 @@ import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import useFetchBulletinDePaie, {
   useFetchBulletinDePaieProps,
-} from '@src/assets/hooks/useFetchBulletinDePaie'
+} from '@src/hooks/useFetchBulletinDePaie'
 import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
