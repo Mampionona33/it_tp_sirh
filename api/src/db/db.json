@@ -968,7 +968,6 @@
   ],
   "dns": [
     {
-      "annee_mois": "",
       "travailleur": [
         {
           "id": 1,
@@ -1093,29 +1092,6 @@
           "matricule": "442",
           "nom": "ANDRIAINA",
           "prenom": "José",
-          "date_embauche": "2016-04-16",
-          "date_depart": null,
-          "salaire_du_mois": 800000,
-          "avantage_du_mois": 8000,
-          "temps_presence": 160,
-          "hs_non_plafonne": 4,
-          "hs_plafonne": 2,
-          "num_cnaps": "960101059745",
-          "cin": "101261135258",
-          "ref_employeur": "2002B00608",
-          "created_at": null,
-          "taux_cotisation_cnaps_employeur": 0.035,
-          "taux_cotisation_cnaps_salarie": 0.1,
-          "updated_at": null
-        },
-        {
-          "id": 6,
-          "annee": "2023",
-          "trimestre": "t1",
-          "mois": "01",
-          "matricule": "442",
-          "nom": "RAKOTOZANANY",
-          "prenom": "Benjamin",
           "date_embauche": "2016-04-16",
           "date_depart": null,
           "salaire_du_mois": 800000,

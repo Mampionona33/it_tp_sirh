@@ -60,6 +60,7 @@ router.route('/historique-paie/:id/:annee').get(historiquePaieController.getAllB
 router.route('/historique-paie/:id/:annee/:mois').get(historiquePaieController.getDetailsById)
 
 router.route('/dns/:annee/:periode').get(dnsControllers.fetchDns)
+router.route('/dns').post(dnsControllers.create)
 
 router.route('/mode-de-payement').get(modeDePayementControllers.getAll)
 router.route('/mode-de-payement/:value').get(modeDePayementControllers.getOneByVal)

@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import AxiosErrorHandler from './AxiosErrorHandler'
+import { IDnsServiceAddProps } from '@src/interfaces/interfaceDnsServiceAdd'
 
 export interface IDnsFetchAllProps {
   annee: number
@@ -35,6 +36,22 @@ class DnsService {
       const newError = error as AxiosError
 
       throw newError
+    }
+  }
+
+  add = async (props: IDnsServiceAddProps) => {
+    const { data } = props
+    console.log(data)
+    try {
+      const resp = await axios.post(`${DnsService.REACT_APP_API_BASE_URL}/dns`, data, {
+        auth: {
+          username: 'lslisteemployes',
+          password: '20lsliste23',
+        },
+      })
+      return resp
+    } catch (error) {
+      throw error
     }
   }
 }

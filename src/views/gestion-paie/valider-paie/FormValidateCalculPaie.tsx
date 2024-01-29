@@ -5,16 +5,21 @@ import React, { useEffect } from 'react'
 import bulletinDePaieService from '@src/services/BulletinDePaieService'
 import { useNavigate, useParams } from 'react-router-dom'
 import { resetBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
+import useAddEmployeDns from '@src/hooks/useAddEmployeDns'
 
 const FormValidateCalculPaie = () => {
   const dispatch = useAppDispatch()
+  const { data, error, isError, isIdle, isSuccess, isPending, mutate, addEmployeeDns } =
+    useAddEmployeDns()
   const { id } = useParams()
   const bullettinDePaie = useAppSelector((store) => store.bulletinDePaie)
   const navigate = useNavigate()
 
   const handleValidation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+
     try {
+      const respAddDns = await addEmployeeDns(bullettinDePaie)
       const resp = await bulletinDePaieService.create({ id, data: bullettinDePaie })
 
       if (resp.data === 'Paie enregistrée') {
