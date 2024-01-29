@@ -41,7 +41,7 @@ class DnsService {
 
   add = async (props: IDnsServiceAddProps) => {
     const { data } = props
-    console.log(data)
+    // console.log(data)
     try {
       const resp = await axios.post(`${DnsService.REACT_APP_API_BASE_URL}/dns`, data, {
         auth: {
@@ -49,6 +49,7 @@ class DnsService {
           password: '20lsliste23',
         },
       })
+      console.log(resp.data)
       return resp
     } catch (error) {
       throw error
