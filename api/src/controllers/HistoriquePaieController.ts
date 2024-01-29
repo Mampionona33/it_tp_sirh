@@ -42,7 +42,7 @@ class HistoriquePaieController {
 
     setTimeout(() => {
       return res.status(200).send(resp)
-    }, 5000)
+    }, 1000)
   }
 
   getDetailsById = (req: Request, res: Response) => {
