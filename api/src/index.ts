@@ -65,8 +65,7 @@ router.route('/dns').post(dnsControllers.create)
 router.route('/mode-de-payement').get(modeDePayementControllers.getAll)
 router.route('/mode-de-payement/:value').get(modeDePayementControllers.getOneByVal)
 
-router.route('/taux-cnaps/employeur').get(tauxCnapsController.getTauxEmployeur)
-router.route('/taux-cnaps/salarie').get(tauxCnapsController.getTauxSalarie)
+router.route('/taux-cnaps/all').get(tauxCnapsController.getAll)
 
 const PORT = process.env.PORT || 8000
 

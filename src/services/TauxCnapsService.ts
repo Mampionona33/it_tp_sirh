@@ -15,7 +15,7 @@ class TauxCnapsService {
 
   public getTauxEmployeur = async () => {
     try {
-      const response = await axios.get(`${this.REACT_APP_API_BASE_URL_DEV}/taux-cnaps/employeur`, {
+      const response = await axios.get(`${this.REACT_APP_API_BASE_URL_DEV}/taux-cnaps/all`, {
         auth: {
           username: this.login,
           password: this.pass,

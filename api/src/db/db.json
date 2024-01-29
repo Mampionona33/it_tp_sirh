@@ -848,31 +848,17 @@
   "/cotisations": [
     {
       "id": 1,
-      "label": "cnaps",
-      "type": "cnaps",
-      "payer": "salarie",
-      "taux": 0.01
+      "libelle": "Cotisation CNAPS",
+      "type": "CNAPS",
+      "employeur": 0.01,
+      "salarie": 0.13
     },
     {
       "id": 2,
-      "label": "osmi",
-      "type": "osmi",
-      "payer": "salarie",
-      "taux": 0.01
-    },
-    {
-      "id": 3,
-      "label": "Cotisation sociale",
-      "type": "social",
-      "payer": "salarie",
-      "taux": 0.01
-    },
-    {
-      "id": 4,
-      "label": "Cotisation cnaps employeur",
-      "type": "cnaps",
-      "payer": "employeur",
-      "taux": 0.02
+      "libelle": "Cotisation OMSI",
+      "type": "OMSI",
+      "employeur": 0.1,
+      "salarie": 0.1
     }
   ],
   "allocationFamil": [

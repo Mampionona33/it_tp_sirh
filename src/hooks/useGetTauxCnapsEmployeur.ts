@@ -31,7 +31,7 @@ const useGetTauxCnapsEmployeur = () => {
       setTauxCnapsEmployeur(data.data)
     }
   }, [data])
-  return { data, isLoading, refetch, isError, errors }
+  return { data, isLoading, refetch, isError, errors, tauxCnapsEmployeur }
 }
 
 export default useGetTauxCnapsEmployeur
