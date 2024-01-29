@@ -91,7 +91,7 @@ class DnsControllers {
       const data = req.body
       const dbFilePath = path.join(__dirname, '../db/db.json')
 
-      const dbContent = JSON.parse(fs.readFileSync(dbFilePath, 'utf-8'))
+      let dbContent = JSON.parse(fs.readFileSync(dbFilePath, 'utf-8'))
 
       // Vérifier si le tableau dns existe et s'il contient des éléments
       if (Array.isArray(dbContent.dns) && dbContent.dns.length > 0) {
@@ -121,8 +121,10 @@ class DnsControllers {
           }
 
           // Ajouter les données formatées à la propriété travailleur
-          dbContent.dns[0].travailleur.push({ ...formatedData })
-          fs.writeFileSync(dbFilePath, JSON.stringify(firstDnsItem, null, 2), 'utf-8')
+          firstDnsItem.travailleur.push({ ...formatedData })
+
+          // Enregistrer tout le contenu de dbContent dans le fichier JSON
+          fs.writeFileSync(dbFilePath, JSON.stringify(dbContent, null, 2), 'utf-8')
           // Envoi de la réponse
           res.status(200).json({ message: 'Dns a été créée avec succès.' })
         } else {
