@@ -2,21 +2,21 @@ import tauxCnapsService from '@src/services/TauxCnapsService'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 
-const useGetTauxCnapsEmployeur = () => {
+const useFetchTauxCnaps = () => {
   const [data, setTauxCnapsEmployeur] = useState(null)
   const [errors, setErrors] = useState(null)
 
   const {
-    data: tauxCnapsEmployeur,
+    data: cotisations,
     isLoading,
     refetch,
     isError,
     error,
   } = useQuery({
-    queryKey: ['tauxCnapsEmployeur'],
+    queryKey: ['cotisations'],
     queryFn: async () => {
       try {
-        const response = await tauxCnapsService.getTauxEmployeur()
+        const response = await tauxCnapsService.getAll()
         setTauxCnapsEmployeur(response.data)
         return response
       } catch (error) {
@@ -31,7 +31,7 @@ const useGetTauxCnapsEmployeur = () => {
       setTauxCnapsEmployeur(data.data)
     }
   }, [data])
-  return { data, isLoading, refetch, isError, errors, tauxCnapsEmployeur }
+  return { data, isLoading, refetch, isError, errors, cotisations }
 }
 
-export default useGetTauxCnapsEmployeur
+export default useFetchTauxCnaps

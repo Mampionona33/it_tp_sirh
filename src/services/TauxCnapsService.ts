@@ -13,23 +13,9 @@ class TauxCnapsService {
     this.pass = '20lsliste23'
   }
 
-  public getTauxEmployeur = async () => {
+  public getAll = async () => {
     try {
       const response = await axios.get(`${this.REACT_APP_API_BASE_URL_DEV}/taux-cnaps/all`, {
-        auth: {
-          username: this.login,
-          password: this.pass,
-        },
-      })
-      return response
-    } catch (error) {
-      throw error
-    }
-  }
-
-  public getTauxSalarie = async () => {
-    try {
-      const response = await axios.get(`${this.REACT_APP_API_BASE_URL_DEV}/taux-cnaps/salarie`, {
         auth: {
           username: this.login,
           password: this.pass,

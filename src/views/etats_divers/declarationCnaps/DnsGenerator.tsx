@@ -16,7 +16,7 @@ import { IDnsState, setDns } from '@src/redux/dns/dnsReducers'
 import { format, getMonth, parse } from 'date-fns'
 import { fr } from 'date-fns/locale'
 
-class DnsGenerator extends Component {
+class DnsGenerator extends Component<{ tauxCnaps: any }> {
   private store: Store
   private wb: ExcelJS.Workbook
   private employeurSheet: EmployerWorksheet
@@ -197,6 +197,11 @@ class DnsGenerator extends Component {
     this.employeurSheet.sheet.getCell('C7').value = employeurData.telephone
     this.employeurSheet.sheet.getCell('C8').value = employeurData.adresse
     this.employeurSheet.sheet.getCell('C9').value = employeurData.email
+    console.log(this.props)
+    if (this.props.tauxCnaps) {
+      this.employeurSheet.sheet.getCell('C15').value = this.props.tauxCnaps.employeur
+      this.employeurSheet.sheet.getCell('C16').value = this.props.tauxCnaps.salarie
+    }
   }
 
   private handelDownload = async (event: React.MouseEvent<HTMLButtonElement>) => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DnsGenerator from './DnsGenerator'
 import Select from 'react-select'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
@@ -11,9 +11,7 @@ import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import { useQuery } from '@tanstack/react-query'
 import Loading from '@src/components/loadings/Loading'
 import dnsService from '@src/services/DnsService'
-import useAppQuery from '@src/hooks/useAppQuery'
-import tauxCnapsService from '@src/services/TauxCnapsService'
-import useGetTauxCnapsEmployeur from '@src/hooks/useGetTauxCnapsEmployeur'
+import useFetchTauxCnaps from '@src/hooks/useFetchTauxCnaps'
 
 const Body = () => {
   const dispatch = useAppDispatch()
@@ -21,14 +19,15 @@ const Body = () => {
   const { anneeSelectionne: annee, periodSelectionne: periode } = useAppSelector(
     (store) => store.dns,
   )
+  const formatError = useErrorFormatter()
 
   const {
-    data: tauxEmployeurData,
-    errors: tauxEmployeurErrors,
-    isLoading: isLoadingTauxEmployeur,
-    isError: isErrorTauxEmployeur,
-    refetch: refetchTauxEmployeur,
-  } = useGetTauxCnapsEmployeur()
+    data: tauxCnaps,
+    errors: tauxCnapsErrors,
+    isLoading: isLoadingTauxCnaps,
+    isError: isErrorTauxCnaps,
+    refetch: refetchTauxCnaps,
+  } = useFetchTauxCnaps()
 
   // console.log('dnsData', dnsData)
 
@@ -119,10 +118,6 @@ const Body = () => {
     label: (currentYear - index).toString(),
   }))
 
-  if (tauxEmployeurData) {
-    console.log(tauxEmployeurData)
-  }
-
   const handleGenerate = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
@@ -133,68 +128,80 @@ const Body = () => {
     }
   }
 
+  const [tauxCnapsData, setTauxCnapsData] = useState(null)
+
+  useEffect(() => {
+    if (tauxCnaps) {
+      setTauxCnapsData(tauxCnaps)
+    }
+  }, [tauxCnaps])
+
   return (
     <>
-      <form action="post" className="w-full flex flex-col gap-2 p-4">
-        <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
-          <div className="flex justify-between gap-2">
-            <div>
-              <label className="form-label text-sm" htmlFor="periode">
-                Période
-              </label>
-              <Select
-                className="basic-multi-select"
-                name="periode"
-                options={periodesOptions}
-                onChange={(selectedOption, actionMeta) =>
-                  handleInputChange(selectedOption, actionMeta)
-                }
-                value={periodesOptions.find((option) => option.value === periode)}
-                styles={customSelectStyles}
-                theme={(theme) => ({
-                  ...theme,
-                  borderRadius: 0,
-                  height: 28,
-                  colors: {
-                    ...theme.colors,
-                    primary25: '#FFF2F2',
-                    primary: '#FEBABA',
-                  },
-                })}
-              />
+      {isErrorTauxCnaps ? (
+        <CAlert color="danger">{formatError(tauxCnapsErrors)}</CAlert>
+      ) : (
+        <form action="post" className="w-full flex flex-col gap-2 p-4">
+          <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
+            <div className="flex justify-between gap-2">
+              <div>
+                <label className="form-label text-sm" htmlFor="periode">
+                  Période
+                </label>
+                <Select
+                  className="basic-multi-select"
+                  name="periode"
+                  options={periodesOptions}
+                  onChange={(selectedOption, actionMeta) =>
+                    handleInputChange(selectedOption, actionMeta)
+                  }
+                  value={periodesOptions.find((option) => option.value === periode)}
+                  styles={customSelectStyles}
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 0,
+                    height: 28,
+                    colors: {
+                      ...theme.colors,
+                      primary25: '#FFF2F2',
+                      primary: '#FEBABA',
+                    },
+                  })}
+                />
+              </div>
+              <div>
+                <label className="form-label text-sm" htmlFor="annee">
+                  Année
+                </label>
+                <Select
+                  className="basic-multi-select"
+                  name="annee"
+                  options={years}
+                  onChange={(selectedOption, actionMeta) =>
+                    handleInputChange(selectedOption, actionMeta)
+                  }
+                  value={years.find((option) => option.value === annee)}
+                  styles={customSelectStyles}
+                  theme={(theme) => ({
+                    ...theme,
+                    borderRadius: 0,
+                    height: 28,
+                    colors: {
+                      ...theme.colors,
+                      primary25: '#FFF2F2',
+                      primary: '#FEBABA',
+                    },
+                  })}
+                />
+              </div>
             </div>
-            <div>
-              <label className="form-label text-sm" htmlFor="annee">
-                Année
-              </label>
-              <Select
-                className="basic-multi-select"
-                name="annee"
-                options={years}
-                onChange={(selectedOption, actionMeta) =>
-                  handleInputChange(selectedOption, actionMeta)
-                }
-                value={years.find((option) => option.value === annee)}
-                styles={customSelectStyles}
-                theme={(theme) => ({
-                  ...theme,
-                  borderRadius: 0,
-                  height: 28,
-                  colors: {
-                    ...theme.colors,
-                    primary25: '#FFF2F2',
-                    primary: '#FEBABA',
-                  },
-                })}
-              />
+            <div className="flex gap-2">
+              <ButtonWithIcon label="Générer" onClick={handleGenerate} />
+              <DnsGenerator tauxCnaps={tauxCnapsData} />
             </div>
           </div>
-          <div className="flex gap-2">
-            <ButtonWithIcon label="Générer" onClick={handleGenerate} />
-            <DnsGenerator />
-          </div>
-        </div>
-      </form>
+        </form>
+      )}
     </>
   )
 }
