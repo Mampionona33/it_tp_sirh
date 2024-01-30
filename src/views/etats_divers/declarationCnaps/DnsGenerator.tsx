@@ -126,74 +126,85 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     monthWorksheet: MonthWorksheet,
   ): void {
     salaries.forEach((salarie, index) => {
+      const anneeMois = this.formateAnneMois(salarie.mois, salarie.annee)
+      const nom = salarie.nom.toUpperCase()
+      const prenom = salarie.prenom.toUpperCase()
+      const {
+        num_cnaps,
+        ref_employeur,
+        date_embauche,
+        date_depart,
+        salaire_du_mois,
+        avantage_du_mois,
+        temps_presence,
+        cin,
+      } = salarie
+
+      const hs_non_plafonne = salaire_du_mois + avantage_du_mois
+
+      const hs_plafonne = hs_non_plafonne
+
       if (salarie.mois && salarie.annee) {
-        const anneeMois = this.formateAnneMois(salarie.mois, salarie.annee)
         monthWorksheet.workSheet.getCell(`A${index + 3}`).value = anneeMois
       }
       if (salarie.nom) {
-        monthWorksheet.workSheet.getCell(`B${index + 3}`).value = salarie.nom.toUpperCase()
+        monthWorksheet.workSheet.getCell(`B${index + 3}`).value = nom
       }
       if (salarie.prenom) {
-        monthWorksheet.workSheet.getCell(`C${index + 3}`).value = salarie.prenom.toUpperCase()
+        monthWorksheet.workSheet.getCell(`C${index + 3}`).value = prenom
       }
       if (salarie.num_cnaps) {
-        monthWorksheet.workSheet.getCell(`D${index + 3}`).value = salarie.num_cnaps
+        monthWorksheet.workSheet.getCell(`D${index + 3}`).value = num_cnaps
       }
       if (salarie.ref_employeur) {
-        monthWorksheet.workSheet.getCell(`E${index + 3}`).value = salarie.ref_employeur
+        monthWorksheet.workSheet.getCell(`E${index + 3}`).value = ref_employeur
       }
       if (salarie.date_embauche) {
-        monthWorksheet.workSheet.getCell(`F${index + 3}`).value = salarie.date_embauche
+        monthWorksheet.workSheet.getCell(`F${index + 3}`).value = date_embauche
       }
       if (salarie.date_depart) {
-        monthWorksheet.workSheet.getCell(`G${index + 3}`).value = salarie.date_depart
+        monthWorksheet.workSheet.getCell(`G${index + 3}`).value = date_depart
       }
       if (salarie.salaire_du_mois) {
-        monthWorksheet.workSheet.getCell(`H${index + 3}`).value = salarie.salaire_du_mois
+        monthWorksheet.workSheet.getCell(`H${index + 3}`).value = salaire_du_mois
       }
       if (salarie.avantage_du_mois) {
-        monthWorksheet.workSheet.getCell(`I${index + 3}`).value = salarie.avantage_du_mois
+        monthWorksheet.workSheet.getCell(`I${index + 3}`).value = avantage_du_mois
       }
       if (salarie.temps_presence) {
-        monthWorksheet.workSheet.getCell(`J${index + 3}`).value = salarie.temps_presence
+        monthWorksheet.workSheet.getCell(`J${index + 3}`).value = temps_presence
       }
-      if (salarie.hs_non_plafonne) {
-        monthWorksheet.workSheet.getCell(`K${index + 3}`).value = {
-          formula: `=H${index + 3} + I${index + 3}`,
-        }
+      // if (hs_non_plafonne) {
+      monthWorksheet.workSheet.getCell(`K${index + 3}`).value = {
+        formula: `=H${index + 3} + I${index + 3}`,
       }
-      if (salarie.hs_plafonne && salarie.hs_plafonne) {
-        const plafondSme = salarie.plafondSme || 1940000
-        monthWorksheet.workSheet.getCell(`L${index + 3}`).value = {
-          formula: `=IF(K${index + 3} <= ${plafondSme}, K${index + 3}, ${plafondSme})`,
-        }
+      // }
+      // if (salarie.hs_plafonne && salarie.hs_plafonne) {
+      const plafondSme = 1940000
+      monthWorksheet.workSheet.getCell(`L${index + 3}`).value = {
+        formula: `=IF(K${index + 3} <= ${plafondSme}, K${index + 3}, ${plafondSme})`,
       }
-      if (salarie.hs_plafonne && salarie.taux_cotisation_cnaps_employeur) {
-        const tauxCotisationEmployeur = this.props.tauxCnaps.employeur
-          ? this.props.tauxCnaps.employeur
-          : 0.13
+      // }
+      const tauxCotisationEmployeur = this.props.tauxCnaps.employeur
+        ? this.props.tauxCnaps.employeur
+        : 0.13
 
-        monthWorksheet.workSheet.getCell(`M${index + 3}`).value = {
-          formula: `=L${index + 3} * ${tauxCotisationEmployeur}`,
-        }
+      monthWorksheet.workSheet.getCell(`M${index + 3}`).value = {
+        formula: `=L${index + 3} * ${tauxCotisationEmployeur}`,
       }
-      if (salarie.hs_non_plafonne) {
-        const tauxCotisationSalarie = this.props.tauxCnaps.salarie
-          ? this.props.tauxCnaps.salarie
-          : 0.01
 
-        monthWorksheet.workSheet.getCell(`N${index + 3}`).value = {
-          formula: `=L${index + 3} * ${tauxCotisationSalarie}`,
-        }
+      const tauxCotisationSalarie = this.props.tauxCnaps.salarie
+        ? this.props.tauxCnaps.salarie
+        : 0.01
+
+      monthWorksheet.workSheet.getCell(`N${index + 3}`).value = {
+        formula: `=L${index + 3} * ${tauxCotisationSalarie}`,
       }
-      if (salarie.hs_plafonne && salarie.taux_cotisation_cnaps_salarie) {
-        monthWorksheet.workSheet.getCell(`O${index + 3}`).value = {
-          formula: `=M${index + 3} + N${index + 3}`,
-        }
+
+      monthWorksheet.workSheet.getCell(`O${index + 3}`).value = {
+        formula: `=M${index + 3} + N${index + 3}`,
       }
-      if (salarie.cin) {
-        monthWorksheet.workSheet.getCell(`P${index + 3}`).value = salarie.cin
-      }
+      monthWorksheet.workSheet.getCell(`P${index + 3}`).value = cin
     })
   }
 
