@@ -15,8 +15,9 @@ import {
 import { IDnsState, setDns } from '@src/redux/dns/dnsReducers'
 import { format, getMonth, parse } from 'date-fns'
 import { fr } from 'date-fns/locale'
+import { CotisationCnapsProps } from '@src/interfaces/interfaceCotisationCnaps'
 
-class DnsGenerator extends Component<{ tauxCnaps: any }> {
+class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   private store: Store
   private wb: ExcelJS.Workbook
   private employeurSheet: EmployerWorksheet
@@ -168,13 +169,19 @@ class DnsGenerator extends Component<{ tauxCnaps: any }> {
         }
       }
       if (salarie.hs_plafonne && salarie.taux_cotisation_cnaps_employeur) {
-        const tauxCotisationEmployeur = salarie.taux_cotisation_cnaps_employeur || 0.13
+        const tauxCotisationEmployeur = this.props.tauxCnaps.employeur
+          ? this.props.tauxCnaps.employeur
+          : 0.13
+
         monthWorksheet.workSheet.getCell(`M${index + 3}`).value = {
           formula: `=L${index + 3} * ${tauxCotisationEmployeur}`,
         }
       }
       if (salarie.hs_non_plafonne) {
-        const tauxCotisationSalarie = salarie.taux_cotisation_cnaps_salarie || 0.01
+        const tauxCotisationSalarie = this.props.tauxCnaps.salarie
+          ? this.props.tauxCnaps.salarie
+          : 0.01
+
         monthWorksheet.workSheet.getCell(`N${index + 3}`).value = {
           formula: `=L${index + 3} * ${tauxCotisationSalarie}`,
         }
@@ -204,6 +211,14 @@ class DnsGenerator extends Component<{ tauxCnaps: any }> {
     }
   }
 
+  private isSalariesArrayNotEmpty = (number): boolean => {
+    let isNotEmpty = true
+    if (number === 0 || number === undefined) {
+      isNotEmpty = false
+    }
+    return isNotEmpty
+  }
+
   private handelDownload = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
 
@@ -218,9 +233,15 @@ class DnsGenerator extends Component<{ tauxCnaps: any }> {
     this.writeSalarieDataToWorksheet(listSalarieMois2, this.mois2WorkSheet)
     this.writeSalarieDataToWorksheet(listSalarieMois3, this.mois3WorkSheet)
 
-    this.mois1WorkSheet.addBorder(numberSalarieMois1)
-    this.mois2WorkSheet.addBorder(numberSalarieMois2)
-    this.mois3WorkSheet.addBorder(numberSalarieMois3)
+    if (this.isSalariesArrayNotEmpty(numberSalarieMois1)) {
+      this.mois1WorkSheet.addBorder(numberSalarieMois1)
+    }
+    if (this.isSalariesArrayNotEmpty(numberSalarieMois2)) {
+      this.mois2WorkSheet.addBorder(numberSalarieMois2)
+    }
+    if (this.isSalariesArrayNotEmpty(numberSalarieMois3)) {
+      this.mois3WorkSheet.addBorder(numberSalarieMois3)
+    }
 
     if (this.isEmployeurDataExist()) {
       this.writeDataToSheet1(this.dnsData.employeur[0])
