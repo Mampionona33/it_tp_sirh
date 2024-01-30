@@ -62,6 +62,7 @@ class MonthWorksheet implements Partial<Worksheet> {
     const rows = this.workSheet.getRows(3, rowCount)
     rows.forEach((row) => {
       row.eachCell((cell) => {
+        cell.font = { size: 9, name: 'Arial' }
         cell.border = {
           top: { style: 'thin' },
           left: { style: 'thin' },
@@ -70,6 +71,7 @@ class MonthWorksheet implements Partial<Worksheet> {
         }
       })
       row.eachCell({ includeEmpty: true }, (cell) => {
+        cell.font = { size: 9, name: 'Arial' }
         cell.border = {
           top: { style: 'thin' },
           left: { style: 'thin' },

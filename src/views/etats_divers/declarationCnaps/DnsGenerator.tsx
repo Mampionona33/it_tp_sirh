@@ -142,8 +142,6 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
 
       const hs_non_plafonne = salaire_du_mois + avantage_du_mois
 
-      const hs_plafonne = hs_non_plafonne
-
       if (salarie.mois && salarie.annee) {
         monthWorksheet.workSheet.getCell(`A${index + 3}`).value = anneeMois
       }
