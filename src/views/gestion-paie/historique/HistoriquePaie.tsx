@@ -218,7 +218,7 @@ const HistoriquePaie = () => {
           <ReusableTable data={historiquePaiement} columns={cols} />
         </div>
       ) : (
-        <Page404 />
+        !errors && <Page404 />
       )}
     </div>
   )

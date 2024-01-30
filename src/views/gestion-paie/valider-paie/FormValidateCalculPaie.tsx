@@ -19,14 +19,18 @@ const FormValidateCalculPaie = () => {
     event.preventDefault()
 
     try {
-      const respAddDns = await addEmployeeDns(bullettinDePaie)
-      const resp = await bulletinDePaieService.create({ id, data: bullettinDePaie })
+      await addEmployeeDns(bullettinDePaie)
+      // const resp = await bulletinDePaieService.create({ id, data: bullettinDePaie })
 
-      if (resp.data === 'Paie enregistrée') {
-        dispatch(resetBulletinDePaie())
-        dispatch(setModalClose())
-        navigate(`/gestion-de-paie`)
-      }
+      dispatch(resetBulletinDePaie())
+      dispatch(setModalClose())
+      navigate(`/gestion-de-paie`)
+
+      // if (resp.data === 'Paie enregistrée') {
+      //   dispatch(resetBulletinDePaie())
+      //   dispatch(setModalClose())
+      //   navigate(`/gestion-de-paie`)
+      // }
     } catch (error) {
       dispatch(setModalClose())
       throw error
