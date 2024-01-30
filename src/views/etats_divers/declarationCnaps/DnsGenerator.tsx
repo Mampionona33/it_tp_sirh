@@ -215,6 +215,7 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.employeurSheet.sheet.getCell('C9').value = employeurData.email
     console.log(this.props)
     if (this.props.tauxCnaps) {
+      this.employeurSheet.sheet.getCell('C13').value = this.props.tauxCnaps.modeDePayement
       this.employeurSheet.sheet.getCell('C15').value = this.props.tauxCnaps.employeur
       this.employeurSheet.sheet.getCell('C16').value = this.props.tauxCnaps.salarie
     }
