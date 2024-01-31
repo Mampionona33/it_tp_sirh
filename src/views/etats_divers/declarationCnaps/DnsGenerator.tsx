@@ -311,6 +311,7 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.employeurSheet.sheet.getCell('D18').value = mois2
     this.employeurSheet.sheet.getCell('E18').value = mois3
     this.applyDefaultFontToMoisConcernes()
+    this.employeurSheet.sheet.getCell('C22').value = { formula: "SUM(COUNTA($'Mois 1'.D:D);-1" }
   }
 
   private isSalariesArrayNotEmpty = (number): boolean => {
