@@ -262,6 +262,31 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     return mois
   }
 
+  private applyDefaultFont = (workSheet: ExcelJS.Worksheet, cell: string) => {
+    workSheet.getCell(cell).font = {
+      name: 'Arial',
+      size: 10,
+    }
+  }
+
+  private applyDefaultFontToRenseingEmployeur = (): void => {
+    for (let i = 4; i < 10; i++) {
+      this.applyDefaultFont(this.employeurSheet.sheet, `C${i}`)
+    }
+  }
+
+  private applyDefaultFontToCotisation = (): void => {
+    for (let i = 12; i < 17; i++) {
+      this.applyDefaultFont(this.employeurSheet.sheet, `C${i}`)
+    }
+  }
+
+  private applyDefaultFontToMoisConcernes = (): void => {
+    this.applyDefaultFont(this.employeurSheet.sheet, `C18`)
+    this.applyDefaultFont(this.employeurSheet.sheet, `D18`)
+    this.applyDefaultFont(this.employeurSheet.sheet, `E18`)
+  }
+
   private writeDataToSheet1 = (employeurData: IDnsGeneratorEmployeurData) => {
     this.employeurSheet.sheet.getCell('C4').value = employeurData.numero_rcs
     this.employeurSheet.sheet.getCell('C5').value = employeurData.nom
@@ -269,13 +294,16 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.employeurSheet.sheet.getCell('C7').value = employeurData.telephone
     this.employeurSheet.sheet.getCell('C8').value = employeurData.adresse
     this.employeurSheet.sheet.getCell('C9').value = employeurData.email
+    this.applyDefaultFontToRenseingEmployeur()
     console.log(this.props)
+
     if (this.props.tauxCnaps) {
       const periode = this.formatPeriod()
       this.employeurSheet.sheet.getCell('C12').value = periode
       this.employeurSheet.sheet.getCell('C13').value = this.props.tauxCnaps.modeDePayement
       this.employeurSheet.sheet.getCell('C15').value = this.props.tauxCnaps.employeur
       this.employeurSheet.sheet.getCell('C16').value = this.props.tauxCnaps.salarie
+      this.applyDefaultFontToCotisation()
     }
     const mois1 = this.getMoisConcernes().mois1
     const mois2 = this.getMoisConcernes().mois2
@@ -283,6 +311,7 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.employeurSheet.sheet.getCell('C18').value = mois1
     this.employeurSheet.sheet.getCell('D18').value = mois2
     this.employeurSheet.sheet.getCell('E18').value = mois3
+    this.applyDefaultFontToMoisConcernes()
   }
 
   private isSalariesArrayNotEmpty = (number): boolean => {

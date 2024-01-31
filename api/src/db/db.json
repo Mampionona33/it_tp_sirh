@@ -850,8 +850,8 @@
       "id": 1,
       "libelle": "Cotisation CNAPS",
       "type": "CNAPS",
-      "employeur": 0.01,
-      "salarie": 0.13,
+      "employeur": 0.13,
+      "salarie": 0.01,
       "modeDePayement": "Virement bancaire"
     },
     {
