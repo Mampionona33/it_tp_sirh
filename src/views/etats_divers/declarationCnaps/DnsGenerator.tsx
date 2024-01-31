@@ -300,7 +300,6 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     if (this.props.tauxCnaps) {
       const periode = this.formatPeriod()
       this.employeurSheet.sheet.getCell('C12').value = periode
-      this.employeurSheet.sheet.getCell('C13').value = this.props.tauxCnaps.modeDePayement
       this.employeurSheet.sheet.getCell('C15').value = this.props.tauxCnaps.employeur
       this.employeurSheet.sheet.getCell('C16').value = this.props.tauxCnaps.salarie
       this.applyDefaultFontToCotisation()

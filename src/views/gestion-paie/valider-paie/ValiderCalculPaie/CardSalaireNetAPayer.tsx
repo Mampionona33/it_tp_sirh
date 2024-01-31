@@ -7,12 +7,22 @@ import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReduc
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const Body = () => {
-  const { salaireNet, avance, salaireNetAPayer, salarie, montanReductionChargeParEnfant } =
-    useAppSelector((store) => store.bulletinDePaie)
+  const {
+    salaireNet,
+    avance,
+    salaireNetAPayer,
+    salarie,
+    montanReductionChargeParEnfant,
+    avantages,
+  } = useAppSelector((store) => store.bulletinDePaie)
   const dispatch = useAppDispatch()
 
   const updateBulletinDePaie = useCallback(() => {
     const calculPaie = new CalculPaie_v2()
+    const avantageAutre = avantages.autresAvantages || 0
+    const avantageDomestique = avantages.domestique || 0
+    const avantageLogement = avantages.logement || 0
+    const avantageVehicule = avantages.vehicule || 0
 
     const allocationFamille = calculPaie.calculateReductionChargeFamiliale({
       salarie: salarie,
@@ -23,6 +33,10 @@ const Body = () => {
       salaireNet,
       avanceQuinzaine: avance.quinzaine,
       avanceSpeciale: avance.speciale,
+      avantageAutre,
+      avantageDomestique,
+      avantageLogement,
+      avantageVehicule,
     })
 
     dispatch(
@@ -31,7 +45,7 @@ const Body = () => {
         valReductionChargeEnfants: allocationFamille,
       } as IBulletinDePaieProps),
     )
-  }, [salaireNet, avance, salarie, montanReductionChargeParEnfant, dispatch])
+  }, [salaireNet, avance, salarie, montanReductionChargeParEnfant, dispatch, avantages])
 
   useEffect(() => {
     updateBulletinDePaie()
@@ -46,6 +60,26 @@ const Body = () => {
       />
       <CardRow
         className="border-b border-b-customBlue-100"
+        cell1="Avantage véhicule"
+        cell3={avantages.vehicule}
+      />
+      <CardRow
+        className="border-b border-b-customBlue-100"
+        cell1="Avantage logement"
+        cell3={avantages.logement}
+      />
+      <CardRow
+        className="border-b border-b-customBlue-100"
+        cell1="Avantage domestique"
+        cell3={avantages.domestique}
+      />
+      <CardRow
+        className="border-b border-b-customBlue-100"
+        cell1="Autres avantages"
+        cell3={avantages.autresAvantages}
+      />
+      <CardRow
+        className="border-b border-b-customBlue-100"
         cell1="Avances quinzaine"
         cell3={avance.quinzaine}
       />
@@ -54,7 +88,6 @@ const Body = () => {
         cell1="Avances spéciale"
         cell3={avance.speciale}
       />
-
       <CardRow
         cell1="Salaire net à payer"
         cell3={salaireNetAPayer}

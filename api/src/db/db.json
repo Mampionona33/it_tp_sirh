@@ -1094,6 +1094,22 @@
           "taux_cotisation_cnaps_employeur": 0.035,
           "taux_cotisation_cnaps_salarie": 0.1,
           "updated_at": null
+        },
+        {
+          "id": 7,
+          "annee": 2023,
+          "trimestre": "t1",
+          "mois": 1,
+          "matricule": "345",
+          "nom": "RAKOTOZANANY",
+          "prenom": "Benjaminator",
+          "date_embauche": "2016-04-16",
+          "date_depart": null,
+          "salaire_du_mois": 1000000,
+          "avantage_du_mois": 100000,
+          "temps_presence": 160,
+          "created_at": "2023-01-01",
+          "updated_at": null
         }
       ],
       "employeur": [
@@ -1147,7 +1163,204 @@
       "valide": "non"
     }
   ],
-  "bulletinDePaie": [],
+  "bulletinDePaie": [
+    {
+      "validation": {
+        "status": "oui",
+        "date": "2023-01-01",
+        "day": "2024-01-31"
+      },
+      "employeur": {
+        "nom": " LA LIGNE SCANDINAVE",
+        "adresse": " 2 RUE LIEUTNANT BERARD",
+        "CP_et_Ville": " 501 - TOAMASINA",
+        "nif": " 3000000581",
+        "stat": " 50121 11 2003 0 00475",
+        "rcs": " 2002B00608"
+      },
+      "salarie": {
+        "id": 1,
+        "nom": "RAKOTOZANANY",
+        "prenom": "Benjaminator",
+        "date_naissance": "2016-04-16",
+        "lieu_naissance": "Toamasina",
+        "adresse": "2 RUE LIEUTNANT BERARD",
+        "telephone": "",
+        "email": "sealtmm@seal.mg",
+        "num_cin": "fdsffsdfdf",
+        "genre": "masculin",
+        "enfant": [
+          {
+            "id": 1,
+            "nom": "Rosali ",
+            "prenom": "Bambini",
+            "date_naissance": "2023-11-15",
+            "lieu_naissance": "Petronum",
+            "genre_enfant": "feminin",
+            "certificat": "vie"
+          }
+        ],
+        "titre_poste": "Responsable Import et logistique ",
+        "matricule": "345",
+        "categorie": "os2",
+        "date_embauche": "2016-04-16",
+        "lieu_travail": "Toamasina",
+        "salaire_de_base": 250000,
+        "travail_de_nuit": "non",
+        "mode_payement_salaire": "cheque",
+        "actif": "oui",
+        "departement": "Logistique",
+        "num_cnaps": "960101059745",
+        "num_osie": "96010105hjod4",
+        "est_cadre": "non",
+        "rib": "454787f7dsf787878fd",
+        "prime_et_avantage_permanent": [
+          {
+            "libelle": "Carburant",
+            "montant": 450000
+          },
+          {
+            "libelle": "gas",
+            "montant": 100000
+          }
+        ],
+        "depart": {
+          "date": null,
+          "motif": null
+        },
+        "tel": "020 000211",
+        "cin": "10126174565",
+        "cadre": true,
+        "date_delivrance_cin": "2023-12-14",
+        "nom_mere": "dffs",
+        "nom_pere": "Razanajafy",
+        "mode_paiement_salaire": "virement_bancaire"
+      },
+      "dateDeVirement": "2024-01-31",
+      "salaireDeBase": 250000,
+      "valReductionChargeEnfants": 2000,
+      "montanReductionChargeParEnfant": 2000,
+      "totalHn": 160,
+      "totalHs": 53,
+      "totalHs130": 0,
+      "totalHs150": 0,
+      "hsni130": 18,
+      "hsni150": 8,
+      "hsi130": 6,
+      "hsi150": 2,
+      "totalHs30": 0,
+      "totalHs50": 11,
+      "totalHDim": 58,
+      "totalHFerie": 9,
+      "valHsni130": 33750.65,
+      "valHsni150": 17308.03,
+      "valHsi130": 11250.22,
+      "valHsi150": 4327.01,
+      "valHs30": 0,
+      "valHs50": 7932.84,
+      "valHdim": 33462.18,
+      "valHFerie": 12981.02,
+      "totalPrimeEtAvantage": 0,
+      "totalDeduction": 0,
+      "tauxCnaps": 0.01,
+      "tauxOsie": 0.01,
+      "baseCnaps": 372211.95,
+      "avance": {
+        "quinzaine": 0,
+        "speciale": 0
+      },
+      "reduChargeFamil": 0,
+      "baseIrsa": 314931.15,
+      "baseIrsaArrondi": 314900,
+      "salaireBrut": 372211.95000000007,
+      "salaireNet": 360989.8300000001,
+      "osie": 2500,
+      "salaireNetAPayer": 359789.83,
+      "valMinIrsaParTranche": 3000,
+      "plafondSME": 1910400,
+      "irsaAPayer": 3000,
+      "cnaps": 3722.12,
+      "rappel": 0,
+      "indemnites": {
+        "transport": 0,
+        "autresIndemnite": 0
+      },
+      "totalIndemnite": 0,
+      "primeEtGratification": {
+        "assiduite": 0,
+        "excellence": 0
+      },
+      "totalPrimeEtGratification": 0,
+      "deductions": {
+        "absence": 0,
+        "retard": 0
+      },
+      "avantages": {
+        "domestique": 1000,
+        "logement": 100,
+        "vehicule": 100,
+        "autresAvantages": 0
+      },
+      "totalAvantages": 1200,
+      "totalHTravailEffectif": 212,
+      "tableauHsHebdo": [
+        {
+          "jour": "samedi",
+          "semaineDu": "02/01/2023",
+          "tolalHs": 11
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "09/01/2023",
+          "tolalHs": 9
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "16/01/2023",
+          "tolalHs": 14
+        }
+      ],
+      "tableauHs130Hebdo": [
+        {
+          "jour": "samedi",
+          "semaineDu": "02/01/2023",
+          "tolalHs": 8
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "09/01/2023",
+          "tolalHs": 8
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "16/01/2023",
+          "tolalHs": 8
+        }
+      ],
+      "tableauHs150Hebdo": [
+        {
+          "jour": "samedi",
+          "semaineDu": "02/01/2023",
+          "tolalHs": 3
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "09/01/2023",
+          "tolalHs": 1
+        },
+        {
+          "jour": "samedi",
+          "semaineDu": "16/01/2023",
+          "tolalHs": 6
+        }
+      ],
+      "domestique": 1000,
+      "logement": 100,
+      "vehicule": 100,
+      "autresAvantages": 0,
+      "id": 1
+    }
+  ],
   "salaries": [
     {
       "id": 1,

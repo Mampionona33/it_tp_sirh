@@ -47,6 +47,10 @@ export interface calculSalaireNetAPayerParams {
   salaireNet: number
   avanceQuinzaine: number
   avanceSpeciale: number
+  avantageVehicule: number
+  avantageDomestique: number
+  avantageAutre: number
+  avantageLogement: number
 }
 
 export interface calculAllocationParams {
@@ -355,8 +359,24 @@ class CalculPaie_v2 {
 
   public calculSalaireNetAPayer(params: calculSalaireNetAPayerParams): number {
     let salaireNetAPayer = 0
-    const { avanceQuinzaine, avanceSpeciale, salaireNet } = params
-    salaireNetAPayer = this.roundToTwoDecimal(salaireNet - (avanceQuinzaine + avanceSpeciale))
+    const {
+      avanceQuinzaine,
+      avanceSpeciale,
+      salaireNet,
+      avantageAutre,
+      avantageDomestique,
+      avantageLogement,
+      avantageVehicule,
+    } = params
+    salaireNetAPayer = this.roundToTwoDecimal(
+      salaireNet -
+        (avanceQuinzaine +
+          avanceSpeciale +
+          avantageAutre +
+          avantageDomestique +
+          avantageLogement +
+          avantageVehicule),
+    )
 
     return salaireNetAPayer
   }
