@@ -69,6 +69,27 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     })
   }
 
+  private formatPeriod = (): string => {
+    let periode = ''
+    switch (this.periodSelectionne) {
+      case 't1':
+        periode = '01-' + String(this.anneeSelectionne)
+        break
+      case 't2':
+        periode = '02-' + String(this.anneeSelectionne)
+        break
+      case 't3':
+        periode = '03-' + String(this.anneeSelectionne)
+        break
+      case 't4':
+        periode = '04-' + String(this.anneeSelectionne)
+        break
+      default:
+        break
+    }
+    return periode
+  }
+
   private isSalariesDataExist = (): boolean => {
     return this.dnsData.travailleur !== null && this.dnsData.travailleur !== undefined
   }
@@ -215,6 +236,8 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.employeurSheet.sheet.getCell('C9').value = employeurData.email
     console.log(this.props)
     if (this.props.tauxCnaps) {
+      const periode = this.formatPeriod()
+      this.employeurSheet.sheet.getCell('C12').value = periode
       this.employeurSheet.sheet.getCell('C13').value = this.props.tauxCnaps.modeDePayement
       this.employeurSheet.sheet.getCell('C15').value = this.props.tauxCnaps.employeur
       this.employeurSheet.sheet.getCell('C16').value = this.props.tauxCnaps.salarie
