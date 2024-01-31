@@ -852,14 +852,14 @@
       "type": "CNAPS",
       "employeur": 0.01,
       "salarie": 0.13,
-      "modeDePayement": "virement bancaire"
+      "modeDePayement": "Virement bancaire"
     },
     {
       "id": 2,
       "libelle": "Cotisation OMSI",
       "type": "OMSI",
       "employeur": 0.1,
-      "modeDePayement": "virement bancaire",
+      "modeDePayement": "Virement bancaire",
       "salarie": 0.1
     }
   ],
