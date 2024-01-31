@@ -140,6 +140,21 @@ class MonthWorksheet implements Partial<Worksheet> {
       if (row.number > 2) {
         row.eachCell({ includeEmpty: false }, (cell) => {
           cell.value = null
+          cell.border = {
+            top: null,
+            left: null,
+            bottom: null,
+            right: null,
+          }
+        })
+        row.eachCell({ includeEmpty: true }, (cell) => {
+          cell.value = null
+          cell.border = {
+            top: null,
+            left: null,
+            bottom: null,
+            right: null,
+          }
         })
       }
     })
