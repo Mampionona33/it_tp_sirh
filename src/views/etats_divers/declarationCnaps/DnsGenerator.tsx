@@ -227,6 +227,41 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     })
   }
 
+  private getMoisConcernes = (): { mois1: string; mois3: string; mois2: string } => {
+    const mois = {
+      mois1: '',
+      mois3: '',
+      mois2: '',
+    }
+
+    switch (this.periodSelectionne) {
+      case 't1':
+        mois.mois1 = 'janvier'
+        mois.mois2 = 'février'
+        mois.mois3 = 'mars'
+        break
+      case 't2':
+        mois.mois1 = 'avril'
+        mois.mois2 = 'mai'
+        mois.mois3 = 'juin'
+        break
+      case 't3':
+        mois.mois1 = 'juillet'
+        mois.mois2 = 'août'
+        mois.mois3 = 'septembre'
+        break
+      case 't4':
+        mois.mois1 = 'octobre'
+        mois.mois2 = 'novembre'
+        mois.mois3 = 'décembre'
+        break
+      default:
+        break
+    }
+
+    return mois
+  }
+
   private writeDataToSheet1 = (employeurData: IDnsGeneratorEmployeurData) => {
     this.employeurSheet.sheet.getCell('C4').value = employeurData.numero_rcs
     this.employeurSheet.sheet.getCell('C5').value = employeurData.nom
@@ -242,6 +277,12 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
       this.employeurSheet.sheet.getCell('C15').value = this.props.tauxCnaps.employeur
       this.employeurSheet.sheet.getCell('C16').value = this.props.tauxCnaps.salarie
     }
+    const mois1 = this.getMoisConcernes().mois1
+    const mois2 = this.getMoisConcernes().mois2
+    const mois3 = this.getMoisConcernes().mois3
+    this.employeurSheet.sheet.getCell('C18').value = mois1
+    this.employeurSheet.sheet.getCell('D18').value = mois2
+    this.employeurSheet.sheet.getCell('E18').value = mois3
   }
 
   private isSalariesArrayNotEmpty = (number): boolean => {
