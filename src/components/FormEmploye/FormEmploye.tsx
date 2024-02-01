@@ -111,7 +111,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
               {/* <PrimeEtAvantageParMois /> */}
               <FormEmployeGroupButton />
             </form>
-            {formEmploye.id && <FormResiliationContrat />}
+            {formEmploye && formEmploye.id && <FormResiliationContrat />}
           </div>
         </>
       </div>
