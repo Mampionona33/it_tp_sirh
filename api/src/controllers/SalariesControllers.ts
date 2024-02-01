@@ -16,7 +16,7 @@ class SalaierControllers {
 
   getOne = (req: Request, res: Response) => {
     const { id } = req.params
-    const salarie = this.db['salaries'].find((salarie: any) => salarie.id === id)
+    const salarie = this.db['salaries'].find((salarie: any) => Number(salarie.id) === Number(id))
     res.status(200).send(salarie)
   }
 

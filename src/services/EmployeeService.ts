@@ -30,7 +30,7 @@ class EmployeeService {
   }
 
   getById(id: string | number) {
-    return axios.get(`${this.REACT_APP_API_BASE_URL}/employees/id=${id}`)
+    return axios.get(`${this.REACT_APP_API_BASE_URL}/personnels/${id}`)
   }
 
   async create(data: IEmploye) {
@@ -45,7 +45,7 @@ class EmployeeService {
       return response
     } catch (error) {
       console.error("Une erreur s'est produite lors de la requête :", error)
-      // throw error
+      throw error
     }
   }
 
