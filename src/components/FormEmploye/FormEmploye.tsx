@@ -17,6 +17,7 @@ import {
 import Loading from '../loadings/Loading'
 import { resetListEmployees } from '@src/redux/employees/employeesReducer'
 import { CAlert } from '@coreui/react'
+import useFetchSalarie from '@src/hooks/useFetchSalarie'
 
 interface IFormEmploye {
   id?: string | number
@@ -30,8 +31,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     message: '',
   })
 
-  const formEmploye = useAppSelector((state) => state.formEmploye)
-  const { loading } = useAppSelector((state) => state.employeesList)
+  // const formEmploye = useAppSelector((state) => state.formEmploye)
+  // const { loading } = useAppSelector((state) => state.employeesList)
+
+  const { salarie: formEmploye, refetch, isError, errors, isLoading } = useFetchSalarie(id)
 
   const isEmployeExist = (): boolean => {
     return formEmploye.id !== null
@@ -87,6 +90,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   useEffect(() => {
     console.log('formEmploye', formEmploye)
   }, [formEmploye])
+
+  if (isLoading) {
+    return <Loading />
+  }
 
   return (
     <>
