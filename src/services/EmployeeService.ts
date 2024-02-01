@@ -31,7 +31,12 @@ class EmployeeService {
 
   async getById(id: string | number) {
     try {
-      const response = await axios.get(`${this.REACT_APP_API_BASE_URL}/personnels/${id}`)
+      const response = await axios.get(`${this.REACT_APP_API_BASE_URL}/personnels/${id}`, {
+        auth: {
+          username: this.login,
+          password: this.pass,
+        },
+      })
       return response
     } catch (error) {
       console.error("Une erreur s'est produite lors de la requête :", error)
