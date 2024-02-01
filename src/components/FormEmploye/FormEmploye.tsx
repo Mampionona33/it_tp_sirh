@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import InfoPersoEmploye from './InfoPersoEmploye'
 import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
 import InfoPro from './InfoPro'
@@ -83,6 +83,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     ev.preventDefault()
     dispatch(resetFormEmploye())
   }
+
+  useEffect(() => {
+    console.log('formEmploye', formEmploye)
+  }, [formEmploye])
 
   return (
     <>
