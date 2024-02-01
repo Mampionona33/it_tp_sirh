@@ -31,10 +31,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     message: '',
   })
 
-  // const formEmploye = useAppSelector((state) => state.formEmploye)
-  // const { loading } = useAppSelector((state) => state.employeesList)
+  const formEmploye = useAppSelector((state) => state.formEmploye)
+  const { loading } = useAppSelector((state) => state.employeesList)
 
-  const { salarie: formEmploye, refetch, isError, errors, isLoading } = useFetchSalarie(id)
+  const { salarie, refetch, isError, errors, isLoading } = useFetchSalarie(id)
 
   const isEmployeExist = (): boolean => {
     return formEmploye.id !== null
@@ -88,10 +88,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   }
 
   useEffect(() => {
-    if (formEmploye) {
-      dispatch(setFormEmploye(formEmploye))
+    if (salarie) {
+      dispatch(setFormEmploye(salarie))
     }
-  }, [formEmploye])
+  }, [salarie, dispatch])
 
   if (isLoading) {
     return <Loading />
