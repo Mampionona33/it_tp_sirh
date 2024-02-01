@@ -32,9 +32,8 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   })
 
   const formEmploye = useAppSelector((state) => state.formEmploye)
-  const { loading } = useAppSelector((state) => state.employeesList)
 
-  const { salarie, refetch, isError, errors, isLoading } = useFetchSalarie(id)
+  const { salarie, isError, errors, isLoading } = useFetchSalarie(id)
 
   const isEmployeExist = (): boolean => {
     return formEmploye.id !== null
