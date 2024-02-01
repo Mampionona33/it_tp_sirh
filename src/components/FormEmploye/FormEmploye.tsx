@@ -6,7 +6,7 @@ import InformationPaie from './InformationPaie'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
 import FormResiliationContrat from './FormResiliationContrat/FormResiliationContrat'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
-import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
+import { resetFormEmploye, setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import employeService from '@src/services/EmployeeService'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -88,7 +88,9 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   }
 
   useEffect(() => {
-    console.log('formEmploye', formEmploye)
+    if (formEmploye) {
+      dispatch(setFormEmploye(formEmploye))
+    }
   }, [formEmploye])
 
   if (isLoading) {
