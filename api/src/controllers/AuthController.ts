@@ -21,9 +21,7 @@ class AuthController {
     console.log(shouldConnect)
 
     if (shouldConnect) {
-      setTimeout(() => {
-        res.status(200).send('Connecté')
-      }, 5000)
+      res.status(200).send('Connecté')
     } else {
       // res.status(401).json({ success: false, message: 'Vérifier les identifications' })
       res.send('Vérifier les identifications')

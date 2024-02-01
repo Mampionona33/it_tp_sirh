@@ -17,9 +17,7 @@ class SalaierControllers {
   getOne = (req: Request, res: Response) => {
     const { id } = req.params
     const salarie = this.db['salaries'].find((salarie: any) => salarie.id === id)
-    setTimeout(() => {
-      res.status(200).send(salarie)
-    }, 5000)
+    res.status(200).send(salarie)
   }
 
   create = (req: Request, res: Response) => {
