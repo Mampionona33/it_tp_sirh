@@ -311,7 +311,24 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.employeurSheet.sheet.getCell('D18').value = mois2
     this.employeurSheet.sheet.getCell('E18').value = mois3
     this.applyDefaultFontToMoisConcernes()
-    this.employeurSheet.sheet.getCell('C22').value = { formula: "SUM(COUNTA($'Mois 1'.D:D);-1" }
+    // this.employeurSheet.sheet.getCell('H1').value = 1
+    // this.employeurSheet.sheet.fillFormula('H2:H10', 'H1+1')
+
+    // const salarieMois1 = 'salarieMois1'
+    // for (let i = 3; i < 10; i++) {
+    //   this.employeurSheet.sheet.getCell(`H${i}`).name = salarieMois1
+    // }
+
+    // this.employeurSheet.sheet.fillFormula(`C22:C22`, `COUNTA($'Mois 1'.D3:D1048576)`)
+
+    this.employeurSheet.sheet.getCell('C22').value = {
+      formula: "COUNTA($'Mois 1'.$D3:D1048576)",
+      result: this.getListSalarieMois1().length,
+      // formula: 'COUNTA(H1:H1048576)',
+    }
+    this.employeurSheet.sheet.getCell('C23').value = {
+      formula: "SUM($'Mois 1'.M3:M1048576)",
+    }
   }
 
   private isSalariesArrayNotEmpty = (number): boolean => {
