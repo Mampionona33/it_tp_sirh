@@ -30,15 +30,23 @@ import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
+import useFetchSalarie from '@src/hooks/useFetchSalarie'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
-  const { salarie, dateDeVirement, validation } = useAppSelector((store) => store.bulletinDePaie)
+
+  const { id } = useParams()
+
+  // const { salarie, dateDeVirement, validation } = useAppSelector((store) => store.bulletinDePaie)
+  const { dateDeVirement, validation } = useAppSelector((store) => store.bulletinDePaie)
   const bulletinDePaie = useAppSelector((store) => store.bulletinDePaie)
   const { listDateDebutDateFin } = useAppSelector((store) => store.parametreCalendrier)
   const { loading: loadingListEmploye, error: errorFetchingListEmployee } = useAppSelector(
     (store) => store.employeesList,
   )
+
+  const { salarie, errors, isLoading, isError } = useFetchSalarie(id)
+
   const { loading: loadingHours, error: errorFetchingHours } = useAppSelector(
     (store) => store.employeHours,
   )
@@ -117,6 +125,14 @@ const ValidePaie = () => {
   const dateFinFormated = formatDateFin()
 
   useEffect(() => {
+    if (salarie) {
+      dispatch(
+        setBulletinDePaie({
+          salarie: salarie,
+          salaireDeBase: salarie.salaire_de_base,
+        } as IBulletinDePaieProps),
+      )
+    }
     const fetchData = async () => {
       if (salarie && dateFinFormated && dateDebutFormated) {
         const matricule = salarie.matricule
@@ -240,6 +256,10 @@ const ValidePaie = () => {
   }
 
   if (loadingListEmploye === 'loading' || loadingHours === 'loading') {
+    return <Loading />
+  }
+
+  if (isLoading) {
     return <Loading />
   }
 

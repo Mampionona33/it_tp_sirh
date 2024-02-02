@@ -67,6 +67,8 @@ export interface calculSalaireNetParams {
   osie: number
   irsaAPayer: number
   valReductionChargeEnfants: number
+  valHsni130: number
+  valHsni150: number
 }
 
 export interface ICalculateIrsaParTrancheParams {
@@ -347,11 +349,13 @@ class CalculPaie_v2 {
    * @return {number} The calculated net salary.
    */
   public caluclateSalaireNet(params: calculSalaireNetParams): number {
-    const { cnaps, irsaAPayer, osie, valReductionChargeEnfants } = params
+    const { cnaps, irsaAPayer, osie, valReductionChargeEnfants, valHsni130, valHsni150 } = params
     let salaireNet = 0
 
     if (this.salaireBrut) {
-      salaireNet = this.salaireBrut - (cnaps + irsaAPayer + osie + valReductionChargeEnfants)
+      salaireNet =
+        this.salaireBrut -
+        (cnaps + irsaAPayer + osie + valReductionChargeEnfants + valHsni130 + valHsni150)
     }
 
     return salaireNet

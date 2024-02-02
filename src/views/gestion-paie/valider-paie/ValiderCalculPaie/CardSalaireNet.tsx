@@ -55,6 +55,8 @@ const Body = () => {
       cnaps,
       irsaAPayer,
       valReductionChargeEnfants,
+      valHsni130,
+      valHsni150,
     })
 
     dispatch(
