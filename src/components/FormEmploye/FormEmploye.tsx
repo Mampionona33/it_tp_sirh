@@ -120,7 +120,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
 
   return (
     <>
-      {notification.type && <CAlert color={notification.type}>{notification.message}</CAlert>}
       <div>
         <>
           <div className="bg-white flex flex-col">
@@ -136,6 +135,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           </div>
         </>
       </div>
+      {notification.type && <CAlert color={notification.type}>{notification.message}</CAlert>}
     </>
   )
 }
