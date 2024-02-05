@@ -58,7 +58,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     event.preventDefault()
     const requestData = {
       ...formEmploye,
-      id: id || 'ajout',
       salaire_de_base: parseFloat(String(formEmploye.salaire_de_base)),
     }
 
