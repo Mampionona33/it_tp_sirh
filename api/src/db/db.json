@@ -1363,15 +1363,15 @@
   ],
   "salaries": [
     {
-      "id": 1,
+      "id": "1",
       "nom": "RAKOTOZANANY",
-      "prenom": "Benjaminator",
+      "prenom": "Benjaminato",
       "date_naissance": "2016-04-16",
       "lieu_naissance": "Toamasina",
       "adresse": "2 RUE LIEUTNANT BERARD",
       "telephone": "",
       "email": "sealtmm@seal.mg",
-      "num_cin": "fdsffsdfdf",
+      "num_cin": "fdfdfdf",
       "genre": "masculin",
       "enfant": [
         {

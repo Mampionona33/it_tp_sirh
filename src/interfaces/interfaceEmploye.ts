@@ -1,5 +1,5 @@
 export interface IEmploye {
-  id?: number
+  id?: string | number
   nom: string
   prenom: string
   date_naissance: string

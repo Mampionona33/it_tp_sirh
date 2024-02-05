@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import InfoPersoEmploye from './InfoPersoEmploye'
 import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
 import InfoPro from './InfoPro'
@@ -18,6 +18,7 @@ import Loading from '../loadings/Loading'
 import { resetListEmployees } from '@src/redux/employees/employeesReducer'
 import { CAlert } from '@coreui/react'
 import useFetchSalarie from '@src/hooks/useFetchSalarie'
+import useMutateSalarie from '@src/hooks/useMutateSalarie'
 
 interface IFormEmploye {
   id?: string | number
@@ -33,58 +34,76 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
 
   const formEmploye = useAppSelector((state) => state.formEmploye)
 
-  const { salarie, isError, errors, isLoading } = useFetchSalarie(id)
+  const {
+    mutateAsync: mutateSalarie,
+    isError: isErrorMutateSalarie,
+    error: errorMutateSalarie,
+    isSuccess: isSuccessMutateSalarie,
+    isIdle: isIdleMutateSalarie,
+    isPaused: isPausedMutateSalarie,
+  } = useMutateSalarie()
 
-  const isEmployeExist = (): boolean => {
+  const {
+    salarie,
+    isError: errorFetchSalarie,
+    errors: errorsFetchSalarie,
+    isLoading: isLoadingSalarie,
+  } = useFetchSalarie(id)
+
+  const isEmployeExist = useCallback((): boolean => {
     return formEmploye.id !== null
-  }
+  }, [formEmploye.id])
 
-  const handleSubmit = async (ev: React.FormEvent) => {
-    ev.preventDefault()
-
-    try {
-      const requestData = {
-        ...formEmploye,
-        salaire_de_base: parseFloat(String(formEmploye.salaire_de_base)),
-      }
-      if (!isEmployeExist()) {
-        const createEmploye = await dispatch(createEmployee(requestData))
-        if (createEmploye.meta.requestStatus === 'fulfilled') {
-          // navigate('/employees/list')
-          setNotification({
-            type: 'success',
-            message: 'Employe ajoute avec succes',
-          })
-          dispatch(resetFormEmploye())
-        }
-      } else {
-        // const updateEmploye = await employeService.update(formEmploye.id, requestData)
-        const updateEmploye = await dispatch(
-          updateEmployee({ id: formEmploye.id, data: requestData }),
-        )
-        if (updateEmploye.meta.requestStatus === 'fulfilled') {
-          // dispatch(resetListEmployees())
-          // navigate('/employees/list')
-          setNotification({
-            type: 'success',
-            message: 'Employe modifie avec succes',
-          })
-        }
-      }
-      // navigate('/employees/list')
-    } catch (error) {
-      setNotification({
-        type: 'danger',
-        message: 'Une erreur est survenue',
-      })
-      throw error
+  const handleSubmit = (event: React.FormEvent): void => {
+    event.preventDefault()
+    const requestData = {
+      ...formEmploye,
+      id: id || 'ajout',
+      salaire_de_base: parseFloat(String(formEmploye.salaire_de_base)),
     }
+
+    mutateSalarie({ id, data: requestData })
   }
 
-  const handleReset = (ev: React.FormEvent) => {
-    ev.preventDefault()
-    dispatch(resetFormEmploye())
-  }
+  const handleMutationSuccess = useCallback(() => {
+    if (isSuccessMutateSalarie) {
+      if (isEmployeExist()) {
+        setNotification({
+          type: 'success',
+          message: 'Employe modifie avec succes',
+        })
+      } else {
+        dispatch(resetListEmployees())
+        setNotification({
+          type: 'success',
+          message: 'Employe ajoute avec succes',
+        })
+      }
+    }
+  }, [dispatch, isEmployeExist, isSuccessMutateSalarie])
+
+  const handleMutationError = useCallback(() => {
+    if (isErrorMutateSalarie) {
+      if (isEmployeExist()) {
+        setNotification({
+          type: 'danger',
+          message: 'Une erreur est survenue lors de la modification',
+        })
+      } else {
+        setNotification({
+          type: 'danger',
+          message: 'Une erreur est survenue lors de la creation',
+        })
+      }
+    }
+  }, [isErrorMutateSalarie, setNotification, isEmployeExist])
+
+  useEffect(() => {
+    if (isSuccessMutateSalarie || isErrorMutateSalarie) {
+      handleMutationSuccess()
+      handleMutationError()
+    }
+  }, [isSuccessMutateSalarie, isErrorMutateSalarie, handleMutationSuccess, handleMutationError])
 
   useEffect(() => {
     if (salarie) {
@@ -92,8 +111,12 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     }
   }, [salarie, dispatch])
 
-  if (isLoading) {
+  if (isLoadingSalarie) {
     return <Loading />
+  }
+
+  if (errorFetchSalarie) {
+    return <CAlert color="danger">Erreur lors de la recuperation du donnée salarie</CAlert>
   }
 
   return (
@@ -102,7 +125,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
       <div>
         <>
           <div className="bg-white flex flex-col">
-            <form action="" onSubmit={handleSubmit} onReset={handleReset}>
+            <form action="" onSubmit={handleSubmit}>
               <InfoPersoEmploye />
               <InfoPersoEnfantEmploye />
               <InfoPro />
