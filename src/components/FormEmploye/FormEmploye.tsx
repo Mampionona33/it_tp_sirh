@@ -105,6 +105,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   }, [isSuccessMutateSalarie, isErrorMutateSalarie, handleMutationSuccess, handleMutationError])
 
   useEffect(() => {
+    console.log(formEmploye)
+  }, [formEmploye])
+
+  useEffect(() => {
     if (salarie) {
       dispatch(setFormEmploye(salarie))
     }
