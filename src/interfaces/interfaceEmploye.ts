@@ -68,6 +68,7 @@ export interface IEnfantEmploye {
   lieu_naissance: string
   genre_enfant: EnumGenre
   certificat?: EnumCertificatEnfant
+  action?: 'ajout' | 'modifier'
 }
 
 export enum EnumCertificatEnfant {

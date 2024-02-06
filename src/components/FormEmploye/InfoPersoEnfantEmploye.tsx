@@ -203,6 +203,7 @@ const InfoPersoEnfantEmploye: React.FC = () => {
       date_naissance: '',
       lieu_naissance: '',
       genre_enfant: EnumGenre.MASCULIN,
+      action: 'ajout',
     }
 
     dispatch(formEmployeAjoutEnfant(nouvelEnfant))
