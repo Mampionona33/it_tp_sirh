@@ -7,10 +7,10 @@ const useMutateSalarie = () => {
 
   const { mutateAsync, error, isError, isIdle, isPending, isPaused, isSuccess } = useMutation({
     mutationFn: async (props: useMutateSalarieProps) => {
-      if (props.id === 'ajout') {
-        return await employeService.create(props.data)
+      if (props.id) {
+        return await employeService.update(String(props.id), props.data)
       }
-      return await employeService.update(String(props.id), props.data)
+      return await employeService.create(props.data)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['salarie'] })

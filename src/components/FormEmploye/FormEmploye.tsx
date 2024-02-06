@@ -7,15 +7,8 @@ import FormEmployeGroupButton from './FormEmployeGroupButton'
 import FormResiliationContrat from './FormResiliationContrat/FormResiliationContrat'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye, setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
-import employeService from '@src/services/EmployeeService'
 import { useNavigate } from 'react-router-dom'
-import {
-  createEmployee,
-  fetchAllEmployees,
-  updateEmployee,
-} from '@src/redux/employees/employeesAction'
 import Loading from '../loadings/Loading'
-import { resetListEmployees } from '@src/redux/employees/employeesReducer'
 import { CAlert } from '@coreui/react'
 import useFetchSalarie from '@src/hooks/useFetchSalarie'
 import useMutateSalarie from '@src/hooks/useMutateSalarie'
@@ -25,7 +18,6 @@ interface IFormEmploye {
 }
 
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
-  const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const [notification, setNotification] = React.useState({
     type: '',
@@ -72,7 +64,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           message: 'Employe modifie avec succes',
         })
       } else {
-        dispatch(resetListEmployees())
+        dispatch(resetFormEmploye())
         setNotification({
           type: 'success',
           message: 'Employe ajoute avec succes',
@@ -133,10 +125,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
               <InfoPro />
               <InformationPaie />
               {/* <PrimeEtAvantageParMois /> */}
-              <FormEmployeGroupButton />
               {notification.type && (
                 <CAlert color={notification.type}>{notification.message}</CAlert>
               )}
+              <FormEmployeGroupButton />
             </form>
             {formEmploye && formEmploye.id && <FormResiliationContrat />}
           </div>
