@@ -46,7 +46,7 @@ const InformationPaie = () => {
       value: formEmploye.rib,
       name: 'rib',
       type: 'text',
-      placeholder: 'RIB',
+      placeholder: 'RIB: 00000 00000 00000000000 00',
     },
     {
       id: 'mode_paiement_salaire',

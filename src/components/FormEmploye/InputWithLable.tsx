@@ -64,6 +64,12 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
     setFocused(true)
   }
 
+  const handleBlur = () => {
+    if (!value) {
+      setFocused(false)
+    }
+  }
+
   const placeHolder = focused ? '' : required ? placeholder + ' *' : placeholder
   const customSelectStyles = {
     control: (provided) => ({
@@ -222,6 +228,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           max={max}
           placeholder={placeHolder}
           onFocus={() => setFocused(true)}
+          onBlur={handleBlur}
           onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
           onInput={
             onInput ? (event) => onInput(event as ChangeEvent<HTMLInputElement>, index) : undefined

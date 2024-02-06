@@ -83,7 +83,7 @@ function InfoPersoEmploye() {
       value: formEmploye.num_cin,
       onInput: handleInputChange,
       onChange: handleInputChange,
-      placeholder: 'N° CIN',
+      placeholder: 'N° CIN: 000 000 000 000',
     },
     {
       id: 'date_delivrance_cin',
