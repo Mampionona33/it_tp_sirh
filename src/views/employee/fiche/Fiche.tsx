@@ -5,21 +5,36 @@ import FormEmploye from '@src/components/FormEmploye/FormEmploye'
 import Page404 from '@src/views/pages/page404/Page404'
 import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import Loading from '@src/components/loadings/Loading'
+import useFetchListEmploye from '@src/hooks/useFetchListEmploye'
+import { CAlert } from '@coreui/react'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 const Fiche: React.FC = () => {
   const { id } = useParams()
-  const { list: listEmploye, loading: loadingList } = useAppSelector((store) => store.employeesList)
+  // const { list: listEmploye, loading: loadingList } = useAppSelector((store) => store.employeesList)
+  const { data: listEmploye, error, isError, isLoading, refetch } = useFetchListEmploye()
   const formEmploye = useAppSelector((store) => store.formEmploye)
   const dispatch = useAppDispatch()
 
+  const isListEmployeExist = useCallback((): boolean => {
+    let isExist = false
+    if (listEmploye) {
+      isExist = true
+    }
+    return isExist
+  }, [listEmploye])
+
   const isValidID = useCallback((): boolean => {
-    if (id && listEmploye.length > 0) {
+    if (id && isListEmployeExist()) {
       return listEmploye.some((item) => String(item.id) === String(id))
     }
     return false
-  }, [id, listEmploye])
+  }, [id, isListEmployeExist, listEmploye])
 
-  const selectedEmploye = listEmploye.filter((employe) => employe.id === parseInt(id, 10))[0]
+  const selectedEmploye =
+    isListEmployeExist() && listEmploye.filter((employe) => employe.id === parseInt(id, 10))[0]
+
+  const formatErrorMessage = useErrorFormatter()
 
   useEffect(() => {
     const setFormEmployeID = (employeeId: string | number): void => {
@@ -33,8 +48,12 @@ const Fiche: React.FC = () => {
     }
   }, [id, formEmploye, isValidID, dispatch, selectedEmploye])
 
-  if (loadingList === 'loading') {
+  if (isLoading) {
     return <Loading />
+  }
+
+  if (isError) {
+    return <CAlert color="danger">{formatErrorMessage(error)}</CAlert>
   }
 
   const renderContent = (): JSX.Element => {

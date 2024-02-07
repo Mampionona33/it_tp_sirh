@@ -13,6 +13,7 @@ import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
 import { useNavigate } from 'react-router-dom'
 import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
+import useFetchListEmploye from '@src/hooks/useFetchListEmploye'
 
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
@@ -42,11 +43,13 @@ const HeaderComponents: React.FC = () => {
 
 const List = () => {
   const dispatch = useAppDispatch()
-  const {
-    list: data,
-    loading: loadingList,
-    error: errorLoadingList,
-  } = useAppSelector((store) => store.employeesList)
+  // const {
+  //   list: data,
+  //   loading: loadingList,
+  //   error: errorLoadingList,
+  // } = useAppSelector((store) => store.employeesList)
+
+  const { data, error, isError, isLoading, refetch } = useFetchListEmploye()
 
   const formattedData: IDataWithActions[] = useMemo(() => {
     return data && data.length > 0
@@ -67,14 +70,14 @@ const List = () => {
         dispatch(resetParametreCalendrier())
         dispatch(fetchAllMouvementSalaire())
         dispatch(resetFormEmploye())
-        try {
-          const res = await dispatch(fetchAllEmployees())
-          if (res.meta.requestStatus === 'fulfilled') {
-            // console.log(res)
-          }
-        } catch (error) {
-          throw error
-        }
+        // try {
+        //   const res = await dispatch(fetchAllEmployees())
+        //   if (res.meta.requestStatus === 'fulfilled') {
+        //     // console.log(res)
+        //   }
+        // } catch (error) {
+        //   throw error
+        // }
       }
     }
 
@@ -113,14 +116,18 @@ const List = () => {
     [columnHelper],
   )
 
-  if (loadingList === 'loading') {
+  if (isLoading) {
     return <Loading />
+  }
+
+  if (isError) {
+    return <CAlert color="danger">{error.message}</CAlert>
   }
 
   return (
     <>
       {/* <TableEmployee /> */}
-      {errorLoadingList && <CAlert color="danger">{errorLoadingList.message}</CAlert>}
+      {/* {errorLoadingList && <CAlert color="danger">{errorLoadingList.message}</CAlert>} */}
       <ReusableTable
         data={formattedData}
         columns={cols}
