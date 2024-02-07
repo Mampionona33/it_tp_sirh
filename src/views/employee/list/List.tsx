@@ -68,7 +68,7 @@ const List = () => {
       if (mount && dispatch) {
         dispatch(resetBulletinDePaie())
         dispatch(resetParametreCalendrier())
-        dispatch(fetchAllMouvementSalaire())
+        // dispatch(fetchAllMouvementSalaire())
         dispatch(resetFormEmploye())
         // try {
         //   const res = await dispatch(fetchAllEmployees())

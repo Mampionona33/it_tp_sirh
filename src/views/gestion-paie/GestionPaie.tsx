@@ -12,44 +12,47 @@ import { useQuery } from '@tanstack/react-query'
 import employeService from '@src/services/EmployeeService'
 import { AxiosError } from 'axios'
 import { setListEmployees } from '@src/redux/employees/employeesReducer'
+import useFetchListEmploye from '@src/hooks/useFetchListEmploye'
 
 const GestionPaie: React.FC = () => {
   const errorMessageFormatter = useErrorFormatter()
 
   const dispatch = useAppDispatch()
 
-  const {
-    data,
-    isLoading,
-    isError,
-    error: errorLoadingListEmployee,
-  } = useQuery({
-    queryKey: ['employes'],
-    queryFn: async () => {
-      try {
-        const list = await employeService.getAll()
-        if (list) {
-          dispatch(
-            setListEmployees({
-              list: Object.values(list),
-              loading: 'success',
-              error: null,
-            }),
-          )
-        }
-        return list
-      } catch (error) {
-        dispatch(
-          setListEmployees({
-            list: [],
-            loading: 'failed',
-            error: error as AxiosError,
-          }),
-        )
-        throw error
-      }
-    },
-  })
+  // const {
+  //   data,
+  //   isLoading,
+  //   isError,
+  //   error: errorLoadingListEmployee,
+  // } = useQuery({
+  //   queryKey: ['employes'],
+  //   queryFn: async () => {
+  //     try {
+  //       const list = await employeService.getAll()
+  //       if (list) {
+  //         dispatch(
+  //           setListEmployees({
+  //             list: Object.values(list),
+  //             loading: 'success',
+  //             error: null,
+  //           }),
+  //         )
+  //       }
+  //       return list
+  //     } catch (error) {
+  //       dispatch(
+  //         setListEmployees({
+  //           list: [],
+  //           loading: 'failed',
+  //           error: error as AxiosError,
+  //         }),
+  //       )
+  //       throw error
+  //     }
+  //   },
+  // })
+
+  const { data, error, isError, isLoading, refetch } = useFetchListEmploye()
 
   const actifEmployes = useMemo(() => {
     let result: IEmploye[] = []
@@ -101,11 +104,7 @@ const GestionPaie: React.FC = () => {
 
   return (
     <div>
-      {isError && (
-        <CAlert color="danger">
-          {errorMessageFormatter(errorLoadingListEmployee as AxiosError)}
-        </CAlert>
-      )}
+      {isError && <CAlert color="danger">{errorMessageFormatter(error)}</CAlert>}
       {data && (
         <div>
           <ReusableTable data={actifEmployes} columns={cols} searchBar pagination />
