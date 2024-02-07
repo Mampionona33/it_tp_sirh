@@ -314,8 +314,18 @@ class CalculHeures_v2 {
 
   private calculateTotalHsni130(): number {
     let totalHsni130 = 0
-    let totalHs130Monsuel = this.calculateTotalHs130Monsuel()
-    totalHsni130 = totalHs130Monsuel >= 18 ? 18 : totalHs130Monsuel
+    const totalHsMensuel = this.calculateTotalHsMonsuel()
+    if (totalHsMensuel >= 20) {
+      totalHsni130 = totalHsMensuel - 18
+      if (totalHsni130 >= 18) {
+        totalHsni130 = 18
+      }
+
+      if (totalHsni130 < 0) {
+        totalHsni130 = 0
+      }
+    }
+
     return this.estCadre ? 0 : totalHsni130
   }
   setTotalHsni130(totalHsni130: number): void {
@@ -327,11 +337,23 @@ class CalculHeures_v2 {
 
   private calculateTotalHsni150(): number {
     let totalHsni150 = 0
-    let totalHs150Monsuel = this.calculateTotalHs150Monsuel()
-    totalHsni150 =
-      totalHs150Monsuel >= 20 ? 2 : totalHs150Monsuel <= 18 ? 18 - totalHs150Monsuel : 0
+    const totalHsMensuel = this.calculateTotalHsMonsuel()
+    const totalHsni130 = this.calculateTotalHsni130()
+
+    if (totalHsMensuel >= 20) {
+      totalHsni150 = 20 - totalHsni130
+      if (totalHsni150 >= 2) {
+        totalHsni150 = 2
+      }
+      if (totalHsni150 < 0) {
+        totalHsni150 = 0
+      }
+    }
+    console.log(totalHsMensuel, totalHsni130, totalHsni150)
+
     return this.estCadre ? 0 : totalHsni150
   }
+
   setTotalHsni150(totalHsni150: number): void {
     this.totalHsni150 = totalHsni150
   }

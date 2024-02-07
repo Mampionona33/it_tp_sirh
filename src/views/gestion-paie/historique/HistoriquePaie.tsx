@@ -46,6 +46,7 @@ const HistoriquePaie = () => {
     isLoading,
     refetch: refetchHistorique,
     errors,
+    isError,
   } = useFetchHistorique(id as string, anneeSectionneNumber)
 
   const formatErrorMessage = useErrorFormatter()
@@ -206,20 +207,22 @@ const HistoriquePaie = () => {
     )
   }
 
+  if (isError) {
+    return <CAlert color="danger">Un erreur est survenue</CAlert>
+  }
+
+  // if (!isEmployeExist) {
+  //   return <Page404 />
+  // }
+
   return (
     <div>
-      {errors ? (
-        <CAlert color="danger">{formatErrorMessage(errors)}</CAlert>
-      ) : isEmployeExist ? (
-        <div>
-          <div className="flex p-2 justify-end">
-            <SelectAnnee selectedDate={new Date(anneeSectionne)} onDateChange={handleDateChange} />
-          </div>
-          <ReusableTable data={historiquePaiement} columns={cols} />
+      <div>
+        <div className="flex p-2 justify-end">
+          <SelectAnnee selectedDate={new Date(anneeSectionne)} onDateChange={handleDateChange} />
         </div>
-      ) : (
-        !errors && <Page404 />
-      )}
+        <ReusableTable data={historiquePaiement} columns={cols} />
+      </div>
     </div>
   )
 }

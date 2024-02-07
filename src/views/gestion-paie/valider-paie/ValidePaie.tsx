@@ -272,7 +272,7 @@ const ValidePaie = () => {
         {errorFetchingHours && (
           <CAlert color="danger">{formatErrorMessage(errorFetchingHours)}</CAlert>
         )}
-        {isEmployeExist && isMonthValid ? (
+        {isMonthValid ? (
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3 mt-2 mb-3">
               <div className="flex flex-row justify-between pt-2 pl-4 pr-4 pb-2 w-full bg-white shadow-sm rounded-sm">
