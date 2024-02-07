@@ -349,7 +349,6 @@ class CalculHeures_v2 {
         totalHsni150 = 0
       }
     }
-    console.log(totalHsMensuel, totalHsni130, totalHsni150)
 
     return this.estCadre ? 0 : totalHsni150
   }
