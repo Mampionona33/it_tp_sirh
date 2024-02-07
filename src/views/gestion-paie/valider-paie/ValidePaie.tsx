@@ -45,7 +45,12 @@ const ValidePaie = () => {
     (store) => store.employeesList,
   )
 
-  const { salarie, errors, isLoading, isError } = useFetchSalarie(id)
+  const {
+    salarie,
+    errors: errorFetchingSalarie,
+    isLoading,
+    isError: isErrorFetchingSalarie,
+  } = useFetchSalarie(id)
 
   const { loading: loadingHours, error: errorFetchingHours } = useAppSelector(
     (store) => store.employeHours,
@@ -245,8 +250,6 @@ const ValidePaie = () => {
       } as IBulletinDePaieProps),
     )
 
-    console.log('Bulletin de paie :', bulletinDePaie)
-
     dispatch(setModalOpen())
   }
 
@@ -263,6 +266,10 @@ const ValidePaie = () => {
     return <Loading />
   }
 
+  if (isErrorFetchingSalarie) {
+    return <CAlert color="danger">{formatErrorMessage(errorFetchingSalarie)}</CAlert>
+  }
+
   return (
     <>
       <div>
@@ -272,7 +279,7 @@ const ValidePaie = () => {
         {errorFetchingHours && (
           <CAlert color="danger">{formatErrorMessage(errorFetchingHours)}</CAlert>
         )}
-        {isMonthValid ? (
+        {isMonthValid && salarie ? (
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3 mt-2 mb-3">
               <div className="flex flex-row justify-between pt-2 pl-4 pr-4 pb-2 w-full bg-white shadow-sm rounded-sm">
