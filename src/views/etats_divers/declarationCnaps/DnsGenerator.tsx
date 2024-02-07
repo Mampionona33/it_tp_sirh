@@ -27,6 +27,7 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   private mois1List: string[]
   private mois2List: string[]
   private mois3List: string[]
+  private mois4List: string[]
   private dnsData: IDnsGeneratorDataProps | null
   private loadingDnsData: string
   private anneeSelectionne: number
@@ -43,6 +44,7 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.mois1List = ['01', '04', '07']
     this.mois2List = ['02', '05', '08']
     this.mois3List = ['03', '06', '09']
+    this.mois4List = ['10', '11', '12']
 
     this.store = store
     this.dnsData = store.getState().dns.dnsData
@@ -195,13 +197,13 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
       }
       // if (hs_non_plafonne) {
       monthWorksheet.workSheet.getCell(`K${index + 3}`).value = {
-        formula: `=H${index + 3} + I${index + 3}`,
+        formula: `H${index + 3} + I${index + 3}`,
       }
       // }
       // if (salarie.hs_plafonne && salarie.hs_plafonne) {
       const plafondSme = 1940000
       monthWorksheet.workSheet.getCell(`L${index + 3}`).value = {
-        formula: `=IF(K${index + 3} <= ${plafondSme}, K${index + 3}, ${plafondSme})`,
+        formula: `IF(K${index + 3} <= ${plafondSme}, K${index + 3}, ${plafondSme})`,
       }
       // }
       const tauxCotisationEmployeur = this.props.tauxCnaps.employeur
@@ -209,7 +211,7 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
         : 0.13
 
       monthWorksheet.workSheet.getCell(`M${index + 3}`).value = {
-        formula: `=L${index + 3} * ${tauxCotisationEmployeur}`,
+        formula: `L${index + 3} * ${tauxCotisationEmployeur}`,
       }
 
       const tauxCotisationSalarie = this.props.tauxCnaps.salarie
@@ -217,11 +219,11 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
         : 0.01
 
       monthWorksheet.workSheet.getCell(`N${index + 3}`).value = {
-        formula: `=L${index + 3} * ${tauxCotisationSalarie}`,
+        formula: `L${index + 3} * ${tauxCotisationSalarie}`,
       }
 
       monthWorksheet.workSheet.getCell(`O${index + 3}`).value = {
-        formula: `=M${index + 3} + N${index + 3}`,
+        formula: `M${index + 3} + N${index + 3}`,
       }
       monthWorksheet.workSheet.getCell(`P${index + 3}`).value = cin
     })
