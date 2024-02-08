@@ -430,7 +430,7 @@ class CalculPaie_v2 {
   }
 
   //   UTILITYES
-  private roundToTwoDecimal(val) {
+  private roundToTwoDecimal(val: number) {
     return Math.round(val * 100) / 100
   }
 }
