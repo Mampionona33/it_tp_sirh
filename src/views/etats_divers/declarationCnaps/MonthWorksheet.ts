@@ -37,7 +37,7 @@ export interface IMonthWorkSheetsColumnData {
 class MonthWorksheet implements Partial<Worksheet> {
   workbook?: ExcelJS.Workbook
   workSheet?: ExcelJS.Worksheet
-  constructor(workbook, monthLabel, tabColor) {
+  constructor(workbook: ExcelJS.Workbook, monthLabel: string, tabColor: string) {
     this.workbook = workbook
     this.workSheet = this.workbook.addWorksheet(monthLabel, {
       properties: { tabColor: { argb: tabColor } },
@@ -46,9 +46,9 @@ class MonthWorksheet implements Partial<Worksheet> {
   }
 
   private adjustColumnWidths = () => {
-    const headerRow = this.workSheet.getRow(2)
+    const headerRow = this.workSheet!.getRow(2)
     headerRow.eachCell((cell) => {
-      const column = this.workSheet.getColumn(cell.col)
+      const column = this.workSheet!.getColumn(cell.col)
       let headerLength = cell.text.length
       const currentWidth = column.width || 15
 
@@ -59,8 +59,8 @@ class MonthWorksheet implements Partial<Worksheet> {
   }
 
   public addBorder = (rowCount: number) => {
-    const rows = this.workSheet.getRows(3, rowCount)
-    rows.forEach((row) => {
+    const rows = this.workSheet!.getRows(3, rowCount)
+    rows!.forEach((row) => {
       row.eachCell((cell) => {
         cell.font = { size: 9, name: 'Arial' }
         cell.border = {
@@ -83,6 +83,7 @@ class MonthWorksheet implements Partial<Worksheet> {
   }
 
   private createHeader = () => {
+    if (this.workSheet === undefined) return
     this.workSheet.mergeCells('A1:A2')
     this.workSheet.mergeCells('B1:C1')
     this.workSheet.mergeCells('D1:D2')
@@ -136,24 +137,25 @@ class MonthWorksheet implements Partial<Worksheet> {
   }
 
   resetData = () => {
+    if (this.workSheet === undefined) return
     this.workSheet.eachRow((row) => {
       if (row.number > 2) {
         row.eachCell({ includeEmpty: false }, (cell) => {
           cell.value = null
           cell.border = {
-            top: null,
-            left: null,
-            bottom: null,
-            right: null,
+            top: undefined,
+            left: undefined,
+            bottom: undefined,
+            right: undefined,
           }
         })
         row.eachCell({ includeEmpty: true }, (cell) => {
           cell.value = null
           cell.border = {
-            top: null,
-            left: null,
-            bottom: null,
-            right: null,
+            top: undefined,
+            left: undefined,
+            bottom: undefined,
+            right: undefined,
           }
         })
       }
