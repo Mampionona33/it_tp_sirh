@@ -57,16 +57,22 @@ const Body = () => {
         valHsi150,
         valHsni130,
         valHsni150,
-        rappel,
-        primeAssiduite: primeEtGratification!.assiduite,
-        primeExcellence: primeEtGratification!.excellence,
+        rappel: rappel ? rappel : 0,
+        primeAssiduite:
+          primeEtGratification && primeEtGratification.assiduite
+            ? primeEtGratification.assiduite
+            : 0,
+        primeExcellence:
+          primeEtGratification && primeEtGratification.excellence
+            ? primeEtGratification.excellence
+            : 0,
         totalIndemnite,
-        avantageLogement: avantages!.logement,
-        avantageVehicule: avantages!.vehicule,
-        avantageDomestique: avantages!.domestique,
-        avantageAutre: avantages!.autresAvantages,
-        retard: deductions!.retard,
-        absence: deductions!.absence,
+        avantageLogement: avantages && avantages.logement ? avantages.logement : 0,
+        avantageVehicule: avantages && avantages.vehicule ? avantages.vehicule : 0,
+        avantageDomestique: avantages && avantages.domestique ? avantages.domestique : 0,
+        avantageAutre: avantages && avantages.autresAvantages ? avantages.autresAvantages : 0,
+        retard: deductions && deductions.retard ? deductions.retard : 0,
+        absence: deductions && deductions.absence ? deductions.absence : 0,
       })
 
       const baseCnaps = calculPaie.calculBaseCnaps({
