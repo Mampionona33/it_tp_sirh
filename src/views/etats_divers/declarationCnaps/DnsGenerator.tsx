@@ -32,7 +32,7 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   private loadingDnsData: string
   private anneeSelectionne: number
   private periodSelectionne: string
-  constructor(props) {
+  constructor(props: { tauxCnaps: CotisationCnapsProps }) {
     super(props)
     this.wb = new ExcelJS.Workbook()
 
@@ -93,16 +93,25 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   }
 
   private isSalariesDataExist = (): boolean => {
+    if (this.dnsData === null) {
+      return false
+    }
     return this.dnsData.travailleur !== null && this.dnsData.travailleur !== undefined
   }
 
   private isEmployeurDataExist = (): boolean => {
+    if (this.dnsData === null) {
+      return false
+    }
     return this.dnsData.employeur !== null && this.dnsData.employeur !== undefined
   }
 
   private getListSalarieMois1 = (): IDnsGeneratorTravailleurProps[] => {
     let listSalarieMois1: IDnsGeneratorTravailleurProps[] = []
     if (this.isSalariesDataExist()) {
+      if (this.dnsData === null) {
+        return []
+      }
       listSalarieMois1 = this.dnsData.travailleur.filter(
         (salarieData) =>
           this.mois1List.includes(salarieData.mois) &&
@@ -115,6 +124,10 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   private getListSalarieMois2 = (): IDnsGeneratorTravailleurProps[] => {
     let listSalarieMois2: IDnsGeneratorTravailleurProps[] = []
     if (this.isSalariesDataExist()) {
+      if (this.dnsData === null) {
+        return []
+      }
+
       listSalarieMois2 = this.dnsData.travailleur.filter(
         (salarieData) =>
           this.mois2List.includes(salarieData.mois) &&
@@ -127,6 +140,9 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   private getListSalarieMois3 = (): IDnsGeneratorTravailleurProps[] => {
     let listSalarieMois3: IDnsGeneratorTravailleurProps[] = []
     if (this.isSalariesDataExist()) {
+      if (this.dnsData === null) {
+        return []
+      }
       listSalarieMois3 = this.dnsData.travailleur.filter(
         (salarieData) =>
           this.mois3List.includes(salarieData.mois) &&
@@ -165,67 +181,69 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
 
       const hs_non_plafonne = salaire_du_mois + avantage_du_mois
 
-      if (salarie.mois && salarie.annee) {
-        monthWorksheet.workSheet.getCell(`A${index + 3}`).value = anneeMois
-      }
-      if (salarie.nom) {
-        monthWorksheet.workSheet.getCell(`B${index + 3}`).value = nom
-      }
-      if (salarie.prenom) {
-        monthWorksheet.workSheet.getCell(`C${index + 3}`).value = prenom
-      }
-      if (salarie.num_cnaps) {
-        monthWorksheet.workSheet.getCell(`D${index + 3}`).value = num_cnaps
-      }
-      if (salarie.ref_employeur) {
-        monthWorksheet.workSheet.getCell(`E${index + 3}`).value = ref_employeur
-      }
-      if (salarie.date_embauche) {
-        monthWorksheet.workSheet.getCell(`F${index + 3}`).value = date_embauche
-      }
-      if (salarie.date_depart) {
-        monthWorksheet.workSheet.getCell(`G${index + 3}`).value = date_depart
-      }
-      if (salarie.salaire_du_mois) {
-        monthWorksheet.workSheet.getCell(`H${index + 3}`).value = salaire_du_mois
-      }
-      if (salarie.avantage_du_mois) {
-        monthWorksheet.workSheet.getCell(`I${index + 3}`).value = avantage_du_mois
-      }
-      if (salarie.temps_presence) {
-        monthWorksheet.workSheet.getCell(`J${index + 3}`).value = temps_presence
-      }
-      // if (hs_non_plafonne) {
-      monthWorksheet.workSheet.getCell(`K${index + 3}`).value = {
-        formula: `H${index + 3} + I${index + 3}`,
-      }
-      // }
-      // if (salarie.hs_plafonne && salarie.hs_plafonne) {
-      const plafondSme = 1940000
-      monthWorksheet.workSheet.getCell(`L${index + 3}`).value = {
-        formula: `IF(K${index + 3} <= ${plafondSme}, K${index + 3}, ${plafondSme})`,
-      }
-      // }
-      const tauxCotisationEmployeur = this.props.tauxCnaps.employeur
-        ? this.props.tauxCnaps.employeur
-        : 0.13
+      if (monthWorksheet.workSheet) {
+        if (salarie.mois && salarie.annee) {
+          monthWorksheet.workSheet.getCell(`A${index + 3}`).value = anneeMois
+        }
+        if (salarie.nom) {
+          monthWorksheet.workSheet.getCell(`B${index + 3}`).value = nom
+        }
+        if (salarie.prenom) {
+          monthWorksheet.workSheet.getCell(`C${index + 3}`).value = prenom
+        }
+        if (salarie.num_cnaps) {
+          monthWorksheet.workSheet.getCell(`D${index + 3}`).value = num_cnaps
+        }
+        if (salarie.ref_employeur) {
+          monthWorksheet.workSheet.getCell(`E${index + 3}`).value = ref_employeur
+        }
+        if (salarie.date_embauche) {
+          monthWorksheet.workSheet.getCell(`F${index + 3}`).value = date_embauche
+        }
+        if (salarie.date_depart) {
+          monthWorksheet.workSheet.getCell(`G${index + 3}`).value = date_depart
+        }
+        if (salarie.salaire_du_mois) {
+          monthWorksheet.workSheet.getCell(`H${index + 3}`).value = salaire_du_mois
+        }
+        if (salarie.avantage_du_mois) {
+          monthWorksheet.workSheet.getCell(`I${index + 3}`).value = avantage_du_mois
+        }
+        if (salarie.temps_presence) {
+          monthWorksheet.workSheet.getCell(`J${index + 3}`).value = temps_presence
+        }
+        // if (hs_non_plafonne) {
+        monthWorksheet.workSheet.getCell(`K${index + 3}`).value = {
+          formula: `H${index + 3} + I${index + 3}`,
+        }
+        // }
+        // if (salarie.hs_plafonne && salarie.hs_plafonne) {
+        const plafondSme = 1940000
+        monthWorksheet.workSheet.getCell(`L${index + 3}`).value = {
+          formula: `IF(K${index + 3} <= ${plafondSme}, K${index + 3}, ${plafondSme})`,
+        }
+        // }
+        const tauxCotisationEmployeur = this.props.tauxCnaps.employeur
+          ? this.props.tauxCnaps.employeur
+          : 0.13
 
-      monthWorksheet.workSheet.getCell(`M${index + 3}`).value = {
-        formula: `L${index + 3} * ${tauxCotisationEmployeur}`,
-      }
+        monthWorksheet.workSheet.getCell(`M${index + 3}`).value = {
+          formula: `L${index + 3} * ${tauxCotisationEmployeur}`,
+        }
 
-      const tauxCotisationSalarie = this.props.tauxCnaps.salarie
-        ? this.props.tauxCnaps.salarie
-        : 0.01
+        const tauxCotisationSalarie = this.props.tauxCnaps.salarie
+          ? this.props.tauxCnaps.salarie
+          : 0.01
 
-      monthWorksheet.workSheet.getCell(`N${index + 3}`).value = {
-        formula: `L${index + 3} * ${tauxCotisationSalarie}`,
-      }
+        monthWorksheet.workSheet.getCell(`N${index + 3}`).value = {
+          formula: `L${index + 3} * ${tauxCotisationSalarie}`,
+        }
 
-      monthWorksheet.workSheet.getCell(`O${index + 3}`).value = {
-        formula: `M${index + 3} + N${index + 3}`,
+        monthWorksheet.workSheet.getCell(`O${index + 3}`).value = {
+          formula: `M${index + 3} + N${index + 3}`,
+        }
+        monthWorksheet.workSheet.getCell(`P${index + 3}`).value = cin
       }
-      monthWorksheet.workSheet.getCell(`P${index + 3}`).value = cin
     })
   }
 
@@ -272,6 +290,9 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   }
 
   private applyDefaultFontToRenseingEmployeur = (): void => {
+    if (this.employeurSheet.sheet === undefined) {
+      return
+    }
     for (let i = 4; i < 10; i++) {
       this.applyDefaultFont(this.employeurSheet.sheet, `C${i}`)
     }
@@ -279,17 +300,24 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
 
   private applyDefaultFontToCotisation = (): void => {
     for (let i = 12; i < 17; i++) {
-      this.applyDefaultFont(this.employeurSheet.sheet, `C${i}`)
+      this.applyDefaultFont(this.employeurSheet!.sheet!, `C${i}`)
     }
   }
 
   private applyDefaultFontToMoisConcernes = (): void => {
+    if (this.employeurSheet.sheet === undefined) {
+      return
+    }
     this.applyDefaultFont(this.employeurSheet.sheet, `C18`)
     this.applyDefaultFont(this.employeurSheet.sheet, `D18`)
     this.applyDefaultFont(this.employeurSheet.sheet, `E18`)
   }
 
   private fillLine22EmployeurSheet = () => {
+    if (this.employeurSheet.sheet === undefined) {
+      return
+    }
+
     this.employeurSheet.sheet.getCell('C22').value = {
       formula: "COUNTA('Mois 1'!$D3:D1048576)",
       result: this.getListSalarieMois1().length,
@@ -305,6 +333,9 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   }
 
   private fillLine23EmployeurSheet = () => {
+    if (this.employeurSheet.sheet === undefined) {
+      return
+    }
     this.employeurSheet.sheet.getCell('C23').value = {
       formula: "SUM('Mois 1'!$H3:H1048576)",
       result: this.getListSalarieMois1().length,
@@ -320,6 +351,9 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   }
 
   private fillLine24EmployeurSheet = () => {
+    if (this.employeurSheet.sheet === undefined) {
+      return
+    }
     this.employeurSheet.sheet.getCell('C24').value = {
       formula: "SUM('Mois 1'!$M3:M1048576)",
     }
@@ -332,6 +366,9 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   }
 
   private fillLine25EmployeurSheet = () => {
+    if (this.employeurSheet.sheet === undefined) {
+      return
+    }
     this.employeurSheet.sheet.getCell('C25').value = {
       formula: "SUM('Mois 1'!$N3:N1048576)",
     }
@@ -344,6 +381,9 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   }
 
   private writeDataToSheet1 = (employeurData: IDnsGeneratorEmployeurData) => {
+    if (this.employeurSheet.sheet === undefined) {
+      return
+    }
     this.employeurSheet.sheet.getCell('C4').value = employeurData.numero_rcs
     this.employeurSheet.sheet.getCell('C5').value = employeurData.nom
     this.employeurSheet.sheet.getCell('C6').value = employeurData.numero_nif
@@ -374,7 +414,7 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.fillLine25EmployeurSheet()
   }
 
-  private isSalariesArrayNotEmpty = (number): boolean => {
+  private isSalariesArrayNotEmpty = (number: number): boolean => {
     let isNotEmpty = true
     if (number === 0 || number === undefined) {
       isNotEmpty = false
@@ -407,7 +447,9 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     }
 
     if (this.isEmployeurDataExist()) {
-      this.writeDataToSheet1(this.dnsData.employeur[0])
+      if (this.dnsData && this.dnsData.employeur) {
+        this.writeDataToSheet1(this.dnsData.employeur[0])
+      }
     }
 
     this.wb.xlsx.writeBuffer().then((data) => {
