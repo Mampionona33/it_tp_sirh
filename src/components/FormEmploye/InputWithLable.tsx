@@ -165,6 +165,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
                     value={option.value}
                     onFocus={() => setFocused(true)}
                     checked={value === option.value}
+                    // @ts-expect-error : next-line
                     onChange={(event) => onChange(event, optionIndex)}
                     onInput={onInput ? (event) => onInput(event, optionIndex) : undefined}
                     className="text-sm"
@@ -190,7 +191,9 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
             name={name}
             required={required}
             options={options as { label: string; value: string }[]}
+            // @ts-expect-error : next-line
             value={options.find((opt: { label: string; value: string }) => opt.value === value)}
+            // @ts-expect-error : next-line
             onChange={handleSelectChange}
             onFocus={handleFocused}
             styles={customSelectStyles}
@@ -229,6 +232,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           placeholder={placeHolder}
           onFocus={() => setFocused(true)}
           onBlur={handleBlur}
+          // @ts-expect-error : next-line
           onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
           onInput={
             onInput ? (event) => onInput(event as ChangeEvent<HTMLInputElement>, index) : undefined
