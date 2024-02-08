@@ -6,8 +6,6 @@ import ReactPDF, { Text, View, StyleSheet } from '@react-pdf/renderer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import formatNumberWithSpaces from '@src/utils/formatNumberWithSpaces'
 import { ToWords } from 'to-words'
-import SlugUtility from '@src/utils/SlugUtility'
-import { IInputWithLabelOptionsProps } from '@src/interfaces/interfaceEmploye'
 
 const Header = () => {
   return (
@@ -255,14 +253,14 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
   } = bodyData
 
   const salaireDeBaseRender = salaireDeBase ? formatNumberWithSpaces(salaireDeBase) || '-' : '-'
-  const assiduite = formatNumberWithSpaces(primeEtGratification.assiduite) || '-'
-  const excellence = formatNumberWithSpaces(primeEtGratification.excellence) || '-'
+  const assiduite = formatNumberWithSpaces(primeEtGratification!.assiduite) || '-'
+  const excellence = formatNumberWithSpaces(primeEtGratification!.excellence) || '-'
   const totalDeductionRender = formatNumberWithSpaces(totalDeduction) || '-'
   const transport = formatNumberWithSpaces(indemnites.transport) || '-'
   const autresIndemnite = formatNumberWithSpaces(indemnites.autresIndemnite) || '-'
-  const vehicule = formatNumberWithSpaces(avantages.vehicule) || '-'
-  const logement = formatNumberWithSpaces(avantages.logement) || '-'
-  const autresAvantages = formatNumberWithSpaces(avantages.autresAvantages) || '-'
+  const vehicule = formatNumberWithSpaces(avantages!.vehicule) || '-'
+  const logement = formatNumberWithSpaces(avantages!.logement) || '-'
+  const autresAvantages = formatNumberWithSpaces(avantages!.autresAvantages) || '-'
   const rappelRender = formatNumberWithSpaces(rappel) || '-'
   const baseCnapsRender = formatNumberWithSpaces(baseCnaps) || '-'
   const montantCnaps = formatNumberWithSpaces(cnaps) || '-'
@@ -275,7 +273,7 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
   const salaireNetAPayerRender = formatNumberWithSpaces(salaireNetAPayer) || '-'
   const totalRetenu = formatNumberWithSpaces(totalDeduction + cnaps + osie + irsaAPayer) || '-'
   const dateDeVirementRender = format(
-    isValid(new Date(dateDeVirement)) ? new Date(dateDeVirement) : new Date(),
+    isValid(new Date(String(dateDeVirement))) ? new Date(String(dateDeVirement)) : new Date(),
     'dd MMMM yyyy',
     { locale: fr },
   )
@@ -284,18 +282,18 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
   const totalIndemniteEtAvantage =
     formatNumberWithSpaces(
       salaireBrut +
-        primeEtGratification.assiduite +
-        primeEtGratification.excellence +
-        indemnites.transport +
-        indemnites.autresIndemnite +
-        avantages.vehicule +
-        avantages.logement +
-        avantages.autresAvantages +
+        primeEtGratification!.assiduite! +
+        primeEtGratification!.excellence! +
+        indemnites!.transport! +
+        indemnites!.autresIndemnite! +
+        avantages!.vehicule! +
+        avantages!.logement! +
+        avantages!.autresAvantages! +
         valReductionChargeEnfants +
-        rappel,
+        rappel!,
     ) || '-'
 
-  const modeDePayementRender = salarie.mode_paiement_salaire || 'virement bancaire'
+  const modeDePayementRender = salarie!.mode_paiement_salaire || 'virement bancaire'
 
   const toWord = new ToWords({
     localeCode: 'fr-FR',
