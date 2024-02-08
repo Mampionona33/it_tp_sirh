@@ -3,7 +3,7 @@ import { EnumGenre, EnumBoolean, IEmploye, IEnfantEmploye } from '@src/interface
 import { format } from 'date-fns'
 
 export const initialState: IEmploye = {
-  id: null,
+  id: undefined,
   nom: '',
   prenom: '',
   date_naissance: '',
@@ -31,8 +31,8 @@ export const initialState: IEmploye = {
   num_osie: '',
   est_cadre: EnumBoolean.NON,
   rib: '',
-  prime_et_avantage_permanent: null,
-  depart: null,
+  prime_et_avantage_permanent: undefined,
+  depart: undefined,
 }
 
 const formEmployeSlice = createSlice({
@@ -44,9 +44,11 @@ const formEmployeSlice = createSlice({
       return { ...state, ...action.payload }
     },
     formEmployeAjoutEnfant: (state, action) => {
+      if (!state.enfant) state.enfant = []
       state.enfant.push(action.payload)
     },
     formEmployeSupprimerEnfant: (state, action) => {
+      if (!state.enfant) state.enfant = []
       state.enfant = state.enfant.filter((enfant: IEnfantEmploye) => enfant.id !== action.payload)
     },
   },
