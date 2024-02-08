@@ -14,7 +14,7 @@ import {
   IHistoriquePaieProps,
 } from '@src/interfaces/interfaceHistoriquePaie'
 import { format } from 'date-fns'
-import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
+import { EnumBoolean, IEmploye } from '@src/interfaces/interfaceEmploye'
 import { fr } from 'date-fns/locale'
 import {
   resetBulletinDePaie,
@@ -38,7 +38,7 @@ const HistoriquePaie = () => {
   const { anneeSectionne } = useAppSelector((store) => store.historiquePaie)
 
   const anneeSectionneNumber: number | undefined = useMemo(() => {
-    return new Date(anneeSectionne).getFullYear()
+    return new Date(String(anneeSectionne)).getFullYear()
   }, [anneeSectionne])
 
   const {
@@ -49,15 +49,15 @@ const HistoriquePaie = () => {
     isError,
   } = useFetchHistorique(id as string, anneeSectionneNumber)
 
-  const formatErrorMessage = useErrorFormatter()
+  // const formatErrorMessage = useErrorFormatter()
 
-  const selectedEmploye = useMemo(
-    () =>
-      listeEmploye && listeEmploye.length > 0
-        ? listeEmploye.find((emp) => emp.id === Number(id))
-        : null,
-    [listeEmploye, id],
-  )
+  const selectedEmploye = useMemo<IEmploye | null>(() => {
+    if (listeEmploye && listeEmploye.length > 0) {
+      return listeEmploye.find((emp: IEmploye) => emp.id === Number(id)) || null
+    } else {
+      return null
+    }
+  }, [listeEmploye, id])
 
   const updateHistoriqueStore = useCallback(() => {
     if (historiques) {
@@ -75,8 +75,9 @@ const HistoriquePaie = () => {
         setHistoriqueDePaie({
           historiques: [],
           loading: 'failed',
-          error: errors,
-        } as IHistoriquePaieProps),
+          error: null,
+          anneeSectionne: new Date().toString(),
+        }),
       )
     }
   }, [dispatch, historiques, anneeSectionne, errors])
@@ -89,7 +90,7 @@ const HistoriquePaie = () => {
       dispatch(
         setBulletinDePaie({
           salarie: selectedEmploye,
-          salaireDeBase: selectedEmploye.salaire_de_base,
+          salaireDeBase: selectedEmploye!.salaire_de_base,
         } as IBulletinDePaieProps),
       )
   }, [
@@ -109,23 +110,29 @@ const HistoriquePaie = () => {
 
   const generateRows = useCallback(() => {
     const currentYear = new Date().getFullYear()
-    const selectedYear = new Date(anneeSectionne).getFullYear()
+    const selectedYear = new Date(String(anneeSectionne)).getFullYear()
 
-    const getEmptyRow = (month): IHistoriquePaieDataProps => ({
+    const getEmptyRow = (month: number): IHistoriquePaieDataProps => ({
       mois: format(new Date(Number(selectedYear), month - 1, 1), 'MMMM', { locale: fr }),
       salarie_id: id,
       annee: selectedYear,
-      matricule: selectedEmploye?.matricule,
+      matricule: selectedEmploye!.matricule,
       validation_status: EnumBoolean.NON,
     })
 
-    const mergeWithHistoricalData = (row) => {
+    const mergeWithHistoricalData = (row: IHistoriquePaieDataProps) => {
       if (historiques) {
         const matchingHistoricalData = Object.values(historiques).find(
-          (data: IHistoriquePaieDataProps) => {
-            return (
-              Number(new Date(data.annee).getFullYear()) === selectedYear && data.mois === row.mois
-            )
+          (data: unknown): data is IHistoriquePaieDataProps => {
+            if (!isIHistoriquePaieDataProps(data)) {
+              return false
+            }
+            if (data.annee !== undefined) {
+              const year = new Date(data.annee).getFullYear()
+              return year === selectedYear && data.mois === row.mois
+            } else {
+              return false
+            }
           },
         )
 
@@ -133,6 +140,17 @@ const HistoriquePaie = () => {
       } else {
         return row
       }
+    }
+
+    // Fonction de type de garde pour vérifier si l'objet est de type IHistoriquePaieDataProps
+    function isIHistoriquePaieDataProps(obj: unknown): obj is IHistoriquePaieDataProps {
+      return (
+        typeof obj === 'object' &&
+        obj !== null &&
+        typeof (obj as IHistoriquePaieDataProps).annee === 'string' &&
+        typeof (obj as IHistoriquePaieDataProps).mois === 'string'
+        // Ajoutez d'autres vérifications de propriété si nécessaire
+      )
     }
 
     let rows = []
@@ -154,7 +172,8 @@ const HistoriquePaie = () => {
   const historiquePaiement = generateRows()
 
   const columnHelper = createColumnHelper<IHistoriquePaieTableProps>()
-  const cols = useMemo<ColumnDef<IHistoriquePaieTableProps>[]>(
+
+  const cols = useMemo<ColumnDef<IHistoriquePaieTableProps, any>[]>(
     () => [
       columnHelper.accessor('mois', {
         cell: (info) => <span className="capitalize">{info.getValue()}</span>,
@@ -219,7 +238,10 @@ const HistoriquePaie = () => {
     <div>
       <div>
         <div className="flex p-2 justify-end">
-          <SelectAnnee selectedDate={new Date(anneeSectionne)} onDateChange={handleDateChange} />
+          <SelectAnnee
+            selectedDate={new Date(String(anneeSectionne))}
+            onDateChange={handleDateChange}
+          />
         </div>
         <ReusableTable data={historiquePaiement} columns={cols} />
       </div>
