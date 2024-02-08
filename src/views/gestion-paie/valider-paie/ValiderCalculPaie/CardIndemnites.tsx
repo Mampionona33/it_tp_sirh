@@ -42,7 +42,7 @@ const Body: React.FC = () => {
         id="transport"
         name="transport"
         label="Indemnités"
-        value={indemnites.transport}
+        value={indemnites!.transport || 0}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
@@ -53,7 +53,7 @@ const Body: React.FC = () => {
         id="autresIndemnite"
         name="autresIndemnite"
         label="Autres"
-        value={indemnites.autresIndemnite}
+        value={indemnites!.autresIndemnite || 0}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
