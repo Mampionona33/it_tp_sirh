@@ -40,7 +40,7 @@ const Body = () => {
         id="prime-assiduite"
         name="assiduite"
         label="Prime d’assiduité"
-        value={primeEtGratification.assiduite}
+        value={primeEtGratification!.assiduite || 0}
         onChange={(e) => handleInputChange(e.target.name, e.target.value)}
         onFocus={handleFocus}
       />
@@ -52,7 +52,7 @@ const Body = () => {
         name="excellence"
         label="Prime d'excellence"
         onFocus={handleFocus}
-        value={primeEtGratification.excellence}
+        value={primeEtGratification!.excellence || 0}
         onChange={(e) => handleInputChange(e.target.name, e.target.value)}
       />
     </div>
