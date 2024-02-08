@@ -72,7 +72,7 @@ const GestionPaie: React.FC = () => {
   //   formatage des colonnes
   const columnHelper = createColumnHelper<IEmploye>()
 
-  const cols = useMemo<ColumnDef<IEmploye>[]>(
+  const cols = useMemo<ColumnDef<IEmploye, any>[]>(
     () => [
       columnHelper.accessor('matricule', {
         cell: (info) => info.getValue(),
