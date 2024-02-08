@@ -5,8 +5,8 @@ import { EnumBoolean, EnumGenre } from '@src/interfaces/interfaceEmploye'
 const initialState: IBulletinDePaieProps = {
   validation: {
     status: EnumBoolean.NON,
-    date: null,
-    day: null,
+    date: undefined,
+    day: undefined,
   },
   employeur: {
     nom: ' LA LIGNE SCANDINAVE',
@@ -17,7 +17,7 @@ const initialState: IBulletinDePaieProps = {
     rcs: ' 2002B00608',
   },
   salarie: {
-    id: null,
+    id: undefined,
     nom: '',
     prenom: '',
     date_naissance: '',
