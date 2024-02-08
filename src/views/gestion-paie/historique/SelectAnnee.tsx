@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Select from 'react-select'
+import Select, { ActionMeta, SingleValue } from 'react-select'
 
 interface YearOption {
   label: string
@@ -22,7 +22,7 @@ const SelectAnnee: React.FC<SelectAnneeProps> = ({ selectedDate, onDateChange })
   }))
 
   const customSelectStyles = {
-    control: (provided) => ({
+    control: (provided: any) => ({
       ...provided,
       height: 21,
       minHeight: 21,
@@ -30,14 +30,14 @@ const SelectAnnee: React.FC<SelectAnneeProps> = ({ selectedDate, onDateChange })
       outline: 'none',
       borderBottom: '1px solid #D6111E',
     }),
-    valueContainer: (style) => ({
+    valueContainer: (style: any) => ({
       ...style,
       paddingTop: 0,
       paddingBottom: 0,
       height: 21,
       minHeight: 21,
     }),
-    input: (style) => ({
+    input: (style: any) => ({
       ...style,
       margin: 0,
       height: 21,
@@ -46,19 +46,19 @@ const SelectAnnee: React.FC<SelectAnneeProps> = ({ selectedDate, onDateChange })
       minHeight: 21,
       fontSize: '0.875rem',
     }),
-    singleValue: (style) => ({
+    singleValue: (style: any) => ({
       ...style,
       fontSize: '0.875rem',
     }),
-    placeholder: (style) => ({
+    placeholder: (style: any) => ({
       ...style,
       fontSize: '0.875rem',
     }),
-    menu: (style) => ({
+    menu: (style: any) => ({
       ...style,
       fontSize: '0.875rem',
     }),
-    indicatorsContainer: (style) => ({
+    indicatorsContainer: (style: any) => ({
       ...style,
       fontSize: '0.875rem',
       height: 21,
@@ -71,9 +71,11 @@ const SelectAnnee: React.FC<SelectAnneeProps> = ({ selectedDate, onDateChange })
       <Select
         menuPlacement="auto"
         value={years.find((y) => y.value === selectedYear)}
-        onChange={(selectedOption: YearOption) => {
-          setSelectedYear(selectedOption.value)
-          onDateChange(new Date(selectedOption.value, 1))
+        onChange={(selectedOption: SingleValue<YearOption>, actionMeta: ActionMeta<YearOption>) => {
+          if (selectedOption) {
+            setSelectedYear(selectedOption.value)
+            onDateChange(new Date(selectedOption.value, 1))
+          }
         }}
         options={years}
         styles={customSelectStyles}

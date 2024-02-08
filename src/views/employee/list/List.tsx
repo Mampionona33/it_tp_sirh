@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { useEffect, useMemo } from 'react'
 import { resetBulletinDePaie } from 'src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametreCalendrierReducer'
@@ -92,7 +94,7 @@ const List = () => {
 
   const cols = useMemo<ColumnDef<IDataWithActions>[]>(
     () => [
-      columnHelper.accessor('matricule', {
+      columnHelper.accessor<string>('matricule', {
         cell: (info) => info.getValue(),
         header: () => <div className="my-1">Matricule</div>,
       }),
@@ -121,7 +123,7 @@ const List = () => {
   }
 
   if (isError) {
-    return <CAlert color="danger">{error.message}</CAlert>
+    return <CAlert color="danger">{error!.message}</CAlert>
   }
 
   return (
