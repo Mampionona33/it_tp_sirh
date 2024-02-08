@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Document, PDFViewer, pdf, Page } from '@react-pdf/renderer'
 import { saveAs } from 'file-saver'
 import Section1 from './Section1'
 import Section2 from './Section2'
 import Section3 from './Section3'
 import { FolderArrowDownIcon } from '@heroicons/react/24/outline'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useAppSelector } from '@src/hooks/useAppDispatch'
+import { useParams } from 'react-router-dom'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import useFetchBulletinDePaie, {
@@ -34,7 +33,7 @@ const MyDocument = ({ data }: IMydocumentProps) => {
 
 const BulletinPaie = () => {
   const { id, validationYear, validationMonth } = useParams()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   // const bulletinDePaie = useAppSelector((state) => state.bulletinDePaie)
 
   const MM_TO_PIXEL_CONVERSION = 3.78
