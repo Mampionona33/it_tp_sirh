@@ -9,6 +9,7 @@ import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReduc
 import ButtonLink from '@src/components/buttons/ButtonLink'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
+import Page404 from '@src/views/pages/page404/Page404'
 
 const DetailPaieValide = () => {
   const dispatch = useAppDispatch()
@@ -19,7 +20,7 @@ const DetailPaieValide = () => {
     const fetchDetailsBltnPaie = async () => {
       try {
         const resp = await dispatch(
-          fetchDetailsHistoriquePaie({ id, annee: validationYear, mois: validationMonth }),
+          fetchDetailsHistoriquePaie({ id: id!, annee: validationYear!, mois: validationMonth! }),
         )
         if (resp.meta.requestStatus === 'fulfilled') {
           dispatch(setBulletinDePaie(resp.payload))
@@ -30,7 +31,11 @@ const DetailPaieValide = () => {
     }
     fetchDetailsBltnPaie()
   }, [idValidation, id, dispatch, validationMonth, validationYear])
-  const moisDeValidation = format(new Date(validation.date), 'MMMM yyyy', { locale: fr })
+  const moisDeValidation = format(new Date(String(validation.date)), 'MMMM yyyy', { locale: fr })
+
+  if (!salarie) {
+    return <Page404 />
+  }
 
   return (
     <div className="w-full mb-3 mr-3 mt-3">
