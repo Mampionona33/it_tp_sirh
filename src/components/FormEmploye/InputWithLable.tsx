@@ -59,7 +59,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
 }) => {
   const [focused, setFocused] = React.useState<boolean>(false)
 
-  const handleFocused = (event) => {
+  const handleFocused = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     setFocused(true)
   }
@@ -72,7 +72,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
 
   const placeHolder = focused ? '' : required ? placeholder + ' *' : placeholder
   const customSelectStyles = {
-    control: (provided) => ({
+    control: (provided: any) => ({
       ...provided,
       height: 21,
       minHeight: 21,
@@ -80,7 +80,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
       outline: 'none',
       borderBottom: '1px solid #D6111E',
     }),
-    valueContainer: (style) => {
+    valueContainer: (style: any) => {
       return {
         ...style,
         paddingTop: 0,
@@ -89,7 +89,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
         minHeight: 21,
       }
     },
-    input: (style) => {
+    input: (style: any) => {
       return {
         ...style,
         margin: 0,
@@ -100,23 +100,23 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
         fontSize: '0.875rem',
       }
     },
-    singleValue: (style) => {
+    singleValue: (style: any) => {
       return {
         ...style,
         fontSize: '0.875rem',
       }
     },
-    placeholder: (style) => {
+    placeholder: (style: any) => {
       return {
         ...style,
         fontSize: '0.875rem',
       }
     },
-    menu: (style) => ({
+    menu: (style: any) => ({
       ...style,
       fontSize: '0.875rem',
     }),
-    indicatorsContainer: (style) => {
+    indicatorsContainer: (style: any) => {
       return {
         ...style,
         fontSize: '0.875rem',

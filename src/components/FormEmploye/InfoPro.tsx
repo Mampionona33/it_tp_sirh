@@ -23,7 +23,7 @@ const InfoPro = () => {
         .then((resp) =>
           dispatch(
             setCategorieEmployeState({
-              data: [...resp.data],
+              data: [...resp!.data],
               error: null,
               loading: 'succeeded',
             } as ICategorieEmployeState),
@@ -40,8 +40,8 @@ const InfoPro = () => {
         }),
   })
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
-    const { name, value } = event.target ?? { name: '', value: '' }
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
     dispatch(
       setFormEmploye({
         ...formEmploye,
@@ -164,11 +164,7 @@ const InfoPro = () => {
         <p className="text-lg  text-customRed-930 uppercase mx-8">Informations professionnelles</p>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 w-full">
           {inputs.map((input, index) => (
-            <InputWithLabel
-              key={index}
-              {...input}
-              onChange={(event) => handleInputChange(event, index)}
-            />
+            <InputWithLabel key={index} {...input} onChange={(event) => handleInputChange(event)} />
           ))}
         </div>
       </div>
