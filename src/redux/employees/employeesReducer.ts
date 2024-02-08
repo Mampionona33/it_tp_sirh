@@ -5,11 +5,17 @@ import {
   fetchAllEmployees,
   updateEmployee,
 } from './employeesAction'
+import { BaseReduxState } from '@src/interfaces/interfaceDeBaseReduxState'
+import { IEmploye } from '@src/interfaces/interfaceEmploye'
+import { AxiosError } from 'axios'
 
-const initialState = {
+export interface IEmployeeList extends BaseReduxState {
+  list: IEmploye[]
+}
+
+const initialState: IEmployeeList = {
   list: [],
   loading: 'idle',
-  loadingUpdate: 'idle',
   error: null,
 }
 
@@ -29,8 +35,10 @@ const employeesSlice = createSlice({
           const newEmployees = Object.values(action.payload)
 
           if (newEmployees.length > 0) {
-            state.list = state.list ? [...newEmployees] : newEmployees
-            state.loading = 'succeeded'
+            if (state.list) {
+              state.list = state.list ? [...newEmployees] : newEmployees
+              state.loading = 'succeeded'
+            }
           } else {
             state.loading = 'loading'
           }
@@ -43,30 +51,34 @@ const employeesSlice = createSlice({
         state.error = null
       })
       .addCase(fetchAllEmployees.rejected, (state, action) => {
-        state.loading = 'reject'
-        state.error = action.error
+        state.loading = 'failed'
+        state.error = action.error as AxiosError
       })
       .addCase(deleteEmployee.fulfilled, (state, action) => {
-        state.list = state.list.filter((employee) => employee.id !== action.payload)
+        state.list = state.list.filter((employee) => String(employee.id) !== String(action.payload))
         state.loading = 'succeeded'
         state.error = null
       })
       .addCase(deleteEmployee.rejected, (state, action) => {
-        state.loading = 'reject'
-        state.error = action.error
+        state.loading = 'failed'
+        state.error = action.error as AxiosError
       })
       .addCase(deleteEmployee.pending, (state, action) => {
         state.loading = 'loading'
         state.error = null
       })
       .addCase(createEmployee.fulfilled, (state, action) => {
-        state.list = [...state.list, action.payload]
-        state.loading = 'succeeded'
-        state.error = null
+        const newEmployee = action.payload.data ? action.payload.data : action.payload
+        if (newEmployee) {
+          state.list = [...state.list, newEmployee]
+          state.loading = 'succeeded'
+          state.error = null
+        }
       })
+
       .addCase(createEmployee.rejected, (state, action) => {
-        state.loading = 'reject'
-        state.error = action.error
+        state.loading = 'failed'
+        state.error = action.error as AxiosError
       })
       .addCase(createEmployee.pending, (state, action) => {
         state.loading = 'loading'
@@ -75,15 +87,12 @@ const employeesSlice = createSlice({
       .addCase(updateEmployee.fulfilled, (state, action) => {
         state.loading = 'idle'
         state.list = []
-        state.loadingUpdate = 'succeeded'
         state.error = null
       })
       .addCase(updateEmployee.rejected, (state, action) => {
-        state.loadingUpdate = 'reject'
-        state.error = action.error
+        state.error = action.error as AxiosError
       })
       .addCase(updateEmployee.pending, (state, action) => {
-        state.loadingUpdate = 'loading'
         state.error = null
       })
   },
