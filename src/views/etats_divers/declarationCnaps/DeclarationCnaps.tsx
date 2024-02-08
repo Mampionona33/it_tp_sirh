@@ -23,7 +23,7 @@ const Body = () => {
 
   const {
     data: tauxCnaps,
-    errors: tauxCnapsErrors,
+    error: tauxCnapsErrors,
     isLoading: isLoadingTauxCnaps,
     isError: isErrorTauxCnaps,
     refetch: refetchTauxCnaps,
@@ -128,80 +128,83 @@ const Body = () => {
     }
   }
 
-  const [tauxCnapsData, setTauxCnapsData] = useState(null)
+  // const [tauxCnapsData, setTauxCnapsData] = useState(null)
 
-  useEffect(() => {
-    if (tauxCnaps) {
-      setTauxCnapsData(tauxCnaps)
-    }
-  }, [tauxCnaps])
+  // useEffect(() => {
+  //   if (tauxCnaps) {
+  //     setTauxCnapsData(tauxCnaps)
+  //   }
+  // }, [tauxCnaps])
 
+  if (isLoadingTauxCnaps) {
+    return <Loading />
+  }
+
+  if (isErrorTauxCnaps) {
+    return <CAlert color="danger">{formatError(tauxCnapsErrors)}</CAlert>
+  }
   return (
     <>
-      {isErrorTauxCnaps ? (
-        <CAlert color="danger">{formatError(tauxCnapsErrors)}</CAlert>
-      ) : (
-        <form action="post" className="w-full flex flex-col gap-2 p-4">
-          <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
-            <div className="flex justify-between gap-2">
-              <div>
-                <label className="form-label text-sm" htmlFor="periode">
-                  Période
-                </label>
-                <Select
-                  className="basic-multi-select"
-                  name="periode"
-                  options={periodesOptions}
-                  onChange={(selectedOption, actionMeta) =>
-                    handleInputChange(selectedOption, actionMeta)
-                  }
-                  value={periodesOptions.find((option) => option.value === periode)}
-                  styles={customSelectStyles}
-                  theme={(theme) => ({
-                    ...theme,
-                    borderRadius: 0,
-                    height: 28,
-                    colors: {
-                      ...theme.colors,
-                      primary25: '#FFF2F2',
-                      primary: '#FEBABA',
-                    },
-                  })}
-                />
-              </div>
-              <div>
-                <label className="form-label text-sm" htmlFor="annee">
-                  Année
-                </label>
-                <Select
-                  className="basic-multi-select"
-                  name="annee"
-                  options={years}
-                  onChange={(selectedOption, actionMeta) =>
-                    handleInputChange(selectedOption, actionMeta)
-                  }
-                  value={years.find((option) => option.value === annee)}
-                  styles={customSelectStyles}
-                  theme={(theme) => ({
-                    ...theme,
-                    borderRadius: 0,
-                    height: 28,
-                    colors: {
-                      ...theme.colors,
-                      primary25: '#FFF2F2',
-                      primary: '#FEBABA',
-                    },
-                  })}
-                />
-              </div>
+      <form action="post" className="w-full flex flex-col gap-2 p-4">
+        <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
+          <div className="flex justify-between gap-2">
+            <div>
+              <label className="form-label text-sm" htmlFor="periode">
+                Période
+              </label>
+              <Select
+                className="basic-multi-select"
+                name="periode"
+                options={periodesOptions}
+                onChange={(selectedOption, actionMeta) =>
+                  handleInputChange(selectedOption, actionMeta)
+                }
+                value={periodesOptions.find((option) => option.value === periode)}
+                styles={customSelectStyles}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 0,
+                  height: 28,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#FFF2F2',
+                    primary: '#FEBABA',
+                  },
+                })}
+              />
             </div>
-            <div className="flex gap-2">
-              <ButtonWithIcon label="Générer" onClick={handleGenerate} />
-              <DnsGenerator tauxCnaps={tauxCnapsData} />
+            <div>
+              <label className="form-label text-sm" htmlFor="annee">
+                Année
+              </label>
+              <Select
+                className="basic-multi-select"
+                name="annee"
+                options={years}
+                onChange={(selectedOption, actionMeta) =>
+                  handleInputChange(selectedOption, actionMeta)
+                }
+                value={years.find((option) => option.value === annee)}
+                styles={customSelectStyles}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: 0,
+                  height: 28,
+                  colors: {
+                    ...theme.colors,
+                    primary25: '#FFF2F2',
+                    primary: '#FEBABA',
+                  },
+                })}
+              />
             </div>
           </div>
-        </form>
-      )}
+          <div className="flex gap-2">
+            <ButtonWithIcon label="Générer" onClick={handleGenerate} />
+            <DnsGenerator tauxCnaps={tauxCnaps} />
+          </div>
+        </div>
+      </form>
     </>
   )
 }

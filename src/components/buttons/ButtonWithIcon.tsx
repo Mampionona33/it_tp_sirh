@@ -49,7 +49,7 @@ const ButtonWithIcon: React.FC<ButtonWithIconProps> = ({
   className,
   ...props
 }) => {
-  const variantClass = getVariantClass({ variant, disabled: props.disabled })
+  const variantClass = getVariantClass({ variant, disabled: props.disabled ? true : false })
 
   return (
     <button {...props} className={`group ${className}`}>
