@@ -11,5 +11,5 @@ export interface IHistoriquePaieDataProps {
 
 export interface IHistoriquePaieProps extends BaseReduxState {
   historiques: IHistoriquePaieDataProps[]
-  anneeSectionne: string
+  anneeSectionne?: string
 }
