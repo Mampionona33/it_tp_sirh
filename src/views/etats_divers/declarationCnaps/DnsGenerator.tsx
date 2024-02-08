@@ -13,7 +13,7 @@ import {
   IDnsGeneratorTravailleurProps,
 } from '@src/interfaces/interfaceDnsGenerator'
 import { IDnsState, setDns } from '@src/redux/dns/dnsReducers'
-import { format, getMonth, parse } from 'date-fns'
+import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { CotisationCnapsProps } from '@src/interfaces/interfaceCotisationCnaps'
 

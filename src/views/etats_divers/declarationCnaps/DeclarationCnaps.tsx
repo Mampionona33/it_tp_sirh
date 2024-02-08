@@ -32,7 +32,7 @@ const Body = () => {
   // console.log('dnsData', dnsData)
 
   const customSelectStyles = {
-    control: (provided) => ({
+    control: (provided: any) => ({
       ...provided,
       height: 21,
       minHeight: 21,
@@ -40,7 +40,7 @@ const Body = () => {
       outline: 'none',
       borderBottom: '1px solid #D6111E',
     }),
-    valueContainer: (style) => {
+    valueContainer: (style: any) => {
       return {
         ...style,
         paddingTop: 0,
@@ -49,7 +49,7 @@ const Body = () => {
         minHeight: 21,
       }
     },
-    input: (style) => {
+    input: (style: any) => {
       return {
         ...style,
         margin: 0,
@@ -60,23 +60,23 @@ const Body = () => {
         fontSize: '0.875rem',
       }
     },
-    singleValue: (style) => {
+    singleValue: (style: any) => {
       return {
         ...style,
         fontSize: '0.875rem',
       }
     },
-    placeholder: (style) => {
+    placeholder: (style: any) => {
       return {
         ...style,
         fontSize: '0.875rem',
       }
     },
-    menu: (style) => ({
+    menu: (style: any) => ({
       ...style,
       fontSize: '0.875rem',
     }),
-    indicatorsContainer: (style) => {
+    indicatorsContainer: (style: any) => {
       return {
         ...style,
         fontSize: '0.875rem',
@@ -92,7 +92,7 @@ const Body = () => {
     { value: 't3', label: 'Trimestre 3' },
   ]
 
-  const handleInputChange = (selectedOption, actionMeta) => {
+  const handleInputChange = (selectedOption: any, actionMeta: any) => {
     if (actionMeta.name === 'periode') {
       dispatch(
         setDns({
