@@ -8,13 +8,14 @@ import { setModalClose } from '@src/redux/modal/modalReducer'
 import { format } from 'date-fns'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import useFetchListEmploye from '@src/hooks/useFetchListEmploye'
 
 interface IModalValidResiliation {
   motif: string
 }
 
 const ModalValidResiliation: React.FC<IModalValidResiliation> = ({ motif }) => {
-  const { loading: loadingListEmployee } = useAppSelector((store) => store.employeesList)
+  // const { loading: loadingListEmployee } = useAppSelector((store) => store.employeesList)
   const formEmploye = useAppSelector((store) => store.formEmploye)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
@@ -37,7 +38,9 @@ const ModalValidResiliation: React.FC<IModalValidResiliation> = ({ motif }) => {
 
     try {
       // const response = await employeService.delete(formEmploye.id, dataToPost)
-      const response = await dispatch(deleteEmployee({ id: formEmploye.id, data: dataToPost }))
+      const response = await dispatch(
+        deleteEmployee({ id: String(formEmploye.id), data: dataToPost }),
+      )
       if (response.meta.requestStatus === 'fulfilled') {
         dispatch(setModalClose())
         navigate('/employees/list')
@@ -46,8 +49,6 @@ const ModalValidResiliation: React.FC<IModalValidResiliation> = ({ motif }) => {
       dispatch(setModalClose())
     }
   }
-
-  if (loadingListEmployee === 'pending') return <Loading />
 
   return (
     <div className="flex justify-center bg-white p-4">

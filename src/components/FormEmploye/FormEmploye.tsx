@@ -36,9 +36,9 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   } = useMutateSalarie()
 
   const {
-    salarie,
+    data: salarie,
     isError: errorFetchSalarie,
-    errors: errorsFetchSalarie,
+    error: errorsFetchSalarie,
     isLoading: isLoadingSalarie,
   } = useFetchSalarie(id)
 
@@ -112,6 +112,12 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
 
   if (errorFetchSalarie) {
     return <CAlert color="danger">Erreur lors de la recuperation du donnée salarie</CAlert>
+  }
+
+  if (isIdleMutateSalarie) {
+    if (isErrorMutateSalarie) {
+      return <CAlert color="danger">Erreur lors de la creation/modification</CAlert>
+    }
   }
 
   return (
