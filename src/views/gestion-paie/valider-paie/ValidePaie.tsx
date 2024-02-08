@@ -46,8 +46,8 @@ const ValidePaie = () => {
   )
 
   const {
-    salarie,
-    errors: errorFetchingSalarie,
+    data: salarie,
+    error: errorFetchingSalarie,
     isLoading,
     isError: isErrorFetchingSalarie,
   } = useFetchSalarie(id)
@@ -61,7 +61,7 @@ const ValidePaie = () => {
 
   const { validationYear, validationMonth } = useParams()
 
-  const isMonthValid = useValidMonthFrMMMM(validationMonth)
+  const isMonthValid = useValidMonthFrMMMM(validationMonth!)
 
   const convetMonthFrToNumber = (monthFr: string): number => {
     let monthNumber = 0
@@ -77,7 +77,7 @@ const ValidePaie = () => {
   }
 
   const formatValidationDate = (): string => {
-    const convertedMonthToNumber = convetMonthFrToNumber(validationMonth)
+    const convertedMonthToNumber = convetMonthFrToNumber(validationMonth!)
     return `${validationYear}-${convertedMonthToNumber.toString().padStart(2, '0')}-01`
   }
 
@@ -93,11 +93,20 @@ const ValidePaie = () => {
   const getDateDebutDateFin = (): { dateDebut: string; dateFin: string } | undefined => {
     const actualMonth = getMonthValidation()
 
-    return listDateDebutDateFin && listDateDebutDateFin[actualMonth]
+    // Utilisez une assertion de type pour indiquer à TypeScript que la clé est valide
+    return listDateDebutDateFin && (listDateDebutDateFin as any)[actualMonth]
   }
-  const { dateDebut, dateFin } = isMonthValid
-    ? getDateDebutDateFin()
-    : { dateDebut: '00/00/0000', dateFin: '00/00/0000' }
+
+  let dateDebut: string = '00/00/0000'
+  let dateFin: string = '00/00/0000'
+
+  if (isMonthValid) {
+    const dateObj = getDateDebutDateFin()
+    if (dateObj) {
+      dateDebut = dateObj.dateDebut
+      dateFin = dateObj.dateFin
+    }
+  }
 
   const formatDateFin = (): DDMMYYYYFormat => {
     const parsedDateValidation = parseISO(dateValidation)
@@ -135,7 +144,7 @@ const ValidePaie = () => {
         setBulletinDePaie({
           salarie: salarie,
           salaireDeBase: salarie.salaire_de_base,
-        } as IBulletinDePaieProps),
+        } as unknown as IBulletinDePaieProps),
       )
     }
     const fetchData = async () => {
@@ -286,7 +295,7 @@ const ValidePaie = () => {
                 <div className="text-sm mt-1">
                   <p className="mb-1">Nom : {salarie.nom}</p>
                   <p className="mb-1">Prenom : {salarie.prenom}</p>
-                  <p className="mb-1">Matricule : {salarie.matricule}</p>
+                  <p className="mb-1">Matricule : {salarie.matricule!}</p>
                 </div>
                 <div className="w-fit">
                   <CustomInputWithLabel
