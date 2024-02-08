@@ -19,14 +19,14 @@ const Body = () => {
 
   const updateBulletinDePaie = useCallback(() => {
     const calculPaie = new CalculPaie_v2()
-    const avantageAutre = avantages.autresAvantages || 0
-    const avantageDomestique = avantages.domestique || 0
-    const avantageLogement = avantages.logement || 0
-    const avantageVehicule = avantages.vehicule || 0
+    const avantageAutre = avantages!.autresAvantages || 0
+    const avantageDomestique = avantages!.domestique || 0
+    const avantageLogement = avantages!.logement || 0
+    const avantageVehicule = avantages!.vehicule || 0
 
     const allocationFamille = calculPaie.calculateReductionChargeFamiliale({
-      salarie: salarie,
-      montanReductionChargeParEnfant: montanReductionChargeParEnfant,
+      salarie: salarie!,
+      montanReductionChargeParEnfant: montanReductionChargeParEnfant!,
     })
 
     const salaireNetAPayer = calculPaie.calculSalaireNetAPayer({
@@ -61,22 +61,22 @@ const Body = () => {
       <CardRow
         className="border-b border-b-customBlue-100"
         cell1="Avantage véhicule"
-        cell3={avantages.vehicule}
+        cell3={avantages!.vehicule}
       />
       <CardRow
         className="border-b border-b-customBlue-100"
         cell1="Avantage logement"
-        cell3={avantages.logement}
+        cell3={avantages!.logement}
       />
       <CardRow
         className="border-b border-b-customBlue-100"
         cell1="Avantage domestique"
-        cell3={avantages.domestique}
+        cell3={avantages!.domestique}
       />
       <CardRow
         className="border-b border-b-customBlue-100"
         cell1="Autres avantages"
-        cell3={avantages.autresAvantages}
+        cell3={avantages!.autresAvantages}
       />
       <CardRow
         className="border-b border-b-customBlue-100"

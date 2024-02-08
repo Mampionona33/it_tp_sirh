@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "strict": true,
     "target": "es5",
     "jsx": "react",
     "allowJs": true,

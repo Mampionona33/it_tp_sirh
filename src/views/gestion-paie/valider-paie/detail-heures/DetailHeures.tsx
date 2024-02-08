@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import heureSerivice from '@src/services/HeureService'

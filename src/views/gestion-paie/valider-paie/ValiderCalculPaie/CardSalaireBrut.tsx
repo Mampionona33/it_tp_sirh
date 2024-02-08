@@ -58,15 +58,15 @@ const Body = () => {
         valHsni130,
         valHsni150,
         rappel,
-        primeAssiduite: primeEtGratification.assiduite,
-        primeExcellence: primeEtGratification.excellence,
+        primeAssiduite: primeEtGratification!.assiduite,
+        primeExcellence: primeEtGratification!.excellence,
         totalIndemnite,
-        avantageLogement: avantages.logement,
-        avantageVehicule: avantages.vehicule,
-        avantageDomestique: avantages.domestique,
-        avantageAutre: avantages.autresAvantages,
-        retard: deductions.retard,
-        absence: deductions.absence,
+        avantageLogement: avantages!.logement,
+        avantageVehicule: avantages!.vehicule,
+        avantageDomestique: avantages!.domestique,
+        avantageAutre: avantages!.autresAvantages,
+        retard: deductions!.retard,
+        absence: deductions!.absence,
       })
 
       const baseCnaps = calculPaie.calculBaseCnaps({
@@ -153,12 +153,12 @@ const Body = () => {
       />
       <CardRow
         cell1="Prime d'assiduité"
-        cell3={primeEtGratification.assiduite}
+        cell3={primeEtGratification!.assiduite}
         className="border-b border-b-customBlue-100"
       />
       <CardRow
         cell1="Autres primes"
-        cell3={primeEtGratification.excellence}
+        cell3={primeEtGratification!.excellence}
         className="border-b border-b-customBlue-100"
       />
       <CardRow
@@ -168,33 +168,33 @@ const Body = () => {
       />
       <CardRow
         cell1="Avantage logement"
-        cell3={avantages.logement}
+        cell3={avantages!.logement}
         className="border-b border-b-customBlue-100"
       />
       <CardRow
         cell1="Avantage véhicule"
-        cell3={avantages.vehicule}
+        cell3={avantages!.vehicule}
         className="border-b border-b-customBlue-100"
       />
       <CardRow
         cell1="Avantage domestique"
-        cell3={avantages.domestique}
+        cell3={avantages!.domestique}
         className="border-b border-b-customBlue-100"
       />
       <CardRow
         cell1="Avantage autres"
-        cell3={avantages.autresAvantages}
+        cell3={avantages!.autresAvantages}
         className="border-b border-b-customBlue-100"
       />
       <CardRow cell1="Rappel" cell3={rappel} className="border-b border-b-customBlue-100" />
       <CardRow
         cell1="Retard"
-        cell3={deductions.retard}
+        cell3={deductions!.retard}
         className="border-b border-b-customBlue-100"
       />
       <CardRow
         cell1="Absence"
-        cell3={deductions.absence}
+        cell3={deductions!.absence}
         className="border-b border-b-customBlue-100"
       />
 
