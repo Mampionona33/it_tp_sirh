@@ -11,7 +11,13 @@ const InformationPaie = () => {
   const dispatch = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
 
-  const { listModeDePayement, isError, isLoading, errors, refetch } = useFetchListModeDePayement()
+  const {
+    data: listModeDePayement,
+    isError,
+    isLoading,
+    error,
+    refetch,
+  } = useFetchListModeDePayement()
   const formatErrorMessage = useErrorFormatter()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -76,7 +82,7 @@ const InformationPaie = () => {
   return (
     <>
       {isError ? (
-        <CAlert color="danger">{formatErrorMessage(errors)}</CAlert>
+        <CAlert color="danger">{formatErrorMessage(error)}</CAlert>
       ) : (
         <div className="flex flex-col border-y border-y-customBlue-200 mt-4 shadow-sm py-4">
           <p className="text-lg ml-4 uppercase mx-8 mb-3">Information sur la paie</p>
