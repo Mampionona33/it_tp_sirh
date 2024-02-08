@@ -25,7 +25,8 @@ class EmployerWorksheet implements Partial<Worksheet> {
     this.fillConstContent()
   }
 
-  applyDefaultStyle = () => {
+  applyDefaultStyle = (): void => {
+    if (!this.sheet) return
     this.sheet.eachRow((row) => {
       row.eachCell((cell) => {
         cell.font = { name: 'Arial', size: 10 }
@@ -41,6 +42,7 @@ class EmployerWorksheet implements Partial<Worksheet> {
   }
 
   createCellArray = ({ cells }: IEmployerWorksheetCreateRangeProps): ExcelJS.Cell[] => {
+    if (!this.sheet) return []
     const range = []
     for (const cell of cells) {
       range.push(this.sheet.getCell(cell))
@@ -49,12 +51,14 @@ class EmployerWorksheet implements Partial<Worksheet> {
   }
 
   private mergeCtoF = () => {
+    if (!this.sheet) return
     for (let i = 4; i <= 9; i++) {
       this.sheet.mergeCells(`C${i}:F${i}`)
     }
   }
 
   private fillConstContent = () => {
+    if (!this.sheet) return
     const columnA2ToA21 = this.createCellArray({
       cells: ['A2', 'A11', 'A18', 'A21'],
     })
@@ -113,7 +117,8 @@ class EmployerWorksheet implements Partial<Worksheet> {
     })
 
     const row21 = ['C21', 'D21', 'E21']
-    row21.forEach((element, index) => {
+    row21.forEach((element, index): void => {
+      if (!this.sheet) return
       this.sheet.getCell(element).value = `Mois ${index + 1}`
 
       this.sheet.getCell(element).font = { bold: true, size: 10, name: 'Arial' }
@@ -156,6 +161,7 @@ class EmployerWorksheet implements Partial<Worksheet> {
     this.sheet.getCell('F26').font = { size: 10, name: 'Arial' }
 
     Array.from(['C18', 'D18', 'E18']).forEach((cell) => {
+      if (!this.sheet) return
       this.sheet.getCell(cell).border = {
         top: { style: 'thin' },
         left: { style: 'thin' },
@@ -166,6 +172,7 @@ class EmployerWorksheet implements Partial<Worksheet> {
 
     for (let i = 22; i <= 25; i++) {
       Array.from([`B${i}`, `C${i}`, `D${i}`, `E${i}`, `F${i}`]).forEach((cell) => {
+        if (!this.sheet) return
         this.sheet.getCell(cell).border = {
           top: { style: 'thin' },
           left: { style: 'thin' },
