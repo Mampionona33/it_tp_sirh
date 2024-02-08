@@ -22,7 +22,7 @@ interface IMydocumentProps {
 }
 const MyDocument = ({ data }: IMydocumentProps) => {
   return (
-    <Document title={`Bulletin de paie ${data.salarie.nom} ${data.salarie.prenom}`}>
+    <Document title={`Bulletin de paie ${data.salarie!.nom} ${data.salarie!.prenom}`}>
       <Page size="A4">
         <Section1 data={data} />
         <Section2 data={data} />
@@ -45,7 +45,13 @@ const BulletinPaie = () => {
 
   const formatErrorMessage = useErrorFormatter()
 
-  const { bulletinDePaie, isLoading, refetch, error, isError } = useFetchBulletinDePaie({
+  const {
+    data: bulletinDePaie,
+    isLoading,
+    refetch,
+    error,
+    isError,
+  } = useFetchBulletinDePaie({
     id,
     annee,
     mois,
@@ -59,7 +65,9 @@ const BulletinPaie = () => {
       .then((blob) =>
         saveAs(
           blob,
-          `${bulletinDePaie.salarie.nom}_${bulletinDePaie.salarie.prenom}_${bulletinDePaie.salarie.matricule}.pdf`,
+          `${bulletinDePaie!.salarie!.nom}_${bulletinDePaie!.salarie.prenom}_${
+            bulletinDePaie!.salarie.matricule
+          }.pdf`,
         ),
       )
   }
@@ -73,7 +81,7 @@ const BulletinPaie = () => {
       ) : (
         <div className="min-h-full w-full flex gap-3 flex-col">
           <PDFViewer width="100%" height={a4HeightInPixels}>
-            <MyDocument data={bulletinDePaie} />
+            <MyDocument data={bulletinDePaie!} />
           </PDFViewer>
           <div className="flex w-full shadow-sm justify-end p-3 bg-white rounded-sm mb-3">
             <ButtonWithIcon

@@ -1,6 +1,5 @@
 import historiquePaieService from '@src/services/HistoriquePaieSerivce'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
 
 export interface useFetchBulletinDePaieProps {
   id: string
@@ -22,7 +21,6 @@ export interface useFetchBulletinDePaieProps {
 
 const useFetchBulletinDePaie = (params: useFetchBulletinDePaieProps) => {
   const { id, annee, mois } = params
-  const [bulletinDePaie, setBulletinDePaie] = useState(null)
 
   const { data, isLoading, refetch, isError, error } = useQuery({
     queryKey: ['bulletinDePaie', id, annee, mois],
@@ -33,22 +31,16 @@ const useFetchBulletinDePaie = (params: useFetchBulletinDePaieProps) => {
           annee,
           mois,
         })
-        setBulletinDePaie(response.data)
-        return response
+        // setBulletinDePaie(response.data)
+        return response.data
       } catch (error) {
         throw error
       }
     },
   })
 
-  useEffect(() => {
-    if (data) {
-      setBulletinDePaie(data.data)
-    }
-  }, [data])
-
   return {
-    bulletinDePaie,
+    data,
     isLoading,
     refetch,
     isError,
