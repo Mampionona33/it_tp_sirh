@@ -37,6 +37,7 @@ const useErrorFormatter = () => {
     } else {
       return "Une erreur inattendue s'est produite."
     }
+    return "Une erreur inattendue s'est produite."
   }, [])
 
   return formatErrorMessage
