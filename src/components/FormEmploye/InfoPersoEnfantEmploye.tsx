@@ -23,9 +23,11 @@ interface IFormEnfantsProps {
 const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
   const dispatch = useAppDispatch()
   const { enfant: listEnfant } = useAppSelector((state) => state.formEmploye)
-  const enfant = listEnfant.find((enfant) => enfant.id === index)
+  const enfant = listEnfant
+    ? listEnfant.find((enfant: IEnfantEmploye) => enfant.id === index)
+    : null
 
-  const idEnfant = listEnfant.find((enfant) => enfant.id === index).id
+  const idEnfant = listEnfant ? listEnfant.find((enfant) => enfant.id === index)!.id : null
 
   const initialFormData: IEnfantEmploye = useMemo(() => {
     return {
@@ -42,7 +44,9 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
   const [formData, setFormData] = useState<IEnfantEmploye>(enfant || initialFormData)
 
   useEffect(() => {
-    setFormData(enfant)
+    if (enfant) {
+      setFormData(enfant)
+    }
   }, [enfant])
 
   const optionCertificat: { label: string; value: EnumCertificatEnfant }[] = [
@@ -56,11 +60,13 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
     label: string
     value: EnumCertificatEnfant
   }) => {
-    dispatch(
-      setFormEmploye({
-        enfant: listEnfant.map((enf) => ({ ...enf, certificat: selectedOption.value })),
-      }),
-    )
+    if (listEnfant) {
+      dispatch(
+        setFormEmploye({
+          enfant: listEnfant.map((enf) => ({ ...enf, certificat: selectedOption.value })),
+        }),
+      )
+    }
   }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
@@ -78,25 +84,27 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       [name]: value,
     })
     // Mette à jour le stat global
-    dispatch(
-      setFormEmploye({
-        enfant: listEnfant.map((enf) => {
-          if (enf.id === index) {
-            if (name === `genre_enfant_${idEnfant}`) {
+    if (listEnfant) {
+      dispatch(
+        setFormEmploye({
+          enfant: listEnfant.map((enf) => {
+            if (enf.id === index) {
+              if (name === `genre_enfant_${idEnfant}`) {
+                return {
+                  ...enf,
+                  genre_enfant: value as EnumGenre,
+                }
+              }
               return {
                 ...enf,
-                genre_enfant: value as EnumGenre,
+                [name]: value,
               }
             }
-            return {
-              ...enf,
-              [name]: value,
-            }
-          }
-          return enf
+            return enf
+          }),
         }),
-      }),
-    )
+      )
+    }
   }
 
   const inputs: IInputWithLabelProps[] = [
@@ -197,7 +205,7 @@ const InfoPersoEnfantEmploye: React.FC = () => {
     event.preventDefault()
 
     const nouvelEnfant: IEnfantEmploye = {
-      id: formEmploye.enfant.length + 1,
+      id: formEmploye.enfant!.length + 1,
       nom: '',
       prenom: '',
       date_naissance: '',
@@ -225,7 +233,7 @@ const InfoPersoEnfantEmploye: React.FC = () => {
             onClick={addEnfant}
           />
         </div>
-        {formEmploye.enfant.map((enfant, index) => (
+        {formEmploye.enfant!.map((enfant, index) => (
           <div key={index} className="flex border-y border-y-customBlue-200 gap-y-2 my-2 shadow-sm">
             <FormEnfants
               index={enfant.id}
