@@ -19,7 +19,7 @@ const categorieEmployeSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllCotisations.fulfilled, (state, action) => {
-        state.data = action.payload.data
+        state.data = action.payload!.data
         state.loading = 'succeeded'
       })
       .addCase(fetchAllCotisations.pending, (state) => {
