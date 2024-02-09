@@ -47,6 +47,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
+    console.log(name, value)
     dispatch(
       setFormEmploye({
         ...formEmploye,
@@ -74,6 +75,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
       required: true,
       placeholder: 'Matricule',
       onChange: handleInputChange,
+      onInput: handleInputChange,
       registerPath: 'matricule',
       register: register,
       errorMessage: formErrors?.matricule?.message,
@@ -87,6 +89,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
       required: true,
       placeholder: 'Titre du poste',
       onChange: handleInputChange,
+      onInput: handleInputChange,
       registerPath: 'titre_poste',
       register: register,
       errorMessage: formErrors?.titre_poste?.message,
@@ -101,6 +104,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
       options: catOptions,
       placeholder: 'Catégorie',
       onSelectChange: handleCategorieChange,
+      onInput: handleInputChange,
       registerPath: 'categorie',
       register: register,
       errorMessage: formErrors?.categorie?.message,
@@ -114,6 +118,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
       required: true,
       placeholder: 'Département',
       onChange: handleInputChange,
+      onInput: handleInputChange,
       registerPath: 'departement',
       register: register,
       errorMessage: formErrors?.departement?.message,
@@ -127,6 +132,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
       required: true,
       value: formEmploye.date_embauche,
       onChange: handleInputChange,
+      onInput: handleInputChange,
       registerPath: 'date_embauche',
       register: register,
       errorMessage: formErrors?.date_embauche?.message,
@@ -140,6 +146,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
       value: formEmploye.lieu_travail,
       placeholder: 'Lieu de travail',
       onChange: handleInputChange,
+      onInput: handleInputChange,
       registerPath: 'lieu_travail',
       register: register,
       errorMessage: formErrors?.lieu_travail?.message,
@@ -152,6 +159,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
       type: 'text',
       placeholder: 'Télephone',
       onChange: handleInputChange,
+      onInput: handleInputChange,
       registerPath: 'telephone',
       register: register,
       errorMessage: formErrors?.telephone?.message,
@@ -165,6 +173,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
       type: 'email',
       placeholder: 'Email',
       onChange: handleInputChange,
+      onInput: handleInputChange,
       registerPath: 'email',
       register: register,
       errorMessage: formErrors?.email?.message,
@@ -180,6 +189,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
       placeholder: 'Travail de nuit',
       options: radioOption,
       onChange: handleInputChange,
+      onInput: handleInputChange,
       registerPath: 'travail_de_nuit',
       register: register,
       errorMessage: formErrors?.travail_de_nuit?.message,
@@ -196,7 +206,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
         <p className="text-lg  text-customRed-930 uppercase mx-8">Informations professionnelles</p>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 w-full">
           {inputs.map((input, index) => (
-            <InputWithLabel key={index} {...input} onChange={(event) => handleInputChange(event)} />
+            <InputWithLabel key={index} {...input} register={register} />
           ))}
         </div>
       </div>

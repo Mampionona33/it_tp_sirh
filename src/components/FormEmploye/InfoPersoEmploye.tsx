@@ -11,6 +11,7 @@ function InfoPersoEmploye({ register, formErrors }: IInfoPersoEmployeProps) {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
+    console.log(name, value)
     dispach(
       setFormEmploye({
         ...formEmploye,
@@ -130,6 +131,7 @@ function InfoPersoEmploye({ register, formErrors }: IInfoPersoEmployeProps) {
       placeholder: 'Nom du père',
       value: formEmploye.nom_pere,
       onChange: handleInputChange,
+      onInput: handleInputChange,
       register: register,
       registerPath: 'nom_pere',
       errorMessage: formErrors?.nom_pere?.message,
@@ -142,6 +144,7 @@ function InfoPersoEmploye({ register, formErrors }: IInfoPersoEmployeProps) {
       placeholder: 'Nom de la mère',
       value: formEmploye.nom_mere,
       onChange: handleInputChange,
+      onInput: handleInputChange,
       register: register,
       registerPath: 'nom_mere',
       errorMessage: formErrors?.nom_mere?.message,
