@@ -3,8 +3,7 @@ import { useParams } from 'react-router-dom'
 
 const useDateValidationExist = (): boolean => {
   const { dateValidation } = useParams()
-
-  return dateValidation && isValid(parseISO(dateValidation))
+  return !dateValidation ? false : isValid(parseISO(dateValidation))
 }
 
 export default useDateValidationExist
