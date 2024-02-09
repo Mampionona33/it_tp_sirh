@@ -132,7 +132,9 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
               <InformationPaie />
               {/* <PrimeEtAvantageParMois /> */}
               {notification.type && (
-                <CAlert color={notification.type}>{notification.message}</CAlert>
+                <CAlert className="my-4" color={notification.type}>
+                  {notification.message}
+                </CAlert>
               )}
               <FormEmployeGroupButton />
             </form>
