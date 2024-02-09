@@ -6,10 +6,15 @@ import useFetchListModeDePayement from '@src/hooks/useFetchListModeDePayement'
 import { CAlert } from '@coreui/react'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import Loading from '../loadings/Loading'
+import { IInformationPaie } from '@src/interfaces/interfaceInformationPaie'
 
-const InformationPaie = () => {
+const InformationPaie = ({ register, formErrors }: IInformationPaie) => {
   const dispatch = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
+
+  if (formErrors) {
+    console.log(formErrors)
+  }
 
   const {
     data: listModeDePayement,
@@ -45,6 +50,9 @@ const InformationPaie = () => {
       placeholder: 'Salaire de base',
       min: 0,
       required: true,
+      register: register,
+      registerPath: 'salaire_de_base',
+      errorMessage: formErrors?.salaire_de_base?.message,
     },
     {
       id: 'rib',
@@ -53,6 +61,9 @@ const InformationPaie = () => {
       name: 'rib',
       type: 'text',
       placeholder: 'RIB: 00000 00000 00000000000 00',
+      required: true,
+      register: register,
+      registerPath: 'rib',
     },
     {
       id: 'mode_paiement_salaire',
@@ -64,6 +75,9 @@ const InformationPaie = () => {
       options: listModeDePayement,
       placeholder: 'Mode de paiement',
       onSelectChange: handleModePaiementChange,
+      errorMessage: formErrors?.mode_paiement_salaire?.message,
+      register: register,
+      registerPath: 'mode_paiement_salaire',
     },
     {
       id: 'num_cnaps',
@@ -72,6 +86,9 @@ const InformationPaie = () => {
       name: 'num_cnaps',
       type: 'text',
       placeholder: 'Numéros cnaps',
+      register: register,
+      registerPath: 'num_cnaps',
+      errorMessage: formErrors?.num_cnaps?.message,
     },
   ]
 

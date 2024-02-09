@@ -12,13 +12,12 @@ const formEmployeSchema: z.ZodType<IEmploye> = z.object({
   prenom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
   date_naissance: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' })
-    .datetime(),
+    .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' }),
+
   lieu_naissance: z.string().min(3, { message: 'Le champ doit contenir au moins 3 caractères' }),
   date_delivrance_cin: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' })
-    .datetime(),
+    .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' }),
   adresse: z.string().min(3, { message: 'Le champ doit contenir au moins 3 caractères' }),
   nom_pere: z.string().optional(),
   nom_mere: z.string().optional(),
@@ -43,7 +42,7 @@ const formEmployeSchema: z.ZodType<IEmploye> = z.object({
       prenom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
       date_naissance: z
         .string()
-        .min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+        .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' }),
       lieu_naissance: z
         .string()
         .min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
@@ -63,7 +62,7 @@ const formEmployeSchema: z.ZodType<IEmploye> = z.object({
         prenom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
         date_naissance: z
           .string()
-          .min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+          .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' }),
         lieu_naissance: z
           .string()
           .min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),

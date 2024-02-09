@@ -9,8 +9,9 @@ import categorieEmployeService from '@src/services/CategorieEmployeService'
 import { ICategorieEmployeState } from '@src/interfaces/intefaceCategorieEmploye'
 import { setCategorieEmployeState } from '@src/redux/categorieEmploye/CategorieEmployeReducer'
 import Loading from '../loadings/Loading'
+import { IInfoProPros } from '@src/interfaces/interfaceInfoPro'
 
-const InfoPro = () => {
+const InfoPro = ({ register, formErrors }: IInfoProPros) => {
   const dispatch = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
   const { data: catOptions } = useAppSelector((store) => store.cateogieEmploye)
@@ -39,6 +40,10 @@ const InfoPro = () => {
           )
         }),
   })
+
+  if (formErrors) {
+    console.log(formErrors)
+  }
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -69,6 +74,9 @@ const InfoPro = () => {
       required: true,
       placeholder: 'Matricule',
       onChange: handleInputChange,
+      registerPath: 'matricule',
+      register: register,
+      errorMessage: formErrors?.matricule?.message,
     },
     {
       id: 'titre_poste',
@@ -79,6 +87,9 @@ const InfoPro = () => {
       required: true,
       placeholder: 'Titre du poste',
       onChange: handleInputChange,
+      registerPath: 'titre_poste',
+      register: register,
+      errorMessage: formErrors?.titre_poste?.message,
     },
     {
       label: 'Catégorie',
@@ -90,6 +101,9 @@ const InfoPro = () => {
       options: catOptions,
       placeholder: 'Catégorie',
       onSelectChange: handleCategorieChange,
+      registerPath: 'categorie',
+      register: register,
+      errorMessage: formErrors?.categorie?.message,
     },
     {
       id: 'departement',
@@ -100,6 +114,9 @@ const InfoPro = () => {
       required: true,
       placeholder: 'Département',
       onChange: handleInputChange,
+      registerPath: 'departement',
+      register: register,
+      errorMessage: formErrors?.departement?.message,
     },
     {
       id: 'date_embauche',
@@ -110,6 +127,9 @@ const InfoPro = () => {
       required: true,
       value: formEmploye.date_embauche,
       onChange: handleInputChange,
+      registerPath: 'date_embauche',
+      register: register,
+      errorMessage: formErrors?.date_embauche?.message,
     },
     {
       id: 'lieu_travail',
@@ -120,6 +140,9 @@ const InfoPro = () => {
       value: formEmploye.lieu_travail,
       placeholder: 'Lieu de travail',
       onChange: handleInputChange,
+      registerPath: 'lieu_travail',
+      register: register,
+      errorMessage: formErrors?.lieu_travail?.message,
     },
     {
       id: 'telephone',
@@ -129,6 +152,9 @@ const InfoPro = () => {
       type: 'text',
       placeholder: 'Télephone',
       onChange: handleInputChange,
+      registerPath: 'telephone',
+      register: register,
+      errorMessage: formErrors?.telephone?.message,
     },
     {
       id: 'email',
@@ -139,6 +165,9 @@ const InfoPro = () => {
       type: 'email',
       placeholder: 'Email',
       onChange: handleInputChange,
+      registerPath: 'email',
+      register: register,
+      errorMessage: formErrors?.email?.message,
     },
     {
       id: 'travail_de_nuit',
@@ -151,6 +180,9 @@ const InfoPro = () => {
       placeholder: 'Travail de nuit',
       options: radioOption,
       onChange: handleInputChange,
+      registerPath: 'travail_de_nuit',
+      register: register,
+      errorMessage: formErrors?.travail_de_nuit?.message,
     },
   ]
 

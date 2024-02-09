@@ -12,6 +12,10 @@ import Loading from '../loadings/Loading'
 import { CAlert } from '@coreui/react'
 import useFetchSalarie from '@src/hooks/useFetchSalarie'
 import useMutateSalarie from '@src/hooks/useMutateSalarie'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import formEmployeSchema from '@src/schema/formEmployeSchema'
+import { IEmploye } from '@src/interfaces/interfaceEmploye'
 
 interface IFormEmploye {
   id?: string | number
@@ -46,14 +50,21 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     return formEmploye.id !== null
   }, [formEmploye.id])
 
-  const handleSubmit = (event: React.FormEvent): void => {
-    event.preventDefault()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: formErrors },
+    setError,
+  } = useForm<IEmploye>({ resolver: zodResolver(formEmployeSchema) })
+
+  const submitForm = async (): Promise<void> => {
+    console.log('formEmploye', formEmploye)
     const requestData = {
       ...formEmploye,
       salaire_de_base: parseFloat(String(formEmploye.salaire_de_base)),
     }
 
-    mutateSalarie({ id, data: requestData })
+    await mutateSalarie({ id, data: requestData })
   }
 
   const handleMutationSuccess = useCallback(() => {
@@ -125,17 +136,17 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
       <div>
         <>
           <div className="bg-white flex flex-col">
-            <form action="" onSubmit={handleSubmit}>
-              <InfoPersoEmploye />
+            <form
+              action=""
+              onSubmit={handleSubmit(async () => {
+                await submitForm()
+              })}
+            >
+              <InfoPersoEmploye register={register} formErrors={formErrors && formErrors} />
               <InfoPersoEnfantEmploye />
               <InfoPro />
               <InformationPaie />
               {/* <PrimeEtAvantageParMois /> */}
-              {notification.type && (
-                <CAlert className="my-4" color={notification.type}>
-                  {notification.message}
-                </CAlert>
-              )}
               <FormEmployeGroupButton />
             </form>
             {formEmploye && formEmploye.id && <FormResiliationContrat />}

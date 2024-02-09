@@ -1,4 +1,13 @@
+import { register } from 'module'
 import React, { ChangeEvent } from 'react'
+import {
+  FieldError,
+  FieldErrors,
+  FieldErrorsImpl,
+  FieldValues,
+  Merge,
+  UseFormRegister,
+} from 'react-hook-form'
 import Select, { StylesConfig } from 'react-select'
 
 export interface IInputWithLabelProps extends React.HTMLProps<HTMLInputElement> {
@@ -31,6 +40,9 @@ export interface IInputWithLabelProps extends React.HTMLProps<HTMLInputElement> 
   options?: IInputWithLabelOptionsProps[]
   onChange?: (value: any, index?: number) => void
   onInput?: (value: any, index?: number) => void
+  register?: UseFormRegister<any>
+  registerPath?: string
+  errorMessage?: string
 }
 
 export interface IInputWithLabelOptionsProps {
@@ -56,6 +68,9 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   onChange,
   onInput,
   onSelectChange,
+  register,
+  registerPath,
+  errorMessage,
 }) => {
   const [focused, setFocused] = React.useState<boolean>(false)
 
@@ -140,6 +155,10 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
     }
   }, [value])
 
+  // if (register && registerPath) {
+  //   console.log({ ...register(registerPath) })
+  // }
+
   return (
     <div className="flex flex-col mb-2">
       {type !== 'radio' && type !== 'select' && (
@@ -169,7 +188,11 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
                     onChange={(event) => onChange(event, optionIndex)}
                     onInput={onInput ? (event) => onInput(event, optionIndex) : undefined}
                     className="text-sm"
+                    {...(register && registerPath ? { ...register(registerPath) } : undefined)}
                   />
+                  {errorMessage && (
+                    <span className="text-sm text-customRed-800">{errorMessage}</span>
+                  )}
                 </div>
                 <label htmlFor={optionID} className="text-sm">
                   {option.label}
@@ -184,62 +207,72 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
           <label htmlFor={name} className="text-sm h-4 mb-1">
             {focused && label} {required && focused ? ' *' : ''}
           </label>
-          <Select
-            inputId={id}
-            aria-label={label}
-            placeholder={placeHolder}
-            name={name}
-            required={required}
-            options={options as { label: string; value: string }[]}
-            // @ts-expect-error : next-line
-            value={options.find((opt: { label: string; value: string }) => opt.value === value)}
-            // @ts-expect-error : next-line
-            onChange={handleSelectChange}
-            onFocus={handleFocused}
-            styles={customSelectStyles}
-            className="text-sm"
-            // styles={{
-            //   ...customSelectStyles,
-            //   control: (base) => ({
-            //     ...customSelectStyles.control(base),
-            //     border: 'none',
-            //     outline: 'none',
-            //     borderBottom: '1px solid #D6111E',
-            //   }),
-            // }}
-            theme={(theme) => ({
-              ...theme,
-              borderRadius: 0,
-              height: 28,
-              colors: {
-                ...theme.colors,
-                primary25: '#FFF2F2',
-                primary: '#da200d',
-              },
-            })}
-          />
+          <>
+            <Select
+              inputId={id}
+              aria-label={label}
+              placeholder={placeHolder}
+              name={name}
+              required={required}
+              options={options as { label: string; value: string }[]}
+              // @ts-expect-error : next-line
+              value={options.find((opt: { label: string; value: string }) => opt.value === value)}
+              // @ts-expect-error : next-line
+              onChange={handleSelectChange}
+              onFocus={handleFocused}
+              styles={customSelectStyles}
+              className="text-sm"
+              {...(register && registerPath ? { ...register(registerPath) } : undefined)}
+              // styles={{
+              //   ...customSelectStyles,
+              //   control: (base) => ({
+              //     ...customSelectStyles.control(base),
+              //     border: 'none',
+              //     outline: 'none',
+              //     borderBottom: '1px solid #D6111E',
+              //   }),
+              // }}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: 0,
+                height: 28,
+                colors: {
+                  ...theme.colors,
+                  primary25: '#FFF2F2',
+                  primary: '#da200d',
+                },
+              })}
+            />
+            {errorMessage && <span className="text-sm text-customRed-800">{errorMessage}</span>}
+          </>
         </div>
       ) : (
         // Render a regular input for other types
-        <input
-          type={type}
-          autoComplete={autoComplete}
-          name={name}
-          id={id || name}
-          value={value}
-          min={min}
-          max={max}
-          placeholder={placeHolder}
-          onFocus={() => setFocused(true)}
-          onBlur={handleBlur}
-          // @ts-expect-error : next-line
-          onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
-          onInput={
-            onInput ? (event) => onInput(event as ChangeEvent<HTMLInputElement>, index) : undefined
-          }
-          className="border-b border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1 text-sm"
-          required={required}
-        />
+        <>
+          <input
+            type={type}
+            autoComplete={autoComplete}
+            name={name}
+            id={id || name}
+            value={value}
+            min={min}
+            max={max}
+            placeholder={placeHolder}
+            onFocus={() => setFocused(true)}
+            onBlur={handleBlur}
+            // @ts-expect-error : next-line
+            onChange={(event) => onChange(event as ChangeEvent<HTMLInputElement>, index)}
+            onInput={
+              onInput
+                ? (event) => onInput(event as ChangeEvent<HTMLInputElement>, index)
+                : undefined
+            }
+            {...(register && registerPath ? { ...register(registerPath) } : undefined)}
+            className="border-b border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1 text-sm"
+            required={required}
+          />
+          {errorMessage && <span className="text-sm text-customRed-800">{errorMessage}</span>}
+        </>
       )}
     </div>
   )

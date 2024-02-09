@@ -3,8 +3,9 @@ import InputWithLabel, { IInputWithLabelOptionsProps, IInputWithLabelProps } fro
 import { EnumGenre, genreOptions } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
+import { IInfoPersoEmployeProps } from '@src/interfaces/interfaceInfoPersoEmploye'
 
-function InfoPersoEmploye() {
+function InfoPersoEmploye({ register, formErrors }: IInfoPersoEmployeProps) {
   const dispach = useAppDispatch()
   const formEmploye = useAppSelector((state) => state.formEmploye)
 
@@ -18,6 +19,10 @@ function InfoPersoEmploye() {
     )
   }
 
+  if (formErrors) {
+    console.log(formErrors)
+  }
+
   const inputs: IInputWithLabelProps[] = [
     {
       id: 'nom_employe',
@@ -29,6 +34,9 @@ function InfoPersoEmploye() {
       onInput: handleInputChange,
       onChange: handleInputChange,
       placeholder: 'Nom employé',
+      register: register,
+      registerPath: 'nom',
+      errorMessage: formErrors?.nom?.message,
     },
     {
       id: 'prenom_employe',
@@ -40,6 +48,9 @@ function InfoPersoEmploye() {
       onInput: handleInputChange,
       onChange: handleInputChange,
       placeholder: 'Prénom employé',
+      register: register,
+      registerPath: 'prenom',
+      errorMessage: formErrors?.prenom?.message,
     },
     {
       id: 'adresse_employe',
@@ -51,6 +62,9 @@ function InfoPersoEmploye() {
       onInput: handleInputChange,
       onChange: handleInputChange,
       placeholder: 'Adresse',
+      register: register,
+      registerPath: 'adresse',
+      errorMessage: formErrors?.adresse?.message,
     },
     {
       id: 'date_naissance_employe',
@@ -62,6 +76,9 @@ function InfoPersoEmploye() {
       value: formEmploye.date_naissance,
       onInput: handleInputChange,
       onChange: handleInputChange,
+      register: register,
+      registerPath: 'date_naissance',
+      errorMessage: formErrors?.date_naissance?.message,
     },
     {
       id: 'lieu_naissance_employe',
@@ -73,6 +90,9 @@ function InfoPersoEmploye() {
       onInput: handleInputChange,
       onChange: handleInputChange,
       placeholder: 'Lieu de naissance',
+      register: register,
+      registerPath: 'lieu_naissance',
+      errorMessage: formErrors?.lieu_naissance?.message,
     },
     {
       id: 'num_cin_employe',
@@ -84,6 +104,9 @@ function InfoPersoEmploye() {
       onInput: handleInputChange,
       onChange: handleInputChange,
       placeholder: 'N° CIN: 000 000 000 000',
+      register: register,
+      registerPath: 'num_cin',
+      errorMessage: formErrors?.num_cin?.message,
     },
     {
       id: 'date_delivrance_cin',
@@ -92,7 +115,12 @@ function InfoPersoEmploye() {
       type: 'date',
       required: true,
       value: formEmploye.date_delivrance_cin,
+      onInput: handleInputChange,
       onChange: handleInputChange,
+      placeholder: 'Date de delivrance CIN',
+      register: register,
+      registerPath: 'date_delivrance_cin',
+      errorMessage: formErrors?.date_delivrance_cin?.message,
     },
     {
       id: 'nom_pere',
@@ -102,6 +130,9 @@ function InfoPersoEmploye() {
       placeholder: 'Nom du père',
       value: formEmploye.nom_pere,
       onChange: handleInputChange,
+      register: register,
+      registerPath: 'nom_pere',
+      errorMessage: formErrors?.nom_pere?.message,
     },
     {
       id: 'nom_mere',
@@ -111,6 +142,9 @@ function InfoPersoEmploye() {
       placeholder: 'Nom de la mère',
       value: formEmploye.nom_mere,
       onChange: handleInputChange,
+      register: register,
+      registerPath: 'nom_mere',
+      errorMessage: formErrors?.nom_mere?.message,
     },
     {
       id: 'genre_employe',
@@ -123,6 +157,9 @@ function InfoPersoEmploye() {
       value: formEmploye.genre,
       onInput: handleInputChange,
       onChange: handleInputChange,
+      register: register,
+      registerPath: 'genre',
+      errorMessage: formErrors?.genre?.message,
     },
   ]
 
@@ -132,7 +169,7 @@ function InfoPersoEmploye() {
         <p className="text-lg text-customRed-930 uppercase mx-8 mb-3">Informations personnelles</p>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-0 px-8 w-full">
           {inputs.map((input, index) => (
-            <InputWithLabel key={index} {...input} />
+            <InputWithLabel register={register} key={index} {...input} />
           ))}
         </div>
       </div>
