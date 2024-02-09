@@ -82,7 +82,7 @@ const formEmployeSchema: z.ZodType<IEmploye> = z.object({
     .optional(),
   titre_poste: z.string(),
   matricule: z.string(),
-  categorie: z.string(),
+  categorie: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
   date_embauche: z.string(),
   departement: z.string(),
   lieu_travail: z.string(),
@@ -110,7 +110,7 @@ const formEmployeSchema: z.ZodType<IEmploye> = z.object({
       motif: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
     })
     .optional(),
-  actif: z.enum([EnumBoolean.OUI, EnumBoolean.NON]),
+  actif: z.enum([EnumBoolean.OUI, EnumBoolean.NON]).optional(),
   indemnites: z
     .object({
       transport: z.number(),

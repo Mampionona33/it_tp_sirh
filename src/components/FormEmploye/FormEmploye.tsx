@@ -144,8 +144,8 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             >
               <InfoPersoEmploye register={register} formErrors={formErrors && formErrors} />
               <InfoPersoEnfantEmploye />
-              <InfoPro />
-              <InformationPaie />
+              <InfoPro register={register} formErrors={formErrors && formErrors} />
+              <InformationPaie register={register} formErrors={formErrors && formErrors} />
               {/* <PrimeEtAvantageParMois /> */}
               <FormEmployeGroupButton />
             </form>
