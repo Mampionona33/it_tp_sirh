@@ -50,7 +50,7 @@ function TableListeEmploye({ actions }: { actions?: React.FC[] }): JSX.Element {
   }
   const columnHelper = createColumnHelper<IDataWithActions>()
 
-  const cols = useMemo<ColumnDef<IDataWithActions>[]>(
+  const cols = useMemo<ColumnDef<IDataWithActions, any>[]>(
     () => [
       columnHelper.accessor('matricule', {
         cell: (info) => info.getValue(),
