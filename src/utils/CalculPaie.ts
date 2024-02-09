@@ -42,7 +42,17 @@ class CalculPaie {
   private rappel: number
   private totalPrimeEtGratification: number
   private totalAvantages: number
-  constructor(salaireDeBase) {
+  constructor(salaireDeBase: number) {
+    this.est_cadre = false
+    this.totalHDim = 0
+    this.hsi130 = 0
+    this.hsi150 = 0
+    this.hsni150 = 0
+    this.hsni130 = 0
+    this.totalHs50 = 0
+    this.totalHs30 = 0
+    this.totalHFerie = 0
+    this.salaireNetAPayer = 0
     this.plafondSME = 1910400
     this.tauxHoraire = 0
     this.valHsni130 = 0
@@ -364,7 +374,7 @@ class CalculPaie {
     return this.baseCnaps
   }
 
-  setCnaps(cnaps): void {
+  setCnaps(cnaps: number): void {
     this.cnaps = cnaps
   }
   private isSalaireBrutSupPlfondSME(): boolean {
@@ -399,7 +409,7 @@ class CalculPaie {
     this.recalculateSalaieBrut()
     this.osie = this.roundToTwoDecimal(this.salaireBrut * this.tauxOsie)
   }
-  setOsie(osie): void {
+  setOsie(osie: number): void {
     this.osie = osie
   }
   getOsie(): number {
@@ -450,7 +460,7 @@ class CalculPaie {
     return this.baseIrsaArrondi >= 500001 && this.baseIrsaArrondi <= 600000
   }
   private calculateIrsaAPayer(): void {
-    if (this.isTranche_1) {
+    if (this.isTranche_1()) {
       this.irsaAPayer = (this.baseIrsaArrondi - 350000) * 0.05
     } else if (this.isTranche_2()) {
       this.irsaAPayer = 50000 * 0.05 + (this.baseIrsaArrondi - 400001) * 0.1
@@ -500,10 +510,10 @@ class CalculPaie {
   }
 
   //   UTILITYES
-  private roundToTwoDecimal(val) {
+  private roundToTwoDecimal(val: number) {
     return Math.round(val * 100) / 100
   }
-  private arrondirNombreDecimales(nombre, decimales) {
+  private arrondirNombreDecimales(nombre: number, decimales: number) {
     const facteur = Math.pow(10, decimales)
     return Math.round(nombre * facteur) / facteur
   }
@@ -548,50 +558,6 @@ class CalculPaie {
     this.updateReduxStore()
   }
 }
-
-// const totalHn = calculHeuresEmploye.getTotalHnormale()
-// const totalHs = calculHeuresEmploye.getTotalHsDuMois()
-// const totalHs130 = calculHeuresEmploye.getTotalHs130()
-// const totalHs150 = calculHeuresEmploye.getTotalHs150()
-// const totalHs30 = calculHeuresEmploye.getTotalTravailDeNuit30()
-// const totalHs50 = calculHeuresEmploye.getTotalTravailDeNuit50()
-// const totalHDim = calculHeuresEmploye.getTotalHdim()
-// const hsni130 = calculHeuresEmploye.getHsni130()
-// const hsni150 = calculHeuresEmploye.getHsni150()
-// const hsi130 = calculHeuresEmploye.getHsi130()
-// const hsi150 = calculHeuresEmploye.getHsi150()
-// const totalHFerie = calculHeuresEmploye.getTotalHFerie()
-
-// const salaireBase = store.getState().bulletinDePaie.salaireDeBase
-// const totalIndemnite = store.getState().bulletinDePaie.totalIndemnite
-
-// const calculPaie = new CalculPaie(salaireBase)
-// calculPaie.setHsni130(hsni130)
-// calculPaie.setTotalIndemnite(totalIndemnite)
-// calculPaie.setHsni150(hsni150)
-// calculPaie.setHsi130(hsi130)
-// calculPaie.setHsi150(hsi150)
-// calculPaie.setTotalHs30(totalHs30)
-// calculPaie.setTotalHs50(totalHs50)
-// calculPaie.setTotalHDim(totalHDim)
-// calculPaie.setTotalHFerie(totalHFerie)
-
-// const cnaps = calculPaie.getCnaps()
-// const osie = calculPaie.getOsie()
-// const valHsni130 = calculPaie.getValHsni130()
-// const valHsni150 = calculPaie.getValHsni150()
-// const valHsi130 = calculPaie.getValHsi130()
-// const valHsi150 = calculPaie.getValHsi150()
-// const valHs30 = calculPaie.getValHs30()
-// const valHs50 = calculPaie.getValHs50()
-// const valHdim = calculPaie.getValHdim()
-// const valHFerie = calculPaie.getValHFerie()
-// const salaireBrut = calculPaie.getSalaireBrut()
-// const baseIrsa = calculPaie.getBaseIrsa()
-// const baseIrsaArrondi = calculPaie.getBaseIrsaArrondi()
-// const irsaAPayer = calculPaie.getIrsaAPayer()
-// const salaireNet = calculPaie.getSalaireNet()
-// const salaireNetAPayer = calculPaie.getSalaireNetAPayer()
 
 const appStore = store
 
