@@ -89,7 +89,7 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
 
   const updatePage = useCallback(
     (tablePage: number) => {
-      goToPage(tablePage - 1)
+      goToPage!(tablePage - 1)
       updateUrl(tablePage, selectedPageSize)
     },
     [goToPage, updateUrl, selectedPageSize],
