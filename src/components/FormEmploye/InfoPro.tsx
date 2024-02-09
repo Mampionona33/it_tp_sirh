@@ -58,6 +58,7 @@ const InfoPro = ({ register, formErrors }: IInfoProPros) => {
 
   const handleCategorieChange = (selectedOption: IInputWithLabelOptionsProps) => {
     dispatch(setFormEmploye({ ...formEmploye, categorie: selectedOption.value }))
+    return selectedOption.value
   }
 
   const radioOption: IInputWithLabelOptionsProps[] = [

@@ -8,7 +8,7 @@ import {
   Merge,
   UseFormRegister,
 } from 'react-hook-form'
-import Select, { StylesConfig } from 'react-select'
+import Select, { InputActionMeta, StylesConfig } from 'react-select'
 
 export interface IInputWithLabelProps extends React.HTMLProps<HTMLInputElement> {
   id: string
@@ -141,9 +141,18 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
     },
   }
 
-  const handleSelectChange = (selectedOption: { label: string; value: string } | undefined) => {
-    if (onSelectChange) {
-      onSelectChange(selectedOption)
+  // const handleSelectChange = (inputValue: string, { action, prevInputValue }: InputActionMeta) => {
+  //   if (action === 'input-change') {
+  //     return prevInputValue
+  //   }
+  // }
+
+  const handleSelectChange = (
+    newValue: string,
+    actionMeta: ActionMeta<IInputWithLabelOptionsProps>,
+  ) => {
+    if (action === 'input-change') {
+      return prevInputValue
     }
   }
 
@@ -154,10 +163,6 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
       setFocused(false)
     }
   }, [value])
-
-  // if (register && registerPath) {
-  //   console.log({ ...register(registerPath) })
-  // }
 
   return (
     <div className="flex flex-col mb-2">
@@ -217,7 +222,6 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
               options={options as { label: string; value: string }[]}
               // @ts-expect-error : next-line
               value={options.find((opt: { label: string; value: string }) => opt.value === value)}
-              // @ts-expect-error : next-line
               onChange={handleSelectChange}
               onFocus={handleFocused}
               styles={customSelectStyles}
