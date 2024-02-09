@@ -1,159 +1,221 @@
-import React, { useCallback, useEffect } from 'react'
-import InfoPersoEmploye from './InfoPersoEmploye'
-import InfoPersoEnfantEmploye from './InfoPersoEnfantEmploye'
-import InfoPro from './InfoPro'
-import InformationPaie from './InformationPaie'
-import FormEmployeGroupButton from './FormEmployeGroupButton'
-import FormResiliationContrat from './FormResiliationContrat/FormResiliationContrat'
-import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
-import { resetFormEmploye, setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
-import { useNavigate } from 'react-router-dom'
-import Loading from '../loadings/Loading'
-import { CAlert } from '@coreui/react'
-import useFetchSalarie from '@src/hooks/useFetchSalarie'
-import useMutateSalarie from '@src/hooks/useMutateSalarie'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import formEmployeSchema from '@src/schema/formEmployeSchema'
-import { IEmploye } from '@src/interfaces/interfaceEmploye'
+import React, { useState } from 'react'
+import InputWithFloatingLabel from '../Inputs/InputFloatingLabel'
+import { CCard, CCardBody } from '@coreui/react'
+import ButtonWithIcon from '../buttons/ButtonWithIcon'
+import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import Select from 'react-select'
+import { ICardEnfantEmployeProps } from '@src/interfaces/interfaceCardEnfantEmploye'
 
 interface IFormEmploye {
   id?: string | number
 }
 
+const classeInput: string =
+  'border-b border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1 text-sm'
+const classeCardBody: string =
+  'grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3 px-8 w-full'
+const classeCardTitle = 'mx-3 mb-0 mt-3 uppercase text-customRed-930 text-base'
+const classeCard: string = 'rounded-sm pb-3 px-3'
+
+const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, onDelete }) => {
+  const handleDelete = () => {
+    onDelete(index)
+  }
+  return (
+    <>
+      <div className="max-w-full border border-slate-300 rounded-sm m-3 relative ">
+        <ButtonWithIcon
+          className="absolute h-[20px] right-0 top-0"
+          onClick={handleDelete}
+          icon={<XMarkIcon width={18} height={18} />}
+        ></ButtonWithIcon>
+        <div className="grid mx-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3 p-3">
+          <InputWithFloatingLabel
+            label="Nom"
+            required
+            placeholder="Nom"
+            name="nom"
+            id={`nom_enfant_${index}`}
+            className={classeInput}
+          />
+          <InputWithFloatingLabel
+            label="Prènom"
+            required
+            placeholder="Prènom"
+            name="prenom"
+            id={`prenom_enfant_${index}`}
+            className={classeInput}
+          />
+          <InputWithFloatingLabel
+            label="Lieu de naissance"
+            required
+            placeholder="Lieu de naissance"
+            name="lieu_naissance"
+            id={`lieu_naissance_${index}`}
+            className={classeInput}
+          />
+          <InputWithFloatingLabel
+            label="Date de naissance"
+            type="date"
+            required
+            name="date_naissance"
+            id={`date_naissance_${index}`}
+            placeholder="Date de naissance"
+            className={classeInput}
+          />
+          <fieldset className="border border-solid border-gray-300 p-3">
+            <legend className="text-sm">Genre</legend>
+            <div className="flex gap-1 flex-col">
+              <label
+                htmlFor={`genre_enfant_m_${index}`}
+                className="flex gap-3 align-middle text-sm"
+              >
+                <input
+                  type="radio"
+                  name="genre_enfant"
+                  id={`genre_enfant_m_${index}`}
+                  value="MASCULIN"
+                  className="w-3 h-3 text-sm"
+                />
+                Masculin
+              </label>
+              <label
+                htmlFor={`genre_enfant_f_${index}`}
+                className="flex gap-3 align-middle text-sm"
+              >
+                <input
+                  type="radio"
+                  name="genre_enfant"
+                  id={`genre_enfant_f_${index}`}
+                  value="FEMININ"
+                  className="w-3 h-3 text-sm"
+                />
+                Féminin
+              </label>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    </>
+  )
+}
+
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
-  const dispatch = useAppDispatch()
-  const [notification, setNotification] = React.useState({
-    type: '',
-    message: '',
-  })
+  const [enfants, setEnfants] = useState<JSX.Element[]>([])
 
-  const formEmploye = useAppSelector((state) => state.formEmploye)
-
-  const {
-    mutateAsync: mutateSalarie,
-    isError: isErrorMutateSalarie,
-    error: errorMutateSalarie,
-    isSuccess: isSuccessMutateSalarie,
-    isIdle: isIdleMutateSalarie,
-    isPaused: isPausedMutateSalarie,
-  } = useMutateSalarie()
-
-  const {
-    data: salarie,
-    isError: errorFetchSalarie,
-    error: errorsFetchSalarie,
-    isLoading: isLoadingSalarie,
-  } = useFetchSalarie(id)
-
-  const isEmployeExist = useCallback((): boolean => {
-    return formEmploye.id !== null
-  }, [formEmploye.id])
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors: formErrors },
-    setError,
-  } = useForm<IEmploye>({ resolver: zodResolver(formEmployeSchema) })
-
-  const submitForm = async (): Promise<void> => {
-    console.log('formEmploye', formEmploye)
-    const requestData = {
-      ...formEmploye,
-      salaire_de_base: parseFloat(String(formEmploye.salaire_de_base)),
-    }
-
-    await mutateSalarie({ id, data: requestData })
+  const handleDeleteEnfant = (index: number) => {
+    const updatedEnfants = enfants.filter((_, i) => i !== index)
+    setEnfants(updatedEnfants)
   }
 
-  const handleMutationSuccess = useCallback(() => {
-    if (isSuccessMutateSalarie) {
-      if (isEmployeExist()) {
-        setNotification({
-          type: 'success',
-          message: 'Employe modifie avec succes',
-        })
-      } else {
-        dispatch(resetFormEmploye())
-        setNotification({
-          type: 'success',
-          message: 'Employe ajoute avec succes',
-        })
-      }
-    }
-  }, [dispatch, isEmployeExist, isSuccessMutateSalarie])
-
-  const handleMutationError = useCallback(() => {
-    if (isErrorMutateSalarie) {
-      if (isEmployeExist()) {
-        setNotification({
-          type: 'danger',
-          message: 'Une erreur est survenue lors de la modification',
-        })
-      } else {
-        setNotification({
-          type: 'danger',
-          message: 'Une erreur est survenue lors de la creation',
-        })
-      }
-    }
-  }, [isErrorMutateSalarie, setNotification, isEmployeExist])
-
-  useEffect(() => {
-    if (isSuccessMutateSalarie || isErrorMutateSalarie) {
-      handleMutationSuccess()
-      handleMutationError()
-    }
-  }, [isSuccessMutateSalarie, isErrorMutateSalarie, handleMutationSuccess, handleMutationError])
-
-  useEffect(() => {
-    console.log(formEmploye)
-  }, [formEmploye])
-
-  useEffect(() => {
-    if (salarie) {
-      dispatch(setFormEmploye(salarie))
-    }
-  }, [salarie, dispatch])
-
-  if (isLoadingSalarie) {
-    return <Loading />
-  }
-
-  if (errorFetchSalarie) {
-    return <CAlert color="danger">Erreur lors de la recuperation du donnée salarie</CAlert>
-  }
-
-  if (isIdleMutateSalarie) {
-    if (isErrorMutateSalarie) {
-      return <CAlert color="danger">Erreur lors de la creation/modification</CAlert>
-    }
+  const addEnfant = () => {
+    const newEnfant = (
+      <CardEnfantEmploye
+        key={enfants.length}
+        index={enfants.length}
+        onDelete={handleDeleteEnfant}
+      />
+    )
+    setEnfants([...enfants, newEnfant])
   }
 
   return (
-    <>
-      <div>
-        <>
-          <div className="bg-white flex flex-col">
-            <form
-              action=""
-              onSubmit={handleSubmit(async () => {
-                await submitForm()
-              })}
-            >
-              <InfoPersoEmploye register={register} formErrors={formErrors && formErrors} />
-              <InfoPersoEnfantEmploye />
-              <InfoPro register={register} formErrors={formErrors && formErrors} />
-              <InformationPaie register={register} formErrors={formErrors && formErrors} />
-              {/* <PrimeEtAvantageParMois /> */}
-              <FormEmployeGroupButton />
-            </form>
-            {formEmploye && formEmploye.id && <FormResiliationContrat />}
+    <div>
+      <form action="" method="post" className="flex gap-3 flex-col">
+        <CCard className={classeCard}>
+          <h2 className={classeCardTitle}>Information personnelles</h2>
+          <CCardBody className={classeCardBody}>
+            <InputWithFloatingLabel
+              label="Nom employé"
+              required
+              placeholder="Nom"
+              name="nom"
+              id="nom"
+              className={classeInput}
+            />
+            <InputWithFloatingLabel
+              label="Prénom employé"
+              required
+              name="prenom"
+              id="prenom"
+              placeholder="Prénom employé"
+              className={classeInput}
+            />
+            <InputWithFloatingLabel
+              label="Adresse"
+              required
+              name="adresse"
+              id="adresse"
+              placeholder="Adresse"
+              className={classeInput}
+            />
+            <InputWithFloatingLabel
+              label="Date de naissance"
+              type="date"
+              required
+              name="date_naissance"
+              id="date_naissance"
+              placeholder="Date de naissance"
+              className={classeInput}
+            />
+            <InputWithFloatingLabel
+              label="Lieu de naissance"
+              required
+              name="lieu_naissance"
+              id="lieu_naissance"
+              placeholder="Lieu de naissance"
+              className={classeInput}
+            />
+            <InputWithFloatingLabel
+              label="N° CIN"
+              required
+              name="num_cin"
+              id="num_cin"
+              placeholder="N° CIN: 000 000 000 000"
+              className={classeInput}
+            />
+            <InputWithFloatingLabel
+              label="Date de delivrance CIN"
+              type="date"
+              required
+              name="date_delivrance_cin"
+              id="date_delivrance_cin"
+              placeholder="Date de delivrance CIN"
+              className={classeInput}
+            />
+            <InputWithFloatingLabel
+              label="Nom du père"
+              name="nom_pere"
+              id="nom_pere"
+              placeholder="Nom du père"
+              className={classeInput}
+            />
+            <InputWithFloatingLabel
+              label="Nom de la mère"
+              name="nom_mere"
+              id="nom_mere"
+              placeholder="Nom de la mère"
+              className={classeInput}
+            />
+          </CCardBody>
+        </CCard>
+
+        <CCard className={classeCard}>
+          <div className="flex flex-col gap-2">
+            <h2 className={classeCardTitle}>Enfants</h2>
+            <div className="mx-3">
+              <ButtonWithIcon
+                type="button"
+                label="Ajouter un enfant"
+                icon={<PlusIcon width={18} height={18} />}
+                onClick={addEnfant}
+              />
+            </div>
           </div>
-        </>
-      </div>
-    </>
+          <div className="flex flex-col gap-3">{enfants}</div>
+        </CCard>
+      </form>
+    </div>
   )
 }
 
