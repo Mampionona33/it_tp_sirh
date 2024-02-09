@@ -25,6 +25,7 @@ const Fiche: React.FC = () => {
   }, [listEmploye])
 
   const isValidID = useCallback((): boolean => {
+    if (!listEmploye) return false
     if (id && isListEmployeExist()) {
       return listEmploye.some((item) => String(item.id) === String(id))
     }
@@ -32,7 +33,8 @@ const Fiche: React.FC = () => {
   }, [id, isListEmployeExist, listEmploye])
 
   const selectedEmploye =
-    isListEmployeExist() && listEmploye.filter((employe) => employe.id === parseInt(id, 10))[0]
+    isListEmployeExist() &&
+    listEmploye!.filter((employe) => employe.id === parseInt(String(id), 10))[0]
 
   const formatErrorMessage = useErrorFormatter()
 
