@@ -6,3 +6,8 @@ export interface IDataTableEmploye {
   tableTitle?: string
   headerComponents: React.ReactNode[] | React.ReactElement
 }
+
+export interface IDataWithActions extends IEmploye {
+  fullName?: string
+  actions?: React.FC[]
+}

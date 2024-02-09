@@ -1,23 +1,25 @@
 import React, { useMemo } from 'react'
 import {
+  ColumnDef,
   createColumnHelper,
   getCoreRowModel,
   getFilteredRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { IDataTableEmploye } from './interfaceDataTableEmploy'
+import { IDataTableEmploye, IDataWithActions } from './interfaceDataTableEmploy'
 
 import { DebounceInput } from 'react-debounce-input'
+import { IEmploye } from '@src/interfaces/interfaceEmploye'
 
 interface ActionComponentProps {
   rowId: any
 }
 // test
 const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, headerComponents }) => {
-  const columnHelper = createColumnHelper()
+  const columnHelper = createColumnHelper<IDataWithActions>()
   const [globalFilter, setGlobalFilter] = React.useState('')
 
-  const columns = useMemo(
+  const columns = useMemo<ColumnDef<IDataWithActions, any>[]>(
     () => [
       columnHelper.accessor('id', {
         cell: (info) => {
