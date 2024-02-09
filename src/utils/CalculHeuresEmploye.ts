@@ -103,7 +103,7 @@ class CalculHeuresEmploye {
   // }
   private calculateHsParSemaine(): void {
     // this.sorteHeuresMonsuelEmploye()
-    let currentWeekStartDate = null
+    let currentWeekStartDate = new Date()
     let hsParSemaine: number = 0
 
     this.heuresMonsuelEmploye.forEach((item, index) => {
