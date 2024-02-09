@@ -8,7 +8,7 @@ const useAddEmployeDns = () => {
     mutationFn: (employeeData: IBulletinDePaieProps) => dnsService.add({ data: employeeData }),
   })
 
-  const addEmployeeDns = async (employeeData) => {
+  const addEmployeeDns = async (employeeData: IBulletinDePaieProps) => {
     await mutate(employeeData)
   }
 
