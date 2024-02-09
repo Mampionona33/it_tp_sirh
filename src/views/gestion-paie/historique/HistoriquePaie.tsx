@@ -112,13 +112,18 @@ const HistoriquePaie = () => {
     const currentYear = new Date().getFullYear()
     const selectedYear = new Date(String(anneeSectionne)).getFullYear()
 
-    const getEmptyRow = (month: number): IHistoriquePaieDataProps => ({
-      mois: format(new Date(Number(selectedYear), month - 1, 1), 'MMMM', { locale: fr }),
-      salarie_id: id,
-      annee: selectedYear,
-      matricule: selectedEmploye!.matricule,
-      validation_status: EnumBoolean.NON,
-    })
+    const getEmptyRow = (month: number): IHistoriquePaieDataProps => {
+      // Check if selectedEmploye is not null before accessing its properties
+      const matricule = selectedEmploye?.matricule || ''
+
+      return {
+        mois: format(new Date(Number(selectedYear), month - 1, 1), 'MMMM', { locale: fr }),
+        salarie_id: id,
+        annee: selectedYear,
+        matricule: matricule,
+        validation_status: EnumBoolean.NON,
+      }
+    }
 
     const mergeWithHistoricalData = (row: IHistoriquePaieDataProps) => {
       if (historiques) {
