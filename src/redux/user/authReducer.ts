@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { loggedUser } from './authActions'
 import { AxiosError } from 'axios'
+import { authReducerProps } from '@src/interfaces/interfaceAuthReducer'
 
-const initialState = {
+const initialState: authReducerProps = {
   isAuthenticated: false,
   user: null,
   loading: 'idle',
@@ -44,12 +45,12 @@ const authSlice = createSlice({
       })
       .addCase(loggedUser.pending, (state) => {
         state.isAuthenticated = false
-        state.loading = 'pending'
+        state.loading = 'loading'
       })
       .addCase(loggedUser.rejected, (state, action) => {
         state.loading = 'failed'
         state.isAuthenticated = false
-        state.error = action.error
+        state.error = action.error as AxiosError
       })
   },
 })

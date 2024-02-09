@@ -42,10 +42,10 @@ const HistoriquePaie = () => {
   }, [anneeSectionne])
 
   const {
-    historiques,
+    data: historiques,
     isLoading,
     refetch: refetchHistorique,
-    errors,
+    error,
     isError,
   } = useFetchHistorique(id as string, anneeSectionneNumber)
 
@@ -70,7 +70,7 @@ const HistoriquePaie = () => {
         } as IHistoriquePaieProps),
       )
     }
-    if (errors) {
+    if (error) {
       dispatch(
         setHistoriqueDePaie({
           historiques: [],
@@ -80,7 +80,7 @@ const HistoriquePaie = () => {
         }),
       )
     }
-  }, [dispatch, historiques, anneeSectionne, errors])
+  }, [dispatch, historiques, anneeSectionne, error])
 
   useEffect(() => {
     dispatch(resetBulletinDePaie())
