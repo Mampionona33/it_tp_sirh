@@ -25,7 +25,6 @@ class DnsService {
         },
       })
 
-      console.log(this.resp.data)
       return this.resp
     } catch (error) {
       // console.log(error, typeof error)
