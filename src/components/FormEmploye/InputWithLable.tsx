@@ -147,14 +147,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
   //   }
   // }
 
-  const handleSelectChange = (
-    newValue: string,
-    actionMeta: ActionMeta<IInputWithLabelOptionsProps>,
-  ) => {
-    if (action === 'input-change') {
-      return prevInputValue
-    }
-  }
+  const handleSelectChange = () => {}
 
   React.useEffect(() => {
     if (value) {
@@ -222,6 +215,7 @@ const InputWithLabel: React.FC<IInputWithLabelProps> = ({
               options={options as { label: string; value: string }[]}
               // @ts-expect-error : next-line
               value={options.find((opt: { label: string; value: string }) => opt.value === value)}
+              // @ts-expect-error: next-line
               onChange={handleSelectChange}
               onFocus={handleFocused}
               styles={customSelectStyles}
