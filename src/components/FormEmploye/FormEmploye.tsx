@@ -14,6 +14,7 @@ import {
   formEmployeSupprimerEnfant,
 } from '@src/redux/FormEmploye/formEmployeReducer'
 import { ICardInfoPersoEmploye } from '@src/interfaces/interfaceCardInfoPersoEmploye'
+import SelectFloatingLable from '../Inputs/SelectFloatingLable'
 
 interface IFormEmploye {
   id?: string | number
@@ -34,6 +35,7 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
   }
 
   const idNom = uuidV4()
+  const certificat = uuidV4()
   const idPrenom = uuidV4()
   const idDateNaissance = uuidV4()
   const idLieuNaissance = uuidV4()
@@ -82,10 +84,11 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
           placeholder="Date de naissance"
           className={classeInput}
         />
+        <SelectFloatingLable required label="Certificat" id={certificat} placeholder="Certificat" />
         <fieldset id={idGenre} className="border border-solid border-gray-300 p-3">
           <legend className="text-sm">Genre</legend>
           <div className="flex gap-1 flex-col">
-            <label htmlFor={idGenreMasculin} className="flex gap-3 align-middle text-sm">
+            <label htmlFor={idGenreMasculin} className="flex gap-3 items-middle text-sm">
               <input
                 type="radio"
                 name="genre_enfant"
@@ -93,9 +96,9 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
                 value="MASCULIN"
                 className="w-3 h-3 text-sm"
               />
-              Masculin
+              <span>Masculin</span>
             </label>
-            <label htmlFor={idGenreFeminin} className="flex gap-3 align-middle text-sm">
+            <label htmlFor={idGenreFeminin} className="flex gap-3 items-middle text-sm">
               <input
                 type="radio"
                 name="genre_enfant"
@@ -103,7 +106,7 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
                 value="FEMININ"
                 className="w-3 h-3 text-sm"
               />
-              Féminin
+              <span>Féminin</span>
             </label>
           </div>
         </fieldset>
@@ -189,8 +192,165 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
           placeholder="Nom de la mère"
           className={classeInput}
         />
+        <fieldset id="genre" className="border border-solid border-gray-300 p-3">
+          <legend className="text-sm">Genre</legend>
+          <div className="flex gap-1 flex-col">
+            <label htmlFor="genre_masculin" className="flex gap-3 items-middle text-sm">
+              <input
+                type="radio"
+                name="genre_enfant"
+                id="genre_masculin"
+                value="MASCULIN"
+                className="w-3 h-3 text-sm"
+              />
+              <span>Masculin</span>
+            </label>
+            <label htmlFor="genre_feminin" className="flex gap-3 items-middle text-sm">
+              <input
+                type="radio"
+                name="genre_feminin"
+                id="genre_feminin"
+                value="FEMININ"
+                className="w-3 h-3 text-sm"
+              />
+              <span>Féminin</span>
+            </label>
+          </div>
+        </fieldset>
       </CCardBody>
     </CCard>
+  )
+}
+
+const CardInfoPro: React.FC = () => {
+  return (
+    <>
+      <CCard className={classeCard}>
+        <h2 className={classeCardTitle}>Information professionnelles</h2>
+        <CCardBody className={classeCardBody}>
+          <InputWithFloatingLabel
+            label="Matricule"
+            required
+            placeholder="Matricule"
+            name="matricule"
+            id="matricule"
+            className={classeInput}
+          />{' '}
+          <InputWithFloatingLabel
+            label="Titre du poste"
+            required
+            placeholder="Titre du poste"
+            name="titre_poste"
+            id="titre_poste"
+            className={classeInput}
+          />
+          <SelectFloatingLable label="Catégorie" placeholder="Categorie" required />
+          <InputWithFloatingLabel
+            label="Département"
+            required
+            placeholder="Département"
+            name="departement"
+            id="departement"
+            className={classeInput}
+          />
+          <InputWithFloatingLabel
+            label="Date d'embauche"
+            type="date"
+            required
+            placeholder="Département"
+            name="date_embauche"
+            id="date_embauche"
+            className={classeInput}
+          />
+          <InputWithFloatingLabel
+            label="Lieu de travail"
+            required
+            placeholder="Lieu de travail"
+            name="lieu_travail"
+            id="lieu_travail"
+            className={classeInput}
+          />
+          <InputWithFloatingLabel
+            label="Telephone"
+            placeholder="Telephone"
+            name="telephone"
+            id="telephone"
+            className={classeInput}
+          />
+          <InputWithFloatingLabel
+            label="Email"
+            type="email"
+            placeholder="Email: employe@example.com"
+            name="email"
+            id="email"
+            className={classeInput}
+          />
+          <fieldset id="travail_de_nuit" className="border border-solid border-gray-300 p-3">
+            <legend className="text-sm">Travail de nuit</legend>
+            <div className="flex gap-1 flex-col">
+              <label htmlFor="travail_de_nuit_oui" className="flex items-center gap-3 text-sm">
+                <input
+                  type="radio"
+                  name="travail_de_nuit"
+                  id="travail_de_nuit_oui"
+                  value="OUI"
+                  className="w-3 h-3 text-sm"
+                />
+                <span>Oui</span>
+              </label>
+
+              <label htmlFor="travail_de_nuit_non" className="flex gap-3 items-center text-sm">
+                <input
+                  type="radio"
+                  name="travail_de_nuit"
+                  id="travail_de_nuit_non"
+                  value="NON"
+                  className="w-3 h-3 text-sm text-center"
+                />
+                <span>Non</span>
+              </label>
+            </div>
+          </fieldset>
+        </CCardBody>
+      </CCard>
+    </>
+  )
+}
+
+const CardInfoPaieEmploye: React.FC = () => {
+  return (
+    <>
+      <CCard className={classeCard}>
+        <h2 className={classeCardTitle}>Information de paie</h2>
+        <CCardBody className={classeCardBody}>
+          <InputWithFloatingLabel
+            label="Salaire de base"
+            type="number"
+            min={0}
+            required
+            placeholder="Salaire de base"
+            name="salaire_de_base"
+            id="salaire_de_base"
+            className={classeInput}
+          />
+          <InputWithFloatingLabel
+            label="RIB"
+            placeholder="RIB: 00000 00000 00000000000 00"
+            name="rib"
+            id="rib"
+            className={classeInput}
+          />
+          <InputWithFloatingLabel
+            label="Numero CNAPS"
+            placeholder="Numero CNAPS"
+            name="num_cnaps"
+            id="num_cnaps"
+            className={classeInput}
+          />
+          <SelectFloatingLable required label="Mode de paiement" placeholder="Mode de paiement" />
+        </CCardBody>
+      </CCard>
+    </>
   )
 }
 
@@ -245,7 +405,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             genre,
           }}
         />
-
         <CCard className={classeCard}>
           <div className="flex flex-col gap-2">
             <h2 className={classeCardTitle}>Enfants</h2>
@@ -259,12 +418,14 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col">
             {enfant?.map((enfant, index) => (
               <CardEnfantEmploye key={index} index={index} data={enfant} />
             ))}
           </div>
         </CCard>
+        <CardInfoPro />
+        <CardInfoPaieEmploye />
       </form>
     </div>
   )
