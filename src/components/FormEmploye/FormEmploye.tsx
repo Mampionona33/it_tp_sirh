@@ -6,7 +6,12 @@ import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { v4 as uuidV4 } from 'uuid'
 import { ICardEnfantEmployeProps } from '@src/interfaces/interfaceCardEnfantEmploye'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
-import { EnumCertificatEnfant, EnumGenre, IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
+import {
+  EnumBoolean,
+  EnumCertificatEnfant,
+  EnumGenre,
+  IEnfantEmploye,
+} from '@src/interfaces/interfaceEmploye'
 import { useDispatch } from 'react-redux'
 import {
   formEmployeAjoutEnfant,
@@ -16,6 +21,7 @@ import {
 import { ICardInfoPersoEmploye } from '@src/interfaces/interfaceCardInfoPersoEmploye'
 import SelectFloatingLable from '../Inputs/SelectFloatingLable'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
+import { ICardInfoProEmployeProps } from '@src/interfaces/interfaceCardInfoProEmploye'
 
 interface IFormEmploye {
   id?: string | number
@@ -251,7 +257,25 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
   )
 }
 
-const CardInfoPro: React.FC = () => {
+const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({ data }) => {
+  const {
+    matricule,
+    titre_poste,
+    departement,
+    date_embauche,
+    lieu_travail,
+    telephone,
+    email,
+    travail_de_nuit,
+    categorie,
+  } = data
+
+  const dispatch = useDispatch()
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, id } = event.target
+    dispatch(setFormEmploye({ [name]: value }))
+  }
+
   return (
     <>
       <CCard className={classeCard}>
@@ -262,9 +286,11 @@ const CardInfoPro: React.FC = () => {
             required
             placeholder="Matricule"
             name="matricule"
+            value={matricule}
             id="matricule"
             className={classeInput}
-          />{' '}
+            onChange={handleInputChange}
+          />
           <InputWithFloatingLabel
             label="Titre du poste"
             required
@@ -272,6 +298,8 @@ const CardInfoPro: React.FC = () => {
             name="titre_poste"
             id="titre_poste"
             className={classeInput}
+            value={titre_poste}
+            onChange={handleInputChange}
           />
           <SelectFloatingLable label="Catégorie" placeholder="Categorie" required />
           <InputWithFloatingLabel
@@ -281,6 +309,8 @@ const CardInfoPro: React.FC = () => {
             name="departement"
             id="departement"
             className={classeInput}
+            value={departement}
+            onChange={handleInputChange}
           />
           <InputWithFloatingLabel
             label="Date d'embauche"
@@ -290,6 +320,8 @@ const CardInfoPro: React.FC = () => {
             name="date_embauche"
             id="date_embauche"
             className={classeInput}
+            value={date_embauche}
+            onChange={handleInputChange}
           />
           <InputWithFloatingLabel
             label="Lieu de travail"
@@ -298,6 +330,8 @@ const CardInfoPro: React.FC = () => {
             name="lieu_travail"
             id="lieu_travail"
             className={classeInput}
+            value={lieu_travail}
+            onChange={handleInputChange}
           />
           <InputWithFloatingLabel
             label="Telephone"
@@ -305,6 +339,8 @@ const CardInfoPro: React.FC = () => {
             name="telephone"
             id="telephone"
             className={classeInput}
+            value={telephone}
+            onChange={handleInputChange}
           />
           <InputWithFloatingLabel
             label="Email"
@@ -313,6 +349,8 @@ const CardInfoPro: React.FC = () => {
             name="email"
             id="email"
             className={classeInput}
+            value={email}
+            onChange={handleInputChange}
           />
           <fieldset id="travail_de_nuit" className="border border-solid border-gray-300 p-3">
             <legend className="text-sm">Travail de nuit</legend>
@@ -322,8 +360,9 @@ const CardInfoPro: React.FC = () => {
                   type="radio"
                   name="travail_de_nuit"
                   id="travail_de_nuit_oui"
-                  value="OUI"
                   className="w-3 h-3 text-sm"
+                  value={travail_de_nuit === EnumBoolean.OUI ? EnumBoolean.OUI : EnumBoolean.NON}
+                  onChange={handleInputChange}
                 />
                 <span>Oui</span>
               </label>
@@ -333,8 +372,9 @@ const CardInfoPro: React.FC = () => {
                   type="radio"
                   name="travail_de_nuit"
                   id="travail_de_nuit_non"
-                  value="NON"
                   className="w-3 h-3 text-sm text-center"
+                  value={travail_de_nuit === EnumBoolean.NON ? EnumBoolean.NON : EnumBoolean.OUI}
+                  onChange={handleInputChange}
                 />
                 <span>Non</span>
               </label>
@@ -439,6 +479,15 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     adresse,
     genre,
     date_delivrance_cin,
+    travail_de_nuit,
+    matricule,
+    date_embauche,
+    departement,
+    titre_poste,
+    categorie,
+    lieu_travail,
+    telephone,
+    email,
   } = useAppSelector((state) => state.formEmploye)
   const dispatch = useDispatch()
 
@@ -498,7 +547,19 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             ))}
           </div>
         </CCard>
-        <CardInfoPro />
+        <CardInfoProEmploye
+          data={{
+            travail_de_nuit,
+            matricule,
+            date_embauche,
+            departement,
+            titre_poste,
+            categorie,
+            lieu_travail,
+            telephone,
+            email,
+          }}
+        />
         <CardInfoPaieEmploye />
         <CCard>
           <FormEmployeGroupButton />
