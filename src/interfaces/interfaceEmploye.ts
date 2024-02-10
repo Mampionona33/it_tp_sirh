@@ -61,7 +61,7 @@ export interface Conjoint {
 }
 
 export interface IEnfantEmploye {
-  id: number
+  id: number | string
   nom: string
   prenom: string
   date_naissance: string

@@ -1,4 +1,6 @@
+import { IEnfantEmploye } from './interfaceEmploye'
+
 export interface ICardEnfantEmployeProps {
-  index: number
-  onDelete: (index: number) => void
+  index: number | string
+  data: IEnfantEmploye
 }

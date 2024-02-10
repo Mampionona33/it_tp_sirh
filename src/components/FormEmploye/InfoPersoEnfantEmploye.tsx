@@ -236,8 +236,8 @@ const InfoPersoEnfantEmploye: React.FC = () => {
         {formEmploye.enfant!.map((enfant, index) => (
           <div key={index} className="flex border-y border-y-customBlue-200 gap-y-2 my-2 shadow-sm">
             <FormEnfants
-              index={enfant.id}
-              handleClose={(event, index) => handleCloseEnfant(event, enfant.id)}
+              index={Number(enfant.id)}
+              handleClose={(event, index) => handleCloseEnfant(event, Number(enfant.id))}
             />
           </div>
         ))}

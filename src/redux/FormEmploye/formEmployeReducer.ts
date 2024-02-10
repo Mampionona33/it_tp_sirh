@@ -49,6 +49,7 @@ const formEmployeSlice = createSlice({
     },
     formEmployeSupprimerEnfant: (state, action) => {
       if (!state.enfant) state.enfant = []
+      console.log(action.payload)
       state.enfant = state.enfant.filter((enfant: IEnfantEmploye) => enfant.id !== action.payload)
     },
   },
