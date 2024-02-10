@@ -15,7 +15,6 @@ import {
 import { ICardInfoPersoEmploye } from '@src/interfaces/interfaceCardInfoPersoEmploye'
 import SelectFloatingLable from '../Inputs/SelectFloatingLable'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
-import { QueryClient } from '@tanstack/react-query'
 
 interface IFormEmploye {
   id?: string | number
