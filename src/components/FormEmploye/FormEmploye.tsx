@@ -31,7 +31,6 @@ const classeCard: string = 'rounded-sm pb-3 px-3'
 const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
   const dispatch = useDispatch()
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault()
     const { name, value, id } = event.target
     dispatch(setFormEmploye({ [name]: value }))
   }
@@ -136,20 +135,24 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
             <label htmlFor="genre_masculin" className="flex gap-3 items-center text-sm">
               <input
                 type="radio"
-                name="genre_enfant"
+                name="genre"
                 id="genre_masculin"
-                value="MASCULIN"
+                value={EnumGenre.MASCULIN}
+                checked={data?.genre === EnumGenre.MASCULIN}
                 className="w-3 h-3 text-sm"
+                onChange={handleInputChange}
               />
               <span>Masculin</span>
             </label>
             <label htmlFor="genre_feminin" className="flex gap-3 items-center text-sm">
               <input
                 type="radio"
-                name="genre_feminin"
+                name="genre"
                 id="genre_feminin"
-                value="FEMININ"
+                checked={data?.genre === EnumGenre.FEMININ}
+                value={EnumGenre.FEMININ}
                 className="w-3 h-3 text-sm"
+                onChange={handleInputChange}
               />
               <span>Féminin</span>
             </label>

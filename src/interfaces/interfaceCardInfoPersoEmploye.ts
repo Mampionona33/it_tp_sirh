@@ -1,10 +1,12 @@
+import { EnumGenre } from './interfaceEmploye'
+
 export interface ICardInfoPersoEmploye {
   data: {
     nom: string
     prenom: string
     date_naissance: string
     lieu_naissance: string
-    genre: string
+    genre: EnumGenre
     num_cin: string
     nom_pere?: string
     nom_mere?: string
