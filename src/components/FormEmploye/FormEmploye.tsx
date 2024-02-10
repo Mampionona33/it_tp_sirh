@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import InputWithFloatingLabel from '../Inputs/InputFloatingLabel'
 import { CCard, CCardBody } from '@coreui/react'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import Select from 'react-select'
 import { v4 as uuidV4 } from 'uuid'
 import { ICardEnfantEmployeProps } from '@src/interfaces/interfaceCardEnfantEmploye'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
@@ -16,7 +15,6 @@ import {
 import { ICardInfoPersoEmploye } from '@src/interfaces/interfaceCardInfoPersoEmploye'
 import SelectFloatingLable from '../Inputs/SelectFloatingLable'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
-import { CardBody } from 'react-bootstrap'
 
 interface IFormEmploye {
   id?: string | number
@@ -90,21 +88,21 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
         <fieldset id={idGenre} className="border border-solid border-gray-300 p-3">
           <legend className="text-sm">Genre</legend>
           <div className="flex gap-1 flex-col">
-            <label htmlFor={idGenreMasculin} className="flex gap-3 items-middle text-sm">
+            <label htmlFor="genre_masculin" className="flex gap-3 items-center text-sm">
               <input
                 type="radio"
-                name="genre_enfant"
-                id={idGenreMasculin}
+                name="genre"
+                id="genre_masculin"
                 value="MASCULIN"
                 className="w-3 h-3 text-sm"
               />
               <span>Masculin</span>
             </label>
-            <label htmlFor={idGenreFeminin} className="flex gap-3 items-middle text-sm">
+            <label htmlFor="genre_feminin" className="flex gap-3 items-center text-sm">
               <input
                 type="radio"
-                name="genre_enfant"
-                id={idGenreFeminin}
+                name="genre"
+                id="genre_feminin"
                 value="FEMININ"
                 className="w-3 h-3 text-sm"
               />
@@ -197,7 +195,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
         <fieldset id="genre" className="border border-solid border-gray-300 p-3">
           <legend className="text-sm">Genre</legend>
           <div className="flex gap-1 flex-col">
-            <label htmlFor="genre_masculin" className="flex gap-3 items-middle text-sm">
+            <label htmlFor="genre_masculin" className="flex gap-3 items-center text-sm">
               <input
                 type="radio"
                 name="genre_enfant"
@@ -207,7 +205,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
               />
               <span>Masculin</span>
             </label>
-            <label htmlFor="genre_feminin" className="flex gap-3 items-middle text-sm">
+            <label htmlFor="genre_feminin" className="flex gap-3 items-center text-sm">
               <input
                 type="radio"
                 name="genre_feminin"
