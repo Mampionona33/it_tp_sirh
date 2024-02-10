@@ -9,5 +9,6 @@ export interface ICardInfoPersoEmploye {
     nom_pere?: string
     nom_mere?: string
     adresse: string
+    date_delivrance_cin: string
   }
 }

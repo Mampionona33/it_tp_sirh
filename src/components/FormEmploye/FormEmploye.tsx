@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import {
   formEmployeAjoutEnfant,
   formEmployeSupprimerEnfant,
+  setFormEmploye,
 } from '@src/redux/FormEmploye/formEmployeReducer'
 import { ICardInfoPersoEmploye } from '@src/interfaces/interfaceCardInfoPersoEmploye'
 import SelectFloatingLable from '../Inputs/SelectFloatingLable'
@@ -28,6 +29,13 @@ const classeCardTitle = 'mx-3 mb-0 mt-3 uppercase text-customRed-930 text-base'
 const classeCard: string = 'rounded-sm pb-3 px-3'
 
 const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
+  const dispatch = useDispatch()
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    event.preventDefault()
+    const { name, value, id } = event.target
+    dispatch(setFormEmploye({ [name]: value }))
+  }
+
   return (
     <CCard className={classeCard}>
       <h2 className={classeCardTitle}>Information personnelles</h2>
@@ -39,6 +47,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
           name="nom"
           id="nom"
           className={classeInput}
+          value={data?.nom}
+          onChange={handleInputChange}
         />
         <InputWithFloatingLabel
           label="Prénom employé"
@@ -47,6 +57,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
           id="prenom"
           placeholder="Prénom employé"
           className={classeInput}
+          value={data?.prenom}
+          onChange={handleInputChange}
         />
         <InputWithFloatingLabel
           label="Adresse"
@@ -55,6 +67,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
           id="adresse"
           placeholder="Adresse"
           className={classeInput}
+          value={data?.adresse}
+          onChange={handleInputChange}
         />
         <InputWithFloatingLabel
           label="Date de naissance"
@@ -64,6 +78,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
           id="date_naissance"
           placeholder="Date de naissance"
           className={classeInput}
+          value={data?.date_naissance}
+          onChange={handleInputChange}
         />
         <InputWithFloatingLabel
           label="Lieu de naissance"
@@ -72,6 +88,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
           id="lieu_naissance"
           placeholder="Lieu de naissance"
           className={classeInput}
+          value={data?.lieu_naissance}
+          onChange={handleInputChange}
         />
         <InputWithFloatingLabel
           label="N° CIN"
@@ -80,6 +98,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
           id="num_cin"
           placeholder="N° CIN: 000 000 000 000"
           className={classeInput}
+          value={data?.num_cin}
+          onChange={handleInputChange}
         />
         <InputWithFloatingLabel
           label="Date de delivrance CIN"
@@ -89,6 +109,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
           id="date_delivrance_cin"
           placeholder="Date de delivrance CIN"
           className={classeInput}
+          value={data?.date_delivrance_cin}
+          onChange={handleInputChange}
         />
         <InputWithFloatingLabel
           label="Nom du père"
@@ -96,6 +118,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
           id="nom_pere"
           placeholder="Nom du père"
           className={classeInput}
+          value={data?.nom_pere}
+          onChange={handleInputChange}
         />
         <InputWithFloatingLabel
           label="Nom de la mère"
@@ -103,6 +127,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
           id="nom_mere"
           placeholder="Nom de la mère"
           className={classeInput}
+          value={data?.nom_mere}
+          onChange={handleInputChange}
         />
         <fieldset id="genre" className="border border-solid border-gray-300 p-3">
           <legend className="text-sm">Genre</legend>
@@ -409,6 +435,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     nom_mere,
     adresse,
     genre,
+    date_delivrance_cin,
   } = useAppSelector((state) => state.formEmploye)
   const dispatch = useDispatch()
 
@@ -446,6 +473,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             nom_mere,
             adresse,
             genre,
+            date_delivrance_cin,
           }}
         />
         <CCard className={classeCard}>
