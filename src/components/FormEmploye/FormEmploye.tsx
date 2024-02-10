@@ -15,6 +15,8 @@ import {
 } from '@src/redux/FormEmploye/formEmployeReducer'
 import { ICardInfoPersoEmploye } from '@src/interfaces/interfaceCardInfoPersoEmploye'
 import SelectFloatingLable from '../Inputs/SelectFloatingLable'
+import FormEmployeGroupButton from './FormEmployeGroupButton'
+import { CardBody } from 'react-bootstrap'
 
 interface IFormEmploye {
   id?: string | number
@@ -426,6 +428,9 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         </CCard>
         <CardInfoPro />
         <CardInfoPaieEmploye />
+        <CCard>
+          <FormEmployeGroupButton />
+        </CCard>
       </form>
     </div>
   )
