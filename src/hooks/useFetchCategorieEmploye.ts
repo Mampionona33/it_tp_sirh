@@ -7,7 +7,7 @@ const useFetchCategorieEmploye = () => {
     queryFn: async () => {
       try {
         const response = await categorieEmployeService.getAll()
-        return response
+        return response?.data
       } catch (error) {
         throw error
       }

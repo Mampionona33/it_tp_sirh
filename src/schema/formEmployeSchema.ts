@@ -82,7 +82,13 @@ const formEmployeSchema: z.ZodType<IEmploye> = z.object({
     .optional(),
   titre_poste: z.string(),
   matricule: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
-  categorie: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+  categorie: z
+    .object({
+      id: z.number() || z.string().optional(),
+      label: z.string().min(1, { message: 'Le champ doit contenir au moins 1 caractère' }),
+      value: z.string().min(1, { message: 'Le champ doit contenir au moins 1 caractère' }),
+    })
+    .optional(),
   date_embauche: z.string(),
   departement: z.string(),
   lieu_travail: z.string(),

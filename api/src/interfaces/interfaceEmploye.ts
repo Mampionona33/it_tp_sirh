@@ -17,7 +17,7 @@ export interface IEmploye {
   enfant?: IEnfantEmploye[]
   titre_poste: string
   matricule: string
-  categorie: string
+  categorie: IInputWithLabelOptionsProps
   date_embauche: string
   departement: string
   lieu_travail: string
@@ -84,6 +84,7 @@ export enum EnumGenre {
 }
 
 export interface IInputWithLabelOptionsProps {
+  id?: string | number
   label: string | number
   value: string | number
 }

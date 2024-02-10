@@ -1,11 +1,12 @@
 import React from 'react'
 import InputWithFloatingLabel from '../Inputs/InputFloatingLabel'
-import { CCard, CCardBody, CCardFooter, CCardText } from '@coreui/react'
+import { CAlert, CCard, CCardBody, CCardFooter, CCardText } from '@coreui/react'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { v4 as uuidV4 } from 'uuid'
 import { ICardEnfantEmployeProps } from '@src/interfaces/interfaceCardEnfantEmploye'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
+import { InputActionMeta, SelectOptionActionMeta, SetValueAction } from 'react-select'
 import {
   EnumBoolean,
   EnumCertificatEnfant,
@@ -22,6 +23,8 @@ import { ICardInfoPersoEmploye } from '@src/interfaces/interfaceCardInfoPersoEmp
 import SelectFloatingLable from '../Inputs/SelectFloatingLable'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
 import { ICardInfoProEmployeProps } from '@src/interfaces/interfaceCardInfoProEmploye'
+import useFetchCategorieEmploye from '@src/hooks/useFetchCategorieEmploye'
+import { IInputWithLabelOptionsProps } from './InputWithLable'
 
 interface IFormEmploye {
   id?: string | number
@@ -271,9 +274,27 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({ data }) => {
   } = data
 
   const dispatch = useDispatch()
+
+  const {
+    data: categories,
+    isError: isErrorCategorieEmploye,
+    error,
+    isLoading: isLoadingCategorieEmploye,
+  } = useFetchCategorieEmploye()
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value, id } = event.target
+    const { name, value } = event.target
     dispatch(setFormEmploye({ [name]: value }))
+  }
+
+  const handleSelectChange = (newValue: string, action: SetValueAction) => {
+    if (action === 'select-option') {
+      dispatch(setFormEmploye({ categorie: newValue }))
+    }
+  }
+
+  if (isErrorCategorieEmploye) {
+    return <CAlert color="danger">{(error as Error).message}</CAlert>
   }
 
   return (
@@ -301,7 +322,16 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({ data }) => {
             value={titre_poste}
             onChange={handleInputChange}
           />
-          <SelectFloatingLable label="Catégorie" placeholder="Categorie" required />
+          <SelectFloatingLable
+            label="Catégorie"
+            placeholder="Categorie"
+            name="categorie"
+            required
+            value={categorie}
+            onChange={(e) => handleSelectChange(e as string, 'select-option')}
+            options={categories}
+            isLoading={isLoadingCategorieEmploye}
+          />
           <InputWithFloatingLabel
             label="Département"
             required

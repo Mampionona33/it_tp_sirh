@@ -1,4 +1,4 @@
-import { EnumBoolean } from './interfaceEmploye'
+import { EnumBoolean, IInputWithLabelOptionsProps } from './interfaceEmploye'
 
 export interface ICardInfoProEmployeProps {
   data: {
@@ -9,7 +9,7 @@ export interface ICardInfoProEmployeProps {
     lieu_travail: string
     telephone?: string
     email?: string
-    categorie: string
+    categorie?: IInputWithLabelOptionsProps
     travail_de_nuit: EnumBoolean
   }
 }

@@ -32,7 +32,7 @@ const initialState: IBulletinDePaieProps = {
     genre: EnumGenre.MASCULIN,
     titre_poste: '',
     matricule: '',
-    categorie: '',
+    categorie: undefined,
     date_embauche: '',
     departement: '',
     lieu_travail: '',

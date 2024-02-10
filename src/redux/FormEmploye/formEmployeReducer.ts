@@ -19,7 +19,7 @@ export const initialState: IEmploye = {
   enfant: [],
   titre_poste: '',
   matricule: '',
-  categorie: '',
+  categorie: undefined,
   date_embauche: format(new Date(), 'yyyy-MM-dd'),
   lieu_travail: '',
   salaire_de_base: 0,
