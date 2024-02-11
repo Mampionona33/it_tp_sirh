@@ -67,15 +67,17 @@ const formEmployeSchema: z.ZodType<IEmploye> = z.object({
           .string()
           .min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
         genre_enfant: z.enum([EnumGenre.MASCULIN, EnumGenre.FEMININ]),
-        certificat: z
-          .enum([
-            EnumCertificatEnfant.VIE,
-            EnumCertificatEnfant.SCOLARITE,
-            EnumCertificatEnfant.MEDICAL,
-            EnumCertificatEnfant.DECE,
+        certificat: z.object({
+          id: z.string().optional(),
+          label: z.string(),
+          value: z.enum([
             EnumCertificatEnfant.AUCUN,
-          ])
-          .optional(),
+            EnumCertificatEnfant.VIE,
+            EnumCertificatEnfant.DECE,
+            EnumCertificatEnfant.MEDICAL,
+            EnumCertificatEnfant.SCOLARITE,
+          ]),
+        }),
         action: z.enum(['ajout', 'modifier']).optional(),
       }),
     )

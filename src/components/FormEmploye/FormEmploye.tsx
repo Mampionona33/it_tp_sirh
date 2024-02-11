@@ -176,6 +176,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
 }
 
 const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) => {
+  const { enfant: listeEnfants } = useAppSelector((state) => state.formEmploye)
   const dispatch = useDispatch()
   const handleDeleteEnf = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -191,75 +192,132 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
   const idGenreFeminin = uuidV4()
   const idGenre = uuidV4()
 
+  const optionCertificat: { label: string; value: EnumCertificatEnfant }[] = [
+    { label: '---', value: EnumCertificatEnfant.AUCUN },
+    { label: 'Certificat de vie', value: EnumCertificatEnfant.VIE },
+    { label: 'Certificat de scolarité', value: EnumCertificatEnfant.SCOLARITE },
+    { label: 'Certificat de médical', value: EnumCertificatEnfant.MEDICAL },
+  ]
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+
+    const updatedEnfants = listeEnfants!.map((enfant) => {
+      if (enfant.id === data.id) {
+        return {
+          ...enfant,
+          [name]: value,
+        }
+      }
+      return enfant
+    })
+
+    dispatch(setFormEmploye({ enfant: updatedEnfants }))
+  }
+
+  const handleSelectChange = (newValue: string, action: SetValueAction) => {
+    if (action === 'select-option') {
+      const updatedEnfants = listeEnfants!.map((enfant) => {
+        if (enfant.id === data.id) {
+          return {
+            ...enfant,
+            categorie: newValue,
+          }
+        }
+        return enfant
+      })
+      dispatch(setFormEmploye({ enfant: updatedEnfants }))
+    }
+  }
+
+  console.log(data.certificat)
+
   return (
-    <div className="max-w-full border border-slate-300 rounded-sm m-3 relative ">
-      <ButtonWithIcon
-        className="absolute h-[20px] right-0 top-0"
-        onClick={handleDeleteEnf}
-        icon={<XMarkIcon width={18} height={18} />}
-      ></ButtonWithIcon>
-      <div className="grid mx-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3 p-3">
-        <InputWithFloatingLabel
-          label="Nom"
-          required
-          placeholder="Nom"
-          name="nom"
-          id={idNom}
-          className={classeInput}
-        />
-        <InputWithFloatingLabel
-          label="Prènom"
-          required
-          placeholder="Prènom"
-          name="prenom"
-          id={idPrenom}
-          className={classeInput}
-        />
-        <InputWithFloatingLabel
-          label="Lieu de naissance"
-          required
-          placeholder="Lieu de naissance"
-          name="lieu_naissance"
-          id={idLieuNaissance}
-          className={classeInput}
-        />
-        <InputWithFloatingLabel
-          label="Date de naissance"
-          type="date"
-          required
-          name="date_naissance"
-          id={idDateNaissance}
-          placeholder="Date de naissance"
-          className={classeInput}
-        />
-        <SelectFloatingLable required label="Certificat" id={certificat} placeholder="Certificat" />
-        <fieldset id={idGenre} className="border border-solid border-gray-300 p-3">
-          <legend className="text-sm">Genre</legend>
-          <div className="flex gap-1 flex-col">
-            <label htmlFor="genre_masculin" className="flex gap-3 items-center text-sm">
-              <input
-                type="radio"
-                name="genre"
-                id="genre_masculin"
-                value="MASCULIN"
-                className="w-3 h-3 text-sm"
-              />
-              <span>Masculin</span>
-            </label>
-            <label htmlFor="genre_feminin" className="flex gap-3 items-center text-sm">
-              <input
-                type="radio"
-                name="genre"
-                id="genre_feminin"
-                value="FEMININ"
-                className="w-3 h-3 text-sm"
-              />
-              <span>Féminin</span>
-            </label>
-          </div>
-        </fieldset>
+    <>
+      <div className="max-w-full border border-slate-300 rounded-sm m-3 relative ">
+        <ButtonWithIcon
+          className="absolute h-[20px] right-0 top-0"
+          onClick={handleDeleteEnf}
+          icon={<XMarkIcon width={18} height={18} />}
+        ></ButtonWithIcon>
+        <div className="grid mx-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3 p-3">
+          <InputWithFloatingLabel
+            label="Nom"
+            required
+            placeholder="Nom"
+            name="nom"
+            id={idNom}
+            className={classeInput}
+            value={data.nom}
+            onChange={handleInputChange}
+          />
+          <InputWithFloatingLabel
+            label="Prènom"
+            required
+            placeholder="Prènom"
+            name="prenom"
+            id={idPrenom}
+            className={classeInput}
+            value={data.prenom}
+            onChange={handleInputChange}
+          />
+          <InputWithFloatingLabel
+            label="Lieu de naissance"
+            required
+            placeholder="Lieu de naissance"
+            name="lieu_naissance"
+            id={idLieuNaissance}
+            className={classeInput}
+            value={data.lieu_naissance}
+            onChange={handleInputChange}
+          />
+          <InputWithFloatingLabel
+            label="Date de naissance"
+            type="date"
+            required
+            name="date_naissance"
+            id={idDateNaissance}
+            placeholder="Date de naissance"
+            className={classeInput}
+            value={data.date_naissance}
+            onChange={handleInputChange}
+          />
+          <SelectFloatingLable
+            label="Certificat"
+            placeholder="Certificat"
+            id={certificat}
+            value={data.certificat}
+            options={optionCertificat}
+            onChange={(e) => handleSelectChange(e as string, 'select-option')}
+          />
+          <fieldset id={idGenre} className="border border-solid border-gray-300 p-3">
+            <legend className="text-sm">Genre</legend>
+            <div className="flex gap-1 flex-col">
+              <label htmlFor="genre_masculin" className="flex gap-3 items-center text-sm">
+                <input
+                  type="radio"
+                  name="genre"
+                  id="genre_masculin"
+                  value="MASCULIN"
+                  className="w-3 h-3 text-sm"
+                />
+                <span>Masculin</span>
+              </label>
+              <label htmlFor="genre_feminin" className="flex gap-3 items-center text-sm">
+                <input
+                  type="radio"
+                  name="genre"
+                  id="genre_feminin"
+                  value="FEMININ"
+                  className="w-3 h-3 text-sm"
+                />
+                <span>Féminin</span>
+              </label>
+            </div>
+          </fieldset>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
@@ -594,7 +652,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
       prenom: '',
       date_naissance: '',
       lieu_naissance: '',
-      certificat: EnumCertificatEnfant.AUCUN,
+      certificat: undefined,
       genre_enfant: EnumGenre.MASCULIN,
       action: 'ajout',
     }
@@ -637,9 +695,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           </div>
 
           <div className="flex flex-col">
-            {enfant?.map((enfant, index) => (
-              <CardEnfantEmploye key={index} index={index} data={enfant} />
-            ))}
+            {enfant &&
+              enfant.map((enfant, index) => (
+                <CardEnfantEmploye key={index} index={index} data={enfant} />
+              ))}
           </div>
         </CCard>
         <CardInfoProEmploye

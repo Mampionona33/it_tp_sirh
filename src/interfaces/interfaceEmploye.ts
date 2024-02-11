@@ -67,8 +67,12 @@ export interface IEnfantEmploye {
   date_naissance: string
   lieu_naissance: string
   genre_enfant: EnumGenre
-  certificat?: EnumCertificatEnfant
+  certificat?: CertificatEnfantProps
   action?: 'ajout' | 'modifier'
+}
+
+export interface CertificatEnfantProps extends IInputWithLabelOptionsProps {
+  value: EnumCertificatEnfant
 }
 
 export enum EnumCertificatEnfant {

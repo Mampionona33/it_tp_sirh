@@ -393,11 +393,19 @@ class CalculPaie_v2 {
         const dateNaissance = parse(enfant.date_naissance, 'yyyy-MM-dd', new Date())
         const age = differenceInYears(new Date(), dateNaissance)
 
-        if (enfant.certificat === EnumCertificatEnfant.VIE && age < 6) {
+        if (enfant.certificat?.value === EnumCertificatEnfant.VIE && age < 6) {
           nombreEnfantEligible++
-        } else if (enfant.certificat === EnumCertificatEnfant.SCOLARITE && age >= 6 && age <= 21) {
+        } else if (
+          enfant.certificat?.value === EnumCertificatEnfant.SCOLARITE &&
+          age >= 6 &&
+          age <= 21
+        ) {
           nombreEnfantEligible++
-        } else if (enfant.certificat === EnumCertificatEnfant.MEDICAL && age > 6 && age <= 21) {
+        } else if (
+          enfant.certificat?.value === EnumCertificatEnfant.MEDICAL &&
+          age > 6 &&
+          age <= 21
+        ) {
           nombreEnfantEligible++
         }
       }

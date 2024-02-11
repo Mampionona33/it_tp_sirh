@@ -37,7 +37,11 @@ const FormEnfants: React.FC<IFormEnfantsProps> = ({ index, handleClose }) => {
       date_naissance: '',
       lieu_naissance: '',
       genre_enfant: EnumGenre.MASCULIN,
-      certificat: EnumCertificatEnfant.AUCUN,
+      certificat: {
+        id: index,
+        value: EnumCertificatEnfant.AUCUN,
+        label: '',
+      },
     }
   }, [index])
 
