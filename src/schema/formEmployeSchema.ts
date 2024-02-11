@@ -6,10 +6,12 @@ import {
 } from '@src/interfaces/interfaceEmploye'
 import { z } from 'zod'
 
-export interface IFormEmployeSchema extends Omit<IEmploye, 'categorie' | 'matricule' | 'conjoint'> {
+export interface IFormEmployeSchema
+  extends Omit<IEmploye, 'categorie' | 'matricule' | 'conjoint' | 'salaire_de_base'> {
   categorie?: string
   matricule: string
   conjoint?: Conjoint
+  salaire_de_base: string
 }
 
 interface Conjoint {
@@ -45,17 +47,27 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
   nom_mere: z.string().optional(),
 
   telephone: z
-    .string()
-    .regex(/^$|^\+?\d+$/, { message: 'Veuillez renseigner un numéro de téléphone valide' }),
+    .union([
+      z.string().regex(/^$|^[-+()\s\d]+$/, {
+        message: 'Veuillez renseigner un numéro de numéro valide',
+      }),
+      z.literal(''),
+    ])
+    .optional(),
 
-  email: z.string().email({ message: 'Veuillez renseigner une adresse email valide' }).optional(),
+  email: z
+    .union([
+      z.string().email({ message: 'Veuillez renseigner une adresse email valide' }),
+      z.literal(''),
+    ])
+    .optional(),
 
   num_cin: z
     .string()
     .refine((value) => value.length === 15, {
       message: 'Veuillez renseigner un numéro de carte d’identité valide',
     })
-    .refine((value) => /^\d+$/.test(value), {
+    .refine((value) => /^\d+(\s\d+)*$/.test(value), {
       message: 'Ce champ accepte uniquement des chiffres',
     })
     .refine((value) => /^\d{3}\s?\d{3}\s?\d{3}\s?\d{3}$/.test(value), {
@@ -150,7 +162,9 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
 
   travail_de_nuit: z.enum([EnumBoolean.OUI, EnumBoolean.NON]),
 
-  salaire_de_base: z.number(),
+  salaire_de_base: z.string().regex(/^[1-9]\d*$/, {
+    message: 'Veuillez renseigner un salaire valide',
+  }),
 
   rib: z
     .string()
