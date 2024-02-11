@@ -6,31 +6,64 @@ import {
 } from '@src/interfaces/interfaceEmploye'
 import { z } from 'zod'
 
-export interface IFormEmployeSchema extends Omit<IEmploye, 'categorie'> {
+export interface IFormEmployeSchema extends Omit<IEmploye, 'categorie' | 'matricule' | 'conjoint'> {
   categorie?: string
+  matricule: string
+  conjoint?: Conjoint
+}
+
+interface Conjoint {
+  nom: string
+  prenom: string
+  date_naissance: string
+  tel?: string
 }
 
 const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
   id: z.string(),
-  nom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
-  prenom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+
+  nom: z.string().min(2, { message: 'Le champ nom doit contenir au moins 2 caractères' }),
+
+  prenom: z.string().min(2, { message: 'Le champ prénom doit contenir au moins 2 caractères' }),
+
   date_naissance: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' }),
 
-  lieu_naissance: z.string().min(3, { message: 'Le champ doit contenir au moins 3 caractères' }),
+  lieu_naissance: z
+    .string()
+    .min(3, { message: 'Le champ lieu de naissance doit contenir au moins 3 caractères' }),
+
   date_delivrance_cin: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' }),
-  adresse: z.string().min(3, { message: 'Le champ doit contenir au moins 3 caractères' }),
+
+  adresse: z.string().min(3, { message: 'Le champ addresse doit contenir au moins 3 caractères' }),
+
   nom_pere: z.string().optional(),
+
   nom_mere: z.string().optional(),
-  telephone: z.string().optional(),
-  email: z.string().email().optional(),
+
+  telephone: z
+    .string()
+    .regex(/^$|^\+?\d+$/, { message: 'Veuillez renseigner un numéro de téléphone valide' }),
+
+  email: z.string().email({ message: 'Veuillez renseigner une adresse email valide' }).optional(),
+
   num_cin: z
     .string()
-    .regex(/^\d{3} \d{3} \d{3} \d{3}$/, { message: 'Veuillez suivre le format 000 000 000 000' }),
+    .refine((value) => value.length === 15, {
+      message: 'Veuillez renseigner un numéro de carte d’identité valide',
+    })
+    .refine((value) => /^\d+$/.test(value), {
+      message: 'Ce champ accepte uniquement des chiffres',
+    })
+    .refine((value) => /^\d{3}\s?\d{3}\s?\d{3}\s?\d{3}$/.test(value), {
+      message: 'Veuillez suivre le format 000 000 000 000',
+    }),
+
   genre: z.enum([EnumGenre.MASCULIN, EnumGenre.FEMININ]),
+
   contact_urgence: z
     .array(
       z.object({
@@ -40,24 +73,36 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
       }),
     )
     .optional(),
+
   conjoint: z
     .object({
-      nom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
-      prenom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+      nom: z.string().min(2, { message: 'Le champ nom doit contenir au moins 2 caractères' }),
+
+      prenom: z.string().min(2, { message: 'Le champ prénom doit contenir au moins 2 caractères' }),
+
       date_naissance: z
         .string()
         .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' }),
+
       lieu_naissance: z
         .string()
         .min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+
       adresse: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+
       num_cin: z.string().regex(/^\d{3} \d{3} \d{3} \d{3}$/, {
         message: 'Veuillez suivre le format 000 000 000 000',
       }),
-      tel: z.string(),
+
+      tel: z
+        .string()
+        .regex(/^\+?\d{10}$/, { message: 'Veuillez renseigner un numéro de téléphone valide' })
+        .optional(),
+
       email: z.string().email(),
     })
     .optional(),
+
   enfant: z
     .array(
       z.object({
@@ -86,21 +131,48 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
       }),
     )
     .optional(),
-  titre_poste: z.string(),
-  matricule: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+
+  titre_poste: z.string().min(2, { message: 'Le champ poste doit contenir au moins 2 caractères' }),
+
+  matricule: z
+    .string()
+    .min(2, { message: 'Le champ matricule doit contenir au moins 2 caractères' }),
+
   categorie: z.string(),
+
   date_embauche: z.string(),
+
   departement: z.string(),
+
   lieu_travail: z.string(),
+
   est_cadre: z.enum([EnumBoolean.OUI, EnumBoolean.NON]).optional(),
+
   travail_de_nuit: z.enum([EnumBoolean.OUI, EnumBoolean.NON]),
+
   salaire_de_base: z.number(),
-  rib: z.string().regex(/^\d{5} \d{5} \d{11} \d{2}$/, {
-    message: 'Veuillez suivre le format 00000 00000 00000000000 00',
-  }),
-  mode_paiement_salaire: z.string(),
+
+  rib: z
+    .string()
+    .refine((value) => value.length === 26, {
+      message: 'Veuillez renseigner un num de rib valide',
+    })
+    .refine((value) => /^\d+$/.test(value), {
+      message: 'Ce champ accepte uniquement des chiffres',
+    })
+    .refine((value) => /^\d{5} \d{5} \d{11} \d{2}$/.test(value), {
+      message: 'Veuillez suivre le format 00000 00000 00000000000 00',
+    })
+    .optional(),
+
+  mode_paiement_salaire: z
+    .string()
+    .min(2, { message: 'Le champ mode de paiment doit contenir au moins 2 caractères' }),
+
   num_cnaps: z.string().optional(),
+
   num_osie: z.string().optional(),
+
   prime_et_avantage_permanent: z
     .array(
       z.object({
@@ -110,13 +182,16 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
       }),
     )
     .optional(),
+
   depart: z
     .object({
       date: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
       motif: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
     })
     .optional(),
+
   actif: z.enum([EnumBoolean.OUI, EnumBoolean.NON]).optional(),
+
   indemnites: z
     .object({
       transport: z.number(),
