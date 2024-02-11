@@ -26,6 +26,8 @@ import { ICardInfoProEmployeProps } from '@src/interfaces/interfaceCardInfoProEm
 import useFetchCategorieEmploye from '@src/hooks/useFetchCategorieEmploye'
 import { ICardInfoPaieEmployeProps } from '@src/interfaces/interfaceCardInfoPaieEmploye'
 import useFetchListModeDePayement from '@src/hooks/useFetchListModeDePayement'
+import { ICardResiliationContratProps } from '@src/interfaces/interfaceCardResiliationContrat'
+import { format } from 'date-fns'
 
 interface IFormEmploye {
   id?: string | number
@@ -497,9 +499,21 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({ data }) => {
   )
 }
 
-const CardResiliationContrat: React.FC = () => {
+const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({ data }) => {
+  const { depart } = data
+  const dispatch = useDispatch()
+  const handleTexteAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { name, value } = event.target
+    dispatch(setFormEmploye({ depart: { ...depart, [name]: value } }))
+  }
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const dateDepart = new Date()
+    dispatch(setFormEmploye({ depart: { ...depart, date: format(dateDepart, 'yyyy-MM-dd') } }))
+  }
+
   return (
-    <form action="">
+    <form action="" onSubmit={handleSubmit}>
       <CCard>
         <h2 className={classeCardTitle}>Résiliation du contrat</h2>
         <CCardBody className="p-3 flex flex-col gap-3">
@@ -530,6 +544,8 @@ const CardResiliationContrat: React.FC = () => {
             placeholder="Motif de la resiliation du contrat"
             required
             className="border outline-customRed-930 text-sm p-1"
+            value={data.depart?.motif}
+            onChange={handleTexteAreaChange}
           ></textarea>
         </CCardBody>
         <CCardFooter className="flex justify-end">
@@ -566,6 +582,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     mode_paiement_salaire,
     rib,
     num_cnaps,
+    depart,
   } = useAppSelector((state) => state.formEmploye)
   const dispatch = useDispatch()
 
@@ -643,7 +660,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           <FormEmployeGroupButton />
         </CCard>
       </form>
-      <CardResiliationContrat />
+      <CardResiliationContrat data={{ depart }} />
     </div>
   )
 }
