@@ -489,6 +489,7 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
   const handleSelectChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
       dispatch(setFormEmploye({ categorie: newValue }))
+      catOnChange(newValue, action)
     }
   }
 
@@ -545,14 +546,14 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               placeholder="Categorie"
               {...refCategorie}
               required
-              value={categorieValue}
-              onChange={(e) => catOnChange(e as string, 'select-option')}
+              value={categorie ? categorie : categorieValue}
+              onChange={(e) => handleSelectChange(e as string, 'select-option')}
+              options={categories}
+              isLoading={isLoadingCategorieEmploye}
               // name="categorie"
               // {...register('categorie')}
               // value={categorie}
               // onChange={(e) => handleSelectChange(e as string, 'select-option')}
-              options={categories}
-              isLoading={isLoadingCategorieEmploye}
             />
             {formEmployeValidationError.categorie && (
               <span className="text-red-500 text-sm">
