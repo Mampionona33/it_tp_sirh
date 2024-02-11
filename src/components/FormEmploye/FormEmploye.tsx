@@ -29,7 +29,7 @@ import { ICardInfoPaieEmployeProps } from '@src/interfaces/interfaceCardInfoPaie
 import useFetchListModeDePayement from '@src/hooks/useFetchListModeDePayement'
 import { ICardResiliationContratProps } from '@src/interfaces/interfaceCardResiliationContrat'
 import { format } from 'date-fns'
-import { useForm } from 'react-hook-form'
+import { useController, useForm } from 'react-hook-form'
 import formEmployeSchema from '@src/schema/formEmployeSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -454,6 +454,7 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
   data,
   register,
   formEmployeValidationError,
+  control,
 }) => {
   const {
     matricule,
@@ -468,6 +469,10 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
   } = data
 
   const dispatch = useDispatch()
+
+  const {
+    field: { value: categorieValue, onChange: catOnChange, ...refCategorie },
+  } = useController({ name: 'categorie', control: control })
 
   const {
     data: categories,
@@ -538,11 +543,14 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
             <SelectFloatingLable
               label="Catégorie"
               placeholder="Categorie"
-              // name="categorie"
-              {...register('categorie')}
+              {...refCategorie}
               required
-              value={categorie}
-              onChange={(e) => handleSelectChange(e as string, 'select-option')}
+              value={categorieValue}
+              onChange={(e) => catOnChange(e as string, 'select-option')}
+              // name="categorie"
+              // {...register('categorie')}
+              // value={categorie}
+              // onChange={(e) => handleSelectChange(e as string, 'select-option')}
               options={categories}
               isLoading={isLoadingCategorieEmploye}
             />
@@ -917,6 +925,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     handleSubmit,
     watch,
     formState: { errors: formEmployeValidationError },
+    control: controlFormEmploye,
   } = useForm<IEmploye>({ resolver: zodResolver(formEmployeSchema) })
 
   if (formEmployeValidationError) {
@@ -977,6 +986,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         </CCard>
 
         <CardInfoProEmploye
+          control={controlFormEmploye}
           register={register}
           formEmployeValidationError={formEmployeValidationError}
           data={{

@@ -9,10 +9,10 @@ import { z } from 'zod'
 export interface IFormEmployeSchema
   extends Omit<
     IEmploye,
-    'id' | 'categorie' | 'matricule' | 'conjoint' | 'salaire_de_base' | 'mode_paiement_salaire'
+    'id' | 'matricule' | 'conjoint' | 'salaire_de_base' | 'mode_paiement_salaire'
   > {
   id?: string | number
-  categorie?: string
+  // categorie?: string
   matricule: string
   conjoint?: Conjoint
   salaire_de_base: string
@@ -155,7 +155,11 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
     .string()
     .min(2, { message: 'Le champ matricule doit contenir au moins 2 caractères' }),
 
-  categorie: z.string(),
+  categorie: z.object({
+    id: z.union([z.string().optional(), z.number().optional()]),
+    label: z.string(),
+    value: z.string(),
+  }),
 
   date_embauche: z.string(),
 
