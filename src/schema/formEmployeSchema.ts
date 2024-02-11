@@ -119,7 +119,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
   enfant: z
     .array(
       z.object({
-        id: z.number(),
+        id: z.union([z.string().min(1, { message: 'Le champ est obligatoire' }), z.number()]),
         nom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
         prenom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
         date_naissance: z

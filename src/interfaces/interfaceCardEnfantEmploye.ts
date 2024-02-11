@@ -1,4 +1,12 @@
-import { Control, FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import {
+  Control,
+  FieldArrayWithId,
+  FieldErrors,
+  UseFieldArrayRemove,
+  UseFieldArrayUpdate,
+  UseFormRegister,
+  UseFormSetValue,
+} from 'react-hook-form'
 import { IEmploye, IEnfantEmploye } from './interfaceEmploye'
 
 export interface ICardEnfantEmployeProps {
@@ -8,4 +16,7 @@ export interface ICardEnfantEmployeProps {
   register: UseFormRegister<IEmploye>
   control: Control<IEmploye, any, IEmploye>
   setValue: UseFormSetValue<IEmploye>
+  value: FieldArrayWithId<IEmploye, 'enfant', 'id'>
+  remove: UseFieldArrayRemove
+  update: UseFieldArrayUpdate<IEmploye, 'enfant'>
 }
