@@ -9,8 +9,9 @@ import { z } from 'zod'
 export interface IFormEmployeSchema
   extends Omit<
     IEmploye,
-    'categorie' | 'matricule' | 'conjoint' | 'salaire_de_base' | 'mode_paiement_salaire'
+    'id' | 'categorie' | 'matricule' | 'conjoint' | 'salaire_de_base' | 'mode_paiement_salaire'
   > {
+  id?: string | number
   categorie?: string
   matricule: string
   conjoint?: Conjoint
@@ -26,7 +27,7 @@ interface Conjoint {
 }
 
 const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
-  id: z.string(),
+  id: z.union([z.string().optional(), z.number().optional()]),
 
   nom: z.string().min(2, { message: 'Le champ nom doit contenir au moins 2 caractères' }),
 
@@ -183,11 +184,12 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
     })
     .optional(),
 
-  mode_paiement_salaire: z
-    .string()
-    .min(2, { message: 'Le champ mode de paiment doit contenir au moins 2 caractères' }),
+  mode_paiement_salaire: z.string(),
 
-  num_cnaps: z.string().optional(),
+  num_cnaps: z
+    .string()
+    .min(2, { message: 'Le champ doit contenir au moins 2 caractères' })
+    .optional(),
 
   num_osie: z.string().optional(),
 

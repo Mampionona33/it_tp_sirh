@@ -228,7 +228,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             <label htmlFor="genre_masculin" className="flex gap-3 items-center text-sm">
               <input
                 type="radio"
-                name="genre"
+                // name="genre"
+                {...register('genre')}
                 id="genre_masculin"
                 value={EnumGenre.MASCULIN}
                 checked={data?.genre === EnumGenre.MASCULIN}
@@ -240,7 +241,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             <label htmlFor="genre_feminin" className="flex gap-3 items-center text-sm">
               <input
                 type="radio"
-                name="genre"
+                // name="genre"
+                {...register('genre')}
                 id="genre_feminin"
                 checked={data?.genre === EnumGenre.FEMININ}
                 value={EnumGenre.FEMININ}
@@ -250,6 +252,11 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
               <span>Féminin</span>
             </label>
           </div>
+          {formEmployeValidationError.genre && (
+            <span className="text-sm text-customRed-800">
+              {formEmployeValidationError.genre.message}
+            </span>
+          )}
         </fieldset>
       </CCardBody>
     </CCard>
@@ -647,7 +654,8 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               <label htmlFor="travail_de_nuit_oui" className="flex items-center gap-3 text-sm">
                 <input
                   type="radio"
-                  name="travail_de_nuit"
+                  // name="travail_de_nuit"
+                  {...register('travail_de_nuit')}
                   id="travail_de_nuit_oui"
                   className="w-3 h-3 text-sm"
                   value={EnumBoolean.OUI}
@@ -660,7 +668,8 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               <label htmlFor="travail_de_nuit_non" className="flex gap-3 items-center text-sm">
                 <input
                   type="radio"
-                  name="travail_de_nuit"
+                  // name="travail_de_nuit"
+                  {...register('travail_de_nuit')}
                   id="travail_de_nuit_non"
                   className="w-3 h-3 text-sm text-center"
                   value={EnumBoolean.NON}
@@ -670,6 +679,11 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
                 <span>Non</span>
               </label>
             </div>
+            {formEmployeValidationError.travail_de_nuit && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.travail_de_nuit.message}
+              </span>
+            )}
           </fieldset>
         </CCardBody>
       </CCard>
@@ -774,6 +788,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
               label="Mode de paiement"
               placeholder="Mode de paiement"
               // name="mode_paiement"
+              {...register('mode_paiement_salaire')}
               options={modeDePaiement}
               value={data.mode_paiement_salaire}
               onChange={(e) => handleSelectChange(e as string, 'select-option')}
@@ -893,17 +908,21 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     dispatch(formEmployeAjoutEnfant(nouvelEnfant))
   }
 
-  const submitForm = async (event: React.MouseEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    console.log(event.target)
+  const submitForm = (data: IEmploye) => {
+    console.log(data)
   }
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors: formEmployeValidationError },
     setError,
   } = useForm<IEmploye>({ resolver: zodResolver(formEmployeSchema) })
+
+  if (formEmployeValidationError) {
+    console.log(formEmployeValidationError)
+  }
 
   return (
     <div className="flex flex-col gap-3">
@@ -911,8 +930,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         action=""
         method="post"
         className="flex gap-3 flex-col"
-        onSubmit={handleSubmit(async () => await submitForm)}
+        onSubmit={handleSubmit(submitForm)}
+        // onSubmit={submitForm}
       >
+        <input type="text" className="hidden" value={id} {...register('id')} />
         <CardInfoPersoEmploye
           register={register}
           formEmployeValidationError={formEmployeValidationError}
@@ -977,6 +998,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           data={{ salaire_de_base, mode_paiement_salaire, rib, num_cnaps }}
         />
         <CCard>
+          <pre>{JSON.stringify(watch, null, 2)}</pre>
           <FormEmployeGroupButton />
         </CCard>
       </form>
