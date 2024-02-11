@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react'
+import React, { useState, forwardRef, useEffect } from 'react'
 import Select, { StylesConfig } from 'react-select'
 import { ISelectFloatingLableProps } from '@src/interfaces/interfaceSelectFloatingLable'
 
@@ -64,6 +64,12 @@ const SelectFloatingLable: React.ForwardRefRenderFunction<
     }
     props.onBlur && props.onBlur(event)
   }
+
+  useEffect(() => {
+    if (props.value) {
+      setShowLabel(true)
+    }
+  }, [props.value])
 
   return (
     <div ref={ref} className="flex flex-col">

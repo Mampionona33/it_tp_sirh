@@ -6,7 +6,11 @@ import {
 } from '@src/interfaces/interfaceEmploye'
 import { z } from 'zod'
 
-const formEmployeSchema: z.ZodType<IEmploye> = z.object({
+export interface IFormEmployeSchema extends Omit<IEmploye, 'categorie'> {
+  categorie?: string
+}
+
+const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
   id: z.string(),
   nom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
   prenom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
@@ -84,13 +88,7 @@ const formEmployeSchema: z.ZodType<IEmploye> = z.object({
     .optional(),
   titre_poste: z.string(),
   matricule: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
-  categorie: z
-    .object({
-      id: z.number() || z.string().optional(),
-      label: z.string().min(1, { message: 'Le champ doit contenir au moins 1 caractère' }),
-      value: z.string().min(1, { message: 'Le champ doit contenir au moins 1 caractère' }),
-    })
-    .optional(),
+  categorie: z.string(),
   date_embauche: z.string(),
   departement: z.string(),
   lieu_travail: z.string(),

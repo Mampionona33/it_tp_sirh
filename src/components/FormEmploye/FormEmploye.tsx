@@ -905,8 +905,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     setError,
   } = useForm<IEmploye>({ resolver: zodResolver(formEmployeSchema) })
 
-  console.log(enfant)
-
   return (
     <div className="flex flex-col gap-3">
       <form

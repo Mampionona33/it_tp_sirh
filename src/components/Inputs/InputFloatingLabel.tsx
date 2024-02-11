@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLProps, useState, FocusEvent } from 'react'
+import React, { forwardRef, HTMLProps, useState, FocusEvent, useEffect } from 'react'
 
 interface InputProps extends HTMLProps<HTMLInputElement> {
   label: string
@@ -21,6 +21,12 @@ const InputWithFloatingLabel: React.ForwardRefRenderFunction<HTMLInputElement, I
     }
     props.onBlur && props.onBlur(event)
   }
+
+  useEffect(() => {
+    if (props.value) {
+      setShowLabel(true)
+    }
+  }, [props.value])
 
   return (
     <div className="flex flex-col">
