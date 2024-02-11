@@ -40,7 +40,7 @@ const initialState: IBulletinDePaieProps = {
     travail_de_nuit: EnumBoolean.NON,
     salaire_de_base: 0,
     rib: '',
-    mode_paiement_salaire: '',
+    mode_paiement_salaire: undefined,
     num_cnaps: '',
     num_osie: '',
     actif: EnumBoolean.OUI,

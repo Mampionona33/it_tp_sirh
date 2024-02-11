@@ -1,4 +1,4 @@
-import { Control, FieldErrors, UseFormRegister } from 'react-hook-form'
+import { Control, FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 import { IEmploye } from './interfaceEmploye'
 
 export interface ICardInfoProEmployeProps {
@@ -6,4 +6,5 @@ export interface ICardInfoProEmployeProps {
   formEmployeValidationError: FieldErrors<IEmploye>
   register: UseFormRegister<IEmploye>
   control: Control<IEmploye, any, IEmploye>
+  setValue: UseFormSetValue<IEmploye>
 }

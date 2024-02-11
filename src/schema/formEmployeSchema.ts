@@ -4,19 +4,15 @@ import {
   EnumCertificatEnfant,
   EnumBoolean,
 } from '@src/interfaces/interfaceEmploye'
+import { id } from 'date-fns/locale'
 import { z } from 'zod'
 
 export interface IFormEmployeSchema
-  extends Omit<
-    IEmploye,
-    'id' | 'matricule' | 'conjoint' | 'salaire_de_base' | 'mode_paiement_salaire'
-  > {
+  extends Omit<IEmploye, 'id' | 'matricule' | 'conjoint' | 'salaire_de_base'> {
   id?: string | number
-  // categorie?: string
   matricule: string
   conjoint?: Conjoint
   salaire_de_base: string
-  mode_paiement_salaire: string
 }
 
 interface Conjoint {
@@ -188,7 +184,11 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
     })
     .optional(),
 
-  mode_paiement_salaire: z.string(),
+  mode_paiement_salaire: z.object({
+    id: z.union([z.string().optional(), z.number().optional()]),
+    label: z.string(),
+    value: z.string(),
+  }),
 
   num_cnaps: z
     .string()

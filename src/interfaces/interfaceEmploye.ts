@@ -25,7 +25,7 @@ export interface IEmploye {
   travail_de_nuit: EnumBoolean
   salaire_de_base: number
   rib?: string
-  mode_paiement_salaire: string
+  mode_paiement_salaire?: IInputWithLabelOptionsProps
   num_cnaps?: string
   num_osie?: string
   prime_et_avantage_permanent?: PrimeEtAvantagePermanent[]

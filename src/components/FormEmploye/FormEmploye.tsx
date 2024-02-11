@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import InputWithFloatingLabel from '../Inputs/InputFloatingLabel'
 import { CAlert, CCard, CCardBody, CCardFooter, CCardText } from '@coreui/react'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
@@ -455,6 +455,7 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
   register,
   formEmployeValidationError,
   control,
+  setValue,
 }) => {
   const {
     matricule,
@@ -469,6 +470,12 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
   } = data
 
   const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    if (categorie) {
+      setValue('categorie', categorie)
+    }
+  }, [categorie, setValue])
 
   const {
     field: { value: categorieValue, onChange: catOnChange, ...refCategorie },
@@ -704,6 +711,8 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
   data,
   register,
   formEmployeValidationError,
+  contol,
+  setValue,
 }) => {
   const dispatch = useDispatch()
   const {
@@ -716,8 +725,23 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
     const { name, value } = event.target
     dispatch(setFormEmploye({ [name]: value }))
   }
+
+  React.useEffect(() => {
+    if (data.mode_paiement_salaire) {
+      setValue('mode_paiement_salaire', data.mode_paiement_salaire)
+    }
+  }, [setValue, data.mode_paiement_salaire])
+
+  const {
+    field: { value: selectedModeDePaiment, onChange: onChangeModeDePaiement, ...refModeDePaiement },
+  } = useController({
+    name: 'mode_paiement_salaire',
+    control: contol,
+  })
+
   const handleSelectChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
+      onChangeModeDePaiement(newValue, action)
       dispatch(setFormEmploye({ mode_paiement_salaire: newValue }))
     }
   }
@@ -797,8 +821,9 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
               label="Mode de paiement"
               placeholder="Mode de paiement"
               // name="mode_paiement"
-              {...register('mode_paiement_salaire')}
-              options={modeDePaiement}
+              // {...register('mode_paiement_salaire')}
+              {...refModeDePaiement}
+              options={modeDePaiement ? modeDePaiement : selectedModeDePaiment}
               value={data.mode_paiement_salaire}
               onChange={(e) => handleSelectChange(e as string, 'select-option')}
               isLoading={isLoadingModeDePaiement}
@@ -927,6 +952,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     watch,
     formState: { errors: formEmployeValidationError },
     control: controlFormEmploye,
+    setValue,
   } = useForm<IEmploye>({ resolver: zodResolver(formEmployeSchema) })
 
   if (formEmployeValidationError) {
@@ -987,6 +1013,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         </CCard>
 
         <CardInfoProEmploye
+          setValue={setValue}
           control={controlFormEmploye}
           register={register}
           formEmployeValidationError={formEmployeValidationError}
@@ -1003,6 +1030,8 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           }}
         />
         <CardInfoPaieEmploye
+          setValue={setValue}
+          contol={controlFormEmploye}
           register={register}
           formEmployeValidationError={formEmployeValidationError}
           data={{ salaire_de_base, mode_paiement_salaire, rib, num_cnaps }}
