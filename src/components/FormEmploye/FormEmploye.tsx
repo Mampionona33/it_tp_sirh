@@ -268,6 +268,8 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
   data,
   formEmployeValidationError,
   register,
+  control,
+  setValue,
 }) => {
   const { enfant: listeEnfants } = useAppSelector((state) => state.formEmploye)
   const dispatch = useDispatch()
@@ -1002,6 +1004,8 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             {enfant &&
               enfant.map((enfant, index) => (
                 <CardEnfantEmploye
+                  setValue={setValue}
+                  control={controlFormEmploye}
                   key={index}
                   index={index}
                   data={enfant}
