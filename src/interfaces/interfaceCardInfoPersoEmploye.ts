@@ -1,6 +1,9 @@
-import { EnumGenre } from './interfaceEmploye'
+import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import { EnumGenre, IEmploye } from './interfaceEmploye'
 
 export interface ICardInfoPersoEmploye {
+  register: UseFormRegister<IEmploye>
+  formEmployeValidationError: FieldErrors<IEmploye>
   data: {
     nom: string
     prenom: string

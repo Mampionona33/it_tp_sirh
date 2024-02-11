@@ -1,9 +1,9 @@
+import React, { useState, forwardRef } from 'react'
+import Select, { StylesConfig } from 'react-select'
 import { ISelectFloatingLableProps } from '@src/interfaces/interfaceSelectFloatingLable'
-import React from 'react'
-import Select from 'react-select'
 
-const customSelectStyles = {
-  control: (provided: any) => ({
+const customSelectStyles: StylesConfig = {
+  control: (provided) => ({
     ...provided,
     height: 21,
     minHeight: 21,
@@ -11,54 +11,47 @@ const customSelectStyles = {
     outline: 'none',
     borderBottom: '1px solid #D6111E',
   }),
-  valueContainer: (style: any) => {
-    return {
-      ...style,
-      paddingTop: 0,
-      paddingBottom: 0,
-      height: 21,
-      minHeight: 21,
-    }
-  },
-  input: (style: any) => {
-    return {
-      ...style,
-      margin: 0,
-      height: 21,
-      paddingTop: 0,
-      paddingBottom: 0,
-      minHeight: 21,
-      fontSize: '0.875rem',
-    }
-  },
-  singleValue: (style: any) => {
-    return {
-      ...style,
-      fontSize: '0.875rem',
-    }
-  },
-  placeholder: (style: any) => {
-    return {
-      ...style,
-      fontSize: '0.875rem',
-    }
-  },
-  menu: (style: any) => ({
-    ...style,
+  valueContainer: (provided) => ({
+    ...provided,
+    paddingTop: 0,
+    paddingBottom: 0,
+    height: 21,
+    minHeight: 21,
+  }),
+  input: (provided) => ({
+    ...provided,
+    margin: 0,
+    height: 21,
+    paddingTop: 0,
+    paddingBottom: 0,
+    minHeight: 21,
     fontSize: '0.875rem',
   }),
-  indicatorsContainer: (style: any) => {
-    return {
-      ...style,
-      fontSize: '0.875rem',
-      height: 21,
-      minHeight: 21,
-    }
-  },
+  singleValue: (provided) => ({
+    ...provided,
+    fontSize: '0.875rem',
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    fontSize: '0.875rem',
+  }),
+  menu: (provided) => ({
+    ...provided,
+    fontSize: '0.875rem',
+  }),
+  indicatorsContainer: (provided) => ({
+    ...provided,
+    fontSize: '0.875rem',
+    height: 21,
+    minHeight: 21,
+  }),
 }
 
-const SelectFloatingLable: React.FC<ISelectFloatingLableProps> = ({ label, ...props }) => {
-  const [showLabel, setShowLabel] = React.useState(false)
+const SelectFloatingLable: React.ForwardRefRenderFunction<
+  HTMLDivElement,
+  ISelectFloatingLableProps
+> = ({ label, ...props }, ref) => {
+  const [showLabel, setShowLabel] = useState(false)
 
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     setShowLabel(true)
@@ -73,12 +66,10 @@ const SelectFloatingLable: React.FC<ISelectFloatingLableProps> = ({ label, ...pr
   }
 
   return (
-    <div className="flex flex-col">
-      {
-        <label className="text-sm h-5" htmlFor={props.id}>
-          {showLabel ? label : ''} {props.required && showLabel ? '*' : ''}
-        </label>
-      }
+    <div ref={ref} className="flex flex-col">
+      <label className="text-sm h-5" htmlFor={props.id}>
+        {showLabel ? label : ''} {props.required && showLabel ? '*' : ''}
+      </label>
       <Select
         {...props}
         id={props.id}
@@ -103,4 +94,4 @@ const SelectFloatingLable: React.FC<ISelectFloatingLableProps> = ({ label, ...pr
   )
 }
 
-export default SelectFloatingLable
+export default forwardRef(SelectFloatingLable)

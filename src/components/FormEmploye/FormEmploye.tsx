@@ -11,6 +11,7 @@ import {
   EnumBoolean,
   EnumCertificatEnfant,
   EnumGenre,
+  IEmploye,
   IEnfantEmploye,
 } from '@src/interfaces/interfaceEmploye'
 import { useDispatch } from 'react-redux'
@@ -28,6 +29,9 @@ import { ICardInfoPaieEmployeProps } from '@src/interfaces/interfaceCardInfoPaie
 import useFetchListModeDePayement from '@src/hooks/useFetchListModeDePayement'
 import { ICardResiliationContratProps } from '@src/interfaces/interfaceCardResiliationContrat'
 import { format } from 'date-fns'
+import { useForm } from 'react-hook-form'
+import formEmployeSchema from '@src/schema/formEmployeSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 interface IFormEmploye {
   id?: string | number
@@ -40,7 +44,11 @@ const classeCardBody: string =
 const classeCardTitle = 'mx-3 mb-0 mt-3 uppercase text-customRed-930 text-base'
 const classeCard: string = 'rounded-sm pb-3 px-3'
 
-const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
+const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
+  data,
+  register,
+  formEmployeValidationError,
+}) => {
   const dispatch = useDispatch()
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, id } = event.target
@@ -51,96 +59,169 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
     <CCard className={classeCard}>
       <h2 className={classeCardTitle}>Information personnelles</h2>
       <CCardBody className={classeCardBody}>
-        <InputWithFloatingLabel
-          label="Nom employé"
-          required
-          placeholder="Nom"
-          name="nom"
-          id="nom"
-          className={classeInput}
-          value={data?.nom}
-          onChange={handleInputChange}
-        />
-        <InputWithFloatingLabel
-          label="Prénom employé"
-          required
-          name="prenom"
-          id="prenom"
-          placeholder="Prénom employé"
-          className={classeInput}
-          value={data?.prenom}
-          onChange={handleInputChange}
-        />
-        <InputWithFloatingLabel
-          label="Adresse"
-          required
-          name="adresse"
-          id="adresse"
-          placeholder="Adresse"
-          className={classeInput}
-          value={data?.adresse}
-          onChange={handleInputChange}
-        />
-        <InputWithFloatingLabel
-          label="Date de naissance"
-          type="date"
-          required
-          name="date_naissance"
-          id="date_naissance"
-          placeholder="Date de naissance"
-          className={classeInput}
-          value={data?.date_naissance}
-          onChange={handleInputChange}
-        />
-        <InputWithFloatingLabel
-          label="Lieu de naissance"
-          required
-          name="lieu_naissance"
-          id="lieu_naissance"
-          placeholder="Lieu de naissance"
-          className={classeInput}
-          value={data?.lieu_naissance}
-          onChange={handleInputChange}
-        />
-        <InputWithFloatingLabel
-          label="N° CIN"
-          required
-          name="num_cin"
-          id="num_cin"
-          placeholder="N° CIN: 000 000 000 000"
-          className={classeInput}
-          value={data?.num_cin}
-          onChange={handleInputChange}
-        />
-        <InputWithFloatingLabel
-          label="Date de delivrance CIN"
-          type="date"
-          required
-          name="date_delivrance_cin"
-          id="date_delivrance_cin"
-          placeholder="Date de delivrance CIN"
-          className={classeInput}
-          value={data?.date_delivrance_cin}
-          onChange={handleInputChange}
-        />
-        <InputWithFloatingLabel
-          label="Nom du père"
-          name="nom_pere"
-          id="nom_pere"
-          placeholder="Nom du père"
-          className={classeInput}
-          value={data?.nom_pere}
-          onChange={handleInputChange}
-        />
-        <InputWithFloatingLabel
-          label="Nom de la mère"
-          name="nom_mere"
-          id="nom_mere"
-          placeholder="Nom de la mère"
-          className={classeInput}
-          value={data?.nom_mere}
-          onChange={handleInputChange}
-        />
+        <div>
+          <InputWithFloatingLabel
+            label="Nom employé"
+            required
+            placeholder="Nom"
+            id="nom"
+            className={classeInput}
+            value={data?.nom}
+            {...register('nom')}
+            onChange={handleInputChange}
+          />
+          {formEmployeValidationError.nom && (
+            <span className="text-sm text-customRed-800">
+              {formEmployeValidationError.nom.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <InputWithFloatingLabel
+            label="Prénom employé"
+            required
+            id="prenom"
+            placeholder="Prénom employé"
+            className={classeInput}
+            {...register('prenom')}
+            value={data?.prenom}
+            onChange={handleInputChange}
+          />
+          {formEmployeValidationError.prenom && (
+            <span className="text-sm text-customRed-800">
+              {formEmployeValidationError.prenom.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <InputWithFloatingLabel
+            label="Adresse"
+            required
+            id="adresse"
+            placeholder="Adresse"
+            className={classeInput}
+            value={data?.adresse}
+            {...register('adresse')}
+            onChange={handleInputChange}
+          />
+          {formEmployeValidationError.adresse && (
+            <span className="text-sm text-customRed-800">
+              {formEmployeValidationError.adresse.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <InputWithFloatingLabel
+            label="Date de naissance"
+            type="date"
+            required
+            id="date_naissance"
+            placeholder="Date de naissance"
+            className={classeInput}
+            {...register('date_naissance')}
+            value={data?.date_naissance}
+            onChange={handleInputChange}
+          />
+          {formEmployeValidationError.date_naissance && (
+            <span className="text-sm text-customRed-800">
+              {formEmployeValidationError.date_naissance.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <InputWithFloatingLabel
+            label="Lieu de naissance"
+            required
+            id="lieu_naissance"
+            placeholder="Lieu de naissance"
+            {...register('lieu_naissance')}
+            className={classeInput}
+            value={data?.lieu_naissance}
+            onChange={handleInputChange}
+          />
+          {formEmployeValidationError.lieu_naissance && (
+            <span className="text-sm text-customRed-800">
+              {formEmployeValidationError.lieu_naissance.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <InputWithFloatingLabel
+            label="N° CIN"
+            required
+            id="num_cin"
+            placeholder="N° CIN: 000 000 000 000"
+            className={classeInput}
+            {...register('num_cin')}
+            value={data?.num_cin}
+            onChange={handleInputChange}
+          />
+          {formEmployeValidationError.num_cin && (
+            <span className="text-sm text-customRed-800">
+              {formEmployeValidationError.num_cin.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <InputWithFloatingLabel
+            label="Date de delivrance CIN"
+            type="date"
+            required
+            {...register('date_delivrance_cin')}
+            id="date_delivrance_cin"
+            placeholder="Date de delivrance CIN"
+            className={classeInput}
+            value={data?.date_delivrance_cin}
+            onChange={handleInputChange}
+          />
+          {formEmployeValidationError.date_delivrance_cin && (
+            <span className="text-sm text-customRed-800">
+              {formEmployeValidationError.date_delivrance_cin.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <InputWithFloatingLabel
+            label="Nom du père"
+            // name="nom_pere"
+            {...register('nom_pere')}
+            id="nom_pere"
+            placeholder="Nom du père"
+            className={classeInput}
+            value={data?.nom_pere}
+            onChange={handleInputChange}
+          />
+          {formEmployeValidationError.nom_pere && (
+            <span className="text-sm text-customRed-800">
+              {formEmployeValidationError.nom_pere.message}
+            </span>
+          )}
+        </div>
+
+        <div>
+          <InputWithFloatingLabel
+            label="Nom de la mère"
+            // name="nom_mere"
+            {...register('nom_mere')}
+            id="nom_mere"
+            placeholder="Nom de la mère"
+            className={classeInput}
+            value={data?.nom_mere}
+            onChange={handleInputChange}
+          />
+          {formEmployeValidationError.nom_mere && (
+            <span className="text-sm text-customRed-800">
+              {formEmployeValidationError.nom_mere.message}
+            </span>
+          )}
+        </div>
         <fieldset id="genre" className="border border-solid border-gray-300 p-3">
           <legend className="text-sm">Genre</legend>
           <div className="flex gap-1 flex-col">
@@ -175,7 +256,12 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({ data }) => {
   )
 }
 
-const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) => {
+const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
+  index,
+  data,
+  formEmployeValidationError,
+  register,
+}) => {
   const { enfant: listeEnfants } = useAppSelector((state) => state.formEmploye)
   const dispatch = useDispatch()
   const handleDeleteEnf = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -245,26 +331,54 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
           icon={<XMarkIcon width={18} height={18} />}
         ></ButtonWithIcon>
         <div className="grid mx-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3 p-3">
-          <InputWithFloatingLabel
-            label="Nom"
-            required
-            placeholder="Nom"
-            name="nom"
-            id={idNom}
-            className={classeInput}
-            value={data.nom}
-            onChange={handleInputChange}
-          />
-          <InputWithFloatingLabel
-            label="Prènom"
-            required
-            placeholder="Prènom"
-            name="prenom"
-            id={idPrenom}
-            className={classeInput}
-            value={data.prenom}
-            onChange={handleInputChange}
-          />
+          <div>
+            <InputWithFloatingLabel
+              label="Nom"
+              required
+              placeholder="Nom"
+              name="nom"
+              // {...register(`enfant[${index}].nom` as string)}
+              id={idNom}
+              className={classeInput}
+              value={data.nom}
+              onChange={handleInputChange}
+            />
+            {/* {formEmployeValidationError.enfant &&
+              Array.isArray(formEmployeValidationError.enfant) && (
+                <span className="text-red-500 text-sm">
+                  {formEmployeValidationError.enfant
+                    .filter((error) => error.id === data.id)
+                    .map((error, index) => (
+                      <span key={index}>{error.message}</span>
+                    ))}
+                </span>
+              )} */}
+          </div>
+
+          <div>
+            <InputWithFloatingLabel
+              label="Prènom"
+              required
+              placeholder="Prènom"
+              name="prenom"
+              // {...register(`enfant[${index}].prenom` as any)}
+              id={idPrenom}
+              className={classeInput}
+              value={data.prenom}
+              onChange={handleInputChange}
+            />
+            {/* {formEmployeValidationError.enfant &&
+              Array.isArray(formEmployeValidationError.enfant) && (
+                <span className="text-red-500 text-sm">
+                  {formEmployeValidationError.enfant
+                    .filter((error) => error.id === data.id)
+                    .map((error, index) => (
+                      <span key={index}>{error.message}</span>
+                    ))}
+                </span>
+              )} */}
+          </div>
+
           <InputWithFloatingLabel
             label="Lieu de naissance"
             required
@@ -329,7 +443,11 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
   )
 }
 
-const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({ data }) => {
+const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
+  data,
+  register,
+  formEmployeValidationError,
+}) => {
   const {
     matricule,
     titre_poste,
@@ -371,86 +489,158 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({ data }) => {
       <CCard className={classeCard}>
         <h2 className={classeCardTitle}>Information professionnelles</h2>
         <CCardBody className={classeCardBody}>
-          <InputWithFloatingLabel
-            label="Matricule"
-            required
-            placeholder="Matricule"
-            name="matricule"
-            value={matricule}
-            id="matricule"
-            className={classeInput}
-            onChange={handleInputChange}
-          />
-          <InputWithFloatingLabel
-            label="Titre du poste"
-            required
-            placeholder="Titre du poste"
-            name="titre_poste"
-            id="titre_poste"
-            className={classeInput}
-            value={titre_poste}
-            onChange={handleInputChange}
-          />
-          <SelectFloatingLable
-            label="Catégorie"
-            placeholder="Categorie"
-            name="categorie"
-            required
-            value={categorie}
-            onChange={(e) => handleSelectChange(e as string, 'select-option')}
-            options={categories}
-            isLoading={isLoadingCategorieEmploye}
-          />
-          <InputWithFloatingLabel
-            label="Département"
-            required
-            placeholder="Département"
-            name="departement"
-            id="departement"
-            className={classeInput}
-            value={departement}
-            onChange={handleInputChange}
-          />
-          <InputWithFloatingLabel
-            label="Date d'embauche"
-            type="date"
-            required
-            placeholder="Département"
-            name="date_embauche"
-            id="date_embauche"
-            className={classeInput}
-            value={date_embauche}
-            onChange={handleInputChange}
-          />
-          <InputWithFloatingLabel
-            label="Lieu de travail"
-            required
-            placeholder="Lieu de travail"
-            name="lieu_travail"
-            id="lieu_travail"
-            className={classeInput}
-            value={lieu_travail}
-            onChange={handleInputChange}
-          />
-          <InputWithFloatingLabel
-            label="Telephone"
-            placeholder="Telephone"
-            name="telephone"
-            id="telephone"
-            className={classeInput}
-            value={telephone}
-            onChange={handleInputChange}
-          />
-          <InputWithFloatingLabel
-            label="Email"
-            type="email"
-            placeholder="Email: employe@example.com"
-            name="email"
-            id="email"
-            className={classeInput}
-            value={email}
-            onChange={handleInputChange}
-          />
+          <div>
+            <InputWithFloatingLabel
+              label="Matricule"
+              required
+              placeholder="Matricule"
+              // name="matricule"
+              {...register('matricule')}
+              value={matricule}
+              id="matricule"
+              className={classeInput}
+              onChange={handleInputChange}
+            />
+            {formEmployeValidationError.matricule && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.matricule.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <InputWithFloatingLabel
+              label="Titre du poste"
+              required
+              placeholder="Titre du poste"
+              // name="titre_poste"
+              id="titre_poste"
+              {...register('titre_poste')}
+              className={classeInput}
+              value={titre_poste}
+              onChange={handleInputChange}
+            />
+            {formEmployeValidationError.titre_poste && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.titre_poste.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <SelectFloatingLable
+              label="Catégorie"
+              placeholder="Categorie"
+              // name="categorie"
+              {...register('categorie')}
+              required
+              value={categorie}
+              onChange={(e) => handleSelectChange(e as string, 'select-option')}
+              options={categories}
+              isLoading={isLoadingCategorieEmploye}
+            />
+            {formEmployeValidationError.categorie && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.categorie.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <InputWithFloatingLabel
+              label="Département"
+              required
+              placeholder="Département"
+              // name="departement"
+              {...register('departement')}
+              id="departement"
+              className={classeInput}
+              value={departement}
+              onChange={handleInputChange}
+            />
+            {formEmployeValidationError.departement && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.departement.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <InputWithFloatingLabel
+              label="Date d'embauche"
+              type="date"
+              required
+              placeholder="Département"
+              // name="date_embauche"
+              {...register('date_embauche')}
+              id="date_embauche"
+              className={classeInput}
+              value={date_embauche}
+              onChange={handleInputChange}
+            />
+            {formEmployeValidationError.date_embauche && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.date_embauche.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <InputWithFloatingLabel
+              label="Lieu de travail"
+              required
+              placeholder="Lieu de travail"
+              // name="lieu_travail"
+              {...register('lieu_travail')}
+              id="lieu_travail"
+              className={classeInput}
+              value={lieu_travail}
+              onChange={handleInputChange}
+            />
+            {formEmployeValidationError.lieu_travail && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.lieu_travail.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <InputWithFloatingLabel
+              label="Telephone"
+              placeholder="Telephone"
+              // name="telephone"
+              {...register('telephone')}
+              id="telephone"
+              className={classeInput}
+              value={telephone}
+              onChange={handleInputChange}
+            />
+            {formEmployeValidationError.telephone && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.telephone.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <InputWithFloatingLabel
+              label="Email"
+              type="email"
+              placeholder="Email: employe@example.com"
+              // name="email"
+              {...register('email')}
+              id="email"
+              className={classeInput}
+              value={email}
+              onChange={handleInputChange}
+            />
+            {formEmployeValidationError.email && (
+              <span className="text-red-500 text-sm">
+                {' '}
+                {formEmployeValidationError.email.message}
+              </span>
+            )}
+          </div>
           <fieldset id="travail_de_nuit" className="border border-solid border-gray-300 p-3">
             <legend className="text-sm">Travail de nuit</legend>
             <div className="flex gap-1 flex-col">
@@ -487,7 +677,11 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({ data }) => {
   )
 }
 
-const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({ data }) => {
+const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
+  data,
+  register,
+  formEmployeValidationError,
+}) => {
   const dispatch = useDispatch()
   const {
     data: modeDePaiement,
@@ -518,47 +712,79 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({ data }) => {
       <CCard className={classeCard}>
         <h2 className={classeCardTitle}>Information de paie</h2>
         <CCardBody className={classeCardBody}>
-          <InputWithFloatingLabel
-            label="Salaire de base"
-            type="number"
-            min={0}
-            required
-            placeholder="Salaire de base"
-            name="salaire_de_base"
-            id="salaire_de_base"
-            className={classeInput}
-            value={data.salaire_de_base}
-            onChange={handleInputChange}
-            onFocus={handleFocusInputTypeNumber}
-          />
-          <InputWithFloatingLabel
-            label="RIB"
-            placeholder="RIB: 00000 00000 00000000000 00"
-            name="rib"
-            id="rib"
-            className={classeInput}
-            value={data.rib}
-            onChange={handleInputChange}
-          />
-          <InputWithFloatingLabel
-            label="Numero CNAPS"
-            placeholder="Numero CNAPS"
-            name="num_cnaps"
-            id="num_cnaps"
-            className={classeInput}
-            value={data.num_cnaps}
-            onChange={handleInputChange}
-          />
-          <SelectFloatingLable
-            required
-            label="Mode de paiement"
-            placeholder="Mode de paiement"
-            name="mode_paiement"
-            options={modeDePaiement}
-            value={data.mode_paiement_salaire}
-            onChange={(e) => handleSelectChange(e as string, 'select-option')}
-            isLoading={isLoadingModeDePaiement}
-          />
+          <div>
+            <InputWithFloatingLabel
+              label="Salaire de base"
+              type="number"
+              min={0}
+              required
+              placeholder="Salaire de base"
+              // name="salaire_de_base"
+              {...register('salaire_de_base')}
+              id="salaire_de_base"
+              className={classeInput}
+              value={data.salaire_de_base}
+              onChange={handleInputChange}
+              onFocus={handleFocusInputTypeNumber}
+            />
+            {formEmployeValidationError.salaire_de_base && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.salaire_de_base.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <InputWithFloatingLabel
+              label="RIB"
+              placeholder="RIB: 00000 00000 00000000000 00"
+              // name="rib"
+              {...register('rib')}
+              id="rib"
+              className={classeInput}
+              value={data.rib}
+              onChange={handleInputChange}
+            />
+            {formEmployeValidationError.rib && (
+              <span className="text-red-500 text-sm">{formEmployeValidationError.rib.message}</span>
+            )}
+          </div>
+
+          <div>
+            <InputWithFloatingLabel
+              label="Numero CNAPS"
+              placeholder="Numero CNAPS"
+              // name="num_cnaps"
+              {...register('num_cnaps')}
+              id="num_cnaps"
+              className={classeInput}
+              value={data.num_cnaps}
+              onChange={handleInputChange}
+            />
+            {formEmployeValidationError.num_cnaps && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.num_cnaps.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <SelectFloatingLable
+              required
+              label="Mode de paiement"
+              placeholder="Mode de paiement"
+              // name="mode_paiement"
+              options={modeDePaiement}
+              value={data.mode_paiement_salaire}
+              onChange={(e) => handleSelectChange(e as string, 'select-option')}
+              isLoading={isLoadingModeDePaiement}
+            />
+            {formEmployeValidationError.mode_paiement_salaire && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.mode_paiement_salaire.message}
+              </span>
+            )}
+          </div>
         </CCardBody>
       </CCard>
     </>
@@ -667,17 +893,31 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     dispatch(formEmployeAjoutEnfant(nouvelEnfant))
   }
 
-  const handleSubmit = (event: React.MouseEvent<HTMLFormElement>) => {
+  const submitForm = async (event: React.MouseEvent<HTMLFormElement>) => {
     event.preventDefault()
     console.log(event.target)
   }
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors: formEmployeValidationError },
+    setError,
+  } = useForm<IEmploye>({ resolver: zodResolver(formEmployeSchema) })
 
   console.log(enfant)
 
   return (
     <div className="flex flex-col gap-3">
-      <form action="" method="post" className="flex gap-3 flex-col" onSubmit={handleSubmit}>
+      <form
+        action=""
+        method="post"
+        className="flex gap-3 flex-col"
+        onSubmit={handleSubmit(async () => await submitForm)}
+      >
         <CardInfoPersoEmploye
+          register={register}
+          formEmployeValidationError={formEmployeValidationError}
           data={{
             nom,
             prenom,
@@ -707,11 +947,20 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           <div className="flex flex-col">
             {enfant &&
               enfant.map((enfant, index) => (
-                <CardEnfantEmploye key={index} index={index} data={enfant} />
+                <CardEnfantEmploye
+                  key={index}
+                  index={index}
+                  data={enfant}
+                  register={register}
+                  formEmployeValidationError={formEmployeValidationError}
+                />
               ))}
           </div>
         </CCard>
+
         <CardInfoProEmploye
+          register={register}
+          formEmployeValidationError={formEmployeValidationError}
           data={{
             travail_de_nuit,
             matricule,
@@ -724,7 +973,11 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             email,
           }}
         />
-        <CardInfoPaieEmploye data={{ salaire_de_base, mode_paiement_salaire, rib, num_cnaps }} />
+        <CardInfoPaieEmploye
+          register={register}
+          formEmployeValidationError={formEmployeValidationError}
+          data={{ salaire_de_base, mode_paiement_salaire, rib, num_cnaps }}
+        />
         <CCard>
           <FormEmployeGroupButton />
         </CCard>
