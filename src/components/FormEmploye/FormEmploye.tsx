@@ -202,8 +202,14 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
 
-    const updatedEnfants = listeEnfants!.map((enfant) => {
+    const updatedEnfants = listeEnfants!.map((enfant: IEnfantEmploye) => {
       if (enfant.id === data.id) {
+        if (name.includes('genre_enfant')) {
+          return {
+            ...enfant,
+            genre_enfant: value,
+          }
+        }
         return {
           ...enfant,
           [name]: value,
@@ -229,8 +235,6 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
       dispatch(setFormEmploye({ enfant: updatedEnfants }))
     }
   }
-
-  console.log(data.certificat)
 
   return (
     <>
@@ -293,23 +297,27 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({ index, data }) =
           <fieldset id={idGenre} className="border border-solid border-gray-300 p-3">
             <legend className="text-sm">Genre</legend>
             <div className="flex gap-1 flex-col">
-              <label htmlFor="genre_masculin" className="flex gap-3 items-center text-sm">
+              <label htmlFor={idGenreMasculin} className="flex gap-3 items-center text-sm">
                 <input
                   type="radio"
-                  name="genre"
-                  id="genre_masculin"
-                  value="MASCULIN"
+                  name={`genre_enfant_${data.id}`}
+                  id={idGenreMasculin}
                   className="w-3 h-3 text-sm"
+                  value={EnumGenre.MASCULIN}
+                  checked={data.genre_enfant === EnumGenre.MASCULIN}
+                  onChange={handleInputChange}
                 />
                 <span>Masculin</span>
               </label>
-              <label htmlFor="genre_feminin" className="flex gap-3 items-center text-sm">
+              <label htmlFor={idGenreFeminin} className="flex gap-3 items-center text-sm">
                 <input
                   type="radio"
-                  name="genre"
-                  id="genre_feminin"
-                  value="FEMININ"
+                  name={`genre_enfant_${data.id}`}
+                  id={idGenreFeminin}
                   className="w-3 h-3 text-sm"
+                  value={EnumGenre.FEMININ}
+                  checked={data.genre_enfant === EnumGenre.FEMININ}
+                  onChange={handleInputChange}
                 />
                 <span>Féminin</span>
               </label>
@@ -663,6 +671,8 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     event.preventDefault()
     console.log(event.target)
   }
+
+  console.log(enfant)
 
   return (
     <div className="flex flex-col gap-3">
