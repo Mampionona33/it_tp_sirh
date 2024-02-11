@@ -7,11 +7,15 @@ import {
 import { z } from 'zod'
 
 export interface IFormEmployeSchema
-  extends Omit<IEmploye, 'categorie' | 'matricule' | 'conjoint' | 'salaire_de_base'> {
+  extends Omit<
+    IEmploye,
+    'categorie' | 'matricule' | 'conjoint' | 'salaire_de_base' | 'mode_paiement_salaire'
+  > {
   categorie?: string
   matricule: string
   conjoint?: Conjoint
   salaire_de_base: string
+  mode_paiement_salaire: string
 }
 
 interface Conjoint {
@@ -171,7 +175,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
     .refine((value) => value.length === 26, {
       message: 'Veuillez renseigner un num de rib valide',
     })
-    .refine((value) => /^\d+$/.test(value), {
+    .refine((value) => /\s\d*$/.test(value), {
       message: 'Ce champ accepte uniquement des chiffres',
     })
     .refine((value) => /^\d{5} \d{5} \d{11} \d{2}$/.test(value), {
