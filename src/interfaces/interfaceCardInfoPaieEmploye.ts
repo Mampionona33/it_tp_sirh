@@ -1,5 +1,5 @@
 import { IEmploye } from './interfaceEmploye'
 
-export interface ICardInfoProEmployeProps {
+export interface ICardInfoPaieEmployeProps {
   data: Partial<IEmploye>
 }

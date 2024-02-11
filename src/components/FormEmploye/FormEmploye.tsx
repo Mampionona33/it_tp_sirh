@@ -6,7 +6,7 @@ import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { v4 as uuidV4 } from 'uuid'
 import { ICardEnfantEmployeProps } from '@src/interfaces/interfaceCardEnfantEmploye'
 import { useAppSelector } from '@src/hooks/useAppDispatch'
-import { InputActionMeta, SelectOptionActionMeta, SetValueAction } from 'react-select'
+import { SetValueAction } from 'react-select'
 import {
   EnumBoolean,
   EnumCertificatEnfant,
@@ -24,7 +24,8 @@ import SelectFloatingLable from '../Inputs/SelectFloatingLable'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
 import { ICardInfoProEmployeProps } from '@src/interfaces/interfaceCardInfoProEmploye'
 import useFetchCategorieEmploye from '@src/hooks/useFetchCategorieEmploye'
-import { IInputWithLabelOptionsProps } from './InputWithLable'
+import { ICardInfoPaieEmployeProps } from '@src/interfaces/interfaceCardInfoPaieEmploye'
+import useFetchListModeDePayement from '@src/hooks/useFetchListModeDePayement'
 
 interface IFormEmploye {
   id?: string | number
@@ -418,7 +419,32 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({ data }) => {
   )
 }
 
-const CardInfoPaieEmploye: React.FC = () => {
+const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({ data }) => {
+  const dispatch = useDispatch()
+  const {
+    data: modeDePaiement,
+    isLoading: isLoadingModeDePaiement,
+    isError: isErrorModeDePaiement,
+    error,
+  } = useFetchListModeDePayement()
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target
+    dispatch(setFormEmploye({ [name]: value }))
+  }
+  const handleSelectChange = (newValue: string, action: SetValueAction) => {
+    if (action === 'select-option') {
+      dispatch(setFormEmploye({ mode_paiement_salaire: newValue }))
+    }
+  }
+
+  const handleFocusInputTypeNumber = (event: React.FocusEvent<HTMLInputElement>) => {
+    event.target.select()
+  }
+
+  if (isErrorModeDePaiement) {
+    return <CAlert color="danger">Une erreur est survenue.</CAlert>
+  }
+
   return (
     <>
       <CCard className={classeCard}>
@@ -433,6 +459,9 @@ const CardInfoPaieEmploye: React.FC = () => {
             name="salaire_de_base"
             id="salaire_de_base"
             className={classeInput}
+            value={data.salaire_de_base}
+            onChange={handleInputChange}
+            onFocus={handleFocusInputTypeNumber}
           />
           <InputWithFloatingLabel
             label="RIB"
@@ -440,6 +469,8 @@ const CardInfoPaieEmploye: React.FC = () => {
             name="rib"
             id="rib"
             className={classeInput}
+            value={data.rib}
+            onChange={handleInputChange}
           />
           <InputWithFloatingLabel
             label="Numero CNAPS"
@@ -447,8 +478,19 @@ const CardInfoPaieEmploye: React.FC = () => {
             name="num_cnaps"
             id="num_cnaps"
             className={classeInput}
+            value={data.num_cnaps}
+            onChange={handleInputChange}
           />
-          <SelectFloatingLable required label="Mode de paiement" placeholder="Mode de paiement" />
+          <SelectFloatingLable
+            required
+            label="Mode de paiement"
+            placeholder="Mode de paiement"
+            name="mode_paiement"
+            options={modeDePaiement}
+            value={data.mode_paiement_salaire}
+            onChange={(e) => handleSelectChange(e as string, 'select-option')}
+            isLoading={isLoadingModeDePaiement}
+          />
         </CCardBody>
       </CCard>
     </>
@@ -520,6 +562,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     lieu_travail,
     telephone,
     email,
+    salaire_de_base,
+    mode_paiement_salaire,
+    rib,
+    num_cnaps,
   } = useAppSelector((state) => state.formEmploye)
   const dispatch = useDispatch()
 
@@ -592,7 +638,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             email,
           }}
         />
-        <CardInfoPaieEmploye />
+        <CardInfoPaieEmploye data={{ salaire_de_base, mode_paiement_salaire, rib, num_cnaps }} />
         <CCard>
           <FormEmployeGroupButton />
         </CCard>
