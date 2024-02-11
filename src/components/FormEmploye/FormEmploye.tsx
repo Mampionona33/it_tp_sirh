@@ -917,7 +917,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     handleSubmit,
     watch,
     formState: { errors: formEmployeValidationError },
-    setError,
   } = useForm<IEmploye>({ resolver: zodResolver(formEmployeSchema) })
 
   if (formEmployeValidationError) {
