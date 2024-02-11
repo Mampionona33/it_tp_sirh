@@ -391,7 +391,8 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({ data }) => {
                   name="travail_de_nuit"
                   id="travail_de_nuit_oui"
                   className="w-3 h-3 text-sm"
-                  value={travail_de_nuit === EnumBoolean.OUI ? EnumBoolean.OUI : EnumBoolean.NON}
+                  value={EnumBoolean.OUI}
+                  checked={travail_de_nuit === EnumBoolean.OUI}
                   onChange={handleInputChange}
                 />
                 <span>Oui</span>
@@ -403,7 +404,8 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({ data }) => {
                   name="travail_de_nuit"
                   id="travail_de_nuit_non"
                   className="w-3 h-3 text-sm text-center"
-                  value={travail_de_nuit === EnumBoolean.NON ? EnumBoolean.NON : EnumBoolean.OUI}
+                  value={EnumBoolean.NON}
+                  checked={travail_de_nuit === EnumBoolean.NON}
                   onChange={handleInputChange}
                 />
                 <span>Non</span>
