@@ -30,7 +30,7 @@ import { ICardInfoPaieEmployeProps } from '@src/interfaces/interfaceCardInfoPaie
 import useFetchListModeDePayement from '@src/hooks/useFetchListModeDePayement'
 import { ICardResiliationContratProps } from '@src/interfaces/interfaceCardResiliationContrat'
 import { format } from 'date-fns'
-import { useController, useFieldArray, useForm } from 'react-hook-form'
+import { useController, useFieldArray, useForm, Controller } from 'react-hook-form'
 import formEmployeSchema from '@src/schema/formEmployeSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useFetchSalarie from '@src/hooks/useFetchSalarie'
@@ -61,8 +61,6 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
     const { name, value, id } = event.target
     dispatch(setFormEmploye({ [name]: value }))
   }
-
-  console.log({ ...register('nom') })
 
   return (
     <CCard className={classeCard}>
@@ -293,8 +291,6 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
     remove(Number(index))
   }
 
-  console.log(value)
-
   const idNom = uuidV4()
   const certificat = uuidV4()
   const idPrenom = uuidV4()
@@ -311,47 +307,47 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
     { label: 'Certificat de médical', value: EnumCertificatEnfant.MEDICAL },
   ]
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
+  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target
 
-    const updatedEnfants = listeEnfants!.map((enfant: IEnfantEmploye) => {
-      if (enfant.id === data.id) {
-        if (name.includes('genre_enfant')) {
-          return {
-            ...enfant,
-            genre_enfant: value,
-          }
-        }
-        return {
-          ...enfant,
-          [name]: value,
-        }
-      }
-      return enfant
-    })
-    setValue('enfant', updatedEnfants as IEnfantEmploye[], {
-      shouldDirty: true,
-      shouldValidate: true,
-    })
-    dispatch(setFormEmploye({ enfant: updatedEnfants }))
-  }
+  //   const updatedEnfants = listeEnfants!.map((enfant: IEnfantEmploye) => {
+  //     if (enfant.id === data.id) {
+  //       if (name.includes('genre_enfant')) {
+  //         return {
+  //           ...enfant,
+  //           genre_enfant: value,
+  //         }
+  //       }
+  //       return {
+  //         ...enfant,
+  //         [name]: value,
+  //       }
+  //     }
+  //     return enfant
+  //   })
+  //   setValue('enfant', updatedEnfants as IEnfantEmploye[], {
+  //     shouldDirty: true,
+  //     shouldValidate: true,
+  //   })
+  //   dispatch(setFormEmploye({ enfant: updatedEnfants }))
+  // }
 
   const handleSelectChange = (newValue: CertificatEnfantProps, action: SetValueAction) => {
     if (action === 'select-option') {
-      const updatedEnfants = listeEnfants!.map((enfant) => {
-        console.log(newValue)
+      setValue(`enfant.${index}.certificat` as any, newValue)
 
-        setValue(`enfant.${index}.certificat` as any, newValue)
+      // const updatedEnfants = listeEnfants!.map((enfant) => {
+      //   console.log(newValue)
 
-        if (enfant.id === data.id) {
-          return {
-            ...enfant,
-            categorie: newValue,
-          }
-        }
-        return enfant
-      })
-      dispatch(setFormEmploye({ enfant: updatedEnfants }))
+      //   if (enfant.id === data.id) {
+      //     return {
+      //       ...enfant,
+      //       categorie: newValue,
+      //     }
+      //   }
+      //   return enfant
+      // })
+      // dispatch(setFormEmploye({ enfant: updatedEnfants }))
     }
   }
 
@@ -369,23 +365,13 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               label="Nom"
               required
               placeholder="Nom"
-              // name="nom"
               {...register(`enfant.${index}.nom` as any)}
               id={idNom}
               className={classeInput}
+              // name="nom"
               // value={value.nom}
               // onChange={handleInputChange}
             />
-            {/* {formEmployeValidationError.enfant &&
-              Array.isArray(formEmployeValidationError.enfant) && (
-                <span className="text-red-500 text-sm">
-                  {formEmployeValidationError.enfant
-                    .filter((error) => error.id === data.id)
-                    .map((error, index) => (
-                      <span key={index}>{error.message}</span>
-                    ))}
-                </span>
-              )} */}
           </div>
 
           <div>
@@ -398,10 +384,6 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               id={idPrenom}
               className={classeInput}
               // value={value.prenom}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                // handleInputChange(event)
-                // setValue(`enfant.${index}.prenom` as any, event.target.value)
-              }}
             />
           </div>
 
@@ -409,10 +391,10 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
             label="Lieu de naissance"
             required
             placeholder="Lieu de naissance"
-            // name="lieu_naissance"
-            {...register(`enfant.${index}.lieu_naissance` as any)}
             id={idLieuNaissance}
             className={classeInput}
+            {...register(`enfant.${index}.lieu_naissance` as any)}
+            // name="lieu_naissance"
             // value={data.lieu_naissance}
             // onChange={handleInputChange}
           />
@@ -420,22 +402,37 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
             label="Date de naissance"
             type="date"
             required
-            // name="date_naissance"
             {...register(`enfant.${index}.date_naissance` as any)}
             id={idDateNaissance}
             placeholder="Date de naissance"
             className={classeInput}
+            // name="date_naissance"
             // value={data.date_naissance}
             // onChange={handleInputChange}
           />
-          <SelectFloatingLable
-            label="Certificat"
-            placeholder="Certificat"
-            id={certificat}
-            // value={data.certificat}
-            {...register(`enfant.${index}.certificat` as any)}
-            options={optionCertificat}
-            onChange={(e) => handleSelectChange(e as CertificatEnfantProps, 'select-option')}
+          <Controller
+            control={control}
+            name="enfant"
+            render={({ field: { onBlur, onChange, value, name, ref, ...rest } }) => {
+              console.log(value)
+              return (
+                <SelectFloatingLable
+                  // https://www.youtube.com/watch?v=npV3X53Ral0
+                  label="Certificat"
+                  placeholder="Certificat"
+                  id={certificat}
+                  options={optionCertificat}
+                  // value={value?.filter((el) => el[index] == data.id)}
+                  name="certificat"
+                  ref={ref}
+                  onBlur={onBlur}
+                  onChange={onChange}
+                  // value={data.certificat}
+                  // {...register(`enfant.${index}.certificat` as any)}
+                  // onChange={(e) => handleSelectChange(e as CertificatEnfantProps, 'select-option')}
+                />
+              )
+            }}
           />
           <fieldset id={idGenre} className="border border-solid border-gray-300 p-3">
             <legend className="text-sm">Genre</legend>
@@ -443,12 +440,12 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               <label htmlFor={idGenreMasculin} className="flex gap-3 items-center text-sm">
                 <input
                   type="radio"
-                  // name={`genre_enfant_${data.id}`}
-                  {...register(`enfant.${index}.genre_enfant` as any)}
+                  {...register(`enfant.${index}.genre` as any)}
                   id={idGenreMasculin}
                   className="w-3 h-3 text-sm"
                   value={EnumGenre.MASCULIN}
-                  checked={data.genre_enfant === EnumGenre.MASCULIN}
+                  // name={`genre_enfant_${data.id}`}
+                  // checked={data.genre_enfant === EnumGenre.MASCULIN}
                   // onChange={handleInputChange}
                 />
                 <span>Masculin</span>
@@ -456,13 +453,13 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               <label htmlFor={idGenreFeminin} className="flex gap-3 items-center text-sm">
                 <input
                   type="radio"
-                  // name={`genre_enfant_${data.id}`}
-                  {...register(`enfant.${index}.genre_enfant` as any)}
+                  {...register(`enfant.${index}.genre` as any)}
                   id={idGenreFeminin}
                   className="w-3 h-3 text-sm"
                   value={EnumGenre.FEMININ}
-                  checked={data.genre_enfant === EnumGenre.FEMININ}
+                  // name={`genre_enfant_${data.id}`}
                   // onChange={handleInputChange}
+                  // checked={data.genre_enfant === EnumGenre.FEMININ}
                 />
                 <span>Féminin</span>
               </label>
@@ -928,7 +925,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     console.log(data)
   }
 
-  console.log(employe)
   const {
     register,
     handleSubmit,

@@ -1438,6 +1438,11 @@
           "prenom": "Rosam",
           "date_naissance": "2022-04-16",
           "lieu_naissance": "Toamasina",
+          "certificat": {
+            "id": 1,
+            "label": "Certificat de scolarité",
+            "value": "scolarite"
+          },
           "genre": "feminin",
           "age": 1
         },

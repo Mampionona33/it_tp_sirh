@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 
 const useFetchSalarie = (id?: string | number) => {
-  console.log(id)
   const { data, isLoading, refetch, isError, error, isSuccess } = useQuery({
     queryKey: ['salarie', id],
     queryFn: async () => {
