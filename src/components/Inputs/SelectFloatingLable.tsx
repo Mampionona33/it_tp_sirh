@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState, forwardRef, useEffect } from 'react'
 import Select, { StylesConfig } from 'react-select'
 import { ISelectFloatingLableProps } from '@src/interfaces/interfaceSelectFloatingLable'

@@ -33,6 +33,11 @@ import { format } from 'date-fns'
 import { useController, useFieldArray, useForm } from 'react-hook-form'
 import formEmployeSchema from '@src/schema/formEmployeSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import useFetchSalarie from '@src/hooks/useFetchSalarie'
+import Loading from '../loadings/Loading'
+import Page404 from '@src/views/pages/page404/Page404'
+import { isNull } from 'util'
+import employeService from '@src/services/EmployeeService'
 
 interface IFormEmploye {
   id?: string | number
@@ -49,12 +54,15 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
   data,
   register,
   formEmployeValidationError,
+  setValue,
 }) => {
   const dispatch = useDispatch()
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, id } = event.target
     dispatch(setFormEmploye({ [name]: value }))
   }
+
+  console.log({ ...register('nom') })
 
   return (
     <CCard className={classeCard}>
@@ -67,9 +75,11 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             placeholder="Nom"
             id="nom"
             className={classeInput}
-            value={data?.nom}
             {...register('nom')}
-            onChange={handleInputChange}
+            // value={data?.nom}
+            // onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            //   setValue('nom', event.target.value)
+            // }
           />
           {formEmployeValidationError.nom && (
             <span className="text-sm text-customRed-800">
@@ -86,8 +96,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             placeholder="Prénom employé"
             className={classeInput}
             {...register('prenom')}
-            value={data?.prenom}
-            onChange={handleInputChange}
+            // value={data?.prenom}
+            // onChange={handleInputChange}
           />
           {formEmployeValidationError.prenom && (
             <span className="text-sm text-customRed-800">
@@ -103,9 +113,9 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             id="adresse"
             placeholder="Adresse"
             className={classeInput}
-            value={data?.adresse}
             {...register('adresse')}
-            onChange={handleInputChange}
+            // value={data?.adresse}
+            // onChange={handleInputChange}
           />
           {formEmployeValidationError.adresse && (
             <span className="text-sm text-customRed-800">
@@ -123,8 +133,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             placeholder="Date de naissance"
             className={classeInput}
             {...register('date_naissance')}
-            value={data?.date_naissance}
-            onChange={handleInputChange}
+            // value={data?.date_naissance}
+            // onChange={handleInputChange}
           />
           {formEmployeValidationError.date_naissance && (
             <span className="text-sm text-customRed-800">
@@ -141,8 +151,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             placeholder="Lieu de naissance"
             {...register('lieu_naissance')}
             className={classeInput}
-            value={data?.lieu_naissance}
-            onChange={handleInputChange}
+            // value={data?.lieu_naissance}
+            // onChange={handleInputChange}
           />
           {formEmployeValidationError.lieu_naissance && (
             <span className="text-sm text-customRed-800">
@@ -159,8 +169,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             placeholder="N° CIN: 000 000 000 000"
             className={classeInput}
             {...register('num_cin')}
-            value={data?.num_cin}
-            onChange={handleInputChange}
+            // value={data?.num_cin}
+            // onChange={handleInputChange}
           />
           {formEmployeValidationError.num_cin && (
             <span className="text-sm text-customRed-800">
@@ -178,8 +188,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             id="date_delivrance_cin"
             placeholder="Date de delivrance CIN"
             className={classeInput}
-            value={data?.date_delivrance_cin}
-            onChange={handleInputChange}
+            // value={data?.date_delivrance_cin}
+            // onChange={handleInputChange}
           />
           {formEmployeValidationError.date_delivrance_cin && (
             <span className="text-sm text-customRed-800">
@@ -196,8 +206,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             id="nom_pere"
             placeholder="Nom du père"
             className={classeInput}
-            value={data?.nom_pere}
-            onChange={handleInputChange}
+            // value={data?.nom_pere}
+            // onChange={handleInputChange}
           />
           {formEmployeValidationError.nom_pere && (
             <span className="text-sm text-customRed-800">
@@ -214,8 +224,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             id="nom_mere"
             placeholder="Nom de la mère"
             className={classeInput}
-            value={data?.nom_mere}
-            onChange={handleInputChange}
+            // value={data?.nom_mere}
+            // onChange={handleInputChange}
           />
           {formEmployeValidationError.nom_mere && (
             <span className="text-sm text-customRed-800">
@@ -229,26 +239,26 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             <label htmlFor="genre_masculin" className="flex gap-3 items-center text-sm">
               <input
                 type="radio"
-                // name="genre"
                 {...register('genre')}
                 id="genre_masculin"
                 value={EnumGenre.MASCULIN}
-                checked={data?.genre === EnumGenre.MASCULIN}
                 className="w-3 h-3 text-sm"
-                onChange={handleInputChange}
+                // name="genre"
+                // checked={data?.genre === EnumGenre.MASCULIN}
+                // onChange={handleInputChange}
               />
               <span>Masculin</span>
             </label>
             <label htmlFor="genre_feminin" className="flex gap-3 items-center text-sm">
               <input
                 type="radio"
-                // name="genre"
                 {...register('genre')}
                 id="genre_feminin"
-                checked={data?.genre === EnumGenre.FEMININ}
                 value={EnumGenre.FEMININ}
                 className="w-3 h-3 text-sm"
-                onChange={handleInputChange}
+                // name="genre"
+                // onChange={handleInputChange}
+                // checked={data?.genre === EnumGenre.FEMININ}
               />
               <span>Féminin</span>
             </label>
@@ -912,41 +922,13 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({ data }
 }
 
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
-  const {
-    enfant,
-    nom,
-    prenom,
-    date_naissance,
-    lieu_naissance,
-    num_cin,
-    nom_pere,
-    nom_mere,
-    adresse,
-    genre,
-    date_delivrance_cin,
-    travail_de_nuit,
-    matricule,
-    date_embauche,
-    departement,
-    titre_poste,
-    categorie,
-    lieu_travail,
-    telephone,
-    email,
-    salaire_de_base,
-    mode_paiement_salaire,
-    rib,
-    num_cnaps,
-    depart,
-  } = useAppSelector((state) => state.formEmploye)
-  const dispatch = useDispatch()
-
-  const employe = useAppSelector((state) => state.formEmploye)
+  const { data: employe, error, isError, isLoading, refetch, isSuccess } = useFetchSalarie(id)
 
   const submitForm = (data: IEmploye) => {
     console.log(data)
   }
 
+  console.log(employe)
   const {
     register,
     handleSubmit,
@@ -954,18 +936,62 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     formState: { errors: formEmployeValidationError },
     control: controlFormEmploye,
     setValue,
-  } = useForm<IEmploye>({ resolver: zodResolver(formEmployeSchema), defaultValues: { ...employe } })
+  } = useForm<IEmploye>({
+    resolver: zodResolver(formEmployeSchema),
+    defaultValues: async () => {
+      if (id) {
+        const resp = await employeService.getById(String(id))
+        const data = resp.data as IEmploye
+        return { ...data }
+      } else {
+        return {
+          id: '',
+          nom: '',
+          prenom: '',
+          adresse: '',
+          date_delivrance_cin: '',
+          date_embauche: '',
+          date_naissance: '',
+          departement: '',
+          genre: EnumGenre.MASCULIN,
+          lieu_naissance: '',
+          lieu_travail: '',
+          categorie: undefined,
+          matricule: '',
+          num_cin: '',
+          salaire_de_base: 0,
+          titre_poste: '',
+          travail_de_nuit: EnumBoolean.NON,
+          actif: EnumBoolean.OUI,
+          avance: undefined,
+          conjoint: undefined,
+          contact_urgence: undefined,
+          depart: undefined,
+          email: '',
+          enfant: undefined,
+          est_cadre: EnumBoolean.NON,
+          indemnites: undefined,
+          nom_mere: '',
+          nom_pere: '',
+          mode_paiement_salaire: undefined,
+          num_cnaps: '',
+          num_osie: '',
+          prime_et_avantage_permanent: [],
+          rib: '',
+          telephone: '',
+        }
+      }
+    },
+  })
 
-  // console.log(watch('enfant'))
-
-  React.useEffect(() => {
-    const subscri = watch((value, { name, type }) => {
-      console.log(value, name, type)
-    })
-    return () => {
-      subscri.unsubscribe()
-    }
-  }, [watch])
+  // React.useEffect(() => {
+  //   const subscri = watch((value, { name, type }) => {
+  //     console.log(value, name, type)
+  //   })
+  //   return () => {
+  //     subscri.unsubscribe()
+  //   }
+  // }, [watch])
 
   const {
     fields: listeEnfant,
@@ -987,11 +1013,19 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
       action: 'ajout',
     }
     ajoutEnfant(nouvelEnfant)
-    dispatch(formEmployeAjoutEnfant(nouvelEnfant))
+    // dispatch(formEmployeAjoutEnfant(nouvelEnfant))
   }
 
   if (formEmployeValidationError) {
     console.log(formEmployeValidationError)
+  }
+
+  if (isLoading) {
+    return <Loading />
+  }
+
+  if (isError) {
+    return <CAlert color="danger">Une erreur est survenue</CAlert>
   }
 
   return (
@@ -1007,17 +1041,18 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         <CardInfoPersoEmploye
           register={register}
           formEmployeValidationError={formEmployeValidationError}
+          setValue={setValue}
           data={{
-            nom,
-            prenom,
-            date_naissance,
-            lieu_naissance,
-            num_cin,
-            nom_pere,
-            nom_mere,
-            adresse,
-            genre,
-            date_delivrance_cin,
+            nom: employe?.nom || '',
+            adresse: employe?.adresse || '',
+            date_delivrance_cin: employe?.date_delivrance_cin || '',
+            date_naissance: employe?.date_naissance || '',
+            genre: employe?.genre || EnumGenre.MASCULIN,
+            lieu_naissance: employe?.lieu_naissance || '',
+            num_cin: employe?.num_cin || '',
+            prenom: employe?.prenom || '',
+            nom_mere: employe?.nom_mere,
+            nom_pere: employe?.nom_pere,
           }}
         />
         <CCard className={classeCard}>
@@ -1058,15 +1093,15 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           register={register}
           formEmployeValidationError={formEmployeValidationError}
           data={{
-            travail_de_nuit,
-            matricule,
-            date_embauche,
-            departement,
-            titre_poste,
-            categorie,
-            lieu_travail,
-            telephone,
-            email,
+            travail_de_nuit: employe?.travail_de_nuit || EnumBoolean.NON,
+            matricule: employe?.matricule || '',
+            date_embauche: employe?.date_embauche || '',
+            departement: employe?.departement || '',
+            titre_poste: employe?.titre_poste || '',
+            categorie: employe?.categorie,
+            lieu_travail: employe?.lieu_travail || '',
+            telephone: employe?.telephone || '',
+            email: employe?.email || '',
           }}
         />
         <CardInfoPaieEmploye
@@ -1074,14 +1109,19 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           contol={controlFormEmploye}
           register={register}
           formEmployeValidationError={formEmployeValidationError}
-          data={{ salaire_de_base, mode_paiement_salaire, rib, num_cnaps }}
+          data={{
+            salaire_de_base: employe?.salaire_de_base || 0,
+            mode_paiement_salaire: employe?.mode_paiement_salaire,
+            rib: employe?.rib || '',
+            num_cnaps: employe?.num_cnaps || '',
+          }}
         />
         <CCard>
           <pre>{JSON.stringify(watch, null, 2)}</pre>
           <FormEmployeGroupButton />
         </CCard>
       </form>
-      <CardResiliationContrat data={{ depart }} />
+      {/* <CardResiliationContrat data={{ depart }} /> */}
     </div>
   )
 }

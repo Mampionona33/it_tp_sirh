@@ -165,7 +165,7 @@ const ValidePaie = () => {
             const { payload } = result
 
             if (payload) {
-              const estCadre = salarie.categorie === 'hc'
+              const estCadre = salarie.categorie?.value === 'hc'
               const travailleurDeNuit = salarie.travail_de_nuit === EnumBoolean.OUI
 
               const heureCalculator = new CalculHeures_v2()

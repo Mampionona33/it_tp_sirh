@@ -2,7 +2,7 @@ import { Control, FieldErrors, UseFormRegister, UseFormSetValue } from 'react-ho
 import { IEmploye } from './interfaceEmploye'
 
 export interface ICardInfoPaieEmployeProps {
-  data: Partial<IEmploye>
+  data: Pick<IEmploye, 'salaire_de_base' | 'mode_paiement_salaire' | 'rib' | 'num_cnaps'>
   formEmployeValidationError: FieldErrors<IEmploye>
   register: UseFormRegister<IEmploye>
   contol: Control<IEmploye, any, IEmploye>

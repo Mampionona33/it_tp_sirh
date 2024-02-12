@@ -24,14 +24,6 @@ const Fiche: React.FC = () => {
     return isExist
   }, [listEmploye])
 
-  const isValidID = useCallback((): boolean => {
-    if (!listEmploye) return false
-    if (id && isListEmployeExist()) {
-      return listEmploye.some((item) => String(item.id) === String(id))
-    }
-    return false
-  }, [id, isListEmployeExist, listEmploye])
-
   const selectedEmploye =
     isListEmployeExist() &&
     listEmploye!.filter((employe) => employe.id === parseInt(String(id), 10))[0]
@@ -40,7 +32,7 @@ const Fiche: React.FC = () => {
 
   useEffect(() => {
     const setFormEmployeID = (employeeId: string | number): void => {
-      if (isValidID() && !formEmploye.id) {
+      if (id && !formEmploye.id) {
         const parsedEmployeeId = Number(employeeId)
         dispatch(setFormEmploye({ ...selectedEmploye, id: parsedEmployeeId }))
       }
@@ -48,7 +40,7 @@ const Fiche: React.FC = () => {
     if (id) {
       setFormEmployeID(id)
     }
-  }, [id, formEmploye, isValidID, dispatch, selectedEmploye])
+  }, [id, formEmploye, dispatch, selectedEmploye])
 
   if (isLoading) {
     return <Loading />
@@ -58,8 +50,10 @@ const Fiche: React.FC = () => {
     return <CAlert color="danger">{formatErrorMessage(error)}</CAlert>
   }
 
+  console.log(id)
+
   const renderContent = (): JSX.Element => {
-    return isValidID() ? <FormEmploye id={id} /> : <Page404 />
+    return id ? <FormEmploye id={id} /> : <Page404 />
   }
 
   return <>{renderContent()}</>
