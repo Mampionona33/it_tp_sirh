@@ -372,6 +372,11 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               // value={value.nom}
               // onChange={handleInputChange}
             />
+            {formEmployeValidationError && formEmployeValidationError.enfant && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.enfant![Number(index)]?.nom?.message}
+              </span>
+            )}
           </div>
 
           <div>
@@ -385,31 +390,51 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               className={classeInput}
               // value={value.prenom}
             />
+            {formEmployeValidationError && formEmployeValidationError.enfant && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.enfant![Number(index)]?.prenom?.message}
+              </span>
+            )}
           </div>
 
-          <InputWithFloatingLabel
-            label="Lieu de naissance"
-            required
-            placeholder="Lieu de naissance"
-            id={idLieuNaissance}
-            className={classeInput}
-            {...register(`enfant.${index}.lieu_naissance` as any)}
-            // name="lieu_naissance"
-            // value={data.lieu_naissance}
-            // onChange={handleInputChange}
-          />
-          <InputWithFloatingLabel
-            label="Date de naissance"
-            type="date"
-            required
-            {...register(`enfant.${index}.date_naissance` as any)}
-            id={idDateNaissance}
-            placeholder="Date de naissance"
-            className={classeInput}
-            // name="date_naissance"
-            // value={data.date_naissance}
-            // onChange={handleInputChange}
-          />
+          <div>
+            <InputWithFloatingLabel
+              label="Lieu de naissance"
+              required
+              placeholder="Lieu de naissance"
+              id={idLieuNaissance}
+              className={classeInput}
+              {...register(`enfant.${index}.lieu_naissance` as any)}
+              // name="lieu_naissance"
+              // value={data.lieu_naissance}
+              // onChange={handleInputChange}
+            />
+            {formEmployeValidationError && formEmployeValidationError.enfant && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.enfant![Number(index)]?.lieu_naissance?.message}
+              </span>
+            )}
+          </div>
+
+          <div>
+            <InputWithFloatingLabel
+              label="Date de naissance"
+              type="date"
+              required
+              {...register(`enfant.${index}.date_naissance` as any)}
+              id={idDateNaissance}
+              placeholder="Date de naissance"
+              className={classeInput}
+              // name="date_naissance"
+              // value={data.date_naissance}
+              // onChange={handleInputChange}
+            />
+            {formEmployeValidationError && formEmployeValidationError.enfant && (
+              <span className="text-red-500 text-sm">
+                {formEmployeValidationError.enfant![Number(index)]?.date_naissance?.message}
+              </span>
+            )}
+          </div>
 
           {/**
            * Utilisation de Controller pour intégrer React-select.
@@ -423,7 +448,6 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               field: { onBlur, onChange, value, name, ref, ...rest },
               fieldState: { error },
             }) => {
-              console.log(formEmployeValidationError)
               const handleChange = (newValue: any) => {
                 // Mettre à jour la valeur sélectionnée pour le certificat dans le tableau value
                 const updatedValue = value!.map((enfant: IEnfantEmploye, idx: number) => {
