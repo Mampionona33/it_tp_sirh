@@ -1457,7 +1457,11 @@
       ],
       "titre_poste": "Responsable Import et logistique ",
       "matricule": "523",
-      "categorie": "B5",
+      "categorie": {
+        "id": 4,
+        "value": "1b",
+        "label": "1B"
+      },
       "date_embauche": "2016-04-16",
       "departement": "Logistique",
       "lieu_travail": "Toamasina",

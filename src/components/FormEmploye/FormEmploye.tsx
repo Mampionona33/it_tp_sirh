@@ -410,30 +410,57 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
             // value={data.date_naissance}
             // onChange={handleInputChange}
           />
+
+          {/**
+           * Utilisation de Controller pour intégrer React-select.
+           * Controller permet de gérer les champs de formulaire avec React-hook-form.
+           * Cela nous permet de synchroniser facilement les valeurs du formulaire avec les composants externes comme React-select.
+           */}
           <Controller
             control={control}
             name="enfant"
             render={({ field: { onBlur, onChange, value, name, ref, ...rest } }) => {
-              console.log(value)
+              const handleChange = (newValue: any) => {
+                // Mettre à jour la valeur sélectionnée pour le certificat dans le tableau value
+                const updatedValue = value!.map((enfant: IEnfantEmploye, idx: number) => {
+                  if (idx === Number(index)) {
+                    return {
+                      ...enfant,
+                      certificat: newValue,
+                    }
+                  }
+                  return enfant
+                })
+                onChange(updatedValue)
+              }
+
+              const enfantValue = value && value[Number(index)]
+              const valueCertificat =
+                enfantValue && enfantValue.certificat
+                  ? enfantValue.certificat
+                  : {
+                      label: '---',
+                      value: EnumCertificatEnfant.AUCUN,
+                    }
+
               return (
                 <SelectFloatingLable
-                  // https://www.youtube.com/watch?v=npV3X53Ral0
+                  {...rest}
                   label="Certificat"
                   placeholder="Certificat"
                   id={certificat}
+                  defaultValue={valueCertificat}
                   options={optionCertificat}
-                  // value={value?.filter((el) => el[index] == data.id)}
+                  value={valueCertificat}
                   name="certificat"
                   ref={ref}
                   onBlur={onBlur}
-                  onChange={onChange}
-                  // value={data.certificat}
-                  // {...register(`enfant.${index}.certificat` as any)}
-                  // onChange={(e) => handleSelectChange(e as CertificatEnfantProps, 'select-option')}
+                  onChange={(newValue) => handleChange(newValue)} // Utiliser la fonction handleChange
                 />
               )
             }}
           />
+
           <fieldset id={idGenre} className="border border-solid border-gray-300 p-3">
             <legend className="text-sm">Genre</legend>
             <div className="flex gap-1 flex-col">
@@ -535,12 +562,12 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               label="Matricule"
               required
               placeholder="Matricule"
-              // name="matricule"
               {...register('matricule')}
-              value={matricule}
               id="matricule"
               className={classeInput}
-              onChange={handleInputChange}
+              // name="matricule"
+              // value={matricule}
+              // onChange={handleInputChange}
             />
             {formEmployeValidationError.matricule && (
               <span className="text-red-500 text-sm">
@@ -554,12 +581,12 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               label="Titre du poste"
               required
               placeholder="Titre du poste"
-              // name="titre_poste"
               id="titre_poste"
               {...register('titre_poste')}
               className={classeInput}
-              value={titre_poste}
-              onChange={handleInputChange}
+              // name="titre_poste"
+              // value={titre_poste}
+              // onChange={handleInputChange}
             />
             {formEmployeValidationError.titre_poste && (
               <span className="text-red-500 text-sm">
@@ -568,39 +595,43 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
             )}
           </div>
 
-          <div>
-            <SelectFloatingLable
-              label="Catégorie"
-              placeholder="Categorie"
-              {...refCategorie}
-              required
-              value={categorie ? categorie : categorieValue}
-              onChange={(e) => handleSelectChange(e as string, 'select-option')}
-              options={categories}
-              isLoading={isLoadingCategorieEmploye}
-              // name="categorie"
-              // {...register('categorie')}
-              // value={categorie}
-              // onChange={(e) => handleSelectChange(e as string, 'select-option')}
-            />
-            {formEmployeValidationError.categorie && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.categorie.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name="categorie"
+            render={({
+              field: { onChange, onBlur, name, value, ...rest },
+              fieldState: { error },
+            }) => {
+              // console.log(value, 'value')
+              return (
+                <div>
+                  <SelectFloatingLable
+                    label="Catégorie"
+                    placeholder="Categorie"
+                    {...rest}
+                    required
+                    value={value ? value : categorieValue}
+                    onChange={(e) => handleSelectChange(e as string, 'select-option')}
+                    options={categories}
+                    isLoading={isLoadingCategorieEmploye}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
           <div>
             <InputWithFloatingLabel
               label="Département"
               required
               placeholder="Département"
-              // name="departement"
               {...register('departement')}
               id="departement"
               className={classeInput}
-              value={departement}
-              onChange={handleInputChange}
+              // name="departement"
+              // value={departement}
+              // onChange={handleInputChange}
             />
             {formEmployeValidationError.departement && (
               <span className="text-red-500 text-sm">
@@ -615,12 +646,12 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               type="date"
               required
               placeholder="Département"
-              // name="date_embauche"
               {...register('date_embauche')}
               id="date_embauche"
               className={classeInput}
-              value={date_embauche}
-              onChange={handleInputChange}
+              // name="date_embauche"
+              // value={date_embauche}
+              // onChange={handleInputChange}
             />
             {formEmployeValidationError.date_embauche && (
               <span className="text-red-500 text-sm">
@@ -634,12 +665,12 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               label="Lieu de travail"
               required
               placeholder="Lieu de travail"
-              // name="lieu_travail"
               {...register('lieu_travail')}
               id="lieu_travail"
               className={classeInput}
-              value={lieu_travail}
-              onChange={handleInputChange}
+              // name="lieu_travail"
+              // value={lieu_travail}
+              // onChange={handleInputChange}
             />
             {formEmployeValidationError.lieu_travail && (
               <span className="text-red-500 text-sm">
@@ -652,12 +683,12 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
             <InputWithFloatingLabel
               label="Telephone"
               placeholder="Telephone"
-              // name="telephone"
               {...register('telephone')}
               id="telephone"
               className={classeInput}
-              value={telephone}
-              onChange={handleInputChange}
+              // name="telephone"
+              // value={telephone}
+              // onChange={handleInputChange}
             />
             {formEmployeValidationError.telephone && (
               <span className="text-red-500 text-sm">
@@ -671,12 +702,12 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               label="Email"
               type="email"
               placeholder="Email: employe@example.com"
-              // name="email"
               {...register('email')}
               id="email"
               className={classeInput}
-              value={email}
-              onChange={handleInputChange}
+              // name="email"
+              // value={email}
+              // onChange={handleInputChange}
             />
             {formEmployeValidationError.email && (
               <span className="text-red-500 text-sm">
@@ -691,13 +722,13 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               <label htmlFor="travail_de_nuit_oui" className="flex items-center gap-3 text-sm">
                 <input
                   type="radio"
-                  // name="travail_de_nuit"
                   {...register('travail_de_nuit')}
                   id="travail_de_nuit_oui"
                   className="w-3 h-3 text-sm"
                   value={EnumBoolean.OUI}
-                  checked={travail_de_nuit === EnumBoolean.OUI}
-                  onChange={handleInputChange}
+                  // name="travail_de_nuit"
+                  // checked={travail_de_nuit === EnumBoolean.OUI}
+                  // onChange={handleInputChange}
                 />
                 <span>Oui</span>
               </label>
@@ -705,13 +736,13 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               <label htmlFor="travail_de_nuit_non" className="flex gap-3 items-center text-sm">
                 <input
                   type="radio"
-                  // name="travail_de_nuit"
                   {...register('travail_de_nuit')}
                   id="travail_de_nuit_non"
                   className="w-3 h-3 text-sm text-center"
                   value={EnumBoolean.NON}
-                  checked={travail_de_nuit === EnumBoolean.NON}
-                  onChange={handleInputChange}
+                  // name="travail_de_nuit"
+                  // onChange={handleInputChange}
+                  // checked={travail_de_nuit === EnumBoolean.NON}
                 />
                 <span>Non</span>
               </label>
@@ -787,13 +818,13 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
               min={0}
               required
               placeholder="Salaire de base"
-              // name="salaire_de_base"
               {...register('salaire_de_base')}
               id="salaire_de_base"
               className={classeInput}
-              value={data.salaire_de_base}
-              onChange={handleInputChange}
-              onFocus={handleFocusInputTypeNumber}
+              // name="salaire_de_base"
+              // value={data.salaire_de_base}
+              // onChange={handleInputChange}
+              // onFocus={handleFocusInputTypeNumber}
             />
             {formEmployeValidationError.salaire_de_base && (
               <span className="text-red-500 text-sm">
@@ -806,12 +837,12 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
             <InputWithFloatingLabel
               label="RIB"
               placeholder="RIB: 00000 00000 00000000000 00"
-              // name="rib"
               {...register('rib')}
               id="rib"
               className={classeInput}
-              value={data.rib}
-              onChange={handleInputChange}
+              // name="rib"
+              // value={data.rib}
+              // onChange={handleInputChange}
             />
             {formEmployeValidationError.rib && (
               <span className="text-red-500 text-sm">{formEmployeValidationError.rib.message}</span>
@@ -822,12 +853,12 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
             <InputWithFloatingLabel
               label="Numero CNAPS"
               placeholder="Numero CNAPS"
-              // name="num_cnaps"
               {...register('num_cnaps')}
               id="num_cnaps"
               className={classeInput}
-              value={data.num_cnaps}
-              onChange={handleInputChange}
+              // name="num_cnaps"
+              // value={data.num_cnaps}
+              // onChange={handleInputChange}
             />
             {formEmployeValidationError.num_cnaps && (
               <span className="text-red-500 text-sm">
@@ -836,25 +867,25 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
             )}
           </div>
 
-          <div>
-            <SelectFloatingLable
-              required
-              label="Mode de paiement"
-              placeholder="Mode de paiement"
-              // name="mode_paiement"
-              // {...register('mode_paiement_salaire')}
-              {...refModeDePaiement}
-              options={modeDePaiement ? modeDePaiement : selectedModeDePaiment}
-              value={data.mode_paiement_salaire}
-              onChange={(e) => handleSelectChange(e as string, 'select-option')}
-              isLoading={isLoadingModeDePaiement}
-            />
-            {formEmployeValidationError.mode_paiement_salaire && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.mode_paiement_salaire.message}
-              </span>
+          <Controller
+            name="mode_paiement_salaire"
+            control={contol}
+            render={({ field: { onChange, value, ...rest }, fieldState: { error } }) => (
+              <div>
+                <SelectFloatingLable
+                  {...rest}
+                  required
+                  label="Mode de paiement"
+                  placeholder="Mode de paiement"
+                  options={modeDePaiement ? modeDePaiement : selectedModeDePaiment}
+                  value={value}
+                  onChange={(e) => handleSelectChange(e as string, 'select-option')}
+                  isLoading={isLoadingModeDePaiement}
+                />
+                {error && <span className="text-red-500 text-sm">{error.message}</span>}
+              </div>
             )}
-          </div>
+          />
         </CCardBody>
       </CCard>
     </>
