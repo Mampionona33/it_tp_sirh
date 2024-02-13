@@ -7,12 +7,10 @@ import {
 import { id } from 'date-fns/locale'
 import { z } from 'zod'
 
-export interface IFormEmployeSchema
-  extends Omit<IEmploye, 'id' | 'matricule' | 'conjoint' | 'salaire_de_base'> {
+export interface IFormEmployeSchema extends Omit<IEmploye, 'id' | 'matricule' | 'conjoint'> {
   id?: string | number
   matricule: string
   conjoint?: Conjoint
-  salaire_de_base: string
 }
 
 interface Conjoint {
@@ -119,7 +117,10 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
   enfant: z
     .array(
       z.object({
-        id: z.union([z.string().min(1, { message: 'Le champ est obligatoire' }), z.number()]),
+        id: z.union([
+          z.string().min(1, { message: 'ID enfant est obligatoire' }),
+          z.number().min(1, { message: 'ID enfant est obligatoire' }),
+        ]),
         nom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
         prenom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
         date_naissance: z
@@ -130,16 +131,27 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
           .min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
         genre_enfant: z.enum([EnumGenre.MASCULIN, EnumGenre.FEMININ]),
         certificat: z.object({
-          id: z.string().optional(),
-          label: z.string(),
-          value: z.enum([
-            EnumCertificatEnfant.AUCUN,
-            EnumCertificatEnfant.VIE,
-            EnumCertificatEnfant.DECE,
-            EnumCertificatEnfant.MEDICAL,
-            EnumCertificatEnfant.SCOLARITE,
-          ]),
+          id: z.union([z.string().optional(), z.number().optional()]),
+          label: z
+            .string()
+            .min(2, { message: 'Le champ certificat doit contenir au moins 2 caractères' }),
+          value: z
+            .enum([
+              EnumCertificatEnfant.AUCUN,
+              EnumCertificatEnfant.VIE,
+              EnumCertificatEnfant.DECE,
+              EnumCertificatEnfant.MEDICAL,
+              EnumCertificatEnfant.SCOLARITE,
+            ])
+            .refine(
+              (val) => {
+                // Valider que la valeur est l'un des certificats valides
+                return Object.values(EnumCertificatEnfant).includes(val as EnumCertificatEnfant)
+              },
+              { message: 'Veuillez renseigner un certificat valide' },
+            ),
         }),
+
         action: z.enum(['ajout', 'modifier']).optional(),
       }),
     )
@@ -167,9 +179,11 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z.object({
 
   travail_de_nuit: z.enum([EnumBoolean.OUI, EnumBoolean.NON]),
 
-  salaire_de_base: z.string().regex(/^[1-9]\d*$/, {
-    message: 'Veuillez renseigner un salaire valide',
-  }),
+  salaire_de_base: z.number().gte(0, { message: 'Veuillez renseigner un salaire valide' }),
+
+  // z.string().regex(/^[1-9]\d*$/, {
+  //   message: 'Veuillez renseigner un salaire valide',
+  // }),
 
   rib: z
     .string()

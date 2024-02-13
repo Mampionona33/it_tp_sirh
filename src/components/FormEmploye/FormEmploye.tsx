@@ -467,7 +467,7 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               <label htmlFor={idGenreMasculin} className="flex gap-3 items-center text-sm">
                 <input
                   type="radio"
-                  {...register(`enfant.${index}.genre` as any)}
+                  {...register(`enfant.${index}.genre_enfant` as any)}
                   id={idGenreMasculin}
                   className="w-3 h-3 text-sm"
                   value={EnumGenre.MASCULIN}
@@ -480,8 +480,8 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               <label htmlFor={idGenreFeminin} className="flex gap-3 items-center text-sm">
                 <input
                   type="radio"
-                  {...register(`enfant.${index}.genre` as any)}
                   id={idGenreFeminin}
+                  {...register(`enfant.${index}.genre_enfant` as any)}
                   className="w-3 h-3 text-sm"
                   value={EnumGenre.FEMININ}
                   // name={`genre_enfant_${data.id}`}

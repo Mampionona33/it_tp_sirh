@@ -1430,11 +1430,12 @@
       "adresse": "2 RUE LIEUTNANT BERARD",
       "tel": "020 000211",
       "email": "sealtmm@seal.mg",
-      "cin": "10126174565",
+      "num_cin": "000 000 000 002",
       "genre": "masculin",
       "enfant": [
         {
-          "nom": "Bambini",
+          "id": "1",
+          "nom": "Traoré",
           "prenom": "Rosam",
           "date_naissance": "2022-04-16",
           "lieu_naissance": "Toamasina",
@@ -1443,15 +1444,16 @@
             "label": "Certificat de scolarité",
             "value": "scolarite"
           },
-          "genre": "feminin",
+          "genre_enfant": "feminin",
           "age": 1
         },
         {
+          "id": "2",
           "nom": "Bambini",
           "prenom": "Didié",
           "date_naissance": "2017-04-16",
           "lieu_naissance": "Toamasina",
-          "genre": "masculin",
+          "genre_enfant": "masculin",
           "age": 6
         }
       ],
@@ -1468,24 +1470,13 @@
       "est_cadre": "non",
       "travail_de_nuit": "oui",
       "salaire_de_base": 800000,
-      "rib": "454787f7dsf787878fd",
+      "rib": "00000 00000 00000000000 01",
       "mode_payement_salaire": "Virement banquaire",
       "num_cnaps": "960101059745",
+      "date_delivrance_cin": "2015-04-16",
       "num_osie": "96010105hjod4",
-      "prime_et_avantage_permanent": [
-        {
-          "libelle": "Carburant",
-          "montant": 450000
-        },
-        {
-          "libelle": "gas",
-          "montant": 100000
-        }
-      ],
-      "depart": {
-        "date": null,
-        "motif": null
-      }
+      "prime_et_avantage_permanent": null,
+      "depart": null
     },
     {
       "id": 3,
