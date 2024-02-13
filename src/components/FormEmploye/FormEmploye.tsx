@@ -930,6 +930,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
 const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
   control,
   handleSubmit,
+  register,
 }) => {
   const dispatch = useDispatch()
   const handleTexteAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -937,13 +938,12 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
     // dispatch(setFormEmploye({ depart: { ...depart, [name]: value } }))
   }
   const submitForm = (data: IEmploye) => {
-    const dateDepart = new Date()
-    console.log(dateDepart)
-    // dispatch(setFormEmploye({ depart: { ...depart, date: format(dateDepart, 'yyyy-MM-dd') } }))
+    console.log(data)
   }
 
   return (
-    <form action="" onSubmit={handleSubmit(submitForm)}>
+    <>
+      {/* <form action="" onSubmit={handleSubmit(submitForm)}> */}
       <Controller
         name="depart"
         control={control}
@@ -963,7 +963,14 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
                   cette action et irréversible. Assurez-vous de suivre le format suivant:
                   <strong>nom matricule</strong>.
                 </CCardText>
-                <input type="date" name="date" id="date_resiliation" className="hidden" />
+                <input
+                  type="date"
+                  // name="date"
+                  id="date_resiliation"
+                  className="hidden"
+                  value={format(new Date(), 'yyyy-MM-dd')}
+                  {...register('depart.date')}
+                />
                 <div className="w-1/3">
                   <label htmlFor="nom_matricule" className="visually-hidden">
                     nom et matricule
@@ -974,22 +981,25 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
                       type="text"
                       id="nom_matricule"
                       placeholder="Nom matricule"
+                      {...register('depart.nom_matricule')}
                       // name="nom_matricule"
                       // value={value!.nom_matricule}
                       required
                       className="border text-sm p-2 h-[28px] w-full outline-customRed-930"
                     />
+                    {error && <span className="text-red-500 text-sm">{error.message}</span>}
                   </div>
                 </div>
                 <div>
                   <textarea
                     {...rest}
-                    name="motif"
+                    // name="motif"
                     id="motif"
                     rows={3}
                     placeholder="Motif de la resiliation du contrat"
                     required
                     className="border outline-customRed-930 text-sm p-1 w-full"
+                    {...register('depart.motif')}
                     // name="motif"
                     // value={data.depart?.motif}
                     // onChange={handleTexteAreaChange}
@@ -997,18 +1007,25 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
                 </div>
               </CCardBody>
               <CCardFooter className="flex justify-end">
-                <ButtonWithIcon label="Résilier" type="submit" name="submit-resiliation" />
+                <ButtonWithIcon
+                  label="Résilier"
+                  type="button"
+                  name="submit-resiliation"
+                  onClick={handleSubmit(submitForm)}
+                />
               </CCardFooter>
             </CCard>
           )
         }}
       />
-    </form>
+      {/* </form> */}
+    </>
   )
 }
 
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   const { data: employe, error, isError, isLoading, refetch, isSuccess } = useFetchSalarie(id)
+  const [showResiliationCard, setShowResiliationCard] = React.useState(false)
 
   const submitForm = (data: IEmploye) => {
     console.log(data)
@@ -1101,6 +1118,12 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     // dispatch(formEmployeAjoutEnfant(nouvelEnfant))
   }
 
+  React.useEffect(() => {
+    if (!showResiliationCard) {
+      setValue('depart', undefined)
+    }
+  }, [showResiliationCard, setValue])
+
   if (formEmployeValidationError) {
     console.log(formEmployeValidationError)
   }
@@ -1117,7 +1140,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     <div className="flex flex-col gap-3">
       <form
         action=""
-        method="post"
+        method="POST"
         className="flex gap-3 flex-col"
         onSubmit={handleSubmit(submitForm)}
         // onSubmit={submitForm}
@@ -1203,14 +1226,19 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         />
         <CCard>
           <pre>{JSON.stringify(watch, null, 2)}</pre>
-          <FormEmployeGroupButton />
+          <FormEmployeGroupButton
+            resiliationCardOpen={showResiliationCard}
+            setShowResiliationCard={setShowResiliationCard}
+          />
         </CCard>
       </form>
-      <CardResiliationContrat
-        control={controlFormEmploye}
-        register={register}
-        handleSubmit={handleSubmit}
-      />
+      {showResiliationCard ? (
+        <CardResiliationContrat
+          control={controlFormEmploye}
+          register={register}
+          handleSubmit={handleSubmit}
+        />
+      ) : null}
     </div>
   )
 }

@@ -253,11 +253,24 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
   })
   .refine(
     (data) => {
-      return data.depart?.nom_matricule === `${data.nom} ${data.matricule}`
+      const { depart, nom, matricule } = data
+      if (!depart && nom && matricule) {
+        return true
+      } else if (depart) {
+        if (
+          depart.nom_matricule !== undefined &&
+          depart.nom_matricule.length > 2 &&
+          depart.nom_matricule === `${data.nom} ${data.matricule}`
+        ) {
+          return true
+        } else {
+          return false
+        }
+      }
     },
     {
       message: "Le champ nom_matricule doit correspondre au format 'nom matricule'",
-      path: ['nom_matricule'],
+      path: ['depart', 'nom_matricule'],
     },
   )
 
