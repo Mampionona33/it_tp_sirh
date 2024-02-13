@@ -931,6 +931,7 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
   control,
   handleSubmit,
   register,
+  formEmployeValidationError,
 }) => {
   const dispatch = useDispatch()
   const handleTexteAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -987,7 +988,11 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
                       required
                       className="border text-sm p-2 h-[28px] w-full outline-customRed-930"
                     />
-                    {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                    {formEmployeValidationError && (
+                      <span className="text-red-500 text-sm">
+                        {formEmployeValidationError.depart?.nom_matricule?.message}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -1004,6 +1009,11 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
                     // value={data.depart?.motif}
                     // onChange={handleTexteAreaChange}
                   ></textarea>
+                  {formEmployeValidationError && (
+                    <span className="text-red-500 text-sm">
+                      {formEmployeValidationError.depart?.motif?.message}
+                    </span>
+                  )}
                 </div>
               </CCardBody>
               <CCardFooter className="flex justify-end">
@@ -1237,6 +1247,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           control={controlFormEmploye}
           register={register}
           handleSubmit={handleSubmit}
+          formEmployeValidationError={formEmployeValidationError}
         />
       ) : null}
     </div>

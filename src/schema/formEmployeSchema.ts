@@ -253,23 +253,53 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
   })
   .refine(
     (data) => {
-      const { depart, nom, matricule } = data
-      if (!depart && nom && matricule) {
+      const { depart } = data
+      if (!depart) {
         return true
-      } else if (depart) {
-        if (
-          depart.nom_matricule !== undefined &&
-          depart.nom_matricule.length > 2 &&
-          depart.nom_matricule === `${data.nom} ${data.matricule}`
-        ) {
-          return true
-        } else {
-          return false
-        }
+      } else if (depart && depart.nom_matricule && depart.nom_matricule.length > 0) {
+        return true
+      } else {
+        return false
       }
     },
     {
-      message: "Le champ nom_matricule doit correspondre au format 'nom matricule'",
+      message: 'Le champ ne doit pas être vide',
+      path: ['depart', 'nom_matricule'],
+    },
+  )
+  .refine(
+    (data) => {
+      const { depart } = data
+      if (!depart) {
+        return true
+      } else if (depart && depart.motif && depart.motif.length > 0) {
+        return true
+      } else {
+        return false
+      }
+    },
+    {
+      message: 'Le champ ne doit pas être vide',
+      path: ['depart', 'motif'],
+    },
+  )
+  .refine(
+    (data) => {
+      const { depart, nom, matricule } = data
+      if (!depart) {
+        return true
+      } else if (
+        depart.nom_matricule !== undefined &&
+        depart.nom_matricule.length > 2 &&
+        depart.nom_matricule === `${nom} ${matricule}`
+      ) {
+        return true
+      } else {
+        return false
+      }
+    },
+    {
+      message: "Veuillez suivre le format 'nom matricule'",
       path: ['depart', 'nom_matricule'],
     },
   )
