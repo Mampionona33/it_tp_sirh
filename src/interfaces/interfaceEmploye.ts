@@ -106,6 +106,7 @@ export interface IInputWithLabelOptionsProps {
 }
 
 export interface Depart {
-  date: string
-  motif: string
+  nom_matricule?: string
+  date?: string
+  motif?: string
 }

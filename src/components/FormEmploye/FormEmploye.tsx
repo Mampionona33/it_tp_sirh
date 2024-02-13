@@ -927,59 +927,82 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
   )
 }
 
-const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({ data }) => {
-  const { depart } = data
+const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
+  control,
+  handleSubmit,
+}) => {
   const dispatch = useDispatch()
   const handleTexteAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target
-    dispatch(setFormEmploye({ depart: { ...depart, [name]: value } }))
+    // dispatch(setFormEmploye({ depart: { ...depart, [name]: value } }))
   }
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  const submitForm = (data: IEmploye) => {
     const dateDepart = new Date()
-    dispatch(setFormEmploye({ depart: { ...depart, date: format(dateDepart, 'yyyy-MM-dd') } }))
+    console.log(dateDepart)
+    // dispatch(setFormEmploye({ depart: { ...depart, date: format(dateDepart, 'yyyy-MM-dd') } }))
   }
 
   return (
-    <form action="" onSubmit={handleSubmit}>
-      <CCard>
-        <h2 className={classeCardTitle}>Résiliation du contrat</h2>
-        <CCardBody className="p-3 flex flex-col gap-3">
-          <CCardText className="text-sm text-customRed-930">
-            Veuillez confirmer la résiliation en saisissant les informations suivantes: nom,
-            matricule de l'employe, ainsi que le motif de la resiliation. Merci de noter que cette
-            action et irréversible. Assurez-vous de suivre le format suivant:
-            <strong>nom matricule</strong>.
-          </CCardText>
-          <div className="w-1/3">
-            <label htmlFor="nom_matricule" className="visually-hidden">
-              nom et matricule
-            </label>
-            <input
-              type="text"
-              name="nom_matricule"
-              id="nom_matricule"
-              placeholder="Nom matricule"
-              required
-              className="border text-sm p-2 h-[28px] w-full outline-customRed-930"
-            />
-          </div>
-          <textarea
-            name="motif"
-            id="motif"
-            cols={10}
-            rows={3}
-            placeholder="Motif de la resiliation du contrat"
-            required
-            className="border outline-customRed-930 text-sm p-1"
-            value={data.depart?.motif}
-            onChange={handleTexteAreaChange}
-          ></textarea>
-        </CCardBody>
-        <CCardFooter className="flex justify-end">
-          <ButtonWithIcon label="Résilier" type="submit" name="submit-resiliation" />
-        </CCardFooter>
-      </CCard>
+    <form action="" onSubmit={handleSubmit(submitForm)}>
+      <Controller
+        name="depart"
+        control={control}
+        render={({
+          field: { onChange, value, ref, ...rest },
+          fieldState: { error, invalid, isDirty, isTouched },
+        }) => {
+          // console.log(value)
+
+          return (
+            <CCard>
+              <h2 className={classeCardTitle}>Résiliation du contrat</h2>
+              <CCardBody className="p-3 flex flex-col gap-3">
+                <CCardText className="text-sm text-customRed-930">
+                  Veuillez confirmer la résiliation en saisissant les informations suivantes: nom,
+                  matricule de l'employe, ainsi que le motif de la resiliation. Merci de noter que
+                  cette action et irréversible. Assurez-vous de suivre le format suivant:
+                  <strong>nom matricule</strong>.
+                </CCardText>
+                <input type="date" name="date" id="date_resiliation" className="hidden" />
+                <div className="w-1/3">
+                  <label htmlFor="nom_matricule" className="visually-hidden">
+                    nom et matricule
+                  </label>
+                  <div>
+                    <input
+                      {...rest}
+                      type="text"
+                      id="nom_matricule"
+                      placeholder="Nom matricule"
+                      // name="nom_matricule"
+                      // value={value!.nom_matricule}
+                      required
+                      className="border text-sm p-2 h-[28px] w-full outline-customRed-930"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <textarea
+                    {...rest}
+                    name="motif"
+                    id="motif"
+                    rows={3}
+                    placeholder="Motif de la resiliation du contrat"
+                    required
+                    className="border outline-customRed-930 text-sm p-1 w-full"
+                    // name="motif"
+                    // value={data.depart?.motif}
+                    // onChange={handleTexteAreaChange}
+                  ></textarea>
+                </div>
+              </CCardBody>
+              <CCardFooter className="flex justify-end">
+                <ButtonWithIcon label="Résilier" type="submit" name="submit-resiliation" />
+              </CCardFooter>
+            </CCard>
+          )
+        }}
+      />
     </form>
   )
 }
@@ -1183,7 +1206,11 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           <FormEmployeGroupButton />
         </CCard>
       </form>
-      {/* <CardResiliationContrat data={{ depart }} /> */}
+      <CardResiliationContrat
+        control={controlFormEmploye}
+        register={register}
+        handleSubmit={handleSubmit}
+      />
     </div>
   )
 }
