@@ -419,7 +419,11 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
           <Controller
             control={control}
             name="enfant"
-            render={({ field: { onBlur, onChange, value, name, ref, ...rest } }) => {
+            render={({
+              field: { onBlur, onChange, value, name, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              console.log(formEmployeValidationError)
               const handleChange = (newValue: any) => {
                 // Mettre à jour la valeur sélectionnée pour le certificat dans le tableau value
                 const updatedValue = value!.map((enfant: IEnfantEmploye, idx: number) => {
@@ -444,19 +448,26 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
                     }
 
               return (
-                <SelectFloatingLable
-                  {...rest}
-                  label="Certificat"
-                  placeholder="Certificat"
-                  id={certificat}
-                  defaultValue={valueCertificat}
-                  options={optionCertificat}
-                  value={valueCertificat}
-                  name="certificat"
-                  ref={ref}
-                  onBlur={onBlur}
-                  onChange={(newValue) => handleChange(newValue)} // Utiliser la fonction handleChange
-                />
+                <div>
+                  <SelectFloatingLable
+                    {...rest}
+                    label="Certificat"
+                    placeholder="Certificat"
+                    id={certificat}
+                    defaultValue={valueCertificat}
+                    options={optionCertificat}
+                    value={valueCertificat}
+                    name="certificat"
+                    ref={ref}
+                    onBlur={onBlur}
+                    onChange={(newValue) => handleChange(newValue)} // Utiliser la fonction handleChange
+                  />
+                  {formEmployeValidationError && formEmployeValidationError.enfant && (
+                    <span className="text-red-500 text-sm">
+                      {formEmployeValidationError.enfant![Number(index)]?.certificat?.message}
+                    </span>
+                  )}
+                </div>
               )
             }}
           />
