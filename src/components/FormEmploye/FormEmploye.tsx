@@ -1022,14 +1022,14 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     },
   })
 
-  // React.useEffect(() => {
-  //   const subscri = watch((value, { name, type }) => {
-  //     console.log(value, name, type)
-  //   })
-  //   return () => {
-  //     subscri.unsubscribe()
-  //   }
-  // }, [watch])
+  React.useEffect(() => {
+    const subscri = watch((value, { name, type }) => {
+      console.log(value, name, type)
+    })
+    return () => {
+      subscri.unsubscribe()
+    }
+  }, [watch])
 
   const {
     fields: listeEnfant,
