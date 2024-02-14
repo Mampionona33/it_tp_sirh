@@ -51,7 +51,7 @@ const customSelectStyles: StylesConfig = {
 const SelectFloatingLable: React.ForwardRefRenderFunction<
   HTMLDivElement,
   ISelectFloatingLableProps
-> = ({ label, ...props }, ref) => {
+> = ({ label, ...props }, ref: Ref<HTMLInputElement>) => {
   const [showLabel, setShowLabel] = useState(false)
 
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
@@ -60,15 +60,19 @@ const SelectFloatingLable: React.ForwardRefRenderFunction<
   }
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    if (!event.target.value) {
+    if (!props.value) {
       setShowLabel(false)
+    } else {
+      setShowLabel(true)
     }
-    props.onBlur && props.onBlur(event)
+    // props.onBlur && props.onBlur(event)
   }
 
   useEffect(() => {
-    if (props.value) {
+    if (props.value && props.value.value !== '') {
       setShowLabel(true)
+    } else {
+      setShowLabel(false)
     }
   }, [props.value])
 

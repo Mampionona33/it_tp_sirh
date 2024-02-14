@@ -1008,7 +1008,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
   const handleSelectChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
       onChangeModeDePaiement(newValue, action)
-      dispatch(setFormEmploye({ mode_paiement_salaire: newValue }))
+      // dispatch(setFormEmploye({ mode_paiement_salaire: newValue }))
     }
   }
 
@@ -1084,21 +1084,25 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
           <Controller
             name="mode_paiement_salaire"
             control={contol}
-            render={({ field: { onChange, value, ...rest }, fieldState: { error } }) => (
-              <div>
-                <SelectFloatingLable
-                  {...rest}
-                  required
-                  label="Mode de paiement"
-                  placeholder="Mode de paiement"
-                  options={modeDePaiement ? modeDePaiement : selectedModeDePaiment}
-                  value={value}
-                  onChange={(e) => handleSelectChange(e as string, 'select-option')}
-                  isLoading={isLoadingModeDePaiement}
-                />
-                {error && <span className="text-red-500 text-sm">{error.message}</span>}
-              </div>
-            )}
+            render={({ field: { onChange, onBlur, value, ...rest }, fieldState: { error } }) => {
+              console.log(value)
+              return (
+                <div>
+                  <SelectFloatingLable
+                    {...rest}
+                    required
+                    label="Mode de paiement"
+                    placeholder="Mode de paiement"
+                    options={modeDePaiement ? modeDePaiement : selectedModeDePaiment}
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={(e) => handleSelectChange(e as string, 'select-option')}
+                    isLoading={isLoadingModeDePaiement}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
           />
         </CCardBody>
       </CCard>
