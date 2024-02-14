@@ -1,14 +1,26 @@
-import React, { forwardRef, HTMLProps, useState, FocusEvent, useEffect } from 'react'
+import React, {
+  forwardRef,
+  HTMLProps,
+  Ref,
+  useState,
+  FocusEvent,
+  useEffect,
+  ChangeEvent,
+} from 'react'
 
-interface InputProps extends HTMLProps<HTMLInputElement> {
+interface InputProps extends Omit<HTMLProps<HTMLInputElement>, 'onChange' | 'value'> {
   label: string
+  value?: string
+  onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 
 const InputWithFloatingLabel: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { label, ...props },
-  ref,
+  { label, value, onChange, ...props },
+  ref: Ref<HTMLInputElement>,
 ) => {
-  const [showLabel, setShowLabel] = useState(false)
+  const [showLabel, setShowLabel] = useState(!!value)
+
+  const isControlled = value !== undefined
 
   const handleFocus = (event: FocusEvent<HTMLInputElement>) => {
     setShowLabel(true)
@@ -22,11 +34,16 @@ const InputWithFloatingLabel: React.ForwardRefRenderFunction<HTMLInputElement, I
     props.onBlur && props.onBlur(event)
   }
 
+  // Updated handleLocalChange function to directly call the onChange prop with the new value
+  const handleLocalChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange && onChange(event) // Forward the event to the parent component, if provided
+  }
+
   useEffect(() => {
-    if (props.value) {
+    if (value) {
       setShowLabel(true)
     }
-  }, [props.value])
+  }, [value])
 
   return (
     <div className="flex flex-col">
@@ -38,8 +55,10 @@ const InputWithFloatingLabel: React.ForwardRefRenderFunction<HTMLInputElement, I
       <input
         {...props}
         ref={ref}
+        value={isControlled ? value : undefined} // Use undefined for uncontrolled input
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onChange={handleLocalChange} // Handle input changes locally
         placeholder={
           props.required && props.placeholder ? `${props.placeholder} *` : props.placeholder
         }

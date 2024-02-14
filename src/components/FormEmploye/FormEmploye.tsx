@@ -51,10 +51,11 @@ const classeCardTitle = 'mx-3 mb-0 mt-3 uppercase text-customRed-930 text-base'
 const classeCard: string = 'rounded-sm pb-3 px-3'
 
 const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
-  data,
+  // data,
   register,
   formEmployeValidationError,
   setValue,
+  control,
 }) => {
   const dispatch = useDispatch()
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,42 +68,63 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
       <h2 className={classeCardTitle}>Information personnelles</h2>
       <CCardBody className={classeCardBody}>
         <div>
-          <InputWithFloatingLabel
-            label="Nom employé"
-            required
-            placeholder="Nom"
-            id="nom"
-            className={classeInput}
-            {...register('nom')}
-            // value={data?.nom}
-            // onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            //   setValue('nom', event.target.value)
-            // }
+          <Controller
+            control={control}
+            name="nom"
+            render={({ field: { onBlur, onChange, value, ref, ...rest } }) => (
+              <>
+                <InputWithFloatingLabel
+                  label="Nom employé"
+                  required
+                  placeholder="Nom"
+                  id="nom"
+                  className={classeInput}
+                  {...rest}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  // {...register('nom')}
+                  // value={data?.nom}
+                  // onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  //   setValue('nom', event.target.value)
+                  // }
+                />
+                {formEmployeValidationError.nom && (
+                  <span className="text-sm text-customRed-800">
+                    {formEmployeValidationError.nom.message}
+                  </span>
+                )}
+              </>
+            )}
           />
-          {formEmployeValidationError.nom && (
-            <span className="text-sm text-customRed-800">
-              {formEmployeValidationError.nom.message}
-            </span>
-          )}
         </div>
 
-        <div>
-          <InputWithFloatingLabel
-            label="Prénom employé"
-            required
-            id="prenom"
-            placeholder="Prénom employé"
-            className={classeInput}
-            {...register('prenom')}
-            // value={data?.prenom}
-            // onChange={handleInputChange}
-          />
-          {formEmployeValidationError.prenom && (
-            <span className="text-sm text-customRed-800">
-              {formEmployeValidationError.prenom.message}
-            </span>
-          )}
-        </div>
+        <Controller
+          control={control}
+          name="prenom"
+          render={({ field: { onBlur, onChange, value, ref, ...rest }, fieldState: { error } }) => {
+            console.log(error)
+            return (
+              <div>
+                <InputWithFloatingLabel
+                  label="Prénom employé"
+                  required
+                  id="prenom"
+                  placeholder="Prénom employé"
+                  className={classeInput}
+                  {...rest}
+                  onChange={onChange}
+                  value={value}
+                  onBlur={onBlur}
+                  // {...register('prenom')}
+                  // value={data?.prenom}
+                  // onChange={handleInputChange}
+                />
+                {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+              </div>
+            )
+          }}
+        />
 
         <div>
           <InputWithFloatingLabel
@@ -1157,21 +1179,22 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
       >
         <input type="text" className="hidden" value={id} {...register('id')} />
         <CardInfoPersoEmploye
+          control={controlFormEmploye}
           register={register}
           formEmployeValidationError={formEmployeValidationError}
           setValue={setValue}
-          data={{
-            nom: employe?.nom || '',
-            adresse: employe?.adresse || '',
-            date_delivrance_cin: employe?.date_delivrance_cin || '',
-            date_naissance: employe?.date_naissance || '',
-            genre: employe?.genre || EnumGenre.MASCULIN,
-            lieu_naissance: employe?.lieu_naissance || '',
-            num_cin: employe?.num_cin || '',
-            prenom: employe?.prenom || '',
-            nom_mere: employe?.nom_mere,
-            nom_pere: employe?.nom_pere,
-          }}
+          // data={{
+          //   nom: employe?.nom || '',
+          //   adresse: employe?.adresse || '',
+          //   date_delivrance_cin: employe?.date_delivrance_cin || '',
+          //   date_naissance: employe?.date_naissance || '',
+          //   genre: employe?.genre || EnumGenre.MASCULIN,
+          //   lieu_naissance: employe?.lieu_naissance || '',
+          //   num_cin: employe?.num_cin || '',
+          //   prenom: employe?.prenom || '',
+          //   nom_mere: employe?.nom_mere,
+          //   nom_pere: employe?.nom_pere,
+          // }}
         />
         <CCard className={classeCard}>
           <div className="flex flex-col gap-2">
