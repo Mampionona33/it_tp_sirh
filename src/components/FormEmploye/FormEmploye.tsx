@@ -1085,7 +1085,6 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
             name="mode_paiement_salaire"
             control={contol}
             render={({ field: { onChange, onBlur, value, ...rest }, fieldState: { error } }) => {
-              console.log(value)
               return (
                 <div>
                   <SelectFloatingLable
