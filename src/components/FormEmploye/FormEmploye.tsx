@@ -311,42 +311,40 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
           }}
         />
 
-        <fieldset id="genre" className="border border-solid border-gray-300 p-3">
-          <legend className="text-sm">Genre</legend>
-          <div className="flex gap-1 flex-col">
-            <label htmlFor="genre_masculin" className="flex gap-3 items-center text-sm">
-              <input
-                type="radio"
-                {...register('genre')}
-                id="genre_masculin"
-                value={EnumGenre.MASCULIN}
-                className="w-3 h-3 text-sm"
-                // name="genre"
-                // checked={data?.genre === EnumGenre.MASCULIN}
-                // onChange={handleInputChange}
-              />
-              <span>Masculin</span>
-            </label>
-            <label htmlFor="genre_feminin" className="flex gap-3 items-center text-sm">
-              <input
-                type="radio"
-                {...register('genre')}
-                id="genre_feminin"
-                value={EnumGenre.FEMININ}
-                className="w-3 h-3 text-sm"
-                // name="genre"
-                // onChange={handleInputChange}
-                // checked={data?.genre === EnumGenre.FEMININ}
-              />
-              <span>Féminin</span>
-            </label>
-          </div>
-          {formEmployeValidationError.genre && (
-            <span className="text-sm text-customRed-800">
-              {formEmployeValidationError.genre.message}
-            </span>
-          )}
-        </fieldset>
+        <Controller
+          control={control}
+          name="genre"
+          render={({ field: { onBlur, onChange, value, ...rest }, fieldState: { error } }) => {
+            return (
+              <fieldset id="genre" className="border border-solid border-gray-300 p-3">
+                <legend className="text-sm">Genre</legend>
+                <div className="flex gap-1 flex-col">
+                  <label htmlFor="genre_masculin" className="flex gap-3 items-center text-sm">
+                    <input
+                      type="radio"
+                      value={EnumGenre.MASCULIN}
+                      onChange={onChange}
+                      checked={value === EnumGenre.MASCULIN}
+                      className="w-3 h-3 text-sm"
+                    />
+                    <span>Masculin</span>
+                  </label>
+                  <label htmlFor="genre_feminin" className="flex gap-3 items-center text-sm">
+                    <input
+                      type="radio"
+                      value={EnumGenre.FEMININ}
+                      onChange={onChange}
+                      checked={value === EnumGenre.FEMININ}
+                      className="w-3 h-3 text-sm"
+                    />
+                    <span>Féminin</span>
+                  </label>
+                </div>
+                {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+              </fieldset>
+            )
+          }}
+        />
       </CCardBody>
     </CCard>
   )
