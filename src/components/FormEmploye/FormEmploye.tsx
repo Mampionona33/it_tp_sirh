@@ -67,37 +67,35 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
     <CCard className={classeCard}>
       <h2 className={classeCardTitle}>Information personnelles</h2>
       <CCardBody className={classeCardBody}>
-        <div>
-          <Controller
-            control={control}
-            name="nom"
-            render={({ field: { onBlur, onChange, value, ref, ...rest } }) => (
-              <>
-                <InputWithFloatingLabel
-                  label="Nom employé"
-                  required
-                  placeholder="Nom"
-                  id="nom"
-                  className={classeInput}
-                  {...rest}
-                  onChange={onChange}
-                  onBlur={onBlur}
-                  value={value}
-                  // {...register('nom')}
-                  // value={data?.nom}
-                  // onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  //   setValue('nom', event.target.value)
-                  // }
-                />
-                {formEmployeValidationError.nom && (
-                  <span className="text-sm text-customRed-800">
-                    {formEmployeValidationError.nom.message}
-                  </span>
-                )}
-              </>
-            )}
-          />
-        </div>
+        <Controller
+          control={control}
+          name="nom"
+          render={({ field: { onBlur, onChange, value, ref, ...rest } }) => (
+            <>
+              <InputWithFloatingLabel
+                label="Nom employé"
+                required
+                placeholder="Nom"
+                id="nom"
+                className={classeInput}
+                {...rest}
+                onChange={onChange}
+                onBlur={onBlur}
+                value={value}
+                // {...register('nom')}
+                // value={data?.nom}
+                // onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                //   setValue('nom', event.target.value)
+                // }
+              />
+              {formEmployeValidationError.nom && (
+                <span className="text-sm text-customRed-800">
+                  {formEmployeValidationError.nom.message}
+                </span>
+              )}
+            </>
+          )}
+        />
 
         <Controller
           control={control}
@@ -126,133 +124,193 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
           }}
         />
 
-        <div>
-          <InputWithFloatingLabel
-            label="Adresse"
-            required
-            id="adresse"
-            placeholder="Adresse"
-            className={classeInput}
-            {...register('adresse')}
-            // value={data?.adresse}
-            // onChange={handleInputChange}
-          />
-          {formEmployeValidationError.adresse && (
-            <span className="text-sm text-customRed-800">
-              {formEmployeValidationError.adresse.message}
-            </span>
-          )}
-        </div>
+        <Controller
+          control={control}
+          name="adresse"
+          render={({ field: { onBlur, onChange, value, ref, ...rest }, fieldState: { error } }) => {
+            return (
+              <div>
+                <InputWithFloatingLabel
+                  label="Adresse"
+                  required
+                  id="adresse"
+                  placeholder="Adresse"
+                  className={classeInput}
+                  {...rest}
+                  value={value}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  // {...register('adresse')}
+                  // value={data?.adresse}
+                  // onChange={handleInputChange}
+                />
+                {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+              </div>
+            )
+          }}
+        />
 
-        <div>
-          <InputWithFloatingLabel
-            label="Date de naissance"
-            type="date"
-            required
-            id="date_naissance"
-            placeholder="Date de naissance"
-            className={classeInput}
-            {...register('date_naissance')}
-            // value={data?.date_naissance}
-            // onChange={handleInputChange}
-          />
-          {formEmployeValidationError.date_naissance && (
-            <span className="text-sm text-customRed-800">
-              {formEmployeValidationError.date_naissance.message}
-            </span>
-          )}
-        </div>
+        <Controller
+          control={control}
+          name="date_naissance"
+          render={({ field: { onBlur, onChange, value, ref, ...rest }, fieldState: { error } }) => {
+            return (
+              <div>
+                <InputWithFloatingLabel
+                  label="Date de naissance"
+                  type="date"
+                  required
+                  id="date_naissance"
+                  placeholder="Date de naissance"
+                  className={classeInput}
+                  {...rest}
+                  value={value}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  // {...register('date_naissance')}
+                  // value={data?.date_naissance}
+                  // onChange={handleInputChange}
+                />
+                {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+              </div>
+            )
+          }}
+        />
 
-        <div>
-          <InputWithFloatingLabel
-            label="Lieu de naissance"
-            required
-            id="lieu_naissance"
-            placeholder="Lieu de naissance"
-            {...register('lieu_naissance')}
-            className={classeInput}
-            // value={data?.lieu_naissance}
-            // onChange={handleInputChange}
-          />
-          {formEmployeValidationError.lieu_naissance && (
-            <span className="text-sm text-customRed-800">
-              {formEmployeValidationError.lieu_naissance.message}
-            </span>
-          )}
-        </div>
+        <Controller
+          control={control}
+          name="lieu_naissance"
+          render={({ field: { onBlur, onChange, value, ref, ...rest }, fieldState: { error } }) => {
+            return (
+              <div>
+                <InputWithFloatingLabel
+                  label="Lieu de naissance"
+                  required
+                  id="lieu_naissance"
+                  placeholder="Lieu de naissance"
+                  className={classeInput}
+                  {...rest}
+                  value={value}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  // {...register('lieu_naissance')}
+                  // value={data?.lieu_naissance}
+                  // onChange={handleInputChange}
+                />
+                {formEmployeValidationError.lieu_naissance && (
+                  <span className="text-sm text-customRed-800">
+                    {formEmployeValidationError.lieu_naissance.message}
+                  </span>
+                )}
+              </div>
+            )
+          }}
+        />
 
-        <div>
-          <InputWithFloatingLabel
-            label="N° CIN"
-            required
-            id="num_cin"
-            placeholder="N° CIN: 000 000 000 000"
-            className={classeInput}
-            {...register('num_cin')}
-            // value={data?.num_cin}
-            // onChange={handleInputChange}
-          />
-          {formEmployeValidationError.num_cin && (
-            <span className="text-sm text-customRed-800">
-              {formEmployeValidationError.num_cin.message}
-            </span>
-          )}
-        </div>
+        <Controller
+          control={control}
+          name="num_cin"
+          render={({ field: { onBlur, onChange, value, ref, ...rest }, fieldState: { error } }) => {
+            return (
+              <div>
+                <InputWithFloatingLabel
+                  label="N° CIN"
+                  required
+                  id="num_cin"
+                  placeholder="N° CIN: 000 000 000 000"
+                  className={classeInput}
+                  {...rest}
+                  value={value}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  // {...register('num_cin')}
+                  // value={data?.num_cin}
+                  // onChange={handleInputChange}
+                />
+                {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+              </div>
+            )
+          }}
+        />
 
-        <div>
-          <InputWithFloatingLabel
-            label="Date de delivrance CIN"
-            type="date"
-            required
-            {...register('date_delivrance_cin')}
-            id="date_delivrance_cin"
-            placeholder="Date de delivrance CIN"
-            className={classeInput}
-            // value={data?.date_delivrance_cin}
-            // onChange={handleInputChange}
-          />
-          {formEmployeValidationError.date_delivrance_cin && (
-            <span className="text-sm text-customRed-800">
-              {formEmployeValidationError.date_delivrance_cin.message}
-            </span>
-          )}
-        </div>
+        <Controller
+          control={control}
+          name="date_delivrance_cin"
+          render={({ field: { onBlur, onChange, value, ref, ...rest }, fieldState: { error } }) => {
+            return (
+              <div>
+                <InputWithFloatingLabel
+                  label="Date de delivrance CIN"
+                  type="date"
+                  required
+                  id="date_delivrance_cin"
+                  placeholder="Date de delivrance CIN"
+                  className={classeInput}
+                  value={value}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  // {...register('date_delivrance_cin')}
+                  // value={data?.date_delivrance_cin}
+                  // onChange={handleInputChange}
+                />
+                {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+              </div>
+            )
+          }}
+        />
 
-        <div>
-          <InputWithFloatingLabel
-            label="Nom du père"
-            // name="nom_pere"
-            {...register('nom_pere')}
-            id="nom_pere"
-            placeholder="Nom du père"
-            className={classeInput}
-            // value={data?.nom_pere}
-            // onChange={handleInputChange}
-          />
-          {formEmployeValidationError.nom_pere && (
-            <span className="text-sm text-customRed-800">
-              {formEmployeValidationError.nom_pere.message}
-            </span>
-          )}
-        </div>
+        <Controller
+          control={control}
+          name="nom_pere"
+          render={({ field: { onBlur, onChange, value, ref, ...rest }, fieldState: { error } }) => {
+            return (
+              <div>
+                <InputWithFloatingLabel
+                  label="Nom du père"
+                  id="nom_pere"
+                  placeholder="Nom du père"
+                  className={classeInput}
+                  {...rest}
+                  value={value}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  // {...register('nom_pere')}
+                  // name="nom_pere"
+                  // value={data?.nom_pere}
+                  // onChange={handleInputChange}
+                />
+                {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+              </div>
+            )
+          }}
+        />
 
-        <div>
-          <InputWithFloatingLabel
-            label="Nom de la mère"
-            // name="nom_mere"
-            {...register('nom_mere')}
-            id="nom_mere"
-            placeholder="Nom de la mère"
-            className={classeInput}
-            // value={data?.nom_mere}
-            // onChange={handleInputChange}
-          />
-          {formEmployeValidationError.nom_mere && (
-            <span className="text-sm text-customRed-800">
-              {formEmployeValidationError.nom_mere.message}
-            </span>
-          )}
-        </div>
+        <Controller
+          control={control}
+          name="nom_mere"
+          render={({ field: { onBlur, onChange, value, ref, ...rest }, fieldState: { error } }) => {
+            return (
+              <div>
+                <InputWithFloatingLabel
+                  label="Nom de la mère"
+                  id="nom_mere"
+                  placeholder="Nom de la mère"
+                  className={classeInput}
+                  {...rest}
+                  value={value}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  // name="nom_mere"
+                  // {...register('nom_mere')}
+                  // value={data?.nom_mere}
+                  // onChange={handleInputChange}
+                />
+                {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+              </div>
+            )
+          }}
+        />
+
         <fieldset id="genre" className="border border-solid border-gray-300 p-3">
           <legend className="text-sm">Genre</legend>
           <div className="flex gap-1 flex-col">
@@ -382,81 +440,129 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
           icon={<XMarkIcon width={18} height={18} />}
         ></ButtonWithIcon>
         <div className="grid mx-0 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3 p-3">
-          <div>
-            <InputWithFloatingLabel
-              label="Nom"
-              required
-              placeholder="Nom"
-              {...register(`enfant.${index}.nom` as any)}
-              id={idNom}
-              className={classeInput}
-              // name="nom"
-              // value={value.nom}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError && formEmployeValidationError.enfant && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.enfant![Number(index)]?.nom?.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name={`enfant.${index}.nom` as any}
+            render={({
+              field: { onBlur, onChange, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Nom"
+                    required
+                    placeholder="Nom"
+                    id={idNom}
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    {...rest}
+                    // {...register(`enfant.${index}.nom` as any)}
+                    // name="nom"
+                    // value={value.nom}
+                    // onChange={handleInputChange}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
-          <div>
-            <InputWithFloatingLabel
-              label="Prènom"
-              required
-              placeholder="Prènom"
-              // name="prenom"
-              {...register(`enfant.${index}.prenom` as any)}
-              id={idPrenom}
-              className={classeInput}
-              // value={value.prenom}
-            />
-            {formEmployeValidationError && formEmployeValidationError.enfant && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.enfant![Number(index)]?.prenom?.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name={`enfant.${index}.prenom` as any}
+            render={({
+              field: { onBlur, onChange, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Prènom"
+                    required
+                    placeholder="Prènom"
+                    id={idPrenom}
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    {...rest}
+                    // name="prenom"
+                    // {...register(`enfant.${index}.prenom` as any)}
+                    // value={value.prenom}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
-          <div>
-            <InputWithFloatingLabel
-              label="Lieu de naissance"
-              required
-              placeholder="Lieu de naissance"
-              id={idLieuNaissance}
-              className={classeInput}
-              {...register(`enfant.${index}.lieu_naissance` as any)}
-              // name="lieu_naissance"
-              // value={data.lieu_naissance}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError && formEmployeValidationError.enfant && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.enfant![Number(index)]?.lieu_naissance?.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name={`enfant.${index}.lieu_naissance` as any}
+            render={({
+              field: { onBlur, onChange, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Lieu de naissance"
+                    required
+                    placeholder="Lieu de naissance"
+                    id={idLieuNaissance}
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    {...rest}
+                    // {...register(`enfant.${index}.lieu_naissance` as any)}
+                    // name="lieu_naissance"
+                    // value={data.lieu_naissance}
+                    // onChange={handleInputChange}
+                  />
+                  {formEmployeValidationError && formEmployeValidationError.enfant && (
+                    <span className="text-red-500 text-sm">
+                      {formEmployeValidationError.enfant![Number(index)]?.lieu_naissance?.message}
+                    </span>
+                  )}
+                </div>
+              )
+            }}
+          />
 
-          <div>
-            <InputWithFloatingLabel
-              label="Date de naissance"
-              type="date"
-              required
-              {...register(`enfant.${index}.date_naissance` as any)}
-              id={idDateNaissance}
-              placeholder="Date de naissance"
-              className={classeInput}
-              // name="date_naissance"
-              // value={data.date_naissance}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError && formEmployeValidationError.enfant && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.enfant![Number(index)]?.date_naissance?.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name={`enfant.${index}.date_naissance` as any}
+            render={({
+              field: { onBlur, onChange, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Date de naissance"
+                    type="date"
+                    required
+                    id={idDateNaissance}
+                    placeholder="Date de naissance"
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    {...rest}
+                    // name="date_naissance"
+                    // value={data.date_naissance}
+                    // onChange={handleInputChange}
+                    // {...register(`enfant.${index}.date_naissance` as any)}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
           {/**
            * Utilisation de Controller pour intégrer React-select.
@@ -465,54 +571,27 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
            */}
           <Controller
             control={control}
-            name="enfant"
+            name={`enfant.${index}.certificat` as any}
             render={({
               field: { onBlur, onChange, value, name, ref, ...rest },
               fieldState: { error },
             }) => {
-              const handleChange = (newValue: any) => {
-                // Mettre à jour la valeur sélectionnée pour le certificat dans le tableau value
-                const updatedValue = value!.map((enfant: IEnfantEmploye, idx: number) => {
-                  if (idx === Number(index)) {
-                    return {
-                      ...enfant,
-                      certificat: newValue,
-                    }
-                  }
-                  return enfant
-                })
-                onChange(updatedValue)
-              }
-
-              const enfantValue = value && value[Number(index)]
-              const valueCertificat =
-                enfantValue && enfantValue.certificat
-                  ? enfantValue.certificat
-                  : {
-                      label: '---',
-                      value: EnumCertificatEnfant.AUCUN,
-                    }
-
               return (
                 <div>
                   <SelectFloatingLable
-                    {...rest}
                     label="Certificat"
                     placeholder="Certificat"
                     id={certificat}
-                    defaultValue={valueCertificat}
                     options={optionCertificat}
-                    value={valueCertificat}
-                    name="certificat"
+                    value={value}
+                    {...rest}
                     ref={ref}
                     onBlur={onBlur}
-                    onChange={(newValue) => handleChange(newValue)} // Utiliser la fonction handleChange
+                    onChange={onChange}
+                    // name="certificat"
+                    // onChange={(newValue) => handleChange(newValue)} // Utiliser la fonction handleChange
                   />
-                  {formEmployeValidationError && formEmployeValidationError.enfant && (
-                    <span className="text-red-500 text-sm">
-                      {formEmployeValidationError.enfant![Number(index)]?.certificat?.message}
-                    </span>
-                  )}
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
                 </div>
               )
             }}
@@ -614,43 +693,70 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
       <CCard className={classeCard}>
         <h2 className={classeCardTitle}>Information professionnelles</h2>
         <CCardBody className={classeCardBody}>
-          <div>
-            <InputWithFloatingLabel
-              label="Matricule"
-              required
-              placeholder="Matricule"
-              {...register('matricule')}
-              id="matricule"
-              className={classeInput}
-              // name="matricule"
-              // value={matricule}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError.matricule && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.matricule.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name="matricule"
+            render={({
+              field: { onBlur, onChange, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Matricule"
+                    required
+                    placeholder="Matricule"
+                    id="matricule"
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    ref={ref}
+                    {...rest}
+                    // {...register('matricule')}
+                    // name="matricule"
+                    // value={matricule}
+                    // onChange={handleInputChange}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
-          <div>
-            <InputWithFloatingLabel
-              label="Titre du poste"
-              required
-              placeholder="Titre du poste"
-              id="titre_poste"
-              {...register('titre_poste')}
-              className={classeInput}
-              // name="titre_poste"
-              // value={titre_poste}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError.titre_poste && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.titre_poste.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name="titre_poste"
+            render={({
+              field: { onBlur, onChange, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Titre du poste"
+                    required
+                    placeholder="Titre du poste"
+                    id="titre_poste"
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    {...rest}
+                    // {...register('titre_poste')}
+                    // name="titre_poste"
+                    // value={titre_poste}
+                    // onChange={handleInputChange}
+                  />
+                  {formEmployeValidationError.titre_poste && (
+                    <span className="text-red-500 text-sm">
+                      {formEmployeValidationError.titre_poste.message}
+                    </span>
+                  )}
+                </div>
+              )
+            }}
+          />
 
           <Controller
             control={control}
@@ -678,138 +784,192 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
             }}
           />
 
-          <div>
-            <InputWithFloatingLabel
-              label="Département"
-              required
-              placeholder="Département"
-              {...register('departement')}
-              id="departement"
-              className={classeInput}
-              // name="departement"
-              // value={departement}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError.departement && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.departement.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name="departement"
+            render={({
+              field: { onChange, onBlur, name, value, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Département"
+                    required
+                    placeholder="Département"
+                    id="departement"
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    // {...register('departement')}
+                    // name="departement"
+                    // value={departement}
+                    // onChange={handleInputChange}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
-          <div>
-            <InputWithFloatingLabel
-              label="Date d'embauche"
-              type="date"
-              required
-              placeholder="Département"
-              {...register('date_embauche')}
-              id="date_embauche"
-              className={classeInput}
-              // name="date_embauche"
-              // value={date_embauche}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError.date_embauche && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.date_embauche.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name="date_embauche"
+            render={({
+              field: { onChange, onBlur, name, value, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Date d'embauche"
+                    type="date"
+                    required
+                    placeholder="Date d'embauche"
+                    id="date_embauche"
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    {...rest}
+                    // name="date_embauche"
+                    // value={date_embauche}
+                    // {...register('date_embauche')}
+                    // onChange={handleInputChange}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
-          <div>
-            <InputWithFloatingLabel
-              label="Lieu de travail"
-              required
-              placeholder="Lieu de travail"
-              {...register('lieu_travail')}
-              id="lieu_travail"
-              className={classeInput}
-              // name="lieu_travail"
-              // value={lieu_travail}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError.lieu_travail && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.lieu_travail.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name="lieu_travail"
+            render={({
+              field: { onChange, onBlur, name, value, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Lieu de travail"
+                    required
+                    placeholder="Lieu de travail"
+                    id="lieu_travail"
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    {...rest}
+                    // name="lieu_travail"
+                    // value={lieu_travail}
+                    // {...register('lieu_travail')}
+                    // onChange={handleInputChange}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
-          <div>
-            <InputWithFloatingLabel
-              label="Telephone"
-              placeholder="Telephone"
-              {...register('telephone')}
-              id="telephone"
-              className={classeInput}
-              // name="telephone"
-              // value={telephone}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError.telephone && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.telephone.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name="telephone"
+            render={({
+              field: { onChange, onBlur, name, value, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Telephone"
+                    placeholder="Telephone"
+                    id="telephone"
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    {...rest}
+                    // name="telephone"
+                    // value={telephone}
+                    // {...register('telephone')}
+                    // onChange={handleInputChange}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
-          <div>
-            <InputWithFloatingLabel
-              label="Email"
-              type="email"
-              placeholder="Email: employe@example.com"
-              {...register('email')}
-              id="email"
-              className={classeInput}
-              // name="email"
-              // value={email}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError.email && (
-              <span className="text-red-500 text-sm">
-                {' '}
-                {formEmployeValidationError.email.message}
-              </span>
-            )}
-          </div>
-          <fieldset id="travail_de_nuit" className="border border-solid border-gray-300 p-3">
-            <legend className="text-sm">Travail de nuit</legend>
-            <div className="flex gap-1 flex-col">
-              <label htmlFor="travail_de_nuit_oui" className="flex items-center gap-3 text-sm">
-                <input
-                  type="radio"
-                  {...register('travail_de_nuit')}
-                  id="travail_de_nuit_oui"
-                  className="w-3 h-3 text-sm"
-                  value={EnumBoolean.OUI}
-                  // name="travail_de_nuit"
-                  // checked={travail_de_nuit === EnumBoolean.OUI}
-                  // onChange={handleInputChange}
-                />
-                <span>Oui</span>
-              </label>
+          <Controller
+            control={control}
+            name="email"
+            render={({
+              field: { onChange, onBlur, name, value, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Email"
+                    type="email"
+                    placeholder="Email: employe@example.com"
+                    id="email"
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    {...rest}
+                    // name="email"
+                    // value={email}
+                    // {...register('email')}
+                    // onChange={handleInputChange}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
-              <label htmlFor="travail_de_nuit_non" className="flex gap-3 items-center text-sm">
-                <input
-                  type="radio"
-                  {...register('travail_de_nuit')}
-                  id="travail_de_nuit_non"
-                  className="w-3 h-3 text-sm text-center"
-                  value={EnumBoolean.NON}
-                  // name="travail_de_nuit"
-                  // onChange={handleInputChange}
-                  // checked={travail_de_nuit === EnumBoolean.NON}
-                />
-                <span>Non</span>
-              </label>
-            </div>
-            {formEmployeValidationError.travail_de_nuit && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.travail_de_nuit.message}
-              </span>
+          <Controller
+            control={control}
+            name="travail_de_nuit"
+            render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
+              <fieldset id="travail_de_nuit" className="border border-solid border-gray-300 p-3">
+                <legend className="text-sm">Travail de nuit</legend>
+                <div className="flex gap-1 flex-col">
+                  <label htmlFor="travail_de_nuit_oui" className="flex items-center gap-3 text-sm">
+                    <input
+                      type="radio"
+                      id="travail_de_nuit_oui"
+                      className="w-3 h-3 text-sm"
+                      value={EnumBoolean.OUI}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      checked={value === EnumBoolean.OUI}
+                    />
+                    <span>Oui</span>
+                  </label>
+
+                  <label htmlFor="travail_de_nuit_non" className="flex gap-3 items-center text-sm">
+                    <input
+                      type="radio"
+                      id="travail_de_nuit_non"
+                      className="w-3 h-3 text-sm text-center"
+                      value={EnumBoolean.NON}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      checked={value === EnumBoolean.NON}
+                    />
+                    <span>Non</span>
+                  </label>
+                </div>
+                {error && <span className="text-red-500 text-sm">{error.message}</span>}
+              </fieldset>
             )}
-          </fieldset>
+          />
         </CCardBody>
       </CCard>
     </>
