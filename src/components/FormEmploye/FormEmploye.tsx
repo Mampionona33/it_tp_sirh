@@ -101,7 +101,6 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
           control={control}
           name="prenom"
           render={({ field: { onBlur, onChange, value, ref, ...rest }, fieldState: { error } }) => {
-            console.log(error)
             return (
               <div>
                 <InputWithFloatingLabel
