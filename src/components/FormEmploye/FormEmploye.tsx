@@ -977,7 +977,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
   data,
   register,
   formEmployeValidationError,
-  contol,
+  control,
   setValue,
 }) => {
   const dispatch = useDispatch()
@@ -1002,7 +1002,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
     field: { value: selectedModeDePaiment, onChange: onChangeModeDePaiement, ...refModeDePaiement },
   } = useController({
     name: 'mode_paiement_salaire',
-    control: contol,
+    control: control,
   })
 
   const handleSelectChange = (newValue: string, action: SetValueAction) => {
@@ -1025,65 +1025,104 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
       <CCard className={classeCard}>
         <h2 className={classeCardTitle}>Information de paie</h2>
         <CCardBody className={classeCardBody}>
-          <div>
-            <InputWithFloatingLabel
-              label="Salaire de base"
-              type="number"
-              min={0}
-              required
-              placeholder="Salaire de base"
-              {...register('salaire_de_base')}
-              id="salaire_de_base"
-              className={classeInput}
-              // name="salaire_de_base"
-              // value={data.salaire_de_base}
-              // onChange={handleInputChange}
-              // onFocus={handleFocusInputTypeNumber}
-            />
-            {formEmployeValidationError.salaire_de_base && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.salaire_de_base.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name="salaire_de_base"
+            render={({
+              field: { onBlur, onChange, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Salaire de base"
+                    type="number"
+                    min={0}
+                    required
+                    placeholder="Salaire de base"
+                    id="salaire_de_base"
+                    className={classeInput}
+                    onFocus={handleFocusInputTypeNumber}
+                    value={value ? value.toString() : ''}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    ref={ref}
+                    {...rest}
+                    // {...register('salaire_de_base')}
+                    // name="salaire_de_base"
+                    // value={data.salaire_de_base}
+                    // onChange={handleInputChange}
+                    // onFocus={handleFocusInputTypeNumber}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
-          <div>
-            <InputWithFloatingLabel
-              label="RIB"
-              placeholder="RIB: 00000 00000 00000000000 00"
-              {...register('rib')}
-              id="rib"
-              className={classeInput}
-              // name="rib"
-              // value={data.rib}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError.rib && (
-              <span className="text-red-500 text-sm">{formEmployeValidationError.rib.message}</span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name="rib"
+            render={({
+              field: { onBlur, onChange, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="RIB"
+                    placeholder="RIB: 00000 00000 00000000000 00"
+                    id="rib"
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    ref={ref}
+                    {...rest}
+                    // name="rib"
+                    // {...register('rib')}
+                    // value={data.rib}
+                    // onChange={handleInputChange}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
-          <div>
-            <InputWithFloatingLabel
-              label="Numero CNAPS"
-              placeholder="Numero CNAPS"
-              {...register('num_cnaps')}
-              id="num_cnaps"
-              className={classeInput}
-              // name="num_cnaps"
-              // value={data.num_cnaps}
-              // onChange={handleInputChange}
-            />
-            {formEmployeValidationError.num_cnaps && (
-              <span className="text-red-500 text-sm">
-                {formEmployeValidationError.num_cnaps.message}
-              </span>
-            )}
-          </div>
+          <Controller
+            control={control}
+            name="num_cnaps"
+            render={({
+              field: { onBlur, onChange, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <div>
+                  <InputWithFloatingLabel
+                    label="Numero CNAPS"
+                    placeholder="Numero CNAPS"
+                    id="num_cnaps"
+                    className={classeInput}
+                    value={value}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    ref={ref}
+                    {...rest}
+                    // name="num_cnaps"
+                    // {...register('num_cnaps')}
+                    // value={data.num_cnaps}
+                    // onChange={handleInputChange}
+                  />
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                </div>
+              )
+            }}
+          />
 
           <Controller
             name="mode_paiement_salaire"
-            control={contol}
+            control={control}
             render={({ field: { onChange, onBlur, value, ...rest }, fieldState: { error } }) => {
               return (
                 <div>
@@ -1407,7 +1446,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         />
         <CardInfoPaieEmploye
           setValue={setValue}
-          contol={controlFormEmploye}
+          control={controlFormEmploye}
           register={register}
           formEmployeValidationError={formEmployeValidationError}
           data={{
