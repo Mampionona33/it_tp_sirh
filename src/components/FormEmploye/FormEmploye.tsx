@@ -212,7 +212,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
                   label="N° CIN"
                   required
                   id="num_cin"
-                  placeholder="N° CIN: 000 000 000 000"
+                  placeholder="N° CIN: 000.000.000.000"
                   className={classeInput}
                   {...rest}
                   value={value}
@@ -1390,18 +1390,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           register={register}
           formEmployeValidationError={formEmployeValidationError}
           setValue={setValue}
-          // data={{
-          //   nom: employe?.nom || '',
-          //   adresse: employe?.adresse || '',
-          //   date_delivrance_cin: employe?.date_delivrance_cin || '',
-          //   date_naissance: employe?.date_naissance || '',
-          //   genre: employe?.genre || EnumGenre.MASCULIN,
-          //   lieu_naissance: employe?.lieu_naissance || '',
-          //   num_cin: employe?.num_cin || '',
-          //   prenom: employe?.prenom || '',
-          //   nom_mere: employe?.nom_mere,
-          //   nom_pere: employe?.nom_pere,
-          // }}
         />
         <CCard className={classeCard}>
           <div className="flex flex-col gap-2">
@@ -1467,6 +1455,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         <CCard>
           <pre>{JSON.stringify(watch, null, 2)}</pre>
           <FormEmployeGroupButton
+            id={id}
             resiliationCardOpen={showResiliationCard}
             setShowResiliationCard={setShowResiliationCard}
           />

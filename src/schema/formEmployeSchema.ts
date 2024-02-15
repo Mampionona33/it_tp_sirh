@@ -5,6 +5,7 @@ import {
   EnumBoolean,
   Depart,
 } from '@src/interfaces/interfaceEmploye'
+import { dataTagSymbol } from '@tanstack/react-query'
 import { z } from 'zod'
 
 export interface IFormEmployeSchema
@@ -75,11 +76,11 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       .refine((value) => value.length === 15, {
         message: 'Veuillez renseigner un numéro de carte d’identité valide',
       })
-      .refine((value) => /^\d+(\s\d+)*$/.test(value), {
+      .refine((value) => /^\d+(\.\d+)*$/.test(value), {
         message: 'Ce champ accepte uniquement des chiffres',
       })
-      .refine((value) => /^\d{3}\s?\d{3}\s?\d{3}\s?\d{3}$/.test(value), {
-        message: 'Veuillez suivre le format 000 000 000 000',
+      .refine((value) => /^\d{3}\.?\d{3}\.?\d{3}\.?\d{3}$/.test(value), {
+        message: 'Veuillez suivre le format 000.000.000.000',
       }),
 
     genre: z.enum([EnumGenre.MASCULIN, EnumGenre.FEMININ]),
@@ -190,18 +191,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       message: 'Le salaire doit être supérieur à 0Ar.',
     }),
 
-    rib: z
-      .string()
-      .refine((value) => value.length === 26, {
-        message: 'Veuillez renseigner un num de rib valide',
-      })
-      .refine((value) => /\s\d*$/.test(value), {
-        message: 'Ce champ accepte uniquement des chiffres',
-      })
-      .refine((value) => /^\d{5} \d{5} \d{11} \d{2}$/.test(value), {
-        message: 'Veuillez suivre le format 00000 00000 00000000000 00',
-      })
-      .optional(),
+    rib: z.string().optional(),
 
     mode_paiement_salaire: z.object({
       id: z.union([z.string().optional(), z.number().optional()]),
@@ -314,6 +304,26 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
     {
       message: 'Le champ ne doit pas être vide',
       path: ['salaire_de_base'],
+    },
+  )
+  .refine(
+    (data) => {
+      if (data.rib) {
+        if (
+          data.rib.length > 0 &&
+          /^\d{5} \d{5} \d{11} \d{2}$/.test(data.rib) &&
+          /\s\d*$/.test(data.rib)
+        ) {
+          return true
+        }
+        return false
+      }
+      // Accept empty string
+      return true
+    },
+    {
+      message: 'Veuillez suivre le format 00000 00000 00000000000 00.',
+      path: ['rib'],
     },
   )
 

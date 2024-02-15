@@ -3,8 +3,11 @@ import ButtonWithIcon, { ButtonWithIconVariant } from '../buttons/ButtonWithIcon
 import ButtonLink, { ButtonLinkVariant } from '../buttons/ButtonLink'
 import { useAppDispatch } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
+import { boolean } from 'zod'
+import { id } from 'date-fns/locale'
 
 export interface IFormEmployeGroupButtonProps {
+  id?: string | number
   setShowResiliationCard: React.Dispatch<React.SetStateAction<boolean>>
   resiliationCardOpen: boolean
 }
@@ -12,6 +15,7 @@ export interface IFormEmployeGroupButtonProps {
 const FormEmployeGroupButton = ({
   setShowResiliationCard,
   resiliationCardOpen,
+  id,
 }: IFormEmployeGroupButtonProps) => {
   const dispatch = useAppDispatch()
 
@@ -33,12 +37,13 @@ const FormEmployeGroupButton = ({
         >
           Annuler
         </ButtonLink>
-        <ButtonWithIcon
-          type="button"
-          label={resiliationCardOpen ? 'Annuler la résiliation' : 'Résilier contrat'}
-          onClick={handleToggleResiliationCard}
-        />
-
+        {id ? (
+          <ButtonWithIcon
+            type="button"
+            label={resiliationCardOpen ? 'Annuler la résiliation' : 'Résilier contrat'}
+            onClick={handleToggleResiliationCard}
+          />
+        ) : null}
         {resiliationCardOpen ? null : (
           <>
             <ButtonWithIcon
