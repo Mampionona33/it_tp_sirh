@@ -1,7 +1,6 @@
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import employeService from '@src/services/EmployeeService'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
 
 const useFetchSalarie = (id?: string | number) => {
   const { data, isLoading, refetch, isError, error, isSuccess } = useQuery({
@@ -14,7 +13,7 @@ const useFetchSalarie = (id?: string | number) => {
         throw error
       }
     },
-    // enabled: !!id,
+    enabled: !!id,
   })
 
   return { data, isLoading, refetch, isError, error, isSuccess }
