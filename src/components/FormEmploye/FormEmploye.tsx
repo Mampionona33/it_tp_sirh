@@ -70,7 +70,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
         <Controller
           control={control}
           name="nom"
-          render={({ field: { onBlur, onChange, value, ref, ...rest } }) => (
+          render={({ field: { onBlur, onChange, value, ref, ...rest }, fieldState: { error } }) => (
             <>
               <InputWithFloatingLabel
                 label="Nom employé"
@@ -78,21 +78,17 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
                 placeholder="Nom"
                 id="nom"
                 className={classeInput}
-                {...rest}
                 onChange={onChange}
                 onBlur={onBlur}
                 value={value}
+                {...rest}
                 // {...register('nom')}
                 // value={data?.nom}
                 // onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 //   setValue('nom', event.target.value)
                 // }
               />
-              {formEmployeValidationError.nom && (
-                <span className="text-sm text-customRed-800">
-                  {formEmployeValidationError.nom.message}
-                </span>
-              )}
+              {error && <span className="text-sm text-customRed-800">{error.message}</span>}
             </>
           )}
         />
@@ -1166,89 +1162,101 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
   return (
     <>
       {/* <form action="" onSubmit={handleSubmit(submitForm)}> */}
-      <Controller
-        name="depart"
-        control={control}
-        render={({
-          field: { onChange, value, ref, ...rest },
-          fieldState: { error, invalid, isDirty, isTouched },
-        }) => {
-          // console.log(value)
+      <CCard>
+        <h2 className={classeCardTitle}>Résiliation du contrat</h2>
+        <CCardBody className="p-3 flex flex-col gap-3">
+          <CCardText className="text-sm text-customRed-930">
+            Veuillez confirmer la résiliation en saisissant les informations suivantes: nom,
+            matricule de l'employe, ainsi que le motif de la resiliation. Merci de noter que cette
+            action et irréversible. Assurez-vous de suivre le format suivant:
+            <strong>nom matricule</strong>.
+          </CCardText>
 
-          return (
-            <CCard>
-              <h2 className={classeCardTitle}>Résiliation du contrat</h2>
-              <CCardBody className="p-3 flex flex-col gap-3">
-                <CCardText className="text-sm text-customRed-930">
-                  Veuillez confirmer la résiliation en saisissant les informations suivantes: nom,
-                  matricule de l'employe, ainsi que le motif de la resiliation. Merci de noter que
-                  cette action et irréversible. Assurez-vous de suivre le format suivant:
-                  <strong>nom matricule</strong>.
-                </CCardText>
-                <input
-                  type="date"
-                  // name="date"
-                  id="date_resiliation"
-                  className="hidden"
-                  value={format(new Date(), 'yyyy-MM-dd')}
-                  {...register('depart.date')}
-                />
+          {/* <Controller
+            control={control}
+            name="depart.date"
+            render={({ field: { onChange, onBlur, value, ...rest }, fieldState: { error } }) => {
+              return (
+                )
+              }}
+          /> */}
+          <input
+            type="hidden"
+            value={format(new Date(), 'yyyy-MM-dd')}
+            {...register('depart.date')}
+          />
+
+          <Controller
+            name="depart.nom_matricule"
+            control={control}
+            render={({
+              field: { onChange, onBlur, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
                 <div className="w-1/3">
                   <label htmlFor="nom_matricule" className="visually-hidden">
                     nom et matricule
                   </label>
                   <div>
                     <input
-                      {...rest}
                       type="text"
                       id="nom_matricule"
                       placeholder="Nom matricule"
-                      {...register('depart.nom_matricule')}
+                      {...rest}
+                      onChange={onChange}
+                      onBlur={onBlur}
+                      value={value || ''}
+                      ref={ref}
                       // name="nom_matricule"
                       // value={value!.nom_matricule}
+                      // {...register('depart.nom_matricule')}
                       required
                       className="border text-sm p-2 h-[28px] w-full outline-customRed-930"
                     />
-                    {formEmployeValidationError && (
-                      <span className="text-red-500 text-sm">
-                        {formEmployeValidationError.depart?.nom_matricule?.message}
-                      </span>
-                    )}
+                    {error && <span className="text-red-500 text-sm">{error.message}</span>}
                   </div>
                 </div>
+              )
+            }}
+          />
+
+          <Controller
+            name="depart.motif"
+            control={control}
+            render={({ field: { onChange, onBlur, value, ...rest }, fieldState: { error } }) => {
+              return (
                 <div>
                   <textarea
                     {...rest}
-                    // name="motif"
                     id="motif"
                     rows={3}
                     placeholder="Motif de la resiliation du contrat"
                     required
                     className="border outline-customRed-930 text-sm p-1 w-full"
-                    {...register('depart.motif')}
+                    value={value || ''}
+                    onChange={onChange}
+                    onBlur={onBlur}
+                    // {...register('depart.motif')}
                     // name="motif"
                     // value={data.depart?.motif}
                     // onChange={handleTexteAreaChange}
                   ></textarea>
-                  {formEmployeValidationError && (
-                    <span className="text-red-500 text-sm">
-                      {formEmployeValidationError.depart?.motif?.message}
-                    </span>
-                  )}
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
                 </div>
-              </CCardBody>
-              <CCardFooter className="flex justify-end">
-                <ButtonWithIcon
-                  label="Résilier"
-                  type="button"
-                  name="submit-resiliation"
-                  onClick={handleSubmit(submitForm)}
-                />
-              </CCardFooter>
-            </CCard>
-          )
-        }}
-      />
+              )
+            }}
+          />
+        </CCardBody>
+        <CCardFooter className="flex justify-end">
+          <ButtonWithIcon
+            label="Résilier"
+            type="button"
+            name="submit-resiliation"
+            onClick={handleSubmit(submitForm)}
+          />
+        </CCardFooter>
+      </CCard>
       {/* </form> */}
     </>
   )
@@ -1376,7 +1384,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         onSubmit={handleSubmit(submitForm)}
         // onSubmit={submitForm}
       >
-        <input type="text" className="hidden" value={id} {...register('id')} />
+        <input type="text" className="hidden" {...register('id')} />
         <CardInfoPersoEmploye
           control={controlFormEmploye}
           register={register}

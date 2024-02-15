@@ -5,8 +5,6 @@ import {
   EnumBoolean,
   Depart,
 } from '@src/interfaces/interfaceEmploye'
-import { id } from 'date-fns/locale'
-import { string } from 'prop-types'
 import { z } from 'zod'
 
 export interface IFormEmployeSchema

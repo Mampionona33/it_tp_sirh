@@ -55,10 +55,10 @@ const InputWithFloatingLabel: React.ForwardRefRenderFunction<HTMLInputElement, I
       <input
         {...props}
         ref={ref}
-        value={isControlled ? value : undefined} // Use undefined for uncontrolled input
+        value={isControlled ? value : ''}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        onChange={handleLocalChange} // Handle input changes locally
+        onChange={handleLocalChange}
         placeholder={
           props.required && props.placeholder ? `${props.placeholder} *` : props.placeholder
         }
