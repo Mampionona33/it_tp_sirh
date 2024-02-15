@@ -1019,7 +1019,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
   return (
     <>
       <CCard className={classeCard}>
-        <h2 className={classeCardTitle}>Information de paie</h2>
+        <h2 className={classeCardTitle}>Information sur la paie</h2>
         <CCardBody className={classeCardBody}>
           <Controller
             control={control}

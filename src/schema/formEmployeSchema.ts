@@ -186,7 +186,9 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
 
     travail_de_nuit: z.enum([EnumBoolean.OUI, EnumBoolean.NON]),
 
-    salaire_de_base: z.number().gte(0, { message: 'Veuillez renseigner un salaire valide' }),
+    salaire_de_base: z.coerce.number().gte(1, {
+      message: 'Le salaire doit être supérieur à 0Ar.',
+    }),
 
     rib: z
       .string()
@@ -299,6 +301,19 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
     {
       message: "Veuillez suivre le format 'nom matricule'",
       path: ['depart', 'nom_matricule'],
+    },
+  )
+  .refine(
+    (data) => {
+      if (data.salaire_de_base) {
+        return true
+      } else {
+        return false
+      }
+    },
+    {
+      message: 'Le champ ne doit pas être vide',
+      path: ['salaire_de_base'],
     },
   )
 
