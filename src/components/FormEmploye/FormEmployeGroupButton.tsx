@@ -35,7 +35,7 @@ const FormEmployeGroupButton = ({
           to="/employees/list"
           variant={ButtonLinkVariant.Tertiary}
         >
-          Annuler
+          Retour à la liste
         </ButtonLink>
         {id ? (
           <ButtonWithIcon

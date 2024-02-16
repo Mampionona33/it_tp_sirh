@@ -35,8 +35,6 @@ import formEmployeSchema from '@src/schema/formEmployeSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useFetchSalarie from '@src/hooks/useFetchSalarie'
 import Loading from '../loadings/Loading'
-import Page404 from '@src/views/pages/page404/Page404'
-import { isNull } from 'util'
 import employeService from '@src/services/EmployeeService'
 import useMutateSalarie from '@src/hooks/useMutateSalarie'
 import CustomCAlert from '../CustomAlert'
@@ -1249,6 +1247,7 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   const { data: employe, error, isError, isLoading, refetch } = useFetchSalarie(id)
   const [showResiliationCard, setShowResiliationCard] = React.useState(false)
+
   const [notification, setNotification] = React.useState<{ message: string; color: string }>({
     message: '',
     color: '',
@@ -1263,12 +1262,8 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
 
   const submitForm = async (data: IEmploye): Promise<void> => {
     console.log('formEmploye', data)
-    const requestData = {
-      ...data,
-      salaire_de_base: parseFloat(String(data.salaire_de_base)),
-    }
-
-    await mutateSalarie({ id, data: requestData })
+    // commetn faire pour que le mutation ne se declanche que si il ya des modification dans la formulaire
+    await mutateSalarie({ id, data })
   }
 
   const {
@@ -1484,8 +1479,12 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           }}
         />
 
-        {isSuccessMutate && <CAlert color={notification.color}>{notification.message}</CAlert>}
-        {isErrorMutate && <CAlert color={notification.color}>{notification.message}</CAlert>}
+        {isSuccessMutate && (
+          <CustomCAlert color={notification.color}>{notification.message}</CustomCAlert>
+        )}
+        {isErrorMutate && (
+          <CustomCAlert color={notification.color}>{notification.message}</CustomCAlert>
+        )}
 
         <CCard>
           <FormEmployeGroupButton

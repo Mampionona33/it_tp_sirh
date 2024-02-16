@@ -1399,6 +1399,59 @@
       "num_osie": "",
       "prime_et_avantage_permanent": [],
       "actif": "oui"
+    },
+    {
+      "id": "",
+      "nom": "Consequatur dolor a",
+      "prenom": "Quis commodo qui in ",
+      "date_naissance": "1992-03-21",
+      "lieu_naissance": "Corporis nostrud vol",
+      "date_delivrance_cin": "1998-02-11",
+      "adresse": "Non reprehenderit v",
+      "nom_pere": "Qui adipisicing quia",
+      "nom_mere": "Iure enim do corrupt",
+      "telephone": "+1 (695) 651-2969",
+      "email": "redem@mailinator.com",
+      "num_cin": "000.000.000.001",
+      "genre": "masculin",
+      "enfant": [
+        {
+          "id": "f391518c-6bd1-4f52-b0c0-e285fded1978",
+          "nom": "Culpa aliquam et el",
+          "prenom": "Sed quas enim culpa",
+          "date_naissance": "2004-02-05",
+          "lieu_naissance": "Rerum quis consequat",
+          "genre_enfant": "feminin",
+          "certificat": {
+            "label": "Certificat de scolarité",
+            "value": "scolarite"
+          },
+          "action": "ajout"
+        }
+      ],
+      "titre_poste": "Iusto ea ut excepteu",
+      "matricule": "Dolorum aperiam qui ",
+      "categorie": {
+        "id": 4,
+        "label": "1B",
+        "value": "1b"
+      },
+      "date_embauche": "2000-12-11",
+      "departement": "Et rerum sed sequi n",
+      "lieu_travail": "Est accusantium perf",
+      "est_cadre": "non",
+      "travail_de_nuit": "non",
+      "salaire_de_base": 10,
+      "rib": "",
+      "mode_paiement_salaire": {
+        "id": 3,
+        "label": "Virement bancaire",
+        "value": "virement_bancaire"
+      },
+      "num_cnaps": "45445554",
+      "num_osie": "",
+      "prime_et_avantage_permanent": [],
+      "actif": "oui"
     }
   ],
   "modeDePayement": [
