@@ -40,19 +40,13 @@ const FormEmployeGroupButton = ({
         {id ? (
           <ButtonWithIcon
             type="button"
+            variant={ButtonWithIconVariant.Secondary}
             label={resiliationCardOpen ? 'Annuler la résiliation' : 'Résilier contrat'}
             onClick={handleToggleResiliationCard}
           />
         ) : null}
         {resiliationCardOpen ? null : (
-          <>
-            <ButtonWithIcon
-              type="reset"
-              label="Recommencer"
-              variant={ButtonWithIconVariant.Secondary}
-            />
-            <ButtonWithIcon name="submit-update-or-add" type="submit" label="Enregistrer" />
-          </>
+          <ButtonWithIcon name="submit-update-or-add" type="submit" label="Enregistrer" />
         )}
       </div>
     </>

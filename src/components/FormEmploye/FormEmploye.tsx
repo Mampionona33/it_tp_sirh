@@ -347,7 +347,6 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
 
 const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
   index,
-  data,
   formEmployeValidationError,
   register,
   control,
@@ -360,7 +359,7 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
   const dispatch = useDispatch()
   const handleDeleteEnf = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    dispatch(formEmployeSupprimerEnfant(data.id))
+    // dispatch(formEmployeSupprimerEnfant(data.id))
     remove(Number(index))
   }
 
@@ -634,17 +633,7 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
   control,
   setValue,
 }) => {
-  const {
-    matricule,
-    titre_poste,
-    departement,
-    date_embauche,
-    lieu_travail,
-    telephone,
-    email,
-    travail_de_nuit,
-    categorie,
-  } = data
+  const { categorie } = data
 
   const dispatch = useDispatch()
 
@@ -1412,7 +1401,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
                   control={controlFormEmploye}
                   key={enfant.id}
                   index={index}
-                  data={enfant}
                   register={register}
                   value={enfant}
                   update={updateEnfant}
@@ -1460,15 +1448,15 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             setShowResiliationCard={setShowResiliationCard}
           />
         </CCard>
+        {showResiliationCard ? (
+          <CardResiliationContrat
+            control={controlFormEmploye}
+            register={register}
+            handleSubmit={handleSubmit}
+            formEmployeValidationError={formEmployeValidationError}
+          />
+        ) : null}
       </form>
-      {showResiliationCard ? (
-        <CardResiliationContrat
-          control={controlFormEmploye}
-          register={register}
-          handleSubmit={handleSubmit}
-          formEmployeValidationError={formEmployeValidationError}
-        />
-      ) : null}
     </div>
   )
 }
