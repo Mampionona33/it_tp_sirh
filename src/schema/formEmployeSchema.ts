@@ -195,8 +195,8 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
 
     mode_paiement_salaire: z.object({
       id: z.union([z.string().optional(), z.number().optional()]),
-      label: z.string(),
-      value: z.string(),
+      label: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+      value: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
     }),
 
     num_cnaps: z
