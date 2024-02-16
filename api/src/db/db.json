@@ -1622,6 +1622,44 @@
       "nom_mere": "",
       "nom_pere": "",
       "mode_paiement_salaire": ""
+    },
+    {
+      "id": "",
+      "nom": "Occaecat ut quis ass",
+      "prenom": "Nostrud in ullam por",
+      "date_naissance": "1983-12-28",
+      "lieu_naissance": "Asperiores dolor inc",
+      "date_delivrance_cin": "1989-09-08",
+      "adresse": "Facere dolore sunt e",
+      "nom_pere": "Vero rerum voluptati",
+      "nom_mere": "Rerum irure et non o",
+      "telephone": "+1 (279) 803-7144",
+      "email": "bisiq@mailinator.com",
+      "num_cin": "000.000.000.000",
+      "genre": "masculin",
+      "titre_poste": "Commodi aliquam dolo",
+      "matricule": "Dolore voluptatibus ",
+      "categorie": {
+        "id": 3,
+        "label": "1A",
+        "value": "1a"
+      },
+      "date_embauche": "2001-09-15",
+      "departement": "Et magna itaque corp",
+      "lieu_travail": "Animi culpa exercit",
+      "est_cadre": "non",
+      "travail_de_nuit": "non",
+      "salaire_de_base": 30,
+      "rib": "",
+      "mode_paiement_salaire": {
+        "id": 2,
+        "label": "Chèque",
+        "value": "cheque"
+      },
+      "num_cnaps": "Inventore quia volup",
+      "num_osie": "",
+      "prime_et_avantage_permanent": [],
+      "actif": "oui"
     }
   ],
   "modeDePayement": [

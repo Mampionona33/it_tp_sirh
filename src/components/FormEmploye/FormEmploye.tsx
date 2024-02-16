@@ -38,6 +38,7 @@ import Loading from '../loadings/Loading'
 import Page404 from '@src/views/pages/page404/Page404'
 import { isNull } from 'util'
 import employeService from '@src/services/EmployeeService'
+import useMutateSalarie from '@src/hooks/useMutateSalarie'
 
 interface IFormEmploye {
   id?: string | number
@@ -1245,11 +1246,24 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
 }
 
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
-  const { data: employe, error, isError, isLoading, refetch, isSuccess } = useFetchSalarie(id)
+  const { data: employe, error, isError, isLoading, refetch } = useFetchSalarie(id)
   const [showResiliationCard, setShowResiliationCard] = React.useState(false)
 
-  const submitForm = (data: IEmploye) => {
-    console.log(data)
+  const {
+    mutateAsync: mutateSalarie,
+    error: errorMutate,
+    isError: isErrorMutate,
+    isSuccess: isSuccessMutate,
+  } = useMutateSalarie()
+
+  const submitForm = async (data: IEmploye): Promise<void> => {
+    console.log('formEmploye', data)
+    const requestData = {
+      ...data,
+      salaire_de_base: parseFloat(String(data.salaire_de_base)),
+    }
+
+    await mutateSalarie({ id, data: requestData })
   }
 
   const {
