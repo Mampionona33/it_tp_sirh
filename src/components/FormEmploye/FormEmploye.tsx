@@ -39,6 +39,7 @@ import Page404 from '@src/views/pages/page404/Page404'
 import { isNull } from 'util'
 import employeService from '@src/services/EmployeeService'
 import useMutateSalarie from '@src/hooks/useMutateSalarie'
+import CustomCAlert from '../CustomAlert'
 
 interface IFormEmploye {
   id?: string | number
@@ -1248,6 +1249,10 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   const { data: employe, error, isError, isLoading, refetch } = useFetchSalarie(id)
   const [showResiliationCard, setShowResiliationCard] = React.useState(false)
+  const [notification, setNotification] = React.useState<{ message: string; color: string }>({
+    message: '',
+    color: '',
+  })
 
   const {
     mutateAsync: mutateSalarie,
@@ -1346,22 +1351,49 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   }
 
   React.useEffect(() => {
+    if (isSuccessMutate) {
+      if (!id) {
+        reset()
+        setNotification({
+          message: 'Le salarie a bien été enregistré',
+          color: 'success',
+        })
+      }
+      setNotification({
+        message: 'Le salarie a bien été modifié',
+        color: 'success',
+      })
+    }
+
+    if (isErrorMutate) {
+      setNotification({
+        message: 'Une erreur est survenue',
+        color: 'danger',
+      })
+    }
+
     if (!showResiliationCard) {
       setValue('depart', undefined)
     }
-  }, [showResiliationCard, setValue])
 
-  React.useEffect(() => {
-    if (isSuccessMutate && !id) {
-      reset()
-    }
+    // Juste verification des valeur
+    // A supprimer après mod dev
     const subscri = watch((value, { name, type }) => {
       console.log(value, name, type)
     })
     return () => {
       subscri.unsubscribe()
     }
-  }, [watch, isSuccessMutate, id, reset])
+  }, [
+    watch,
+    isSuccessMutate,
+    id,
+    reset,
+    showResiliationCard,
+    setValue,
+    isErrorMutate,
+    setNotification,
+  ])
 
   if (formEmployeValidationError) {
     console.log(formEmployeValidationError)
@@ -1451,8 +1483,11 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             num_cnaps: employe?.num_cnaps || '',
           }}
         />
+
+        {isSuccessMutate && <CAlert color={notification.color}>{notification.message}</CAlert>}
+        {isErrorMutate && <CAlert color={notification.color}>{notification.message}</CAlert>}
+
         <CCard>
-          <pre>{JSON.stringify(watch, null, 2)}</pre>
           <FormEmployeGroupButton
             id={id}
             resiliationCardOpen={showResiliationCard}
