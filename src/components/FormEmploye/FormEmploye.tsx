@@ -1273,6 +1273,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     formState: { errors: formEmployeValidationError },
     control: controlFormEmploye,
     setValue,
+    reset,
   } = useForm<IEmploye>({
     resolver: zodResolver(formEmployeSchema),
     defaultValues: async () => {
@@ -1321,15 +1322,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     },
   })
 
-  React.useEffect(() => {
-    const subscri = watch((value, { name, type }) => {
-      console.log(value, name, type)
-    })
-    return () => {
-      subscri.unsubscribe()
-    }
-  }, [watch])
-
   const {
     fields: listeEnfant,
     append: ajoutEnfant,
@@ -1358,6 +1350,18 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
       setValue('depart', undefined)
     }
   }, [showResiliationCard, setValue])
+
+  React.useEffect(() => {
+    if (isSuccessMutate && !id) {
+      reset()
+    }
+    const subscri = watch((value, { name, type }) => {
+      console.log(value, name, type)
+    })
+    return () => {
+      subscri.unsubscribe()
+    }
+  }, [watch, isSuccessMutate, id, reset])
 
   if (formEmployeValidationError) {
     console.log(formEmployeValidationError)
