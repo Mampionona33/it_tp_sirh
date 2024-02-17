@@ -266,7 +266,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
                   placeholder="Nom du père"
                   className={classeInput}
                   {...rest}
-                  value={value}
+                  value={value || ''}
                   onChange={onChange}
                   onBlur={onBlur}
                   // {...register('nom_pere')}
@@ -292,7 +292,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
                   placeholder="Nom de la mère"
                   className={classeInput}
                   {...rest}
-                  value={value}
+                  value={value || ''}
                   onChange={onChange}
                   onBlur={onBlur}
                   // name="nom_mere"
@@ -870,7 +870,7 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
                     placeholder="Telephone"
                     id="telephone"
                     className={classeInput}
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     {...rest}
@@ -900,7 +900,7 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
                     placeholder="Email: employe@example.com"
                     id="email"
                     className={classeInput}
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     {...rest}
