@@ -42,7 +42,6 @@ const initialState: IBulletinDePaieProps = {
     rib: '',
     mode_paiement_salaire: undefined,
     num_cnaps: '',
-    num_osie: '',
     actif: EnumBoolean.OUI,
     indemnites: {
       transport: 0,

@@ -201,8 +201,6 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
 
     num_cnaps: z.string().optional(),
 
-    num_osie: z.string().optional().nullable(),
-
     prime_et_avantage_permanent: z
       .array(
         z.object({

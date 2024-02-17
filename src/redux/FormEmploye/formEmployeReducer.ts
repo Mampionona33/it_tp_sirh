@@ -28,7 +28,6 @@ export const initialState: IEmploye = {
   actif: EnumBoolean.OUI,
   departement: '',
   num_cnaps: '',
-  num_osie: '',
   est_cadre: EnumBoolean.NON,
   rib: '',
   prime_et_avantage_permanent: undefined,
