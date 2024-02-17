@@ -49,25 +49,29 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       .string()
       .min(3, { message: 'Le champ addresse doit contenir au moins 3 caractères' }),
 
-    nom_pere: z.string().optional(),
+    nom_pere: z.nullable(z.string().optional()),
 
-    nom_mere: z.string().optional(),
+    nom_mere: z.nullable(z.string().optional()),
 
-    telephone: z
-      .union([
-        z.string().regex(/^$|^[-+()\s\d]+$/, {
-          message: 'Veuillez renseigner un numéro de numéro valide',
-        }),
-        z.literal(''),
-      ])
-      .optional(),
+    telephone: z.nullable(
+      z
+        .union([
+          z.string().regex(/^$|^[-+()\s\d]+$/, {
+            message: 'Veuillez renseigner un numéro de numéro valide',
+          }),
+          z.literal(''),
+        ])
+        .optional(),
+    ),
 
-    email: z
-      .union([
-        z.string().email({ message: 'Veuillez renseigner une adresse email valide' }),
-        z.literal(''),
-      ])
-      .optional(),
+    email: z.nullable(
+      z
+        .union([
+          z.string().email({ message: 'Veuillez renseigner une adresse email valide' }),
+          z.literal(''),
+        ])
+        .optional(),
+    ),
 
     num_cin: z
       .string()
@@ -140,21 +144,24 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
             .string()
             .min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
           genre_enfant: z.enum([EnumGenre.MASCULIN, EnumGenre.FEMININ]),
-          certificat: z
-            .object({
-              id: z.union([z.string().optional(), z.number().optional()]),
-              label: z
-                .string()
-                .min(2, { message: 'Le champ certificat doit contenir au moins 2 caractères' }),
-              value: z.enum([
-                EnumCertificatEnfant.AUCUN,
-                EnumCertificatEnfant.VIE,
-                EnumCertificatEnfant.DECE,
-                EnumCertificatEnfant.MEDICAL,
-                EnumCertificatEnfant.SCOLARITE,
-              ]),
-            })
-            .optional(),
+
+          certificat: z.nullable(
+            z
+              .object({
+                id: z.union([z.string().optional(), z.number().optional()]),
+                label: z
+                  .string()
+                  .min(2, { message: 'Le champ certificat doit contenir au moins 2 caractères' }),
+                value: z.enum([
+                  EnumCertificatEnfant.AUCUN,
+                  EnumCertificatEnfant.VIE,
+                  EnumCertificatEnfant.DECE,
+                  EnumCertificatEnfant.MEDICAL,
+                  EnumCertificatEnfant.SCOLARITE,
+                ]),
+              })
+              .optional(),
+          ),
 
           action: z.enum(['ajout', 'modifier']).optional(),
         }),

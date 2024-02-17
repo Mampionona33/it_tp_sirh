@@ -6,10 +6,10 @@ export interface IEmploye {
   lieu_naissance: string
   date_delivrance_cin: string
   adresse: string
-  nom_pere?: string
-  nom_mere?: string
-  telephone?: string
-  email?: string
+  nom_pere?: string | null
+  nom_mere?: string | null
+  telephone?: string | null
+  email?: string | null
   num_cin: string
   genre: EnumGenre
   contact_urgence?: ContactUrgence[]
@@ -66,7 +66,7 @@ export interface IEnfantEmploye {
   date_naissance: string
   lieu_naissance: string
   genre_enfant: EnumGenre
-  certificat?: CertificatEnfantProps
+  certificat?: CertificatEnfantProps | null
   action?: 'ajout' | 'modifier'
 }
 
