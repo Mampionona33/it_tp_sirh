@@ -1523,42 +1523,6 @@
       "num_osie": "",
       "prime_et_avantage_permanent": [],
       "actif": "oui"
-    },
-    {
-      "id": "",
-      "nom": "Ullamco ",
-      "prenom": "Cupiditate ipsum ex",
-      "date_naissance": "1987-08-08",
-      "lieu_naissance": "Impedit tempore as",
-      "date_delivrance_cin": "1989-03-28",
-      "adresse": "Consectetur debitis",
-      "nom_pere": "Perspiciatis sunt a",
-      "nom_mere": "Deleniti expedita un",
-      "telephone": "+1 (861) 887-3807",
-      "email": "topityf@mailinator.com",
-      "num_cin": "000.000.000.001",
-      "genre": "masculin",
-      "titre_poste": "Quis facere in quo e",
-      "matricule": "Cumque aspernatur a ",
-      "categorie": {
-        "id": 32,
-        "label": "Hors catégorie",
-        "value": "hc"
-      },
-      "date_embauche": "1997-02-02",
-      "departement": "Enim qui a sed quis ",
-      "lieu_travail": "Adipisci quibusdam v",
-      "est_cadre": "non",
-      "travail_de_nuit": "non",
-      "salaire_de_base": 150000,
-      "rib": "00000 00000 00000000000 01",
-      "mode_paiement_salaire": {
-        "id": 3,
-        "label": "Virement bancaire",
-        "value": "virement_bancaire"
-      },
-      "num_cnaps": "Et ea excepturi pers",
-      "actif": "oui"
     }
   ],
   "modeDePayement": [
