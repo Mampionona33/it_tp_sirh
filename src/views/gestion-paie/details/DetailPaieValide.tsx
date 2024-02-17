@@ -31,7 +31,8 @@ const DetailPaieValide = () => {
     }
     fetchDetailsBltnPaie()
   }, [idValidation, id, dispatch, validationMonth, validationYear])
-  const moisDeValidation = format(new Date(String(validation.date)), 'MMMM yyyy', { locale: fr })
+  console.log(validation)
+  // const moisDeValidation = format(new Date(String(validation.date)), 'MMMM yyyy', { locale: fr })
 
   if (!salarie) {
     return <Page404 />
@@ -42,7 +43,7 @@ const DetailPaieValide = () => {
       <div className="flex gap-3 flex-wrap">
         <div className="pt-4 pl-4 pr-4 pb-2 w-full bg-white shadow-sm rounded-sm">
           <p className="text-customRed-900 capitalize border-b border-b-customRed-900">
-            Détails sur la paie: {moisDeValidation}
+            {/* Détails sur la paie: {moisDeValidation} */}
           </p>
           <div className="text-sm">
             <p className="mb-1">Nom : {salarie.nom}</p>

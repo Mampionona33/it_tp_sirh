@@ -1359,6 +1359,130 @@
       "vehicule": 100,
       "autresAvantages": 0,
       "id": 1
+    },
+    {
+      "validation": {
+        "status": "oui",
+        "date": "2024-01-01",
+        "day": "2024-02-17"
+      },
+      "employeur": {
+        "nom": " LA LIGNE SCANDINAVE",
+        "adresse": " 2 RUE LIEUTNANT BERARD",
+        "CP_et_Ville": " 501 - TOAMASINA",
+        "nif": " 3000000581",
+        "stat": " 50121 11 2003 0 00475",
+        "rcs": " 2002B00608"
+      },
+      "salarie": {
+        "id": "1",
+        "nom": "Eius est dolorum ut ",
+        "prenom": "Autem ut minim dolor",
+        "date_naissance": "2004-06-18",
+        "lieu_naissance": "Dolore est dicta qui",
+        "date_delivrance_cin": "1978-10-23",
+        "adresse": "Dolore alias exceptu",
+        "nom_pere": "Id exercitation volu",
+        "nom_mere": "Illum vitae necessi",
+        "telephone": "+1 (241) 866-8705",
+        "email": "rywulago@mailinator.com",
+        "num_cin": "000.000.000.004",
+        "genre": "masculin",
+        "titre_poste": "Culpa aut possimus ",
+        "matricule": "Adipisicing quo elit",
+        "categorie": {
+          "id": 4,
+          "label": "1B",
+          "value": "1b"
+        },
+        "date_embauche": "2010-02-13",
+        "departement": "Ut error praesentium",
+        "lieu_travail": "A ex quos quam tempo",
+        "est_cadre": "non",
+        "travail_de_nuit": "non",
+        "salaire_de_base": 90,
+        "rib": "00000 00000 00000000000 00",
+        "mode_paiement_salaire": {
+          "id": 3,
+          "label": "Virement bancaire",
+          "value": "virement_bancaire"
+        },
+        "num_cnaps": "",
+        "num_osie": "",
+        "prime_et_avantage_permanent": [],
+        "actif": "oui"
+      },
+      "dateDeVirement": "2024-02-17",
+      "salaireDeBase": 90,
+      "valReductionChargeEnfants": 0,
+      "montanReductionChargeParEnfant": 2000,
+      "totalHn": 0,
+      "totalHs": 0,
+      "totalHs130": 0,
+      "totalHs150": 0,
+      "hsni130": 0,
+      "hsni150": 0,
+      "hsi130": 0,
+      "hsi150": 0,
+      "totalHs30": 0,
+      "totalHs50": 0,
+      "totalHDim": 0,
+      "totalHFerie": 0,
+      "valHsni130": 0,
+      "valHsni150": 0,
+      "valHsi130": 0,
+      "valHsi150": 0,
+      "valHs30": 0,
+      "valHs50": 0,
+      "valHdim": 0,
+      "valHFerie": 0,
+      "totalPrimeEtAvantage": 0,
+      "totalDeduction": 0,
+      "tauxCnaps": 0.01,
+      "tauxOsie": 0.01,
+      "baseCnaps": 90,
+      "avance": {
+        "quinzaine": 0,
+        "speciale": 0
+      },
+      "reduChargeFamil": 0,
+      "baseIrsa": 88.2,
+      "baseIrsaArrondi": 0,
+      "salaireBrut": 90,
+      "salaireNet": -2911.8,
+      "osie": 0.9,
+      "salaireNetAPayer": -2911.8,
+      "valMinIrsaParTranche": 3000,
+      "plafondSME": 1910400,
+      "irsaAPayer": 3000,
+      "cnaps": 0.9,
+      "rappel": 0,
+      "indemnites": {
+        "transport": 0,
+        "autresIndemnite": 0
+      },
+      "totalIndemnite": 0,
+      "primeEtGratification": {
+        "assiduite": 0,
+        "excellence": 0
+      },
+      "totalPrimeEtGratification": 0,
+      "deductions": {
+        "absence": 0,
+        "retard": 0
+      },
+      "avantages": {
+        "domestique": 0,
+        "logement": 0,
+        "vehicule": 0,
+        "autresAvantages": 0
+      },
+      "totalAvantages": 0,
+      "totalHTravailEffectif": 0,
+      "tableauHsHebdo": [],
+      "tableauHs130Hebdo": [],
+      "tableauHs150Hebdo": [],
+      "id": 2
     }
   ],
   "salaries": [

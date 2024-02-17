@@ -29,7 +29,7 @@ export interface IEmploye {
   num_cnaps?: string
   num_osie?: string | null
   prime_et_avantage_permanent?: PrimeEtAvantagePermanent[]
-  depart?: Depart | null
+  depart?: Depart
   actif?: EnumBoolean
   indemnites?: {
     transport: number
