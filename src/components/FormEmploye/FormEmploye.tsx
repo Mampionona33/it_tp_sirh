@@ -1259,8 +1259,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     data: IEmploye,
     event?: React.BaseSyntheticEvent,
   ): Promise<void> => {
-    event?.preventDefault()
-    console.log(event)
+    console.log('event', event)
     // console.log('formEmploye', data)
     await mutateSalarie({ id, data })
     // Mettez votre logique de mutation ici
