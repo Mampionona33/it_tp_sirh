@@ -5,8 +5,9 @@ import {
   EnumBoolean,
   Depart,
 } from '@src/interfaces/interfaceEmploye'
-import { dataTagSymbol } from '@tanstack/react-query'
 import { z } from 'zod'
+import { differenceInYears } from 'date-fns'
+import path from 'path'
 
 export interface IFormEmployeSchema extends Omit<IEmploye, 'id' | 'matricule' | 'conjoint'> {
   id?: string | number
@@ -371,6 +372,23 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       }
     }
     return true
+  })
+  .refine((data) => {
+    if (data.date_naissance) {
+      const age = differenceInYears(new Date(), new Date(data.date_naissance))
+      if (age < 18) {
+        return {
+          message: "L'employé doit avoir au moins 18 ans",
+          path: ['date_naissance'],
+        }
+      }
+      if (age > 70) {
+        return {
+          message: "L'employé doit avoir moins de 70 ans",
+          path: ['date_naissance'],
+        }
+      }
+    }
   })
 
 export default formEmployeSchema
