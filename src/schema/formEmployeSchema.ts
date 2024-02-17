@@ -8,12 +8,10 @@ import {
 import { dataTagSymbol } from '@tanstack/react-query'
 import { z } from 'zod'
 
-export interface IFormEmployeSchema
-  extends Omit<IEmploye, 'id' | 'matricule' | 'conjoint' | 'depart'> {
+export interface IFormEmployeSchema extends Omit<IEmploye, 'id' | 'matricule' | 'conjoint'> {
   id?: string | number
   matricule: string
   conjoint?: Conjoint
-  depart?: formEmployeDateProps
 }
 
 interface Conjoint {
@@ -23,9 +21,9 @@ interface Conjoint {
   tel?: string
 }
 
-interface formEmployeDateProps extends Depart {
-  nom_matricule?: string
-}
+// interface formEmployeDateProps extends Depart {
+//   nom_matricule?: string
+// }
 
 const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
   .object({
@@ -211,20 +209,23 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       )
       .optional(),
 
-    depart: z
-      .object({
-        nom_matricule: z.string().optional(),
+    depart: z.nullable(
+      z
+        .object({
+          nom_matricule: z.string().optional(),
 
-        date: z
-          .string()
-          .min(2, { message: 'Le champ date doit contenir au moins 2 caractères' })
-          .optional(),
-        motif: z
-          .string()
-          .min(2, { message: 'Le champ motif doit contenir au moins 2 caractères' })
-          .optional(),
-      })
-      .optional(),
+          date: z
+            .string()
+            .min(2, { message: 'Le champ date doit contenir au moins 2 caractères' })
+            .optional(),
+          motif: z
+            .string()
+            .min(2, { message: 'Le champ motif doit contenir au moins 2 caractères' })
+            .optional(),
+        })
+        .optional(),
+    ),
+
     actif: z.enum([EnumBoolean.OUI, EnumBoolean.NON]).optional(),
 
     indemnites: z
@@ -297,6 +298,19 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
     },
     {
       message: 'Le champ ne doit pas être vide',
+      path: ['salaire_de_base'],
+    },
+  )
+  .refine(
+    (data) => {
+      if (data.salaire_de_base && data.salaire_de_base > 100000) {
+        return true
+      } else {
+        return false
+      }
+    },
+    {
+      message: 'Le salaire ne doit pas depasser 100000',
       path: ['salaire_de_base'],
     },
   )

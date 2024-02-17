@@ -28,7 +28,7 @@ export interface IEmploye {
   mode_paiement_salaire?: IInputWithLabelOptionsProps
   num_cnaps?: string
   // prime_et_avantage_permanent?: PrimeEtAvantagePermanent[]
-  depart?: Depart
+  depart?: Depart | null
   actif?: EnumBoolean
   indemnites?: {
     transport: number
