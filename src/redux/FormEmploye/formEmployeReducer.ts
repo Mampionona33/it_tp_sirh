@@ -30,7 +30,7 @@ export const initialState: IEmploye = {
   num_cnaps: '',
   est_cadre: EnumBoolean.NON,
   rib: '',
-  prime_et_avantage_permanent: undefined,
+  // prime_et_avantage_permanent: undefined,
   depart: undefined,
 }
 

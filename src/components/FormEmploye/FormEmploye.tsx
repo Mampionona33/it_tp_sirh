@@ -1312,8 +1312,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           nom_pere: '',
           mode_paiement_salaire: undefined,
           num_cnaps: '',
-          num_osie: '',
-          prime_et_avantage_permanent: [],
           rib: '',
           telephone: '',
         }
@@ -1346,17 +1344,19 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
 
   React.useEffect(() => {
     if (isSuccessMutate) {
+      console.log(id)
       if (!id) {
         reset()
         setNotification({
-          message: 'Le salarie a bien été enregistré',
+          message: 'Le salarie a bien été ajouté avec success',
+          color: 'success',
+        })
+      } else {
+        setNotification({
+          message: 'Le salarie a bien été modifié avec success',
           color: 'success',
         })
       }
-      setNotification({
-        message: 'Le salarie a bien été modifié',
-        color: 'success',
-      })
     }
 
     if (isErrorMutate) {
