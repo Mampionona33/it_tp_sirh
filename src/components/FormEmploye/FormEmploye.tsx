@@ -28,7 +28,10 @@ import { ICardInfoProEmployeProps } from '@src/interfaces/interfaceCardInfoProEm
 import useFetchCategorieEmploye from '@src/hooks/useFetchCategorieEmploye'
 import { ICardInfoPaieEmployeProps } from '@src/interfaces/interfaceCardInfoPaieEmploye'
 import useFetchListModeDePayement from '@src/hooks/useFetchListModeDePayement'
-import { ICardResiliationContratProps } from '@src/interfaces/interfaceCardResiliationContrat'
+import {
+  ICardResiliationContratProps,
+  ResiliationState,
+} from '@src/interfaces/interfaceCardResiliationContrat'
 import { format } from 'date-fns'
 import { useController, useFieldArray, useForm, Controller, SubmitHandler } from 'react-hook-form'
 import formEmployeSchema from '@src/schema/formEmployeSchema'
@@ -38,6 +41,7 @@ import Loading from '../loadings/Loading'
 import employeService from '@src/services/EmployeeService'
 import useMutateSalarie from '@src/hooks/useMutateSalarie'
 import CustomCAlert from '../CustomAlert'
+import { date } from 'zod'
 
 interface IFormEmploye {
   id?: string | number
@@ -1139,19 +1143,32 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
   handleSubmit,
   register,
   formEmployeValidationError,
+  id,
 }) => {
   const dispatch = useDispatch()
   const handleTexteAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = event.target
     // dispatch(setFormEmploye({ depart: { ...depart, [name]: value } }))
   }
-  // const submitForm = (data: IEmploye) => {
-  //   console.log(data)
+
+  const {
+    mutateAsync: mutateSalarie,
+    error: errorMutate,
+    isError: isErrorMutate,
+    isSuccess: isSuccessMutate,
+  } = useMutateSalarie()
+
+  // const submitForm = async (data: IEmploye) => {
+  //   const updatedData = {
+  //     ...data,
+  //     actif: EnumBoolean.NON,
+  //   }
+  //   console.log(updatedData)
+  //   await mutateSalarie({ id, data: updatedData })
   // }
 
   return (
     <>
-      {/* <form action="" onSubmit={handleSubmit(submitForm)}> */}
       <CCard>
         <h2 className={classeCardTitle}>Résiliation du contrat</h2>
         <CCardBody className="p-3 flex flex-col gap-3">
@@ -1231,10 +1248,14 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
           />
         </CCardBody>
         <CCardFooter className="flex justify-end">
-          <ButtonWithIcon label="Résilier" type="submit" name="submit-resiliation" />
+          <ButtonWithIcon
+            label="Résilier"
+            type="submit"
+            name="submit-resiliation"
+            // onClick={handleSubmit(submitForm)}
+          />
         </CCardFooter>
       </CCard>
-      {/* </form> */}
     </>
   )
 }
@@ -1242,6 +1263,8 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   const { data: employe, error, isError, isLoading, refetch } = useFetchSalarie(id)
   const [showResiliationCard, setShowResiliationCard] = React.useState(false)
+
+  const [etatResiliation, setEtatResiliation] = React.useState<ResiliationState>('idle')
 
   const [notification, setNotification] = React.useState<{ message: string; color: string }>({
     message: '',
@@ -1255,14 +1278,22 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     isSuccess: isSuccessMutate,
   } = useMutateSalarie()
 
-  const submitForm: SubmitHandler<IEmploye> = async (
-    data: IEmploye,
-    event?: React.BaseSyntheticEvent,
-  ): Promise<void> => {
-    console.log('event', event)
-    // console.log('formEmploye', data)
-    await mutateSalarie({ id, data })
-    // Mettez votre logique de mutation ici
+  const updateEmploye: SubmitHandler<IEmploye> = async (data: IEmploye): Promise<void> => {
+    const depart = getValues('depart')
+
+    if (etatResiliation !== 'canceled') {
+      if (!depart) {
+        console.log('update employe', data)
+        await mutateSalarie({ id, data })
+      } else {
+        const updatedData: IEmploye = {
+          ...data,
+          actif: EnumBoolean.NON,
+        }
+        console.log('resilié contrat', updatedData)
+        await mutateSalarie({ id, data: updatedData })
+      }
+    }
   }
 
   const {
@@ -1273,6 +1304,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     control: controlFormEmploye,
     setValue,
     reset,
+    getValues,
   } = useForm<IEmploye>({
     resolver: zodResolver(formEmployeSchema),
     defaultValues: async () => {
@@ -1344,7 +1376,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
 
   React.useEffect(() => {
     if (isSuccessMutate) {
-      console.log(id)
       if (!id) {
         reset()
         setNotification({
@@ -1373,7 +1404,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     // Juste verification des valeur
     // A supprimer après mod dev
     const subscri = watch((value, { name, type }) => {
-      console.log(value, name, type)
+      // console.log(value, name, type)
     })
     return () => {
       subscri.unsubscribe()
@@ -1407,7 +1438,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         action=""
         method="POST"
         className="flex gap-3 flex-col"
-        onSubmit={handleSubmit(submitForm)}
+        onSubmit={handleSubmit(updateEmploye)}
         // onSubmit={submitForm}
       >
         <input type="text" className="hidden" {...register('id')} />
@@ -1490,10 +1521,12 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             id={id}
             resiliationCardOpen={showResiliationCard}
             setShowResiliationCard={setShowResiliationCard}
+            setEtatResiliation={setEtatResiliation}
           />
         </CCard>
         {showResiliationCard ? (
           <CardResiliationContrat
+            id={id}
             control={controlFormEmploye}
             register={register}
             handleSubmit={handleSubmit}

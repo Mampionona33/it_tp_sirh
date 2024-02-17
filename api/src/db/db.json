@@ -1488,7 +1488,7 @@
   "salaries": [
     {
       "id": "1",
-      "nom": "Eius est dolorum ut ",
+      "nom": "Rakoto",
       "prenom": "Autem ut minim dolor",
       "date_naissance": "2004-06-18",
       "lieu_naissance": "Dolore est dicta qui",
@@ -1501,7 +1501,7 @@
       "num_cin": "000.000.000.004",
       "genre": "masculin",
       "titre_poste": "Culpa aut possimus ",
-      "matricule": "Adipisicing quo elit",
+      "matricule": "45455",
       "categorie": {
         "id": 4,
         "label": "1B",
@@ -1512,7 +1512,7 @@
       "lieu_travail": "A ex quos quam tempo",
       "est_cadre": "non",
       "travail_de_nuit": "non",
-      "salaire_de_base": 90,
+      "salaire_de_base": 200000,
       "rib": "00000 00000 00000000000 00",
       "mode_paiement_salaire": {
         "id": 3,

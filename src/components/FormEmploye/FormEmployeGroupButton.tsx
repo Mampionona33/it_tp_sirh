@@ -1,40 +1,34 @@
 import React from 'react'
 import ButtonWithIcon, { ButtonWithIconVariant } from '../buttons/ButtonWithIcon'
 import ButtonLink, { ButtonLinkVariant } from '../buttons/ButtonLink'
-import { useAppDispatch } from '@src/hooks/useAppDispatch'
-import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
-import { boolean } from 'zod'
-import { id } from 'date-fns/locale'
+import { ResiliationState } from '@src/interfaces/interfaceCardResiliationContrat'
 
 export interface IFormEmployeGroupButtonProps {
   id?: string | number
   setShowResiliationCard: React.Dispatch<React.SetStateAction<boolean>>
+  setEtatResiliation: React.Dispatch<React.SetStateAction<ResiliationState>>
   resiliationCardOpen: boolean
 }
 
 const FormEmployeGroupButton = ({
   setShowResiliationCard,
   resiliationCardOpen,
+  setEtatResiliation,
   id,
 }: IFormEmployeGroupButtonProps) => {
-  const dispatch = useAppDispatch()
-
-  const handleclickCancel = () => {
-    dispatch(resetFormEmploye())
-  }
-
   const handleToggleResiliationCard = () => {
     setShowResiliationCard((prev) => !prev)
+    if (resiliationCardOpen) {
+      setEtatResiliation('canceled')
+    } else {
+      setEtatResiliation('open')
+    }
   }
 
   return (
     <>
       <div className="flex flex-row flex-wrap justify-end m-4 gap-3">
-        <ButtonLink
-          onClick={handleclickCancel}
-          to="/employees/list"
-          variant={ButtonLinkVariant.Tertiary}
-        >
+        <ButtonLink to="/employees/list" variant={ButtonLinkVariant.Tertiary}>
           Retour à la liste
         </ButtonLink>
         {id ? (
@@ -46,7 +40,12 @@ const FormEmployeGroupButton = ({
           />
         ) : null}
         {resiliationCardOpen ? null : (
-          <ButtonWithIcon name="submit-update-or-add" type="submit" label="Enregistrer" />
+          <ButtonWithIcon
+            name="submit-update-or-add"
+            type="submit"
+            label="Enregistrer"
+            onClick={() => setEtatResiliation('idle')}
+          />
         )}
       </div>
     </>
