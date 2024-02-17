@@ -62,7 +62,7 @@ export interface Conjoint {
 export interface IEnfantEmploye {
   id: number | string
   nom: string
-  prenom: string
+  prenom?: string
   date_naissance: string
   lieu_naissance: string
   genre_enfant: EnumGenre

@@ -136,7 +136,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
             z.number().min(1, { message: 'ID enfant est obligatoire' }),
           ]),
           nom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
-          prenom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+          prenom: z.string().optional(),
           date_naissance: z
             .string()
             .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' }),
@@ -341,5 +341,36 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       path: ['rib'],
     },
   )
+  .refine((data) => {
+    if (data.enfant && data.enfant.length > 0) {
+      for (const enfant of data.enfant) {
+        if (!enfant.nom) {
+          return {
+            message: 'Le champ ne doit pas être vide',
+            path: ['enfant', 'nom'],
+          }
+        }
+        if (!enfant.date_naissance) {
+          return {
+            message: 'Le champ ne doit pas être vide',
+            path: ['enfant', 'date_naissance'],
+          }
+        }
+        if (!enfant.lieu_naissance) {
+          return {
+            message: 'Le champ ne doit pas être vide',
+            path: ['enfant', 'lieu_naissance'],
+          }
+        }
+        if (!enfant.genre_enfant) {
+          return {
+            message: 'Le champ ne doit pas être vide',
+            path: ['enfant', 'genre_enfant'],
+          }
+        }
+      }
+    }
+    return true
+  })
 
 export default formEmployeSchema

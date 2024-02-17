@@ -452,7 +452,7 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
                     placeholder="Nom"
                     id={idNom}
                     className={classeInput}
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     {...rest}
@@ -478,11 +478,10 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
                 <div>
                   <InputWithFloatingLabel
                     label="Prènom"
-                    required
                     placeholder="Prènom"
                     id={idPrenom}
                     className={classeInput}
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     {...rest}
@@ -511,7 +510,7 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
                     placeholder="Lieu de naissance"
                     id={idLieuNaissance}
                     className={classeInput}
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     {...rest}
@@ -520,11 +519,7 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
                     // value={data.lieu_naissance}
                     // onChange={handleInputChange}
                   />
-                  {formEmployeValidationError && formEmployeValidationError.enfant && (
-                    <span className="text-red-500 text-sm">
-                      {formEmployeValidationError.enfant![Number(index)]?.lieu_naissance?.message}
-                    </span>
-                  )}
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
                 </div>
               )
             }}
@@ -546,7 +541,7 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
                     id={idDateNaissance}
                     placeholder="Date de naissance"
                     className={classeInput}
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     {...rest}
@@ -1383,6 +1378,8 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           message: 'Le salarie a bien été ajouté avec success',
           color: 'success',
         })
+        setValue('enfant', undefined)
+        navigate('/employees/ajout')
       } else {
         const depart = getValues('depart')
         if (etatResiliation !== 'canceled') {
@@ -1413,7 +1410,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     // Juste verification des valeur
     // A supprimer après mod dev
     const subscri = watch((value, { name, type }) => {
-      // console.log(value, name, type)
+      console.log(value, name, type)
     })
     return () => {
       subscri.unsubscribe()
