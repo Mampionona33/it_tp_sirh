@@ -388,6 +388,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
           path: ['date_naissance'],
         }
       }
+      return true
     }
   })
 
