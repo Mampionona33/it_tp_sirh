@@ -1374,7 +1374,7 @@
       "nom_mere": "Illum vitae necessi",
       "telephone": "+1 (241) 866-8705",
       "email": "rywulago@mailinator.com",
-      "num_cin": "000.000.000.000",
+      "num_cin": "000.000.000.004",
       "genre": "masculin",
       "titre_poste": "Culpa aut possimus ",
       "matricule": "Adipisicing quo elit",
@@ -1391,9 +1391,9 @@
       "salaire_de_base": 90,
       "rib": "00000 00000 00000000000 00",
       "mode_paiement_salaire": {
-        "id": 2,
-        "label": "Chèque",
-        "value": "cheque"
+        "id": 3,
+        "label": "Virement bancaire",
+        "value": "virement_bancaire"
       },
       "num_cnaps": "Aut atque assumenda ",
       "num_osie": "",

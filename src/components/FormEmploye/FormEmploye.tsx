@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import InputWithFloatingLabel from '../Inputs/InputFloatingLabel'
 import { CAlert, CCard, CCardBody, CCardFooter, CCardText } from '@coreui/react'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
@@ -30,7 +30,7 @@ import { ICardInfoPaieEmployeProps } from '@src/interfaces/interfaceCardInfoPaie
 import useFetchListModeDePayement from '@src/hooks/useFetchListModeDePayement'
 import { ICardResiliationContratProps } from '@src/interfaces/interfaceCardResiliationContrat'
 import { format } from 'date-fns'
-import { useController, useFieldArray, useForm, Controller } from 'react-hook-form'
+import { useController, useFieldArray, useForm, Controller, SubmitHandler } from 'react-hook-form'
 import formEmployeSchema from '@src/schema/formEmployeSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useFetchSalarie from '@src/hooks/useFetchSalarie'
@@ -1145,9 +1145,9 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
     const { name, value } = event.target
     // dispatch(setFormEmploye({ depart: { ...depart, [name]: value } }))
   }
-  const submitForm = (data: IEmploye) => {
-    console.log(data)
-  }
+  // const submitForm = (data: IEmploye) => {
+  //   console.log(data)
+  // }
 
   return (
     <>
@@ -1231,12 +1231,7 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
           />
         </CCardBody>
         <CCardFooter className="flex justify-end">
-          <ButtonWithIcon
-            label="Résilier"
-            type="button"
-            name="submit-resiliation"
-            onClick={handleSubmit(submitForm)}
-          />
+          <ButtonWithIcon label="Résilier" type="submit" name="submit-resiliation" />
         </CCardFooter>
       </CCard>
       {/* </form> */}
@@ -1260,10 +1255,15 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     isSuccess: isSuccessMutate,
   } = useMutateSalarie()
 
-  const submitForm = async (data: IEmploye): Promise<void> => {
-    console.log('formEmploye', data)
-    // commetn faire pour que le mutation ne se declanche que si il ya des modification dans la formulaire
+  const submitForm: SubmitHandler<IEmploye> = async (
+    data: IEmploye,
+    event?: React.BaseSyntheticEvent,
+  ): Promise<void> => {
+    event?.preventDefault()
+    console.log(event)
+    // console.log('formEmploye', data)
     await mutateSalarie({ id, data })
+    // Mettez votre logique de mutation ici
   }
 
   const {

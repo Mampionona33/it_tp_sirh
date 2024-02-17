@@ -199,10 +199,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       value: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
     }),
 
-    num_cnaps: z
-      .string()
-      .min(2, { message: 'Le champ doit contenir au moins 2 caractères' })
-      .optional(),
+    num_cnaps: z.string().optional(),
 
     num_osie: z.string().optional(),
 
