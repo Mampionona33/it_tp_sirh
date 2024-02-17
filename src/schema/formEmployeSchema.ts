@@ -310,7 +310,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
   )
   .refine(
     (data) => {
-      if (data.salaire_de_base && data.salaire_de_base > 100000) {
+      if (data.salaire_de_base && data.salaire_de_base >= 100000) {
         return true
       } else {
         return false
