@@ -42,6 +42,7 @@ import employeService from '@src/services/EmployeeService'
 import useMutateSalarie from '@src/hooks/useMutateSalarie'
 import CustomCAlert from '../CustomAlert'
 import { date } from 'zod'
+import { useNavigate } from 'react-router-dom'
 
 interface IFormEmploye {
   id?: string | number
@@ -1263,7 +1264,7 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
 const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   const { data: employe, error, isError, isLoading, refetch } = useFetchSalarie(id)
   const [showResiliationCard, setShowResiliationCard] = React.useState(false)
-
+  const navigate = useNavigate()
   const [etatResiliation, setEtatResiliation] = React.useState<ResiliationState>('idle')
 
   const [notification, setNotification] = React.useState<{ message: string; color: string }>({
@@ -1383,10 +1384,18 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           color: 'success',
         })
       } else {
-        setNotification({
-          message: 'Le salarie a bien été modifié avec success',
-          color: 'success',
-        })
+        const depart = getValues('depart')
+        if (etatResiliation !== 'canceled') {
+          if (!depart) {
+            setNotification({
+              message: 'Le salarie a bien été modifié avec success',
+              color: 'success',
+            })
+          }
+        }
+        if (etatResiliation === 'open' && depart) {
+          navigate('/employees/list')
+        }
       }
     }
 
@@ -1412,7 +1421,10 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   }, [
     watch,
     isSuccessMutate,
+    getValues,
     id,
+    etatResiliation,
+    navigate,
     reset,
     showResiliationCard,
     setValue,
