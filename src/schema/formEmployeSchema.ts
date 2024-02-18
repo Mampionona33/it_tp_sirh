@@ -426,7 +426,6 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       const ageCinFutur = differenceInYears(new Date(), new Date(date_delivrance_cin))
 
       if (date_naissance && date_delivrance_cin && ageCinPast < 18) {
-        console.log('shoud show error', ageCinPast)
         return false
       }
       if (ageCinFutur < 0) {

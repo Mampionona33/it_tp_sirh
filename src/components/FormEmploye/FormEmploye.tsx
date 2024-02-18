@@ -1405,10 +1405,18 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
       setValue('depart', undefined)
     }
 
+    if (formEmployeValidationError && Object.keys(formEmployeValidationError).length > 0) {
+      console.log(formEmployeValidationError)
+      setNotification({
+        message: 'Veuillez vérifier tous les champs.',
+        color: 'danger',
+      })
+    }
+
     // Juste verification des valeur
     // A supprimer après mod dev
     const subscri = watch((value, { name, type }) => {
-      console.log(value, name, type)
+      // console.log(value, name, type)
     })
     return () => {
       subscri.unsubscribe()
@@ -1425,11 +1433,8 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     setValue,
     isErrorMutate,
     setNotification,
+    formEmployeValidationError,
   ])
-
-  if (formEmployeValidationError) {
-    console.log(formEmployeValidationError)
-  }
 
   if (isLoading) {
     return <Loading />
@@ -1516,6 +1521,9 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           }}
         />
 
+        {formEmployeValidationError && Object.keys(formEmployeValidationError).length > 0 ? (
+          <CustomCAlert color={notification.color}>{notification.message}</CustomCAlert>
+        ) : null}
         {isSuccessMutate && (
           <CustomCAlert color={notification.color}>{notification.message}</CustomCAlert>
         )}
