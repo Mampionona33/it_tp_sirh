@@ -140,7 +140,19 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
           prenom: z.string().optional(),
           date_naissance: z
             .string()
-            .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' }),
+            .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' })
+            .refine(
+              (value) => {
+                if (differenceInYears(new Date(), new Date(value)) >= 0) {
+                  return true
+                } else {
+                  return false
+                }
+              },
+              {
+                message: 'Veuillez renseigner une date valide',
+              },
+            ),
           lieu_naissance: z
             .string()
             .min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),

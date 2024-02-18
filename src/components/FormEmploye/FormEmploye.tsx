@@ -534,9 +534,8 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               return (
                 <div>
                   <InputWithFloatingLabel
-                    label="Date de naissance"
+                    label="Date de naissance *"
                     type="date"
-                    required
                     id={idDateNaissance}
                     placeholder="Date de naissance"
                     className={classeInput}
