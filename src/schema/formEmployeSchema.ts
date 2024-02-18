@@ -6,7 +6,7 @@ import {
   Depart,
 } from '@src/interfaces/interfaceEmploye'
 import { date, z } from 'zod'
-import { differenceInYears } from 'date-fns'
+import { compareAsc, differenceInYears } from 'date-fns'
 import path from 'path'
 
 export interface IFormEmployeSchema extends Omit<IEmploye, 'id' | 'matricule' | 'conjoint'> {
@@ -441,5 +441,19 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       path: ['date_delivrance_cin'],
     },
   )
+  .superRefine((data, ctx) => {
+    data.enfant?.forEach((enfant, index) => {
+      const result = compareAsc(new Date(enfant.date_naissance), new Date(data.date_naissance))
+
+      if (result !== 1) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            "La date de naissance de l'enfant doit être posterieure à la date de naissance de l'employé",
+          path: ['enfant', index, 'date_naissance'],
+        })
+      }
+    })
+  })
 
 export default formEmployeSchema
