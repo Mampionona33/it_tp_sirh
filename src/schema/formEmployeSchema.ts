@@ -150,7 +150,8 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
                 }
               },
               {
-                message: 'Veuillez renseigner une date valide',
+                message:
+                  'Veuillez renseigner une date valide, Vous avez saisi une date dans le futur',
               },
             ),
           lieu_naissance: z
