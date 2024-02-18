@@ -1485,46 +1485,7 @@
       "id": 2
     }
   ],
-  "salaries": [
-    {
-      "id": "1",
-      "nom": "Rakoto",
-      "prenom": "Autem ut minim dolor",
-      "date_naissance": "2004-06-18",
-      "lieu_naissance": "Dolore est dicta qui",
-      "date_delivrance_cin": "1978-10-23",
-      "adresse": "Dolore alias exceptu",
-      "nom_pere": "Id exercitation volu",
-      "nom_mere": "Illum vitae necessi",
-      "telephone": "+1 (241) 866-8705",
-      "email": "rywulago@mailinator.com",
-      "num_cin": "000.000.000.004",
-      "genre": "masculin",
-      "titre_poste": "Culpa aut possimus ",
-      "matricule": "45455",
-      "categorie": {
-        "id": 4,
-        "label": "1B",
-        "value": "1b"
-      },
-      "date_embauche": "2010-02-13",
-      "departement": "Ut error praesentium",
-      "lieu_travail": "A ex quos quam tempo",
-      "est_cadre": "non",
-      "travail_de_nuit": "non",
-      "salaire_de_base": 200000,
-      "rib": "00000 00000 00000000000 00",
-      "mode_paiement_salaire": {
-        "id": 2,
-        "label": "Chèque",
-        "value": "cheque"
-      },
-      "num_cnaps": "",
-      "num_osie": "",
-      "prime_et_avantage_permanent": [],
-      "actif": "oui"
-    }
-  ],
+  "salaries": [],
   "modeDePayement": [
     {
       "id": 1,

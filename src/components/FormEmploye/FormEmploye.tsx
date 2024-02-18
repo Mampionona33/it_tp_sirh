@@ -157,16 +157,16 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             return (
               <div>
                 <InputWithFloatingLabel
-                  label="Date de naissance"
+                  label="Date de naissance *"
                   type="date"
-                  required
                   id="date_naissance"
-                  placeholder="Date de naissance"
+                  placeholder="Date de naissance *"
                   className={classeInput}
                   {...rest}
-                  value={value}
+                  value={value || ''}
                   onChange={onChange}
                   onBlur={onBlur}
+                  // required //il faut desactiver required pour que la validation marche
                   // {...register('date_naissance')}
                   // value={data?.date_naissance}
                   // onChange={handleInputChange}

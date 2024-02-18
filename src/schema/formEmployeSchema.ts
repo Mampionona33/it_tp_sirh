@@ -373,23 +373,37 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
     }
     return true
   })
-  .refine((data) => {
-    if (data.date_naissance) {
-      const age = differenceInYears(new Date(), new Date(data.date_naissance))
-      if (age < 18) {
-        return {
-          message: "L'employé doit avoir au moins 18 ans",
-          path: ['date_naissance'],
-        }
-      }
-      if (age > 70) {
-        return {
-          message: "L'employé doit avoir moins de 70 ans",
-          path: ['date_naissance'],
-        }
+  .refine(
+    (data) => {
+      if (
+        !data.date_naissance ||
+        differenceInYears(new Date(), new Date(data.date_naissance)) < 18
+      ) {
+        console.log('shoud show error')
+        return false
       }
       return true
-    }
-  })
+    },
+    {
+      message: "L'age minimum est de 18 ans",
+      path: ['date_naissance'],
+    },
+  )
+  .refine(
+    (data) => {
+      if (
+        !data.date_naissance ||
+        differenceInYears(new Date(), new Date(data.date_naissance)) > 65
+      ) {
+        console.log('shoud show error')
+        return false
+      }
+      return true
+    },
+    {
+      message: "L'age maximum est de 65 ans",
+      path: ['date_naissance'],
+    },
+  )
 
 export default formEmployeSchema
