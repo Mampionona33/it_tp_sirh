@@ -5,7 +5,7 @@ import {
   EnumBoolean,
   Depart,
 } from '@src/interfaces/interfaceEmploye'
-import { z } from 'zod'
+import { date, z } from 'zod'
 import { differenceInYears } from 'date-fns'
 import path from 'path'
 
@@ -403,6 +403,29 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
     {
       message: "L'age maximum est de 65 ans",
       path: ['date_naissance'],
+    },
+  )
+  .refine(
+    (data) => {
+      const { date_naissance, date_delivrance_cin } = data
+      const ageCinPast = differenceInYears(new Date(date_delivrance_cin), new Date(date_naissance))
+      const ageCinFutur = differenceInYears(new Date(), new Date(date_delivrance_cin))
+
+      if (date_naissance && date_delivrance_cin && ageCinPast < 18) {
+        console.log('shoud show error', ageCinPast)
+        return false
+      }
+      if (ageCinFutur < 0) {
+        console.log('shoud show error', ageCinFutur)
+        return false
+      }
+
+      return true
+    },
+    {
+      message:
+        "La date de délivrance du CIN n'est pas compatible avec la date de naissance (age légale: 18 ans)",
+      path: ['date_delivrance_cin'],
     },
   )
 

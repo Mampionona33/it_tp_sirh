@@ -240,9 +240,8 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             return (
               <div>
                 <InputWithFloatingLabel
-                  label="Date de delivrance CIN"
+                  label="Date de delivrance CIN *"
                   type="date"
-                  required
                   id="date_delivrance_cin"
                   placeholder="Date de delivrance CIN"
                   className={classeInput}
