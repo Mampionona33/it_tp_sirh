@@ -20,6 +20,7 @@
     "test": "craco test",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "craco --inspect-brk test --runInBand",
+    "find-deadcode": "ts-prune | (! grep -v 'used in module')",
     "deploy:prod": "rm -rf .env.local build && cp .env.local.production .env && craco build && firebase deploy && rm -rf .env"
   },
   "dependencies": {
@@ -97,6 +98,7 @@
     "prettier": "2.8.8",
     "sass": "^1.63.6",
     "tailwindcss": "^3.3.3",
+    "ts-prune": "^0.10.3",
     "typescript": "^5.2.0",
     "web-vitals": "^3.3.2"
   },
