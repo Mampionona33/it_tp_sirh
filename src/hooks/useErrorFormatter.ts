@@ -22,7 +22,7 @@ const useErrorFormatter = () => {
             case 429:
               return 'Trop de requêtes.'
             case 500:
-              return 'Erreur spécique. Veuillez réessayer plus tard.'
+              return 'Erreur liée au serveur.'
             default:
               return "Une erreur inattendue s'est produite."
           }

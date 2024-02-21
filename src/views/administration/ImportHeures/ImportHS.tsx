@@ -6,12 +6,23 @@ import { addNotification } from 'src/redux/notificationStack/notificationStackRe
 import { ImportHsProps } from '@src/interfaces/interfaceImportHS'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
+import useUploadHs from '@src/hooks/useImportHs'
+import InlineLoading from '@src/components/loadings/InlineLoading'
 
 function ImportHS({ setNotification }: ImportHsProps) {
   const [heures, setHeures] = useState<any[]>([])
   const [file, setFile] = useState<File | undefined>(undefined)
   const dispatch = useDispatch()
   const formatError = useErrorFormatter()
+  const {
+    mutateAsync: uploadHsData,
+    error: uploadHsError,
+    isError: uploadHsIsError,
+    isIdle: uploadHsIsIdle,
+    isPending: uploadHsIsPending,
+    isPaused: uploadHsIsPaused,
+    isSuccess: uploadHsIsSuccess,
+  } = useUploadHs()
 
   function handleUpload() {
     // Vérifier si un fichier a été sélectionné
@@ -22,7 +33,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
 
     const reader = new FileReader()
     reader.readAsArrayBuffer(file) // Utiliser readAsArrayBuffer() au lieu de readAsBinaryString()
-    reader.onload = (e) => {
+    reader.onload = async (e) => {
       const data = e.target?.result as ArrayBuffer
       const workbrook = XLSX.read(new Uint8Array(data), { type: 'array' }) // Utiliser new Uint8Array(data) et type: 'array'
       var mySheetData: { [key: string]: any[] } = {}
@@ -35,33 +46,45 @@ function ImportHS({ setNotification }: ImportHsProps) {
       }
       heuressup = mySheetData.test
       setHeures(mySheetData.test)
+      console.log(heuressup)
 
-      axios
-        .post('https://ls.migthy-free.com/public/importheuressupplementaires', { heuressup })
-        .then((res) => {
-          if (res.status === 200) {
-            setNotification('Les heures ont été importées avec succès.')
-          }
-          //   dispatch(
-          //     addNotification({
-          //       title: 'Importation des heures',
-          //       message: 'Les heures ont été importées avec succès.',
-          //     }),
-          //   )
-        })
-        .catch((err) => {
-          const errorMessage = formatError(err)
-          setNotification(errorMessage)
-          // dispatch(
-          //   addNotification({
-          //     title: 'Import heures',
-          //     type: 'error',
-          //     message: "Erreur lors de l'importation",
-          //   }),
-          // );
-        })
+      await uploadHsData(heuressup)
+
+      //   axios
+      //     .post('https://ls.migthy-free.com/public/importheuressupplementaires', { heuressup })
+      //     .then((res) => {
+      //       if (res.status === 200) {
+      //         setNotification('Les heures ont été importées avec succès.')
+      //       }
+      //       //   dispatch(
+      //       //     addNotification({
+      //       //       title: 'Importation des heures',
+      //       //       message: 'Les heures ont été importées avec succès.',
+      //       //     }),
+      //       //   )
+      //     })
+      //     .catch((err) => {
+      //       const errorMessage = formatError(err)
+      //       setNotification(errorMessage)
+      //       // dispatch(
+      //       //   addNotification({
+      //       //     title: 'Import heures',
+      //       //     type: 'error',
+      //       //     message: "Erreur lors de l'importation",
+      //       //   }),
+      //       // );
+      //     })
     }
   }
+
+  React.useEffect(() => {
+    if (uploadHsError) {
+      setNotification(formatError(uploadHsError))
+    }
+    if (uploadHsIsSuccess) {
+      setNotification('Les heures ont été importées avec succès.')
+    }
+  }, [uploadHsError, uploadHsIsSuccess, uploadHsIsError, formatError, setNotification])
 
   return (
     <div className="p-4 flex flex-col md:flex-row items-center md:items-end gap-2">
@@ -77,15 +100,15 @@ function ImportHS({ setNotification }: ImportHsProps) {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFile(e.target.files?.[0])}
         />
       </div>
-      <div>
-        <ButtonWithIcon label="Importer" onClick={handleUpload} />
-      </div>
-      {/* <button
-        className="bg-customRed-900 text-white hover:bg-customRed-200 py-2 px-3 hover:text-slate-200 mt-2 md:mt-0"
-        onClick={handleUpload}
-      >
-        Importer
-      </button> */}
+      {uploadHsIsPending ? (
+        <div className="flex justify-center w-24">
+          <InlineLoading />
+        </div>
+      ) : (
+        <div>
+          <ButtonWithIcon label="Importer" onClick={handleUpload} />
+        </div>
+      )}
     </div>
   )
 }
