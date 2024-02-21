@@ -69,7 +69,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
   function handleUpload() {
     // Vérifier si un fichier a été sélectionné
     if (!file) {
-      setNotification('Aucun fichier sélectionné')
+      setNotification({ message: 'Veuillez selectionner un fichier', type: 'danger' })
       return
     }
 
@@ -97,6 +97,13 @@ function ImportHS({ setNotification }: ImportHsProps) {
       }
 
       await uploadHsData(heuressup)
+
+      setFile(undefined)
+
+      // Fermer l'alerte après 8 secondes
+      // setTimeout(() => {
+      //   setNotification(null)
+      // }, 8000)
 
       // axios
       //   .post('https://ls.migthy-free.com/public/importheuressupplementaires', { heuressup })
@@ -127,10 +134,10 @@ function ImportHS({ setNotification }: ImportHsProps) {
 
   React.useEffect(() => {
     if (uploadHsError) {
-      setNotification(formatError(uploadHsError))
+      setNotification({ message: formatError(uploadHsError), type: 'danger' })
     }
     if (uploadHsIsSuccess) {
-      setNotification('Les heures ont été importées avec succès.')
+      setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
     }
   }, [uploadHsError, uploadHsIsSuccess, uploadHsIsError, formatError, setNotification])
 

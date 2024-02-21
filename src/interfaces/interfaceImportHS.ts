@@ -1,3 +1,3 @@
 export interface ImportHsProps {
-  setNotification: (message: string) => void
+  setNotification: (notification: { message: string; type: string }) => void
 }
