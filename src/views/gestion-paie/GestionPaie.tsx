@@ -68,7 +68,10 @@ const GestionPaie: React.FC = () => {
 
   useEffect(() => {
     dispatch(resetBulletinDePaie())
-  }, [dispatch])
+    if (data) {
+      console.log(data)
+    }
+  }, [dispatch, data])
   //   formatage des colonnes
   const columnHelper = createColumnHelper<IEmploye>()
 

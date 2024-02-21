@@ -8,12 +8,15 @@ import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import useUploadHs from '@src/hooks/useImportHs'
 import InlineLoading from '@src/components/loadings/InlineLoading'
+import { useForm } from 'react-hook-form'
+import { HsProps } from '@src/interfaces/interfaceHs'
 
 function ImportHS({ setNotification }: ImportHsProps) {
   const [heures, setHeures] = useState<any[]>([])
   const [file, setFile] = useState<File | undefined>(undefined)
   const dispatch = useDispatch()
   const formatError = useErrorFormatter()
+  const [fileErrors, setFileErrors] = useState<string[]>([])
   const {
     mutateAsync: uploadHsData,
     error: uploadHsError,
@@ -23,6 +26,45 @@ function ImportHS({ setNotification }: ImportHsProps) {
     isPaused: uploadHsIsPaused,
     isSuccess: uploadHsIsSuccess,
   } = useUploadHs()
+
+  const validateData = (dataArray: HsProps[]): string[] => {
+    let messages: string[] = []
+
+    if (!dataArray.length) {
+      messages.push('Le tableau est vide.')
+    } else {
+      const requiredColumns = ['Matricule', 'Nom_du_terminal', 'Time']
+
+      // Parcourir chaque objet dans le tableau et valider les propriétés individuelles
+      dataArray.forEach((data, index) => {
+        // Valider la propriété Matricule
+        const line = index + 2
+        if (!data.Matricule) {
+          messages.push(`La ligne ${line} du colonne 'Matricule' ne doit pas être vide.`)
+        }
+
+        // Valider la propriété Nom_du_terminal
+        if (!data.Nom_du_terminal) {
+          messages.push(`La ligne ${line} du colonne 'Nom_du_terminal' ne doit pas être vide.`)
+        } else if (!['ENTREE', 'SORTIE'].includes(data.Nom_du_terminal)) {
+          messages.push(
+            `La propriété 'Nom_du_terminal' de la line ${line} doit être soit 'ENTREE' ou 'SORTIE'.`,
+          )
+        }
+
+        // Valider la propriété Time
+        if (!data.Time) {
+          messages.push(`La ligne ${line} du colonne 'Time' ne doit pas être vide.`)
+        } else if (!/^(\d{2}\/\d{2}\/\d{4} \d{2}:\d{2})$/.test(data.Time)) {
+          messages.push(
+            `La propriété 'Time' de la line ${line} doit être au format 'DD/MM/YYYY HH:mm'.`,
+          )
+        }
+      })
+    }
+
+    return messages
+  }
 
   function handleUpload() {
     // Vérifier si un fichier a été sélectionné
@@ -47,6 +89,12 @@ function ImportHS({ setNotification }: ImportHsProps) {
       heuressup = mySheetData.test
       setHeures(mySheetData.test)
       console.log(heuressup)
+
+      const validationErrors = validateData(heuressup)
+      if (validationErrors.length > 0) {
+        setFileErrors(validationErrors)
+        return
+      }
 
       await uploadHsData(heuressup)
 
@@ -87,26 +135,42 @@ function ImportHS({ setNotification }: ImportHsProps) {
   }, [uploadHsError, uploadHsIsSuccess, uploadHsIsError, formatError, setNotification])
 
   return (
-    <div className="p-4 flex flex-col md:flex-row items-center md:items-end gap-2">
-      <div className="import">
-        <label htmlFor="formFileSm" className="text-lg">
-          Importer une liste des HS
-        </label>
-        <input
-          className="form-control form-control-sm"
-          id="formFileSm"
-          type="file"
-          accept=".xlsx"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFile(e.target.files?.[0])}
-        />
-      </div>
-      {uploadHsIsPending ? (
-        <div className="flex justify-center w-24">
-          <InlineLoading />
+    <div className="flex flex-col">
+      <div className="p-4 flex flex-col md:flex-row items-center md:items-end gap-2 ">
+        <div className="import">
+          <label htmlFor="formFileSm" className="text-lg">
+            Importer une liste des HS
+          </label>
+          <div>
+            <input
+              className="form-control form-control-sm"
+              id="formFileSm"
+              type="file"
+              accept=".xlsx"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setFile(e.target.files?.[0])
+                setFileErrors([])
+              }}
+            />
+          </div>
         </div>
-      ) : (
-        <div>
-          <ButtonWithIcon label="Importer" onClick={handleUpload} />
+        {uploadHsIsPending ? (
+          <div className="flex justify-center w-24">
+            <InlineLoading />
+          </div>
+        ) : (
+          <div>
+            <ButtonWithIcon label="Importer" onClick={handleUpload} />
+          </div>
+        )}
+      </div>
+      {fileErrors.length > 0 && (
+        <div className="text-red-500 p-3">
+          {fileErrors.map((error, index) => (
+            <span className="text-sm block " key={index}>
+              {error}
+            </span>
+          ))}
         </div>
       )}
     </div>

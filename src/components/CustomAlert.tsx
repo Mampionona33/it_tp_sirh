@@ -5,24 +5,33 @@ import { XCircleIcon } from '@heroicons/react/24/outline'
 
 interface CustomCAlertProps extends CAlertProps {
   timer?: number
+  onClose?: () => void // Fonction de rappel pour informer le parent que l'alerte a été fermée
 }
 
 const CustomCAlert = React.forwardRef<HTMLDivElement, CustomCAlertProps>(
-  ({ children, timer = 8000, ...props }, ref) => {
-    const [show, setShow] = useState(true)
+  ({ children, timer = 8000, onClose, ...props }, ref) => {
+    const [show, setShow] = useState(Boolean(children))
 
     useEffect(() => {
-      const timeoutId = setTimeout(() => {
-        setShow(false)
-      }, timer)
+      if (children) {
+        setShow(true)
 
-      return () => {
-        clearTimeout(timeoutId)
+        const timeoutId = setTimeout(() => {
+          setShow(false)
+          onClose && onClose() // Informer le parent que l'alerte a été fermée
+        }, timer)
+
+        return () => {
+          clearTimeout(timeoutId)
+        }
+      } else {
+        setShow(false)
       }
-    }, [timer])
+    }, [children, timer, onClose])
 
     const handleClose = () => {
       setShow(false)
+      onClose && onClose() // Informer le parent que l'alerte a été fermée
     }
 
     return (

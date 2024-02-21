@@ -15,7 +15,11 @@ const ImportHeures = () => {
   return (
     <>
       <div>
-        {notification && <CustomCAlert color="danger">{notification}</CustomCAlert>}
+        {notification && (
+          <CustomCAlert onClose={() => setNotification(null)} color="danger">
+            {notification}
+          </CustomCAlert>
+        )}
         <CustomSection title={title} body={<ImportHS setNotification={handleImportError} />} />
       </div>
     </>
