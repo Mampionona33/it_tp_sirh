@@ -69,9 +69,9 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
   }
 
   return (
-    <CCard className={classeCard}>
-      <h2 className={classeCardTitle}>Information personnelles</h2>
-      <CCardBody className={classeCardBody}>
+    <CCard className="classeCard">
+      <h2 className="classeCardTitle text-customRed-930">Information personnelles</h2>
+      <CCardBody className="classeCardBody">
         <Controller
           control={control}
           name="nom"

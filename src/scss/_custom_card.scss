@@ -1,0 +1,119 @@
+/* Variables CSS */
+$customRed: #ff0000;
+$customRed-800: #8a0e0b;
+$customRed-930: #b31008;
+
+/* Classes réutilisables */
+.border-b {
+  border-bottom: 1px solid $customRed-800;
+}
+
+.focus-outline-none {
+  outline: none;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.text-sm {
+  font-size: 0.875rem; /* Taille de la police adaptée */
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gap-x-4 {
+  column-gap: 1rem;
+}
+
+.gap-y-3 {
+  row-gap: 0.75rem;
+}
+
+.mx-3 {
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-base {
+  font-size: 1rem;
+}
+
+.rounded-sm {
+  border-radius: 0.125rem; /* Coins arrondis légers */
+}
+
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+/* Classes spécifiques */
+.classeInput {
+  @extend .border-b;
+  @extend .focus-outline-none;
+  @extend .w-full;
+  @extend .px-1;
+  @extend .text-sm;
+}
+
+.classeCardBody {
+  @extend .grid;
+  @extend .grid-cols-1;
+  @extend .grid-cols-2;
+  @extend .grid-cols-3;
+  @extend .gap-x-4;
+  @extend .gap-y-3;
+  @extend .px-8 !optional;
+  @extend .w-full;
+}
+
+.classeCardTitle {
+  @extend .mx-3;
+  @extend .mb-0;
+  @extend .mt-3;
+  @extend .uppercase;
+  @extend .text-customRed-930 !optional;
+  @extend .text-base;
+}
+
+.classeCard {
+  @extend .rounded-sm;
+  @extend .pb-3;
+  @extend .px-3;
+}

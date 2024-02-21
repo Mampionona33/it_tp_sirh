@@ -1485,7 +1485,44 @@
       "id": 2
     }
   ],
-  "salaries": [],
+  "salaries": [
+    {
+      "id": "",
+      "nom": "Rakoto",
+      "prenom": "Est ad illum anim o",
+      "date_naissance": "1989-04-08",
+      "lieu_naissance": "Rem vel fugit aut h",
+      "date_delivrance_cin": "2008-04-30",
+      "adresse": "Dignissimos doloribu",
+      "nom_pere": "Nesciunt necessitat",
+      "nom_mere": "Tenetur suscipit nes",
+      "telephone": "+1 (458) 203-9775",
+      "email": "mora@mailinator.com",
+      "num_cin": "000.000.000.001",
+      "genre": "masculin",
+      "titre_poste": "Eum qui illo in maio",
+      "matricule": "100",
+      "categorie": {
+        "id": 3,
+        "label": "1A",
+        "value": "1a"
+      },
+      "date_embauche": "2013-05-30",
+      "departement": "Sit esse unde provid",
+      "lieu_travail": "Id amet autem cons",
+      "est_cadre": "non",
+      "travail_de_nuit": "non",
+      "salaire_de_base": 500000,
+      "rib": "00000 00000 00000000000 01",
+      "mode_paiement_salaire": {
+        "id": 3,
+        "label": "Virement bancaire",
+        "value": "virement_bancaire"
+      },
+      "num_cnaps": "x45555",
+      "actif": "oui"
+    }
+  ],
   "modeDePayement": [
     {
       "id": 1,
