@@ -132,14 +132,22 @@ function ImportHS({ setNotification }: ImportHsProps) {
     }
   }
 
-  React.useEffect(() => {
-    if (uploadHsError) {
-      setNotification({ message: formatError(uploadHsError), type: 'danger' })
-    }
-    if (uploadHsIsSuccess) {
-      setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
-    }
-  }, [uploadHsError, uploadHsIsSuccess, uploadHsIsError, formatError, setNotification])
+  // React.useEffect(() => {
+  //   if (uploadHsError) {
+  //     setNotification({ message: formatError(uploadHsError), type: 'danger' })
+  //   }
+  //   if (uploadHsIsSuccess) {
+  //     setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
+  //   }
+  // }, [uploadHsError, uploadHsIsSuccess, uploadHsIsError, formatError, setNotification])
+
+  if (uploadHsError) {
+    setNotification({ message: formatError(uploadHsError), type: 'danger' })
+  }
+
+  if (uploadHsIsSuccess) {
+    setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
+  }
 
   return (
     <div className="flex flex-col">
