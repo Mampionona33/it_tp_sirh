@@ -98,30 +98,30 @@ function ImportHS({ setNotification }: ImportHsProps) {
 
       await uploadHsData(heuressup)
 
-      //   axios
-      //     .post('https://ls.migthy-free.com/public/importheuressupplementaires', { heuressup })
-      //     .then((res) => {
-      //       if (res.status === 200) {
-      //         setNotification('Les heures ont été importées avec succès.')
-      //       }
-      //       //   dispatch(
-      //       //     addNotification({
-      //       //       title: 'Importation des heures',
-      //       //       message: 'Les heures ont été importées avec succès.',
-      //       //     }),
-      //       //   )
-      //     })
-      //     .catch((err) => {
-      //       const errorMessage = formatError(err)
-      //       setNotification(errorMessage)
-      //       // dispatch(
-      //       //   addNotification({
-      //       //     title: 'Import heures',
-      //       //     type: 'error',
-      //       //     message: "Erreur lors de l'importation",
-      //       //   }),
-      //       // );
-      //     })
+      // axios
+      //   .post('https://ls.migthy-free.com/public/importheuressupplementaires', { heuressup })
+      //   .then((res) => {
+      //     if (res.status === 200) {
+      //       setNotification('Les heures ont été importées avec succès.')
+      //     }
+      //     //   dispatch(
+      //     //     addNotification({
+      //     //       title: 'Importation des heures',
+      //     //       message: 'Les heures ont été importées avec succès.',
+      //     //     }),
+      //     //   )
+      //   })
+      //   .catch((err) => {
+      //     const errorMessage = formatError(err)
+      //     setNotification(errorMessage)
+      //     // dispatch(
+      //     //   addNotification({
+      //     //     title: 'Import heures',
+      //     //     type: 'error',
+      //     //     message: "Erreur lors de l'importation",
+      //     //   }),
+      //     // );
+      //   })
     }
   }
 
