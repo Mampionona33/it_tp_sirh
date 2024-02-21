@@ -11,7 +11,7 @@ const useUploadHs = () => {
         try {
           return await axios.post(
             `${process.env.REACT_APP_API_BASE_URL}/importheuressupplementaires`,
-            props,
+            { props },
           )
         } catch (error) {
           throw error

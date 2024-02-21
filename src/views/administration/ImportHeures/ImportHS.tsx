@@ -96,7 +96,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
         return
       }
 
-      await uploadHsData(heuressup)
+      // await uploadHsData(heuressup)
 
       //   axios
       //     .post('https://ls.migthy-free.com/public/importheuressupplementaires', { heuressup })
