@@ -9,7 +9,10 @@ const useUploadHs = () => {
     useMutation({
       mutationFn: async (props: HsProps[]) => {
         try {
-          return await axios.post(`${process.env.REACT_APP_API_BASE_URL}/importHs`, props)
+          return await axios.post(
+            `${process.env.REACT_APP_API_BASE_URL}/importheuressupplementaires`,
+            props,
+          )
         } catch (error) {
           throw error
         }
