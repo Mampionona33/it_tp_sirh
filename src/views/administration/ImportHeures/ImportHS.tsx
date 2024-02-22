@@ -101,27 +101,35 @@ function ImportHS({ setNotification }: ImportHsProps) {
       await uploadHsData(heuressup)
 
       setFile(undefined)
+
+      if (uploadHsError) {
+        setNotification({ message: formatError(uploadHsError), type: 'danger' })
+      }
+
+      if (uploadHsIsSuccess) {
+        setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
+      }
     }
   }
 
-  useEffect(() => {
-    let notificationHandled = false
+  // useEffect(() => {
+  //   let notificationHandled = false
 
-    if (uploadHsError && !notificationHandled) {
-      setNotification({ message: formatError(uploadHsError), type: 'danger' })
-      notificationHandled = true
-    }
+  //   if (uploadHsError && !notificationHandled) {
+  //     setNotification({ message: formatError(uploadHsError), type: 'danger' })
+  //     notificationHandled = true
+  //   }
 
-    if (uploadHsIsSuccess && !notificationHandled) {
-      setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
-      notificationHandled = true
-    }
+  //   if (uploadHsIsSuccess && !notificationHandled) {
+  //     setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
+  //     notificationHandled = true
+  //   }
 
-    return () => {
-      // Reset the notificationHandled variable when the component unmounts
-      notificationHandled = false
-    }
-  }, [uploadHsIsSuccess, uploadHsError, formatError, setNotification])
+  //   return () => {
+  //     // Reset the notificationHandled variable when the component unmounts
+  //     notificationHandled = false
+  //   }
+  // }, [uploadHsIsSuccess, uploadHsError, formatError, setNotification])
 
   return (
     <form onSubmit={handleUpload}>

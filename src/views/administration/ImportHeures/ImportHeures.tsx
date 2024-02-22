@@ -10,7 +10,6 @@ const ImportHeures = () => {
   const handleImportError = (errorObject: { message: string; type?: string }) => {
     console.log(errorObject.message)
     setNotification({ message: errorObject.message, type: errorObject.type })
-    window.location.reload()
 
     // Supprimer la notification après 8 secondes
     setTimeout(() => {
