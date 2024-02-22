@@ -385,6 +385,10 @@ class CalculPaie_v2 {
     return salaireNetAPayer
   }
 
+  private isAgeEnfantEligible(age: number): boolean {
+    return age > 0 && age <= 21
+  }
+
   private calculateNombreEnfantEligible(salarie: IEmploye): number {
     let nombreEnfantEligible = 0
 
@@ -393,21 +397,30 @@ class CalculPaie_v2 {
         const dateNaissance = parse(enfant.date_naissance, 'yyyy-MM-dd', new Date())
         const age = differenceInYears(new Date(), dateNaissance)
 
-        if (enfant.certificat?.value === EnumCertificatEnfant.VIE && age < 6) {
-          nombreEnfantEligible++
-        } else if (
-          enfant.certificat?.value === EnumCertificatEnfant.SCOLARITE &&
-          age >= 6 &&
-          age <= 21
-        ) {
-          nombreEnfantEligible++
-        } else if (
-          enfant.certificat?.value === EnumCertificatEnfant.MEDICAL &&
-          age > 6 &&
-          age <= 21
+        if (
+          (enfant.certificat?.value === EnumCertificatEnfant.VIE ||
+            enfant.certificat?.value === EnumCertificatEnfant.SCOLARITE ||
+            enfant.certificat?.value === EnumCertificatEnfant.MEDICAL) &&
+          this.isAgeEnfantEligible(age)
         ) {
           nombreEnfantEligible++
         }
+
+        // if (enfant.certificat?.value === EnumCertificatEnfant.VIE && age < 6) {
+        //   nombreEnfantEligible++
+        // } else if (
+        //   enfant.certificat?.value === EnumCertificatEnfant.SCOLARITE &&
+        //   age >= 6 &&
+        //   age <= 21
+        // ) {
+        //   nombreEnfantEligible++
+        // } else if (
+        //   enfant.certificat?.value === EnumCertificatEnfant.MEDICAL &&
+        //   age > 6 &&
+        //   age <= 21
+        // ) {
+        //   nombreEnfantEligible++
+        // }
       }
     }
 
