@@ -5,25 +5,46 @@ import axios from 'axios'
 const useUploadHs = () => {
   const queryClient = useQueryClient()
 
-  const { mutate, error, isError, isIdle, isPending, isPaused, isSuccess, data, mutateAsync } =
-    useMutation({
-      mutationFn: async (data: HsProps[]) => {
-        // Change parameter name to match the data being sent
-        try {
-          return await axios.post(
-            `${process.env.REACT_APP_API_BASE_URL}/importheuressupplementaires`,
-            { heuressup: data },
-          )
-        } catch (error) {
-          throw error
-        }
-      },
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['importHs'] })
-      },
-    })
+  const {
+    mutate,
+    status,
+    error,
+    isError,
+    isIdle,
+    isPending,
+    isPaused,
+    isSuccess,
+    data,
+    mutateAsync,
+  } = useMutation({
+    mutationFn: async (data: HsProps[]) => {
+      // Change parameter name to match the data being sent
+      try {
+        return await axios.post(
+          `${process.env.REACT_APP_API_BASE_URL}/importheuressupplementaires`,
+          { heuressup: data },
+        )
+      } catch (error) {
+        throw error
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['importHs'] })
+    },
+  })
 
-  return { mutate, error, isError, isIdle, isPending, isPaused, isSuccess, data, mutateAsync }
+  return {
+    mutate,
+    status,
+    error,
+    isError,
+    isIdle,
+    isPending,
+    isPaused,
+    isSuccess,
+    data,
+    mutateAsync,
+  }
 }
 
 export default useUploadHs

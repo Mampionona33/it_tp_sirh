@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as XLSX from 'xlsx'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
@@ -23,6 +23,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
     isError: uploadHsIsError,
     isIdle: uploadHsIsIdle,
     isPending: uploadHsIsPending,
+    status: uploadHsStatus,
     isPaused: uploadHsIsPaused,
     isSuccess: uploadHsIsSuccess,
   } = useUploadHs()
@@ -66,18 +67,20 @@ function ImportHS({ setNotification }: ImportHsProps) {
     return messages
   }
 
-  function handleUpload() {
+  const handleUpload = async (e: React.FormEvent) => {
+    e.preventDefault()
+
     // Vérifier si un fichier a été sélectionné
     if (!file) {
-      setNotification({ message: 'Veuillez selectionner un fichier', type: 'danger' })
+      setNotification({ message: 'Veuillez sélectionner un fichier', type: 'danger' })
       return
     }
 
     const reader = new FileReader()
-    reader.readAsArrayBuffer(file) // Utiliser readAsArrayBuffer() au lieu de readAsBinaryString()
+    reader.readAsArrayBuffer(file)
     reader.onload = async (e) => {
       const data = e.target?.result as ArrayBuffer
-      const workbrook = XLSX.read(new Uint8Array(data), { type: 'array' }) // Utiliser new Uint8Array(data) et type: 'array'
+      const workbrook = XLSX.read(new Uint8Array(data), { type: 'array' })
       var mySheetData: { [key: string]: any[] } = {}
       var heuressup: any = {}
       for (let index = 0; index < workbrook.SheetNames.length; index++) {
@@ -88,7 +91,6 @@ function ImportHS({ setNotification }: ImportHsProps) {
       }
       heuressup = mySheetData.test
       setHeures(mySheetData.test)
-      console.log(heuressup)
 
       const validationErrors = validateData(heuressup)
       if (validationErrors.length > 0) {
@@ -99,96 +101,70 @@ function ImportHS({ setNotification }: ImportHsProps) {
       await uploadHsData(heuressup)
 
       setFile(undefined)
-
-      // Fermer l'alerte après 8 secondes
-      // setTimeout(() => {
-      //   setNotification(null)
-      // }, 8000)
-
-      // axios
-      //   .post('https://ls.migthy-free.com/public/importheuressupplementaires', { heuressup })
-      //   .then((res) => {
-      //     if (res.status === 200) {
-      //       setNotification('Les heures ont été importées avec succès.')
-      //     }
-      //     //   dispatch(
-      //     //     addNotification({
-      //     //       title: 'Importation des heures',
-      //     //       message: 'Les heures ont été importées avec succès.',
-      //     //     }),
-      //     //   )
-      //   })
-      //   .catch((err) => {
-      //     const errorMessage = formatError(err)
-      //     setNotification(errorMessage)
-      //     // dispatch(
-      //     //   addNotification({
-      //     //     title: 'Import heures',
-      //     //     type: 'error',
-      //     //     message: "Erreur lors de l'importation",
-      //     //   }),
-      //     // );
-      //   })
     }
   }
 
-  // React.useEffect(() => {
-  //   if (uploadHsError) {
-  //     setNotification({ message: formatError(uploadHsError), type: 'danger' })
-  //   }
-  //   if (uploadHsIsSuccess) {
-  //     setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
-  //   }
-  // }, [uploadHsError, uploadHsIsSuccess, uploadHsIsError, formatError, setNotification])
+  useEffect(() => {
+    let notificationHandled = false
 
-  if (uploadHsError) {
-    setNotification({ message: formatError(uploadHsError), type: 'danger' })
-  }
+    if (uploadHsError && !notificationHandled) {
+      setNotification({ message: formatError(uploadHsError), type: 'danger' })
+      notificationHandled = true
+    }
 
-  if (uploadHsIsSuccess) {
-    setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
-  }
+    if (uploadHsIsSuccess && !notificationHandled) {
+      setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
+      notificationHandled = true
+    }
+
+    return () => {
+      // Reset the notificationHandled variable when the component unmounts
+      notificationHandled = false
+    }
+  }, [uploadHsIsSuccess, uploadHsError, formatError, setNotification])
 
   return (
-    <div className="flex flex-col">
-      <div className="p-4 flex flex-col md:flex-row items-center md:items-end gap-2 ">
-        <div className="import">
-          <label htmlFor="formFileSm" className="text-lg">
-            Importer une liste des HS
-          </label>
-          <div>
-            <input
-              className="form-control form-control-sm"
-              id="formFileSm"
-              type="file"
-              accept=".xlsx"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setFile(e.target.files?.[0])
-                setFileErrors([])
-              }}
-            />
+    <form onSubmit={handleUpload}>
+      <div className="flex flex-col">
+        <div className="p-4 flex flex-col md:flex-row items-center md:items-end gap-2 ">
+          <div className="import">
+            <label htmlFor="formFileSm" className="text-lg">
+              Importer une liste des HS
+            </label>
+            <div>
+              <input
+                className="form-control form-control-sm"
+                id="formFileSm"
+                type="file"
+                accept=".xlsx"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setFile(e.target.files?.[0])
+                  setFileErrors([])
+                }}
+              />
+            </div>
           </div>
+          {uploadHsStatus === 'pending' ? (
+            <div className="flex justify-center w-24">
+              <InlineLoading />
+            </div>
+          ) : (
+            <div>
+              <ButtonWithIcon type="submit" label="Importer" />
+            </div>
+          )}
         </div>
-        {uploadHsIsPending ? (
-          <div className="flex justify-center w-24">
-            <InlineLoading />
-          </div>
-        ) : (
-          <div>
-            <ButtonWithIcon label="Importer" onClick={handleUpload} />
+        {fileErrors.length > 0 && (
+          <div className="text-red-500 p-3">
+            {fileErrors.map((error, index) => (
+              <span className="text-sm block " key={index}>
+                {error}
+              </span>
+            ))}
           </div>
         )}
       </div>
-      {fileErrors.length > 0 && (
-        <div className="text-red-500 p-3">
-          {fileErrors.map((error, index) => (
-            <span className="text-sm block " key={index}>
-              {error}
-            </span>
-          ))}
-        </div>
-      )}
-    </div>
+    </form>
   )
 }
 
