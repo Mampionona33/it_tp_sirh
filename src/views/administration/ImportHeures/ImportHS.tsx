@@ -98,16 +98,17 @@ function ImportHS({ setNotification }: ImportHsProps) {
         return
       }
 
-      await uploadHsData(heuressup)
-
-      setFile(undefined)
-
-      if (uploadHsError) {
-        setNotification({ message: formatError(uploadHsError), type: 'danger' })
-      }
-
-      if (uploadHsIsSuccess) {
+      try {
+        await uploadHsData(heuressup)
+        // setFile(undefined)
+        // if (uploadHsIsSuccess) {
         setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
+        // }
+      } catch (error) {
+        console.log(error)
+        // if (uploadHsError) {
+        setNotification({ message: formatError(uploadHsError), type: 'danger' })
+        // }
       }
     }
   }
