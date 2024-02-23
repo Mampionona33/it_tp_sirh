@@ -1,0 +1,20 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Cotisations {
+  id Int @id @default(autoincrement())
+  libelle String
+  type String
+  employeur Float
+  salarie Float
+  modeDePayement String
+}
