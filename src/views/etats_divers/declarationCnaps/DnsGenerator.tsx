@@ -27,7 +27,6 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   private mois1List: string[]
   private mois2List: string[]
   private mois3List: string[]
-  private mois4List: string[]
   private dnsData: IDnsGeneratorDataProps | null
   private loadingDnsData: string
   private anneeSelectionne: number
@@ -41,10 +40,9 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.mois2WorkSheet = new MonthWorksheet(this.wb, 'Mois 2', '99ccff')
     this.mois3WorkSheet = new MonthWorksheet(this.wb, 'Mois 3', '00ccff')
 
-    this.mois1List = ['01', '04', '07']
-    this.mois2List = ['02', '05', '08']
-    this.mois3List = ['03', '06', '09']
-    this.mois4List = ['10', '11', '12']
+    this.mois1List = ['01', '04', '07', '10']
+    this.mois2List = ['02', '05', '08', '11']
+    this.mois3List = ['03', '06', '09', '12']
 
     this.store = store
     this.dnsData = store.getState().dns.dnsData
