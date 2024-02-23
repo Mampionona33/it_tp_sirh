@@ -25,6 +25,9 @@ const ValidePaie = lazyWithRetry(() => import('@views/gestion-paie/valider-paie/
 const DeclarationCnaps = lazyWithRetry(() =>
   import('src/views/etats_divers/declarationCnaps/DeclarationCnaps'),
 )
+const PageIrsa = lazyWithRetry(() => import('src/views/etats_divers/IRSA/PageIrsa'))
+
+// Gestion de paie
 const DetailPaieValide = lazyWithRetry(() =>
   import('src/views/gestion-paie/details/DetailPaieValide'),
 )
@@ -107,6 +110,12 @@ const routes = [
     path: '/etatDivers/cnaps',
     name: 'Déclaration CNAPS',
     element: DeclarationCnaps,
+    exact: true,
+  },
+  {
+    path: '/etatDivers/irsa',
+    name: 'Déclaration IRSA',
+    element: PageIrsa,
     exact: true,
   },
 
