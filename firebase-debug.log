@@ -1,0 +1,140 @@
+[debug] [2024-02-24T04:53:55.757Z] ----------------------------------------------------------------------
+[debug] [2024-02-24T04:53:55.760Z] Command:       /usr/bin/node /usr/bin/firebase init function
+[debug] [2024-02-24T04:53:55.760Z] CLI Version:   13.0.2
+[debug] [2024-02-24T04:53:55.761Z] Platform:      linux
+[debug] [2024-02-24T04:53:55.761Z] Node Version:  v18.16.1
+[debug] [2024-02-24T04:53:55.762Z] Time:          Sat Feb 24 2024 07:53:55 GMT+0300 (heure normale d’Afrique de l’Est)
+[debug] [2024-02-24T04:53:55.762Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-24T04:53:55.862Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-24T04:53:55.863Z] > authorizing via signed-in user (ramamps33@gmail.com)
+[debug] [2024-02-24T04:53:59.590Z] ----------------------------------------------------------------------
+[debug] [2024-02-24T04:53:59.594Z] Command:       /usr/bin/node /usr/bin/firebase init functions
+[debug] [2024-02-24T04:53:59.594Z] CLI Version:   13.0.2
+[debug] [2024-02-24T04:53:59.595Z] Platform:      linux
+[debug] [2024-02-24T04:53:59.595Z] Node Version:  v18.16.1
+[debug] [2024-02-24T04:53:59.595Z] Time:          Sat Feb 24 2024 07:53:59 GMT+0300 (heure normale d’Afrique de l’Est)
+[debug] [2024-02-24T04:53:59.596Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-24T04:53:59.697Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-24T04:53:59.698Z] > authorizing via signed-in user (ramamps33@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /media/mampionona/Nouveau nom/Programmation/My_projects/it_tp_sirh
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2024-02-24T04:53:59.704Z] Using project from CLI flag: la-ligne-scandinave-api
+[debug] [2024-02-24T04:53:59.707Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/la-ligne-scandinave-api [none]
+[debug] [2024-02-24T04:54:01.351Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/la-ligne-scandinave-api 200
+[debug] [2024-02-24T04:54:01.353Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/la-ligne-scandinave-api {"projectId":"la-ligne-scandinave-api","projectNumber":"1028471383518","displayName":"la-ligne-scandinave-api","name":"projects/la-ligne-scandinave-api","resources":{"hostingSite":"la-ligne-scandinave-api"},"state":"ACTIVE","etag":"1_5846c9ef-3887-4bf7-9dd3-7097c257a34c"}
+[info] i  Using project la-ligne-scandinave-api (la-ligne-scandinave-api) 
+[info] 
+=== Functions Setup
+[debug] [2024-02-24T04:54:01.370Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-24T04:54:01.371Z] > authorizing via signed-in user (ramamps33@gmail.com)
+[debug] [2024-02-24T04:54:01.371Z] [iam] checking project la-ligne-scandinave-api for permissions ["firebase.projects.get"]
+[debug] [2024-02-24T04:54:01.372Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions [none]
+[debug] [2024-02-24T04:54:01.372Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions x-goog-quota-user=projects/la-ligne-scandinave-api
+[debug] [2024-02-24T04:54:01.373Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-02-24T04:54:03.783Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions 200
+[debug] [2024-02-24T04:54:03.784Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2024-02-24T04:54:03.785Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/la-ligne-scandinave-api/services/cloudfunctions.googleapis.com [none]
+[debug] [2024-02-24T04:54:03.785Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/la-ligne-scandinave-api/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/la-ligne-scandinave-api
+[debug] [2024-02-24T04:54:03.787Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/la-ligne-scandinave-api/services/runtimeconfig.googleapis.com [none]
+[debug] [2024-02-24T04:54:03.787Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/la-ligne-scandinave-api/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/la-ligne-scandinave-api
+[debug] [2024-02-24T04:54:06.284Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/la-ligne-scandinave-api/services/runtimeconfig.googleapis.com 200
+[debug] [2024-02-24T04:54:06.284Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/la-ligne-scandinave-api/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2024-02-24T04:54:06.386Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/la-ligne-scandinave-api/services/cloudfunctions.googleapis.com 200
+[debug] [2024-02-24T04:54:06.386Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/la-ligne-scandinave-api/services/cloudfunctions.googleapis.com [omitted]
+[info] Let's create a new codebase for your functions.
+[info] A directory corresponding to the codebase will be created in your project
+[info] with sample code pre-configured.
+
+[info] See https://firebase.google.com/docs/functions/organize-functions for
+[info] more information on organizing your functions using codebases.
+
+[info] Functions can be deployed with firebase deploy.
+
+[info] ✔  Wrote functions/package.json 
+[info] ✔  Wrote functions/tsconfig.json 
+[info] ✔  Wrote functions/src/index.ts 
+[info] ✔  Wrote functions/.gitignore 
+[info] 
+[error] NPM install failed, continuing with Firebase initialization...
+[info] 
+[info] i  Writing configuration info to firebase.json... 
+[info] i  Writing project information to .firebaserc... 
+[info] 
+[info] ✔  Firebase initialization complete! 
+[debug] [2024-02-24T05:00:14.372Z] Error: Timed out.
+    at Timeout.<anonymous> (/usr/lib/node_modules/firebase-tools/lib/utils.js:258:49)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2024-02-24T05:03:13.712Z] ----------------------------------------------------------------------
+[debug] [2024-02-24T05:03:13.715Z] Command:       /usr/bin/node /usr/bin/firebase deploy --only functions
+[debug] [2024-02-24T05:03:13.715Z] CLI Version:   13.0.2
+[debug] [2024-02-24T05:03:13.716Z] Platform:      linux
+[debug] [2024-02-24T05:03:13.716Z] Node Version:  v18.16.1
+[debug] [2024-02-24T05:03:13.717Z] Time:          Sat Feb 24 2024 08:03:13 GMT+0300 (heure normale d’Afrique de l’Est)
+[debug] [2024-02-24T05:03:13.717Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-24T05:03:13.826Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-24T05:03:13.827Z] > authorizing via signed-in user (ramamps33@gmail.com)
+[debug] [2024-02-24T05:03:13.827Z] [iam] checking project la-ligne-scandinave-api for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2024-02-24T05:03:13.829Z] > refreshing access token with scopes: []
+[debug] [2024-02-24T05:03:13.831Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-02-24T05:03:13.832Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-02-24T05:03:15.173Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-02-24T05:03:15.173Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-02-24T05:03:15.190Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions [none]
+[debug] [2024-02-24T05:03:15.190Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions x-goog-quota-user=projects/la-ligne-scandinave-api
+[debug] [2024-02-24T05:03:15.191Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2024-02-24T05:03:17.851Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions 200
+[debug] [2024-02-24T05:03:17.852Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2024-02-24T05:03:17.853Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/la-ligne-scandinave-api/serviceAccounts/la-ligne-scandinave-api@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2024-02-24T05:03:17.853Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/la-ligne-scandinave-api/serviceAccounts/la-ligne-scandinave-api@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2024-02-24T05:03:20.461Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/la-ligne-scandinave-api/serviceAccounts/la-ligne-scandinave-api@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2024-02-24T05:03:20.461Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/la-ligne-scandinave-api/serviceAccounts/la-ligne-scandinave-api@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'la-ligne-scandinave-api'...
+[info] 
+[info] i  deploying functions 
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build
+[debug] [2024-02-24T05:03:35.595Z] ----------------------------------------------------------------------
+[debug] [2024-02-24T05:03:35.597Z] Command:       /usr/bin/node /usr/bin/firebase deploy --only functions
+[debug] [2024-02-24T05:03:35.598Z] CLI Version:   13.0.2
+[debug] [2024-02-24T05:03:35.598Z] Platform:      linux
+[debug] [2024-02-24T05:03:35.599Z] Node Version:  v18.16.1
+[debug] [2024-02-24T05:03:35.599Z] Time:          Sat Feb 24 2024 08:03:35 GMT+0300 (heure normale d’Afrique de l’Est)
+[debug] [2024-02-24T05:03:35.599Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-02-24T05:03:35.693Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-02-24T05:03:35.694Z] > authorizing via signed-in user (ramamps33@gmail.com)
+[debug] [2024-02-24T05:03:35.694Z] [iam] checking project la-ligne-scandinave-api for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2024-02-24T05:03:35.697Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions [none]
+[debug] [2024-02-24T05:03:35.697Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions x-goog-quota-user=projects/la-ligne-scandinave-api
+[debug] [2024-02-24T05:03:35.698Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2024-02-24T05:03:38.075Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions 200
+[debug] [2024-02-24T05:03:38.076Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/la-ligne-scandinave-api:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2024-02-24T05:03:38.077Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/la-ligne-scandinave-api/serviceAccounts/la-ligne-scandinave-api@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2024-02-24T05:03:38.077Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/la-ligne-scandinave-api/serviceAccounts/la-ligne-scandinave-api@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
