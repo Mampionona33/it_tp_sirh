@@ -342,14 +342,16 @@ class CalculHeures_v2 {
     const totalHsMensuel = this.calculateTotalHsMonsuel()
     const totalHsni130 = this.calculateTotalHsni130()
 
-    if (totalHsMensuel >= 20) {
-      totalHsni150 = 20 - totalHsni130
-      if (totalHsni150 >= 2) {
-        totalHsni150 = 2
+    if (totalHsMensuel > 18 && totalHsni130 === 18) {
+      if (totalHsMensuel >= 20) {
+        totalHsni150 = 20 - totalHsni130
+      } else {
+        totalHsni150 = totalHsMensuel - totalHsni130
       }
-      if (totalHsni150 < 0) {
-        totalHsni150 = 0
-      }
+    }
+
+    if (totalHsni150 < 0) {
+      totalHsni150 = 0
     }
 
     return this.estCadre ? 0 : totalHsni150
