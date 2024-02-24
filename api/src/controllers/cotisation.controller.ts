@@ -9,5 +9,6 @@ export const getAllCotisation = async (req: Request, res: Response) => {
     res.status(200).json({ data: allCotisation })
   } catch (error) {
     console.log(error)
+    res.status(500).json({ error: 'Internal server error' })
   }
 }
