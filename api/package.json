@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node build/index.js",
     "build": "webpack --config webpack.config.js",
-    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts"
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
+    "deploy": "npm run build && firebase deploy --only functions"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
