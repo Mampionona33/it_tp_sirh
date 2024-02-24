@@ -159,10 +159,11 @@ const ValidePaie = () => {
               dateFin: dateFinFormated,
             }),
           )
-
+          // console.log('result', result)
           // console.log('Dispatch réussi avec résultat :', result)
           if (result.meta.requestStatus === 'fulfilled') {
             const { payload } = result
+            // console.log('payload', payload)
 
             if (payload) {
               const estCadre = salarie.categorie?.value === 'hc'
@@ -204,29 +205,29 @@ const ValidePaie = () => {
 
               dispatch(
                 setBulletinDePaie({
-                  totalHn: totalHnormal,
-                  totalHs: totalHs,
-                  hsi130: totalHsi130,
-                  hsi150: totalHsi150,
-                  hsni130: totalHsni130,
-                  hsni150: totalHsni150,
-                  totalHDim: totalHdim,
-                  totalHs30: totalHs30,
-                  totalHs50: totalHs50,
-                  totalHFerie: totalHFerie,
+                  totalHn: totalHnormal === 0 ? 0 : totalHnormal,
+                  totalHs: totalHs === 0 ? 0 : totalHs,
+                  hsi130: totalHsi130 === 0 ? 0 : totalHsi130,
+                  hsi150: totalHsi150 === 0 ? 0 : totalHsi150,
+                  hsni130: totalHsni130 === 0 ? 0 : totalHsni130,
+                  hsni150: totalHsni150 === 0 ? 0 : totalHsni150,
+                  totalHDim: totalHdim === 0 ? 0 : totalHdim,
+                  totalHs30: totalHs30 === 0 ? 0 : totalHs30,
+                  totalHs50: totalHs50 === 0 ? 0 : totalHs50,
+                  totalHFerie: totalHFerie === 0 ? 0 : totalHFerie,
 
-                  totalHTravailEffectif: totalHTravailEffectif,
+                  totalHTravailEffectif: totalHTravailEffectif === 0 ? 0 : totalHTravailEffectif,
                   tableauHsHebdo: tableauHsHebdo,
                   tableauHs130Hebdo: tableauHs130Hebdo,
                   tableauHs150Hebdo: tableauHs150Hebdo,
-                  valHdim: valHdim,
-                  valHs30: valHs30,
-                  valHs50: valHs50,
-                  valHFerie: valHFerie,
-                  valHsi130: valHsi130,
-                  valHsi150: valHsi150,
-                  valHsni130: valHsni130,
-                  valHsni150: valHsni150,
+                  valHdim: valHdim === 0 ? 0 : valHdim,
+                  valHs30: valHs30 === 0 ? 0 : valHs30,
+                  valHs50: valHs50 === 0 ? 0 : valHs50,
+                  valHFerie: valHFerie === 0 ? 0 : valHFerie,
+                  valHsi130: valHsi130 === 0 ? 0 : valHsi130,
+                  valHsi150: valHsi150 === 0 ? 0 : valHsi150,
+                  valHsni130: valHsni130 === 0 ? 0 : valHsni130,
+                  valHsni150: valHsni150 === 0 ? 0 : valHsni150,
                 } as IBulletinDePaieProps),
               )
             }

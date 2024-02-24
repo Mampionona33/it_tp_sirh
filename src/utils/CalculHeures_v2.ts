@@ -324,6 +324,8 @@ class CalculHeures_v2 {
       if (totalHsni130 < 0) {
         totalHsni130 = 0
       }
+    } else {
+      totalHsni130 = totalHsMensuel
     }
 
     return this.estCadre ? 0 : totalHsni130
