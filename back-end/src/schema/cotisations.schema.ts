@@ -12,7 +12,7 @@ interface Cotisation extends Document {
 
 const cotisationsSchema = new Schema<Cotisation>({
   libelle: String,
-  type: String,
+  type: { type: String, unique: true, message: 'Type must be unique' },
   employeur: Number,
   salarie: Number,
   modeDePayement: String,

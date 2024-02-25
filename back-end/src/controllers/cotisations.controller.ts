@@ -45,6 +45,8 @@ export const createCotisation = async (req: Request, res: Response) => {
     // Sauvegardez la nouvelle cotisation dans la base de données
     const savedCotisation = await newCotisation.save()
 
+    console.log(savedCotisation)
+
     // Renvoyez la nouvelle cotisation créée en réponse
     res.status(201).json(savedCotisation)
   } catch (error) {
