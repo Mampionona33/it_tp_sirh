@@ -18,7 +18,7 @@ class DnsControllers {
       return { travailleur, employeur: dns.employeur, cotisation: dns.cotisation }
     })
 
-    res.status(200).json(data)
+    res.status(200).json( ...data )
   }
 }
 
