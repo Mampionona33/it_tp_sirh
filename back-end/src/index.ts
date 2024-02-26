@@ -3,6 +3,7 @@ import cotisationRouter from './routes/cotisations.router'
 import modeDePayementRouter from './routes/modeDePaiement.router'
 import connectToMongoDB from './db'
 import dotenv from 'dotenv'
+import categorieRouter from './routes/categorie.router'
 
 dotenv.config({ path: './.env' })
 
@@ -19,8 +20,7 @@ app.get('/api', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server')
 })
 
-app.use('/api', cotisationRouter)
-app.use('/api', modeDePayementRouter)
+app.use('/api', cotisationRouter, modeDePayementRouter, categorieRouter)
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
   // error && error instanceof Error && error.stack
