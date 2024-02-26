@@ -90,3 +90,18 @@ export const deleteCotisation = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Internal server error' })
   }
 }
+
+export const getCotisationCnaps = async (req: Request, res: Response) => {
+  try {
+    const coti = await Cotisations.find({ type: 'CNAPS' }).lean()
+
+    if (!coti || coti.length === 0) {
+      return res.status(404).json({ error: 'Cotisation CNAPS not found' })
+    }
+
+    res.status(200).json(coti)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+}
