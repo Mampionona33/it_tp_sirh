@@ -10,9 +10,10 @@ class DnsControllers {
     const { annee, periode } = req.params
 
     const data = this.db['dns'].map((dns: any) => {
-      const travailleur = dns.travailleur.filter((trav: any) => {
-        return trav.trimestre === periode && trav.annee === annee
-      })
+      const travailleur =
+        dns.travailleur.filter((trav: any) => {
+          return trav.trimestre === periode && trav.annee === annee
+        }) || []
 
       return { travailleur, employeur: dns.employeur, cotisation: dns.cotisation }
     })
