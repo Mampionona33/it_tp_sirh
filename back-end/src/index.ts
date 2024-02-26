@@ -1,5 +1,6 @@
 import express, { Express, NextFunction, Request, Response } from 'express'
 import cotisationRouter from './routes/cotisations.router'
+import modeDePayementRouter from './routes/modeDePaiement.router'
 import connectToMongoDB from './db'
 import dotenv from 'dotenv'
 
@@ -19,9 +20,10 @@ app.get('/api', (req: Request, res: Response) => {
 })
 
 app.use('/api', cotisationRouter)
+app.use('/api', modeDePayementRouter)
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
-  error && error instanceof Error && error.stack
+  // error && error instanceof Error && error.stack
   res.status(404).json({ error: 'Not found' })
 })
 

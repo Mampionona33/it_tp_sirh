@@ -1196,7 +1196,28 @@
       "taux": 0.02
     }
   ],
-
+  "modeDePayement": [
+    {
+      "id": 1,
+      "label": "Espèce",
+      "value": "espece"
+    },
+    {
+      "id": 2,
+      "label": "Chèque",
+      "value": "cheque"
+    },
+    {
+      "id": 3,
+      "label": "Virement bancaire",
+      "value": "virement_bancaire"
+    },
+    {
+      "id": 4,
+      "label": "Mobile money",
+      "value": "mobile_money"
+    }
+  ],
   "allocationFamil": [{ "id": 1, "label": "enfant", "montant": 2000, "age_max": 21 }],
   "avances": [
     { "id": 1, "employee": { "id": 1 }, "date": "2023-01-15T05:14:08.190Z", "montant": 100000 },
