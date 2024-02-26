@@ -6,8 +6,8 @@ import { Router } from 'express'
 
 const modeDePayementRouter = Router()
 
-modeDePayementRouter
-  .post('/mode-de-payement', createModeDePayement)
-  .get('/mode-de-payement', getAllModeDePayement)
+modeDePayementRouter.post('/mode-de-payement', createModeDePayement)
+
+modeDePayementRouter.get('/mode-de-payement', getAllModeDePayement)
 
 export default modeDePayementRouter
