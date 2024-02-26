@@ -20,8 +20,8 @@ export const createModeDePayement = async (req: Request, res: Response) => {
 
 export const getAllModeDePayement = async (req: Request, res: Response) => {
   try {
-    const modeDePayement = await ModeDePayement.find({})
-    res.status(200).json({ modeDePayement })
+    const modeDePayement = await ModeDePayement.find()
+    res.status(200).json(modeDePayement)
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Internal server error' })

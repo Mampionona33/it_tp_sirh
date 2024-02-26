@@ -4,6 +4,7 @@ import modeDePayementRouter from './routes/modeDePaiement.router'
 import connectToMongoDB from './db'
 import dotenv from 'dotenv'
 import categorieRouter from './routes/categorie.router'
+const cors = require('cors')
 
 dotenv.config({ path: './.env' })
 
@@ -11,13 +12,21 @@ const app: Express = express()
 // Middleware pour parser les corps de requête JSON
 app.use(express.json())
 
+const corsOptions = {
+  origin: '*',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+}
+app.use(cors(corsOptions))
+
 const port = process.env.PORT || 8000
 
 connectToMongoDB()
 app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server')
+  res.send('Welcome to la-ligne-scandinave-api server!')
 })
 
 app.use('/', cotisationRouter, modeDePayementRouter, categorieRouter)
