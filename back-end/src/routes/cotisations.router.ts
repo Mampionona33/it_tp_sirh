@@ -1,5 +1,10 @@
 import { Router } from 'express'
-import { createCotisation, getAllCotisation } from '../controllers/cotisations.controller'
+import {
+  createCotisation,
+  deleteCotisation,
+  getAllCotisation,
+  updateCotisation,
+} from '../controllers/cotisations.controller'
 
 const cotisationRouter = Router()
 
@@ -8,5 +13,9 @@ cotisationRouter.get('/cotisations', getAllCotisation)
 
 // POST a new cotisation
 cotisationRouter.post('/cotisations', createCotisation)
+
+cotisationRouter.put('/cotisations/:id', updateCotisation)
+
+cotisationRouter.delete('/cotisations/:id', deleteCotisation)
 
 export default cotisationRouter

@@ -54,3 +54,39 @@ export const createCotisation = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Internal server error' })
   }
 }
+
+export const updateCotisation = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params
+    const { libelle, type, employeur, salarie, modeDePayement } = req.body
+    const updatedCotisation = await Cotisations.findByIdAndUpdate(
+      id,
+      { libelle, type, employeur, salarie, modeDePayement },
+      { new: true },
+    )
+    if (!updatedCotisation) {
+      res.status(404).json({ error: 'Cotisation not found' })
+      return
+    }
+    res.status(200).json(updatedCotisation)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+}
+
+export const deleteCotisation = async (req: Request, res: Response) => {
+  console.log(req.params)
+  try {
+    const { id } = req.params
+    const deletedCotisation = await Cotisations.findByIdAndDelete({ _id: id })
+    if (!deletedCotisation) {
+      res.status(404).json({ error: 'Cotisation not found' })
+      return
+    }
+    res.status(200).json({ message: 'Cotisation deleted successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+}

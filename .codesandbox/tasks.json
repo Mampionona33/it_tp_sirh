@@ -31,7 +31,7 @@
     "start api": {
       "name": "start-api",
       "command": "cd api/ &&  yarn start",
-      "runAtStart": true,
+      "runAtStart": false,
       "preview": {
         "port": 8000
       }
