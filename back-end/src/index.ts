@@ -16,11 +16,11 @@ const port = process.env.PORT || 8000
 connectToMongoDB()
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/api', (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server')
 })
 
-app.use('/api', cotisationRouter, modeDePayementRouter, categorieRouter)
+app.use('/', cotisationRouter, modeDePayementRouter, categorieRouter)
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
   // error && error instanceof Error && error.stack
