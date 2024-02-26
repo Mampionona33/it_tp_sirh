@@ -1,9 +1,6 @@
 import { Request, Response } from 'express'
-<<<<<<< HEAD
 import fs from 'fs'
 import path from 'path'
-=======
->>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 class SalaierControllers {
   private db: any
   constructor(db: any) {
@@ -11,7 +8,6 @@ class SalaierControllers {
   }
 
   getAll = (req: Request, res: Response) => {
-<<<<<<< HEAD
     setTimeout(() => {
       res.status(200).send(this.db['salaries'])
     }, 5000)
@@ -78,9 +74,6 @@ class SalaierControllers {
       console.error("Une erreur s'est produite lors de la mise à jour de l'employé :", error)
       res.status(500).send('Erreur serveur')
     }
-=======
-    return res.status(200).send(this.db['salaries'])
->>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
   }
 }
 

@@ -5,7 +5,6 @@ import MouvementSalaireControllers from '@controllers/MouvementSalaireController
 import CotisationController from '@controllers/CotisationControllers'
 import EmployeurControllers from '@controllers/EmployeurControllers'
 import SalaierControllers from '@controllers/SalariesControllers'
-<<<<<<< HEAD
 import HeuresControllers from '@controllers/HeuresControllers'
 import CategorieEmployeControllers from '@controllers/CategorieEmployeControllers'
 import BulletinDePaieControllers from '@controllers/BulletinDePaieControllers'
@@ -14,8 +13,6 @@ import DnsControllers from '@controllers/DnsControllers'
 import ModeDePayementControllers from '@controllers/ModeDePayementControllers'
 import TauxCnapsController from '@controllers/TauxCnapsController'
 import cotisationsRouter from '@routes/cotisation.router'
-=======
->>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 const cors = require('cors')
 
 const app = express()
@@ -36,7 +33,6 @@ const mouvementSalaireController = new MouvementSalaireControllers(db)
 const cotisationController = new CotisationController(db)
 const employeurController = new EmployeurControllers(db)
 const salarieController = new SalaierControllers(db)
-<<<<<<< HEAD
 const heuresController = new HeuresControllers(db)
 const categorieEmployeController = new CategorieEmployeControllers(db)
 const bulletinDePaieController = new BulletinDePaieControllers(db)
@@ -65,7 +61,7 @@ router.route('/historique-paie/:id/:annee').get(historiquePaieController.getAllB
 router.route('/historique-paie/:id/:annee/:mois').get(historiquePaieController.getDetailsById)
 
 router.route('/dns/:annee/:periode').get(dnsControllers.fetchDns)
-router.route('/dns').post(dnsControllers.create)
+// router.route('/dns').post(dnsControllers.create)
 
 router.route('/mode-de-payement').get(modeDePayementControllers.getAll)
 router.route('/mode-de-payement/:value').get(modeDePayementControllers.getOneByVal)
@@ -73,14 +69,6 @@ router.route('/mode-de-payement/:value').get(modeDePayementControllers.getOneByV
 router.route('/taux-cnaps/all').get(tauxCnapsController.getAll)
 
 app.use('/cotisations/all', cotisationsRouter)
-=======
-
-router.route('/login').post(authController.login)
-router.route('/mouvement-salaire').get(mouvementSalaireController.getAll)
-router.route('/cotisations/all').get(cotisationController.getAll)
-router.route('/employeurs').get(employeurController.getAll)
-router.route('/personnels').get(salarieController.getAll)
->>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 
 const PORT = process.env.PORT || 8000
 
@@ -89,8 +77,5 @@ app.use('/', router)
 app.listen(PORT, () => {
   console.log(`Server started at port: ${PORT}`)
 })
-<<<<<<< HEAD
 
 module.exports = app
-=======
->>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147

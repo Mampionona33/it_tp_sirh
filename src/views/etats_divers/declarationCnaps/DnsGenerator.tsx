@@ -27,10 +27,6 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   private mois1List: string[]
   private mois2List: string[]
   private mois3List: string[]
-<<<<<<< HEAD
-=======
-  private mois4List: string[]
->>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
   private dnsData: IDnsGeneratorDataProps | null
   private loadingDnsData: string
   private anneeSelectionne: number
@@ -44,16 +40,9 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.mois2WorkSheet = new MonthWorksheet(this.wb, 'Mois 2', '99ccff')
     this.mois3WorkSheet = new MonthWorksheet(this.wb, 'Mois 3', '00ccff')
 
-<<<<<<< HEAD
     this.mois1List = ['01', '04', '07', '10']
     this.mois2List = ['02', '05', '08', '11']
     this.mois3List = ['03', '06', '09', '12']
-=======
-    this.mois1List = ['01', '04', '07']
-    this.mois2List = ['02', '05', '08']
-    this.mois3List = ['03', '06', '09']
-    this.mois4List = ['10', '11', '12']
->>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 
     this.store = store
     this.dnsData = store.getState().dns.dnsData
@@ -329,7 +318,6 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
 
     this.employeurSheet.sheet.getCell('C22').value = {
       formula: "COUNTA('Mois 1'!$D3:D1048576)",
-<<<<<<< HEAD
       // result: this.getListSalarieMois1().length,
     }
     this.employeurSheet.sheet.getCell('D22').value = {
@@ -339,17 +327,6 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.employeurSheet.sheet.getCell('E22').value = {
       formula: "COUNTA('Mois 3'!$D3:D1048576)",
       // result: this.getListSalarieMois1().length,
-=======
-      result: this.getListSalarieMois1().length,
-    }
-    this.employeurSheet.sheet.getCell('D22').value = {
-      formula: "COUNTA('Mois 2'!$D3:D1048576)",
-      result: this.getListSalarieMois1().length,
-    }
-    this.employeurSheet.sheet.getCell('E22').value = {
-      formula: "COUNTA('Mois 3'!$D3:D1048576)",
-      result: this.getListSalarieMois1().length,
->>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
     }
   }
 
@@ -359,7 +336,6 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     }
     this.employeurSheet.sheet.getCell('C23').value = {
       formula: "SUM('Mois 1'!$H3:H1048576)",
-<<<<<<< HEAD
       // result: this.getListSalarieMois1().length,
     }
     this.employeurSheet.sheet.getCell('D23').value = {
@@ -369,17 +345,6 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     this.employeurSheet.sheet.getCell('E23').value = {
       formula: "SUM('Mois 3'!$H3:H1048576)",
       // result: this.getListSalarieMois1().length,
-=======
-      result: this.getListSalarieMois1().length,
-    }
-    this.employeurSheet.sheet.getCell('D23').value = {
-      formula: "SUM('Mois 2'!$H3:H1048576)",
-      result: this.getListSalarieMois1().length,
-    }
-    this.employeurSheet.sheet.getCell('E23').value = {
-      formula: "SUM('Mois 3'!$H3:H1048576)",
-      result: this.getListSalarieMois1().length,
->>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
     }
   }
 
