@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+<<<<<<< HEAD
     "build": "webpack --config webpack.config.js",
     "start": "node build/index.js",
     "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
@@ -18,6 +19,14 @@
     "json-loader": "^0.5.7",
     "nodemon": "^3.0.1",
     "prisma": "^5.10.2",
+=======
+    "start": "node build/index.js",
+    "build": "webpack --config webpack.config.js",
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
     "ts-loader": "^9.5.1",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
@@ -27,7 +36,10 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@prisma/client": "^5.10.2",
+=======
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.4",
     "cors": "^2.8.5",

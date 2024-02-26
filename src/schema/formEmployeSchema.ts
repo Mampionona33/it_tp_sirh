@@ -5,6 +5,7 @@ import {
   EnumBoolean,
   Depart,
 } from '@src/interfaces/interfaceEmploye'
+<<<<<<< HEAD
 import { date, z } from 'zod'
 import { compareAsc, differenceInYears } from 'date-fns'
 import path from 'path'
@@ -13,6 +14,17 @@ export interface IFormEmployeSchema extends Omit<IEmploye, 'id' | 'matricule' | 
   id?: string | number
   matricule: string
   conjoint?: Conjoint
+=======
+import { dataTagSymbol } from '@tanstack/react-query'
+import { z } from 'zod'
+
+export interface IFormEmployeSchema
+  extends Omit<IEmploye, 'id' | 'matricule' | 'conjoint' | 'depart'> {
+  id?: string | number
+  matricule: string
+  conjoint?: Conjoint
+  depart?: formEmployeDateProps
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 }
 
 interface Conjoint {
@@ -22,9 +34,15 @@ interface Conjoint {
   tel?: string
 }
 
+<<<<<<< HEAD
 // interface formEmployeDateProps extends Depart {
 //   nom_matricule?: string
 // }
+=======
+interface formEmployeDateProps extends Depart {
+  nom_matricule?: string
+}
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 
 const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
   .object({
@@ -50,6 +68,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       .string()
       .min(3, { message: 'Le champ addresse doit contenir au moins 3 caractères' }),
 
+<<<<<<< HEAD
     nom_pere: z.nullable(z.string().optional()),
 
     nom_mere: z.nullable(z.string().optional()),
@@ -73,6 +92,27 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
         ])
         .optional(),
     ),
+=======
+    nom_pere: z.string().optional(),
+
+    nom_mere: z.string().optional(),
+
+    telephone: z
+      .union([
+        z.string().regex(/^$|^[-+()\s\d]+$/, {
+          message: 'Veuillez renseigner un numéro de numéro valide',
+        }),
+        z.literal(''),
+      ])
+      .optional(),
+
+    email: z
+      .union([
+        z.string().email({ message: 'Veuillez renseigner une adresse email valide' }),
+        z.literal(''),
+      ])
+      .optional(),
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 
     num_cin: z
       .string()
@@ -137,6 +177,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
             z.number().min(1, { message: 'ID enfant est obligatoire' }),
           ]),
           nom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+<<<<<<< HEAD
           prenom: z.string().optional(),
           date_naissance: z
             .string()
@@ -155,10 +196,17 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
                   'Veuillez renseigner une date de naissance valide, Vous avez saisi une date dans le futur',
               },
             ),
+=======
+          prenom: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+          date_naissance: z
+            .string()
+            .regex(/^\d{4}-\d{2}-\d{2}$/, { message: 'Veuillez renseigner une date valide' }),
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
           lieu_naissance: z
             .string()
             .min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
           genre_enfant: z.enum([EnumGenre.MASCULIN, EnumGenre.FEMININ]),
+<<<<<<< HEAD
 
           certificat: z.nullable(
             z
@@ -177,6 +225,23 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
               })
               .optional(),
           ),
+=======
+          certificat: z
+            .object({
+              id: z.union([z.string().optional(), z.number().optional()]),
+              label: z
+                .string()
+                .min(2, { message: 'Le champ certificat doit contenir au moins 2 caractères' }),
+              value: z.enum([
+                EnumCertificatEnfant.AUCUN,
+                EnumCertificatEnfant.VIE,
+                EnumCertificatEnfant.DECE,
+                EnumCertificatEnfant.MEDICAL,
+                EnumCertificatEnfant.SCOLARITE,
+              ]),
+            })
+            .optional(),
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 
           action: z.enum(['ajout', 'modifier']).optional(),
         }),
@@ -215,11 +280,24 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
 
     mode_paiement_salaire: z.object({
       id: z.union([z.string().optional(), z.number().optional()]),
+<<<<<<< HEAD
       label: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
       value: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
     }),
 
     num_cnaps: z.string().optional(),
+=======
+      label: z.string(),
+      value: z.string(),
+    }),
+
+    num_cnaps: z
+      .string()
+      .min(2, { message: 'Le champ doit contenir au moins 2 caractères' })
+      .optional(),
+
+    num_osie: z.string().optional(),
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 
     prime_et_avantage_permanent: z
       .array(
@@ -231,6 +309,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       )
       .optional(),
 
+<<<<<<< HEAD
     depart: z.nullable(
       z
         .object({
@@ -247,6 +326,22 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
         })
         .optional(),
     ),
+=======
+    depart: z
+      .object({
+        nom_matricule: z.string().optional(),
+
+        date: z
+          .string()
+          .min(2, { message: 'Le champ date doit contenir au moins 2 caractères' })
+          .optional(),
+        motif: z
+          .string()
+          .min(2, { message: 'Le champ motif doit contenir au moins 2 caractères' })
+          .optional(),
+      })
+      .optional(),
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 
     actif: z.enum([EnumBoolean.OUI, EnumBoolean.NON]).optional(),
 
@@ -325,6 +420,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
   )
   .refine(
     (data) => {
+<<<<<<< HEAD
       if (data.salaire_de_base && data.salaire_de_base >= 100000) {
         return true
       } else {
@@ -338,6 +434,8 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
   )
   .refine(
     (data) => {
+=======
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
       if (data.rib) {
         if (
           data.rib.length > 0 &&
@@ -356,6 +454,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       path: ['rib'],
     },
   )
+<<<<<<< HEAD
   .refine((data) => {
     if (data.enfant && data.enfant.length > 0) {
       for (const enfant of data.enfant) {
@@ -455,5 +554,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       }
     })
   })
+=======
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
 
 export default formEmployeSchema

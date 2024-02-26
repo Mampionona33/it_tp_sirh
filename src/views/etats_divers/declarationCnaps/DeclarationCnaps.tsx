@@ -90,7 +90,10 @@ const Body = () => {
     { value: 't1', label: 'Trimestre 1' },
     { value: 't2', label: 'Trimestre 2' },
     { value: 't3', label: 'Trimestre 3' },
+<<<<<<< HEAD
     { value: 't4', label: 'Trimestre 4' },
+=======
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
   ]
 
   const handleInputChange = (selectedOption: any, actionMeta: any) => {

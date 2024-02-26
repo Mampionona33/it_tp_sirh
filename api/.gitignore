@@ -1,3 +1,6 @@
 .vercel
+<<<<<<< HEAD
  build
  node_modules
+=======
+>>>>>>> 64f0ab4785ac05f9167f6e115a3046c1ffd49147
