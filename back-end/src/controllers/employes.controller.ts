@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import EmployeModel from '../schema/employe.schema'
+import { format } from 'date-fns'
 
 // Create - Créer un nouvel employé
 export const createEmploye = async (req: Request, res: Response) => {
@@ -39,7 +40,25 @@ export const getEmployeById = async (req: Request, res: Response) => {
     if (!employe) {
       return res.status(404).json({ error: 'Employe not found' })
     }
-    res.status(200).json(employe)
+
+    const formattedEmploye = {
+      ...employe,
+      id: employe._id.toString(),
+      date_delivrance_cin:
+        employe.date_delivrance_cin && format(employe.date_delivrance_cin, 'yyyy-MM-dd'),
+      date_naissance: employe.date_naissance && format(employe.date_naissance, 'yyyy-MM-dd'),
+      date_embauche: employe.date_embauche && format(employe.date_embauche, 'yyyy-MM-dd'),
+      enfant:
+        employe.enfant &&
+        employe.enfant.map((enfant, index) => {
+          return {
+            ...enfant,
+            date_naissance: enfant.date_naissance && format(enfant.date_naissance, 'yyyy-MM-dd'),
+          }
+        }),
+    }
+
+    res.status(200).json(formattedEmploye)
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: 'Internal server error' })
