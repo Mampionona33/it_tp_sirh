@@ -6,7 +6,7 @@ const EnfantSchema = new Schema({
     label: String,
     value: String,
   },
-  id: Number,
+  id: String,
   nom: String,
   prenom: String,
   lieu_naissance: String,
