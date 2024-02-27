@@ -5,6 +5,7 @@ import connectToMongoDB from './db'
 import dotenv from 'dotenv'
 import categorieRouter from './routes/categorie.router'
 import userRouter from './routes/users.router'
+import employesRouter from './routes/employes.router'
 const cors = require('cors')
 
 dotenv.config({ path: './.env' })
@@ -30,7 +31,7 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to la-ligne-scandinave-api server!')
 })
 
-app.use('/', cotisationRouter, modeDePayementRouter, categorieRouter, userRouter)
+app.use('/', cotisationRouter, modeDePayementRouter, categorieRouter, userRouter, employesRouter)
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
   // error && error instanceof Error && error.stack
