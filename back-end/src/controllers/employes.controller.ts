@@ -18,7 +18,13 @@ export const createEmploye = async (req: Request, res: Response) => {
 export const getAllEmployes = async (req: Request, res: Response) => {
   try {
     const employes = await EmployeModel.find()
-    res.status(200).json(employes)
+    const modifiedEmployes = employes.map((employe) => {
+      return {
+        ...employe.toObject(),
+        id: employe._id.toString(),
+      }
+    })
+    res.status(200).json(modifiedEmployes)
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: 'Internal server error' })
@@ -29,9 +35,9 @@ export const getAllEmployes = async (req: Request, res: Response) => {
 export const getEmployeById = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
-    const employe = await EmployeModel.findById(id)
+    const employe = await EmployeModel.findById(id).lean()
     if (!employe) {
-      return res.status(404).json({ error: 'EmployeModel not found' })
+      return res.status(404).json({ error: 'Employe not found' })
     }
     res.status(200).json(employe)
   } catch (error) {

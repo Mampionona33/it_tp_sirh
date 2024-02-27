@@ -32,15 +32,27 @@ const Fiche: React.FC = () => {
 
   useEffect(() => {
     const setFormEmployeID = (employeeId: string | number): void => {
-      if (id && !formEmploye.id) {
+      if (id && !formEmploye.id && selectedEmploye) {
         const parsedEmployeeId = Number(employeeId)
         dispatch(setFormEmploye({ ...selectedEmploye, id: parsedEmployeeId }))
       }
     }
-    if (id) {
+    if (id && selectedEmploye) {
       setFormEmployeID(id)
     }
   }, [id, formEmploye, dispatch, selectedEmploye])
+
+  // useEffect(() => {
+  //   const setFormEmployeID = (employeeId: string | number): void => {
+  //     if (id && !formEmploye.id) {
+  //       const parsedEmployeeId = Number(employeeId)
+  //       dispatch(setFormEmploye({ ...selectedEmploye, id: parsedEmployeeId }))
+  //     }
+  //   }
+  //   if (id) {
+  //     setFormEmployeID(id)
+  //   }
+  // }, [id, formEmploye, dispatch, selectedEmploye])
 
   if (isLoading) {
     return <Loading />
