@@ -18,6 +18,7 @@ import formEmployeReducer from './FormEmploye/formEmployeReducer'
 import modalReducer from './modal/modalReducer'
 import historiqueDePaieReducer from './historiqueDePaie/historiqueDePaieReducer'
 import authReducer from './user/authReducer'
+import formPageIrsaReducer from './irsa/formPageIrsaReducer'
 
 const persistConfig = {
   key: 'root',
@@ -42,6 +43,7 @@ const rootReducer = combineReducers({
   formEmploye: formEmployeReducer,
   modal: modalReducer,
   historiquePaie: historiqueDePaieReducer,
+  formPageIrsa: formPageIrsaReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

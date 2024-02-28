@@ -118,6 +118,12 @@ const routes = [
     element: PageIrsa,
     exact: true,
   },
+  {
+    path: '/etatDivers/irsa/:mois/:annee',
+    name: 'Déclaration IRSA',
+    element: PageIrsa,
+    exact: true,
+  },
 
   // Gestion de paie path def
   {
