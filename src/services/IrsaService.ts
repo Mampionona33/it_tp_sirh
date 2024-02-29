@@ -13,7 +13,7 @@ class IrsaService {
 
   async getIrsaByMonthYear(month: number, year: number) {
     try {
-      const response = await axios.get(`${this.REACT_APP_API_BASE_URL}/irsa/${month}/${year}`, {
+      const response = await axios.get(`${this.REACT_APP_API_BASE_URL}/irsa/${year}/${month}`, {
         auth: {
           username: this.login,
           password: this.pass,

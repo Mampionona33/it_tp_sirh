@@ -12,6 +12,7 @@ const initialState: IPageIrsaProps = {
       value: 0,
     },
   },
+  fetchData: false,
   loading: 'idle',
   error: null,
 }
