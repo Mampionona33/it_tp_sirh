@@ -4,11 +4,11 @@ import { IPageIrsaProps } from '@src/interfaces/intefacePageIrsa'
 const initialState: IPageIrsaProps = {
   data: {
     mois: {
-      label: '',
+      label: undefined,
       value: 0,
     },
     annee: {
-      label: '',
+      label: undefined,
       value: 0,
     },
   },
