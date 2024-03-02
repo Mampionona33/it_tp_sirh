@@ -11,8 +11,10 @@ import axios, { AxiosError } from 'axios'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import React from 'react'
-import { Controller, useForm } from 'react-hook-form'
-import formPageIrsaSchema, { IFormPageIrsaSchema } from '../../../schema/formPageIrsaSchema'
+import { Controller, SubmitHandler, useController, useForm } from 'react-hook-form'
+import formPageIrsaSchema from '../../../schema/formPageIrsaSchema'
+import { IPageIrsaState } from '@src/interfaces/intefacePageIrsa'
+import { SetValueAction } from 'react-select'
 
 type SelectOption = {
   value: number
@@ -29,7 +31,7 @@ const PageIrsa = () => {
 
   const moisOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => {
     const date = new Date()
-    date.setMonth(m)
+    date.setMonth(m - 1)
     const mois = format(date, 'MMMM', { locale: fr })
     return { value: m, label: mois }
   })
@@ -40,33 +42,53 @@ const PageIrsa = () => {
     label: (currentYear - index).toString(),
   }))
 
-  const handleGenerateIrsa = () => {
-    // event.preventDefault()
-    if (formIrsaProps.data.mois.value === 0 && formIrsaProps.data.annee.value === 0) {
-      const error: AxiosError = new AxiosError('Champs obligatoires (Mois et Annee)')
-      dispatch(
-        setFormPageIrsa({
-          ...formIrsaProps,
-          error: error,
-        }),
-      )
-    } else {
-      console.log('formIrsaProps', formIrsaProps)
-      dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: true }))
-    }
+  const handleGenerateIrsa: SubmitHandler<IPageIrsaState> = async (
+    data: IPageIrsaState,
+  ): Promise<void> => {
+    console.log(data)
   }
 
   const handleCloseErrorCard = () => {
-    dispatch(setFormPageIrsa({ ...formIrsaProps, error: null }))
+    console.log(formIrsaProps)
+    // dispatch(setFormPageIrsa({ ...formIrsaProps, error: null }))
   }
 
-  const { register, handleSubmit, setValue, control } = useForm<IFormPageIrsaSchema>({
+  const { register, handleSubmit, setValue, control } = useForm<IPageIrsaState>({
     resolver: zodResolver(formPageIrsaSchema),
+    defaultValues: {
+      mois: undefined,
+      annee: undefined,
+    },
   })
 
-  const handleInputChange = (label: keyof IFormPageIrsaSchema, option: SelectOption) => {
-    setValue(label, option)
-    dispatch(setFormPageIrsa({ ...data, data: { ...data, [label]: option } }))
+  const {
+    field: { value: selectedMois, onChange: onChangeMois },
+  } = useController({
+    name: 'mois',
+    control,
+    rules: { required: true },
+  })
+
+  const {
+    field: { value: selectedAnnee, onChange: onChangeAnnee },
+  } = useController({
+    name: 'annee',
+    control,
+    rules: { required: true },
+  })
+
+  const handleMoisChange = (newValue: string, action: SetValueAction) => {
+    if (action === 'select-option') {
+      console.log(newValue)
+      onChangeMois(newValue, action)
+    }
+  }
+
+  const handleAnneeChange = (newValue: string, action: SetValueAction) => {
+    if (action === 'select-option') {
+      console.log(newValue)
+      onChangeAnnee(newValue, action)
+    }
   }
 
   return (
@@ -77,7 +99,7 @@ const PageIrsa = () => {
           {formateError(errorIrsa)}
         </CustomCAlert>
       )}
-      <div className="flex">
+      <div className="flex mt-3">
         <div className="flex flex-col shadow-sm bg-white rounded-sm">
           <h3 className="bg-customRed-900 text-white text-lg px-4 py-2 capitalize rounded-t-sm">
             Impôt sur les revenus salariaux et assimilés
@@ -89,36 +111,25 @@ const PageIrsa = () => {
                   name="mois"
                   control={control}
                   render={({
-                    field: { onChange, onBlur, value, ...rest },
+                    field: { onChange, onBlur, value, ref, ...rest },
                     fieldState: { error },
-                  }) => (
-                    <div>
-                      <SelectFloatingLable
-                        className="w-full capitalize"
-                        label="Mois"
-                        placeholder="Mois"
-                        {...rest}
-                        options={moisOptions}
-                        value={data.mois.value}
-                        onChange={(newVal: any) =>
-                          dispatch(setFormPageIrsa({ ...data, data: { ...data, mois: newVal } }))
-                        }
-                      />
-                      {error && <span className="text-red-500 text-sm">{error.message}</span>}
-                    </div>
-                  )}
+                  }) => {
+                    return (
+                      <div className="w-full min-w-[8rem]">
+                        <SelectFloatingLable
+                          className="w-full capitalize"
+                          label="Mois"
+                          placeholder="Mois"
+                          {...rest}
+                          options={moisOptions}
+                          value={value ? value : selectedMois}
+                          onChange={(e) => handleMoisChange(e as string, 'select-option')}
+                        />
+                        {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                      </div>
+                    )
+                  }}
                 />
-                {/* <SelectFloatingLable
-                  className="w-full capitalize"
-                  label="Mois"
-                  placeholder="Mois"
-                  options={moisOptions}
-                  value={data.mois}
-                  required
-                  onChange={(newVal: any) =>
-                    dispatch(setFormPageIrsa({ ...data, data: { ...data, mois: newVal } }))
-                  }
-                /> */}
               </div>
 
               <div className="w-full">
@@ -129,41 +140,27 @@ const PageIrsa = () => {
                     field: { onChange, onBlur, value, ref, ...rest },
                     fieldState: { error },
                   }) => {
-                    console.log('data', data.annee)
-                    console.log('error', error)
                     return (
-                      <div>
+                      <div className="w-full min-w-[8rem]">
                         <SelectFloatingLable
                           className="w-full capitalize"
                           label="Année"
                           placeholder="Année"
                           {...rest}
-                          ref={ref}
                           options={anneOptions}
-                          value={data.annee}
-                          onChange={(newVal: any) => handleInputChange('annee', newVal)}
+                          value={value ? value : selectedAnnee}
+                          onChange={(e) => handleAnneeChange(e as string, 'select-option')}
                         />
                         {error && <span className="text-red-500 text-sm">{error.message}</span>}
                       </div>
                     )
                   }}
                 />
-                {/* <SelectFloatingLable
-                  className="w-full capitalize"
-                  label="Année"
-                  placeholder="Année"
-                  options={anneOptions}
-                  value={data.annee}
-                  required
-                  onChange={(newVal: any) =>
-                    dispatch(setFormPageIrsa({ ...data, data: { ...data, annee: newVal } }))
-                  }
-                /> */}
               </div>
-              <div className="flex full items-end">
+              <div className="flex full items-center">
                 <ButtonWithIcon label="Générer" type="submit" />
               </div>
-              <div className="flex full items-end">
+              <div className="flex full items-center">
                 {isLoading ? (
                   <div>
                     <InlineLoading />

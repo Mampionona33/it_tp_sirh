@@ -5,11 +5,11 @@ const initialState: IPageIrsaProps = {
   data: {
     mois: {
       label: undefined,
-      value: 0,
+      value: undefined,
     },
     annee: {
       label: undefined,
-      value: 0,
+      value: undefined,
     },
   },
   fetchData: false,

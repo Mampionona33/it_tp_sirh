@@ -12,7 +12,12 @@ const useFetchIrsa = (formIrsaProps: IPageIrsaProps) => {
   } = useQuery({
     queryKey: ['irsa'],
     queryFn: async () => {
-      if (!formIrsaProps.data.mois.value || !formIrsaProps.data.annee.value) return
+      if (
+        formIrsaProps.data?.mois?.value === undefined ||
+        formIrsaProps.data?.annee?.value === undefined
+      ) {
+        return
+      }
       try {
         const response = await irsaService.getIrsaByMonthYear(
           formIrsaProps.data.mois.value,
@@ -25,8 +30,8 @@ const useFetchIrsa = (formIrsaProps: IPageIrsaProps) => {
     },
 
     enabled:
-      !!formIrsaProps.data.mois.value &&
-      !!formIrsaProps.data.annee.value &&
+      !!formIrsaProps.data?.annee?.value &&
+      !!formIrsaProps.data?.mois?.value &&
       formIrsaProps.fetchData,
   })
 
