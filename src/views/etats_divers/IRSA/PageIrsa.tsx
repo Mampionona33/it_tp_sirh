@@ -6,8 +6,7 @@ import InlineLoading from '@src/components/loadings/InlineLoading'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import useFetchIrsa from '@src/hooks/useFetchIrsa'
-import { setFormPageIrsa } from '@src/redux/irsa/formPageIrsaReducer'
-import axios, { AxiosError } from 'axios'
+import { resetFormPageIrsa, setFormPageIrsa } from '@src/redux/irsa/formPageIrsaReducer'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import React from 'react'
@@ -45,20 +44,15 @@ const PageIrsa = () => {
   const handleGenerateIrsa: SubmitHandler<IPageIrsaState> = async (
     data: IPageIrsaState,
   ): Promise<void> => {
-    console.log(data)
+    if (!!data) {
+      console.log(data)
+      dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: true }))
+    }
   }
 
-  const handleCloseErrorCard = () => {
-    console.log(formIrsaProps)
-    // dispatch(setFormPageIrsa({ ...formIrsaProps, error: null }))
-  }
-
-  const { register, handleSubmit, setValue, control } = useForm<IPageIrsaState>({
+  const { register, handleSubmit, control, setValue, reset } = useForm<IPageIrsaState>({
     resolver: zodResolver(formPageIrsaSchema),
-    defaultValues: {
-      mois: undefined,
-      annee: undefined,
-    },
+    defaultValues: data,
   })
 
   const {
@@ -81,24 +75,42 @@ const PageIrsa = () => {
     if (action === 'select-option') {
       console.log(newValue)
       onChangeMois(newValue, action)
+      dispatch(
+        setFormPageIrsa({
+          ...formIrsaProps,
+          data: { ...data, mois: newValue as any },
+        }),
+      )
     }
   }
+
+  const resetFormIrsaProps = React.useCallback(() => {
+    if (isError) {
+      dispatch(resetFormPageIrsa())
+    }
+  }, [isError])
+
+  React.useEffect(() => {
+    isError && resetFormIrsaProps()
+  }, [isError])
 
   const handleAnneeChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
       console.log(newValue)
       onChangeAnnee(newValue, action)
+      dispatch(
+        setFormPageIrsa({
+          ...formIrsaProps,
+          data: { ...data, annee: newValue as any },
+        }),
+      )
     }
   }
 
   return (
     <div className="flex flex-col">
       {isError && <CustomCAlert color="danger">{formateError(error)}</CustomCAlert>}
-      {errorIrsa && (
-        <CustomCAlert color="danger" onClose={handleCloseErrorCard}>
-          {formateError(errorIrsa)}
-        </CustomCAlert>
-      )}
+
       <div className="flex mt-3">
         <div className="flex flex-col shadow-sm bg-white rounded-sm">
           <h3 className="bg-customRed-900 text-white text-lg px-4 py-2 capitalize rounded-t-sm">
@@ -158,11 +170,15 @@ const PageIrsa = () => {
                 />
               </div>
               <div className="flex full items-center">
-                <ButtonWithIcon label="Générer" type="submit" />
+                <ButtonWithIcon
+                  label="Générer"
+                  type="submit"
+                  disabled={!(data.mois && data.annee)}
+                />
               </div>
               <div className="flex full items-center">
                 {isLoading ? (
-                  <div>
+                  <div className="flex min-w-7 justify-center">
                     <InlineLoading />
                   </div>
                 ) : (

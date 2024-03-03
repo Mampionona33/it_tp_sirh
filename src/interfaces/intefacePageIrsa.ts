@@ -6,11 +6,11 @@ export interface IPageIrsaProps extends Partial<BaseReduxState> {
 }
 
 export interface IPageIrsaState {
-  mois: {
+  mois?: {
     label?: string
     value?: number
   }
-  annee: {
+  annee?: {
     label?: string
     value?: number
   }
