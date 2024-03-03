@@ -45,12 +45,12 @@ const PageIrsa = () => {
     data: IPageIrsaState,
   ): Promise<void> => {
     if (!!data) {
-      console.log(data)
-      dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: true }))
+      // console.log(data)
+      dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: true, data }))
     }
   }
 
-  const { register, handleSubmit, control, setValue, reset } = useForm<IPageIrsaState>({
+  const { register, handleSubmit, control, getValues, reset } = useForm<IPageIrsaState>({
     resolver: zodResolver(formPageIrsaSchema),
     defaultValues: data,
   })
@@ -73,37 +73,40 @@ const PageIrsa = () => {
 
   const handleMoisChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
-      console.log(newValue)
+      // console.log(newValue)
       onChangeMois(newValue, action)
-      dispatch(
-        setFormPageIrsa({
-          ...formIrsaProps,
-          data: { ...data, mois: newValue as any },
-        }),
-      )
+      // dispatch(
+      //   setFormPageIrsa({
+      //     ...formIrsaProps,
+      //     data: { ...data, mois: newValue as any },
+      //   }),
+      // )
     }
   }
 
   const resetFormIrsaProps = React.useCallback(() => {
     if (isError) {
       dispatch(resetFormPageIrsa())
+      reset()
     }
   }, [isError])
 
   React.useEffect(() => {
-    isError && resetFormIrsaProps()
+    if (isError) {
+      resetFormIrsaProps()
+    }
   }, [isError])
 
   const handleAnneeChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
       console.log(newValue)
       onChangeAnnee(newValue, action)
-      dispatch(
-        setFormPageIrsa({
-          ...formIrsaProps,
-          data: { ...data, annee: newValue as any },
-        }),
-      )
+      // dispatch(
+      //   setFormPageIrsa({
+      //     ...formIrsaProps,
+      //     data: { ...data, annee: newValue as any },
+      //   }),
+      // )
     }
   }
 
@@ -173,7 +176,7 @@ const PageIrsa = () => {
                 <ButtonWithIcon
                   label="Générer"
                   type="submit"
-                  disabled={!(data.mois && data.annee)}
+                  // disabled={!(getValues('annee') && getValues('mois'))}
                 />
               </div>
               <div className="flex full items-center">
@@ -182,7 +185,7 @@ const PageIrsa = () => {
                     <InlineLoading />
                   </div>
                 ) : (
-                  <ButtonWithIcon label="Télecharger" />
+                  <ButtonWithIcon label="Télecharger" disabled={!irsaData} />
                 )}
               </div>
             </div>
