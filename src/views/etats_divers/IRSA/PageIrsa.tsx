@@ -26,7 +26,8 @@ const PageIrsa = () => {
   const formateError = useErrorFormatter()
   const dispatch = useAppDispatch()
 
-  const { irsaData, error, isError, isLoading, refetch } = useFetchIrsa(formIrsaProps)
+  const { irsaData, error, isError, isLoading, refetch, isSuccess, isFetching } =
+    useFetchIrsa(formIrsaProps)
 
   const moisOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => {
     const date = new Date()
@@ -50,7 +51,7 @@ const PageIrsa = () => {
     }
   }
 
-  const { register, handleSubmit, control, getValues, reset } = useForm<IPageIrsaState>({
+  const { handleSubmit, control, getValues, reset } = useForm<IPageIrsaState>({
     resolver: zodResolver(formPageIrsaSchema),
     defaultValues: data,
   })
@@ -85,17 +86,18 @@ const PageIrsa = () => {
   }
 
   const resetFormIrsaProps = React.useCallback(() => {
-    if (isError) {
+    if (isError || isSuccess) {
+      isSuccess && console.log('success')
       dispatch(resetFormPageIrsa())
-      reset()
+      // reset()
     }
-  }, [isError])
+  }, [isError, irsaData])
 
   React.useEffect(() => {
-    if (isError) {
+    if (isError || isSuccess) {
       resetFormIrsaProps()
     }
-  }, [isError])
+  }, [isError, isSuccess])
 
   const handleAnneeChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
@@ -180,12 +182,12 @@ const PageIrsa = () => {
                 />
               </div>
               <div className="flex full items-center">
-                {isLoading ? (
+                {isFetching ? (
                   <div className="flex min-w-7 justify-center">
                     <InlineLoading />
                   </div>
                 ) : (
-                  <ButtonWithIcon label="Télecharger" disabled={!irsaData} />
+                  <ButtonWithIcon label="Télecharger" disabled={!isSuccess} />
                 )}
               </div>
             </div>

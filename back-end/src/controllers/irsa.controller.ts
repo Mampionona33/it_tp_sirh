@@ -30,7 +30,8 @@ export const getIrsaByYearMonth = async (req: Request, res: Response) => {
   try {
     const { year, month } = req.params
     const irsa = await IrsaModel.find({ year, month })
-    if (!irsa) {
+    console.log(irsa)
+    if (!irsa || irsa.length === 0) {
       return res.status(404).json({ error: 'irsa not found' })
     }
     res.status(200).json(irsa)

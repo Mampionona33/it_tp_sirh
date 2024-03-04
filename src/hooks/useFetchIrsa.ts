@@ -1,4 +1,4 @@
-import { IPageIrsaProps } from '@src/interfaces/intefacePageIrsa'
+import { IPageIrsaProps, IPageIrsaState } from '@src/interfaces/intefacePageIrsa'
 import irsaService from '@src/services/IrsaService'
 import { useQuery } from '@tanstack/react-query'
 
@@ -9,6 +9,8 @@ const useFetchIrsa = (formIrsaProps: IPageIrsaProps) => {
     refetch,
     isError,
     error,
+    isSuccess,
+    isFetching,
   } = useQuery({
     queryKey: ['irsa'],
     queryFn: async () => {
@@ -35,7 +37,7 @@ const useFetchIrsa = (formIrsaProps: IPageIrsaProps) => {
       formIrsaProps.fetchData,
   })
 
-  return { irsaData, isLoading, refetch, isError, error }
+  return { irsaData, isLoading, refetch, isError, error, isSuccess, isFetching }
 }
 
 export default useFetchIrsa
