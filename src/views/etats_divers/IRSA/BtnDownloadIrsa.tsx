@@ -97,16 +97,16 @@ const BtnDownloadIrsa = ({ data, mois, annee }: IBtnDownloadIrsaProps) => {
         const rowObject = sheetSaisie.addRow(rowData)
 
         // Appliquer des bordures à toute la ligne si au moins une cellule est non vide
-        if (!isEmpty) {
-          rowObject.eachCell((cell) => {
-            cell.border = {
-              top: { style: 'thin' },
-              left: { style: 'thin' },
-              bottom: { style: 'thin' },
-              right: { style: 'thin' },
-            }
-          })
-        }
+        // if (!isEmpty) {
+        // rowObject.eachCell((cell) => {
+        //   cell.border = {
+        //     top: { style: 'thin' },
+        //     left: { style: 'thin' },
+        //     bottom: { style: 'thin' },
+        //     right: { style: 'thin' },
+        //   }
+        // })
+        // }
       })
 
       // Ajuster la longueur de chaque colonne en fonction du contenu
