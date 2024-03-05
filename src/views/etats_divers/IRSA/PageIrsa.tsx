@@ -188,7 +188,11 @@ const PageIrsa = () => {
                     <InlineLoading />
                   </div>
                 ) : (
-                  <BtnDownloadIrsa data={irsaData} />
+                  <BtnDownloadIrsa
+                    data={irsaData}
+                    mois={getValues('mois')?.label || ''}
+                    annee={getValues('annee')?.label || ''}
+                  />
                   // <ButtonWithIcon label="Télecharger" disabled={!isSuccess} />
                 )}
               </div>

@@ -1,5 +1,7 @@
 export interface IBtnDownloadIrsaProps {
   data: irsaProps[]
+  mois?: string
+  annee?: string
 }
 
 export interface irsaProps {
@@ -10,9 +12,12 @@ export interface irsaProps {
   num_cnaps: string
   nom_prenom: string
   cin: string
+  date_embauche: string
+  date_debauche: string
   fonction: string
   salaire_de_base: number
   indemnite_imposables?: number
+  indemnite_non_imposables?: number
   avantage_nature_imposables?: number
   temps_de_presence: number
   heures_supplementaires: number
