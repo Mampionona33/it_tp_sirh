@@ -14,6 +14,7 @@ import { Controller, SubmitHandler, useController, useForm } from 'react-hook-fo
 import formPageIrsaSchema from '../../../schema/formPageIrsaSchema'
 import { IPageIrsaState } from '@src/interfaces/intefacePageIrsa'
 import { SetValueAction } from 'react-select'
+import BtnDownloadIrsa from './BtnDownloadIrsa'
 
 type SelectOption = {
   value: number
@@ -187,7 +188,8 @@ const PageIrsa = () => {
                     <InlineLoading />
                   </div>
                 ) : (
-                  <ButtonWithIcon label="Télecharger" disabled={!isSuccess} />
+                  <BtnDownloadIrsa data={irsaData} />
+                  // <ButtonWithIcon label="Télecharger" disabled={!isSuccess} />
                 )}
               </div>
             </div>
