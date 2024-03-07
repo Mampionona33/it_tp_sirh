@@ -18,6 +18,7 @@ const PageOmsi = () => {
   }))
 
   const { handleSubmit, control, getValues, reset } = useForm()
+
   const handlePeriodeChange = (value: string, type: string) => {}
   const handleAnneeChange = (value: string, type: string) => {}
 
