@@ -32,11 +32,13 @@ const PageIrsa = () => {
     useFetchIrsa(formIrsaProps)
 
   const fetchedData = useMemo(() => {
-    if (irsaData && formIrsaProps.loading === 'succeeded') {
+    if (formIrsaProps.loading !== 'succeeded' && !formIrsaProps.fetchData) {
+      return [] as irsaProps[]
+    }
+    if (irsaData && isSuccess && formIrsaProps.data) {
       return irsaData
     }
-    return [] as irsaProps[]
-  }, [irsaData, formIrsaProps.loading])
+  }, [irsaData, formIrsaProps.loading, isSuccess, formIrsaProps.data])
 
   const moisOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => {
     const date = new Date()
@@ -55,7 +57,6 @@ const PageIrsa = () => {
     data: IPageIrsaState,
   ): Promise<void> => {
     if (!!data) {
-      console.log(data)
       dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: true, data }))
     }
   }
@@ -94,48 +95,42 @@ const PageIrsa = () => {
 
   React.useEffect(() => {
     let mount = true
-    if (isError || isSuccess) {
+    if (isError) {
       resetFormIrsaProps()
     }
     if (mount) {
-      resetFormIrsaProps()
+      dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: false, loading: 'idle' }))
     }
     return () => {
       mount = false
     }
   }, [isError, isSuccess])
 
-  const handleMoisChange = (newValue: string, action: SetValueAction) => {
+  const handleMoisChange = async (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
-      // console.log(newValue)
       onChangeMois(newValue, action)
       dispatch(
         setFormPageIrsa({
           ...formIrsaProps,
           loading: 'idle',
-          // data: { ...data, mois: newValue as any },
+          fetchData: false,
+          data: { ...data, mois: newValue as any },
         }),
       )
-      // if (!!newValue && getValues('annee') && formIrsaProps.fetchData) {
-      //   refetch()
-      // }
     }
   }
 
-  const handleAnneeChange = (newValue: string, action: SetValueAction) => {
+  const handleAnneeChange = async (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
-      console.log(newValue)
       onChangeAnnee(newValue, action)
       dispatch(
         setFormPageIrsa({
           ...formIrsaProps,
           loading: 'idle',
-          // data: { ...data, annee: newValue as any },
+          fetchData: false,
+          data: { ...data, annee: newValue as any },
         }),
       )
-      // if (!!newValue && getValues('mois') && formIrsaProps.fetchData) {
-      //   refetch()
-      // }
     }
   }
 
@@ -221,7 +216,6 @@ const PageIrsa = () => {
                     mois={getValues('mois')?.label || ''}
                     annee={getValues('annee')?.label || ''}
                   />
-                  // <ButtonWithIcon label="Télecharger" disabled={!isSuccess} />
                 )}
               </div>
             </div>
