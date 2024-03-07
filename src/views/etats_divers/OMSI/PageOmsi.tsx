@@ -18,11 +18,20 @@ const PageOmsi = () => {
 
   const { handleSubmit, control, getValues, reset } = useForm()
   const handlePeriodeChange = (value: string, type: string) => {}
+  const handleAnneeChange = (value: string, type: string) => {}
 
   const {
     field: { value: selectedPeriode, onChange: onChangePeriode },
   } = useController({
     name: 'periode',
+    control,
+    defaultValue: 't1',
+  })
+
+  const {
+    field: { value: selectedAnnee, onChange: onChangeAnnee },
+  } = useController({
+    name: 'annee',
     control,
     defaultValue: 't1',
   })
@@ -35,7 +44,7 @@ const PageOmsi = () => {
             OMSI
           </h3>
           <form action="" method="post">
-            <div className="w-full flex px-4 pb-4 justify-between-gap-2">
+            <div className="w-full flex px-4 pb-4 pt-2 justify-between gap-2">
               <div className="w-full">
                 <Controller
                   name="periode"
@@ -54,6 +63,32 @@ const PageOmsi = () => {
                           options={periode}
                           value={value ? value : selectedPeriode}
                           onChange={(e) => handlePeriodeChange(e as string, 'select-option')}
+                        />
+                        {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                      </div>
+                    )
+                  }}
+                />
+              </div>
+
+              <div className="w-full">
+                <Controller
+                  name="annee"
+                  control={control}
+                  render={({
+                    field: { onChange, onBlur, value, ref, ...rest },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <div className="w-full min-w-[8rem]">
+                        <SelectFloatingLable
+                          className="w-full capitalize"
+                          label="Année"
+                          placeholder="Année"
+                          {...rest}
+                          options={anneOptions}
+                          value={value ? value : selectedAnnee}
+                          onChange={(e) => handleAnneeChange(e as string, 'select-option')}
                         />
                         {error && <span className="text-red-500 text-sm">{error.message}</span>}
                       </div>
