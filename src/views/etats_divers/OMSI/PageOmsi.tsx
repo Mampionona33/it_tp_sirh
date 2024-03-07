@@ -1,4 +1,5 @@
 import SelectFloatingLable from '@src/components/Inputs/SelectFloatingLable'
+import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import React from 'react'
 import { Controller, useController, useForm } from 'react-hook-form'
 
@@ -95,6 +96,10 @@ const PageOmsi = () => {
                     )
                   }}
                 />
+              </div>
+
+              <div className="flex full items-center">
+                <ButtonWithIcon label="Générer" type="submit" />
               </div>
             </div>
           </form>
