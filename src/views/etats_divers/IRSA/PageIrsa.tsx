@@ -31,6 +31,13 @@ const PageIrsa = () => {
   const { irsaData, error, isError, isLoading, refetch, isSuccess, isFetching } =
     useFetchIrsa(formIrsaProps)
 
+  const fetchedData = useMemo(() => {
+    if (irsaData && formIrsaProps.loading === 'succeeded') {
+      return irsaData
+    }
+    return [] as irsaProps[]
+  }, [irsaData, formIrsaProps.loading])
+
   const moisOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => {
     const date = new Date()
     date.setMonth(m - 1)
@@ -48,7 +55,7 @@ const PageIrsa = () => {
     data: IPageIrsaState,
   ): Promise<void> => {
     if (!!data) {
-      // console.log(data)
+      console.log(data)
       dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: true, data }))
     }
   }
@@ -74,52 +81,63 @@ const PageIrsa = () => {
     rules: { required: true },
   })
 
-  const handleMoisChange = (newValue: string, action: SetValueAction) => {
-    if (action === 'select-option') {
-      // console.log(newValue)
-      onChangeMois(newValue, action)
-      // dispatch(
-      //   setFormPageIrsa({
-      //     ...formIrsaProps,
-      //     data: { ...data, mois: newValue as any },
-      //   }),
-      // )
-    }
-  }
-
   const resetFormIrsaProps = React.useCallback(() => {
-    if (isError || isSuccess) {
+    if (isError) {
       isSuccess && console.log('success')
       dispatch(resetFormPageIrsa())
       // reset()
     }
+    if (isSuccess) {
+      dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: false, loading: 'succeeded' }))
+    }
   }, [isError, irsaData])
 
   React.useEffect(() => {
+    let mount = true
     if (isError || isSuccess) {
       resetFormIrsaProps()
     }
+    if (mount) {
+      resetFormIrsaProps()
+    }
+    return () => {
+      mount = false
+    }
   }, [isError, isSuccess])
+
+  const handleMoisChange = (newValue: string, action: SetValueAction) => {
+    if (action === 'select-option') {
+      // console.log(newValue)
+      onChangeMois(newValue, action)
+      dispatch(
+        setFormPageIrsa({
+          ...formIrsaProps,
+          loading: 'idle',
+          // data: { ...data, mois: newValue as any },
+        }),
+      )
+      // if (!!newValue && getValues('annee') && formIrsaProps.fetchData) {
+      //   refetch()
+      // }
+    }
+  }
 
   const handleAnneeChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
       console.log(newValue)
       onChangeAnnee(newValue, action)
-      // dispatch(
-      //   setFormPageIrsa({
-      //     ...formIrsaProps,
-      //     data: { ...data, annee: newValue as any },
-      //   }),
-      // )
+      dispatch(
+        setFormPageIrsa({
+          ...formIrsaProps,
+          loading: 'idle',
+          // data: { ...data, annee: newValue as any },
+        }),
+      )
+      // if (!!newValue && getValues('mois') && formIrsaProps.fetchData) {
+      //   refetch()
+      // }
     }
   }
-
-  const fetchedData = useMemo(() => {
-    if (irsaData && getValues('mois') && getValues('annee')) {
-      return irsaData
-    }
-    return [] as irsaProps[]
-  }, [irsaData])
 
   return (
     <div className="flex flex-col">

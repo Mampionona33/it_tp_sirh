@@ -2,6 +2,7 @@ export interface IBtnDownloadIrsaProps {
   data: irsaProps[]
   mois?: string
   annee?: string
+  onClick?: () => void
 }
 
 export interface irsaProps {

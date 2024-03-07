@@ -2,8 +2,12 @@ import React from 'react'
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
 import { IBtnDownloadIrsaProps, irsaProps } from '@src/interfaces/interfaceBtnDownloadIrsaProps'
 import ExcelJS from 'exceljs'
+import { useAppDispatch } from '@src/hooks/useAppDispatch'
+import { resetFormPageIrsa } from '@src/redux/irsa/formPageIrsaReducer'
 
-const BtnDownloadIrsa = ({ data, mois, annee }: IBtnDownloadIrsaProps) => {
+const BtnDownloadIrsa: React.FC<IBtnDownloadIrsaProps> = ({ data, mois, annee, onClick }) => {
+  const dispatch = useAppDispatch()
+
   const handleDownload = () => {
     if (data && data.length > 0) {
       const workBook = new ExcelJS.Workbook()
@@ -131,6 +135,8 @@ const BtnDownloadIrsa = ({ data, mois, annee }: IBtnDownloadIrsaProps) => {
         a.download = `edi-annexe-IRSA_${mois}_${annee}.xlsx`
         a.click()
       })
+
+      // dispatch(resetFormPageIrsa())
     }
   }
 

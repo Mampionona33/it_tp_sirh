@@ -34,6 +34,7 @@ const useFetchIrsa = (formIrsaProps: IPageIrsaProps) => {
     enabled:
       !!formIrsaProps.data?.annee?.value &&
       !!formIrsaProps.data?.mois?.value &&
+      formIrsaProps.loading !== 'succeeded' &&
       formIrsaProps.fetchData,
   })
 
