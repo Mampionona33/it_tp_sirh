@@ -113,12 +113,8 @@ const PageIrsa = () => {
         setFormPageIrsa({
           ...formIrsaProps,
           loading: 'idle',
-          // data: { ...data, mois: newValue as any },
         }),
       )
-      // if (!!newValue && getValues('annee') && formIrsaProps.fetchData) {
-      //   refetch()
-      // }
     }
   }
 
@@ -130,12 +126,8 @@ const PageIrsa = () => {
         setFormPageIrsa({
           ...formIrsaProps,
           loading: 'idle',
-          // data: { ...data, annee: newValue as any },
         }),
       )
-      // if (!!newValue && getValues('mois') && formIrsaProps.fetchData) {
-      //   refetch()
-      // }
     }
   }
 
