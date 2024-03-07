@@ -32,6 +32,7 @@ const PageIrsa = () => {
     useFetchIrsa(formIrsaProps)
 
   const fetchedData = useMemo(() => {
+    console.log(irsaData)
     if (irsaData && formIrsaProps.loading === 'succeeded') {
       return irsaData
     }
@@ -56,6 +57,9 @@ const PageIrsa = () => {
   ): Promise<void> => {
     if (!!data) {
       console.log(data)
+      if (formIrsaProps.fetchData && data) {
+        refetch()
+      }
       dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: true, data }))
     }
   }
@@ -82,39 +86,21 @@ const PageIrsa = () => {
   })
 
   const resetFormIrsaProps = React.useCallback(() => {
-    if (isError) {
-      isSuccess && console.log('success')
-      dispatch(resetFormPageIrsa())
-      // reset()
-    }
     if (isSuccess) {
       dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: false, loading: 'succeeded' }))
     }
   }, [isError, irsaData])
 
   React.useEffect(() => {
-    let mount = true
-    if (isError || isSuccess) {
+    if (isSuccess) {
       resetFormIrsaProps()
     }
-    if (mount) {
-      resetFormIrsaProps()
-    }
-    return () => {
-      mount = false
-    }
-  }, [isError, isSuccess])
+  }, [isSuccess])
 
   const handleMoisChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
-      // console.log(newValue)
       onChangeMois(newValue, action)
-      dispatch(
-        setFormPageIrsa({
-          ...formIrsaProps,
-          loading: 'idle',
-        }),
-      )
+      dispatch(resetFormPageIrsa())
     }
   }
 
@@ -122,12 +108,7 @@ const PageIrsa = () => {
     if (action === 'select-option') {
       console.log(newValue)
       onChangeAnnee(newValue, action)
-      dispatch(
-        setFormPageIrsa({
-          ...formIrsaProps,
-          loading: 'idle',
-        }),
-      )
+      dispatch(resetFormPageIrsa())
     }
   }
 
