@@ -26,6 +26,7 @@ const DeclarationCnaps = lazyWithRetry(() =>
   import('src/views/etats_divers/declarationCnaps/DeclarationCnaps'),
 )
 const PageIrsa = lazyWithRetry(() => import('src/views/etats_divers/IRSA/PageIrsa'))
+const PageOmsi = lazyWithRetry(() => import('src/views/etats_divers/OMSI/PageOmsi'))
 
 // Gestion de paie
 const DetailPaieValide = lazyWithRetry(() =>
@@ -122,6 +123,18 @@ const routes = [
     path: '/etatDivers/irsa/:mois/:annee',
     name: 'Déclaration IRSA',
     element: PageIrsa,
+    exact: true,
+  },
+  {
+    path: '/etatDivers/osie/:mois/:annee/:activeTabParam',
+    name: 'Déclaration OSIE',
+    element: PageOmsi,
+    exact: true,
+  },
+  {
+    path: '/etatDivers/osie',
+    name: 'Déclaration OSIE',
+    element: PageOmsi,
     exact: true,
   },
 

@@ -66,8 +66,8 @@ const _nav = [
       },
       {
         component: CNavItem,
-        name: 'OSTIE',
-        to: '/etatDivers/ostie',
+        name: 'OSIE',
+        to: '/etatDivers/osie',
       },
     ],
   },
