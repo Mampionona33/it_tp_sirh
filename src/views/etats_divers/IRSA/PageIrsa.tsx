@@ -32,12 +32,10 @@ const PageIrsa = () => {
     useFetchIrsa(formIrsaProps)
 
   const fetchedData = useMemo(() => {
-    console.log(irsaData)
     if (irsaData && formIrsaProps.loading === 'succeeded') {
       return irsaData
     }
-    return [] as irsaProps[]
-  }, [irsaData, formIrsaProps.loading])
+  }, [irsaData, formIrsaProps.loading, isSuccess, formIrsaProps.data])
 
   const moisOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => {
     const date = new Date()
@@ -97,16 +95,15 @@ const PageIrsa = () => {
     }
   }, [isSuccess])
 
-  const handleMoisChange = (newValue: string, action: SetValueAction) => {
+  const handleMoisChange = async (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
       onChangeMois(newValue, action)
       dispatch(resetFormPageIrsa())
     }
   }
 
-  const handleAnneeChange = (newValue: string, action: SetValueAction) => {
+  const handleAnneeChange = async (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
-      console.log(newValue)
       onChangeAnnee(newValue, action)
       dispatch(resetFormPageIrsa())
     }
