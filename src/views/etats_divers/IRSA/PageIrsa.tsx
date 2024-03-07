@@ -9,12 +9,13 @@ import useFetchIrsa from '@src/hooks/useFetchIrsa'
 import { resetFormPageIrsa, setFormPageIrsa } from '@src/redux/irsa/formPageIrsaReducer'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { Controller, SubmitHandler, useController, useForm } from 'react-hook-form'
 import formPageIrsaSchema from '../../../schema/formPageIrsaSchema'
 import { IPageIrsaState } from '@src/interfaces/intefacePageIrsa'
 import { SetValueAction } from 'react-select'
 import BtnDownloadIrsa from './BtnDownloadIrsa'
+import { irsaProps } from '@src/interfaces/interfaceBtnDownloadIrsaProps'
 
 type SelectOption = {
   value: number
@@ -113,6 +114,13 @@ const PageIrsa = () => {
     }
   }
 
+  const fetchedData = useMemo(() => {
+    if (irsaData && getValues('mois') && getValues('annee')) {
+      return irsaData
+    }
+    return [] as irsaProps[]
+  }, [irsaData])
+
   return (
     <div className="flex flex-col">
       {isError && <CustomCAlert color="danger">{formateError(error)}</CustomCAlert>}
@@ -191,7 +199,7 @@ const PageIrsa = () => {
                   </div>
                 ) : (
                   <BtnDownloadIrsa
-                    data={irsaData}
+                    data={fetchedData}
                     mois={getValues('mois')?.label || ''}
                     annee={getValues('annee')?.label || ''}
                   />
