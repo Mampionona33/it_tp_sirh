@@ -54,7 +54,6 @@ const PageIrsa = () => {
     data: IPageIrsaState,
   ): Promise<void> => {
     if (!!data) {
-      console.log(data)
       if (formIrsaProps.fetchData && data) {
         refetch()
       }
