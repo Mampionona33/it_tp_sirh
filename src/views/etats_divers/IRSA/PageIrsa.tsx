@@ -175,6 +175,7 @@ const PageIrsa = () => {
                   }}
                 />
               </div>
+
               <div className="flex full items-center">
                 <ButtonWithIcon
                   label="Générer"
@@ -182,6 +183,7 @@ const PageIrsa = () => {
                   // disabled={!(getValues('annee') && getValues('mois'))}
                 />
               </div>
+
               <div className="flex full items-center">
                 {isFetching ? (
                   <div className="flex min-w-7 justify-center">
