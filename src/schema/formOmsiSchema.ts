@@ -1,7 +1,7 @@
 import { IFormPageOmsi } from '@src/interfaces/interfaceFormPageOmsi'
 import { z } from 'zod'
 
-const formOmsiSchema: z.ZodType<IFormPageOmsi> = z
+const formOmsiSchema: z.ZodType<Partial<IFormPageOmsi>> = z
   .object({
     periode: z.object({
       value: z.coerce.string().min(1, { message: 'Valeur obligatoire pour la periode' }),

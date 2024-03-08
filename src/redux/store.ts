@@ -45,7 +45,7 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   historiquePaie: historiqueDePaieReducer,
   formPageIrsa: formPageIrsaReducer,
-  formOmsi: formPageOmsiReducer,
+  formPageOmsi: formPageOmsiReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -2,7 +2,7 @@ import { IFormPageOmsi } from '@src/interfaces/interfaceFormPageOmsi'
 import omsiService from '@src/services/omsiService'
 import { useQuery } from '@tanstack/react-query'
 
-const useFetchOmsi = ({ annee, periode }: IFormPageOmsi) => {
+const useFetchOmsi = ({ annee, periode, fetchData }: IFormPageOmsi) => {
   const {
     data: omsiData,
     isLoading,
@@ -24,7 +24,7 @@ const useFetchOmsi = ({ annee, periode }: IFormPageOmsi) => {
         throw error
       }
     },
-    enabled: !!annee && !!periode,
+    enabled: !!annee && !!periode && fetchData,
   })
   return {
     omsiData,

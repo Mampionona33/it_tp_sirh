@@ -4,6 +4,7 @@ import { IFormPageOmsi } from '@src/interfaces/interfaceFormPageOmsi'
 const initialState: IFormPageOmsi = {
   periode: undefined,
   annee: undefined,
+  fetchData: false,
 }
 
 const formPageOmsiSlice = createSlice({

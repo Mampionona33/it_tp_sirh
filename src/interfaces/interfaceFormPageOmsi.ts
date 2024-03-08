@@ -7,4 +7,6 @@ export interface IFormPageOmsi {
     label: string
     value: number
   }
+
+  fetchData: boolean
 }

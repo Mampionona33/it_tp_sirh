@@ -171,11 +171,7 @@ const PageIrsa = () => {
               </div>
 
               <div className="flex full items-center">
-                <ButtonWithIcon
-                  label="Générer"
-                  type="submit"
-                  // disabled={!(getValues('annee') && getValues('mois'))}
-                />
+                <ButtonWithIcon label="Générer" type="submit" />
               </div>
 
               <div className="flex full items-center">

@@ -1,9 +1,27 @@
+import { zodResolver } from '@hookform/resolvers/zod'
+import CustomCAlert from '@src/components/CustomAlert'
 import SelectFloatingLable from '@src/components/Inputs/SelectFloatingLable'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
+import InlineLoading from '@src/components/loadings/InlineLoading'
+import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
+import useFetchOmsi from '@src/hooks/useFecthOmsi'
+import { IFormPageOmsi } from '@src/interfaces/interfaceFormPageOmsi'
+import { resetFormPageOmsi, setFormPageOmsi } from '@src/redux/formPageOmsi/formPageOmsiReducer'
+import formOmsiSchema from '@src/schema/formOmsiSchema'
 import React from 'react'
-import { Controller, useController, useForm } from 'react-hook-form'
+import { Controller, SubmitHandler, useController, useForm } from 'react-hook-form'
+import { SetValueAction } from 'react-select'
 
 const PageOmsi = () => {
+  const dispatch = useAppDispatch()
+  const { annee, periode: storePeriode } = useAppSelector((store) => store.formPageOmsi)
+  const formPageOmsi = useAppSelector((store) => store.formPageOmsi)
+  const formateError = useErrorFormatter()
+
+  const { omsiData, error, isError, isLoading, refetch, isSuccess, isFetching } =
+    useFetchOmsi(formPageOmsi)
+
   const periode = ['t1', 't2', 't3', 't4'].map((item) => {
     return {
       value: item,
@@ -17,17 +35,19 @@ const PageOmsi = () => {
     label: (currentYear - index).toString(),
   }))
 
-  const { handleSubmit, control, getValues, reset } = useForm()
-
-  const handlePeriodeChange = (value: string, type: string) => {}
-  const handleAnneeChange = (value: string, type: string) => {}
+  const { handleSubmit, control, getValues, reset } = useForm<IFormPageOmsi>({
+    resolver: zodResolver(formOmsiSchema),
+    defaultValues: {
+      annee: annee,
+      periode: storePeriode,
+    },
+  })
 
   const {
     field: { value: selectedPeriode, onChange: onChangePeriode },
   } = useController({
     name: 'periode',
     control,
-    defaultValue: 't1',
   })
 
   const {
@@ -35,17 +55,50 @@ const PageOmsi = () => {
   } = useController({
     name: 'annee',
     control,
-    defaultValue: 't1',
   })
+
+  const handlePeriodeChange = (newValue: string, action: SetValueAction) => {
+    if (action === 'select-option') {
+      onChangePeriode(newValue, action)
+      dispatch(resetFormPageOmsi())
+    }
+  }
+  const handleAnneeChange = (newValue: string, action: SetValueAction) => {
+    if (action === 'select-option') {
+      onChangeAnnee(newValue, action)
+      dispatch(resetFormPageOmsi())
+    }
+  }
+
+  const handleGenerateOmsi: SubmitHandler<IFormPageOmsi> = async (
+    data: IFormPageOmsi,
+  ): Promise<void> => {
+    if (!!data) {
+      dispatch(setFormPageOmsi({ ...data, fetchData: true }))
+    }
+  }
+
+  const resetFormOmsiProps = React.useCallback(() => {
+    if (isError) {
+      dispatch(setFormPageOmsi({ ...formPageOmsi, fetchData: false }))
+    }
+  }, [isError, omsiData])
+
+  React.useEffect(() => {
+    if (isError) {
+      resetFormOmsiProps()
+    }
+  }, [isError, omsiData])
 
   return (
     <div className="flex flex-col">
+      {isError && <CustomCAlert color="danger">{formateError(error)}</CustomCAlert>}
       <div className="flex mt-3">
         <div className="flex flex-col shadow-sm bg-white">
           <h3 className="bg-customRed-900 text-white text-lg px-4 py-2 capitalize rounded-t-sm">
             OMSI
           </h3>
-          <form action="" method="post">
+          <form action="" method="post" onSubmit={handleSubmit(handleGenerateOmsi)}>
             <div className="w-full flex px-4 pb-4 pt-2 justify-between gap-2">
               <div className="w-full">
                 <Controller
@@ -101,6 +154,18 @@ const PageOmsi = () => {
 
               <div className="flex full items-center">
                 <ButtonWithIcon label="Générer" type="submit" />
+              </div>
+
+              <div className="flex full items-center">
+                {isFetching ? (
+                  <div className="flex min-w-7 justify-center">
+                    <InlineLoading />
+                  </div>
+                ) : (
+                  <button className="flex items-center justify-center" onClick={() => reset()}>
+                    Effacer
+                  </button>
+                )}
               </div>
             </div>
           </form>
