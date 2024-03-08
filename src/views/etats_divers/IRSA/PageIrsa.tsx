@@ -9,13 +9,12 @@ import useFetchIrsa from '@src/hooks/useFetchIrsa'
 import { resetFormPageIrsa, setFormPageIrsa } from '@src/redux/irsa/formPageIrsaReducer'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
-import React, { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { Controller, SubmitHandler, useController, useForm } from 'react-hook-form'
 import formPageIrsaSchema from '../../../schema/formPageIrsaSchema'
 import { IPageIrsaState } from '@src/interfaces/intefacePageIrsa'
 import { SetValueAction } from 'react-select'
 import BtnDownloadIrsa from './BtnDownloadIrsa'
-import { irsaProps } from '@src/interfaces/interfaceBtnDownloadIrsaProps'
 
 type SelectOption = {
   value: number
