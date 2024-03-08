@@ -22,10 +22,6 @@ interface Conjoint {
   tel?: string
 }
 
-// interface formEmployeDateProps extends Depart {
-//   nom_matricule?: string
-// }
-
 const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
   .object({
     id: z.union([z.string().optional(), z.number().optional()]),

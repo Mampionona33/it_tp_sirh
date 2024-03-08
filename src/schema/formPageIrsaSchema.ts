@@ -1,5 +1,5 @@
-import { IPageIrsaProps, IPageIrsaState } from '@src/interfaces/intefacePageIrsa'
-import { date, z } from 'zod'
+import { IPageIrsaState } from '@src/interfaces/intefacePageIrsa'
+import { z } from 'zod'
 
 const formPageIrsaSchema: z.ZodType<Partial<IPageIrsaState>> = z
   .object({
