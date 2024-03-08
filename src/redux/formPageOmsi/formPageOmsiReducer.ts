@@ -20,3 +20,5 @@ const formPageOmsiSlice = createSlice({
 })
 
 export const { setFormPageOmsi, resetFormPageOmsi } = formPageOmsiSlice.actions
+
+export default formPageOmsiSlice.reducer
