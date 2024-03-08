@@ -26,3 +26,6 @@ class OmsiService {
     }
   }
 }
+
+const omsiService = new OmsiService()
+export default omsiService
