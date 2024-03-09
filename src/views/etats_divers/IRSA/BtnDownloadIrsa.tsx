@@ -2,12 +2,8 @@ import React from 'react'
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
 import { IBtnDownloadIrsaProps, irsaProps } from '@src/interfaces/interfaceBtnDownloadIrsaProps'
 import ExcelJS from 'exceljs'
-import { useAppDispatch } from '@src/hooks/useAppDispatch'
-import { resetFormPageIrsa } from '@src/redux/irsa/formPageIrsaReducer'
 
 const BtnDownloadIrsa: React.FC<IBtnDownloadIrsaProps> = ({ data, mois, annee, onClick }) => {
-  const dispatch = useAppDispatch()
-
   const handleDownload = () => {
     if (data && data.length > 0) {
       const workBook = new ExcelJS.Workbook()
@@ -99,18 +95,6 @@ const BtnDownloadIrsa: React.FC<IBtnDownloadIrsaProps> = ({ data, mois, annee, o
 
         // Ajouter la ligne avec les données
         const rowObject = sheetSaisie.addRow(rowData)
-
-        // Appliquer des bordures à toute la ligne si au moins une cellule est non vide
-        // if (!isEmpty) {
-        // rowObject.eachCell((cell) => {
-        //   cell.border = {
-        //     top: { style: 'thin' },
-        //     left: { style: 'thin' },
-        //     bottom: { style: 'thin' },
-        //     right: { style: 'thin' },
-        //   }
-        // })
-        // }
       })
 
       // Ajuster la longueur de chaque colonne en fonction du contenu
@@ -135,8 +119,6 @@ const BtnDownloadIrsa: React.FC<IBtnDownloadIrsaProps> = ({ data, mois, annee, o
         a.download = `edi-annexe-IRSA_${mois}_${annee}.xlsx`
         a.click()
       })
-
-      // dispatch(resetFormPageIrsa())
     }
   }
 

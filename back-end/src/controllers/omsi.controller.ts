@@ -16,7 +16,7 @@ export const createOmsi = async (req: Request, res: Response) => {
 export const getOmsiByPeriodeYear = async (req: Request, res: Response) => {
   try {
     const { annee, periode } = req.params
-    const omsi = await OmsiModel.findOne({ annee, periode })
+    const omsi = await OmsiModel.find({ annee, periode })
     if (!omsi) {
       return res.status(404).json({ error: 'Omsi not found' })
     }

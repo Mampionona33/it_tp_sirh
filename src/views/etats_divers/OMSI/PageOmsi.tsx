@@ -12,6 +12,7 @@ import formOmsiSchema from '@src/schema/formOmsiSchema'
 import React from 'react'
 import { Controller, SubmitHandler, useController, useForm } from 'react-hook-form'
 import { SetValueAction } from 'react-select'
+import BtnDonwloadOmsi from './ BtnDonwloadOmsi'
 
 const PageOmsi = () => {
   const dispatch = useAppDispatch()
@@ -162,9 +163,7 @@ const PageOmsi = () => {
                     <InlineLoading />
                   </div>
                 ) : (
-                  <button className="flex items-center justify-center" onClick={() => reset()}>
-                    Effacer
-                  </button>
+                  <BtnDonwloadOmsi data={omsiData} />
                 )}
               </div>
             </div>
