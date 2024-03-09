@@ -1,5 +1,13 @@
 export interface IBtnDownloadOmsiProps {
   data?: dataOmsiProps[]
+  periode?: {
+    label: string
+    value: string
+  }
+  annee?: {
+    label: string
+    value: number
+  }
 }
 
 export interface dataOmsiProps {

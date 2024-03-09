@@ -163,7 +163,11 @@ const PageOmsi = () => {
                     <InlineLoading />
                   </div>
                 ) : (
-                  <BtnDonwloadOmsi data={omsiData} />
+                  <BtnDonwloadOmsi
+                    data={omsiData}
+                    periode={getValues('periode')}
+                    annee={getValues('annee')}
+                  />
                 )}
               </div>
             </div>
