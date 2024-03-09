@@ -27,44 +27,70 @@ import { useAppSelector } from '@src/hooks/useAppDispatch'
 import Loading from '@src/components/loadings/Loading'
 import { AxiosError } from 'axios'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
+import useAuth from '../../../hooks/useAuth'
+import InlineLoading from '@src/components/loadings/InlineLoading'
 
 const Login = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState(undefined)
+  const [password, setPassword] = useState(undefined)
+  const [fetchData, setFetchData] = useState(false)
   const { loading, error } = useAppSelector((store) => store.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const errorMessageFormatter = useErrorFormatter()
+  const {
+    data,
+    isLoading,
+    refetch,
+    isError,
+    error: erroAuth,
+    isSuccess,
+    isFetching,
+  } = useAuth({
+    email: username,
+    password: password,
+    fetchData: fetchData,
+  })
 
-  const handleSubmit = async (ev) => {
+  const handleSubmit = (ev) => {
     ev.preventDefault()
 
-    try {
-      await dispatch(loggedUser({ email: username, password: password }))
-    } catch (error) {
-      throw error
+    if (!username || !password) {
+      return
     }
-
-    setUsername('')
-    setPassword('')
+    setFetchData(true)
   }
 
-  useEffect(() => {
-    let mount = true
-    if (loading === 'succeeded') {
-      dispatch(setUserLoggedIn({ email: username, password: password }))
-      navigate('/dashboard')
+  React.useEffect(() => {
+    if (isError && fetchData) {
+      dispatch(setUserLoggedOut())
+      setFetchData(false)
+      return
     }
 
-    return () => {
-      mount = false
+    if (isSuccess && data && data && fetchData) {
+      setFetchData(false)
+
+      if (data !== 'Connecté') {
+        dispatch(setUserLoggedOut())
+        setUsername(undefined)
+        setPassword(undefined)
+        return
+      }
+      if (data === 'Connecté') {
+        dispatch(setUserLoggedIn({ email: username, password: password }))
+        navigate('/dashboard')
+      }
     }
-  }, [loading, dispatch, navigate, username, password, error])
+  }, [isSuccess, dispatch, navigate, username, password, error, data, fetchData, isError, erroAuth])
 
   return (
     <div className="bg-light min-vh-100 d-flex flex-row align-items-center">
       <CContainer>
-        {error && <CAlert color="danger">{errorMessageFormatter(error)}</CAlert>}
+        {isError && <CAlert color="danger">{errorMessageFormatter(erroAuth)}</CAlert>}
+        {data === 'Vérifier les identifications' && (
+          <CAlert color="danger"> Identifiant ou mot de passe incorrect</CAlert>
+        )}
         <CRow className="justify-content-center">
           <CCol md={8}>
             <CCardGroup>
@@ -84,9 +110,10 @@ const Login = () => {
                         placeholder="Username"
                         autoComplete="username"
                         id="username"
-                        value={username}
+                        value={username ? username : ''}
                         required
                         onChange={(e) => setUsername(e.target.value)}
+                        onFocus={(e) => e.target.select()}
                       />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
@@ -99,15 +126,16 @@ const Login = () => {
                         required
                         placeholder="Password"
                         autoComplete="current-password"
-                        value={password}
+                        value={password ? password : ''}
                         onChange={(e) => setPassword(e.target.value)}
+                        onFocus={(e) => e.target.select()}
                       />
                     </CInputGroup>
                     <CRow>
                       <CCol xs={6}>
                         <div className="flex items-center">
-                          {loading === 'pending' ? (
-                            <Loading width="w-6" height="h-6" />
+                          {isFetching ? (
+                            <InlineLoading />
                           ) : (
                             <ButtonWithIcon type="submit" label="Login" className="w-full" />
                           )}
