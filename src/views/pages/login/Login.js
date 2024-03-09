@@ -73,8 +73,8 @@ const Login = () => {
 
       if (data !== 'Connecté') {
         dispatch(setUserLoggedOut())
-        setUsername(undefined)
-        setPassword(undefined)
+        // setUsername(undefined)
+        // setPassword(undefined)
         return
       }
       if (data === 'Connecté') {
