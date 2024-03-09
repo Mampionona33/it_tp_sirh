@@ -3,14 +3,18 @@ import { z } from 'zod'
 
 const formOmsiSchema: z.ZodType<Partial<IFormPageOmsi>> = z
   .object({
-    periode: z.object({
-      value: z.coerce.string().min(1, { message: 'Valeur obligatoire pour la periode' }),
-      label: z.string().min(1, { message: 'Label obligatoire pour la periode' }),
-    }),
-    annee: z.object({
-      value: z.coerce.number().gt(0, { message: "Valeur obligatoire pour l'annee" }),
-      label: z.string().min(1, { message: "Label obligatoire pour l'annee" }),
-    }),
+    periode: z
+      .object({
+        value: z.coerce.string().min(1, { message: 'Valeur obligatoire pour la periode' }),
+        label: z.string().min(1, { message: 'Label obligatoire pour la periode' }),
+      })
+      .optional(),
+    annee: z
+      .object({
+        value: z.coerce.number().gt(0, { message: "Valeur obligatoire pour l'annee" }),
+        label: z.string().min(1, { message: "Label obligatoire pour l'annee" }),
+      })
+      .optional(),
   })
   .refine(
     (data) => {
