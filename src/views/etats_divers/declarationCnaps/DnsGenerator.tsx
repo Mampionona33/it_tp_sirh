@@ -216,7 +216,7 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
         }
         // }
         // if (salarie.hs_plafonne && salarie.hs_plafonne) {
-        const plafondSme = 1940000
+        const plafondSme = 1910400 // ovaina paramaitre
         monthWorksheet.workSheet.getCell(`L${index + 3}`).value = {
           formula: `IF(K${index + 3} <= ${plafondSme}, K${index + 3}, ${plafondSme})`,
         }
