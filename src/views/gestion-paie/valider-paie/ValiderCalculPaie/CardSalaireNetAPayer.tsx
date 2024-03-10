@@ -7,14 +7,9 @@ import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReduc
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 
 const Body = () => {
-  const {
-    salaireNet,
-    avance,
-    salaireNetAPayer,
-    salarie,
-    montanReductionChargeParEnfant,
-    avantages,
-  } = useAppSelector((store) => store.bulletinDePaie)
+  const { salaireNet, avance, salaireNetAPayer, avantages } = useAppSelector(
+    (store) => store.bulletinDePaie,
+  )
   const dispatch = useAppDispatch()
 
   const updateBulletinDePaie = useCallback(() => {
@@ -23,11 +18,6 @@ const Body = () => {
     const avantageDomestique = avantages!.domestique || 0
     const avantageLogement = avantages!.logement || 0
     const avantageVehicule = avantages!.vehicule || 0
-
-    const allocationFamille = calculPaie.calculateReductionChargeFamiliale({
-      salarie: salarie!,
-      montanReductionChargeParEnfant: montanReductionChargeParEnfant!,
-    })
 
     const salaireNetAPayer = calculPaie.calculSalaireNetAPayer({
       salaireNet,
@@ -42,10 +32,9 @@ const Body = () => {
     dispatch(
       setBulletinDePaie({
         salaireNetAPayer: salaireNetAPayer,
-        valReductionChargeEnfants: allocationFamille,
       } as IBulletinDePaieProps),
     )
-  }, [salaireNet, avance, salarie, montanReductionChargeParEnfant, dispatch, avantages])
+  }, [salaireNet, avance, dispatch, avantages])
 
   useEffect(() => {
     updateBulletinDePaie()

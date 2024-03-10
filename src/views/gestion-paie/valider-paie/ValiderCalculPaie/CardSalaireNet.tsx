@@ -17,6 +17,7 @@ const Body = () => {
     valHsni150,
     baseIrsaArrondi,
     baseIrsa,
+    salarie,
     irsaAPayer,
     salaireNet,
     plafondSME,
@@ -25,6 +26,7 @@ const Body = () => {
     salaireDeBase,
     valMinIrsaParTranche,
     valReductionChargeEnfants,
+    montanReductionChargeParEnfant,
   } = useAppSelector((store) => store.bulletinDePaie)
 
   const dispatch = useAppDispatch()
@@ -60,6 +62,12 @@ const Body = () => {
 
     const irsaAPayer = calculPaie.calculateIrsaParTranche(baseIrsaArrondi, valMinIrsaParTranche)
 
+    const allocationFamille = calculPaie.calculateReductionChargeFamiliale({
+      salarie: salarie!,
+      montanReductionChargeParEnfant:
+        parametre?.reduction_charge_par_enfant || montanReductionChargeParEnfant!,
+    })
+
     const salaireNet = calculPaie.caluclateSalaireNet({
       osie,
       cnaps,
@@ -77,9 +85,11 @@ const Body = () => {
         baseIrsaArrondi: baseIrsaArrondi,
         irsaAPayer: irsaAPayer,
         salaireNet: salaireNet,
+        valReductionChargeEnfants: allocationFamille,
       } as IBulletinDePaieProps),
     )
   }, [
+    salarie,
     salaireBrut,
     valHsni130,
     valHsni150,
@@ -89,6 +99,7 @@ const Body = () => {
     parametre?.plafond_sme,
     parametre?.cotisations,
     dispatch,
+    montanReductionChargeParEnfant,
   ])
 
   useEffect(() => {
