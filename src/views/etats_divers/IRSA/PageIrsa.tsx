@@ -34,7 +34,7 @@ const PageIrsa = () => {
     if (irsaData && formIrsaProps.loading === 'succeeded') {
       return irsaData
     }
-  }, [irsaData, formIrsaProps.loading, isSuccess, formIrsaProps.data])
+  }, [irsaData, formIrsaProps.loading])
 
   const moisOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((m) => {
     const date = new Date()
