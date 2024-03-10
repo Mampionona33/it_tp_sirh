@@ -85,7 +85,7 @@ const PageIrsa = () => {
     if (isSuccess) {
       dispatch(setFormPageIrsa({ ...formIrsaProps, fetchData: false, loading: 'succeeded' }))
     }
-  }, [isError, irsaData])
+  }, [dispatch, formIrsaProps, isSuccess])
 
   React.useEffect(() => {
     if (isSuccess) {
