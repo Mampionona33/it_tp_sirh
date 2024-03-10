@@ -10,6 +10,7 @@ import InputWithFloatingLabel from '@src/components/Inputs/InputFloatingLabel'
 import SelectFloatingLable from '../Inputs/SelectFloatingLable'
 import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
 import useFetchParametre from '../../hooks/useFetchParametre'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
   data,
@@ -42,6 +43,8 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
     field: { value: categorieValue, onChange: catOnChange, ...refCategorie },
   } = useController({ name: 'categorie', control: control })
 
+  const formatError = useErrorFormatter()
+
   // const {
   //   data: categories,
   //   isError: isErrorCategorieEmploye,
@@ -65,7 +68,7 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
   //   return <CAlert color="danger">{(error as Error).message}</CAlert>
   // }
   if (isErrorParametres) {
-    return <CAlert color="danger">{(errorParametres as Error).message}</CAlert>
+    return <CAlert color="danger">{formatError(errorParametres)}</CAlert>
   }
 
   return (
