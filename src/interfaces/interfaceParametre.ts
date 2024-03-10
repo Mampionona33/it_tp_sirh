@@ -31,7 +31,7 @@ interface IParametreProps {
   cotisations: ICotisationParametre[]
   periode_mensuelle: IPeriodeDuMoisParametre[]
   categorie_salarie: ICategorieParametre[]
-  mode_de_paiement: IModeDePaiementParametre[]
+  mode_de_payement: IModeDePaiementParametre[]
   certificats: ICertificatParametre[]
 }
 

@@ -1,13 +1,14 @@
 import React from 'react'
 import { ICardInfoPaieEmployeProps } from '@src/interfaces/interfaceCardInfoPaieEmploye'
 import { useDispatch } from 'react-redux'
-import useFetchListModeDePayement from '@src/hooks/useFetchListModeDePayement'
-import { setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import { Controller, useController } from 'react-hook-form'
 import { SetValueAction } from 'react-select'
-import { CAlert, CCard, CCardBody } from '@coreui/react'
+import { CCard, CCardBody } from '@coreui/react'
 import InputWithFloatingLabel from '@src/components/Inputs/InputFloatingLabel'
 import SelectFloatingLable from '@src/components/Inputs/SelectFloatingLable'
+import useFetchParametre from '@src/hooks/useFetchParametre'
+import CustomCAlert from '../CustomAlert'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
   data,
@@ -16,17 +17,20 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
   control,
   setValue,
 }) => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
+  const formatError = useErrorFormatter()
+
   const {
-    data: modeDePaiement,
-    isLoading: isLoadingModeDePaiement,
-    isError: isErrorModeDePaiement,
-    error,
-  } = useFetchListModeDePayement()
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    dispatch(setFormEmploye({ [name]: value }))
-  }
+    data: parametres,
+    isError: isErrorParametres,
+    error: errorParametres,
+    isFetching: isFetchingParametres,
+  } = useFetchParametre()
+
+  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target
+  //   dispatch(setFormEmploye({ [name]: value }))
+  // }
 
   React.useEffect(() => {
     if (data.mode_paiement_salaire) {
@@ -52,8 +56,8 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
     event.target.select()
   }
 
-  if (isErrorModeDePaiement) {
-    return <CAlert color="danger">Une erreur est survenue.</CAlert>
+  if (isErrorParametres) {
+    return <CustomCAlert color="danger">{formatError(errorParametres)}</CustomCAlert>
   }
 
   return (
@@ -160,7 +164,6 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
             name="mode_paiement_salaire"
             control={control}
             render={({ field: { onChange, onBlur, value, ...rest }, fieldState: { error } }) => {
-              // console.log(value)
               return (
                 <div>
                   <SelectFloatingLable
@@ -168,11 +171,11 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
                     required
                     label="Mode de paiement"
                     placeholder="Mode de paiement"
-                    options={modeDePaiement ? modeDePaiement : selectedModeDePaiment}
+                    options={parametres?.mode_de_payement ? parametres?.mode_de_payement : []}
                     value={value}
                     onBlur={onBlur}
                     onChange={(e) => handleSelectChange(e as string, 'select-option')}
-                    isLoading={isLoadingModeDePaiement}
+                    isLoading={isFetchingParametres}
                   />
                   {error && <span className="text-red-500 text-sm">{error.message}</span>}
                 </div>
