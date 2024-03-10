@@ -9,6 +9,7 @@ import employesRouter from './routes/employes.router'
 import irsaRouter from './routes/irsa.router'
 import omsiRouter from './routes/omsi.router'
 import historiquePaieRouter from './routes/historiquePaie.router'
+import parametreRouter from './routes/parametre.router'
 const cors = require('cors')
 
 dotenv.config({ path: './.env' })
@@ -44,6 +45,7 @@ app.use(
   irsaRouter,
   omsiRouter,
   historiquePaieRouter,
+  parametreRouter,
 )
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {

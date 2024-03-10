@@ -1,0 +1,32 @@
+const mongoose = require('mongoose')
+
+// Définition du schéma Mongoose pour les cotisations
+const CotisationSchema = new mongoose.Schema({
+  name: String,
+  part_emplyeur: Number,
+  part_salarie: Number,
+})
+
+// Définition du schéma Mongoose pour les périodes mensuelles
+const PeriodeDuMois = new mongoose.Schema({
+  month: Number,
+  jour_debut: String,
+  jour_fin: String,
+})
+
+// Définition du schéma Mongoose pour les paramètres de paie
+const ParametreGenelalSchema = new mongoose.Schema({
+  plafond_sme: Number,
+  reduction_charge_par_enfant: Number,
+  cotisations: [CotisationSchema],
+  periode_mensuelle: [PeriodeDuMois],
+})
+
+// Création du modèle Mongoose pour les paramètres de paie
+const ParametreGeneral = mongoose.model(
+  'ParametreGeneral',
+  ParametreGenelalSchema,
+  'parametreGeneral',
+)
+
+export default ParametreGeneral
