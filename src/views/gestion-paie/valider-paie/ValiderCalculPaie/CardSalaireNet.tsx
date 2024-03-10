@@ -6,6 +6,7 @@ import CardRow from './CardRow'
 import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
+import useFetchParametre from '@src/hooks/useFetchParametre'
 
 const Body = () => {
   const {
@@ -27,6 +28,15 @@ const Body = () => {
   } = useAppSelector((store) => store.bulletinDePaie)
 
   const dispatch = useAppDispatch()
+  const {
+    data: parametre,
+    error: errorFetchingParametre,
+    isLoading: isLoadingParametre,
+    isError: isErrorFetchingParametre,
+    isSuccess: isSuccessParametre,
+    refetch: refetchParametre,
+    isFetching: isFetchingParametre,
+  } = useFetchParametre()
 
   const updateBulletinDePaie = useCallback(() => {
     const calculPaie = new CalculPaie_v2()
@@ -34,11 +44,11 @@ const Body = () => {
     calculPaie.setSalaireBrut(salaireBrut)
 
     const cnaps = calculPaie.calulateCnaps({
-      taux: tauxCnaps || 0.01,
-      plafondSME: plafondSME || 1910400,
+      taux: parametre?.cotisations.find((item) => item.name === 'cnaps')?.part_salarie || 0.01,
+      plafondSME: parametre?.plafond_sme || 1910400,
     })
     const osie = calculPaie.calculOsie({
-      taux: tauxOsie || 0.01,
+      taux: parametre?.cotisations.find((item) => item.name === 'ostie')?.part_salarie || 0.01,
     })
     const baseIrsa = calculPaie.calculBaseIrsa({
       cnaps: cnaps,
@@ -70,15 +80,14 @@ const Body = () => {
       } as IBulletinDePaieProps),
     )
   }, [
-    plafondSME,
     salaireBrut,
-    tauxCnaps,
     valHsni130,
     valHsni150,
     salaireDeBase,
     valMinIrsaParTranche,
     valReductionChargeEnfants,
-    tauxOsie,
+    parametre?.plafond_sme,
+    parametre?.cotisations,
     dispatch,
   ])
 
@@ -108,7 +117,7 @@ const Body = () => {
           className="border-b border-b-customBlue-100"
           cell1="IRSA  - PAR TRANCHE"
           cell3={irsaAPayer}
-        />{' '}
+        />
         <CardRow
           className="border-b border-b-customBlue-100"
           cell1="Réduction par enfant"
