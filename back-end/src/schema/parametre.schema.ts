@@ -14,12 +14,26 @@ const PeriodeDuMois = new mongoose.Schema({
   jour_fin: String,
 })
 
+// Définition du schéma Mongoose pour les catégories des salariés
+const CategorieSchema = new mongoose.Schema({
+  label: String,
+  value: String,
+})
+
+// Définition du schéma Mongoose pour les mode de paiements des salaires
+const ModeDePaiementSchema = new mongoose.Schema({
+  label: String,
+  value: String,
+})
+
 // Définition du schéma Mongoose pour les paramètres de paie
 const ParametreGenelalSchema = new mongoose.Schema({
   plafond_sme: Number,
   reduction_charge_par_enfant: Number,
   cotisations: [CotisationSchema],
   periode_mensuelle: [PeriodeDuMois],
+  categorie_salarie: [CategorieSchema],
+  mode_de_payement: [ModeDePaiementSchema],
 })
 
 // Création du modèle Mongoose pour les paramètres de paie
