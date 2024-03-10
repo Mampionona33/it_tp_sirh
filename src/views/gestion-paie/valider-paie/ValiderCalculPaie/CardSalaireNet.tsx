@@ -7,6 +7,9 @@ import CalculPaie_v2 from '@src/utils/CalculPaie_v2'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
 import useFetchParametre from '@src/hooks/useFetchParametre'
+import CustomCAlert from '@src/components/CustomAlert'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
+import Loading from '@src/components/loadings/Loading'
 
 const Body = () => {
   const {
@@ -30,14 +33,14 @@ const Body = () => {
   } = useAppSelector((store) => store.bulletinDePaie)
 
   const dispatch = useAppDispatch()
+
+  const formatError = useErrorFormatter()
+
   const {
     data: parametre,
     error: errorFetchingParametre,
     isLoading: isLoadingParametre,
     isError: isErrorFetchingParametre,
-    isSuccess: isSuccessParametre,
-    refetch: refetchParametre,
-    isFetching: isFetchingParametre,
   } = useFetchParametre()
 
   const updateBulletinDePaie = useCallback(() => {
@@ -62,7 +65,7 @@ const Body = () => {
 
     const irsaAPayer = calculPaie.calculateIrsaParTranche(baseIrsaArrondi, valMinIrsaParTranche)
 
-    const allocationFamille = calculPaie.calculateReductionChargeFamiliale({
+    const valReductionChargeEnfants = calculPaie.calculateReductionChargeFamiliale({
       salarie: salarie!,
       montanReductionChargeParEnfant:
         parametre?.reduction_charge_par_enfant || montanReductionChargeParEnfant!,
@@ -85,7 +88,7 @@ const Body = () => {
         baseIrsaArrondi: baseIrsaArrondi,
         irsaAPayer: irsaAPayer,
         salaireNet: salaireNet,
-        valReductionChargeEnfants: allocationFamille,
+        valReductionChargeEnfants: valReductionChargeEnfants,
       } as IBulletinDePaieProps),
     )
   }, [
@@ -95,9 +98,9 @@ const Body = () => {
     valHsni150,
     salaireDeBase,
     valMinIrsaParTranche,
-    valReductionChargeEnfants,
     parametre?.plafond_sme,
     parametre?.cotisations,
+    parametre?.reduction_charge_par_enfant,
     dispatch,
     montanReductionChargeParEnfant,
   ])
@@ -105,6 +108,14 @@ const Body = () => {
   useEffect(() => {
     updateBulletinDePaie()
   }, [updateBulletinDePaie])
+
+  if (isLoadingParametre) {
+    return <Loading />
+  }
+
+  if (isErrorFetchingParametre) {
+    return <CustomCAlert color="danger">{formatError(errorFetchingParametre)}</CustomCAlert>
+  }
 
   return (
     <>
