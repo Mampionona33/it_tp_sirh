@@ -8,9 +8,9 @@ import {
 
 const parametreRouter = Router()
 
-parametreRouter.get('/parametre', getParametre)
-parametreRouter.post('/parametre', createParametre)
-parametreRouter.put('/parametre/', updateParametre)
+parametreRouter.get('/parametres', getParametre)
+parametreRouter.post('/parametres', createParametre)
+parametreRouter.put('/parametres/', updateParametre)
 parametreRouter.delete('/parametre/:id', deleteParametre)
 
 export default parametreRouter

@@ -9,6 +9,7 @@ import { CAlert, CCard, CCardBody } from '@coreui/react'
 import InputWithFloatingLabel from '@src/components/Inputs/InputFloatingLabel'
 import SelectFloatingLable from '../Inputs/SelectFloatingLable'
 import { EnumBoolean } from '@src/interfaces/interfaceEmploye'
+import useFetchParametre from '../../hooks/useFetchParametre'
 
 const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
   data,
@@ -21,6 +22,16 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
 
   const dispatch = useDispatch()
 
+  const {
+    data: parametres,
+    isLoading: isLoadingParametres,
+    refetch: refetchParametres,
+    isError: isErrorParametres,
+    error: errorParametres,
+    isSuccess: isSuccessParametres,
+    isFetching: isFetchingParametres,
+  } = useFetchParametre()
+
   React.useEffect(() => {
     if (categorie) {
       setValue('categorie', categorie)
@@ -31,17 +42,17 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
     field: { value: categorieValue, onChange: catOnChange, ...refCategorie },
   } = useController({ name: 'categorie', control: control })
 
-  const {
-    data: categories,
-    isError: isErrorCategorieEmploye,
-    error,
-    isLoading: isLoadingCategorieEmploye,
-  } = useFetchCategorieEmploye()
+  // const {
+  //   data: categories,
+  //   isError: isErrorCategorieEmploye,
+  //   error,
+  //   isLoading: isLoadingCategorieEmploye,
+  // } = useFetchCategorieEmploye()
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    dispatch(setFormEmploye({ [name]: value }))
-  }
+  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = event.target
+  //   dispatch(setFormEmploye({ [name]: value }))
+  // }
 
   const handleSelectChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
@@ -50,8 +61,11 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
     }
   }
 
-  if (isErrorCategorieEmploye) {
-    return <CAlert color="danger">{(error as Error).message}</CAlert>
+  // if (isErrorCategorieEmploye) {
+  //   return <CAlert color="danger">{(error as Error).message}</CAlert>
+  // }
+  if (isErrorParametres) {
+    return <CAlert color="danger">{(errorParametres as Error).message}</CAlert>
   }
 
   return (
@@ -138,11 +152,10 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
                     label="Catégorie"
                     placeholder="Categorie"
                     {...rest}
-                    required
                     value={value ? value : categorieValue}
                     onChange={(e) => handleSelectChange(e as string, 'select-option')}
-                    options={categories}
-                    isLoading={isLoadingCategorieEmploye}
+                    options={parametres?.categorie_salarie || []}
+                    isLoading={isLoadingParametres}
                   />
                   {error && <span className="text-red-500 text-sm">{error.message}</span>}
                 </div>
