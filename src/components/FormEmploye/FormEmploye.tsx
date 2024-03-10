@@ -1,39 +1,12 @@
 import React from 'react'
-import InputWithFloatingLabel from '../Inputs/InputFloatingLabel'
-import { CAlert, CCard, CCardBody, CCardFooter, CCardText } from '@coreui/react'
+import { CAlert, CCard } from '@coreui/react'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
-import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { PlusIcon } from '@heroicons/react/24/outline'
 import { v4 as uuidV4 } from 'uuid'
-import { ICardEnfantEmployeProps } from '@src/interfaces/interfaceCardEnfantEmploye'
-import { useAppSelector } from '@src/hooks/useAppDispatch'
-import { SetValueAction } from 'react-select'
-import {
-  CertificatEnfantProps,
-  EnumBoolean,
-  EnumCertificatEnfant,
-  EnumGenre,
-  IEmploye,
-  IEnfantEmploye,
-} from '@src/interfaces/interfaceEmploye'
-import { useDispatch } from 'react-redux'
-import {
-  formEmployeAjoutEnfant,
-  formEmployeSupprimerEnfant,
-  setFormEmploye,
-} from '@src/redux/FormEmploye/formEmployeReducer'
-import { ICardInfoPersoEmploye } from '@src/interfaces/interfaceCardInfoPersoEmploye'
-import SelectFloatingLable from '../Inputs/SelectFloatingLable'
+import { EnumBoolean, EnumGenre, IEmploye, IEnfantEmploye } from '@src/interfaces/interfaceEmploye'
 import FormEmployeGroupButton from './FormEmployeGroupButton'
-import { ICardInfoProEmployeProps } from '@src/interfaces/interfaceCardInfoProEmploye'
-import useFetchCategorieEmploye from '@src/hooks/useFetchCategorieEmploye'
-import { ICardInfoPaieEmployeProps } from '@src/interfaces/interfaceCardInfoPaieEmploye'
-import useFetchListModeDePayement from '@src/hooks/useFetchListModeDePayement'
-import {
-  ICardResiliationContratProps,
-  ResiliationState,
-} from '@src/interfaces/interfaceCardResiliationContrat'
-import { format } from 'date-fns'
-import { useController, useFieldArray, useForm, Controller, SubmitHandler } from 'react-hook-form'
+import { ResiliationState } from '@src/interfaces/interfaceCardResiliationContrat'
+import { useFieldArray, useForm, SubmitHandler } from 'react-hook-form'
 import formEmployeSchema from '@src/schema/formEmployeSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import useFetchSalarie from '@src/hooks/useFetchSalarie'
@@ -52,10 +25,6 @@ interface IFormEmploye {
   id?: string | number
 }
 
-const classeInput: string =
-  'border-b border-b-customRed-800 focus:border-b-2 focus:outline-none w-full px-1 text-sm'
-const classeCardBody: string =
-  'grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-3 px-8 w-full'
 const classeCardTitle = 'mx-3 mb-0 mt-3 uppercase text-customRed-930 text-base'
 const classeCard: string = 'rounded-sm pb-3 px-3'
 
