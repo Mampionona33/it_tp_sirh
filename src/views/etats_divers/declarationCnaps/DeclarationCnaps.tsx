@@ -1,231 +1,233 @@
-import React, { useEffect, useState } from 'react'
-import DnsGenerator from './DnsGenerator'
-import Select from 'react-select'
-import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
-import { IDnsState, setDns } from '@src/redux/dns/dnsReducers'
-import CustomSection from '@src/components/CustomSection'
+import React from 'react'
+import SelectFloatingLable from '@src/components/Inputs/SelectFloatingLable'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
-import { fetchDnsData } from '@src/redux/dns/dnsActions'
-import { CAlert } from '@coreui/react'
+import InlineLoading from '@src/components/loadings/InlineLoading'
+import { Controller, SubmitHandler, useController, useForm } from 'react-hook-form'
+import { SetValueAction } from 'react-select'
+import useFetchDns from '@src/hooks/useFetchDns'
+import { IPageDnsProps } from '@src/interfaces/interfacePageCnaps'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
-import { useQuery } from '@tanstack/react-query'
-import Loading from '@src/components/loadings/Loading'
-import dnsService from '@src/services/DnsService'
-import useFetchTauxCnaps from '@src/hooks/useFetchTauxCnaps'
+import CustomCAlert from '@src/components/CustomAlert'
+import { useAppDispatch } from '@src/hooks/useAppDispatch'
+import { IDnsState, setDns } from '@src/redux/dns/dnsReducers'
+import DnsGenerator from './DnsGenerator'
+import useFetchParametre from '@src/hooks/useFetchParametre'
+import { ICotisationParametre } from '@src/interfaces/interfaceParametre'
 
-const Body = () => {
+const DeclarationCnaps = () => {
   const dispatch = useAppDispatch()
+  const [state, setState] = React.useState<IPageDnsProps>({
+    annee: undefined,
+    periode: undefined,
+    fetchData: false,
+  })
 
-  const { anneeSelectionne: annee, periodSelectionne: periode } = useAppSelector(
-    (store) => store.dns,
-  )
   const formatError = useErrorFormatter()
 
-  const {
-    data: tauxCnaps,
-    error: tauxCnapsErrors,
-    isLoading: isLoadingTauxCnaps,
-    isError: isErrorTauxCnaps,
-    refetch: refetchTauxCnaps,
-  } = useFetchTauxCnaps()
-
-  // console.log('dnsData', dnsData)
-
-  const customSelectStyles = {
-    control: (provided: any) => ({
-      ...provided,
-      height: 21,
-      minHeight: 21,
-      border: 'none',
-      outline: 'none',
-      borderBottom: '1px solid #D6111E',
-    }),
-    valueContainer: (style: any) => {
-      return {
-        ...style,
-        paddingTop: 0,
-        paddingBottom: 0,
-        height: 21,
-        minHeight: 21,
-      }
-    },
-    input: (style: any) => {
-      return {
-        ...style,
-        margin: 0,
-        height: 21,
-        paddingTop: 0,
-        paddingBottom: 0,
-        minHeight: 21,
-        fontSize: '0.875rem',
-      }
-    },
-    singleValue: (style: any) => {
-      return {
-        ...style,
-        fontSize: '0.875rem',
-      }
-    },
-    placeholder: (style: any) => {
-      return {
-        ...style,
-        fontSize: '0.875rem',
-      }
-    },
-    menu: (style: any) => ({
-      ...style,
-      fontSize: '0.875rem',
-    }),
-    indicatorsContainer: (style: any) => {
-      return {
-        ...style,
-        fontSize: '0.875rem',
-        height: 21,
-        minHeight: 21,
-      }
-    },
-  }
-
-  const periodesOptions = [
-    { value: 't1', label: 'Trimestre 1' },
-    { value: 't2', label: 'Trimestre 2' },
-    { value: 't3', label: 'Trimestre 3' },
-    { value: 't4', label: 'Trimestre 4' },
-  ]
-
-  const handleInputChange = (selectedOption: any, actionMeta: any) => {
-    if (actionMeta.name === 'periode') {
-      dispatch(
-        setDns({
-          periodSelectionne: selectedOption.value,
-          dnsData: null,
-          loading: 'idle',
-        } as IDnsState),
-      )
-    } else if (actionMeta.name === 'annee') {
-      dispatch(
-        setDns({
-          anneeSelectionne: Number(selectedOption.value),
-          dnsData: null,
-          loading: 'idle',
-        } as IDnsState),
-      )
+  const periode = ['t1', 't2', 't3', 't4'].map((item) => {
+    return {
+      value: item,
+      label: item,
     }
-  }
+  })
+  const {
+    data: dnsData,
+    error: dnsError,
+    isError: isDnsError,
+    isLoading: dnsIsLoading,
+    refetch: dnsRefetch,
+    isFetching: dnsIsFetching,
+  } = useFetchDns({ annee: state.annee, periode: state.periode, fetchData: state.fetchData })
+
+  const {
+    data: parametreData,
+    error: parametreError,
+    isError: isParametreError,
+    isLoading: parametreIsLoading,
+    refetch: parametreRefetch,
+    isFetching: parametreIsFetching,
+  } = useFetchParametre()
 
   const currentYear = new Date().getFullYear()
-  const years = Array.from({ length: currentYear - 1900 + 1 }, (_, index) => ({
+  const anneOptions = Array.from({ length: currentYear - 1900 + 1 }, (_, index) => ({
     value: currentYear - index,
     label: (currentYear - index).toString(),
   }))
 
-  const handleGenerate = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
+  const { handleSubmit, control, getValues, reset } = useForm({
+    defaultValues: {
+      annee: currentYear,
+      periode: 't1',
+    },
+  })
 
-    try {
-      await dispatch(fetchDnsData({ periode, annee }))
-    } catch (error) {
-      throw error
+  const {
+    field: { value: selectedPeriode, onChange: onChangePeriode },
+  } = useController({
+    name: 'periode',
+    control,
+  })
+
+  const {
+    field: { value: selectedAnnee, onChange: onChangeAnnee },
+  } = useController({
+    name: 'annee',
+    control,
+  })
+
+  const handleGenerateDns: SubmitHandler<Partial<IPageDnsProps>> = async ({
+    annee,
+    periode,
+  }: Partial<IPageDnsProps>): Promise<void> => {
+    if (!!annee && !!periode) {
+      setState({ ...state, fetchData: true })
     }
   }
 
-  // const [tauxCnapsData, setTauxCnapsData] = useState(null)
-
-  // useEffect(() => {
-  //   if (tauxCnaps) {
-  //     setTauxCnapsData(tauxCnaps)
-  //   }
-  // }, [tauxCnaps])
-
-  if (isLoadingTauxCnaps) {
-    return <Loading />
+  const handlePeriodeChange = (
+    newValue: { value: string; label: string },
+    action: SetValueAction,
+  ) => {
+    if (action === 'select-option') {
+      onChangePeriode(newValue, action)
+      console.log(newValue)
+      setState({ ...state, periode: newValue.value as any, fetchData: false })
+      dispatch(
+        setDns({
+          periodSelectionne: newValue.value,
+          dnsData: null,
+          loading: 'idle',
+        } as IDnsState),
+      )
+    }
   }
 
-  if (isErrorTauxCnaps) {
-    return <CAlert color="danger">{formatError(tauxCnapsErrors)}</CAlert>
+  const handleAnneeChange = (
+    newValue: { value: number; label: string },
+    action: SetValueAction,
+  ) => {
+    if (action === 'select-option') {
+      onChangeAnnee(newValue, action)
+      setState({ ...state, annee: newValue.value as any, fetchData: false })
+      dispatch(
+        setDns({
+          anneeSelectionne: newValue.value,
+          dnsData: null,
+          loading: 'idle',
+        } as IDnsState),
+      )
+    }
   }
+
+  React.useEffect(() => {
+    if (dnsData) {
+      setState({ ...state, fetchData: false })
+      dispatch(setDns({ dnsData, loading: 'idle' } as IDnsState))
+    }
+    if (dnsError) {
+      setState({ ...state, fetchData: false })
+    }
+  }, [dnsData, dispatch, state, dnsError])
+
   return (
-    <>
-      <form action="post" className="w-full flex flex-col gap-2 p-4">
-        <div className="w-full flex flex-row gap-2 justify-between flex-wrap items-end">
-          <div className="flex justify-between gap-2">
-            <div>
-              <label className="form-label text-sm" htmlFor="periode">
-                Période
-              </label>
-              <Select
-                className="basic-multi-select"
-                name="periode"
-                options={periodesOptions}
-                onChange={(selectedOption, actionMeta) =>
-                  handleInputChange(selectedOption, actionMeta)
-                }
-                value={periodesOptions.find((option) => option.value === periode)}
-                styles={customSelectStyles}
-                theme={(theme) => ({
-                  ...theme,
-                  borderRadius: 0,
-                  height: 28,
-                  colors: {
-                    ...theme.colors,
-                    primary25: '#FFF2F2',
-                    primary: '#FEBABA',
-                  },
-                })}
-              />
+    <div className="flex flex-col">
+      {isDnsError && <CustomCAlert color="danger">{formatError(dnsError)}</CustomCAlert>}
+      {isParametreError && (
+        <CustomCAlert color="danger">{formatError(parametreError)}</CustomCAlert>
+      )}
+      <div className="flex mt-3">
+        <div className="flex flex-col shadow-sm bg-white">
+          <h3 className="bg-customRed-900 text-white text-lg px-4 py-2 capitalize rounded-t-sm">
+            Déclaration nominative de salaires
+          </h3>
+          <form action="" method="post" onSubmit={handleSubmit(handleGenerateDns)}>
+            <div className="w-full flex px-4 pb-4 pt-2 justify-between gap-2">
+              <div className="w-full">
+                <Controller
+                  name="periode"
+                  control={control}
+                  render={({
+                    field: { onChange, onBlur, value, ref, ...rest },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <div className="w-full min-w-[8rem]">
+                        <SelectFloatingLable
+                          className="w-full capitalize"
+                          label="Période"
+                          placeholder="Période"
+                          {...rest}
+                          options={periode}
+                          value={value ? value : selectedPeriode}
+                          onChange={(e) =>
+                            handlePeriodeChange(
+                              e as { value: string; label: string },
+                              'select-option',
+                            )
+                          }
+                        />
+                        {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                      </div>
+                    )
+                  }}
+                />
+              </div>
+
+              <div className="w-full">
+                <Controller
+                  name="annee"
+                  control={control}
+                  render={({
+                    field: { onChange, onBlur, value, ref, ...rest },
+                    fieldState: { error },
+                  }) => {
+                    return (
+                      <div className="w-full min-w-[8rem]">
+                        <SelectFloatingLable
+                          className="w-full capitalize"
+                          label="Année"
+                          placeholder="Année"
+                          {...rest}
+                          options={anneOptions}
+                          value={value ? value : selectedAnnee}
+                          onChange={(e) =>
+                            handleAnneeChange(
+                              e as { value: number; label: string },
+                              'select-option',
+                            )
+                          }
+                        />
+                        {error && <span className="text-red-500 text-sm">{error.message}</span>}
+                      </div>
+                    )
+                  }}
+                />
+              </div>
+
+              <div className="flex full items-center">
+                <ButtonWithIcon label="Générer" type="submit" />
+              </div>
+
+              <div className="flex full items-center">
+                {dnsIsFetching ? (
+                  <div className="flex min-w-7 justify-center">
+                    <InlineLoading />
+                  </div>
+                ) : (
+                  <DnsGenerator
+                    plafondSme={parametreData?.plafond_sme || 1910400}
+                    tauxCnaps={
+                      parametreData?.cotisations.find(
+                        (c: ICotisationParametre) => c.name === 'cnaps',
+                      ) || { name: '', part_employeur: 0, part_salarie: 0 }
+                    }
+                  />
+                )}
+              </div>
             </div>
-            <div>
-              <label className="form-label text-sm" htmlFor="annee">
-                Année
-              </label>
-              <Select
-                className="basic-multi-select"
-                name="annee"
-                options={years}
-                onChange={(selectedOption, actionMeta) =>
-                  handleInputChange(selectedOption, actionMeta)
-                }
-                value={years.find((option) => option.value === annee)}
-                styles={customSelectStyles}
-                theme={(theme) => ({
-                  ...theme,
-                  borderRadius: 0,
-                  height: 28,
-                  colors: {
-                    ...theme.colors,
-                    primary25: '#FFF2F2',
-                    primary: '#FEBABA',
-                  },
-                })}
-              />
-            </div>
-          </div>
-          <div className="flex gap-2">
-            <ButtonWithIcon label="Générer" onClick={handleGenerate} />
-            <DnsGenerator tauxCnaps={tauxCnaps} />
-          </div>
+          </form>
         </div>
-      </form>
-    </>
-  )
-}
-
-const DeclarationCnaps = () => {
-  const { anneeSelectionne: annee, periodSelectionne: periode } = useAppSelector(
-    (state) => state.dns,
-  )
-
-  const { isPending, error, isError } = useQuery({
-    queryKey: ['dns'],
-    queryFn: () => dnsService.fetch({ annee, periode }),
-  })
-
-  if (isPending) return <Loading />
-
-  return (
-    <div>
-      {isError && <CAlert color="danger">{error.message}</CAlert>}
-      <CustomSection body={<Body />} title="Déclaration nominative de salaires" />
+      </div>
     </div>
   )
 }

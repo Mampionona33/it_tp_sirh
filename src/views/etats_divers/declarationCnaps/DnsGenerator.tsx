@@ -17,7 +17,7 @@ import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { CotisationCnapsProps } from '@src/interfaces/interfaceCotisationCnaps'
 
-class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
+class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps; plafondSme: number }> {
   private store: Store
   private wb: ExcelJS.Workbook
   private employeurSheet: EmployerWorksheet
@@ -31,7 +31,7 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
   private loadingDnsData: string
   private anneeSelectionne: number
   private periodSelectionne: string
-  constructor(props: { tauxCnaps: CotisationCnapsProps }) {
+  constructor(props: { tauxCnaps: CotisationCnapsProps; plafondSme: number }) {
     super(props)
     this.wb = new ExcelJS.Workbook()
 
@@ -216,21 +216,23 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
         }
         // }
         // if (salarie.hs_plafonne && salarie.hs_plafonne) {
-        const plafondSme = 1910400 // ovaina paramaitre
+        // const plafondSme = 1910400 // ovaina paramaitre
         monthWorksheet.workSheet.getCell(`L${index + 3}`).value = {
-          formula: `IF(K${index + 3} <= ${plafondSme}, K${index + 3}, ${plafondSme})`,
+          formula: `IF(K${index + 3} <= ${this.props.plafondSme}, K${index + 3}, ${
+            this.props.plafondSme
+          })`,
         }
         // }
-        const tauxCotisationEmployeur = this.props.tauxCnaps.employeur
-          ? this.props.tauxCnaps.employeur
+        const tauxCotisationEmployeur = this.props.tauxCnaps.part_employeur
+          ? this.props.tauxCnaps.part_employeur
           : 0.13
 
         monthWorksheet.workSheet.getCell(`M${index + 3}`).value = {
           formula: `L${index + 3} * ${tauxCotisationEmployeur}`,
         }
 
-        const tauxCotisationSalarie = this.props.tauxCnaps.salarie
-          ? this.props.tauxCnaps.salarie
+        const tauxCotisationSalarie = this.props.tauxCnaps.part_salarie
+          ? this.props.tauxCnaps.part_salarie
           : 0.01
 
         monthWorksheet.workSheet.getCell(`N${index + 3}`).value = {
@@ -394,8 +396,8 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps }> {
     if (this.props.tauxCnaps) {
       const periode = this.formatPeriod()
       this.employeurSheet.sheet.getCell('C12').value = periode
-      this.employeurSheet.sheet.getCell('C15').value = this.props.tauxCnaps.employeur
-      this.employeurSheet.sheet.getCell('C16').value = this.props.tauxCnaps.salarie
+      this.employeurSheet.sheet.getCell('C15').value = this.props.tauxCnaps.part_employeur
+      this.employeurSheet.sheet.getCell('C16').value = this.props.tauxCnaps.part_salarie
       this.applyDefaultFontToCotisation()
     }
     const mois1 = this.getMoisConcernes().mois1
