@@ -7,6 +7,12 @@ const CotisationSchema = new mongoose.Schema({
   part_salarie: Number,
 })
 
+// Définition du schéma Mongoose pour les cértificats
+const CertificatSchema = new mongoose.Schema({
+  label: String,
+  value: String,
+})
+
 // Définition du schéma Mongoose pour les périodes mensuelles
 const PeriodeDuMois = new mongoose.Schema({
   month: Number,
@@ -34,6 +40,7 @@ const ParametreGenelalSchema = new mongoose.Schema({
   periode_mensuelle: [PeriodeDuMois],
   categorie_salarie: [CategorieSchema],
   mode_de_payement: [ModeDePaiementSchema],
+  certificats: [CertificatSchema],
 })
 
 // Création du modèle Mongoose pour les paramètres de paie

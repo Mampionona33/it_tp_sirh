@@ -1,18 +1,15 @@
 import React from 'react'
-import {
-  CertificatEnfantProps,
-  EnumCertificatEnfant,
-  EnumGenre,
-} from '@src/interfaces/interfaceEmploye'
+import { EnumGenre } from '@src/interfaces/interfaceEmploye'
 import { v4 as uuidV4 } from 'uuid'
 import SelectFloatingLable from '../Inputs/SelectFloatingLable'
 import { Controller } from 'react-hook-form'
 import InputWithFloatingLabel from '@src/components/Inputs/InputFloatingLabel'
 import { ICardEnfantEmployeProps } from '@src/interfaces/interfaceCardEnfantEmploye'
-import { useAppSelector } from '@src/hooks/useAppDispatch'
-import { SetValueAction } from 'react-select'
 import ButtonWithIcon from '../buttons/ButtonWithIcon'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import useFetchParametre from '@src/hooks/useFetchParametre'
+import CustomCAlert from '../CustomAlert'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
   index,
@@ -24,7 +21,6 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
   remove,
   update,
 }) => {
-  const { enfant: listeEnfants } = useAppSelector((state) => state.formEmploye)
   //   const dispatch = useDispatch()
   const handleDeleteEnf = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -41,55 +37,26 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
   const idGenreFeminin = uuidV4()
   const idGenre = uuidV4()
 
-  const optionCertificat: { label: string; value: EnumCertificatEnfant }[] = [
-    { label: '---', value: EnumCertificatEnfant.AUCUN },
-    { label: 'Certificat de vie', value: EnumCertificatEnfant.VIE },
-    { label: 'Certificat de scolarité', value: EnumCertificatEnfant.SCOLARITE },
-    { label: 'Certificat de médical', value: EnumCertificatEnfant.MEDICAL },
-  ]
+  const {
+    data: parametres,
+    isLoading: isLoadingParametres,
+    refetch: refetchParametres,
+    isError: isErrorParametres,
+    error: errorParametres,
+    isSuccess: isSuccessParametres,
+    isFetching: isFetchingParametres,
+  } = useFetchParametre()
 
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = event.target
+  const formatError = useErrorFormatter()
 
-  //   const updatedEnfants = listeEnfants!.map((enfant: IEnfantEmploye) => {
-  //     if (enfant.id === data.id) {
-  //       if (name.includes('genre_enfant')) {
-  //         return {
-  //           ...enfant,
-  //           genre_enfant: value,
-  //         }
-  //       }
-  //       return {
-  //         ...enfant,
-  //         [name]: value,
-  //       }
-  //     }
-  //     return enfant
-  //   })
-  //   setValue('enfant', updatedEnfants as IEnfantEmploye[], {
-  //     shouldDirty: true,
-  //     shouldValidate: true,
-  //   })
-  //   dispatch(setFormEmploye({ enfant: updatedEnfants }))
+  // const handleSelectChange = (newValue: CertificatEnfantProps, action: SetValueAction) => {
+  //   if (action === 'select-option') {
+  //     setValue(`enfant.${index}.certificat` as any, newValue)
+  //   }
   // }
 
-  const handleSelectChange = (newValue: CertificatEnfantProps, action: SetValueAction) => {
-    if (action === 'select-option') {
-      setValue(`enfant.${index}.certificat` as any, newValue)
-
-      // const updatedEnfants = listeEnfants!.map((enfant) => {
-      //   console.log(newValue)
-
-      //   if (enfant.id === data.id) {
-      //     return {
-      //       ...enfant,
-      //       categorie: newValue,
-      //     }
-      //   }
-      //   return enfant
-      // })
-      // dispatch(setFormEmploye({ enfant: updatedEnfants }))
-    }
+  if (isErrorParametres) {
+    return <CustomCAlert color="danger">{formatError(errorParametres)}</CustomCAlert>
   }
 
   return (
@@ -237,12 +204,13 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
                     label="Certificat"
                     placeholder="Certificat"
                     id={certificat}
-                    options={optionCertificat}
+                    options={parametres?.certificats || []}
                     value={value}
                     {...rest}
                     ref={ref}
                     onBlur={onBlur}
                     onChange={onChange}
+                    isLoading={isFetchingParametres}
                     // name="certificat"
                     // onChange={(newValue) => handleChange(newValue)} // Utiliser la fonction handleChange
                   />

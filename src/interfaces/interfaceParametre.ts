@@ -20,6 +20,11 @@ export interface IModeDePaiementParametre {
   value: string
 }
 
+export interface ICertificatParametre {
+  label: string
+  value: string
+}
+
 interface IParametreProps {
   plafond_sme: number
   reduction_charge_par_enfant: number
@@ -27,6 +32,7 @@ interface IParametreProps {
   periode_mensuelle: IPeriodeDuMoisParametre[]
   categorie_salarie: ICategorieParametre[]
   mode_de_paiement: IModeDePaiementParametre[]
+  certificats: ICertificatParametre[]
 }
 
 export default IParametreProps
