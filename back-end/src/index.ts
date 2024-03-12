@@ -10,6 +10,7 @@ import irsaRouter from './routes/irsa.router'
 import omsiRouter from './routes/omsi.router'
 import historiquePaieRouter from './routes/historiquePaie.router'
 import parametreRouter from './routes/parametre.router'
+import dnsRouter from './routes/dns.router'
 const cors = require('cors')
 
 dotenv.config({ path: './.env' })
@@ -46,6 +47,7 @@ app.use(
   omsiRouter,
   historiquePaieRouter,
   parametreRouter,
+  dnsRouter,
 )
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {

@@ -15,7 +15,7 @@ const EnfantSchema = new Schema({
 })
 
 // Définir le schéma principal pour les données de l'employé
-const EmployeSchema = new Schema({
+const EmployeSchma = new Schema({
   actif: String,
   adresse: String,
   categorie: {
@@ -57,6 +57,6 @@ const EmployeSchema = new Schema({
 })
 
 // Créer le modèle à partir du schéma
-const EmployeModel = mongoose.model('Employe', EmployeSchema, 'employes')
+const EmployeModel = mongoose.model('Employe', EmployeSchma, 'employes')
 
 export default EmployeModel
