@@ -482,7 +482,11 @@ class DnsGenerator extends Component<{ tauxCnaps: CotisationCnapsProps; plafondS
             <ButtonWithIcon
               label="Télécharger"
               variant={ButtonWithIconVariant.Secondary}
-              disabled={this.dnsData === null}
+              disabled={
+                this.dnsData === null ||
+                (this.dnsData.employeur === null && this.dnsData.travailleur === null) ||
+                (this.dnsData.travailleur && this.dnsData.travailleur.length === 0)
+              }
               onClick={this.handelDownload}
             />
           )}

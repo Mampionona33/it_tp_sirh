@@ -91,7 +91,7 @@ const DeclarationCnaps = () => {
     if (action === 'select-option') {
       onChangePeriode(newValue, action)
       console.log(newValue)
-      setState({ ...state, periode: newValue.value as any, fetchData: false })
+      setState({ ...state, periode: newValue.value as any, fetchData: false, error: undefined })
       dispatch(
         setDns({
           periodSelectionne: newValue.value,
@@ -108,7 +108,7 @@ const DeclarationCnaps = () => {
   ) => {
     if (action === 'select-option') {
       onChangeAnnee(newValue, action)
-      setState({ ...state, annee: newValue.value as any, fetchData: false })
+      setState({ ...state, annee: newValue.value as any, fetchData: false, error: undefined })
       dispatch(
         setDns({
           anneeSelectionne: newValue.value,
@@ -120,11 +120,21 @@ const DeclarationCnaps = () => {
   }
 
   React.useEffect(() => {
-    if (dnsData) {
+    if (dnsData && state.fetchData) {
       setState({ ...state, fetchData: false })
-      dispatch(setDns({ dnsData, loading: 'idle' } as IDnsState))
+
+      console.log(dnsData, state)
+
+      if (dnsData.length === 0) {
+        setState({ ...state, fetchData: false, error: 'Aucune donnée' })
+      }
+
+      if (dnsData.length > 0) {
+        dispatch(setDns({ dnsData, loading: 'idle' } as IDnsState))
+      }
     }
-    if (dnsError) {
+
+    if (dnsError && state.fetchData) {
       setState({ ...state, fetchData: false })
     }
   }, [dnsData, dispatch, state, dnsError])
@@ -135,6 +145,7 @@ const DeclarationCnaps = () => {
       {isParametreError && (
         <CustomCAlert color="danger">{formatError(parametreError)}</CustomCAlert>
       )}
+      {state.error && <CustomCAlert color="danger">{state.error}</CustomCAlert>}
       <div className="flex mt-3">
         <div className="flex flex-col shadow-sm bg-white">
           <h3 className="bg-customRed-900 text-white text-lg px-4 py-2 capitalize rounded-t-sm">
