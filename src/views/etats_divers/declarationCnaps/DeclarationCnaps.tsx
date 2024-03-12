@@ -13,6 +13,8 @@ import { IDnsState, setDns } from '@src/redux/dns/dnsReducers'
 import DnsGenerator from './DnsGenerator'
 import useFetchParametre from '@src/hooks/useFetchParametre'
 import { ICotisationParametre } from '@src/interfaces/interfaceParametre'
+import formDnsSchema from '@src/schema/formDnsSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const DeclarationCnaps = () => {
   const dispatch = useAppDispatch()
@@ -54,10 +56,11 @@ const DeclarationCnaps = () => {
     label: (currentYear - index).toString(),
   }))
 
-  const { handleSubmit, control, getValues, reset } = useForm({
+  const { handleSubmit, control, getValues, reset } = useForm<Partial<IPageDnsProps>>({
+    resolver: zodResolver(formDnsSchema),
     defaultValues: {
-      annee: currentYear,
-      periode: 't1',
+      annee: undefined,
+      periode: undefined,
     },
   })
 
@@ -66,6 +69,7 @@ const DeclarationCnaps = () => {
   } = useController({
     name: 'periode',
     control,
+    defaultValue: undefined,
   })
 
   const {
@@ -73,6 +77,7 @@ const DeclarationCnaps = () => {
   } = useController({
     name: 'annee',
     control,
+    defaultValue: undefined,
   })
 
   const handleGenerateDns: SubmitHandler<Partial<IPageDnsProps>> = async ({
@@ -121,16 +126,13 @@ const DeclarationCnaps = () => {
 
   React.useEffect(() => {
     if (dnsData && state.fetchData) {
-      setState({ ...state, fetchData: false })
-
       console.log(dnsData, state)
-
-      if (dnsData.length === 0) {
-        setState({ ...state, fetchData: false, error: 'Aucune donnée' })
-      }
-
-      if (dnsData.length > 0) {
+      if (dnsData.travailleur && dnsData.travailleur.length > 0) {
         dispatch(setDns({ dnsData, loading: 'idle' } as IDnsState))
+        setState({ ...state, fetchData: false })
+      } else {
+        dispatch(setDns({ dnsData: null, loading: 'idle' } as IDnsState))
+        setState({ ...state, fetchData: false, error: 'Ressource introuvable' })
       }
     }
 
@@ -169,7 +171,7 @@ const DeclarationCnaps = () => {
                           placeholder="Période"
                           {...rest}
                           options={periode}
-                          value={value ? value : selectedPeriode}
+                          value={value}
                           onChange={(e) =>
                             handlePeriodeChange(
                               e as { value: string; label: string },
@@ -189,7 +191,7 @@ const DeclarationCnaps = () => {
                   name="annee"
                   control={control}
                   render={({
-                    field: { onChange, onBlur, value, ref, ...rest },
+                    field: { onChange, onBlur, value, ...rest },
                     fieldState: { error },
                   }) => {
                     return (
@@ -200,7 +202,7 @@ const DeclarationCnaps = () => {
                           placeholder="Année"
                           {...rest}
                           options={anneOptions}
-                          value={value ? value : selectedAnnee}
+                          value={value}
                           onChange={(e) =>
                             handleAnneeChange(
                               e as { value: number; label: string },

@@ -16,10 +16,10 @@ export const createDns = async (req: Request, res: Response) => {
 export const getDnsByYearPeriod = async (req: Request, res: Response) => {
   try {
     const { annee, periode } = req.params
-    const dns = await DnsModel.find({
+    const dns = await DnsModel.findOne({
       'travailleur.annee': annee,
       'travailleur.trimestre': periode,
-    })
+    }).lean()
 
     if (!dns) {
       return res.status(404).json({ error: 'Dns not found' })
