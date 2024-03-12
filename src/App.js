@@ -45,7 +45,8 @@ class App extends Component {
                 path="/"
                 element={
                   this.isAuth ? (
-                    <Navigate to="/dashboard" replace />
+                    // <Navigate to="/dashboard" replace />
+                    <Navigate to="/employees/list/list?page=1&pageSize=5" replace />
                   ) : (
                     <Navigate to="/login" replace />
                   )

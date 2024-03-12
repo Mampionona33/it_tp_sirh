@@ -12,7 +12,7 @@ import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye, setFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import { fetchAllEmployees } from '@src/redux/employees/employeesAction'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 import useFetchListEmploye from '@src/hooks/useFetchListEmploye'
@@ -24,11 +24,16 @@ interface IDataWithActions extends IEmploye {
 const HeaderComponents: React.FC = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const handleClickButtonAdd = (ev: React.MouseEvent<HTMLElement>) => {
     ev.preventDefault()
     dispatch(resetFormEmploye())
     navigate('/employees/ajout')
   }
+
+  React.useEffect(() => {
+    console.log(location)
+  }, [location])
 
   return (
     <>
