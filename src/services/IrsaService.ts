@@ -1,3 +1,4 @@
+import { DeclarationIrsaProps } from '@src/interfaces/interfaceDeclarationIrsa'
 import axios from 'axios'
 
 class IrsaService {
@@ -14,6 +15,20 @@ class IrsaService {
   async getIrsaByMonthYear(month: number, year: number) {
     try {
       const response = await axios.get(`${this.REACT_APP_API_BASE_URL}/irsa/${year}/${month}`, {
+        auth: {
+          username: this.login,
+          password: this.pass,
+        },
+      })
+      return response.data
+    } catch (error) {
+      console.error('An error occurred during the request:', error)
+      throw error
+    }
+  }
+  async add({ data }: DeclarationIrsaProps) {
+    try {
+      const response = await axios.post(`${this.REACT_APP_API_BASE_URL}/irsa`, data, {
         auth: {
           username: this.login,
           password: this.pass,
