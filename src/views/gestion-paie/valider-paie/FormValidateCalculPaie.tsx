@@ -55,7 +55,7 @@ const FormValidateCalculPaie = () => {
 
       const declarationIrsaData = {
         year: dateValidation.getFullYear().toString(),
-        month: (dateValidation.getMonth() + 1).toString().padStart(2, '0'),
+        month: (dateValidation.getMonth() + 1).toString(),
         matricule: bullettinDePaie.salarie?.matricule,
         num_cnaps: bullettinDePaie.salarie?.num_cnaps,
         nom_prenom: bullettinDePaie.salarie?.nom + ' ' + bullettinDePaie.salarie?.prenom,
@@ -101,6 +101,12 @@ const FormValidateCalculPaie = () => {
   const handleCancel = () => {
     dispatch(setModalClose())
   }
+
+  React.useEffect(() => {
+    if (isError || isErrorIrsa) {
+      dispatch(setModalClose())
+    }
+  }, [isError, isErrorIrsa, dispatch])
 
   return (
     <div className="flex flex-col bg-white w-2/4 p-3 rounded-sm">

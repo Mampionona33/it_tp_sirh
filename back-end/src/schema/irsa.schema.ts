@@ -4,7 +4,7 @@ const IrsaSchema = new Schema(
   {
     year: { type: String, require: true },
     month: { type: String, require: true },
-    matricule: { type: String, unique: true, require: true },
+    matricule: { type: String, require: true },
     num_cnaps: { type: String, unique: true, require: true },
     nom_prenom: { type: String, require: true },
     cin: { type: String, unique: true, require: true },
