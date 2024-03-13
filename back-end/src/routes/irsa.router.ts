@@ -3,8 +3,8 @@ import { createIrsa, getAllIrsa, getIrsaByYearMonth } from '../controllers/irsa.
 
 const irsaRouter = Router()
 
-irsaRouter.get('/irsa', getAllIrsa)
-irsaRouter.get('/irsa/:year/:month', getIrsaByYearMonth)
-irsaRouter.post('/irsa', createIrsa)
+irsaRouter.get('/declaration-irsa', getAllIrsa)
+irsaRouter.get('/declaration-irsa/:year/:month', getIrsaByYearMonth)
+irsaRouter.post('/declaration-irsa', createIrsa)
 
 export default irsaRouter
