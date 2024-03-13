@@ -11,12 +11,11 @@ const OmsiSchema = new Schema(
     date_embauche: { type: String, require: true },
     genre: { type: String, require: true },
     date_debauche: { type: String },
-    cotisations: {
-      mois_1: { type: Number },
-      mois_2: { type: Number },
-      mois_3: { type: Number },
+    salaires: {
+      salaire_mois_1: { type: Number },
+      salaire_mois_2: { type: Number },
+      salaire_mois_3: { type: Number },
     },
-    cotis_trav: { type: Number },
   },
   {
     timestamps: true,

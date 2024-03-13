@@ -20,10 +20,10 @@ export interface dataOmsiProps {
   date_embauche: string
   date_debauche?: string
   genre: string
-  cotisations: {
-    mois_1: number
-    mois_2: number
-    mois_3: number
+  salaires: {
+    salaire_mois_1: number
+    salaire_mois_2: number
+    salaire_mois_3: number
   }
   cotis_trav: number
 }

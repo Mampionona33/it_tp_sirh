@@ -85,6 +85,15 @@ const BtnDonwloadOmsi: React.FC<IBtnDownloadOmsiProps> = ({ data, periode, annee
 
       // Ajout donnée
       data.forEach((row: Partial<dataOmsiProps>, index) => {
+        const totalSalaires =
+          (row.salaires?.salaire_mois_1 ?? 0) +
+          (row.salaires?.salaire_mois_2 ?? 0) +
+          (row.salaires?.salaire_mois_3 ?? 0)
+
+        const totalCotisTrav = totalSalaires * 0.01
+
+        const cotisTotal = totalCotisTrav * 7
+
         const rowData = [
           row.matricule,
           row.nom,
@@ -93,12 +102,12 @@ const BtnDonwloadOmsi: React.FC<IBtnDownloadOmsiProps> = ({ data, periode, annee
           row.date_embauche,
           row.genre,
           row.date_debauche,
-          row.cotisations?.mois_1,
-          row.cotisations?.mois_2,
-          row.cotisations?.mois_3,
-          { formula: `SUM(H${index + 2}:J${index + 2})` },
-          row.cotis_trav,
-          { formula: `SUM(K${index + 2}:L${index + 2})` },
+          row.salaires?.salaire_mois_1,
+          row.salaires?.salaire_mois_2,
+          row.salaires?.salaire_mois_3,
+          totalSalaires,
+          totalCotisTrav,
+          cotisTotal,
         ]
 
         sheetListeEmploye.addRow(rowData)
