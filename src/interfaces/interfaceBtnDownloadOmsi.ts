@@ -1,5 +1,5 @@
 export interface IBtnDownloadOmsiProps {
-  data?: dataOmsiProps[]
+  data?: DataOmsiProps[]
   periode?: {
     label: string
     value: string
@@ -10,7 +10,7 @@ export interface IBtnDownloadOmsiProps {
   }
 }
 
-export interface dataOmsiProps {
+export interface DataOmsiProps {
   annee: string
   periode: string
   matricule: string
@@ -21,9 +21,8 @@ export interface dataOmsiProps {
   date_debauche?: string
   genre: string
   salaires: {
-    salaire_mois_1: number
-    salaire_mois_2: number
-    salaire_mois_3: number
+    salaire_mois_1?: number
+    salaire_mois_2?: number
+    salaire_mois_3?: number
   }
-  cotis_trav: number
 }

@@ -7,7 +7,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { resetBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import useAddEmployeDns from '@src/hooks/useAddEmployeDns'
 import useAddDeclarationIrsa from '@src/hooks/useAddDeclarationIrsa'
-import { IAvantageProps, IPrimeEtGratification } from '@src/interfaces/interfaceBulletinDePaie'
+import {
+  IAvantageProps,
+  IPrimeEtGratification,
+  IValidationProps,
+} from '@src/interfaces/interfaceBulletinDePaie'
+import useAddDeclarationOmsie from '@src/hooks/useAddDeclarationOmsie'
+import { DataOmsiProps } from '@src/interfaces/interfaceBtnDownloadOmsi'
 
 const FormValidateCalculPaie = () => {
   const dispatch = useAppDispatch()
@@ -22,6 +28,17 @@ const FormValidateCalculPaie = () => {
     mutate: mutateIrsa,
     addDeclarationIrsa,
   } = useAddDeclarationIrsa()
+
+  const {
+    data: omsieData,
+    isError: isErrorOmsie,
+    error: errorOmsie,
+    isSuccess: isSuccessOmsie,
+    mutate: mutateOmsie,
+    addDeclarationOmsie,
+    isIdle: isIdleOmsie,
+    isPending: isPendingOmsie,
+  } = useAddDeclarationOmsie()
 
   const { id } = useParams()
   const bullettinDePaie = useAppSelector((store) => store.bulletinDePaie)
@@ -47,11 +64,82 @@ const FormValidateCalculPaie = () => {
     return total
   }
 
+  const getValidationPeriode = (validation: IValidationProps) => {
+    const date = new Date(String(validation.date))
+    const month = date.getMonth() + 1
+
+    switch (month) {
+      case 1:
+      case 2:
+      case 3:
+        return 't1'
+      case 4:
+      case 5:
+      case 6:
+        return 't2'
+      case 7:
+      case 8:
+      case 9:
+        return 't3'
+      case 10:
+      case 11:
+      case 12:
+        return 't4'
+      default:
+        return ''
+    }
+  }
+
+  const getGenderSalarieOmsie = (gender: string): string => {
+    let result = 'M'
+    if (gender.match(/femminin/gi)) {
+      result = 'F'
+    }
+    return result
+  }
+
+  const formatSalariesOmsie = (salaire: number, mois: number) => {
+    const result: Record<string, number | null> = {}
+    switch (mois) {
+      case 1:
+      case 4:
+      case 7:
+      case 10:
+        result.salaire_mois_1 = salaire
+        break
+      case 2:
+      case 5:
+      case 8:
+      case 11:
+        result.salaire_mois_2 = salaire
+        break
+      case 3:
+      case 6:
+      case 9:
+      case 12:
+        result.salaire_mois_3 = salaire
+        break
+      default:
+        break
+    }
+    return result
+  }
+
   const handleValidation = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     try {
       const dateValidation = new Date(String(bullettinDePaie.validation.date))
+
+      const moisValidation = dateValidation.getMonth() + 1
+
+      if (
+        !bullettinDePaie.salarie?.matricule ||
+        !bullettinDePaie.validation.date ||
+        !bullettinDePaie.salarie?.num_cnaps
+      ) {
+        return
+      }
 
       const declarationIrsaData = {
         year: dateValidation.getFullYear().toString(),
@@ -80,9 +168,24 @@ const FormValidateCalculPaie = () => {
         impot_du: bullettinDePaie.irsaAPayer,
       }
 
-      console.log('declarationIrsaData', declarationIrsaData)
+      const genderSalarieOm = getGenderSalarieOmsie(bullettinDePaie.salarie?.genre)
+
+      const declarationOmsieData: DataOmsiProps = {
+        annee: dateValidation.getFullYear().toString(),
+        periode: getValidationPeriode(bullettinDePaie.validation),
+        matricule: bullettinDePaie.salarie?.matricule,
+        num_cnaps: bullettinDePaie.salarie?.num_cnaps,
+        date_embauche: bullettinDePaie.salarie?.date_embauche,
+        nom: bullettinDePaie.salarie.nom,
+        prenom: bullettinDePaie.salarie.prenom,
+        genre: genderSalarieOm,
+        salaires: formatSalariesOmsie(bullettinDePaie.salaireBrut, moisValidation),
+      }
+      console.log('declarationIrsaData: ', declarationIrsaData)
+      console.log('declarationOmsieData: ', declarationOmsieData)
 
       await addDeclarationIrsa({ data: declarationIrsaData })
+      await addDeclarationOmsie({ ...declarationOmsieData })
       await addEmployeeDns(bullettinDePaie)
 
       const resp = await bulletinDePaieService.create({ id: String(id), data: bullettinDePaie })
@@ -103,10 +206,10 @@ const FormValidateCalculPaie = () => {
   }
 
   React.useEffect(() => {
-    if (isError || isErrorIrsa) {
+    if (isError || isErrorIrsa || isErrorOmsie) {
       dispatch(setModalClose())
     }
-  }, [isError, isErrorIrsa, dispatch])
+  }, [isError, isErrorIrsa, isErrorOmsie, dispatch])
 
   return (
     <div className="flex flex-col bg-white w-2/4 p-3 rounded-sm">

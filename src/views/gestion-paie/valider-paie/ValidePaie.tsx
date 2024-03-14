@@ -263,6 +263,13 @@ const ValidePaie = () => {
     dispatch(setModalOpen())
   }
 
+  // afficher les données au modifications
+  useEffect(() => {
+    if (bulletinDePaie) {
+      console.log(bulletinDePaie)
+    }
+  }, [bulletinDePaie])
+
   const handleDateVirBancChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
     dispatch(setBulletinDePaie({ dateDeVirement: event.target.value } as IBulletinDePaieProps))

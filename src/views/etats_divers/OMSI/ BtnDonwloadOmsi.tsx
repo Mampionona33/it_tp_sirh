@@ -1,5 +1,5 @@
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
-import { IBtnDownloadOmsiProps, dataOmsiProps } from '@src/interfaces/interfaceBtnDownloadOmsi'
+import { IBtnDownloadOmsiProps, DataOmsiProps } from '@src/interfaces/interfaceBtnDownloadOmsi'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import React, { useCallback } from 'react'
@@ -84,7 +84,7 @@ const BtnDonwloadOmsi: React.FC<IBtnDownloadOmsiProps> = ({ data, periode, annee
       })
 
       // Ajout donnée
-      data.forEach((row: Partial<dataOmsiProps>, index) => {
+      data.forEach((row: Partial<DataOmsiProps>, index) => {
         const totalSalaires =
           (row.salaires?.salaire_mois_1 ?? 0) +
           (row.salaires?.salaire_mois_2 ?? 0) +

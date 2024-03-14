@@ -4,10 +4,10 @@ const OmsiSchema = new Schema(
   {
     annee: { type: String, require: true },
     periode: { type: String, require: true },
-    matricule: { type: String, unique: true, require: true },
+    matricule: { type: String, require: true },
     nom: { type: String, require: true },
     prenom: { type: String },
-    num_cnaps: { type: String, unique: true, require: true },
+    num_cnaps: { type: String, require: true },
     date_embauche: { type: String, require: true },
     genre: { type: String, require: true },
     date_debauche: { type: String },

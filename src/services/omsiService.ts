@@ -1,3 +1,4 @@
+import { DataOmsiProps } from '@src/interfaces/interfaceBtnDownloadOmsi'
 import axios from 'axios'
 
 class OmsiService {
@@ -13,7 +14,25 @@ class OmsiService {
 
   async getOmsiByPeriodeYear(periode: string, year: number) {
     try {
-      const response = await axios.get(`${this.REACT_APP_API_BASE_URL}/omsi/${year}/${periode}`, {
+      const response = await axios.get(
+        `${this.REACT_APP_API_BASE_URL}/declaration-omsi/${year}/${periode}`,
+        {
+          auth: {
+            username: this.login,
+            password: this.pass,
+          },
+        },
+      )
+      return response.data
+    } catch (error) {
+      console.error('An error occurred during the request:', error)
+      throw error
+    }
+  }
+
+  async add(data: DataOmsiProps) {
+    try {
+      const response = await axios.put(`${this.REACT_APP_API_BASE_URL}/declaration-omsi`, data, {
         auth: {
           username: this.login,
           password: this.pass,
