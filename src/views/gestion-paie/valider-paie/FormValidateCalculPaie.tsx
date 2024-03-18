@@ -106,18 +106,24 @@ const FormValidateCalculPaie = () => {
       case 7:
       case 10:
         result.salaire_mois_1 = salaire
+        result.salaire_mois_2 = 0
+        result.salaire_mois_3 = 0
         break
       case 2:
       case 5:
       case 8:
       case 11:
         result.salaire_mois_2 = salaire
+        result.salaire_mois_3 = 0
+        result.salaire_mois_1 = 0
         break
       case 3:
       case 6:
       case 9:
       case 12:
         result.salaire_mois_3 = salaire
+        result.salaire_mois_2 = 0
+        result.salaire_mois_1 = 0
         break
       default:
         break

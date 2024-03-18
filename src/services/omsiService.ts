@@ -32,7 +32,7 @@ class OmsiService {
 
   async add(data: DataOmsiProps) {
     try {
-      const response = await axios.put(`${this.REACT_APP_API_BASE_URL}/declaration-omsi`, data, {
+      const response = await axios.post(`${this.REACT_APP_API_BASE_URL}/declaration-omsi`, data, {
         auth: {
           username: this.login,
           password: this.pass,
