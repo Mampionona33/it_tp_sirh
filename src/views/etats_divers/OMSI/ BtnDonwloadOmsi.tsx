@@ -2,25 +2,27 @@ import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/B
 import { IBtnDownloadOmsiProps, DataOmsiProps } from '@src/interfaces/interfaceBtnDownloadOmsi'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import ExcelJS from 'exceljs'
 
 const BtnDonwloadOmsi: React.FC<IBtnDownloadOmsiProps> = ({ data, periode, annee }) => {
-  const columns = [
-    'MATR.',
-    'NOM',
-    'PRENOM',
-    'NUMERO CNAPS',
-    'ENTREE LE',
-    'SX',
-    'Date Départ',
-    'mois_1',
-    'mois_2',
-    'mois_3',
-    'TOTAL',
-    'COTIS TRAV',
-    'COTIS. TOTALE',
-  ]
+  const columns = useMemo(() => {
+    return [
+      'MATR.',
+      'NOM',
+      'PRENOM',
+      'NUMERO CNAPS',
+      'ENTREE LE',
+      'SX',
+      'Date Départ',
+      'mois_1',
+      'mois_2',
+      'mois_3',
+      'TOTAL',
+      'COTIS TRAV',
+      'COTIS. TOTALE',
+    ]
+  }, [])
 
   const formatEnteteMois = useCallback(() => {
     const indexMois1 = columns.indexOf('mois_1')
@@ -63,7 +65,7 @@ const BtnDonwloadOmsi: React.FC<IBtnDownloadOmsiProps> = ({ data, periode, annee
       columns[indexMois3] = format(mois3, 'MMMM', { locale: fr })
     }
     return columns
-  }, [periode])
+  }, [periode, columns])
 
   const handleDownload = () => {
     if (data && data.length > 0) {
@@ -112,16 +114,73 @@ const BtnDonwloadOmsi: React.FC<IBtnDownloadOmsiProps> = ({ data, periode, annee
 
         sheetListeEmploye.addRow(rowData)
 
-        // Ajuster la longueur de chaque colonne en fonction du contenu
-        columns.forEach((columnName, index) => {
-          const column = sheetListeEmploye.getColumn(index + 1)
-          const maxLength = Math.max(
-            ...[...sheetListeEmploye.getColumn(index + 1).values, columnName.length].map((s) =>
-              s ? s.toString().length : 0,
-            ),
-          )
-          column.width = maxLength + 2 // Add some extra padding
+        // columns.forEach((columnName, index) => {
+        //   const column = sheetListeEmploye.getColumn(index + 1)
+        //   const maxLength = Math.max(
+        //     ...[...sheetListeEmploye.getColumn(index + 1).values, columnName.length].map((s) =>
+        //       s ? s.toString().length : 0,
+        //     ),
+        //   )
+        //   column.width = maxLength + 2 // Add some extra padding
+        // })
+      })
+      const nombreDeLigneNonVide = data.length
+
+      // Ajout ligne somme des colonne H, I, J, K, L, M
+      sheetListeEmploye.getCell(`H${nombreDeLigneNonVide + 4}`).value = {
+        formula: `SUM(H2:H${nombreDeLigneNonVide + 1})`,
+      }
+      sheetListeEmploye.getCell(`I${nombreDeLigneNonVide + 4}`).value = {
+        formula: `SUM(I2:I${nombreDeLigneNonVide + 1})`,
+      }
+      sheetListeEmploye.getCell(`J${nombreDeLigneNonVide + 4}`).value = {
+        formula: `SUM(J2:J${nombreDeLigneNonVide + 1})`,
+      }
+      sheetListeEmploye.getCell(`K${nombreDeLigneNonVide + 4}`).value = {
+        formula: `SUM(K2:K${nombreDeLigneNonVide + 1})`,
+      }
+      sheetListeEmploye.getCell(`L${nombreDeLigneNonVide + 4}`).value = {
+        formula: `SUM(L2:L${nombreDeLigneNonVide + 1})`,
+      }
+      sheetListeEmploye.getCell(`M${nombreDeLigneNonVide + 4}`).value = {
+        formula: `SUM(M2:M${nombreDeLigneNonVide + 1})`,
+      }
+
+      // Ajout resumé du tableau
+      sheetListeEmploye.getCell(`C${nombreDeLigneNonVide + 10}`).value = 'TOTAL PLAFOND'
+      sheetListeEmploye.getCell(`D${nombreDeLigneNonVide + 10}`).value = {
+        formula: `K${nombreDeLigneNonVide + 4}`,
+      }
+
+      sheetListeEmploye.getCell(`C${nombreDeLigneNonVide + 11}`).value = 'Cotisation Travailleurs'
+      sheetListeEmploye.getCell(`D${nombreDeLigneNonVide + 11}`).value = {
+        formula: `L${nombreDeLigneNonVide + 4}`,
+      }
+
+      sheetListeEmploye.getCell(`C${nombreDeLigneNonVide + 12}`).value = 'Cotisation employeurs'
+      sheetListeEmploye.getCell(`D${nombreDeLigneNonVide + 12}`).value = {
+        formula: `K${nombreDeLigneNonVide + 4}*6/100`,
+      }
+
+      sheetListeEmploye.getCell(`C${nombreDeLigneNonVide + 13}`).value = 'Net à payer'
+      sheetListeEmploye.getCell(`D${nombreDeLigneNonVide + 13}`).value = {
+        formula: `SUM(D${nombreDeLigneNonVide + 11}:D${nombreDeLigneNonVide + 12})`,
+      }
+      /**
+       * Mise en forme des colonnes
+       * Ajuster la longueur de chaque colonne en fonction du contenu
+       */
+      sheetListeEmploye.columns.forEach((column, index) => {
+        let maxLength = 0
+        // Parcourir chaque cellule de la colonne
+        sheetListeEmploye.getColumn(index + 1).eachCell({ includeEmpty: true }, (cell) => {
+          const length = cell.value ? cell.value.toString().length : 0
+          if (length > maxLength) {
+            maxLength = length
+          }
         })
+        // Définir la largeur de la colonne pour accommoder le contenu le plus long
+        column.width = maxLength < 10 ? 10 : maxLength + 2
       })
 
       workBook.xlsx.writeBuffer().then((buffer) => {
