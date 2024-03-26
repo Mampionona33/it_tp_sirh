@@ -100,37 +100,12 @@ function ImportHS({ setNotification }: ImportHsProps) {
 
       try {
         await uploadHsData(heuressup)
-        // setFile(undefined)
-        // if (uploadHsIsSuccess) {
         setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
-        // }
       } catch (error) {
-        console.log(error)
-        // if (uploadHsError) {
         setNotification({ message: formatError(uploadHsError), type: 'danger' })
-        // }
       }
     }
   }
-
-  // useEffect(() => {
-  //   let notificationHandled = false
-
-  //   if (uploadHsError && !notificationHandled) {
-  //     setNotification({ message: formatError(uploadHsError), type: 'danger' })
-  //     notificationHandled = true
-  //   }
-
-  //   if (uploadHsIsSuccess && !notificationHandled) {
-  //     setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
-  //     notificationHandled = true
-  //   }
-
-  //   return () => {
-  //     // Reset the notificationHandled variable when the component unmounts
-  //     notificationHandled = false
-  //   }
-  // }, [uploadHsIsSuccess, uploadHsError, formatError, setNotification])
 
   return (
     <form onSubmit={handleUpload}>
