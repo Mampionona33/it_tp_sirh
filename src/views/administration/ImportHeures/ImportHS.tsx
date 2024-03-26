@@ -28,41 +28,91 @@ function ImportHS({ setNotification }: ImportHsProps) {
     isSuccess: uploadHsIsSuccess,
   } = useUploadHs()
 
-  const validateData = (dataArray: HsProps[]): string[] => {
+  // const validateData = (dataArray: HsProps[]): string[] => {
+  //   let messages: string[] = []
+
+  //   if (!dataArray.length) {
+  //     messages.push('Le tableau est vide.')
+  //   } else {
+  //     const requiredColumns = ['Matricule', 'Nom_du_terminal', 'Time']
+
+  //     // Parcourir chaque objet dans le tableau et valider les propriétés individuelles
+  //     dataArray.forEach((data, index) => {
+  //       // Valider la propriété Matricule
+  //       const line = index + 2
+  //       if (!data.Matricule) {
+  //         messages.push(`La ligne ${line} du colonne 'Matricule' ne doit pas être vide.`)
+  //       }
+
+  //       // Valider la propriété Nom_du_terminal
+  //       if (!data.Nom_du_terminal) {
+  //         messages.push(`La ligne ${line} du colonne 'Nom_du_terminal' ne doit pas être vide.`)
+  //       } else if (!['ENTREE', 'SORTIE'].includes(data.Nom_du_terminal)) {
+  //         messages.push(
+  //           `La propriété 'Nom_du_terminal' de la line ${line} doit être soit 'ENTREE' ou 'SORTIE'.`,
+  //         )
+  //       }
+
+  //       // Valider la propriété Time
+  //       if (!data.Time) {
+  //         messages.push(`La ligne ${line} du colonne 'Time' ne doit pas être vide.`)
+  //       } else if (!/^(\d{2}\/\d{2}\/\d{4} \d{2}:\d{2})$/.test(data.Time)) {
+  //         messages.push(
+  //           `La propriété 'Time' de la line ${line} doit être au format 'DD/MM/YYYY HH:mm'.`,
+  //         )
+  //       }
+  //     })
+  //   }
+
+  //   return messages
+  // }
+
+  const isSheetExist = (sheetName: string, mySheetData: any): boolean => {
+    return mySheetData[sheetName] !== undefined
+  }
+
+  const isHeaderExist = (header: string, mySheetData: any): boolean => {
+    return Object.keys(mySheetData).some((sheetName) => {
+      return mySheetData[sheetName].some((row: any) => {
+        return Object.keys(row).some(
+          (columnName) => columnName.toLowerCase() === header.toLowerCase(),
+        )
+      })
+    })
+  }
+
+  const checkHeader = (header: string, dataArray: any): string | undefined => {
+    if (!isHeaderExist(header, dataArray)) {
+      return `La colonne ${header} est absente dans le fichier`
+    }
+  }
+
+  const validateData = (dataArray: any): string[] => {
     let messages: string[] = []
 
-    if (!dataArray.length) {
-      messages.push('Le tableau est vide.')
-    } else {
-      const requiredColumns = ['Matricule', 'Nom_du_terminal', 'Time']
+    const isTafSheetPresent = isSheetExist('TAF', dataArray)
 
-      // Parcourir chaque objet dans le tableau et valider les propriétés individuelles
-      dataArray.forEach((data, index) => {
-        // Valider la propriété Matricule
-        const line = index + 2
-        if (!data.Matricule) {
-          messages.push(`La ligne ${line} du colonne 'Matricule' ne doit pas être vide.`)
-        }
-
-        // Valider la propriété Nom_du_terminal
-        if (!data.Nom_du_terminal) {
-          messages.push(`La ligne ${line} du colonne 'Nom_du_terminal' ne doit pas être vide.`)
-        } else if (!['ENTREE', 'SORTIE'].includes(data.Nom_du_terminal)) {
-          messages.push(
-            `La propriété 'Nom_du_terminal' de la line ${line} doit être soit 'ENTREE' ou 'SORTIE'.`,
-          )
-        }
-
-        // Valider la propriété Time
-        if (!data.Time) {
-          messages.push(`La ligne ${line} du colonne 'Time' ne doit pas être vide.`)
-        } else if (!/^(\d{2}\/\d{2}\/\d{4} \d{2}:\d{2})$/.test(data.Time)) {
-          messages.push(
-            `La propriété 'Time' de la line ${line} doit être au format 'DD/MM/YYYY HH:mm'.`,
-          )
-        }
-      })
+    if (!isTafSheetPresent) {
+      messages.push('La feuille TAF est absente dans le fichier')
     }
+    const headersToCheck = [
+      'ANNEE',
+      'MOIS',
+      'AC-NO',
+      'NAME',
+      'HS',
+      'HSI',
+      'HSNI',
+      'HSNI130',
+      'HSNI150',
+    ]
+
+    headersToCheck.forEach((header) => {
+      const errorMessage = checkHeader(header, dataArray)
+      if (errorMessage) {
+        messages.push(errorMessage)
+      }
+    })
 
     return messages
   }
@@ -89,10 +139,11 @@ function ImportHS({ setNotification }: ImportHsProps) {
         const parseData = XLSX.utils.sheet_to_json(workSheet)
         mySheetData[sheetName] = parseData
       }
-      heuressup = mySheetData.test
+      heuressup = mySheetData.TAF
       setHeures(mySheetData.test)
 
-      const validationErrors = validateData(heuressup)
+      const validationErrors = validateData(mySheetData)
+
       if (validationErrors.length > 0) {
         setFileErrors(validationErrors)
         return
