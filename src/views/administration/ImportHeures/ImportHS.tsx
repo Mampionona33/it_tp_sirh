@@ -98,7 +98,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
     const headersToCheck = [
       'ANNEE',
       'MOIS',
-      'AC-NO',
+      'matricule',
       'NAME',
       'HS',
       'HSI',
