@@ -113,16 +113,6 @@ const BtnDonwloadOmsi: React.FC<IBtnDownloadOmsiProps> = ({ data, periode, annee
         ]
 
         sheetListeEmploye.addRow(rowData)
-
-        // columns.forEach((columnName, index) => {
-        //   const column = sheetListeEmploye.getColumn(index + 1)
-        //   const maxLength = Math.max(
-        //     ...[...sheetListeEmploye.getColumn(index + 1).values, columnName.length].map((s) =>
-        //       s ? s.toString().length : 0,
-        //     ),
-        //   )
-        //   column.width = maxLength + 2 // Add some extra padding
-        // })
       })
       const nombreDeLigneNonVide = data.length
 
