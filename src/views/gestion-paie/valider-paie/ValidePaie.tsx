@@ -356,7 +356,7 @@ const ValidePaie = () => {
             </div>
           </form>
         ) : (
-          !errorFetchingHours && <Page404 />
+          <Page404 />
         )}
       </div>
     </>
