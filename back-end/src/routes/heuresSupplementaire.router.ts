@@ -1,8 +1,15 @@
 import { Router } from 'express'
-import { createHeuresSupplementaire } from '../controllers/heuresSupplementaires.controller'
+import {
+  createHeuresSupplementaire,
+  getSalarieHsByYearMonthMatricule,
+} from '../controllers/heuresSupplementaires.controller'
 
 const heuresSupplementaireRouter = Router()
 
 heuresSupplementaireRouter.post('/importheures/ajout', createHeuresSupplementaire)
+heuresSupplementaireRouter.get(
+  '/importheures/:annee/:mois:/:matricule',
+  getSalarieHsByYearMonthMatricule,
+)
 
 export default heuresSupplementaireRouter

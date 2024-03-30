@@ -23,3 +23,24 @@ export const createHeuresSupplementaire = async (req: Request, res: Response) =>
     res.status(500).json({ error: 'Internal server error' })
   }
 }
+
+export const getSalarieHsByYearMonthMatricule = async (req: Request, res: Response) => {
+  try {
+    const { annee, mois, matricule } = req.query
+    if (!annee || !mois || !matricule) {
+      return res.status(400).json({ error: 'Missing required parameters' })
+    }
+    const salarieHs = await HeuresSupplementaireModel.find({
+      annee,
+      mois,
+      matricule,
+    })
+    if (!salarieHs) {
+      return res.status(404).json({ error: 'SalarieHs not found' })
+    }
+    res.status(200).json(salarieHs)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+}
