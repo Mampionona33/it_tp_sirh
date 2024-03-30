@@ -148,6 +148,8 @@ function ImportHS({ setNotification }: ImportHsProps) {
       heuressup = mySheetData.TAF
       setHeures(mySheetData.test)
 
+      console.log(heuressup)
+
       const validationErrors = validateData(mySheetData)
 
       if (validationErrors.length > 0) {

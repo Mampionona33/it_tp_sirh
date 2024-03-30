@@ -11,6 +11,7 @@ import omsiRouter from './routes/omsi.router'
 import historiquePaieRouter from './routes/historiquePaie.router'
 import parametreRouter from './routes/parametre.router'
 import dnsRouter from './routes/dns.router'
+import heuresSupplementaireRouter from './routes/heuresSupplementaire.router'
 const cors = require('cors')
 
 dotenv.config({ path: './.env' })
@@ -48,6 +49,7 @@ app.use(
   historiquePaieRouter,
   parametreRouter,
   dnsRouter,
+  heuresSupplementaireRouter,
 )
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {
