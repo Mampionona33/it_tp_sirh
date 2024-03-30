@@ -68,6 +68,7 @@ const ValidePaie = () => {
     const tempDate = new Date()
     for (let i = 0; i < 12; i++) {
       tempDate.setMonth(i)
+      tempDate.setDate(1) // Réinitialisez le jour à 1
       const tempDateMonthFr = format(tempDate, 'MMMM', { locale: fr })
       if (tempDateMonthFr === monthFr) {
         monthNumber = i + 1
@@ -138,8 +139,6 @@ const ValidePaie = () => {
   const dateDebutFormated = formatDateDebut()
   const dateFinFormated = formatDateFin()
 
-  console.log(validationMonth)
-
   // Vérifier si les valeurs des paramètres d'URL sont définies
   const decodedYear = validationYear ? decodeURIComponent(validationYear) : undefined
   const decodedMonth = validationMonth ? decodeURIComponent(validationMonth) : undefined
@@ -156,8 +155,6 @@ const ValidePaie = () => {
     error,
     salarieHs,
   } = useFetchSalarieHsByDate(data)
-
-  console.log(salarieHs)
 
   useEffect(() => {
     if (salarie) {
