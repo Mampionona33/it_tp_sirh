@@ -147,6 +147,9 @@ const ValidePaie = () => {
         } as unknown as IBulletinDePaieProps),
       )
     }
+
+    // GET: /importheures/:annee/:mois/:matricule
+
     const fetchData = async () => {
       if (salarie && dateFinFormated && dateDebutFormated) {
         const matricule = salarie.matricule
