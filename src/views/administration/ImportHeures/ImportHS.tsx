@@ -115,6 +115,14 @@ function ImportHS({ setNotification }: ImportHsProps) {
     return messages
   }
 
+  if (uploadHsIsPending) {
+    console.log('uploadHsIsPending', uploadHsIsPending)
+  }
+
+  if (uploadHsIsIdle) {
+    console.log('uploadHsIsIdle', uploadHsIsIdle)
+  }
+
   const handleUpload = async (e: React.FormEvent) => {
     e.preventDefault()
 
@@ -177,7 +185,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
               />
             </div>
           </div>
-          {uploadHsStatus === 'pending' ? (
+          {uploadHsIsPending ? (
             <div className="flex justify-center w-24">
               <InlineLoading />
             </div>
