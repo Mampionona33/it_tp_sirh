@@ -31,11 +31,13 @@ import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import useFetchSalarie from '@src/hooks/useFetchSalarie'
+import useFetchSalarieHsByDate from '@src/hooks/useFetchSalarieHsByDate'
+import { IGetSalarieHsByDateProps } from '@src/interfaces/interfaceGetSalarieHsByDate'
 
 const ValidePaie = () => {
   const isEmployeExist = useEmployeeExists()
 
-  const { id } = useParams()
+  const { id, validationYear, validationMonth } = useParams()
 
   // const { salarie, dateDeVirement, validation } = useAppSelector((store) => store.bulletinDePaie)
   const { dateDeVirement, validation } = useAppSelector((store) => store.bulletinDePaie)
@@ -58,8 +60,6 @@ const ValidePaie = () => {
   const formatErrorMessage = useErrorFormatter()
 
   const dispatch = useAppDispatch()
-
-  const { validationYear, validationMonth } = useParams()
 
   const isMonthValid = useValidMonthFrMMMM(validationMonth!)
 
@@ -137,6 +137,27 @@ const ValidePaie = () => {
 
   const dateDebutFormated = formatDateDebut()
   const dateFinFormated = formatDateFin()
+
+  console.log(validationMonth)
+
+  // Vérifier si les valeurs des paramètres d'URL sont définies
+  const decodedYear = validationYear ? decodeURIComponent(validationYear) : undefined
+  const decodedMonth = validationMonth ? decodeURIComponent(validationMonth) : undefined
+  const data: IGetSalarieHsByDateProps = {
+    annee: decodedYear,
+    mois: decodedMonth,
+    matricule: salarie?.matricule ?? '',
+  }
+
+  const {
+    isLoading: isLoadingSalarieHsByDate,
+    refetch,
+    isError,
+    error,
+    salarieHs,
+  } = useFetchSalarieHsByDate(data)
+
+  console.log(salarieHs)
 
   useEffect(() => {
     if (salarie) {

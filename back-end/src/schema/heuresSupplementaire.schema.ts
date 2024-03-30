@@ -4,7 +4,7 @@ export const HeuresSupplementaire = new Schema({
   annee: { type: String, required: true },
   mois: { type: String, required: true },
   matricule: { type: String, required: true },
-  name: { type: String, required: true },
+  name: { type: String },
   hs: { type: Number },
   hsi: { type: Number },
   hsni: { type: Number },

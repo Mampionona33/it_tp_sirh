@@ -26,18 +26,18 @@ export const createHeuresSupplementaire = async (req: Request, res: Response) =>
 
 export const getSalarieHsByYearMonthMatricule = async (req: Request, res: Response) => {
   try {
-    const { annee, mois, matricule } = req.query
+    const { annee, mois, matricule } = req.params
+    console.log(annee, mois, matricule)
+
     if (!annee || !mois || !matricule) {
       return res.status(400).json({ error: 'Missing required parameters' })
     }
+
     const salarieHs = await HeuresSupplementaireModel.find({
       annee,
       mois,
       matricule,
     })
-    if (!salarieHs) {
-      return res.status(404).json({ error: 'SalarieHs not found' })
-    }
     res.status(200).json(salarieHs)
   } catch (error) {
     console.error(error)

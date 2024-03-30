@@ -6,7 +6,7 @@
  * @param {string} mois
  */
 export interface IGetSalarieHsByDateProps {
-  matricule: string
-  annee: string
-  mois: string
+  matricule: string | undefined
+  annee: string | undefined
+  mois: string | undefined
 }

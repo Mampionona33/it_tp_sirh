@@ -20,6 +20,7 @@ const useFetchSalarieHsByDate = (data: IGetSalarieHsByDateProps) => {
         throw error
       }
     },
+    enabled: !!data.annee && !!data.mois && !!data.matricule,
   })
   return { isLoading, refetch, isError, error, salarieHs }
 }

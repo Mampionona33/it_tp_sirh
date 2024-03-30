@@ -7,8 +7,9 @@ import {
 const heuresSupplementaireRouter = Router()
 
 heuresSupplementaireRouter.post('/importheures/ajout', createHeuresSupplementaire)
+
 heuresSupplementaireRouter.get(
-  '/importheures/:annee/:mois:/:matricule',
+  '/importheures/:annee/:mois/:matricule',
   getSalarieHsByYearMonthMatricule,
 )
 
