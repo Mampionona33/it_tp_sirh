@@ -1,3 +1,4 @@
+import { IGetSalarieHsByDateProps } from '@src/interfaces/interfaceGetSalarieHsByDate'
 import { DDMMYYYYFormat } from '@src/types/DateType'
 import axios from 'axios'
 
@@ -35,7 +36,19 @@ class HeureService {
       return this.resp.data
     } catch (error) {
       console.error(error)
-      throw error // Re-throw the error so that the calling code can handle it
+      throw error
+    }
+  }
+
+  async getSalarieHsByDate(data: IGetSalarieHsByDateProps) {
+    const { matricule, annee, mois } = data
+    try {
+      const instance = axios.create({ baseURL: this.REACT_APP_API_BASE_URL })
+      this.resp = await instance.get(`/importheures/${annee}/${mois}/${matricule}`)
+      return this.resp
+    } catch (error) {
+      console.error(error)
+      throw error
     }
   }
 }
