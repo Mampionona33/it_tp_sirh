@@ -74,9 +74,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
   const isHeaderExist = (header: string, mySheetData: any): boolean => {
     return Object.keys(mySheetData).some((sheetName) => {
       return mySheetData[sheetName].some((row: any) => {
-        return Object.keys(row).some(
-          (columnName) => columnName.toLowerCase() === header.toLowerCase(),
-        )
+        return Object.keys(row).some((columnName) => columnName === header.toLowerCase())
       })
     })
   }
@@ -96,15 +94,15 @@ function ImportHS({ setNotification }: ImportHsProps) {
       messages.push('La feuille TAF est absente dans le fichier')
     }
     const headersToCheck = [
-      'ANNEE',
-      'MOIS',
+      'annee',
+      'mois',
       'matricule',
-      'NAME',
-      'HS',
-      'HSI',
-      'HSNI',
-      'HSNI130',
-      'HSNI150',
+      'name',
+      'hs',
+      'hsi',
+      'hsni',
+      'hsni130',
+      'hsni150',
     ]
 
     headersToCheck.forEach((header) => {
