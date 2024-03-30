@@ -44,7 +44,12 @@ class HeureService {
     const { matricule, annee, mois } = data
     try {
       const instance = axios.create({ baseURL: this.REACT_APP_API_BASE_URL })
-      this.resp = await instance.get(`/importheures/${annee}/${mois}/${matricule}`)
+      this.resp = await instance.get(`/importheures/${annee}/${mois}/${matricule}`, {
+        auth: {
+          username: 'lslisteemployes',
+          password: '20lsliste23',
+        },
+      })
       return this.resp
     } catch (error) {
       console.error(error)
