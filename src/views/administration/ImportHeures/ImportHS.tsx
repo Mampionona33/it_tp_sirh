@@ -74,7 +74,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
   const isHeaderExist = (header: string, mySheetData: any): boolean => {
     return Object.keys(mySheetData).some((sheetName) => {
       return mySheetData[sheetName].some((row: any) => {
-        return Object.keys(row).some((columnName) => columnName === header.toLowerCase())
+        return Object.keys(row).some((columnName) => columnName === header)
       })
     })
   }
@@ -98,6 +98,9 @@ function ImportHS({ setNotification }: ImportHsProps) {
       'mois',
       'matricule',
       'name',
+      'hNormal',
+      'hsFerier',
+      'hsNuit',
       'hs',
       'hsi',
       'hsni',
@@ -113,14 +116,6 @@ function ImportHS({ setNotification }: ImportHsProps) {
     })
 
     return messages
-  }
-
-  if (uploadHsIsPending) {
-    console.log('uploadHsIsPending', uploadHsIsPending)
-  }
-
-  if (uploadHsIsIdle) {
-    console.log('uploadHsIsIdle', uploadHsIsIdle)
   }
 
   const handleUpload = async (e: React.FormEvent) => {

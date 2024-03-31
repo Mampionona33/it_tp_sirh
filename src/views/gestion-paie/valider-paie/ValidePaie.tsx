@@ -164,102 +164,108 @@ const ValidePaie = () => {
           salaireDeBase: salarie.salaire_de_base,
         } as unknown as IBulletinDePaieProps),
       )
+
+      if (salarieHs) {
+        const estCadre = salarie.categorie?.value === 'hc'
+        const travailleurDeNuit = salarie.travail_de_nuit === EnumBoolean.OUI
+        const totalHnormal = 0
+      }
     }
 
     // GET: /importheures/:annee/:mois/:matricule
 
-    const fetchData = async () => {
-      if (salarie && dateFinFormated && dateDebutFormated) {
-        const matricule = salarie.matricule
+    // const fetchData = async () => {
+    //   if (salarie && dateFinFormated && dateDebutFormated) {
+    //     const matricule = salarie.matricule
 
-        try {
-          const result = await dispatch(
-            fetchHeureEmploye({
-              matricule: matricule,
-              dateDebut: dateDebutFormated,
-              dateFin: dateFinFormated,
-            }),
-          )
-          // console.log('result', result)
-          // console.log('Dispatch réussi avec résultat :', result)
-          if (result.meta.requestStatus === 'fulfilled') {
-            const { payload } = result
-            // console.log('payload', payload)
+    //     try {
+    //       const result = await dispatch(
+    //         fetchHeureEmploye({
+    //           matricule: matricule,
+    //           dateDebut: dateDebutFormated,
+    //           dateFin: dateFinFormated,
+    //         }),
+    //       )
+    //       // console.log('result', result)
+    //       // console.log('Dispatch réussi avec résultat :', result)
+    //       if (result.meta.requestStatus === 'fulfilled') {
+    //         const { payload } = result
+    //         // console.log('payload', payload)
 
-            if (payload) {
-              const estCadre = salarie.categorie?.value === 'hc'
-              const travailleurDeNuit = salarie.travail_de_nuit === EnumBoolean.OUI
+    //         if (payload) {
+    //           const estCadre = salarie.categorie?.value === 'hc'
+    //           const travailleurDeNuit = salarie.travail_de_nuit === EnumBoolean.OUI
 
-              const heureCalculator = new CalculHeures_v2()
-              heureCalculator.setHeuresEmploye(payload)
-              heureCalculator.setEstCadre(estCadre)
-              heureCalculator.setTravailleurDeNuit(travailleurDeNuit)
+    //           const heureCalculator = new CalculHeures_v2()
+    //           heureCalculator.setHeuresEmploye(payload)
+    //           heureCalculator.setEstCadre(estCadre)
+    //           heureCalculator.setTravailleurDeNuit(travailleurDeNuit)
 
-              const totalHnormal = heureCalculator.getTotalHnormale()
-              const totalHTravailEffectif = heureCalculator.getTotalHTravailEffectif()
-              const tableauHsHebdo = heureCalculator.getTableauHsHebdo()
-              const tableauHs130Hebdo = heureCalculator.getTableauHs130Hebdo()
-              const tableauHs150Hebdo = heureCalculator.getTableauHs150Hebdo()
-              const totalHdim = heureCalculator.getTotalHdim()
-              const totalHFerie = heureCalculator.getTotalHFerie()
-              const totalHsni130 = heureCalculator.getTotalHsni130()
-              const totalHsni150 = heureCalculator.getTotalHsni150()
-              const totalHsi130 = heureCalculator.getTotalHsi130()
-              const totalHsi150 = heureCalculator.getTotalHsi150()
-              const totalHs30 = heureCalculator.getTotalHs30NuitHabit()
-              const totalHs50 = heureCalculator.getTotalHs50NuitHabit()
-              const totalHs = heureCalculator.getTotalHsMonsuel()
+    //           const totalHnormal = heureCalculator.getTotalHnormale()
+    //           const totalHTravailEffectif = heureCalculator.getTotalHTravailEffectif()
+    //           const tableauHsHebdo = heureCalculator.getTableauHsHebdo()
+    //           const tableauHs130Hebdo = heureCalculator.getTableauHs130Hebdo()
+    //           const tableauHs150Hebdo = heureCalculator.getTableauHs150Hebdo()
+    //           const totalHdim = heureCalculator.getTotalHdim()
+    //           const totalHFerie = heureCalculator.getTotalHFerie()
+    //           const totalHsni130 = heureCalculator.getTotalHsni130()
+    //           const totalHsni150 = heureCalculator.getTotalHsni150()
+    //           const totalHsi130 = heureCalculator.getTotalHsi130()
+    //           const totalHsi150 = heureCalculator.getTotalHsi150()
+    //           const totalHs30 = heureCalculator.getTotalHs30NuitHabit()
+    //           const totalHs50 = heureCalculator.getTotalHs50NuitHabit()
+    //           const totalHs = heureCalculator.getTotalHsMonsuel()
 
-              const calculPaie = new CalculPaie_v2()
-              const salaireDeBase = salarie.salaire_de_base
-              calculPaie.setSalaireBase(salaireDeBase)
-              calculPaie.setTauxHoraire(173.33)
+    //           const calculPaie = new CalculPaie_v2()
+    //           const salaireDeBase = salarie.salaire_de_base
+    //           calculPaie.setSalaireBase(salaireDeBase)
+    //           calculPaie.setTauxHoraire(173.33)
 
-              const valHsni130 = calculPaie.calculateValHsni130(totalHsni130)
-              const valHsni150 = calculPaie.calculateValHsni150(totalHsni150)
-              const valHsi130 = calculPaie.calculateValHsi130(totalHsi130)
-              const valHsi150 = calculPaie.calculateValHsi150(totalHsi150)
-              const valHdim = calculPaie.calculateValHdim(totalHdim)
-              const valHs30 = calculPaie.calculateValHs30(totalHs30)
-              const valHs50 = calculPaie.calculateValHs50(totalHs50)
-              const valHFerie = calculPaie.calculateValHFerie(totalHFerie)
+    //           const valHsni130 = calculPaie.calculateValHsni130(totalHsni130)
+    //           const valHsni150 = calculPaie.calculateValHsni150(totalHsni150)
+    //           const valHsi130 = calculPaie.calculateValHsi130(totalHsi130)
+    //           const valHsi150 = calculPaie.calculateValHsi150(totalHsi150)
+    //           const valHdim = calculPaie.calculateValHdim(totalHdim)
+    //           const valHs30 = calculPaie.calculateValHs30(totalHs30)
+    //           const valHs50 = calculPaie.calculateValHs50(totalHs50)
+    //           const valHFerie = calculPaie.calculateValHFerie(totalHFerie)
 
-              dispatch(
-                setBulletinDePaie({
-                  totalHn: totalHnormal === 0 ? 0 : totalHnormal,
-                  totalHs: totalHs === 0 ? 0 : totalHs,
-                  hsi130: totalHsi130 === 0 ? 0 : totalHsi130,
-                  hsi150: totalHsi150 === 0 ? 0 : totalHsi150,
-                  hsni130: totalHsni130 === 0 ? 0 : totalHsni130,
-                  hsni150: totalHsni150 === 0 ? 0 : totalHsni150,
-                  totalHDim: totalHdim === 0 ? 0 : totalHdim,
-                  totalHs30: totalHs30 === 0 ? 0 : totalHs30,
-                  totalHs50: totalHs50 === 0 ? 0 : totalHs50,
-                  totalHFerie: totalHFerie === 0 ? 0 : totalHFerie,
+    //           dispatch(
+    //             setBulletinDePaie({
+    //               totalHn: totalHnormal === 0 ? 0 : totalHnormal,
+    //               totalHs: totalHs === 0 ? 0 : totalHs,
+    //               hsi130: totalHsi130 === 0 ? 0 : totalHsi130,
+    //               hsi150: totalHsi150 === 0 ? 0 : totalHsi150,
+    //               hsni130: totalHsni130 === 0 ? 0 : totalHsni130,
+    //               hsni150: totalHsni150 === 0 ? 0 : totalHsni150,
+    //               totalHDim: totalHdim === 0 ? 0 : totalHdim,
+    //               totalHs30: totalHs30 === 0 ? 0 : totalHs30,
+    //               totalHs50: totalHs50 === 0 ? 0 : totalHs50,
+    //               totalHFerie: totalHFerie === 0 ? 0 : totalHFerie,
 
-                  totalHTravailEffectif: totalHTravailEffectif === 0 ? 0 : totalHTravailEffectif,
-                  tableauHsHebdo: tableauHsHebdo,
-                  tableauHs130Hebdo: tableauHs130Hebdo,
-                  tableauHs150Hebdo: tableauHs150Hebdo,
-                  valHdim: valHdim === 0 ? 0 : valHdim,
-                  valHs30: valHs30 === 0 ? 0 : valHs30,
-                  valHs50: valHs50 === 0 ? 0 : valHs50,
-                  valHFerie: valHFerie === 0 ? 0 : valHFerie,
-                  valHsi130: valHsi130 === 0 ? 0 : valHsi130,
-                  valHsi150: valHsi150 === 0 ? 0 : valHsi150,
-                  valHsni130: valHsni130 === 0 ? 0 : valHsni130,
-                  valHsni150: valHsni150 === 0 ? 0 : valHsni150,
-                } as IBulletinDePaieProps),
-              )
-            }
-          }
-        } catch (error) {
-          console.error('Erreur lors de la dispatch :', error)
-        }
-      }
-    }
+    //               totalHTravailEffectif: totalHTravailEffectif === 0 ? 0 : totalHTravailEffectif,
+    //               tableauHsHebdo: tableauHsHebdo,
+    //               tableauHs130Hebdo: tableauHs130Hebdo,
+    //               tableauHs150Hebdo: tableauHs150Hebdo,
+    //               valHdim: valHdim === 0 ? 0 : valHdim,
+    //               valHs30: valHs30 === 0 ? 0 : valHs30,
+    //               valHs50: valHs50 === 0 ? 0 : valHs50,
+    //               valHFerie: valHFerie === 0 ? 0 : valHFerie,
+    //               valHsi130: valHsi130 === 0 ? 0 : valHsi130,
+    //               valHsi150: valHsi150 === 0 ? 0 : valHsi150,
+    //               valHsni130: valHsni130 === 0 ? 0 : valHsni130,
+    //               valHsni150: valHsni150 === 0 ? 0 : valHsni150,
+    //             } as IBulletinDePaieProps),
+    //           )
+    //         }
+    //       }
+    //     } catch (error) {
+    //       console.error('Erreur lors de la dispatch :', error)
+    //     }
+    //   }
+    // }
 
-    fetchData()
+    // fetchData()
   }, [salarie, dateFinFormated, dateDebutFormated, dispatch])
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {

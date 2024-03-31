@@ -39,7 +39,7 @@ export const getSalarieHsByYearMonthMatricule = async (req: Request, res: Respon
         mois,
         matricule,
       },
-      { hs: 1, hsi: 1, hsni: 1, hsni130: 1, hsni150: 1 },
+      { hs: 1, hsi: 1, hsni: 1, hsni130: 1, hsni150: 1, hsNuit: 1, hNormal: 1, hFerier: 1 },
     ).lean()
 
     res.status(200).json(...salarieHs)
