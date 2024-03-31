@@ -7,6 +7,7 @@ export const HeuresSupplementaire = new Schema({
   name: { type: String },
   hNormal: { type: Number },
   hFerier: { type: Number },
+  hDimanche: { type: Number },
   hsNuit: { type: Number },
   hs: { type: Number },
   hsi: { type: Number },

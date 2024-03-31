@@ -99,6 +99,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
       'matricule',
       'name',
       'hNormal',
+      'hDimanche',
       'hsFerier',
       'hsNuit',
       'hs',

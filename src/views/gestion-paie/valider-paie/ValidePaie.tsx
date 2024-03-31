@@ -168,7 +168,7 @@ const ValidePaie = () => {
       if (salarieHs) {
         const estCadre = salarie.categorie?.value === 'hc'
         const travailleurDeNuit = salarie.travail_de_nuit === EnumBoolean.OUI
-        const totalHnormal = 0
+        const totalHnormal = salarieHs.hNormal
       }
     }
 

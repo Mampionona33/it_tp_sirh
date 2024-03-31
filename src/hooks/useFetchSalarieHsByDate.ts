@@ -1,6 +1,7 @@
 import { IGetSalarieHsByDateProps } from '@src/interfaces/interfaceGetSalarieHsByDate'
 import heureService from '@src/services/HeureService'
 import { useQuery } from '@tanstack/react-query'
+import { ISalarieHs } from '../interfaces/interfaceSalarieHs'
 
 const useFetchSalarieHsByDate = (data: IGetSalarieHsByDateProps) => {
   // Ajoutez 'data' comme paramètre
@@ -15,7 +16,7 @@ const useFetchSalarieHsByDate = (data: IGetSalarieHsByDateProps) => {
     queryFn: async () => {
       try {
         const response = await heureService.getSalarieHsByDate(data)
-        return response.data
+        return response.data as ISalarieHs
       } catch (error) {
         throw error
       }
