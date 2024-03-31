@@ -33,12 +33,16 @@ export const getSalarieHsByYearMonthMatricule = async (req: Request, res: Respon
       return res.status(400).json({ error: 'Missing required parameters' })
     }
 
-    const salarieHs = await HeuresSupplementaireModel.find({
-      annee,
-      mois,
-      matricule,
-    })
-    res.status(200).json(salarieHs)
+    const salarieHs = await HeuresSupplementaireModel.find(
+      {
+        annee,
+        mois,
+        matricule,
+      },
+      { hs: 1, hsi: 1, hsni: 1, hsni130: 1, hsni150: 1 },
+    ).lean()
+
+    res.status(200).json(...salarieHs)
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: 'Internal server error' })
