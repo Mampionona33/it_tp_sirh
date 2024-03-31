@@ -6,7 +6,7 @@ export const HeuresSupplementaire = new Schema({
   matricule: { type: String, required: true },
   name: { type: String },
   hNormal: { type: Number },
-  hFerier: { type: Number },
+  hsFerie: { type: Number },
   hDimanche: { type: Number },
   hsNuit: { type: Number },
   hs: { type: Number },

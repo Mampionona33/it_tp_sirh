@@ -100,7 +100,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
       'name',
       'hNormal',
       'hDimanche',
-      'hsFerier',
+      'hsFerie',
       'hsNuit',
       'hs',
       'hsi',

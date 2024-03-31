@@ -1,6 +1,6 @@
 export interface ISalarieHs {
   hNormal: number
-  hFerier: number
+  hsFerie: number
   hsNuit: number
   hDimanche: number
   hs: number

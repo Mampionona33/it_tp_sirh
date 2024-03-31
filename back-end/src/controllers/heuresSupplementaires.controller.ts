@@ -47,7 +47,7 @@ export const getSalarieHsByYearMonthMatricule = async (req: Request, res: Respon
         hsni150: 1,
         hsNuit: 1,
         hNormal: 1,
-        hFerier: 1,
+        hsFerie: 1,
         hDimanche: 1,
       },
     ).lean()
