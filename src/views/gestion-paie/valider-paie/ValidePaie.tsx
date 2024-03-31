@@ -151,8 +151,8 @@ const ValidePaie = () => {
   const {
     isLoading: isLoadingSalarieHsByDate,
     refetch,
-    isError,
-    error,
+    isError: isErrorFetchHs,
+    error: errorFetchHs,
     salarieHs,
   } = useFetchSalarieHsByDate(data)
 
@@ -168,11 +168,34 @@ const ValidePaie = () => {
       if (salarieHs) {
         const estCadre = salarie.categorie?.value === 'hc'
         const travailleurDeNuit = salarie.travail_de_nuit === EnumBoolean.OUI
-        const totalHnormal = salarieHs.hNormal
+        const { hs: totalHs, hsi, hsni, hsni130, hsni150 } = salarieHs
+
+        dispatch(
+          setBulletinDePaie({
+            hsni130: hsni130 ? hsni130 : 0,
+            hsni150: hsni150 ? hsni150 : 0,
+            hsi150: hsi ? hsi : 0,
+            totalHs: totalHs ? totalHs : 0,
+          } as unknown as IBulletinDePaieProps),
+        )
+        const calculPaie = new CalculPaie_v2()
+        const salaireDeBase = salarie.salaire_de_base
+        calculPaie.setSalaireBase(salaireDeBase)
+        calculPaie.setTauxHoraire(173.33)
+
+        const valHsni130 = estCadre ? 0 : calculPaie.calculateValHsni130(hsni130)
+        const valHsni150 = estCadre ? 0 : calculPaie.calculateValHsni150(hsni150)
+        const valHsi150 = estCadre ? 0 : calculPaie.calculateValHsi150(hsi)
+
+        dispatch(
+          setBulletinDePaie({
+            valHsni130: valHsni130 ? valHsni130 : 0,
+            valHsni150: valHsni150 ? valHsni150 : 0,
+            valHsi150: valHsi150 ? valHsi150 : 0,
+          } as unknown as IBulletinDePaieProps),
+        )
       }
     }
-
-    // GET: /importheures/:annee/:mois/:matricule
 
     // const fetchData = async () => {
     //   if (salarie && dateFinFormated && dateDebutFormated) {
@@ -266,7 +289,7 @@ const ValidePaie = () => {
     // }
 
     // fetchData()
-  }, [salarie, dateFinFormated, dateDebutFormated, dispatch])
+  }, [salarie, dateFinFormated, dateDebutFormated, dispatch, salarieHs])
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
@@ -323,6 +346,7 @@ const ValidePaie = () => {
         {errorFetchingHours && (
           <CAlert color="danger">{formatErrorMessage(errorFetchingHours)}</CAlert>
         )}
+        {isErrorFetchHs && <CAlert color="danger">{formatErrorMessage(errorFetchHs)}</CAlert>}
         {isMonthValid && salarie ? (
           <form action="" onSubmit={handleSubmit}>
             <div className="flex flex-col gap-3 mt-2 mb-3">

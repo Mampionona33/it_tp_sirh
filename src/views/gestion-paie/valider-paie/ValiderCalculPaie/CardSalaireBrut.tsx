@@ -121,7 +121,7 @@ const Body = () => {
         cell2={formatCell2(hsni150)}
         cell3={valHsni150}
       />
-      <CardRow
+      {/* <CardRow
         className="border-b border-b-customBlue-100"
         cell1="HSI 130%"
         cell2={formatCell2(hsi130)}
@@ -132,31 +132,37 @@ const Body = () => {
         cell1="HSI 150%"
         cell2={formatCell2(hsi150)}
         cell3={valHsi150}
-      />
+      /> */}
       <CardRow
+        className="border-b border-b-customBlue-100"
+        cell1="HSI 150%"
+        cell2={formatCell2(hsi150)}
+        cell3={valHsi150}
+      />
+      {/* <CardRow
         className="border-b border-b-customBlue-100"
         cell1="HS 30%"
         cell2={formatCell2(totalHs30)}
         cell3={valHs30}
-      />
-      <CardRow
+      /> */}
+      {/* <CardRow
         className="border-b border-b-customBlue-100"
         cell1="HS 50%"
         cell2={formatCell2(totalHs50)}
         cell3={valHs50}
-      />
-      <CardRow
+      /> */}
+      {/* <CardRow
         className="border-b border-b-customBlue-100"
         cell1="HFérié"
         cell2={formatCell2(totalHFerie)}
         cell3={valHFerie}
-      />
-      <CardRow
+      /> */}
+      {/* <CardRow
         className="border-b border-b-customBlue-100"
         cell1="HDimanche"
         cell2={formatCell2(totalHDim)}
         cell3={valHdim}
-      />
+      /> */}
       <CardRow
         cell1="Prime d'assiduité"
         cell3={primeEtGratification!.assiduite}
