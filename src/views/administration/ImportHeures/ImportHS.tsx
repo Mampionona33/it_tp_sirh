@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import * as XLSX from 'xlsx'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
@@ -10,23 +10,41 @@ import useUploadHs from '@src/hooks/useImportHs'
 import InlineLoading from '@src/components/loadings/InlineLoading'
 import { useForm } from 'react-hook-form'
 import { HsProps } from '@src/interfaces/interfaceHs'
+import { useMutation } from '@tanstack/react-query'
+import heureService from '@src/services/HeureService'
 
-function ImportHS({ setNotification }: ImportHsProps) {
+function ImportHS({ setNotification, notification }: ImportHsProps) {
   const [heures, setHeures] = useState<any[]>([])
   const [file, setFile] = useState<File | undefined>(undefined)
-  const dispatch = useDispatch()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const formatError = useErrorFormatter()
   const [fileErrors, setFileErrors] = useState<string[]>([])
-  const {
-    mutateAsync: uploadHsData,
-    error: uploadHsError,
-    isError: uploadHsIsError,
-    isIdle: uploadHsIsIdle,
-    isPending: uploadHsIsPending,
-    status: uploadHsStatus,
-    isPaused: uploadHsIsPaused,
-    isSuccess: uploadHsIsSuccess,
-  } = useUploadHs()
+
+  const mutation = useMutation({
+    mutationFn: async (data: HsProps[]) => {
+      try {
+        const response = await heureService.uploadHsData(data)
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
+
+    onError: (error) => {
+      setNotification({
+        message: formatError(error),
+        type: 'danger',
+      })
+      setIsLoading(false)
+    },
+    onSuccess: () => {
+      setNotification({
+        message: 'Heures importées avec succes',
+        type: 'success',
+      })
+      setIsLoading(false)
+    },
+  })
 
   // const validateData = (dataArray: HsProps[]): string[] => {
   //   let messages: string[] = []
@@ -88,11 +106,6 @@ function ImportHS({ setNotification }: ImportHsProps) {
   const validateData = (dataArray: any): string[] => {
     let messages: string[] = []
 
-    const isTafSheetPresent = isSheetExist('TAF', dataArray)
-
-    if (!isTafSheetPresent) {
-      messages.push('La feuille TAF est absente dans le fichier')
-    }
     const headersToCheck = [
       'annee',
       'mois',
@@ -115,7 +128,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
     return messages
   }
 
-  const handleUpload = async (e: React.FormEvent) => {
+  const handleUpload = (e: React.FormEvent) => {
     e.preventDefault()
 
     // Vérifier si un fichier a été sélectionné
@@ -129,18 +142,29 @@ function ImportHS({ setNotification }: ImportHsProps) {
     reader.onload = async (e) => {
       const data = e.target?.result as ArrayBuffer
       const workbrook = XLSX.read(new Uint8Array(data), { type: 'array' })
+
+      const isTafSheetPresent = workbrook.SheetNames.includes('TAF')
+
       var mySheetData: { [key: string]: any[] } = {}
       var heuressup: any = {}
+
+      if (!isTafSheetPresent) {
+        setNotification({ message: 'La feuille TAF est absente dans le fichier', type: 'danger' })
+        return
+      }
+
       for (let index = 0; index < workbrook.SheetNames.length; index++) {
         const sheetName = workbrook.SheetNames[index]
         const workSheet = workbrook.Sheets[sheetName]
-        const parseData = XLSX.utils.sheet_to_json(workSheet)
-        mySheetData[sheetName] = parseData
+
+        if (sheetName === 'TAF') {
+          const parseData = XLSX.utils.sheet_to_json(workSheet)
+          mySheetData[sheetName] = parseData
+        }
       }
+
       heuressup = mySheetData.TAF
       setHeures(mySheetData.test)
-
-      console.log(heuressup)
 
       const validationErrors = validateData(mySheetData)
 
@@ -149,14 +173,24 @@ function ImportHS({ setNotification }: ImportHsProps) {
         return
       }
 
-      try {
-        await uploadHsData(heuressup)
-        setNotification({ message: 'Les heures ont été importées avec succès.', type: 'success' })
-      } catch (error) {
-        setNotification({ message: formatError(uploadHsError), type: 'danger' })
-      }
+      // uploadHsData.arguments(heuressup)
+      mutation.mutate(heuressup)
     }
   }
+
+  useEffect(() => {
+    if (notification) {
+      const timer = setTimeout(() => {
+        setNotification(null)
+      }, 8000)
+
+      // Nettoyer le timer lorsque le composant est démonté ou que la notification change
+      return () => clearTimeout(timer)
+    }
+    if (mutation.isPending) {
+      setIsLoading(true)
+    }
+  }, [notification, setNotification, mutation])
 
   return (
     <form onSubmit={handleUpload}>
@@ -179,7 +213,7 @@ function ImportHS({ setNotification }: ImportHsProps) {
               />
             </div>
           </div>
-          {uploadHsIsPending ? (
+          {isLoading ? (
             <div className="flex justify-center w-24">
               <InlineLoading />
             </div>

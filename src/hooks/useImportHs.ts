@@ -1,4 +1,5 @@
 import { HsProps } from '@src/interfaces/interfaceHs'
+import heureService from '@src/services/HeureService'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 
@@ -17,12 +18,12 @@ const useUploadHs = () => {
     data,
     mutateAsync,
   } = useMutation({
+    mutationKey: ['importHs'],
     mutationFn: async (data: HsProps[]) => {
       // Change parameter name to match the data being sent
       try {
-        return await axios.post(`${process.env.REACT_APP_API_BASE_URL}/importheures/ajout`, {
-          heuressup: data,
-        })
+        const response = await heureService.uploadHsData(data)
+        return response
       } catch (error) {
         throw error
       }

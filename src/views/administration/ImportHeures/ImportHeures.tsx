@@ -7,14 +7,8 @@ const ImportHeures = () => {
   const title = 'Liste des Heures'
   const [notification, setNotification] = useState<{ message: string; type?: string } | null>(null)
 
-  const handleImportError = (errorObject: { message: string; type?: string }) => {
-    console.log(errorObject.message)
-    setNotification({ message: errorObject.message, type: errorObject.type })
-
-    // Supprimer la notification après 8 secondes
-    setTimeout(() => {
-      setNotification(null)
-    }, 8000)
+  const handleNotification = (notificationData: { message: string; type?: string } | null) => {
+    setNotification(notificationData)
   }
 
   return (
@@ -25,7 +19,10 @@ const ImportHeures = () => {
             {notification.message}
           </CustomCAlert>
         )}
-        <CustomSection title={title} body={<ImportHS setNotification={handleImportError} />} />
+        <CustomSection
+          title={title}
+          body={<ImportHS setNotification={handleNotification} notification={notification} />}
+        />
       </div>
     </>
   )

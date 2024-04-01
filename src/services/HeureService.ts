@@ -1,4 +1,5 @@
 import { IGetSalarieHsByDateProps } from '@src/interfaces/interfaceGetSalarieHsByDate'
+import { HsProps } from '@src/interfaces/interfaceHs'
 import { DDMMYYYYFormat } from '@src/types/DateType'
 import axios from 'axios'
 
@@ -45,6 +46,23 @@ class HeureService {
     try {
       const instance = axios.create({ baseURL: this.REACT_APP_API_BASE_URL })
       this.resp = await instance.get(`/importheures/${annee}/${mois}/${matricule}`, {
+        auth: {
+          username: 'lslisteemployes',
+          password: '20lsliste23',
+        },
+      })
+      return this.resp
+    } catch (error) {
+      console.error(error)
+      throw error
+    }
+  }
+
+  async uploadHsData(data: HsProps[]) {
+    try {
+      const instance = axios.create({ baseURL: this.REACT_APP_API_BASE_URL })
+      this.resp = await instance.post('/importheures/ajout', {
+        heuressup: data,
         auth: {
           username: 'lslisteemployes',
           password: '20lsliste23',
