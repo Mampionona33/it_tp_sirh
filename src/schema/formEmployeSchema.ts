@@ -73,7 +73,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
     num_cin: z
       .string()
       .refine((value) => value.length === 15, {
-        message: 'Veuillez renseigner un numéro de carte d’identité valide',
+        message: 'Veuillez renseigner un numéro de carte d’identité valide 000.000.000.000',
       })
       .refine((value) => /^\d+(\.\d+)*$/.test(value), {
         message: 'Ce champ accepte uniquement des chiffres',
