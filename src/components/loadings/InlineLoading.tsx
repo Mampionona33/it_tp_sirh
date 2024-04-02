@@ -11,12 +11,14 @@ const InlineLoading = (props: InlineLoadingProps) => {
 
   return (
     <>
-      <div className="flex gap-2 w-full items-baseline">
-        {label && <span className="font-medium text-sm text-customRed-900 p-0 m-0">{label}</span>}
-        <div className="flex min-w-[5rem] justify-center">
-          <div className={`${circleCommonClasses} mr-1 animate-bounce`}></div>
-          <div className={`${circleCommonClasses} mr-1 animate-bounce-200`}></div>
-          <div className={`${circleCommonClasses} animate-bounce-400`}></div>
+      <div className="flex justify-center w-24 h-8 p-1">
+        <div className="flex gap-2 w-full items-end h-full">
+          {label && <span className="font-medium text-sm text-customRed-900 p-0 m-0">{label}</span>}
+          <div className="flex min-w-[5rem] justify-center">
+            <div className={`${circleCommonClasses} mr-1 animate-bounce`}></div>
+            <div className={`${circleCommonClasses} mr-1 animate-bounce-200`}></div>
+            <div className={`${circleCommonClasses} animate-bounce-400`}></div>
+          </div>
         </div>
       </div>
     </>

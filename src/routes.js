@@ -14,6 +14,7 @@ const BulletinPaie = lazyWithRetry(() =>
   import('src/views/gestion-paie/bulletinDePaie/BulletinPaie'),
 )
 const AjoutEmploye = lazyWithRetry(() => import('@views/employee/ajout/AjoutEmploye'))
+const ImportEmploye = lazyWithRetry(() => import('@views/employee/importEmploye/ImportEmploye'))
 
 // Gestion de paie
 const GestionPaie = lazyWithRetry(() => import('@views/gestion-paie/GestionPaie'))
@@ -107,6 +108,13 @@ const routes = [
     element: FicheEmploye,
     exact: true,
   },
+  {
+    path: '/employees/import',
+    name: 'Import',
+    element: ImportEmploye,
+    exact: true,
+  },
+
   {
     path: '/etatDivers/cnaps',
     name: 'Déclaration CNAPS',

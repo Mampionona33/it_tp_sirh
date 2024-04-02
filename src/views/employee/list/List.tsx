@@ -6,7 +6,7 @@ import { resetParametreCalendrier } from 'src/redux/parametreCalendrier/parametr
 import { fetchAllMouvementSalaire } from 'src/redux/mouvementSalaire/mouvementSalaireAction'
 import ButtonLink from '@src/components/buttons/ButtonLink'
 import ReusableTable from '@src/components/ReusableTable/ReusableTable'
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { PlusIcon, ArrowUpTrayIcon } from '@heroicons/react/24/outline'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
@@ -36,7 +36,7 @@ const HeaderComponents: React.FC = () => {
   }, [location])
 
   return (
-    <>
+    <div className="flex gap-2">
       <ButtonLink
         icon={<PlusIcon width={20} height={20} fontWeight={'bold'} />}
         to="/employees/ajout"
@@ -44,7 +44,14 @@ const HeaderComponents: React.FC = () => {
       >
         Ajouter
       </ButtonLink>
-    </>
+
+      <ButtonLink
+        icon={<ArrowUpTrayIcon width={20} height={20} fontWeight={'bold'} />}
+        to="/employees/import"
+      >
+        Import
+      </ButtonLink>
+    </div>
   )
 }
 

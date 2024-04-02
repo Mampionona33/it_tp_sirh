@@ -214,7 +214,7 @@ function ImportHS({ setNotification, notification }: ImportHsProps) {
             </div>
           </div>
           {isLoading ? (
-            <div className="flex justify-center w-24">
+            <div>
               <InlineLoading />
             </div>
           ) : (
