@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import EmployeModel from '../schema/employe.schema'
 import { format } from 'date-fns'
+import mongoose from 'mongoose'
 
 // Create - Créer un nouvel employé
 export const createEmploye = async (req: Request, res: Response) => {
@@ -69,8 +70,11 @@ export const getEmployeById = async (req: Request, res: Response) => {
 export const updateEmploye = async (req: Request, res: Response) => {
   try {
     const { id } = req.params
+    const employId = new mongoose.Types.ObjectId(id)
     const updatedData = req.body
-    const updatedEmploye = await EmployeModel.findByIdAndUpdate(id, updatedData, { new: true })
+    const updatedEmploye = await EmployeModel.findByIdAndUpdate(employId, updatedData, {
+      new: true,
+    })
     if (!updatedEmploye) {
       return res.status(404).json({ error: 'EmployeModel not found' })
     }

@@ -32,7 +32,6 @@ const EmployeSchma = new Schema({
   enfant: [EnfantSchema], // Utilisation du schéma des enfants défini précédemment
   est_cadre: String,
   genre: String,
-  id: Number,
   lieu_naissance: String,
   lieu_travail: String,
   matricule: String,
