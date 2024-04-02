@@ -2,8 +2,10 @@ import CustomCAlert from '@src/components/CustomAlert'
 import CustomSection_v2 from '@src/components/CustomSection_v2'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import InlineLoading from '@src/components/loadings/InlineLoading'
+import { createValidator } from 'zod-xlsx'
 import React from 'react'
 import * as XLSX from 'xlsx'
+import employeSchema from '@src/schema/importEmployeSchema'
 
 const ImportEmploye = () => {
   const [file, setFile] = React.useState<File | undefined>()
@@ -12,6 +14,19 @@ const ImportEmploye = () => {
     message: string
     type?: string
   } | null>()
+
+  const isDoublonInArray = (txt: string, data: any[]): boolean => {
+    const temp: any[] = []
+
+    // Parcourir les éléments du tableau pour récupérer les valeurs de la propriété spécifiée par `txt`
+    data.forEach((item) => {
+      temp.push(item['data'][txt])
+    })
+
+    // Vérifier s'il y a des doublons dans le tableau temporaire
+    const uniqueSet = new Set(temp)
+    return uniqueSet.size !== temp.length
+  }
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
@@ -25,6 +40,22 @@ const ImportEmploye = () => {
     reader.onload = async (e) => {
       const data = e.target?.result as ArrayBuffer
       const workbook = XLSX.read(new Uint8Array(data), { type: 'array' })
+
+      const validator = createValidator(workbook)
+      const result = validator.validate(employeSchema)
+      const validResult = result.valid
+      const invalidResult = result.invalid
+
+      if (
+        invalidResult.length === 0 &&
+        validResult.length > 0 &&
+        isDoublonInArray('matricule', validResult)
+      ) {
+        setNotification({
+          message: 'Le fichier contient des doublons de matricule',
+          type: 'danger',
+        })
+      }
 
       const isWorksheetListEmploye = workbook.SheetNames.includes('liste_employee')
 
