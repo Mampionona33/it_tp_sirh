@@ -133,12 +133,15 @@ const Body = () => {
         cell2={formatCell2(hsi150)}
         cell3={valHsi150}
       /> */}
+
+      {/* Pour la ligne scandinave on à utiliser hsi150 pour présenter les HSI */}
       <CardRow
         className="border-b border-b-customBlue-100"
-        cell1="HSI 150%"
+        cell1="HSI"
         cell2={formatCell2(hsi150)}
         cell3={valHsi150}
       />
+
       {/* <CardRow
         className="border-b border-b-customBlue-100"
         cell1="HS 30%"
