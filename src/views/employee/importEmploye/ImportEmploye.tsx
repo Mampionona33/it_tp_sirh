@@ -1,12 +1,12 @@
 import CustomCAlert from '@src/components/CustomAlert'
-import CustomSection from '@src/components/CustomSection'
 import CustomSection_v2 from '@src/components/CustomSection_v2'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import InlineLoading from '@src/components/loadings/InlineLoading'
 import React from 'react'
+import * as XLSX from 'xlsx'
 
 const ImportEmploye = () => {
-  const [file, setFile] = React.useState<File | undefined>(undefined)
+  const [file, setFile] = React.useState<File | undefined>()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [notification, setNotification] = React.useState<{
     message: string
@@ -22,6 +22,47 @@ const ImportEmploye = () => {
       return
     }
     reader.readAsArrayBuffer(file)
+    reader.onload = async (e) => {
+      const data = e.target?.result as ArrayBuffer
+      const workbook = XLSX.read(new Uint8Array(data), { type: 'array' })
+
+      const isWorksheetListEmploye = workbook.SheetNames.includes('liste_employee')
+
+      if (!isWorksheetListEmploye) {
+        setNotification({
+          message: 'La feuille liste_employee est absente dans le fichier',
+          type: 'danger',
+        })
+        return
+      }
+
+      const mySheetData: any[] = XLSX.utils.sheet_to_json(workbook.Sheets['liste_employee'])
+
+      // Convertir les champs "categorie" et "mode_paiement_salaire" en objets avec les labels et les valeurs,
+      // en supprimant les champs "categorie/label" et "mode_paiement_salaire/label"
+      const convertedData = mySheetData.map((item: any) => {
+        const {
+          'categorie/label': catLabel,
+          'categorie/value': catValue,
+          'mode_paiement_salaire/label': modeLabel,
+          'mode_paiement_salaire/value': modeValue,
+          ...rest
+        } = item
+        return {
+          ...rest,
+          categorie: {
+            label: catLabel,
+            value: catValue,
+          },
+          mode_paiement_salaire: {
+            label: modeLabel,
+            value: modeValue,
+          },
+        }
+      })
+
+      console.log(convertedData)
+    }
   }
 
   return (
