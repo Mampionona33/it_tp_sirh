@@ -10,6 +10,7 @@ import employeSchema from '@src/schema/importEmployeSchema'
 const ImportEmploye = () => {
   const [file, setFile] = React.useState<File | undefined>()
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const [validationErrors, setValidationErrors] = React.useState<string[]>([])
   const [notification, setNotification] = React.useState<{
     message: string
     type?: string
@@ -17,15 +18,25 @@ const ImportEmploye = () => {
 
   const isDoublonInArray = (txt: string, data: any[]): boolean => {
     const temp: any[] = []
-
-    // Parcourir les éléments du tableau pour récupérer les valeurs de la propriété spécifiée par `txt`
     data.forEach((item) => {
       temp.push(item['data'][txt])
     })
-
     // Vérifier s'il y a des doublons dans le tableau temporaire
     const uniqueSet = new Set(temp)
     return uniqueSet.size !== temp.length
+  }
+
+  /**
+   * Vérifier les doublons dans le tableau
+   * @param columnName Nom de la colonne à traiter
+   * @param data Tableau à traiter
+   * @param message Message d'érreur
+   * @param type Type d'erreur
+   */
+  const setNotificationForDuplicates = (columnName: string, data: any[], message: string) => {
+    if (isDoublonInArray(columnName, data)) {
+      setValidationErrors((prev) => [...prev, message])
+    }
   }
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
@@ -46,15 +57,23 @@ const ImportEmploye = () => {
       const validResult = result.valid
       const invalidResult = result.invalid
 
-      if (
-        invalidResult.length === 0 &&
-        validResult.length > 0 &&
-        isDoublonInArray('matricule', validResult)
-      ) {
-        setNotification({
-          message: 'Le fichier contient des doublons de matricule',
-          type: 'danger',
-        })
+      if (invalidResult.length === 0 && validResult.length > 0) {
+        setNotificationForDuplicates(
+          'matricule',
+          validResult,
+          'Il y a des doublons dans la colonne matricule',
+        )
+        setNotificationForDuplicates(
+          'num_cin',
+          validResult,
+          'Il y a des doublons dans la colonne num_cin',
+        )
+        setNotificationForDuplicates('rib', validResult, 'Il y a des doublons dans la colonne rib')
+        setNotificationForDuplicates(
+          'num_cnaps',
+          validResult,
+          'Il y a des doublons dans la colonne num_cnaps',
+        )
       }
 
       const isWorksheetListEmploye = workbook.SheetNames.includes('liste_employee')
@@ -96,47 +115,66 @@ const ImportEmploye = () => {
     }
   }
 
+  React.useEffect(() => {
+    if (validationErrors.length > 0) {
+      setIsLoading(false)
+    }
+  }, [validationErrors])
+
   return (
     <div>
-      {notification && (
-        <CustomCAlert onClose={() => setNotification(null)} color={notification.type || 'info'}>
-          {notification.message}
-        </CustomCAlert>
-      )}
-      <CustomSection_v2 title="Importer Employé">
-        <form action="" method="post" className="flex flex-col" onSubmit={handleSubmit}>
-          <div className="p-4 flex flex-col md:flex-row items-center md:items-end gap-2 ">
-            <div className="import">
-              <label htmlFor="formFileSm" className="text-lg">
-                Importer une liste des employés
-              </label>
-              <div className="flex flex-row gap-2 flex-wrap">
-                <div>
-                  <input
-                    className="form-control form-control-sm"
-                    id="formFileSm"
-                    required
-                    type="file"
-                    accept=".xlsx"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setFile(e.target.files?.[0])
-                    }}
-                  />
-                </div>
-                {isLoading ? (
-                  <div className="flex justify-center w-24 h-4">
-                    <InlineLoading />
-                  </div>
-                ) : (
+      <div className="flex gap-1">
+        {notification && (
+          <CustomCAlert onClose={() => setNotification(null)} color={notification.type || 'info'}>
+            {notification.message}
+          </CustomCAlert>
+        )}
+
+        <CustomSection_v2 title="Importer Employé">
+          <form action="" method="post" className="flex flex-col" onSubmit={handleSubmit}>
+            <div className="p-4 flex flex-col md:flex-row items-center md:items-end gap-2 ">
+              <div className="import">
+                <label htmlFor="formFileSm" className="text-lg">
+                  Importer une liste des employés
+                </label>
+                <div className="flex flex-row gap-2 flex-wrap">
                   <div>
-                    <ButtonWithIcon type="submit" label="Importer" />
+                    <input
+                      className="form-control form-control-sm"
+                      id="formFileSm"
+                      required
+                      type="file"
+                      accept=".xlsx"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        setFile(e.target.files?.[0])
+                      }}
+                    />
                   </div>
-                )}
+                  {isLoading ? (
+                    <div className="flex justify-center w-24 h-4">
+                      <InlineLoading />
+                    </div>
+                  ) : (
+                    <div>
+                      <ButtonWithIcon type="submit" label="Importer" />
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        </form>
-      </CustomSection_v2>
+          </form>
+        </CustomSection_v2>
+      </div>
+
+      {validationErrors.length > 0 && (
+        <div className="p-4 flex gap-2 flex-col">
+          {validationErrors.map((error, index) => (
+            <div key={index} className="p-2 bg-red-200 text-red-700 rounded">
+              {error}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
