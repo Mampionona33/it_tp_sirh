@@ -21,7 +21,6 @@ const ImportEmploye = () => {
     data.forEach((item) => {
       temp.push(item['data'][txt])
     })
-    console.log(temp)
     // Vérifier s'il y a des doublons dans le tableau temporaire
     const uniqueSet = new Set(temp)
     return uniqueSet.size !== temp.length
