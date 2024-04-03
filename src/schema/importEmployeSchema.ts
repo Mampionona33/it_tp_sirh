@@ -4,19 +4,21 @@ import { z } from 'zod'
 const employeSchema = z
   .object({
     nom: z.string().optional(),
-    prenom: z.string(),
+    prenom: z.string().optional(),
     matricule: z.union([z.string(), z.number()]).optional(),
-    'categorie/label': z.string(),
-    'categorie/value': z.string(),
-    date_delivrance_cin: z.number(),
+    'categorie/label': z.string().optional(),
+    'categorie/value': z.string().optional(),
+    date_delivrance_cin: z.number().optional(),
+    adresse: z.string().optional(),
     date_embauche: z.number().optional(),
-    date_naissance: z.number(),
-    departement: z.string(),
+    date_naissance: z.number().optional(),
+    departement: z.string().optional(),
     num_cin: z.string().optional(),
     email: z.string().optional(),
     genre: z.nativeEnum(EnumGenre),
-    lieu_naissance: z.string(),
-    lieu_travail: z.string(),
+    num_cnaps: z.string().optional(),
+    lieu_naissance: z.string().optional(),
+    lieu_travail: z.string().optional(),
     'mode_paiement_salaire/label': z.string(),
     'mode_paiement_salaire/value': z.string(),
     nom_mere: z.string().optional(),
@@ -71,7 +73,15 @@ const employeSchema = z
       message: "Veuillez renseigner la date d'embauche",
       path: ['date_embauche'],
     },
-  )
+  ).refine((data) => {
+    if (!data.num_cnaps) {
+      return false
+    }
+    return true
+  },{
+    message: 'Veuillez renseigner le numéro CNAPS',
+    path: ['num_cnaps'],
+  })
   .refine(
     (data) => {
       if (!data.num_cin) {
@@ -113,6 +123,18 @@ const employeSchema = z
     {
       message: 'Veuillez suivre le format 00000 00000 00000000000 00.',
       path: ['rib'],
+    },
+  )
+  .refine(
+    (data) => {
+      if (!data.adresse) {
+        return false
+      }
+      return true
+    },
+    {
+      message: "Veuillez renseigner l'adresse",
+      path: ['adresse'],
     },
   )
 

@@ -21,6 +21,7 @@ const ImportEmploye = () => {
     data.forEach((item) => {
       temp.push(item['data'][txt])
     })
+    console.log(temp)
     // Vérifier s'il y a des doublons dans le tableau temporaire
     const uniqueSet = new Set(temp)
     return uniqueSet.size !== temp.length
@@ -71,6 +72,11 @@ const ImportEmploye = () => {
 
       if (invalidResult.length === 0 && validResult.length > 0) {
         setNotificationForDuplicates(
+          'num_cnaps',
+          validResult,
+          'Il y a des doublons dans la colonne num_cnaps',
+        )
+        setNotificationForDuplicates(
           'matricule',
           validResult,
           'Il y a des doublons dans la colonne matricule',
@@ -81,11 +87,6 @@ const ImportEmploye = () => {
           'Il y a des doublons dans la colonne num_cin',
         )
         setNotificationForDuplicates('rib', validResult, 'Il y a des doublons dans la colonne rib')
-        setNotificationForDuplicates(
-          'num_cnaps',
-          validResult,
-          'Il y a des doublons dans la colonne num_cnaps',
-        )
       }
 
       const isWorksheetListEmploye = workbook.SheetNames.includes('liste_employee')
