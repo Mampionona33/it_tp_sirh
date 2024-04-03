@@ -57,6 +57,18 @@ const ImportEmploye = () => {
       const validResult = result.valid
       const invalidResult = result.invalid
 
+      if (invalidResult.length > 0) {
+        console.log(invalidResult)
+        const errorMessages: string[] = []
+        invalidResult.forEach((item, key) => {
+          item.issues.forEach((issue) => {
+            const newMessage = `Ligne ${key + 1} : ${issue.message}`
+            errorMessages.push(newMessage)
+          })
+        })
+        setValidationErrors((prev) => [...prev, ...errorMessages])
+      }
+
       if (invalidResult.length === 0 && validResult.length > 0) {
         setNotificationForDuplicates(
           'matricule',
