@@ -73,15 +73,19 @@ const employeSchema = z
       message: "Veuillez renseigner la date d'embauche",
       path: ['date_embauche'],
     },
-  ).refine((data) => {
-    if (!data.num_cnaps) {
-      return false
-    }
-    return true
-  },{
-    message: 'Veuillez renseigner le numéro CNAPS',
-    path: ['num_cnaps'],
-  })
+  )
+  .refine(
+    (data) => {
+      if (!data.num_cnaps) {
+        return false
+      }
+      return true
+    },
+    {
+      message: 'Veuillez renseigner le numéro CNAPS',
+      path: ['num_cnaps'],
+    },
+  )
   .refine(
     (data) => {
       if (!data.num_cin) {
