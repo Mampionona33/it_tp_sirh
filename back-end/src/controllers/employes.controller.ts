@@ -99,3 +99,15 @@ export const deleteEmploye = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Internal server error' })
   }
 }
+
+// Insert Multiple
+export const insertMultipleEmploye = async (req: Request, res: Response) => {
+  try {
+    const employesData = req.body
+    const insertedEmployes = await EmployeModel.insertMany(employesData)
+    res.status(201).json(insertedEmployes)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+}

@@ -6,7 +6,7 @@ interface ICustomSectionProps {
   children?: ReactNode // Use children instead of body
 }
 
-const CustomSection_v2: React.FC<ICustomSectionProps> = ({ title, fullWidth, children }) => {
+const CustomSectionV2: React.FC<ICustomSectionProps> = ({ title, fullWidth, children }) => {
   return (
     <div
       className={` ${
@@ -21,4 +21,4 @@ const CustomSection_v2: React.FC<ICustomSectionProps> = ({ title, fullWidth, chi
   )
 }
 
-export default CustomSection_v2
+export default CustomSectionV2

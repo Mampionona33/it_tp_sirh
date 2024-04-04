@@ -1,11 +1,15 @@
 import CustomCAlert from '@src/components/CustomAlert'
-import CustomSection_v2 from '@src/components/CustomSection_v2'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import InlineLoading from '@src/components/loadings/InlineLoading'
+import CustomSectionV2 from '@src/components/CustomSectionV2'
 import { createValidator } from 'zod-xlsx'
 import React from 'react'
 import * as XLSX from 'xlsx'
 import employeSchema from '@src/schema/importEmployeSchema'
+import { useMutation } from '@tanstack/react-query'
+import employeService from '@src/services/EmployeeService'
+import { IImportEmployeProps } from '@src/interfaces/interfaceImportEmploye'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 const ImportEmploye = () => {
   const [file, setFile] = React.useState<File | undefined>()
@@ -38,6 +42,27 @@ const ImportEmploye = () => {
       setValidationErrors((prev) => [...prev, message])
     }
   }
+
+  const formatError = useErrorFormatter()
+
+  const mutation = useMutation({
+    mutationFn: async (data: IImportEmployeProps[]) => {
+      try {
+        const response = await employeService.uploadMany(data)
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
+    onError: (error) => {
+      setNotification({ message: formatError(error), type: 'danger' })
+      setIsLoading(false)
+    },
+    onSuccess: () => {
+      setNotification({ message: 'Employe importées avec succes', type: 'success' })
+      setIsLoading(false)
+    },
+  })
 
   const handleSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
@@ -99,9 +124,10 @@ const ImportEmploye = () => {
       }
 
       const mySheetData: any[] = XLSX.utils.sheet_to_json(workbook.Sheets['liste_employee'])
-
-      // Convertir les champs "categorie" et "mode_paiement_salaire" en objets avec les labels et les valeurs,
-      // en supprimant les champs "categorie/label" et "mode_paiement_salaire/label"
+      /**
+       * Convertir les champs "categorie" et "mode_paiement_salaire" en objets avec les labels et les valeurs,
+       * en supprimant les champs "categorie/label" et "mode_paiement_salaire/label"
+       */
       const convertedData = mySheetData.map((item: any) => {
         const {
           'categorie/label': catLabel,
@@ -120,29 +146,34 @@ const ImportEmploye = () => {
             label: modeLabel,
             value: modeValue,
           },
+          actif: 'oui',
         }
       })
 
       console.log(convertedData)
+      mutation.mutate(convertedData)
     }
   }
 
   React.useEffect(() => {
-    if (validationErrors.length > 0) {
+    if (validationErrors.length > 0 || mutation.isError || mutation.isSuccess) {
       setIsLoading(false)
     }
-  }, [validationErrors])
+    if (mutation.isPending) {
+      setIsLoading(true)
+    }
+  }, [validationErrors, mutation])
 
   return (
     <div>
-      <div className="flex gap-1">
+      <div className="flex gap-1 flex-col">
         {notification && (
           <CustomCAlert onClose={() => setNotification(null)} color={notification.type || 'info'}>
             {notification.message}
           </CustomCAlert>
         )}
 
-        <CustomSection_v2 title="Importer Employé">
+        <CustomSectionV2 title="Importer Employé">
           <form action="" method="post" className="flex flex-col" onSubmit={handleSubmit}>
             <div className="p-4 flex flex-col md:flex-row items-center md:items-end gap-2 ">
               <div className="import">
@@ -175,7 +206,7 @@ const ImportEmploye = () => {
               </div>
             </div>
           </form>
-        </CustomSection_v2>
+        </CustomSectionV2>
       </div>
 
       {validationErrors.length > 0 && (

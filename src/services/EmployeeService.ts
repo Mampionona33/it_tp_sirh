@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
+import { IImportEmployeProps } from '@src/interfaces/interfaceImportEmploye'
 
 export interface updateEmployeeProps {
   id: number | string
@@ -85,6 +86,25 @@ class EmployeeService {
       const response = await axios.post(
         `${this.REACT_APP_API_BASE_URL}/deletepersonnel/${id}`,
         data,
+        {
+          auth: {
+            username: this.login,
+            password: this.pass,
+          },
+        },
+      )
+      return response
+    } catch (error) {
+      console.error("Une erreur s'est produite lors de la requête :", error)
+      throw error
+    }
+  }
+
+  async uploadMany(employes: IImportEmployeProps[]) {
+    try {
+      const response = await axios.post(
+        `${this.REACT_APP_API_BASE_URL}/personnels/import`,
+        employes,
         {
           auth: {
             username: this.login,
