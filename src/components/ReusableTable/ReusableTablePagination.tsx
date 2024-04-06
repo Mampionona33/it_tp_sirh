@@ -22,7 +22,7 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
   canNextPage,
   pageCount,
   pageSizeOptions,
-  defaultPageSize = 5,
+  defaultPageSize,
   setPageSize,
   previousPage,
   nextPage,
