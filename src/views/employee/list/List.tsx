@@ -126,7 +126,7 @@ const List = () => {
     return <Loading />
   }
   if (isError) {
-    return <CAlert color="danger">{fomatError(error!)}</CAlert>
+    return <CustomCAlert color="danger">{fomatError(error!)}</CustomCAlert>
   }
 
   return (
