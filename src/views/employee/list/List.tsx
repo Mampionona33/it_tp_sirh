@@ -200,20 +200,23 @@ const List = () => {
         </div>
         <div className="flex">
           {table.getAllLeafColumns().map((column) => {
-            return (
-              <div key={column.id} className="px-1 flex flex-col">
-                <label className="inline-flex gap-1">
-                  <input
-                    {...{
-                      type: 'checkbox',
-                      checked: column.getIsVisible(),
-                      onChange: column.getToggleVisibilityHandler(),
-                    }}
-                  />
-                  {column.columnDef.header()}
-                </label>
-              </div>
-            )
+            // Vérifier si la colonne peut être cachée
+            if (column.getCanHide()) {
+              return (
+                <div key={column.id} className="px-1 flex flex-col">
+                  <label className="inline-flex gap-1">
+                    <input
+                      type="checkbox"
+                      checked={column.getIsVisible()}
+                      onChange={column.getToggleVisibilityHandler()}
+                    />
+                    {column.columnDef.header()}
+                  </label>
+                </div>
+              )
+            }
+            // Si la colonne ne peut pas être cachée, ne pas afficher de case à cocher
+            return null
           })}
         </div>
       </div>
