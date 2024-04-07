@@ -4,12 +4,16 @@ import React, { useEffect, useMemo } from 'react'
 import ButtonLink from '@src/components/buttons/ButtonLink'
 import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import {
+  ColumnFiltersState,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
+  getFacetedMinMaxValues,
+  getFacetedUniqueValues,
+  getSortedRowModel,
 } from '@tanstack/react-table'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch } from '@src/hooks/useAppDispatch'
@@ -22,6 +26,8 @@ import CustomCAlert from '@src/components/CustomAlert'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import ReusableTablePagination from '@src/components/ReusableTable/ReusableTablePagination'
 import { DebounceInput } from 'react-debounce-input'
+import ReusableTableColumnFilter from '@src/components/ReusableTable/ReusableTableColumnFilter'
+import { fuzzyFilter } from '@src/components/ReusableTable/fuzzyFunctions'
 
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
@@ -34,6 +40,7 @@ const List = () => {
   const pageSizeOptions = [10, 15, 20, 25, 30]
   const [globalFilter, setGlobalFilter] = React.useState('')
   const columnHelper = createColumnHelper<IEmploye>()
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = React.useState({
     matricule: true,
     nom: true,
@@ -57,36 +64,43 @@ const List = () => {
       cell: (info) => info.getValue(),
       header: () => <div className="my-1">Matricule</div>,
       enableHiding: false,
+      enableColumnFilter: true,
     }),
     columnHelper.accessor('nom', {
       cell: (info) => info.getValue(),
       header: () => <div className="my-1">Nom</div>,
       enableHiding: false,
+      enableColumnFilter: false,
     }),
     columnHelper.accessor('prenom', {
       cell: (info) => info.getValue(),
       header: () => <div className="my-1">Prénom</div>,
       enableHiding: false,
+      enableColumnFilter: false,
     }),
     columnHelper.accessor('num_cin', {
       cell: (info) => info.getValue(),
       header: () => <div className="my-1">CIN</div>,
       enableHiding: true,
+      enableColumnFilter: false,
     }),
     columnHelper.accessor('date_embauche', {
       cell: (info) => info.getValue(),
       header: () => <div className="my-1">Date d'embauche</div>,
       enableHiding: true,
+      enableColumnFilter: false,
     }),
     columnHelper.accessor('departement', {
       cell: (info) => info.getValue(),
       header: () => <div className="my-1">Département</div>,
       enableHiding: true,
+      enableColumnFilter: true,
     }),
     columnHelper.accessor('titre_poste', {
       cell: (info) => info.getValue(),
       header: () => <div className="my-1">Poste</div>,
       enableHiding: true,
+      enableColumnFilter: true,
     }),
     columnHelper.accessor('actions', {
       cell: (info) => (
@@ -96,21 +110,30 @@ const List = () => {
       ),
       header: () => <div className="my-1">Action</div>,
       enableHiding: false,
+      enableColumnFilter: false,
     }),
   ]
 
   const table = useReactTable({
     data,
     columns,
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
     state: {
       columnVisibility,
+      columnFilters,
       globalFilter,
     },
     getPaginationRowModel: getPaginationRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     getFilteredRowModel: getFilteredRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
     onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFacetedMinMaxValues: getFacetedMinMaxValues(),
     debugTable: true,
     debugHeaders: true,
     debugColumns: true,
@@ -201,9 +224,16 @@ const List = () => {
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th key={header.id} colSpan={header.colSpan}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(header.column.columnDef.header, header.getContext())}
+                  <div>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(header.column.columnDef.header, header.getContext())}
+                  </div>
+                  {header.column.getCanFilter() ? (
+                    <div>
+                      <ReusableTableColumnFilter column={header.column} table={table} />
+                    </div>
+                  ) : null}
                 </th>
               ))}
             </tr>

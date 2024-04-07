@@ -1,5 +1,6 @@
 import React from 'react'
 import { ColumnDef, useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table'
+import { fuzzyFilter } from '@src/components/ReusableTable/fuzzyFunctions'
 
 interface ITableDetailHeuresProps<T extends object> {
   data: T[]
@@ -11,6 +12,9 @@ const TableDetailHeures = <T extends object>({ data, columns }: ITableDetailHeur
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
   })
 
   const totalColumns = table.getHeaderGroups().reduce((acc, headerGroup) => {

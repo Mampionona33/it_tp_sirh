@@ -10,6 +10,7 @@ import { IDataTableEmploye, IDataWithActions } from './interfaceDataTableEmploy'
 
 import { DebounceInput } from 'react-debounce-input'
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
+import { fuzzyFilter } from '../ReusableTable/fuzzyFunctions'
 
 interface ActionComponentProps {
   rowId: any
@@ -93,6 +94,9 @@ const DataTableEmploye: React.FC<IDataTableEmploye> = ({ data, tableTitle, heade
     onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
   })
 
   const headerGroups = table.getHeaderGroups()

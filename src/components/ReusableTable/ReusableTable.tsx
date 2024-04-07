@@ -10,6 +10,7 @@ import {
 import { DebounceInput } from 'react-debounce-input'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import ReusableTablePagination from './ReusableTablePagination'
+import { fuzzyFilter } from './fuzzyFunctions'
 
 export interface IReusableTableProps<T extends object> {
   title?: string
@@ -43,8 +44,10 @@ const ReusableTable = <T extends object>({
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    filterFns: {
+      fuzzy: fuzzyFilter,
+    },
   })
-  // console.log(data)
 
   useEffect(() => {
     table.setGlobalFilter(globalFilter || '')
