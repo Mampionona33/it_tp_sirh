@@ -165,17 +165,21 @@ const List = () => {
   const columnHelper = createColumnHelper<IEmploye>()
   const [columnVisibility, setColumnVisibility] = React.useState({
     matricule: true,
-    nom: false,
+    nom: true,
     prenom: true,
+    num_cin: false,
+    titre_poste: false,
+    departement: false,
+    date_embauche: false,
   })
 
   React.useEffect(() => {
-    if (columnVisibility) {
-      if (columnVisibility) {
-        console.log(columnVisibility)
+    if (data) {
+      if (data) {
+        console.log(data)
       }
     }
-  }, [columnVisibility])
+  }, [data])
 
   const columns = [
     columnHelper.accessor('matricule', {
@@ -186,12 +190,41 @@ const List = () => {
     columnHelper.accessor('nom', {
       cell: (info) => info.getValue(),
       header: () => <div className="my-1">Nom</div>,
-      enableHiding: true,
+      enableHiding: false,
     }),
     columnHelper.accessor('prenom', {
       cell: (info) => info.getValue(),
       header: () => <div className="my-1">Prénom</div>,
+      enableHiding: false,
+    }),
+    columnHelper.accessor('num_cin', {
+      cell: (info) => info.getValue(),
+      header: () => <div className="my-1">CIN</div>,
       enableHiding: true,
+    }),
+    columnHelper.accessor('date_embauche', {
+      cell: (info) => info.getValue(),
+      header: () => <div className="my-1">Date d'embauche</div>,
+      enableHiding: true,
+    }),
+    columnHelper.accessor('departement', {
+      cell: (info) => info.getValue(),
+      header: () => <div className="my-1">Département</div>,
+      enableHiding: true,
+    }),
+    columnHelper.accessor('titre_poste', {
+      cell: (info) => info.getValue(),
+      header: () => <div className="my-1">Poste</div>,
+      enableHiding: true,
+    }),
+    columnHelper.accessor('actions', {
+      cell: (info) => (
+        <div className="flex justify-center">
+          <ButtonLink to={`/employees/fiche/${info.row.original.id}`}>Détails</ButtonLink>
+        </div>
+      ),
+      header: () => <div className="my-1">Action</div>,
+      enableHiding: false,
     }),
   ]
 
@@ -203,6 +236,7 @@ const List = () => {
     },
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     debugTable: true,
     debugHeaders: true,
     debugColumns: true,
@@ -210,6 +244,9 @@ const List = () => {
 
   if (isFetching) {
     return <Loading />
+  }
+  if (isError) {
+    return <CAlert color="danger">{fomatError(error!)}</CAlert>
   }
 
   return (
@@ -230,16 +267,16 @@ const List = () => {
         <div className="flex">
           {table.getAllLeafColumns().map((column) => {
             return (
-              <div key={column.id} className="px-1">
-                <label>
+              <div key={column.id} className="px-1 flex flex-col">
+                <label className="inline-flex gap-1">
                   <input
                     {...{
                       type: 'checkbox',
                       checked: column.getIsVisible(),
                       onChange: column.getToggleVisibilityHandler(),
                     }}
-                  />{' '}
-                  {column.id}
+                  />
+                  {column.columnDef.header()}
                 </label>
               </div>
             )
@@ -284,6 +321,19 @@ const List = () => {
           ))}
         </tfoot>
       </table>
+
+      <ReusableTablePagination
+        pageIndex={table.getState().pagination.pageIndex}
+        pageCount={table.getPageCount()}
+        goToPage={table.setPageIndex}
+        nextPage={table.nextPage}
+        previousPage={table.previousPage}
+        canNextPage={table.getCanNextPage()}
+        canPreviousPage={table.getCanPreviousPage()}
+        pageSizeOptions={pageSizeOptions}
+        setPageSize={table.setPageSize}
+        defaultPageSize={10}
+      />
     </div>
   )
 }
