@@ -162,7 +162,7 @@ const List = () => {
         </ButtonLink>
       </div>
 
-      <div className="inline-block border border-black shadow-sm rounded-sm bg-white">
+      <div className="inline-block border border-black shadow-sm rounded-sm bg-white text-sm">
         <div className="px-1 border-b border-black">
           <label className="flex gap-1 flex-row">
             <input
