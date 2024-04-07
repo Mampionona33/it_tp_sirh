@@ -169,7 +169,13 @@ const List = () => {
     prenom: true,
   })
 
-  console.log(data)
+  React.useEffect(() => {
+    if (columnVisibility) {
+      if (columnVisibility) {
+        console.log(columnVisibility)
+      }
+    }
+  }, [columnVisibility])
 
   const columns = [
     columnHelper.accessor('matricule', {
@@ -192,13 +198,14 @@ const List = () => {
   const table = useReactTable({
     data,
     columns,
-    initialState: {
+    state: {
       columnVisibility,
     },
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    getCoreRowModel: getCoreRowModel(),
     debugTable: true,
+    debugHeaders: true,
+    debugColumns: true,
   })
 
   if (isFetching) {
@@ -206,26 +213,78 @@ const List = () => {
   }
 
   return (
-    <>
-      {isError && <CustomCAlert color="danger">{fomatError(error)}</CustomCAlert>}
-      <div>
-        <table>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-        </table>
+    <div className="p-2 flex flex-col gap-2">
+      <div className="inline-block border border-black shadow-sm rounded-sm bg-white">
+        <div className="px-1 border-b border-black">
+          <label className="flex gap-1 flex-row">
+            <input
+              {...{
+                type: 'checkbox',
+                checked: table.getIsAllColumnsVisible(),
+                onChange: table.getToggleAllColumnsVisibilityHandler(),
+              }}
+            />
+            Tous
+          </label>
+        </div>
+        <div className="flex">
+          {table.getAllLeafColumns().map((column) => {
+            return (
+              <div key={column.id} className="px-1">
+                <label>
+                  <input
+                    {...{
+                      type: 'checkbox',
+                      checked: column.getIsVisible(),
+                      onChange: column.getToggleVisibilityHandler(),
+                    }}
+                  />{' '}
+                  {column.id}
+                </label>
+              </div>
+            )
+          })}
+        </div>
       </div>
-    </>
+
+      <table className="customTable">
+        <thead>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <tr key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} colSpan={header.colSpan}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(header.column.columnDef.header, header.getContext())}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {table.getRowModel().rows.map((row) => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map((cell) => (
+                <td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+        <tfoot>
+          {table.getFooterGroups().map((footerGroup) => (
+            <tr key={footerGroup.id}>
+              {footerGroup.headers.map((header) => (
+                <th key={header.id} colSpan={header.colSpan}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(header.column.columnDef.footer, header.getContext())}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </tfoot>
+      </table>
+    </div>
   )
 }
 

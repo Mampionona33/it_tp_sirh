@@ -1,0 +1,45 @@
+/* Style du tableau */
+.customTable {
+  width: 100%;
+  border-collapse: collapse;
+
+  /* Style de l'en-tête */
+  thead {
+    --tw-bg-opacity: 1;
+    background-color: rgb(218 32 13 / var(--tw-bg-opacity)); /* Couleur de fond */
+    color: white; /* Couleur du texte */
+
+    /* Style des cellules de l'en-tête */
+    th {
+      padding: 0.25rem 0.5rem 0.25rem 0.5rem;
+      text-align: left; /* Alignement du texte */
+      font-weight: bold; /* Poids de la police */
+      border-bottom: 2px solid #cbd5e0; /* Bordure inférieure */
+    }
+  }
+
+  /* Style des lignes paires du corps du tableau */
+  tbody {
+    tr:nth-child(even) {
+      --tw-bg-opacity: 1;
+      background-color: rgb(255 242 242 / var(--tw-bg-opacity)); /* Couleur de fond */
+    }
+    tr:nth-child(odd) {
+      --tw-bg-opacity: 1;
+      background-color: rgb(255 255 255 / var(--tw-bg-opacity)); /* Couleur de fond */
+    }
+
+    /* Style des cellules du corps du tableau */
+    td {
+      padding: 0.25rem 0.5rem 0.25rem 0.5rem; /* Espacement interne */
+      border-bottom: 1px solid #cbd5e0; /* Bordure inférieure */
+    }
+  }
+
+  /* Style pour le message "Aucune donnée disponible" */
+  .no-data {
+    text-align: center; /* Alignement du texte */
+    padding: 16px; /* Espacement interne */
+    font-style: italic; /* Style de police italique */
+  }
+}
