@@ -109,7 +109,6 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
 
   useEffect(() => {
     if (pageSize && pageSize !== defaultPageSize) {
-      console.log('pageSize', pageSize)
       setPageSize(Number(pageSize))
       setSelectedPageSize(Number(pageSize))
     } else {
