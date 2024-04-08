@@ -353,9 +353,7 @@ class CalculPaie_v2 {
     let salaireNet = 0
 
     if (this.salaireBrut) {
-      salaireNet =
-        this.salaireBrut -
-        (cnaps + irsaAPayer + osie - valReductionChargeEnfants + valHsni130 + valHsni150)
+      salaireNet = this.salaireBrut - (cnaps + irsaAPayer + osie - valReductionChargeEnfants) //+ valHsni130 + valHsni150)
     }
 
     return salaireNet

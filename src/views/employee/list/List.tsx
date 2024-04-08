@@ -18,7 +18,7 @@ import {
 import { IEmploye } from '@src/interfaces/interfaceEmploye'
 import { useAppDispatch } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Loading from '@src/components/loadings/Loading'
 import { CAlert } from '@coreui/react'
 import useFetchListEmploye from '@src/hooks/useFetchListEmploye'
@@ -50,11 +50,12 @@ const List = () => {
     departement: false,
     date_embauche: false,
   })
+  const navigate = useNavigate()
 
   React.useEffect(() => {
     if (data) {
       if (data) {
-        console.log(data)
+        // console.log(data)
       }
     }
   }, [data])
