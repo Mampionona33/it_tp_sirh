@@ -190,13 +190,13 @@ const List = () => {
         <div className="px-1 border-b border-black">
           <label className="flex gap-1 flex-row">
             <input
-              {...{
-                type: 'checkbox',
-                checked: table.getIsAllColumnsVisible(),
-                onChange: table.getToggleAllColumnsVisibilityHandler(),
-              }}
+              type="checkbox"
+              checked={table.getIsAllColumnsVisible()}
+              onChange={table.getToggleAllColumnsVisibilityHandler()}
             />
-            Tous
+            {table.getIsAllColumnsVisible()
+              ? 'Masquer toutes les colonnes'
+              : 'Afficher toutes les colonnes'}
           </label>
         </div>
         <div className="flex">
