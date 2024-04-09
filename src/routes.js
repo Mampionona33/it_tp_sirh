@@ -44,6 +44,7 @@ const Parametre = lazyWithRetry(() => import('src/views/parametre/Parametre'))
 const ParametreSalarie = lazyWithRetry(() =>
   import('src/views/parametre/salaries/ParametreSalarie'),
 )
+const ParametrePaie = lazyWithRetry(() => import('src/views/parametre/paies/ParametrePaie'))
 
 // Base
 const Accordion = lazyWithRetry(() => import('./views/base/accordion/Accordion'))
@@ -196,6 +197,12 @@ const routes = [
     path: '/parametres/salarie',
     name: 'Salaries',
     element: ParametreSalarie,
+    exact: true,
+  },
+  {
+    path: '/parametres/paies',
+    name: 'Paies',
+    element: ParametrePaie,
     exact: true,
   },
 

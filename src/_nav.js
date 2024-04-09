@@ -102,11 +102,11 @@ const _nav = [
     to: '/parametres',
     icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
     items: [
-      {
-        component: CNavItem,
-        name: 'Salariés',
-        to: '/parametres/salarie',
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Salariés',
+      //   to: '/parametres/salarie',
+      // },
       {
         component: CNavItem,
         name: 'Paies',

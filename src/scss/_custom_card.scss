@@ -1,3 +1,7 @@
+@import 'tailwindcss/utilities';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+
 /* Variables CSS */
 $customRed: #ff0000;
 $customRed-800: #8a0e0b;
@@ -93,27 +97,22 @@ $customRed-930: #b31008;
 }
 
 .classeCardBody {
-  @extend .grid;
-  @extend .grid-cols-1;
-  @extend .grid-cols-2;
-  @extend .grid-cols-3;
-  @extend .gap-x-4;
-  @extend .gap-y-3;
-  @extend .px-8 !optional;
-  @extend .w-full;
+  @apply px-3;
+  @apply py-1;
+  @apply text-sm;
 }
 
 .classeCardTitle {
-  @extend .mx-3;
-  @extend .mb-0;
-  @extend .mt-3;
-  @extend .uppercase;
-  @extend .text-customRed-930 !optional;
-  @extend .text-base;
+  @apply text-base;
+  @apply capitalize;
+  @apply bg-customRed-800;
+  @apply text-white;
+  @apply rounded-t-sm;
+  @apply px-4;
+  @apply py-2;
 }
 
 .classeCard {
-  @extend .rounded-sm;
-  @extend .pb-3;
-  @extend .px-3;
+  @apply rounded-sm;
+  @apply bg-white;
 }
