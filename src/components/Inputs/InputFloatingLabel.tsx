@@ -62,6 +62,7 @@ const InputWithFloatingLabel: React.ForwardRefRenderFunction<HTMLInputElement, I
         placeholder={
           props.required && props.placeholder ? `${props.placeholder} *` : props.placeholder
         }
+        className='classeInput'
       />
     </div>
   )

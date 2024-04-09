@@ -64,7 +64,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
     <>
       <CCard className="classeCard">
         <h2 className="classeCardTitle text-customRed-930">Information sur la paie</h2>
-        <CCardBody className="classeCardBody">
+        <CCardBody className="classeCardBody grid md:grid-cols-2 gap-y-2 gap-x-3 lg:grid-cols-3 sm:grid-cols-1">
           <Controller
             control={control}
             name="salaire_de_base"

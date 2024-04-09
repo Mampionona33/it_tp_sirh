@@ -89,16 +89,30 @@ $customRed-930: #b31008;
 
 /* Classes spécifiques */
 .classeInput {
-  @extend .border-b;
-  @extend .focus-outline-none;
-  @extend .w-full;
-  @extend .px-1;
-  @extend .text-sm;
+  @apply border-b;
+  @apply focus-outline-none;
+  @apply px-1;
+  @apply text-sm;
+
+  &:focus {
+    @apply border-b-2;
+    @apply border-customRed-800;
+    animation: growBorderBottom 0.3s ease-in-out;
+  }
+
+  @keyframes growBorderBottom {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 100%;
+    }
+  }
 }
 
 .classeCardBody {
   @apply px-3;
-  @apply py-1;
+  @apply pb-3;
   @apply text-sm;
 }
 
@@ -115,4 +129,5 @@ $customRed-930: #b31008;
 .classeCard {
   @apply rounded-sm;
   @apply bg-white;
+  @apply shadow-sm;
 }

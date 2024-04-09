@@ -21,7 +21,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
     <>
       <CCard className="classeCard">
         <h2 className="classeCardTitle text-customRed-930">Information personnelles</h2>
-        <CCardBody className="classeCardBody">
+        <CCardBody className="classeCardBody grid md:grid-cols-2 gap-y-2 gap-x-3 lg:grid-cols-3 sm:grid-cols-1">
           <Controller
             control={control}
             name="nom"
@@ -29,7 +29,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
               field: { onBlur, onChange, value, ref, ...rest },
               fieldState: { error },
             }) => (
-              <>
+              <div>
                 <InputWithFloatingLabel
                   label="Nom employé"
                   required
@@ -47,7 +47,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
                   // }
                 />
                 {error && <span className="text-sm text-customRed-800">{error.message}</span>}
-              </>
+              </div>
             )}
           />
 

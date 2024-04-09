@@ -5,7 +5,7 @@ const CardParamPlafondSme = () => {
     <div className="classeCard">
       <h1 className="classeCardTitle">Plafond SME</h1>
       <div className="classeCardBody">
-        <p>Plafond sme</p>
+        <input type="number" name="plafondSme" id="plafondSme" />
       </div>
     </div>
   )
