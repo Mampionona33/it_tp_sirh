@@ -1,4 +1,5 @@
 // import { exact } from 'prop-types'
+import { exact } from 'prop-types'
 import lazyWithRetry from './utils/lazyWithRetry'
 
 // const Dashboard = lazyWithRetry(() => import('./views/dashboard/Dashboard'))
@@ -36,6 +37,12 @@ const DetailPaieValide = lazyWithRetry(() =>
 // Administration
 const ImportHeures = lazyWithRetry(() =>
   import('src/views/administration/ImportHeures/ImportHeures'),
+)
+
+// Paramétre
+const Parametre = lazyWithRetry(() => import('src/views/parametre/Parametre'))
+const ParametreSalarie = lazyWithRetry(() =>
+  import('src/views/parametre/salaries/ParametreSalarie'),
 )
 
 // Base
@@ -175,6 +182,20 @@ const routes = [
     path: '/admin/import-heures',
     name: 'Importer heures',
     element: ImportHeures,
+    exact: true,
+  },
+
+  // Parametres path def
+  {
+    path: '/parametres',
+    name: 'Paramètres',
+    element: Parametre,
+    exact: true,
+  },
+  {
+    path: '/parametres/salarie',
+    name: 'Salaries',
+    element: ParametreSalarie,
     exact: true,
   },
 

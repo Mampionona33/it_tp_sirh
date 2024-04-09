@@ -16,6 +16,7 @@ import {
   cilStar,
   cilShieldAlt,
   cilLockLocked,
+  cilSettings,
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -92,6 +93,24 @@ const _nav = [
         component: CNavItem,
         name: 'Importer Heures',
         to: '/admin/import-heures',
+      },
+    ],
+  },
+  {
+    component: CNavGroup,
+    name: 'Paramètres',
+    to: '/parametres',
+    icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Salariés',
+        to: '/parametres/salarie',
+      },
+      {
+        component: CNavItem,
+        name: 'Paies',
+        to: '/parametres/paies',
       },
     ],
   },
