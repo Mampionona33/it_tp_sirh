@@ -46,6 +46,7 @@ const ParametrePaie = () => {
 
   React.useEffect(() => {
     if (isSuccessFetchParameter && data) {
+      console.log(data)
       // Mettre à jour les valeurs du formulaire avec les données de l'API
       setValue('plafondSme', data?.plafond_sme ?? 0)
       setValue('reductionChargeParEnfant', data?.reduction_charge_par_enfant ?? 0)

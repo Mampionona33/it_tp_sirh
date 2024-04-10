@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 // Définition du schéma Mongoose pour les cotisations
 const CotisationSchema = new mongoose.Schema({
   name: String,
-  part_emplyeur: Number,
+  part_employeur: Number,
   part_salarie: Number,
 })
 
