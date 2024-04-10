@@ -14,6 +14,7 @@ import {
 } from '@src/interfaces/interfaceBulletinDePaie'
 import useAddDeclarationOmsie from '@src/hooks/useAddDeclarationOmsie'
 import { DataOmsiProps } from '@src/interfaces/interfaceBtnDownloadOmsi'
+import { irsaProps } from '@src/interfaces/interfaceBtnDownloadIrsaProps'
 
 const FormValidateCalculPaie = () => {
   const dispatch = useAppDispatch()
@@ -147,7 +148,7 @@ const FormValidateCalculPaie = () => {
         return
       }
 
-      const declarationIrsaData = {
+      const declarationIrsaData: irsaProps = {
         year: dateValidation.getFullYear().toString(),
         month: (dateValidation.getMonth() + 1).toString(),
         matricule: bullettinDePaie.salarie?.matricule,
@@ -157,8 +158,12 @@ const FormValidateCalculPaie = () => {
         date_embauche: bullettinDePaie.salarie?.date_embauche,
         fonction: bullettinDePaie.salarie?.titre_poste,
         salaire_de_base: bullettinDePaie.salarie?.salaire_de_base,
-        indemnite_imposables: bullettinDePaie.valHsi130 + bullettinDePaie.valHsi150,
-        indemnite_non_imposables: bullettinDePaie.valHsni130 + bullettinDePaie.valHsni150,
+        indemnite_imposables:
+          (bullettinDePaie.indemnites?.autresIndemnite ?? 0) +
+          (bullettinDePaie.indemnites?.transport ?? 0),
+        indemnite_non_imposables: 0,
+        hs_inposables: bullettinDePaie.valHsi130 + bullettinDePaie.valHsi150,
+        hs_non_exonerables: bullettinDePaie.valHsni130 + bullettinDePaie.valHsni150,
         avantage_nature_imposables: calculTotalAvantage(bullettinDePaie.avantages),
         temps_de_presence: bullettinDePaie.totalHn,
         heures_supplementaires: bullettinDePaie.totalHs,
@@ -170,7 +175,7 @@ const FormValidateCalculPaie = () => {
         salaire_net: bullettinDePaie.salaireNet,
         impo_correspondant: bullettinDePaie.irsaAPayer,
         reduction_charge_famille: bullettinDePaie.valReductionChargeEnfants,
-        montant_imposable: bullettinDePaie.salaireNet,
+        montant_imposable: bullettinDePaie.baseIrsaArrondi,
         impot_du: bullettinDePaie.irsaAPayer,
       }
 

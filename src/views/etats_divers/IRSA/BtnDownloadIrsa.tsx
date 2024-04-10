@@ -23,7 +23,8 @@ const BtnDownloadIrsa: React.FC<IBtnDownloadIrsaProps> = ({ data, mois, annee, o
         'Non imposables',
         'imposables',
         'Temps de présence *',
-        'Heures supplémentaires',
+        'Imposables',
+        'Non exonérées',
         'Prime et gratification',
         'Autres',
         'Salaire brut',
@@ -39,6 +40,8 @@ const BtnDownloadIrsa: React.FC<IBtnDownloadIrsaProps> = ({ data, mois, annee, o
       sheetSaisie.getCell('J1').value = 'Indemnités'
       sheetSaisie.mergeCells('K1:L1')
       sheetSaisie.getCell('L1').value = 'Avantages en nature'
+      sheetSaisie.mergeCells('M1:N1')
+      sheetSaisie.getCell('N1').value = 'Heures supplemantes'
       sheetSaisie.addRow(columns)
 
       // Appliquer des bordures à toutes les cellules des en-têtes de colonne
@@ -60,6 +63,8 @@ const BtnDownloadIrsa: React.FC<IBtnDownloadIrsaProps> = ({ data, mois, annee, o
         }
       })
 
+      console.log(data)
+
       // Ajouter les données
       data.forEach((row: irsaProps) => {
         const rowData = [
@@ -75,7 +80,8 @@ const BtnDownloadIrsa: React.FC<IBtnDownloadIrsaProps> = ({ data, mois, annee, o
           row.indemnite_non_imposables,
           row.avantage_nature_imposables,
           row.temps_de_presence,
-          row.heures_supplementaires,
+          row.hs_inposables,
+          row.hs_non_exonerables,
           row.autres_avantages,
           row.prime_gratification,
           row.salaire_brut,

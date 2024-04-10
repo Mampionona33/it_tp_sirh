@@ -14,6 +14,8 @@ const IrsaSchema = new Schema(
     salaire_de_base: { type: Number, require: true },
     indemnite_imposables: { type: Number },
     indemnite_non_imposables: { type: Number },
+    hs_inposables: { type: Number },
+    hs_non_exonerables: { type: Number },
     avantage_nature_imposables: { type: Number },
     temps_de_presence: { type: Number },
     heures_supplementaires: { type: Number },

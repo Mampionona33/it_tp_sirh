@@ -6,7 +6,7 @@ export interface IBtnDownloadIrsaProps {
 }
 
 export interface irsaProps {
-  id: string
+  id?: string
   year: string
   month: string
   matricule: string
@@ -14,10 +14,12 @@ export interface irsaProps {
   nom_prenom: string
   cin: string
   date_embauche: string
-  date_debauche: string
+  date_debauche?: string
   fonction: string
   salaire_de_base: number
   indemnite_imposables?: number
+  hs_inposables?: number
+  hs_non_exonerables?: number
   indemnite_non_imposables?: number
   avantage_nature_imposables?: number
   temps_de_presence: number
