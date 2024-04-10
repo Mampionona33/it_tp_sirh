@@ -10,7 +10,7 @@ const parametreRouter = Router()
 
 parametreRouter.get('/parametres', getParametre)
 parametreRouter.post('/parametres', createParametre)
-parametreRouter.put('/parametres/', updateParametre)
+parametreRouter.post('/parametres/modif', updateParametre)
 parametreRouter.delete('/parametre/:id', deleteParametre)
 
 export default parametreRouter
