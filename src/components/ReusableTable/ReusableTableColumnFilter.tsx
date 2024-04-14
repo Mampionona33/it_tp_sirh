@@ -62,7 +62,7 @@ function ReusableTableColumnFilter({
         type="text"
         value={typeof columnFilterValue === 'string' ? columnFilterValue : ''}
         onChange={(event) => column.setFilterValue(event.target.value)}
-        placeholder={`Search... (${column.getFacetedUniqueValues().size})`}
+        placeholder={`Rechercher... (${column.getFacetedUniqueValues().size})`}
         className="w-36 border shadow rounded-sm text-black px-2"
         list={column.id + 'list'}
       />
