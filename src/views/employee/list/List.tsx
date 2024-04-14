@@ -29,6 +29,7 @@ import { DebounceInput } from 'react-debounce-input'
 import ReusableTableColumnFilter from '@src/components/ReusableTable/ReusableTableColumnFilter'
 import { fuzzyFilter } from '@src/components/ReusableTable/fuzzyFunctions'
 import ReusableTableGlobalFIlter from '@src/components/ReusableTable/ReusableTableGlobalFIlter'
+import ReusableTableColonneVisibilityToggle from '@src/components/ReusableTable/ReusableTableColonneVisibilityToggle'
 
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
@@ -167,7 +168,7 @@ const List = () => {
         </ButtonLink>
       </div>
 
-      <div className="inline-block border border-black shadow-sm rounded-sm bg-white text-sm">
+      {/* <div className="inline-block border border-black shadow-sm rounded-sm bg-white text-sm">
         <div className="px-1 border-b border-black">
           <label className="flex gap-1 flex-row">
             <input
@@ -192,7 +193,7 @@ const List = () => {
                       checked={column.getIsVisible()}
                       onChange={column.getToggleVisibilityHandler()}
                     />
-                    {column.columnDef.header()}
+                    {column.columnDef.header({ table })}
                   </label>
                 </div>
               )
@@ -201,7 +202,9 @@ const List = () => {
             return null
           })}
         </div>
-      </div>
+      </div> */}
+
+      <ReusableTableColonneVisibilityToggle table={table} />
 
       <table className="customTable">
         <thead>
