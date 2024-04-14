@@ -1,8 +1,8 @@
 // @ts-nocheck
 
-import React, { useEffect, useMemo } from 'react'
+import React from 'react'
 import ButtonLink from '@src/components/buttons/ButtonLink'
-import { PlusIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { PlusIcon } from '@heroicons/react/24/outline'
 import {
   ColumnFiltersState,
   createColumnHelper,
@@ -20,24 +20,18 @@ import { useAppDispatch } from '@src/hooks/useAppDispatch'
 import { resetFormEmploye } from '@src/redux/FormEmploye/formEmployeReducer'
 import { useNavigate } from 'react-router-dom'
 import Loading from '@src/components/loadings/Loading'
-import { CAlert } from '@coreui/react'
 import useFetchListEmploye from '@src/hooks/useFetchListEmploye'
 import CustomCAlert from '@src/components/CustomAlert'
 import useErrorFormatter from '@src/hooks/useErrorFormatter'
 import ReusableTablePagination from '@src/components/ReusableTable/ReusableTablePagination'
-import { DebounceInput } from 'react-debounce-input'
 import ReusableTableColumnFilter from '@src/components/ReusableTable/ReusableTableColumnFilter'
 import { fuzzyFilter } from '@src/components/ReusableTable/fuzzyFunctions'
-import ReusableTableGlobalFIlter from '@src/components/ReusableTable/ReusableTableGlobalFIlter'
+import ReusableTableGlobalFilter from '@src/components/ReusableTable/ReusableTableGlobalFilter'
 import ReusableTableToggleColumnVisibilityOneByOne from '@src/components/ReusableTable/ReusableTableToggleColumnVisibilityOneByOne'
 import ReusableTableToggleColumnVisibilityAll from '@src/components/ReusableTable/ReusableTableToggleColumnVisibilityAll'
 
-interface IDataWithActions extends IEmploye {
-  actions?: React.FC[]
-}
-
 const List = () => {
-  const { data, error, isError, isLoading, isFetching, refetch } = useFetchListEmploye()
+  const { data, error, isError, isFetching } = useFetchListEmploye()
   const fomatError = useErrorFormatter()
   const dispatch = useAppDispatch()
   const pageSizeOptions = [10, 15, 20, 25, 30]
@@ -54,14 +48,6 @@ const List = () => {
     date_embauche: false,
   })
   const navigate = useNavigate()
-
-  React.useEffect(() => {
-    if (data) {
-      if (data) {
-        // console.log(data)
-      }
-    }
-  }, [data])
 
   const columns = [
     columnHelper.accessor('matricule', {
@@ -159,7 +145,7 @@ const List = () => {
   return (
     <div className="p-2 flex flex-col gap-2 overflow-auto">
       <div className="flex flex-row justify-between items-center gap-2 flex-wrap">
-        <ReusableTableGlobalFIlter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
+        <ReusableTableGlobalFilter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
         <ButtonLink
           icon={<PlusIcon width={20} height={20} fontWeight={'bold'} />}
           to="/employees/ajout"
@@ -185,7 +171,6 @@ const List = () => {
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}
                   </div>
-                  {/* Decomenter pour afficher les fitre par colonne */}
                   {header.column.getCanFilter() ? (
                     <div>
                       <ReusableTableColumnFilter column={header.column} table={table} />

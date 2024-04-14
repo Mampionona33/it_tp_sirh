@@ -7,7 +7,7 @@ interface GlobalFilterProps {
   setGlobalFilter: (value: string) => void
 }
 
-const ReusableTableGlobalFIlter: React.FC<GlobalFilterProps> = ({
+const ReusableTableGlobalFilter: React.FC<GlobalFilterProps> = ({
   globalFilter,
   setGlobalFilter,
 }) => {
@@ -33,4 +33,4 @@ const ReusableTableGlobalFIlter: React.FC<GlobalFilterProps> = ({
   )
 }
 
-export default ReusableTableGlobalFIlter
+export default ReusableTableGlobalFilter

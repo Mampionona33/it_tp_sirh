@@ -1,16 +1,16 @@
 import { Column, HeaderContext, Table } from '@tanstack/react-table'
 import React from 'react'
 
-interface ReusableTableToggleColumnVisibilityOneByOneProps<TData extends unknown> {
+interface ReusableTableToggleColumnVisibilityOneByOneProps<TData> {
   table: Table<TData>
 }
 
-const ReusableTableToggleColumnVisibilityOneByOne: React.FC<
-  ReusableTableToggleColumnVisibilityOneByOneProps<unknown>
-> = ({ table }) => {
+const ReusableTableToggleColumnVisibilityOneByOne = <TData,>({
+  table,
+}: ReusableTableToggleColumnVisibilityOneByOneProps<TData>) => {
   return (
     <div className="flex flex-wrap">
-      {table.getAllLeafColumns().map((column: Column<unknown, unknown>) => {
+      {table.getAllLeafColumns().map((column: Column<TData, unknown>) => {
         if (column.getCanHide()) {
           return (
             <div key={column.id} className="px-1 flex flex-col">
@@ -22,7 +22,7 @@ const ReusableTableToggleColumnVisibilityOneByOne: React.FC<
                 />
                 {column.columnDef.header &&
                   typeof column.columnDef.header === 'function' &&
-                  column.columnDef.header({ table } as HeaderContext<unknown, unknown>)}
+                  column.columnDef.header({ table } as HeaderContext<TData, unknown>)}
               </label>
             </div>
           )

@@ -2,13 +2,12 @@ import React from 'react'
 import { Column, Table } from '@tanstack/react-table'
 import { DebounceInput } from 'react-debounce-input'
 
-function ReusableTableColumnFilter({
-  column,
-  table,
-}: {
+interface ReusableTableColumnFilterProps {
   column: Column<any, unknown>
   table: Table<any>
-}) {
+}
+
+const ReusableTableColumnFilter = ({ column, table }: ReusableTableColumnFilterProps) => {
   const firstValue = table.getPreFilteredRowModel().flatRows[0]?.getValue(column.id)
   const sortedUniqueValues = React.useMemo(
     () =>

@@ -1,13 +1,13 @@
 import { Table } from '@tanstack/react-table'
 import React from 'react'
 
-interface ReusableTableToggleColumnVisibilityAllProps<TData extends unknown> {
+interface ReusableTableToggleColumnVisibilityAllProps<TData> {
   table: Table<TData>
 }
 
-const ReusableTableToggleColumnVisibilityAll: React.FC<
-  ReusableTableToggleColumnVisibilityAllProps<unknown>
-> = ({ table }) => {
+const ReusableTableToggleColumnVisibilityAll = <TData,>({
+  table,
+}: ReusableTableToggleColumnVisibilityAllProps<TData>) => {
   return (
     <div className="px-1 border-b border-black">
       <label className="flex gap-1 flex-row">
