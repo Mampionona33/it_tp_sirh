@@ -190,7 +190,7 @@ const FormValidateCalculPaie = () => {
         nom: bullettinDePaie.salarie.nom,
         prenom: bullettinDePaie.salarie.prenom,
         genre: genderSalarieOm,
-        salaires: formatSalariesOmsie(bullettinDePaie.salaireBrut, moisValidation),
+        salaires: formatSalariesOmsie(bullettinDePaie.salaireDeBase, moisValidation),
       }
       console.log('declarationIrsaData: ', declarationIrsaData)
       console.log('declarationOmsieData: ', declarationOmsieData)
