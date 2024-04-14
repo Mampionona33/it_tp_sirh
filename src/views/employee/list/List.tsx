@@ -28,6 +28,7 @@ import ReusableTablePagination from '@src/components/ReusableTable/ReusableTable
 import { DebounceInput } from 'react-debounce-input'
 import ReusableTableColumnFilter from '@src/components/ReusableTable/ReusableTableColumnFilter'
 import { fuzzyFilter } from '@src/components/ReusableTable/fuzzyFunctions'
+import ReusableTableGlobalFIlter from '@src/components/ReusableTable/ReusableTableGlobalFIlter'
 
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
@@ -154,10 +155,10 @@ const List = () => {
   }
 
   return (
-    <div className="p-2 flex flex-col gap-2">
+    <div className="p-2 flex flex-col gap-2 overflow-auto">
       <div className="flex justify-between items-center gap-2">
         <div className="relative flex items-center w-full">
-          <div className="relative">
+          {/* <div className="relative">
             <DebounceInput
               value={globalFilter || ''}
               onChange={(e) => {
@@ -175,7 +176,11 @@ const List = () => {
                 height={28}
               />
             )}
-          </div>
+          </div> */}
+          <ReusableTableGlobalFIlter
+            globalFilter={globalFilter}
+            setGlobalFilter={setGlobalFilter}
+          />
         </div>
         <ButtonLink
           icon={<PlusIcon width={20} height={20} fontWeight={'bold'} />}
