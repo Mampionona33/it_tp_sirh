@@ -234,11 +234,11 @@ const List = () => {
                       : flexRender(header.column.columnDef.header, header.getContext())}
                   </div>
                   {/* Decomenter pour afficher les fitre par colonne */}
-                  {/* {header.column.getCanFilter() ? (
+                  {header.column.getCanFilter() ? (
                     <div>
                       <ReusableTableColumnFilter column={header.column} table={table} />
                     </div>
-                  ) : null} */}
+                  ) : null}
                 </th>
               ))}
             </tr>
