@@ -29,7 +29,8 @@ import { DebounceInput } from 'react-debounce-input'
 import ReusableTableColumnFilter from '@src/components/ReusableTable/ReusableTableColumnFilter'
 import { fuzzyFilter } from '@src/components/ReusableTable/fuzzyFunctions'
 import ReusableTableGlobalFIlter from '@src/components/ReusableTable/ReusableTableGlobalFIlter'
-import ReusableTableColonneVisibilityToggle from '@src/components/ReusableTable/ReusableTableColonneVisibilityToggle'
+import ReusableTableToggleColumnVisibilityOneByOne from '@src/components/ReusableTable/ReusableTableToggleColumnVisibilityOneByOne'
+import ReusableTableToggleColumnVisibilityAll from '@src/components/ReusableTable/ReusableTableToggleColumnVisibilityAll'
 
 interface IDataWithActions extends IEmploye {
   actions?: React.FC[]
@@ -168,43 +169,10 @@ const List = () => {
         </ButtonLink>
       </div>
 
-      {/* <div className="inline-block border border-black shadow-sm rounded-sm bg-white text-sm">
-        <div className="px-1 border-b border-black">
-          <label className="flex gap-1 flex-row">
-            <input
-              type="checkbox"
-              checked={table.getIsAllColumnsVisible()}
-              onChange={table.getToggleAllColumnsVisibilityHandler()}
-            />
-            {table.getIsAllColumnsVisible()
-              ? 'Masquer toutes les colonnes'
-              : 'Afficher toutes les colonnes'}
-          </label>
-        </div>
-        <div className="flex flex-wrap">
-          {table.getAllLeafColumns().map((column) => {
-            // Vérifier si la colonne peut être cachée
-            if (column.getCanHide()) {
-              return (
-                <div key={column.id} className="px-1 flex flex-col ">
-                  <label className="inline-flex gap-1">
-                    <input
-                      type="checkbox"
-                      checked={column.getIsVisible()}
-                      onChange={column.getToggleVisibilityHandler()}
-                    />
-                    {column.columnDef.header({ table })}
-                  </label>
-                </div>
-              )
-            }
-            // Si la colonne ne peut pas être cachée, ne pas afficher de case à cocher
-            return null
-          })}
-        </div>
-      </div> */}
-
-      <ReusableTableColonneVisibilityToggle table={table} />
+      <div className="inline-block border border-black shadow-sm rounded-sm bg-white text-sm">
+        <ReusableTableToggleColumnVisibilityAll table={table} />
+        <ReusableTableToggleColumnVisibilityOneByOne table={table} />
+      </div>
 
       <table className="customTable">
         <thead>
