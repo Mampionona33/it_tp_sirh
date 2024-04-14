@@ -12,7 +12,7 @@ const ReusableTableGlobalFIlter: React.FC<GlobalFilterProps> = ({
   setGlobalFilter,
 }) => {
   return (
-    <div className="relative flex items-center w-full">
+    <div className="relative flex items-center">
       <div className="relative">
         <DebounceInput
           value={globalFilter || ''}

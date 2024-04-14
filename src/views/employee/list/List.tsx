@@ -156,32 +156,8 @@ const List = () => {
 
   return (
     <div className="p-2 flex flex-col gap-2 overflow-auto">
-      <div className="flex justify-between items-center gap-2">
-        <div className="relative flex items-center w-full">
-          {/* <div className="relative">
-            <DebounceInput
-              value={globalFilter || ''}
-              onChange={(e) => {
-                const value = e.target.value
-                setGlobalFilter(String(value))
-              }}
-              className="p-1 h-9 bg-white "
-              placeholder="Rechercher"
-            />
-            {globalFilter && (
-              <XMarkIcon
-                className="cursor-pointer absolute right-1 top-1 outline-customRed-50 text-slate-500 hover:text-slate-900"
-                onClick={() => setGlobalFilter('')}
-                width={28}
-                height={28}
-              />
-            )}
-          </div> */}
-          <ReusableTableGlobalFIlter
-            globalFilter={globalFilter}
-            setGlobalFilter={setGlobalFilter}
-          />
-        </div>
+      <div className="flex flex-row justify-between items-center gap-2 flex-wrap">
+        <ReusableTableGlobalFIlter globalFilter={globalFilter} setGlobalFilter={setGlobalFilter} />
         <ButtonLink
           icon={<PlusIcon width={20} height={20} fontWeight={'bold'} />}
           to="/employees/ajout"
@@ -204,12 +180,12 @@ const List = () => {
               : 'Afficher toutes les colonnes'}
           </label>
         </div>
-        <div className="flex">
+        <div className="flex flex-wrap">
           {table.getAllLeafColumns().map((column) => {
             // Vérifier si la colonne peut être cachée
             if (column.getCanHide()) {
               return (
-                <div key={column.id} className="px-1 flex flex-col">
+                <div key={column.id} className="px-1 flex flex-col ">
                   <label className="inline-flex gap-1">
                     <input
                       type="checkbox"
