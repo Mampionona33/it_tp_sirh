@@ -186,7 +186,7 @@ const ParametrePaie = () => {
       </div>
       <div className="classeCard">
         <div className="classeCardBody">
-          <ButtonWithIcon type="submit" label="Enregistrer" />
+          {/* <ButtonWithIcon type="submit" label="Enregistrer" /> */}
         </div>
       </div>
     </form>
