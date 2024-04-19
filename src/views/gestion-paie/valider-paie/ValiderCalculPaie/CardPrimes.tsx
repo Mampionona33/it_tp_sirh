@@ -40,7 +40,7 @@ const Body = () => {
         name="assiduite"
         label="Prime d’assiduité"
         placeholder="Prime d’assiduité"
-        value={(primeEtGratification!.assiduite || '').toString()}
+        value={primeEtGratification!.assiduite || ''}
         onChange={(e) => handleInputChange(e.target.name, e.target.value)}
         onFocus={handleFocus}
       />
@@ -52,7 +52,7 @@ const Body = () => {
         label="Prime d'excellence"
         placeholder="Prime d'excellence"
         onFocus={handleFocus}
-        value={(primeEtGratification!.excellence || '').toString()}
+        value={primeEtGratification!.excellence || ''}
         onChange={(e) => handleInputChange(e.target.name, e.target.value)}
       />
     </div>

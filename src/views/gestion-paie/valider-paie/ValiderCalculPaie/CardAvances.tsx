@@ -35,7 +35,7 @@ const Body = () => {
         name="quinzaine"
         label="Avances quinzaine"
         placeholder="Avances quinzaine"
-        value={(avance.quinzaine || '').toString()}
+        value={avance.quinzaine || ''}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
@@ -46,7 +46,7 @@ const Body = () => {
         name="speciale"
         label="Avances spéciale"
         placeholder="Avances spéciale"
-        value={(avance.speciale || '').toString()}
+        value={avance.speciale || ''}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />

@@ -4,6 +4,7 @@ import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
+import InputWithFloatingLabel from '@src/components/Inputs/InputFloatingLabel'
 
 const Body = () => {
   const dispatch = useAppDispatch()
@@ -12,7 +13,7 @@ const Body = () => {
   const handleInputChange = (name: string, value: string) => {
     const updatedAvantages = {
       ...avantages,
-      [name]: parseInt(value) || 0,
+      [name]: parseFloat(value) || 0,
     }
     const totalAvantages = Object.values(updatedAvantages).reduce(
       (acc, currentValue) => acc + currentValue,
@@ -31,47 +32,47 @@ const Body = () => {
   }
   return (
     <div className="w-full text-sm flex flex-col gap-4 p-4 ">
-      <CustomInputWithLabel
+      <InputWithFloatingLabel
         type="number"
         min={0}
-        required
         id="vehicule"
         name="vehicule"
         label="Véhicules"
-        value={(avantages && avantages.vehicule) || 0}
+        placeholder="Véhicules"
+        value={(avantages && avantages.vehicule) || ''}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
         onFocus={handleFocus}
       />
-      <CustomInputWithLabel
+      <InputWithFloatingLabel
         type="number"
         min={0}
-        required
         id="logement"
         name="logement"
         label="Logement"
-        value={(avantages && avantages.logement) || 0}
+        placeholder="Logement"
+        value={(avantages && avantages.logement) || ''}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
         onFocus={handleFocus}
       />
-      <CustomInputWithLabel
+      <InputWithFloatingLabel
         type="number"
         min={0}
-        required
         id="domestique"
         name="domestique"
         label="Domestique"
-        value={(avantages && avantages.domestique) || 0}
+        placeholder="Domestique"
+        value={(avantages && avantages.domestique) || ''}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
         onFocus={handleFocus}
       />
-      <CustomInputWithLabel
+      <InputWithFloatingLabel
         type="number"
         min={0}
-        required
         id="autresAvantages"
         name="autresAvantages"
         label="Autres"
-        value={(avantages && avantages.autresAvantages) || 0}
+        placeholder="Autres"
+        value={(avantages && avantages.autresAvantages) || ''}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
         onFocus={handleFocus}
       />

@@ -8,16 +8,16 @@ import React, {
   ChangeEvent,
 } from 'react'
 
-interface InputProps<T = string> extends Omit<HTMLProps<HTMLInputElement>, 'onChange' | 'value'> {
+interface InputProps<T> extends Omit<HTMLProps<HTMLInputElement>, 'onChange' | 'value'> {
   label: string
   value?: T
   onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 
-const InputWithFloatingLabel: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { label, value, onChange, ...props },
-  ref: Ref<HTMLInputElement>,
-) => {
+const InputWithFloatingLabel: React.ForwardRefRenderFunction<
+  HTMLInputElement,
+  InputProps<string | number>
+> = ({ label, value, onChange, ...props }, ref: Ref<HTMLInputElement>) => {
   const [showLabel, setShowLabel] = useState(!!value)
 
   const isControlled = value !== undefined
