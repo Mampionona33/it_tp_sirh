@@ -8,9 +8,9 @@ import React, {
   ChangeEvent,
 } from 'react'
 
-interface InputProps extends Omit<HTMLProps<HTMLInputElement>, 'onChange' | 'value'> {
+interface InputProps<T = string> extends Omit<HTMLProps<HTMLInputElement>, 'onChange' | 'value'> {
   label: string
-  value?: string
+  value?: T
   onChange?: React.ChangeEventHandler<HTMLInputElement>
 }
 

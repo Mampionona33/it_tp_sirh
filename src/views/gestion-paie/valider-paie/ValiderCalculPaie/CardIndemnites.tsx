@@ -4,15 +4,17 @@ import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
+import InputWithFloatingLabel from '@src/components/Inputs/InputFloatingLabel'
 
 const Body: React.FC = () => {
   const dispatch = useAppDispatch()
   const { indemnites } = useAppSelector((store) => store.bulletinDePaie)
 
   const handleInputChange = (name: string, value: string) => {
+    const parsedValue = parseFloat(value)
     const updatedIndemnites = {
       ...indemnites,
-      [name]: parseInt(value) || 0,
+      [name]: isNaN(parsedValue) ? 0 : parsedValue,
     }
 
     const totalIndemnite: number = Object.values(updatedIndemnites).reduce(
@@ -35,26 +37,24 @@ const Body: React.FC = () => {
 
   return (
     <div className="w-full text-sm flex flex-col gap-4 p-4">
-      <CustomInputWithLabel
+      <InputWithFloatingLabel
+        label="Indemnité"
         type="number"
-        min={0}
-        required
         id="transport"
         name="transport"
-        label="Indemnités"
-        value={indemnites!.transport || 0}
+        placeholder="Indemnité"
         onFocus={handleFocus}
+        value={(indemnites?.transport || '').toString()}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
-      <CustomInputWithLabel
+      <InputWithFloatingLabel
+        label="Autres"
         type="number"
-        min={0}
-        required
         id="autresIndemnite"
         name="autresIndemnite"
-        label="Autres"
-        value={indemnites!.autresIndemnite || 0}
+        placeholder="Autres"
         onFocus={handleFocus}
+        value={(indemnites?.autresIndemnite || '').toString()}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
     </div>
