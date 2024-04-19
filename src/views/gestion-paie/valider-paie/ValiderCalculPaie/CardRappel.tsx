@@ -25,7 +25,7 @@ const Body = () => {
         name="rappel"
         label="Rappel"
         placeholder="Rappel"
-        value={rappel || ''}
+        value={rappel || undefined}
         onFocus={handleFocus}
         onChange={handleInputChange}
       />

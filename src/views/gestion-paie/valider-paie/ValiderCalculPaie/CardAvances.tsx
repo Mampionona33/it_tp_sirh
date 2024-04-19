@@ -10,9 +10,17 @@ const Body = () => {
   const { avance } = useAppSelector((store) => store.bulletinDePaie)
 
   const handleInputChange = (name: string, value: string) => {
+    let parsedValue: number | undefined
+
+    if (value === '.' || value === '') {
+      parsedValue = undefined // Si l'input est vide ou contient uniquement ".", on laisse la valeur à undefined
+    } else {
+      parsedValue = parseFloat(value) // Sinon, on essaie de convertir la valeur en nombre
+    }
+
     const updatedAvance = {
       ...avance,
-      [name]: parseFloat(value) || 0,
+      [name]: parsedValue || 0, // Si parsedValue est undefined (cas de '.' ou ''), on met 0 par défaut
     }
 
     dispatch(
@@ -35,7 +43,7 @@ const Body = () => {
         name="quinzaine"
         label="Avances quinzaine"
         placeholder="Avances quinzaine"
-        value={avance.quinzaine || ''}
+        value={avance.quinzaine || undefined}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
@@ -46,7 +54,7 @@ const Body = () => {
         name="speciale"
         label="Avances spéciale"
         placeholder="Avances spéciale"
-        value={avance.speciale || ''}
+        value={avance.speciale || undefined}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />

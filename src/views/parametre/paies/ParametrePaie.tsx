@@ -113,7 +113,7 @@ const ParametrePaie = () => {
                     type="number"
                     min={0}
                     onChange={onChange}
-                    value={value?.toString() || '0'}
+                    value={value || undefined}
                     onFocus={handleFocus}
                   />
                   {error && <span className="text-sm text-customRed-800">{error.message}</span>}
@@ -135,7 +135,8 @@ const ParametrePaie = () => {
                     type="number"
                     min={0}
                     onChange={onChange}
-                    value={value?.toString() || '0'}
+                    value={value || undefined}
+                    onFocus={handleFocus}
                   />
                   {error && <span className="text-sm text-customRed-800">{error.message}</span>}
                 </div>
@@ -156,7 +157,8 @@ const ParametrePaie = () => {
                     type="number"
                     min={0}
                     onChange={onChange}
-                    value={value?.toString() || '0'}
+                    value={value || undefined}
+                    onFocus={handleFocus}
                   />
                 )}
               />
@@ -176,7 +178,8 @@ const ParametrePaie = () => {
                     type="number"
                     min={0}
                     onChange={onChange}
-                    value={value?.toString() || '0'}
+                    value={value || undefined}
+                    onFocus={handleFocus}
                   />
                 )}
               />

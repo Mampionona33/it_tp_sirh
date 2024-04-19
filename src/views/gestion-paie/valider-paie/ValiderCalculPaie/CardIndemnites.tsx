@@ -43,7 +43,7 @@ const Body: React.FC = () => {
         name="transport"
         placeholder="Indemnité"
         onFocus={handleFocus}
-        value={indemnites?.transport || ''}
+        value={indemnites?.transport || undefined}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
       <InputWithFloatingLabel
@@ -53,7 +53,7 @@ const Body: React.FC = () => {
         name="autresIndemnite"
         placeholder="Autres"
         onFocus={handleFocus}
-        value={indemnites?.autresIndemnite || ''}
+        value={indemnites?.autresIndemnite || undefined}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
     </div>

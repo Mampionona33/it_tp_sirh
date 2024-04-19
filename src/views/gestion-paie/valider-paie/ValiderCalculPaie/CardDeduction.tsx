@@ -39,7 +39,7 @@ const Body = () => {
         name="absence"
         label="Absence"
         placeholder="Absence"
-        value={deductions!.absence || ''}
+        value={deductions!.absence || undefined}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
@@ -50,7 +50,7 @@ const Body = () => {
         name="retard"
         label="Retard"
         placeholder="Retard"
-        value={deductions!.retard || ''}
+        value={deductions!.retard || undefined}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
