@@ -131,7 +131,7 @@ const ParametrePaie = () => {
                     label="Reduction pour enfant"
                     name="reductionChargeParEnfant"
                     id="reductionChargeParEnfant"
-                    placeholder="Reduction pour enfant"
+                    placeholder="Réduction de charge par enfant"
                     type="number"
                     min={0}
                     onChange={onChange}
@@ -150,7 +150,7 @@ const ParametrePaie = () => {
                 name={`cotisations.${index}.part_salarie`}
                 render={({ field: { onChange, value }, fieldState: { error } }) => (
                   <InputWithFloatingLabel
-                    label={`Cotisation ${cotisation.name} salarie`}
+                    label={`Cotisation ${cotisation.name} salarié`}
                     name={`cotisations[${index}].part_salarie`}
                     id={`part_salarie_${index}`}
                     placeholder={`Part salarié de ${cotisation.name}`}
