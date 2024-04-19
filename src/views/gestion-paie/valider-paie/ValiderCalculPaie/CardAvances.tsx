@@ -1,9 +1,9 @@
 import CustomSection from '@src/components/CustomSection'
 import React from 'react'
-import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
+import InputWithFloatingLabel from '@src/components/Inputs/InputFloatingLabel'
 
 const Body = () => {
   const dispatch = useAppDispatch()
@@ -12,7 +12,7 @@ const Body = () => {
   const handleInputChange = (name: string, value: string) => {
     const updatedAvance = {
       ...avance,
-      [name]: parseInt(value) || 0,
+      [name]: parseFloat(value) || 0,
     }
 
     dispatch(
@@ -28,25 +28,25 @@ const Body = () => {
 
   return (
     <div className="w-full text-sm flex flex-col gap-4 p-4">
-      <CustomInputWithLabel
+      <InputWithFloatingLabel
         type="number"
         min={0}
-        required
         id="quinzaine"
         name="quinzaine"
         label="Avances quinzaine"
-        value={avance.quinzaine}
+        placeholder="Avances quinzaine"
+        value={(avance.quinzaine || '').toString()}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
-      <CustomInputWithLabel
+      <InputWithFloatingLabel
         type="number"
         min={0}
-        required
         id="speciale"
         name="speciale"
         label="Avances spéciale"
-        value={avance.speciale}
+        placeholder="Avances spéciale"
+        value={(avance.speciale || '').toString()}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
       />
