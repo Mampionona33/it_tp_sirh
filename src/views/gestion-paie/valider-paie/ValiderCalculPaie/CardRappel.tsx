@@ -4,6 +4,7 @@ import CustomInputWithLabel from '@src/components/Inputs/CustomInputWithLabel'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import { setBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import { IBulletinDePaieProps } from '@src/interfaces/interfaceBulletinDePaie'
+import InputWithFloatingLabel from '@src/components/Inputs/InputFloatingLabel'
 
 const Body = () => {
   const dispatch = useAppDispatch()
@@ -18,14 +19,14 @@ const Body = () => {
   }
   return (
     <div className="w-full text-sm flex flex-col gap-4 p-4 ">
-      <CustomInputWithLabel
+      <InputWithFloatingLabel
         type="number"
         min={0}
-        required
         id="rappel"
         name="rappel"
         label="Rappel"
-        value={rappel || 0}
+        placeholder="Rappel"
+        value={(rappel || '').toString()}
         onFocus={handleFocus}
         onChange={handleInputChange}
       />
