@@ -72,7 +72,6 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
                 <div>
                   <InputWithFloatingLabel
                     label="Matricule"
-                    required
                     placeholder="Matricule"
                     id="matricule"
                     className="classeInput"
