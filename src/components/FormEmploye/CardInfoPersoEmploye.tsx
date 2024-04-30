@@ -31,14 +31,13 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
             }) => (
               <div>
                 <InputWithFloatingLabel
-                  label="Nom employé"
-                  required
-                  placeholder="Nom"
+                  label="Nom employé *"
+                  placeholder="Nom *"
                   id="nom"
                   className="classeInput"
                   onChange={onChange}
                   onBlur={onBlur}
-                  value={value}
+                  value={value || ''}
                   {...rest}
                   // {...register('nom')}
                   // value={data?.nom}
@@ -62,13 +61,12 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
                 <div>
                   <InputWithFloatingLabel
                     label="Prénom employé"
-                    required
                     id="prenom"
                     placeholder="Prénom employé"
                     className="classeInput"
                     {...rest}
                     onChange={onChange}
-                    value={value}
+                    value={value || ''}
                     onBlur={onBlur}
                     // {...register('prenom')}
                     // value={data?.prenom}
@@ -90,13 +88,12 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
               return (
                 <div>
                   <InputWithFloatingLabel
-                    label="Adresse"
-                    required
+                    label="Adresse *"
                     id="adresse"
-                    placeholder="Adresse"
+                    placeholder="Adresse *"
                     className="classeInput"
                     {...rest}
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     // {...register('adresse')}
@@ -149,13 +146,12 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
               return (
                 <div>
                   <InputWithFloatingLabel
-                    label="Lieu de naissance"
-                    required
+                    label="Lieu de naissance *"
                     id="lieu_naissance"
-                    placeholder="Lieu de naissance"
+                    placeholder="Lieu de naissance *"
                     className="classeInput"
                     {...rest}
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     // {...register('lieu_naissance')}
@@ -178,13 +174,12 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
               return (
                 <div>
                   <InputWithFloatingLabel
-                    label="N° CIN"
-                    required
+                    label="N° CIN *"
                     id="num_cin"
                     placeholder="N° CIN: 000.000.000.000"
                     className="classeInput"
                     {...rest}
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     // {...register('num_cin')}
@@ -212,7 +207,7 @@ const CardInfoPersoEmploye: React.FC<ICardInfoPersoEmploye> = ({
                     id="date_delivrance_cin"
                     placeholder="Date de delivrance CIN"
                     className="classeInput"
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     // {...register('date_delivrance_cin')}

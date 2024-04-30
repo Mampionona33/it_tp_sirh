@@ -78,9 +78,8 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               return (
                 <div>
                   <InputWithFloatingLabel
-                    label="Nom"
-                    required
-                    placeholder="Nom"
+                    label="Nom *"
+                    placeholder="Nom *"
                     id={idNom}
                     className="classeInput"
                     value={value || ''}
@@ -136,9 +135,8 @@ const CardEnfantEmploye: React.FC<ICardEnfantEmployeProps> = ({
               return (
                 <div>
                   <InputWithFloatingLabel
-                    label="Lieu de naissance"
-                    required
-                    placeholder="Lieu de naissance"
+                    label="Lieu de naissance *"
+                    placeholder="Lieu de naissance *"
                     id={idLieuNaissance}
                     className="classeInput"
                     value={value || ''}

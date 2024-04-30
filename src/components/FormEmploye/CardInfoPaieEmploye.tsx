@@ -27,11 +27,6 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
     isFetching: isFetchingParametres,
   } = useFetchParametre()
 
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = event.target
-  //   dispatch(setFormEmploye({ [name]: value }))
-  // }
-
   React.useEffect(() => {
     if (data.mode_paiement_salaire) {
       setValue('mode_paiement_salaire', data.mode_paiement_salaire)
@@ -75,11 +70,10 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
               return (
                 <div>
                   <InputWithFloatingLabel
-                    label="Salaire de base"
+                    label="Salaire de base *"
                     type="number"
                     min={0}
-                    required
-                    placeholder="Salaire de base"
+                    placeholder="Salaire de base *"
                     id="salaire_de_base"
                     className="classeInput"
                     onFocus={handleFocusInputTypeNumber}
@@ -164,6 +158,17 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
             name="mode_paiement_salaire"
             control={control}
             render={({ field: { onChange, onBlur, value, ...rest }, fieldState: { error } }) => {
+              // Vérifier si "Virement bancaire" existe dans les options de paiement
+              const isVirementBancaireOptionAvailable = parametres?.mode_de_payement?.some(
+                (option) => option.label === 'Virement bancaire',
+              )
+              // Définir la valeur par défaut en fonction de la disponibilité de "Virement bancaire"
+              const defaultValue = isVirementBancaireOptionAvailable
+                ? parametres?.mode_de_payement.find(
+                    (option) => option.label === 'Virement bancaire',
+                  )
+                : ''
+
               return (
                 <div>
                   <SelectFloatingLable
@@ -172,7 +177,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
                     label="Mode de paiement"
                     placeholder="Mode de paiement"
                     options={parametres?.mode_de_payement ? parametres?.mode_de_payement : []}
-                    value={value || ''}
+                    value={value || defaultValue}
                     onBlur={onBlur}
                     onChange={(e) => handleSelectChange(e as string, 'select-option')}
                     isLoading={isFetchingParametres}

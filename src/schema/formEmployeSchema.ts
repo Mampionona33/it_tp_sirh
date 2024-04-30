@@ -28,7 +28,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
 
     nom: z.string().min(2, { message: 'Le champ nom doit contenir au moins 2 caractères' }),
 
-    prenom: z.string().min(2, { message: 'Le champ prénom doit contenir au moins 2 caractères' }),
+    prenom: z.string().optional(),
 
     date_naissance: z
       .string()
@@ -179,10 +179,6 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       )
       .optional(),
 
-    titre_poste: z
-      .string()
-      .min(2, { message: 'Le champ poste doit contenir au moins 2 caractères' }),
-
     matricule: z
       .string()
       .min(2, { message: 'Le champ matricule doit contenir au moins 2 caractères' }),
@@ -195,13 +191,19 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
 
     date_embauche: z.string(),
 
-    departement: z.string(),
+    departement: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
 
-    lieu_travail: z.string(),
+    titre_poste: z
+      .string()
+      .min(2, { message: 'Le champ poste doit contenir au moins 2 caractères' }),
+
+    lieu_travail: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
 
     est_cadre: z.enum([EnumBoolean.OUI, EnumBoolean.NON]).optional(),
 
-    travail_de_nuit: z.enum([EnumBoolean.OUI, EnumBoolean.NON]),
+    travail_de_nuit: z.enum([EnumBoolean.OUI, EnumBoolean.NON], {
+      errorMap: () => ({ message: 'Veuillez renseigner une valeur' }),
+    }),
 
     salaire_de_base: z.coerce.number().gte(1, {
       message: 'Le salaire doit être supérieur à 0Ar.',
@@ -328,7 +330,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       }
     },
     {
-      message: 'Le salaire ne doit pas depasser 100000',
+      message: 'Le salaire doit étre superieur ou égal à 100000Ar.',
       path: ['salaire_de_base'],
     },
   )

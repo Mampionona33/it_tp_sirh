@@ -1,7 +1,7 @@
 export interface IEmploye {
   id?: string | number
   nom: string
-  prenom: string
+  prenom?: string
   date_naissance: string
   lieu_naissance: string
   date_delivrance_cin: string

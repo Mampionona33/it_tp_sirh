@@ -45,18 +45,6 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
 
   const formatError = useErrorFormatter()
 
-  // const {
-  //   data: categories,
-  //   isError: isErrorCategorieEmploye,
-  //   error,
-  //   isLoading: isLoadingCategorieEmploye,
-  // } = useFetchCategorieEmploye()
-
-  // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = event.target
-  //   dispatch(setFormEmploye({ [name]: value }))
-  // }
-
   const handleSelectChange = (newValue: string, action: SetValueAction) => {
     if (action === 'select-option') {
       dispatch(setFormEmploye({ categorie: newValue }))
@@ -64,9 +52,6 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
     }
   }
 
-  // if (isErrorCategorieEmploye) {
-  //   return <CAlert color="danger">{(error as Error).message}</CAlert>
-  // }
   if (isErrorParametres) {
     return <CAlert color="danger">{formatError(errorParametres)}</CAlert>
   }
@@ -91,7 +76,7 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
                     placeholder="Matricule"
                     id="matricule"
                     className="classeInput"
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     ref={ref}
@@ -114,15 +99,15 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               field: { onBlur, onChange, value, ref, ...rest },
               fieldState: { error },
             }) => {
+              console.log(error)
               return (
                 <div>
                   <InputWithFloatingLabel
                     label="Titre du poste"
-                    required
                     placeholder="Titre du poste"
                     id="titre_poste"
                     className="classeInput"
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     {...rest}
@@ -131,11 +116,7 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
                     // value={titre_poste}
                     // onChange={handleInputChange}
                   />
-                  {formEmployeValidationError.titre_poste && (
-                    <span className="text-red-500 text-sm">
-                      {formEmployeValidationError.titre_poste.message}
-                    </span>
-                  )}
+                  {error && <span className="text-red-500 text-sm">{error.message}</span>}
                 </div>
               )
             }}
@@ -176,12 +157,11 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               return (
                 <div>
                   <InputWithFloatingLabel
-                    label="Département"
-                    required
-                    placeholder="Département"
+                    label="Département *"
+                    placeholder="Département *"
                     id="departement"
                     className="classeInput"
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     // {...register('departement')}
@@ -205,13 +185,12 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               return (
                 <div>
                   <InputWithFloatingLabel
-                    label="Date d'embauche"
+                    label="Date d'embauche *"
                     type="date"
-                    required
-                    placeholder="Date d'embauche"
+                    placeholder="Date d'embauche *"
                     id="date_embauche"
                     className="classeInput"
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     {...rest}
@@ -236,12 +215,11 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               return (
                 <div>
                   <InputWithFloatingLabel
-                    label="Lieu de travail"
-                    required
-                    placeholder="Lieu de travail"
+                    label="Lieu de travail *"
+                    placeholder="Lieu de travail *"
                     id="lieu_travail"
                     className="classeInput"
-                    value={value}
+                    value={value || ''}
                     onChange={onChange}
                     onBlur={onBlur}
                     {...rest}
