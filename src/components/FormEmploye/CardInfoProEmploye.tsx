@@ -99,7 +99,6 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               field: { onBlur, onChange, value, ref, ...rest },
               fieldState: { error },
             }) => {
-              console.log(error)
               return (
                 <div>
                   <InputWithFloatingLabel

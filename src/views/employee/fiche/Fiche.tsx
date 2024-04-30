@@ -50,8 +50,6 @@ const Fiche: React.FC = () => {
     return <CAlert color="danger">{formatErrorMessage(error)}</CAlert>
   }
 
-  console.log(id)
-
   const renderContent = (): JSX.Element => {
     return id ? <FormEmploye id={id} /> : <Page404 />
   }

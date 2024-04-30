@@ -181,7 +181,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     }
 
     if (formEmployeValidationError && Object.keys(formEmployeValidationError).length > 0) {
-      console.log(formEmployeValidationError)
+      // console.log(formEmployeValidationError)
       setNotification({
         message: 'Veuillez vérifier tous les champs.',
         color: 'danger',
