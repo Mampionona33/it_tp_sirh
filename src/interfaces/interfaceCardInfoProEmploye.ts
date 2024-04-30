@@ -16,6 +16,6 @@ export interface ICardInfoProEmployeProps {
   >
   formEmployeValidationError: FieldErrors<IEmploye>
   register: UseFormRegister<IEmploye>
-  control: Control<IEmploye, any, IEmploye>
+  control: Control<IEmploye> 
   setValue: UseFormSetValue<IEmploye>
 }
