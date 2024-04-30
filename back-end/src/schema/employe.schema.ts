@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import { string } from 'prop-types'
 
 // Définir le schéma pour les données des enfants
 const EnfantSchema = new Schema({
@@ -26,7 +27,11 @@ const EmployeSchma = new Schema({
   date_delivrance_cin: Date,
   date_embauche: Date,
   date_naissance: Date,
-  depart: String,
+  depart: {
+    nom_matricule: String,
+    date: String,
+    motif: String,
+  },
   departement: String,
   email: String,
   enfant: [EnfantSchema], // Utilisation du schéma des enfants défini précédemment

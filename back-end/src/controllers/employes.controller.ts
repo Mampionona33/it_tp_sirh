@@ -33,6 +33,22 @@ export const getAllEmployes = async (req: Request, res: Response) => {
   }
 }
 
+export const getAllActiveEmployes = async (req: Request, res: Response) => {
+  try {
+    const employes = await EmployeModel.find({ actif: 'oui' })
+    const modifiedEmployes = employes.map((employe) => {
+      return {
+        ...employe.toObject(),
+        id: employe._id.toString(),
+      }
+    })
+    res.status(200).json(modifiedEmployes)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+}
+
 // Read - Récupérer un employé par son ID
 export const getEmployeById = async (req: Request, res: Response) => {
   try {
