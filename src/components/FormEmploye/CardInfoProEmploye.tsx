@@ -98,6 +98,9 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               field: { onBlur, onChange, value, ref, ...rest },
               fieldState: { error },
             }) => {
+              console.log(value, 'value')
+              console.log(error, 'error')
+
               return (
                 <div>
                   <InputWithFloatingLabel
@@ -127,11 +130,13 @@ const CardInfoProEmploye: React.FC<ICardInfoProEmployeProps> = ({
               field: { onChange, onBlur, name, value, ...rest },
               fieldState: { error },
             }) => {
-              // console.log(value, 'value')
+              console.log(value, 'value')
+              console.log(error, 'error')
               return (
                 <div>
                   <SelectFloatingLable
                     label="Catégorie"
+                    name="categorie"
                     placeholder="Categorie"
                     {...rest}
                     value={value ? value : categorieValue}

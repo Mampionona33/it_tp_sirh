@@ -185,8 +185,8 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
 
     categorie: z.object({
       id: z.union([z.string().optional(), z.number().optional()]),
-      label: z.string(),
-      value: z.string(),
+      label: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
+      value: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
     }),
 
     date_embauche: z.string(),
@@ -270,6 +270,19 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
     {
       message: 'Le champ ne doit pas être vide',
       path: ['depart', 'nom_matricule'],
+    },
+  )
+  .refine(
+    (data) => {
+      if (!data.categorie) {
+        return true
+      } else {
+        return true
+      }
+    },
+    {
+      message: 'Le champ select ne doit pas être vide',
+      path: ['categorie'],
     },
   )
   .refine(
