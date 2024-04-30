@@ -176,7 +176,7 @@ const FormValidateCalculPaie = () => {
         impo_correspondant: bullettinDePaie.irsaAPayer,
         reduction_charge_famille: bullettinDePaie.valReductionChargeEnfants,
         montant_imposable: bullettinDePaie.baseIrsaArrondi,
-        impot_du: bullettinDePaie.irsaAPayer,
+        impot_du: bullettinDePaie.irsaAPayer - bullettinDePaie.valReductionChargeEnfants,
       }
 
       const genderSalarieOm = getGenderSalarieOmsie(bullettinDePaie.salarie?.genre)
@@ -192,8 +192,8 @@ const FormValidateCalculPaie = () => {
         genre: genderSalarieOm,
         salaires: formatSalariesOmsie(bullettinDePaie.salaireDeBase, moisValidation),
       }
-      console.log('declarationIrsaData: ', declarationIrsaData)
-      console.log('declarationOmsieData: ', declarationOmsieData)
+      // console.log('declarationIrsaData: ', declarationIrsaData)
+      // console.log('declarationOmsieData: ', declarationOmsieData)
 
       await addDeclarationIrsa({ data: declarationIrsaData })
       await addDeclarationOmsie({ ...declarationOmsieData })
