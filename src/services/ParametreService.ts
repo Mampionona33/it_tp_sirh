@@ -1,3 +1,4 @@
+import { IParametrePaie } from '@src/views/parametre/paies/ParametrePaie'
 import axios from 'axios'
 
 class ParametreService {
@@ -42,7 +43,7 @@ class ParametreService {
     }
   }
 
-  async update(parametre: any) {
+  async updatePaie(parametre: IParametrePaie) {
     try {
       const instance = axios.create({
         baseURL: this.REACT_APP_API_BASE_URL,

@@ -8,8 +8,10 @@ import { Controller, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation } from '@tanstack/react-query'
+import parametreService from '@src/services/ParametreService'
 
-interface IParametrePaie {
+export interface IParametrePaie {
   plafondSme?: number
   reductionChargeParEnfant?: number
   cotisations?: {
@@ -45,6 +47,10 @@ const ParametrePaie = () => {
     isSuccess: isSuccessFetchParameter,
   } = useFetchParametre()
 
+  const { mutate, error, isError, isSuccess, isPending } = useMutation({
+    mutationFn: async (data: IParametrePaie) => await parametreService.updatePaie(data),
+  })
+
   const { handleSubmit, setValue, control } = useForm<IParametrePaie>({
     resolver: zodResolver(formParametrePaie),
   })
@@ -75,6 +81,14 @@ const ParametrePaie = () => {
 
   const submitData = (data: IParametrePaie) => {
     console.log(data)
+    mutate(data, {
+      onError: (error) => {
+        console.log(error)
+      },
+      onSuccess: () => {
+        console.log('ok')
+      },
+    })
   }
 
   return (
