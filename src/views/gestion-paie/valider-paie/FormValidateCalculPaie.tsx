@@ -92,8 +92,9 @@ const FormValidateCalculPaie = () => {
   }
 
   const getGenderSalarieOmsie = (gender: string): string => {
+    console.log('gender', gender)
     let result = 'M'
-    if (gender.match(/femminin/gi)) {
+    if (gender.match(/feminin/gi)) {
       result = 'F'
     }
     return result
@@ -180,6 +181,7 @@ const FormValidateCalculPaie = () => {
       }
 
       const genderSalarieOm = getGenderSalarieOmsie(bullettinDePaie.salarie?.genre)
+      console.log('genderSalarieOm', genderSalarieOm)
 
       const declarationOmsieData: DataOmsiProps = {
         annee: dateValidation.getFullYear().toString(),
