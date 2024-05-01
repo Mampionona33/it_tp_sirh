@@ -20,36 +20,17 @@ interface IParametrePaie {
 }
 
 const formParametrePaie: z.ZodType<IParametrePaie> = z.object({
-  plafondSme: z
-    .number()
-    .min(0)
-    .optional()
-    .refine((value) => value != null && value >= 0, {
-      message: 'Veuillez renseigner un plafond SME valide',
-    }),
-  reductionChargeParEnfant: z
-    .number()
-    .min(0)
-    .optional()
-    .refine((value) => value != null && value >= 0, {
-      message: 'Veuillez renseigner une valeur valide',
-    }),
+  plafondSme: z.coerce.number().gt(0, 'Le plafond SME doit être supérieur à 0').optional(),
+
+  reductionChargeParEnfant: z.coerce.number().gt(0, 'La réduction doit être supérieur à 0'),
+
   cotisations: z
     .array(
       z.object({
         name: z.string(),
-        part_salarie: z
-          .number()
-          .optional()
-          .refine((value) => value != null && value >= 0, {
-            message: 'Veuillez renseigner une valeur valide',
-          }),
-        part_employeur: z
-          .number()
-          .optional()
-          .refine((value) => value != null && value >= 0, {
-            message: 'Veuillez renseigner une valeur valide',
-          }),
+        part_salarie: z.coerce.number().gte(0, 'Veuillez renseigner une valeur valide'),
+
+        part_employeur: z.coerce.number().gte(0, 'Veuillez renseigner une valeur valide'),
       }),
     )
     .optional(),
@@ -64,7 +45,7 @@ const ParametrePaie = () => {
     isSuccess: isSuccessFetchParameter,
   } = useFetchParametre()
 
-  const { handleSubmit, setValue, getValues, control } = useForm<IParametrePaie>({
+  const { handleSubmit, setValue, control } = useForm<IParametrePaie>({
     resolver: zodResolver(formParametrePaie),
   })
 
@@ -92,8 +73,12 @@ const ParametrePaie = () => {
     event.target.select()
   }
 
+  const submitData = (data: IParametrePaie) => {
+    console.log(data)
+  }
+
   return (
-    <form action="" className="flex flex-col gap-4">
+    <form action="" className="flex flex-col gap-4" onSubmit={handleSubmit(submitData)}>
       <div className="classeCard">
         <h1 className="classeCardTitle">Parametres Paie</h1>
         <div className="classeCardBody grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
@@ -101,8 +86,6 @@ const ParametrePaie = () => {
             control={control}
             name="plafondSme"
             render={({ field: { onChange, value }, fieldState: { error } }) => {
-              console.log(value)
-
               return (
                 <div>
                   <InputWithFloatingLabel
@@ -149,17 +132,21 @@ const ParametrePaie = () => {
                 control={control}
                 name={`cotisations.${index}.part_salarie`}
                 render={({ field: { onChange, value }, fieldState: { error } }) => (
-                  <InputWithFloatingLabel
-                    label={`Cotisation ${cotisation.name} salarié`}
-                    name={`cotisations[${index}].part_salarie`}
-                    id={`part_salarie_${index}`}
-                    placeholder={`Part salarié de ${cotisation.name}`}
-                    type="number"
-                    min={0}
-                    onChange={onChange}
-                    value={value || undefined}
-                    onFocus={handleFocus}
-                  />
+                  <div>
+                    <InputWithFloatingLabel
+                      label={`Cotisation ${cotisation.name} salarié`}
+                      name={`cotisations[${index}].part_salarie`}
+                      id={`part_salarie_${index}`}
+                      placeholder={`Part salarié de ${cotisation.name}`}
+                      type="number"
+                      step={'any'}
+                      min={0}
+                      onChange={onChange}
+                      value={value || undefined}
+                      onFocus={handleFocus}
+                    />
+                    {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+                  </div>
                 )}
               />
             </div>
@@ -170,17 +157,21 @@ const ParametrePaie = () => {
                 control={control}
                 name={`cotisations.${index}.part_employeur`}
                 render={({ field: { onChange, value }, fieldState: { error } }) => (
-                  <InputWithFloatingLabel
-                    label={`Cotisation ${cotisation.name} employeur`}
-                    name={`cotisations[${index}].part_employeur`}
-                    id={`part_employeur_${index}`}
-                    placeholder={`Part employeur de ${cotisation.name}`}
-                    type="number"
-                    min={0}
-                    onChange={onChange}
-                    value={value || undefined}
-                    onFocus={handleFocus}
-                  />
+                  <div>
+                    <InputWithFloatingLabel
+                      label={`Cotisation ${cotisation.name} employeur`}
+                      name={`cotisations[${index}].part_employeur`}
+                      id={`part_employeur_${index}`}
+                      placeholder={`Part employeur de ${cotisation.name}`}
+                      type="number"
+                      step={'any'}
+                      min={0}
+                      onChange={onChange}
+                      value={value || undefined}
+                      onFocus={handleFocus}
+                    />
+                    {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+                  </div>
                 )}
               />
             </div>
@@ -188,8 +179,8 @@ const ParametrePaie = () => {
         </div>
       </div>
       <div className="classeCard">
-        <div className="classeCardBody">
-          {/* <ButtonWithIcon type="submit" label="Enregistrer" /> */}
+        <div className="classeCardBody flex justify-end">
+          <ButtonWithIcon type="submit" label="Enregistrer" />
         </div>
       </div>
     </form>

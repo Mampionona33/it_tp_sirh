@@ -96,24 +96,24 @@ const _nav = [
       },
     ],
   },
-  // {
-  //   component: CNavGroup,
-  //   name: 'Paramètres',
-  //   to: '/parametres',
-  //   icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
-  //   items: [
-  //     // {
-  //     //   component: CNavItem,
-  //     //   name: 'Salariés',
-  //     //   to: '/parametres/salarie',
-  //     // },
-  //     {
-  //       component: CNavItem,
-  //       name: 'Paies',
-  //       to: '/parametres/paies',
-  //     },
-  //   ],
-  // },
+  {
+    component: CNavGroup,
+    name: 'Paramètres',
+    to: '/parametres',
+    icon: <CIcon icon={cilSettings} customClassName="nav-icon" />,
+    items: [
+      // {
+      //   component: CNavItem,
+      //   name: 'Salariés',
+      //   to: '/parametres/salarie',
+      // },
+      {
+        component: CNavItem,
+        name: 'Paies',
+        to: '/parametres/paies',
+      },
+    ],
+  },
 ]
 
 // const _nav = [
