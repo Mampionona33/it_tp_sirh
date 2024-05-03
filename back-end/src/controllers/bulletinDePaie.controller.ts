@@ -54,19 +54,21 @@ export const getBulletinDePaieByIdYearAndMonth = async (req: any, res: any) => {
 
     // Convertir le mois de format "MMMM" en un nombre entre 1 et 12
     const moisNumber = parseInt(
-      format(parse(mois, 'MMMM', new Date(), { locale: fr }), 'M', { locale: fr }),
+      format(parse(mois, 'MMMM', new Date(annee, 0), { locale: fr }), 'M', { locale: fr }),
     )
     if (moisNumber < 1 || moisNumber > 12) {
       return res.status(400).json({ error: 'Mois invalide' })
     }
 
-    const newDate = new Date(parseInt(annee), moisNumber - 1, 1)
+    // Créer une nouvelle date en utilisant le premier jour du mois spécifié
+    const newDate = new Date(annee, moisNumber - 1, 1)
+    const endOfMonth = new Date(annee, moisNumber, 0, 23, 59, 59)
     console.log('newDate', newDate)
 
     const historiquePaie = await BulletinDePaie.find({
       'validation.status': 'oui',
       'salarie._id': id,
-      'validation.date': { $eq: newDate },
+      'validation.date': { $gte: newDate, $lte: endOfMonth },
     }).lean()
 
     if (!historiquePaie || historiquePaie.length === 0) {
