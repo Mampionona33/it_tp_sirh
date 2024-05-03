@@ -75,6 +75,7 @@ const BulletinPaie = () => {
 
   if (!bulletinDePaie) return <CAlert color="danger">Aucun bulletin de paie</CAlert>
 
+  console.log(bulletinDePaie)
 
   return (
     <>

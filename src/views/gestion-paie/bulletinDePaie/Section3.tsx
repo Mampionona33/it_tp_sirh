@@ -293,7 +293,10 @@ const Body = ({ data: bodyData }: IBodyProps & { data: IBulletinDePaieProps }) =
         rappel!,
     ) || '-'
 
-  const modeDePayementRender = salarie!.mode_paiement_salaire || 'virement bancaire'
+  const modeDePayementRender =
+    salarie!.mode_paiement_salaire && typeof salarie!.mode_paiement_salaire === 'string'
+      ? salarie!.mode_paiement_salaire
+      : salarie!.mode_paiement_salaire?.label.toString().toLowerCase() || 'virement bancaire'
 
   const toWord = new ToWords({
     localeCode: 'fr-FR',
