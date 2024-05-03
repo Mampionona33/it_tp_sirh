@@ -19,10 +19,11 @@ export const getAllSalariesValidateBulletin = async (req: any, res: any) => {
   try {
     const { id, annee } = req.params
     const newDate = new Date(parseInt(annee), 0, 1)
+    const endOfYear = new Date(parseInt(annee), 11, 31, 23, 59, 59) // 31 décembre de l'année spécifiée à 23h59m59s
 
     const historiquePaie = await BulletinDePaie.find({
       'validation.status': 'oui',
-      'validation.date': { $eq: newDate },
+      'validation.date': { $gte: newDate, $lte: endOfYear },
       'salarie._id': id,
     })
 

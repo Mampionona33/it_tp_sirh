@@ -10,9 +10,10 @@ const Body = () => {
   const { rappel } = useAppSelector((store) => store.bulletinDePaie)
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
-      setBulletinDePaie({ rappel: parseInt(event.target.value) || 0 } as IBulletinDePaieProps),
+      setBulletinDePaie({ rappel: parseFloat(event.target.value) || 0 } as IBulletinDePaieProps),
     )
   }
+
   const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
     event.target.select()
   }
