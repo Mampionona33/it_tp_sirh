@@ -1,32 +1,61 @@
 import React from 'react'
 import { Text, View, Image } from '@react-pdf/renderer'
-import { PropTypes } from 'prop-types'
 import registerFonts from './font'
 import { styles } from './styles'
 import { format } from 'date-fns'
 import { fr } from 'date-fns/locale'
-// import Logo from '@images/LogoLs.png'
 import Logo from 'src/assets/images/LogoLs.png'
 
 registerFonts()
 
-const Line = ({ label, value, valueBold, marginBottom }) => {
+interface ISection1Props {
+  data: any
+}
+
+interface ILineProps {
+  label: string
+  value: string
+  valueBold?: boolean
+  marginBottom?: number
+}
+
+interface IEmployeurProps {
+  data: {
+    nomEmployeur: string
+    addresseEmployeur: string
+    CP_et_VilleEmployeur: string
+    nif: string
+    stat: string
+    rcs: string
+  }
+}
+
+interface ISalarieProps {
+  data: {
+    nomPrenomSalarie: string
+    prenomSalarie: string
+    fonction: string
+    numMatriculSalarie: string
+    catSalarie: string | { label: string; value: string }
+    dateSelectionne: string
+  }
+}
+
+const Line = ({ label, value, valueBold, marginBottom }: ILineProps) => {
   return (
     <View style={[styles.row, { width: '100%' }]}>
-      <Text
-        style={[styles.cell, styles.textBoldItalic, styles.textBold, { width: '45%', padding: 2 }]}
-      >
+      <Text style={[styles.cell, styles.textItalic, styles.textBold, { width: '45%', padding: 2 }]}>
         {label}
       </Text>
       <Text
         style={[
           styles.cell,
-          valueBold && styles.textBold,
           {
-            width: '65%',
+            width: '55%',
             textAlign: 'center',
             padding: 2,
             marginBottom: marginBottom ? marginBottom : 0,
+            ...(valueBold && { fontWeight: 'bold' }),
           },
         ]}
       >
@@ -35,14 +64,46 @@ const Line = ({ label, value, valueBold, marginBottom }) => {
     </View>
   )
 }
-Line.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  valueBold: PropTypes.bool,
-  marginBottom: PropTypes.number,
+
+const Employeur = ({ data }: IEmployeurProps) => {
+  const { nomEmployeur, addresseEmployeur, CP_et_VilleEmployeur, nif, stat, rcs } = data
+  return (
+    <>
+      <Line label={'Nom:'} value={nomEmployeur} valueBold={true} />
+      <Line label={'Adresse:'} value={addresseEmployeur} />
+      <Line label={'CP et Ville:'} value={CP_et_VilleEmployeur} />
+      <Line label={'Numéro NIF:'} value={nif} />
+      <Line label={'Numéro STAT:'} value={stat} />
+      <Line label={'RSC:'} value={rcs} marginBottom={15} />
+    </>
+  )
 }
 
-const Section1 = (props) => {
+const Salarie = ({ data }: ISalarieProps) => {
+  const {
+    nomPrenomSalarie,
+    prenomSalarie,
+    fonction,
+    numMatriculSalarie,
+    catSalarie,
+    dateSelectionne,
+  } = data
+
+  // Vérifie si catSalarie est une chaîne de caractères ou un objet
+  const catValue = typeof catSalarie === 'string' ? catSalarie : catSalarie.label
+
+  return (
+    <>
+      <Line label={'Nom et Prénom:'} value={`${nomPrenomSalarie} ${prenomSalarie}`} />
+      <Line label={'Fonction:'} value={fonction} />
+      <Line label={'Numéro Matricule:'} value={numMatriculSalarie} />
+      <Line label={'Catégorie:'} value={catValue} />
+      <Line label={'Mois:'} value={dateSelectionne} />
+    </>
+  )
+}
+
+const Section1 = (props: ISection1Props) => {
   const dateSelectionne = format(new Date(props.data.validation.date), 'MMM yyyy', { locale: fr })
   const nomEmployeur = props.data.employeur.nom
   const addresseEmployeur = props.data.employeur.adresse
@@ -55,31 +116,6 @@ const Section1 = (props) => {
   const fonction = props.data.salarie.titre_poste
   const numMatriculSalarie = props.data.salarie.matricule
   const catSalarie = props.data.salarie.categorie
-
-  const Employeur = () => {
-    return (
-      <>
-        <Line label={'Nom:'} value={nomEmployeur} valueBold={true} />
-        <Line label={'Adresse:'} value={addresseEmployeur} />
-        <Line label={'CP et Ville:'} value={CP_et_VilleEmployeur} />
-        <Line label={'Numéro NIF:'} value={nif} />
-        <Line label={'Numéro STAT:'} value={stat} />
-        <Line label={'RSC:'} value={rcs} marginBottom={15} />
-      </>
-    )
-  }
-
-  const Salarie = () => {
-    return (
-      <>
-        <Line label={'Nom et Prénom:'} value={`${nomPrenomSalarie} ${prenomSalarie}`} />
-        <Line label={'Fonction:'} value={fonction} />
-        <Line label={'Numéro Matricule:'} value={numMatriculSalarie} />
-        <Line label={'Catégorie:'} value={catSalarie} />
-        <Line label={'Mois:'} value={dateSelectionne} />
-      </>
-    )
-  }
 
   return (
     <>
@@ -144,18 +180,25 @@ const Section1 = (props) => {
       </View>
       <View style={[styles.row, styles.borderBottom, { width: '100%' }]}>
         <View style={[styles.borderRight, { width: '45%' }]}>
-          <Employeur />
+          <Employeur
+            data={{ nomEmployeur, addresseEmployeur, CP_et_VilleEmployeur, nif, stat, rcs }}
+          />
         </View>
         <View style={[{ width: '55%' }]}>
-          <Salarie />
+          <Salarie
+            data={{
+              nomPrenomSalarie,
+              prenomSalarie,
+              fonction,
+              numMatriculSalarie,
+              catSalarie,
+              dateSelectionne,
+            }}
+          />
         </View>
       </View>
     </>
   )
-}
-
-Section1.propTypes = {
-  data: PropTypes.object,
 }
 
 export default Section1

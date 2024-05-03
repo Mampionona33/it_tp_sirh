@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format, parse } from 'date-fns'
 import BulletinDePaie from '../schema/bulletinDePaie.schema'
 import { fr } from 'date-fns/locale'
 
@@ -41,6 +41,39 @@ export const getAllSalariesValidateBulletin = async (req: any, res: any) => {
     })
 
     res.status(200).json(result)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'Internal server error' })
+  }
+}
+
+export const getBulletinDePaieByIdYearAndMonth = async (req: any, res: any) => {
+  try {
+    const { id, annee, mois } = req.params
+    console.log('id, annee, mois', id, annee, mois)
+
+    // Convertir le mois de format "MMMM" en un nombre entre 1 et 12
+    const moisNumber = parseInt(
+      format(parse(mois, 'MMMM', new Date(), { locale: fr }), 'M', { locale: fr }),
+    )
+    if (moisNumber < 1 || moisNumber > 12) {
+      return res.status(400).json({ error: 'Mois invalide' })
+    }
+
+    const newDate = new Date(parseInt(annee), moisNumber - 1, 1)
+    console.log('newDate', newDate)
+
+    const historiquePaie = await BulletinDePaie.find({
+      'validation.status': 'oui',
+      'salarie._id': id,
+      'validation.date': { $eq: newDate },
+    }).lean()
+
+    if (!historiquePaie || historiquePaie.length === 0) {
+      return res.status(404).json({ error: 'HistoriquePaie not found' })
+    }
+
+    res.status(200).json(...historiquePaie)
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Internal server error' })

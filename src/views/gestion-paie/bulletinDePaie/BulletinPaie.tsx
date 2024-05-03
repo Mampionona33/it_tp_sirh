@@ -73,6 +73,9 @@ const BulletinPaie = () => {
 
   if (isLoading) return <Loading />
 
+  if (!bulletinDePaie) return <CAlert color="danger">Aucun bulletin de paie</CAlert>
+
+
   return (
     <>
       {isError ? (
