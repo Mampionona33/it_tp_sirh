@@ -12,6 +12,7 @@ import historiquePaieRouter from './routes/historiquePaie.router'
 import parametreRouter from './routes/parametre.router'
 import dnsRouter from './routes/dns.router'
 import heuresSupplementaireRouter from './routes/heuresSupplementaire.router'
+import bulletinDePaieRouter from './routes/bulletinDePaie.router'
 const cors = require('cors')
 
 dotenv.config({ path: './.env' })
@@ -50,6 +51,7 @@ app.use(
   parametreRouter,
   dnsRouter,
   heuresSupplementaireRouter,
+  bulletinDePaieRouter,
 )
 
 app.use((error: unknown, req: Request, res: Response, next: NextFunction) => {

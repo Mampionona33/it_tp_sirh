@@ -3,7 +3,6 @@ import { NextFunction, Request, Response } from 'express'
 
 export const getAllCategorie = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('try to find all categories')
     const categories = await Categories.find({})
     res.status(200).json(categories)
   } catch (error) {
