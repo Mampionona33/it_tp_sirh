@@ -39,6 +39,7 @@ const Body = () => {
         name="vehicule"
         label="Véhicules"
         placeholder="Véhicules"
+        step={'any'}
         value={(avantages && avantages.vehicule) || undefined}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
         onFocus={handleFocus}
@@ -50,6 +51,7 @@ const Body = () => {
         name="logement"
         label="Logement"
         placeholder="Logement"
+        step={'any'}
         value={(avantages && avantages.logement) || undefined}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
         onFocus={handleFocus}
@@ -61,6 +63,7 @@ const Body = () => {
         name="domestique"
         label="Domestique"
         placeholder="Domestique"
+        step={'any'}
         value={(avantages && avantages.domestique) || undefined}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
         onFocus={handleFocus}
@@ -72,6 +75,7 @@ const Body = () => {
         name="autresAvantages"
         label="Autres"
         placeholder="Autres"
+        step={'any'}
         value={(avantages && avantages.autresAvantages) || undefined}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
         onFocus={handleFocus}

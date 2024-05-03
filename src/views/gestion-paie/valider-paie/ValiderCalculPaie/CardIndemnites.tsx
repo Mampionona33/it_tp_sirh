@@ -42,6 +42,7 @@ const Body: React.FC = () => {
         id="transport"
         name="transport"
         placeholder="Indemnité"
+        step={'any'}
         onFocus={handleFocus}
         value={indemnites?.transport || undefined}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
@@ -52,6 +53,7 @@ const Body: React.FC = () => {
         id="autresIndemnite"
         name="autresIndemnite"
         placeholder="Autres"
+        step={'any'}
         onFocus={handleFocus}
         value={indemnites?.autresIndemnite || undefined}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}

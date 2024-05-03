@@ -40,6 +40,7 @@ const Body = () => {
         name="assiduite"
         label="Prime d’assiduité"
         placeholder="Prime d’assiduité"
+        step={'any'}
         value={primeEtGratification!.assiduite || ''}
         onChange={(e) => handleInputChange(e.target.name, e.target.value)}
         onFocus={handleFocus}
@@ -51,6 +52,7 @@ const Body = () => {
         name="excellence"
         label="Prime d'excellence"
         placeholder="Prime d'excellence"
+        step={'any'}
         onFocus={handleFocus}
         value={primeEtGratification!.excellence || ''}
         onChange={(e) => handleInputChange(e.target.name, e.target.value)}

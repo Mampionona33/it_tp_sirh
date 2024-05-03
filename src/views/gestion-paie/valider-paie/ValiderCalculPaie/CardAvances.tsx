@@ -43,6 +43,7 @@ const Body = () => {
         name="quinzaine"
         label="Avances quinzaine"
         placeholder="Avances quinzaine"
+        step={'any'}
         value={avance.quinzaine || undefined}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
@@ -54,6 +55,7 @@ const Body = () => {
         name="speciale"
         label="Avances spéciale"
         placeholder="Avances spéciale"
+        step={'any'}
         value={avance.speciale || undefined}
         onFocus={handleFocus}
         onChange={(event) => handleInputChange(event.target.name, event.target.value)}
