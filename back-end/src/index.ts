@@ -47,7 +47,6 @@ app.use(
   employesRouter,
   irsaRouter,
   omsiRouter,
-  historiquePaieRouter,
   parametreRouter,
   dnsRouter,
   heuresSupplementaireRouter,
