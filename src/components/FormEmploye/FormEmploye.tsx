@@ -48,6 +48,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
 
   const updateEmploye: SubmitHandler<IEmploye> = async (data: IEmploye): Promise<void> => {
     const depart = getValues('depart')
+    console.log('data', data)
 
     if (etatResiliation !== 'canceled') {
       if (!depart) {
@@ -181,7 +182,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     }
 
     if (formEmployeValidationError && Object.keys(formEmployeValidationError).length > 0) {
-      // console.log(formEmployeValidationError)
+      console.log(formEmployeValidationError)
       setNotification({
         message: 'Veuillez vérifier tous les champs.',
         color: 'danger',

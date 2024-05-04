@@ -48,10 +48,22 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
             <strong>nom matricule</strong>.
           </CCardText>
 
-          <input
-            type="hidden"
-            value={format(new Date(), 'yyyy-MM-dd')}
-            {...register('depart.date')}
+          <Controller
+            name="depart.date"
+            control={control}
+            render={({
+              field: { onChange, onBlur, value, ref, ...rest },
+              fieldState: { error },
+            }) => {
+              return (
+                <input
+                  type="hidden"
+                  id="date"
+                  onChange={onChange}
+                  value={format(new Date(), 'yyyy-MM-dd')}
+                />
+              )
+            }}
           />
 
           <Controller
