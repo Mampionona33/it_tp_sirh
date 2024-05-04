@@ -117,12 +117,7 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
           />
         </CCardBody>
         <CCardFooter className="flex justify-end">
-          <ButtonWithIcon
-            label="Résilier"
-            type="submit"
-            name="submit-resiliation"
-            // onClick={handleSubmit(submitForm)}
-          />
+          <ButtonWithIcon label="Résilier" type="submit" name="submit-resiliation" />
         </CCardFooter>
       </CCard>
     </>

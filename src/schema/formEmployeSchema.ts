@@ -195,7 +195,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
 
     titre_poste: z
       .string()
-      .min(2, { message: 'Le champ poste doit contenir au moins 2 caractères' }),
+      .min(3, { message: 'Le champ poste doit contenir au moins 2 caractères' }),
 
     lieu_travail: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
 
