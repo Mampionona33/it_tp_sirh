@@ -101,6 +101,8 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
               field: { onBlur, onChange, value, ref, ...rest },
               fieldState: { error },
             }) => {
+              console.log(value, 'value')
+              const formattedValue = value === null || value === undefined ? '' : value
               return (
                 <div>
                   <InputWithFloatingLabel
@@ -108,7 +110,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
                     placeholder="RIB: 00000 00000 00000000000 00"
                     id="rib"
                     className="classeInput"
-                    value={value || ''}
+                    value={formattedValue}
                     onChange={onChange}
                     onBlur={onBlur}
                     ref={ref}

@@ -15,7 +15,7 @@ export interface DataOmsiProps {
   periode: string
   matricule: string
   nom: string
-  prenom?: string
+  prenom?: string | null
   num_cnaps: string
   date_embauche: string
   date_debauche?: string

@@ -28,7 +28,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
 
     nom: z.string().min(2, { message: 'Le champ nom doit contenir au moins 2 caractères' }),
 
-    prenom: z.string().optional(),
+    prenom: z.string().nullable().optional(),
 
     date_naissance: z
       .string()
@@ -46,9 +46,9 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       .string()
       .min(3, { message: 'Le champ addresse doit contenir au moins 3 caractères' }),
 
-    nom_pere: z.nullable(z.string().optional()),
+    nom_pere: z.nullable(z.string().nullable().optional()),
 
-    nom_mere: z.nullable(z.string().optional()),
+    nom_mere: z.nullable(z.string().nullable().optional()),
 
     telephone: z.nullable(
       z
@@ -209,7 +209,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       message: 'Le salaire doit être supérieur à 0Ar.',
     }),
 
-    rib: z.string().optional(),
+    rib: z.string().nullable().optional(),
 
     mode_paiement_salaire: z.object({
       id: z.union([z.string().optional(), z.number().optional()]),
@@ -217,7 +217,7 @@ const formEmployeSchema: z.ZodType<IFormEmployeSchema> = z
       value: z.string().min(2, { message: 'Le champ doit contenir au moins 2 caractères' }),
     }),
 
-    num_cnaps: z.string().optional(),
+    num_cnaps: z.string().nullable().optional(),
 
     prime_et_avantage_permanent: z
       .array(
