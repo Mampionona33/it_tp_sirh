@@ -34,7 +34,7 @@ const FormEmployeGroupButton: React.FC<IFormEmployeGroupButtonProps> = ({
         <ButtonLink to="/employees/list" variant={ButtonLinkVariant.Tertiary}>
           Retour à la liste
         </ButtonLink>
-        {id && !loading && (
+        {id && (
           <ButtonWithIcon
             type="submit"
             variant={ButtonWithIconVariant.Secondary}
