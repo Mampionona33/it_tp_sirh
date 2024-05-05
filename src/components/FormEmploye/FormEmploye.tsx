@@ -42,6 +42,8 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     color: '',
   })
 
+  const [loading, setLoading] = React.useState<boolean>(false)
+
   const formatError = useErrorFormatter()
 
   const createEmployeMutation = useMutation({
@@ -77,7 +79,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             onSuccess: () => {
               refetch()
               setNotification({
-                message: 'Salarie mis à jour avec succes',
+                message: 'Salarié mis à jour avec succes',
                 color: 'success',
               })
             },
@@ -107,7 +109,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
       createEmployeMutation.mutate(data, {
         onSuccess: () => {
           setNotification({
-            message: 'Salarie ajoute avec succes',
+            message: 'Salarié ajoute avec succes',
             color: 'success',
           })
           reset()
@@ -327,13 +329,11 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         {notification && (
           <CustomCAlert color={notification.color}>{notification.message}</CustomCAlert>
         )}
-        {/* {isErrorMutate && (
-          <CustomCAlert color={notification.color}>{notification.message}</CustomCAlert>
-        )} */}
 
         <CCard>
           <FormEmployeGroupButton
             id={id}
+            loading={createEmployeMutation.isPending || updateEmployeMutation.isPending}
             resiliationCardOpen={showResiliationCard}
             setShowResiliationCard={setShowResiliationCard}
             setEtatResiliation={setEtatResiliation}
