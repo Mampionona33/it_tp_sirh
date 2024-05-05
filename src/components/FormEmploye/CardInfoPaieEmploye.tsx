@@ -16,6 +16,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
   formEmployeValidationError,
   control,
   setValue,
+  getValues,
 }) => {
   // const dispatch = useDispatch()
   const formatError = useErrorFormatter()
@@ -27,14 +28,30 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
     isFetching: isFetchingParametres,
   } = useFetchParametre()
 
+  const modeDePaiement = data?.mode_paiement_salaire
+
   React.useEffect(() => {
     if (data.mode_paiement_salaire) {
       setValue('mode_paiement_salaire', data.mode_paiement_salaire)
     }
-  }, [setValue, data.mode_paiement_salaire])
+    const isVirementBancaireOptionAvailable = parametres?.mode_de_payement?.some(
+      (option) => option.label === 'Virement bancaire',
+    )
+
+    // Définir la valeur par défaut en fonction de la disponibilité de "Virement bancaire"
+    const defaultValue = isVirementBancaireOptionAvailable
+      ? parametres?.mode_de_payement.find((option) => option.label === 'Virement bancaire')
+      : ''
+
+    // Vérifiez si defaultValue est défini et n'est pas une chaîne vide
+    if (defaultValue && typeof defaultValue !== 'string') {
+      // Utilisez defaultValue pour définir la valeur par défaut du mode de paiement
+      setValue('mode_paiement_salaire', defaultValue)
+    }
+  }, [setValue, data.mode_paiement_salaire, modeDePaiement, parametres])
 
   const {
-    field: { value: selectedModeDePaiment, onChange: onChangeModeDePaiement, ...refModeDePaiement },
+    field: { value: selectedModeDePaiment, onChange: onChangeModeDePaiement },
   } = useController({
     name: 'mode_paiement_salaire',
     control: control,
@@ -160,17 +177,6 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
             name="mode_paiement_salaire"
             control={control}
             render={({ field: { onChange, onBlur, value, ...rest }, fieldState: { error } }) => {
-              // Vérifier si "Virement bancaire" existe dans les options de paiement
-              const isVirementBancaireOptionAvailable = parametres?.mode_de_payement?.some(
-                (option) => option.label === 'Virement bancaire',
-              )
-              // Définir la valeur par défaut en fonction de la disponibilité de "Virement bancaire"
-              const defaultValue = isVirementBancaireOptionAvailable
-                ? parametres?.mode_de_payement.find(
-                    (option) => option.label === 'Virement bancaire',
-                  )
-                : ''
-
               return (
                 <div>
                   <SelectFloatingLable
@@ -179,7 +185,7 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
                     label="Mode de paiement"
                     placeholder="Mode de paiement"
                     options={parametres?.mode_de_payement ? parametres?.mode_de_payement : []}
-                    value={value || defaultValue}
+                    value={value}
                     onBlur={onBlur}
                     onChange={(e) => handleSelectChange(e as string, 'select-option')}
                     isLoading={isFetchingParametres}

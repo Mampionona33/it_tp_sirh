@@ -1,4 +1,10 @@
-import { Control, FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import {
+  Control,
+  FieldErrors,
+  UseFormGetValues,
+  UseFormRegister,
+  UseFormSetValue,
+} from 'react-hook-form'
 import { IEmploye } from './interfaceEmploye'
 
 export interface ICardInfoPaieEmployeProps {
@@ -7,4 +13,5 @@ export interface ICardInfoPaieEmployeProps {
   register: UseFormRegister<IEmploye>
   control: Control<IEmploye, any, IEmploye>
   setValue: UseFormSetValue<IEmploye>
+  getValues: UseFormGetValues<IEmploye>
 }

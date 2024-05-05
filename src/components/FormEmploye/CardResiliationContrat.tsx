@@ -12,29 +12,30 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
   handleSubmit,
   register,
   formEmployeValidationError,
+  setValue,
+  getValue,
   id,
 }) => {
-  const dispatch = useDispatch()
-  const handleTexteAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = event.target
-    // dispatch(setFormEmploye({ depart: { ...depart, [name]: value } }))
-  }
-
-  const {
-    mutateAsync: mutateSalarie,
-    error: errorMutate,
-    isError: isErrorMutate,
-    isSuccess: isSuccessMutate,
-  } = useMutateSalarie()
-
-  // const submitForm = async (data: IEmploye) => {
-  //   const updatedData = {
-  //     ...data,
-  //     actif: EnumBoolean.NON,
-  //   }
-  //   console.log(updatedData)
-  //   await mutateSalarie({ id, data: updatedData })
+  // const dispatch = useDispatch()
+  // const handleTexteAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  //   const { name, value } = event.target
+  //   // dispatch(setFormEmploye({ depart: { ...depart, [name]: value } }))
   // }
+
+  // const {
+  //   mutateAsync: mutateSalarie,
+  //   error: errorMutate,
+  //   isError: isErrorMutate,
+  //   isSuccess: isSuccessMutate,
+  // } = useMutateSalarie()
+
+  const dateDepart = getValue('depart.date')
+  React.useEffect(() => {
+    console.log('dateDepart', dateDepart)
+    if (!dateDepart) {
+      setValue('depart.date', format(new Date(), 'yyyy-MM-dd'))
+    }
+  }, [dateDepart, setValue, getValue])
 
   return (
     <>
@@ -55,13 +56,21 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
               field: { onChange, onBlur, value, ref, ...rest },
               fieldState: { error },
             }) => {
+              const formatedValue =
+                value === null || value === undefined ? '' : format(new Date(), 'yyyy-MM-dd')
               return (
-                <input
-                  type="hidden"
-                  id="date"
-                  onChange={onChange}
-                  value={format(new Date(), 'yyyy-MM-dd')}
-                />
+                <div className="w-1/3">
+                  <label htmlFor="date" className="visually-hidden">
+                    date
+                  </label>
+                  <input
+                    type="hidden"
+                    id="date"
+                    ref={ref}
+                    onChange={onChange}
+                    value={formatedValue}
+                  />
+                </div>
               )
             }}
           />

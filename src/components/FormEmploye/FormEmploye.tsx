@@ -288,6 +288,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           control={controlFormEmploye}
           register={register}
           formEmployeValidationError={formEmployeValidationError}
+          getValues={getValues}
           data={{
             salaire_de_base: employe?.salaire_de_base || 0,
             mode_paiement_salaire: employe?.mode_paiement_salaire,
@@ -321,6 +322,8 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
             register={register}
             handleSubmit={handleSubmit}
             formEmployeValidationError={formEmployeValidationError}
+            setValue={setValue}
+            getValue={getValues}
           />
         ) : null}
       </form>
