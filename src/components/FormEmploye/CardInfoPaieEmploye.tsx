@@ -118,7 +118,6 @@ const CardInfoPaieEmploye: React.FC<ICardInfoPaieEmployeProps> = ({
               field: { onBlur, onChange, value, ref, ...rest },
               fieldState: { error },
             }) => {
-              console.log(value, 'value')
               const formattedValue = value === null || value === undefined ? '' : value
               return (
                 <div>

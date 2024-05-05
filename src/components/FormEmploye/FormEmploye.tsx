@@ -12,7 +12,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import useFetchSalarie from '@src/hooks/useFetchSalarie'
 import Loading from '../loadings/Loading'
 import employeService from '@src/services/EmployeeService'
-import useMutateSalarie from '@src/hooks/useMutateSalarie'
 import CustomCAlert from '../CustomAlert'
 import { useNavigate } from 'react-router-dom'
 import CardInfoPersoEmploye from './CardInfoPersoEmploye'
@@ -20,6 +19,8 @@ import CardEnfantEmploye from './CardEnfantEmploye'
 import CardInfoProEmploye from './CardInfoProEmploye'
 import CardInfoPaieEmploye from './CardInfoPaieEmploye'
 import CardResiliationContrat from './CardResiliationContrat'
+import { useMutation } from '@tanstack/react-query'
+import useErrorFormatter from '@src/hooks/useErrorFormatter'
 
 interface IFormEmploye {
   id?: string | number
@@ -34,34 +35,90 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   const navigate = useNavigate()
   const [etatResiliation, setEtatResiliation] = React.useState<ResiliationState>('idle')
 
-  const [notification, setNotification] = React.useState<{ message: string; color: string }>({
+  const [notification, setNotification] = React.useState<
+    { message: string; color: string } | undefined
+  >({
     message: '',
     color: '',
   })
 
-  const {
-    mutateAsync: mutateSalarie,
-    error: errorMutate,
-    isError: isErrorMutate,
-    isSuccess: isSuccessMutate,
-  } = useMutateSalarie()
+  const formatError = useErrorFormatter()
+
+  const createEmployeMutation = useMutation({
+    mutationFn: async (data: IEmploye) => {
+      try {
+        const response = await employeService.create(data)
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
+  })
+
+  const updateEmployeMutation = useMutation({
+    mutationFn: async (data: IEmploye) => {
+      try {
+        const response = await employeService.update(String(id), data)
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
+  })
 
   const updateEmploye: SubmitHandler<IEmploye> = async (data: IEmploye): Promise<void> => {
     const depart = getValues('depart')
-    console.log('data', data)
 
-    if (etatResiliation !== 'canceled') {
-      if (!depart) {
-        console.log('update employe', data)
-        await mutateSalarie({ id, data })
-      } else {
-        const updatedData: IEmploye = {
-          ...data,
-          actif: EnumBoolean.NON,
+    if (id) {
+      if (etatResiliation !== 'canceled') {
+        if (!depart) {
+          // console.log('update_1', data)
+          updateEmployeMutation.mutate(data, {
+            onSuccess: () => {
+              refetch()
+              setNotification({
+                message: 'Salarie mis à jour avec succes',
+                color: 'success',
+              })
+            },
+            onError: (error) => {
+              setNotification({
+                message: formatError(error),
+                color: 'danger',
+              })
+            },
+          })
+        } else {
+          // Resiliation contrat
+          const updatedData: IEmploye = {
+            ...data,
+            actif: EnumBoolean.NON,
+          }
+          // console.log('update_2', data)
+          updateEmployeMutation.mutate(updatedData, {
+            onSuccess: () => {
+              navigate('/employees/list')
+            },
+          })
         }
-        console.log('resilié contrat', updatedData)
-        await mutateSalarie({ id, data: updatedData })
       }
+    } else {
+      // console.log('create', data)
+      createEmployeMutation.mutate(data, {
+        onSuccess: () => {
+          setNotification({
+            message: 'Salarie ajoute avec succes',
+            color: 'success',
+          })
+          reset()
+        },
+        onError: (error) => {
+          setNotification({
+            message: formatError(error),
+            color: 'danger',
+          })
+        },
+      })
     }
   }
 
@@ -145,44 +202,11 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
   }
 
   React.useEffect(() => {
-    if (isSuccessMutate) {
-      if (!id) {
-        reset()
-        setNotification({
-          message: 'Le salarie a bien été ajouté avec success',
-          color: 'success',
-        })
-        setValue('enfant', undefined)
-        navigate('/employees/ajout')
-      } else {
-        const depart = getValues('depart')
-        if (etatResiliation !== 'canceled') {
-          if (!depart) {
-            setNotification({
-              message: 'Le salarie a bien été modifié avec success',
-              color: 'success',
-            })
-          }
-        }
-        if (etatResiliation === 'open' && depart) {
-          navigate('/employees/list')
-        }
-      }
-    }
-
-    if (isErrorMutate) {
-      setNotification({
-        message: 'Une erreur est survenue',
-        color: 'danger',
-      })
-    }
-
     if (!showResiliationCard) {
       setValue('depart', undefined)
     }
 
     if (formEmployeValidationError && Object.keys(formEmployeValidationError).length > 0) {
-      console.log(formEmployeValidationError)
       setNotification({
         message: 'Veuillez vérifier tous les champs.',
         color: 'danger',
@@ -199,7 +223,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     }
   }, [
     watch,
-    isSuccessMutate,
     getValues,
     id,
     etatResiliation,
@@ -207,7 +230,6 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
     reset,
     showResiliationCard,
     setValue,
-    isErrorMutate,
     setNotification,
     formEmployeValidationError,
   ])
@@ -297,15 +319,17 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
           }}
         />
 
-        {formEmployeValidationError && Object.keys(formEmployeValidationError).length > 0 ? (
+        {formEmployeValidationError &&
+        Object.keys(formEmployeValidationError).length > 0 &&
+        notification ? (
           <CustomCAlert color={notification.color}>{notification.message}</CustomCAlert>
         ) : null}
-        {isSuccessMutate && (
+        {notification && (
           <CustomCAlert color={notification.color}>{notification.message}</CustomCAlert>
         )}
-        {isErrorMutate && (
+        {/* {isErrorMutate && (
           <CustomCAlert color={notification.color}>{notification.message}</CustomCAlert>
-        )}
+        )} */}
 
         <CCard>
           <FormEmployeGroupButton

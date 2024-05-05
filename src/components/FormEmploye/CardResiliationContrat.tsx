@@ -31,7 +31,6 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
 
   const dateDepart = getValue('depart.date')
   React.useEffect(() => {
-    console.log('dateDepart', dateDepart)
     if (!dateDepart) {
       setValue('depart.date', format(new Date(), 'yyyy-MM-dd'))
     }
