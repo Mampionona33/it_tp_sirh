@@ -49,7 +49,7 @@ class ParametreService {
         baseURL: this.REACT_APP_API_BASE_URL,
       })
 
-      this.resp = await instance.post('/parametres/modif', parametre, {
+      this.resp = await instance.post('/parametres/modif/paie', parametre, {
         auth: {
           username: this.login,
           password: this.pass,
