@@ -9,23 +9,28 @@ interface CustomCAlertProps extends CAlertProps {
 }
 
 const CustomCAlert = React.forwardRef<HTMLDivElement, CustomCAlertProps>(
-  ({ children, timer = 8000, onClose, ...props }, ref) => {
+  ({ children, timer, onClose, ...props }, ref) => {
     const [show, setShow] = useState(Boolean(children))
 
     useEffect(() => {
+      let timeoutId: NodeJS.Timeout // Déclarer la variable timeoutId en dehors de la condition if
+
       if (children) {
         setShow(true)
 
-        const timeoutId = setTimeout(() => {
-          setShow(false)
-          onClose && onClose() // Informer le parent que l'alerte a été fermée
-        }, timer)
-
-        return () => {
-          clearTimeout(timeoutId)
+        if (timer && timer > 0) {
+          // Vérifier que timer est défini et supérieur à zéro
+          timeoutId = setTimeout(() => {
+            setShow(false)
+            onClose && onClose() // Informer le parent que l'alerte a été fermée
+          }, timer)
         }
       } else {
         setShow(false)
+      }
+
+      return () => {
+        clearTimeout(timeoutId) // Assurer que clearTimeout est appelé dans tous les cas
       }
     }, [children, timer, onClose])
 

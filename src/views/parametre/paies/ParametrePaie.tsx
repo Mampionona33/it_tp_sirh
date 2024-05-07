@@ -10,6 +10,7 @@ import ButtonWithIcon from '@src/components/buttons/ButtonWithIcon'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useMutation } from '@tanstack/react-query'
 import parametreService from '@src/services/ParametreService'
+import InlineLoading from '@src/components/loadings/InlineLoading'
 
 export interface IParametrePaie {
   plafondSme?: number
@@ -46,6 +47,9 @@ const ParametrePaie = () => {
     error: errorFetchParameter,
     isSuccess: isSuccessFetchParameter,
   } = useFetchParametre()
+  const [notification, setNotification] = React.useState<
+    { message: string; color: string } | undefined
+  >(undefined)
 
   const { mutate, error, isError, isSuccess, isPending } = useMutation({
     mutationFn: async (data: IParametrePaie) => await parametreService.updatePaie(data),
@@ -84,76 +88,42 @@ const ParametrePaie = () => {
     mutate(data, {
       onError: (error) => {
         console.log(error)
+        setNotification({
+          message: formatError(error),
+          color: 'danger',
+        })
       },
       onSuccess: () => {
         console.log('ok')
+        setNotification({
+          message: 'Parametres Paie mis à jour avec succes',
+          color: 'success',
+        })
       },
     })
   }
 
   return (
-    <form action="" className="flex flex-col gap-4" onSubmit={handleSubmit(submitData)}>
-      <div className="classeCard">
-        <h1 className="classeCardTitle">Parametres Paie</h1>
-        <div className="classeCardBody grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          <Controller
-            control={control}
-            name="plafondSme"
-            render={({ field: { onChange, value }, fieldState: { error } }) => {
-              return (
-                <div>
-                  <InputWithFloatingLabel
-                    label="Plafond SME"
-                    name="plafondSme"
-                    id="plafondSme"
-                    placeholder="Plafond SME"
-                    type="number"
-                    min={0}
-                    onChange={onChange}
-                    value={value || undefined}
-                    onFocus={handleFocus}
-                  />
-                  {error && <span className="text-sm text-customRed-800">{error.message}</span>}
-                </div>
-              )
-            }}
-          />
-          <Controller
-            control={control}
-            name="reductionChargeParEnfant"
-            render={({ field: { onChange, value }, fieldState: { error } }) => {
-              return (
-                <div>
-                  <InputWithFloatingLabel
-                    label="Reduction pour enfant"
-                    name="reductionChargeParEnfant"
-                    id="reductionChargeParEnfant"
-                    placeholder="Réduction de charge par enfant"
-                    type="number"
-                    min={0}
-                    onChange={onChange}
-                    value={value || undefined}
-                    onFocus={handleFocus}
-                  />
-                  {error && <span className="text-sm text-customRed-800">{error.message}</span>}
-                </div>
-              )
-            }}
-          />
-          {data?.cotisations?.map((cotisation, index) => (
-            <div key={index}>
-              <Controller
-                control={control}
-                name={`cotisations.${index}.part_salarie`}
-                render={({ field: { onChange, value }, fieldState: { error } }) => (
+    <>
+      {notification && (
+        <CustomCAlert color={notification.color}>{notification.message}</CustomCAlert>
+      )}
+      <form action="" className="flex flex-col gap-4" onSubmit={handleSubmit(submitData)}>
+        <div className="classeCard">
+          <h1 className="classeCardTitle">Parametres Paie</h1>
+          <div className="classeCardBody grid gap-3 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <Controller
+              control={control}
+              name="plafondSme"
+              render={({ field: { onChange, value }, fieldState: { error } }) => {
+                return (
                   <div>
                     <InputWithFloatingLabel
-                      label={`Cotisation ${cotisation.name} salarié`}
-                      name={`cotisations[${index}].part_salarie`}
-                      id={`part_salarie_${index}`}
-                      placeholder={`Part salarié de ${cotisation.name}`}
+                      label="Plafond SME"
+                      name="plafondSme"
+                      id="plafondSme"
+                      placeholder="Plafond SME"
                       type="number"
-                      step={'any'}
                       min={0}
                       onChange={onChange}
                       value={value || undefined}
@@ -161,24 +131,21 @@ const ParametrePaie = () => {
                     />
                     {error && <span className="text-sm text-customRed-800">{error.message}</span>}
                   </div>
-                )}
-              />
-            </div>
-          ))}
-          {data?.cotisations?.map((cotisation, index) => (
-            <div key={index}>
-              <Controller
-                control={control}
-                name={`cotisations.${index}.part_employeur`}
-                render={({ field: { onChange, value }, fieldState: { error } }) => (
+                )
+              }}
+            />
+            <Controller
+              control={control}
+              name="reductionChargeParEnfant"
+              render={({ field: { onChange, value }, fieldState: { error } }) => {
+                return (
                   <div>
                     <InputWithFloatingLabel
-                      label={`Cotisation ${cotisation.name} employeur`}
-                      name={`cotisations[${index}].part_employeur`}
-                      id={`part_employeur_${index}`}
-                      placeholder={`Part employeur de ${cotisation.name}`}
+                      label="Reduction pour enfant"
+                      name="reductionChargeParEnfant"
+                      id="reductionChargeParEnfant"
+                      placeholder="Réduction de charge par enfant"
                       type="number"
-                      step={'any'}
                       min={0}
                       onChange={onChange}
                       value={value || undefined}
@@ -186,18 +153,74 @@ const ParametrePaie = () => {
                     />
                     {error && <span className="text-sm text-customRed-800">{error.message}</span>}
                   </div>
-                )}
-              />
-            </div>
-          ))}
+                )
+              }}
+            />
+            {data?.cotisations?.map((cotisation, index) => (
+              <div key={index}>
+                <Controller
+                  control={control}
+                  name={`cotisations.${index}.part_salarie`}
+                  render={({ field: { onChange, value }, fieldState: { error } }) => (
+                    <div>
+                      <InputWithFloatingLabel
+                        label={`Cotisation ${cotisation.name} salarié`}
+                        name={`cotisations[${index}].part_salarie`}
+                        id={`part_salarie_${index}`}
+                        placeholder={`Part salarié de ${cotisation.name}`}
+                        type="number"
+                        step={'any'}
+                        min={0}
+                        onChange={onChange}
+                        value={value || undefined}
+                        onFocus={handleFocus}
+                      />
+                      {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+                    </div>
+                  )}
+                />
+              </div>
+            ))}
+            {data?.cotisations?.map((cotisation, index) => (
+              <div key={index}>
+                <Controller
+                  control={control}
+                  name={`cotisations.${index}.part_employeur`}
+                  render={({ field: { onChange, value }, fieldState: { error } }) => (
+                    <div>
+                      <InputWithFloatingLabel
+                        label={`Cotisation ${cotisation.name} employeur`}
+                        name={`cotisations[${index}].part_employeur`}
+                        id={`part_employeur_${index}`}
+                        placeholder={`Part employeur de ${cotisation.name}`}
+                        type="number"
+                        step={'any'}
+                        min={0}
+                        onChange={onChange}
+                        value={value || undefined}
+                        onFocus={handleFocus}
+                      />
+                      {error && <span className="text-sm text-customRed-800">{error.message}</span>}
+                    </div>
+                  )}
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="classeCard">
-        <div className="classeCardBody flex justify-end">
-          <ButtonWithIcon type="submit" label="Enregistrer" />
+        <div className="classeCard">
+          <div className="classeCardBody flex justify-end">
+            {isPending ? (
+              <div className="flex items-center h-8">
+                <InlineLoading />
+              </div>
+            ) : (
+              <ButtonWithIcon type="submit" label="Enregistrer" />
+            )}
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </>
   )
 }
 
