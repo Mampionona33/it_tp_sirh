@@ -61,6 +61,6 @@ const EmployeSchma = new Schema({
 })
 
 // Créer le modèle à partir du schéma
-const EmployeModel = mongoose.model('Employe', EmployeSchma, 'employes')
+const EmployeModel = mongoose.model('Employes', EmployeSchma, 'employes')
 
 export default EmployeModel

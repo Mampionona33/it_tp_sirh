@@ -14,6 +14,7 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
   formEmployeValidationError,
   setValue,
   getValue,
+  reset,
   id,
 }) => {
   // const dispatch = useDispatch()
@@ -31,10 +32,17 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
 
   const dateDepart = getValue('depart.date')
   React.useEffect(() => {
+    let mount = true
+    if (mount) {
+      setValue('depart', undefined)
+    }
     if (!dateDepart) {
       setValue('depart.date', format(new Date(), 'yyyy-MM-dd'))
     }
-  }, [dateDepart, setValue, getValue])
+    return () => {
+      mount = false
+    }
+  }, [dateDepart, setValue, getValue, reset])
 
   return (
     <>

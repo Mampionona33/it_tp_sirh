@@ -4,6 +4,7 @@ import {
   UseFormGetValues,
   UseFormHandleSubmit,
   UseFormRegister,
+  UseFormReset,
   UseFormSetValue,
 } from 'react-hook-form'
 import { IEmploye } from './interfaceEmploye'
@@ -14,6 +15,7 @@ export interface ICardResiliationContratProps {
   setValue: UseFormSetValue<IEmploye>
   getValue: UseFormGetValues<IEmploye>
   register: UseFormRegister<IEmploye>
+  reset: UseFormReset<IEmploye>
   handleSubmit: UseFormHandleSubmit<IEmploye, IEmploye>
   formEmployeValidationError: FieldErrors<IEmploye>
 }

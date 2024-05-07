@@ -342,6 +342,7 @@ const FormEmploye: React.FC<IFormEmploye> = ({ id }) => {
         {showResiliationCard ? (
           <CardResiliationContrat
             id={id}
+            reset={reset}
             control={controlFormEmploye}
             register={register}
             handleSubmit={handleSubmit}
