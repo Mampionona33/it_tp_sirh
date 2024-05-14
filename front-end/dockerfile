@@ -1,5 +1,15 @@
 # Utilisez une image de base Node.js
-FROM node:14
+FROM node:18
+
+# Installer make
+RUN apt-get update && apt-get install -y make
+
+# Installation de Yarn
+RUN apt-get install -y curl gnupg && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && \
+    apt-get install -y yarn
 
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
@@ -7,11 +17,8 @@ WORKDIR /app
 # Copiez le package.json et le package-lock.json dans le conteneur
 COPY package*.json ./
 
-# Installez les dépendances
-RUN npm install
+# Exclure node_modules lors de la copie
+COPY . . 
 
-# Copiez le reste des fichiers du projet dans le conteneur
-COPY . .
-
-# Exécutez un terminal interactif lorsque le conteneur démarre
-CMD ["/bin/bash"]
+# Exécutez la commande make start lorsque le conteneur démarre
+CMD ["make", "start"]
