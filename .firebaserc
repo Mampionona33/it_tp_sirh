@@ -1,9 +1,0 @@
-{
-  "projects": {
-    "default": "la-ligne-scandinave-dev",
-    "prod": "la-ligne-scandinave",
-    "dev": "la-ligne-scandinave-dev"
-  },
-  "targets": {},
-  "etags": {}
-}

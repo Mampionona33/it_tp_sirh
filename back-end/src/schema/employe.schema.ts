@@ -1,5 +1,4 @@
 import mongoose, { Schema } from 'mongoose'
-import { string } from 'prop-types'
 
 // Définir le schéma pour les données des enfants
 const EnfantSchema = new Schema({
