@@ -84,11 +84,11 @@ const _nav = [
     to: '/admin',
     icon: <CIcon icon={cilLockLocked} customClassName="nav-icon" />,
     items: [
-      {
-        component: CNavItem,
-        name: 'Utilisateur',
-        to: '/admin/utilisateur',
-      },
+      // {
+      //   component: CNavItem,
+      //   name: 'Utilisateur',
+      //   to: '/admin/utilisateur',
+      // },
       {
         component: CNavItem,
         name: 'Importer Heures',
