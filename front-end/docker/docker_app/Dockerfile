@@ -14,11 +14,11 @@ RUN apt-get install -y curl gnupg && \
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copiez le package.json et le package-lock.json dans le conteneur
-COPY package*.json ./
+# Copiez le package.json et le yarn.lock dans le conteneur
+COPY package.json yarn.lock ./
 
-# Exclure node_modules lors de la copie
-COPY . . 
+# Exposer le port 3000 pour l'application
+EXPOSE 3000
 
-# Exécutez la commande make start lorsque le conteneur démarre
-CMD ["make", "start"]
+# Commande pour démarrer l'application
+# CMD ["make", "build"]

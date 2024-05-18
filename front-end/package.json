@@ -13,11 +13,12 @@
   "license": "MIT",
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
-    "build": "craco build",
+    "build": "NODE_ENV=production rm -rf .env && cp .env.local.production .env && craco build",
     "start": "rm -rf .env && cp .env.local.dev .env && craco start",
     "lint": "eslint \"src/**/*.js\"",
     "prettier": "npx prettier --write 'src/**/*.{js,ts,tsx}'",
     "test": "craco test",
+    "deploy-docker": "craco start",
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "craco --inspect-brk test --runInBand",
     "find-deadcode": "ts-prune | (! grep -v 'used in module')",
