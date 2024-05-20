@@ -1,5 +1,5 @@
 # Utilisez une image de base Node.js
-FROM node:18
+FROM node:18 as builder
 
 # Installer make
 RUN apt-get update && apt-get install -y make
@@ -17,8 +17,17 @@ WORKDIR /app
 # Copiez le package.json et le yarn.lock dans le conteneur
 COPY package.json yarn.lock ./
 
+# Copiez le reste des fichiers du projet dans le conteneur
+COPY . .
+
+# Installer les packages
+RUN yarn install --verbosity=verbose --frozen-lockfile
+
+# Build the app
+RUN npm run build --ENV=production
+
 # Exposer le port 3000 pour l'application
 EXPOSE 3000
 
 # Commande pour démarrer l'application
-# CMD ["make", "build"]
+# CMD ["yarn", "start"]

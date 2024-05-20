@@ -13,7 +13,7 @@
   "license": "MIT",
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
-    "build": "NODE_ENV=production rm -rf .env && cp .env.local.production .env && craco build",
+    "build": "craco build",
     "start": "rm -rf .env && cp .env.local.dev .env && craco start",
     "lint": "eslint \"src/**/*.js\"",
     "prettier": "npx prettier --write 'src/**/*.{js,ts,tsx}'",
@@ -80,6 +80,7 @@
     "react-tooltip": "^5.24.0",
     "redux": "4.2.1",
     "redux-persist": "^6.0.0",
+    "serve": "^14.2.3",
     "simplebar-react": "^2.4.3",
     "to-words": "^4.0.0",
     "uuid": "^9.0.1",

@@ -1,11 +1,10 @@
-install:
-	yarn
+SHELL := /bin/bash
 
-build: install
-	yarn build
+down:
+	docker compose down
 
-build-container: build
-	docker-compose up --build -d
+build:	down
+	docker compose build
 
-deploy: install build-container
-	yarn deploy-docker
+serve: build
+	docker compose up

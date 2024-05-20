@@ -1,20 +1,16 @@
 version: '3.7'
 
 services:
-  app:
+  front-end:
+    container_name: la-ligne-scandinave-front-end
+    stdin_open: true
+    tty: true
     build:
       context: .
-      dockerfile: docker/docker_app/Dockerfile
-    volumes:
-      - .:/app
-    environment:
-      - NODE_ENV=production
-
-  nginx:
-    build:
-      context: .
-      dockerfile: docker/docker_nginx/Dockerfile
+      dockerfile: docker/Dockerfile
+    expose:
+      - 8000
     ports:
-      - '8080:80'
-    depends_on:
-      - app
+      - 8000:80
+    environment:
+      - CHOKIDAR_USEPOLLING=true
