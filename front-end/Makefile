@@ -9,5 +9,8 @@ down:
 build:	down
 	docker compose build
 
-serve: build
+build-and-serve: build
 	docker compose up --remove-orphans
+
+serve:
+	docker compose up

@@ -1,37 +1,41 @@
 # Utilisez une image de base Node.js
-FROM node:18 as builder
-
-# Installer make
-RUN apt-get update && apt-get install -y make
-
-# Installation de Yarn
-RUN apt-get install -y curl gnupg && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && \
-    apt-get install -y yarn
+FROM node:18 AS builder
 
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Installer 'serve' pour servir les fichiers statiques
-RUN npm install -g serve
-
-# Copiez le package.json et le yarn.lock dans le conteneur
+# Copier le package.json et le yarn.lock dans le conteneur
 COPY package.json yarn.lock ./
 
-# Copiez le reste des fichiers du projet dans le conteneur
+# Installer les packages
+RUN yarn install --frozen-lockfile
+
+# Copier le reste des fichiers du projet dans le conteneur
 COPY . .
 
-# Installer les packages
-RUN yarn install --verbosity=verbose --frozen-lockfile
+# Construire l'application React
+RUN yarn build
 
+# Utilisez une nouvelle image de base Node.js pour le serveur
+FROM node:18 AS server
 
-# Build the app
-RUN npm run build --ENV=production
+# Définissez le répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copier les fichiers de construction de l'étape précédente
+COPY --from=builder /app/build ./build
+
+# Copier le package.json et le yarn.lock pour installer uniquement les dépendances nécessaires au serveur
+COPY package.json yarn.lock ./
+
+# Installer uniquement les dépendances de production pour le serveur
+RUN yarn install --production
+
+# Copier le fichier serveur
+COPY server.mts ./
 
 # Exposer le port 3000 pour l'application
 EXPOSE 3000
 
-# Commande pour démarrer l'application
-CMD ["serve", "-s", "build"]
+# Commande pour démarrer le serveur Express
+CMD ["node", "server.mts"]
