@@ -3,7 +3,7 @@ SHELL := /bin/bash
 clean:
 	docker system prune -a
 
-down:	clean
+down:	
 	docker compose down
 
 build:	down
