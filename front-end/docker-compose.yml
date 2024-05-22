@@ -1,14 +1,10 @@
 services:
-  front-end:
+  app:
     container_name: la-ligne-scandinave-front-end
     stdin_open: true
     tty: true
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: docker/app_docker/Dockerfile
     expose:
-      - 8000
-    ports:
-      - 8000:80/tcp
-    environment:
-      - CHOKIDAR_USEPOLLING=true
+      - 3000:3000

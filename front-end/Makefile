@@ -10,4 +10,4 @@ build:	down
 	docker compose build
 
 serve: build
-	docker compose up
+	docker compose up --remove-orphans

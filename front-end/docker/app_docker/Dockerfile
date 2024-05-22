@@ -14,6 +14,9 @@ RUN apt-get install -y curl gnupg && \
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
 
+# Installer 'serve' pour servir les fichiers statiques
+RUN npm install -g serve
+
 # Copiez le package.json et le yarn.lock dans le conteneur
 COPY package.json yarn.lock ./
 
@@ -23,6 +26,7 @@ COPY . .
 # Installer les packages
 RUN yarn install --verbosity=verbose --frozen-lockfile
 
+
 # Build the app
 RUN npm run build --ENV=production
 
@@ -30,4 +34,4 @@ RUN npm run build --ENV=production
 EXPOSE 3000
 
 # Commande pour démarrer l'application
-# CMD ["yarn", "start"]
+CMD ["serve", "-s", "build"]
