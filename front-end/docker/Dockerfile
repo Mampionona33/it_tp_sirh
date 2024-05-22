@@ -18,12 +18,15 @@ RUN yarn build
 
 # STAGE 2: Serve Stage
 FROM php:8.1-apache-bullseye
+# FROM httpd:2.4
 
 # Install required packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        htop \
-        default-mysql-client \
+    htop \
+    default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
+
+
 
 # Enable mod_rewrite for Apache
 RUN a2enmod rewrite
@@ -45,6 +48,9 @@ RUN rm -rf /var/www/html/*
 
 # Copy the built application from the build stage
 COPY --from=build-stage /usr/app/build .
+
+# Copier le fichier .htaccess
+COPY .htaccess /var/www/html/
 
 # Expose port 80
 EXPOSE 80
