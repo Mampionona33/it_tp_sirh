@@ -11,7 +11,7 @@ export interface ICardInfoPaieEmployeProps {
   data: Pick<IEmploye, 'salaire_de_base' | 'mode_paiement_salaire' | 'rib' | 'num_cnaps'>
   formEmployeValidationError: FieldErrors<IEmploye>
   register: UseFormRegister<IEmploye>
-  control: Control<IEmploye, any, IEmploye>
+  control: Control<IEmploye>
   setValue: UseFormSetValue<IEmploye>
   getValues: UseFormGetValues<IEmploye>
 }

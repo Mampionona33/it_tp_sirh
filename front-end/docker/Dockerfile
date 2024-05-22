@@ -5,10 +5,10 @@ FROM node:18 as build-stage
 WORKDIR /usr/app
 
 # Copy package.json and yarn.lock to the workdir
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Install app dependencies
-# RUN yarn install --frozen-lockfile
+RUN yarn install --frozen-lockfile
 
 # Copy all files in current dir to app dir
 COPY . .

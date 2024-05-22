@@ -13,7 +13,7 @@ export interface ICardEnfantEmployeProps {
   index: number | string
   formEmployeValidationError: FieldErrors<IEmploye>
   register: UseFormRegister<IEmploye>
-  control: Control<IEmploye, any, IEmploye>
+  control: Control<IEmploye>
   setValue: UseFormSetValue<IEmploye>
   value: FieldArrayWithId<IEmploye, 'enfant', 'id'>
   remove: UseFieldArrayRemove

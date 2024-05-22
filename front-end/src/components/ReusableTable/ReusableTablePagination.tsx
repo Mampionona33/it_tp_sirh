@@ -125,6 +125,8 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
         disabled={!canPreviousPage}
         placeholder="Previous"
         className="flex items-center space-x-2 "
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
       >
         <ArrowLeftIcon className="w-5 h-5 " />
         Previous
@@ -139,6 +141,8 @@ const ReusableTablePagination: React.FC<IReusableTablePaginationProps> = ({
         disabled={!canNextPage}
         placeholder="Next"
         className="flex items-center space-x-2"
+        onPointerEnterCapture={undefined}
+        onPointerLeaveCapture={undefined}
       >
         Next
         <ArrowRightIcon className="w-5 h-5" />
