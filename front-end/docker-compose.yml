@@ -11,6 +11,6 @@ services:
     expose:
       - 8000
     ports:
-      - 8000:80
+      - 8000:80/tcp
     environment:
       - CHOKIDAR_USEPOLLING=true
