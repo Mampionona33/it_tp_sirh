@@ -2,6 +2,9 @@ import express from 'express'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express()
 
@@ -9,8 +12,12 @@ if (!process.env.PORT) {
   throw new Error('PORT environment variable is not set')
 }
 
+if (!process.env.HOST) {
+  throw new Error('HOST environment variable is not set')
+}
+
 const PORT = parseInt(process.env.PORT) || 3000
-const HOST = '0.0.0.0'
+const HOST = process.env.HOST || '0.0.0.0'
 
 // Obtenir le chemin absolu du répertoire courant
 const __filename = fileURLToPath(import.meta.url)

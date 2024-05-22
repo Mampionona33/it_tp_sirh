@@ -32,10 +32,10 @@ COPY package.json yarn.lock ./
 RUN yarn install --production
 
 # Copier le fichier serveur
-COPY server.mts ./
+COPY server.js ./
 
 # Exposer le port 3000 pour l'application
 EXPOSE 3000
 
 # Commande pour démarrer le serveur Express
-CMD ["node", "server.mts"]
+CMD ["node", "server.js"]
