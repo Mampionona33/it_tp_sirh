@@ -31,7 +31,9 @@ Assurez-vous que Make est installé sur votre système pour utiliser les command
 
 [Installation make sous Linux](https://askubuntu.com/questions/161104/how-do-i-install-make)
 
-## Ajout d'un hôte
+## Processus de déploiement en local avec un nom de host différent de localhost
+
+### Ajout d'un hôte
 
 Pour ajouter un hôte au fichier hosts, vous pouvez utiliser la commande suivante :
 
@@ -39,7 +41,7 @@ Pour ajouter un hôte au fichier hosts, vous pouvez utiliser la commande suivant
 make add-host SERVER_NAME=<nom_du_serveur>
 ```
 
-## Configuration manuel du fichier hosts
+### Configuration manuel du fichier hosts
 
 Pour configurer le nom d'hôte, exécutez la commande suivante :
 
@@ -49,7 +51,7 @@ make open-hosts
 
 Cela ouvrira le fichier hosts pour que vous puissiez le modifier.
 
-## Construction et démarrage du serveur
+### Construction et démarrage du serveur
 
 Pour construire et démarrer le serveur, exécutez la commande suivante :
 
@@ -57,7 +59,7 @@ Pour construire et démarrer le serveur, exécutez la commande suivante :
 make build-and-serve
 ```
 
-## Arrêt du serveur
+### Arrêt du serveur
 
 Pour arrêter le serveur, exécutez la commande suivante :
 
@@ -65,7 +67,7 @@ Pour arrêter le serveur, exécutez la commande suivante :
 make down
 ```
 
-## Mise à jour de l'application
+### Mise à jour de l'application
 
 Pour mettre à jour l'application, exécutez la commande suivante :
 
@@ -73,7 +75,7 @@ Pour mettre à jour l'application, exécutez la commande suivante :
 make build-and-serve
 ```
 
-## Édition du fichier hosts
+### Édition du fichier hosts
 
 Pour ouvrir le fichier hosts pour son édition, exécutez la commande suivante :
 
@@ -83,7 +85,7 @@ make open-hosts
 
 Assurez-vous de remplacer `<nom_du_serveur>` par le nom de votre serveur.
 
-## Suppression d'un hôte
+### Suppression d'un hôte
 
 Pour supprimer un hôte du fichier hosts, exécutez la commande suivante :
 
@@ -93,7 +95,7 @@ make remove-host SERVER_NAME=<nom_du_serveur>
 
 Assurez-vous de remplacer `<nom_du_serveur>` par le nom de votre serveur.
 
-## Liste complète des commandes Makefile
+### Liste complète des commandes Makefile
 
 - `make reset-docker` : Nettoie l'environnement Docker en supprimant tous les conteneurs et les images.
 - `make remove-docker_image` : Supprime une image Docker spécifique.
@@ -123,6 +125,8 @@ git pull origin main
 ```
 
 Assurez-vous de remplacer `<frontend_directory>` par le nom du répertoire que vous souhaitez utiliser pour le front-end.
+
+## Processus de déploiement en local avec un nom de host différent de localhost
 
 ### Ajout d'un hôte
 
