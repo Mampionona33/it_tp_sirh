@@ -6,6 +6,12 @@ CONTAINER_NAME ?= la-ligne-scandinave-front-end
 reset-docker:
 	docker system prune -a
 
+view-docker-status:
+	docker system df
+
+remove-docker-cache:
+	docker builder prune
+
 remove-docker_image:
 	docker image rm -f $(CONTAINER_NAME)
 

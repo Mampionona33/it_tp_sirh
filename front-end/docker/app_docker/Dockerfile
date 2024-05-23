@@ -29,7 +29,7 @@ COPY --from=builder /app/build ./build
 COPY package.json ./
 
 # Installer uniquement les dépendances de production pour le serveur
-RUN yarn install --production
+# RUN yarn install --production
 
 # Copier le fichier serveur
 COPY server.mjs ./
