@@ -11,38 +11,38 @@ const Typography = lazyWithRetry(() => import('./views/theme/typography/Typograp
 // const ListEmployes = lazyWithRetry(() => import('./views/employee/list/List'))
 const ListEmployes = lazyWithRetry(() => import('@views/employee/list/List'))
 const FicheEmploye = lazyWithRetry(() => import('src/views/employee/fiche/Fiche'))
-const BulletinPaie = lazyWithRetry(
-  () => import('src/views/gestion-paie/bulletinDePaie/BulletinPaie'),
+const BulletinPaie = lazyWithRetry(() =>
+  import('src/views/gestion-paie/bulletinDePaie/BulletinPaie'),
 )
 const AjoutEmploye = lazyWithRetry(() => import('@views/employee/ajout/AjoutEmploye'))
 
 // Gestion de paie
 const GestionPaie = lazyWithRetry(() => import('@views/gestion-paie/GestionPaie'))
-const HistoriquePaie = lazyWithRetry(
-  () => import('@src/views/gestion-paie/historique/HistoriquePaie'),
+const HistoriquePaie = lazyWithRetry(() =>
+  import('@src/views/gestion-paie/historique/HistoriquePaie'),
 )
 const ValidePaie = lazyWithRetry(() => import('@views/gestion-paie/valider-paie/ValidePaie'))
 // Etat divers
-const DeclarationCnaps = lazyWithRetry(
-  () => import('src/views/etats_divers/declarationCnaps/DeclarationCnaps'),
+const DeclarationCnaps = lazyWithRetry(() =>
+  import('src/views/etats_divers/declarationCnaps/DeclarationCnaps'),
 )
 const PageIrsa = lazyWithRetry(() => import('src/views/etats_divers/IRSA/PageIrsa'))
 const PageOmsi = lazyWithRetry(() => import('src/views/etats_divers/OMSI/PageOmsi'))
 
 // Gestion de paie
-const DetailPaieValide = lazyWithRetry(
-  () => import('src/views/gestion-paie/details/DetailPaieValide'),
+const DetailPaieValide = lazyWithRetry(() =>
+  import('src/views/gestion-paie/details/DetailPaieValide'),
 )
 
 // Administration
-const ImportHeures = lazyWithRetry(
-  () => import('src/views/administration/ImportHeures/ImportHeures'),
+const ImportHeures = lazyWithRetry(() =>
+  import('src/views/administration/ImportHeures/ImportHeures'),
 )
 
 // Paramétre
 const Parametre = lazyWithRetry(() => import('src/views/parametre/Parametre'))
-const ParametreSalarie = lazyWithRetry(
-  () => import('src/views/parametre/salaries/ParametreSalarie'),
+const ParametreSalarie = lazyWithRetry(() =>
+  import('src/views/parametre/salaries/ParametreSalarie'),
 )
 const ParametrePaie = lazyWithRetry(() => import('src/views/parametre/paies/ParametrePaie'))
 

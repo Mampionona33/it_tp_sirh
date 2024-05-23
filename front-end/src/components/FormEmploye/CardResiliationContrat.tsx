@@ -17,19 +17,6 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
   reset,
   id,
 }) => {
-  // const dispatch = useDispatch()
-  // const handleTexteAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-  //   const { name, value } = event.target
-  //   // dispatch(setFormEmploye({ depart: { ...depart, [name]: value } }))
-  // }
-
-  // const {
-  //   mutateAsync: mutateSalarie,
-  //   error: errorMutate,
-  //   isError: isErrorMutate,
-  //   isSuccess: isSuccessMutate,
-  // } = useMutateSalarie()
-
   const dateDepart = getValue('depart.date')
   React.useEffect(() => {
     let mount = true
@@ -50,9 +37,9 @@ const CardResiliationContrat: React.FC<ICardResiliationContratProps> = ({
         <h2 className="classeCardTitle text-customRed-930">Résiliation du contrat</h2>
         <CCardBody className="p-3 flex flex-col gap-3">
           <CCardText className="text-sm text-customRed-930">
-            Veuillez confirmer la résiliation en saisissant les informations suivantes: nom,
+            {`Veuillez confirmer la résiliation en saisissant les informations suivantes: nom,
             matricule de l'employe, ainsi que le motif de la resiliation. Merci de noter que cette
-            action et irréversible. Assurez-vous de suivre le format suivant:
+            action et irréversible. Assurez-vous de suivre le format suivant:`}
             <strong>nom matricule</strong>.
           </CCardText>
 

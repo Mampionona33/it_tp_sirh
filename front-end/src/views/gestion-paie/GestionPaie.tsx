@@ -89,7 +89,7 @@ const GestionPaie: React.FC = () => {
     }),
     columnHelper.accessor('date_embauche', {
       cell: (info) => info.getValue(),
-      header: () => <div className="my-1">Date d'embauche</div>,
+      header: () => <div className="my-1">{`Date d'embauche`}</div>,
       enableHiding: true,
       enableColumnFilter: false,
     }),
