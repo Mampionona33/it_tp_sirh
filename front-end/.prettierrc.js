@@ -7,7 +7,7 @@ module.exports = {
   endOfLine: 'auto',
   overrides: [
     {
-      files: ['*.ts', '*.tsx', '*.js', '*.jsx', '*.mjs', '*.mts'],
+      files: ['*.ts', '*.tsx'],
       options: {
         parser: 'typescript',
       },
