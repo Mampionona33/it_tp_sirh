@@ -1,5 +1,6 @@
 services:
   app:
+    image: la-ligne-scandinave-front-end
     container_name: la-ligne-scandinave-front-end
     stdin_open: true
     tty: true

@@ -5,10 +5,10 @@ FROM node:18 AS builder
 WORKDIR /app
 
 # Copier le package.json et le yarn.lock dans le conteneur
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Installer les packages
-RUN yarn install --frozen-lockfile
+# RUN yarn install --frozen-lockfile
 
 # Copier le reste des fichiers du projet dans le conteneur
 COPY . .
@@ -26,16 +26,16 @@ WORKDIR /app
 COPY --from=builder /app/build ./build
 
 # Copier le package.json et le yarn.lock pour installer uniquement les dépendances nécessaires au serveur
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Installer uniquement les dépendances de production pour le serveur
 RUN yarn install --production
 
 # Copier le fichier serveur
-COPY server.js ./
+COPY server.mjs ./
 
 # Exposer le port 3000 pour l'application
 EXPOSE 3000
 
 # Commande pour démarrer le serveur Express
-CMD ["node", "server.js"]
+CMD ["node", "server.mjs"]
