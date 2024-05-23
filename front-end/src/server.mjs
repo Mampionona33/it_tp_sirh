@@ -16,8 +16,8 @@ if (!process.env.HOST) {
   throw new Error('HOST environment variable is not set')
 }
 
-const PORT = parseInt(process.env.PORT) || 3000
-const HOST = process.env.HOST || '0.0.0.0'
+const PORT = parseInt(process.env.PORT)
+const HOST = process.env.HOST
 
 // Obtenir le chemin absolu du répertoire courant
 const __filename = fileURLToPath(import.meta.url)

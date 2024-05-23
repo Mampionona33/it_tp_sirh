@@ -32,7 +32,7 @@ COPY package.json ./
 RUN yarn install --production
 
 # Copier le fichier serveur
-COPY server.mjs ./
+COPY ./src/server.mjs ./
 
 # Exposer le port 3000 pour l'application
 EXPOSE 3000
