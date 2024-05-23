@@ -29,6 +29,7 @@ Assurez-vous de remplacer `<frontend_directory>` par le nom du répertoire que v
 
 Assurez-vous que Make est installé sur votre système pour utiliser les commandes du Makefile.
 
+[Installation make sous Linux](https://askubuntu.com/questions/161104/how-do-i-install-make)
 
 ## Ajout d'un hôte
 
@@ -103,4 +104,89 @@ Assurez-vous de remplacer `<nom_du_serveur>` par le nom de votre serveur.
 - `make open-hosts` : Ouvre le fichier hosts pour édition.
 - `make add-host` : Ajoute un hôte au fichier hosts.
 - `make remove-host` : Supprime un hôte du fichier hosts.
+
+---
+
+## Option pour les utilisateurs Windows sans Make
+
+### Initialisation
+
+Pour initialiser le projet et récupérer la branche "main" du dossier front-end, exécutez les commandes suivantes dans votre terminal :
+
+```powershell
+git init <frontend_directory>
+cd <frontend_directory>
+git remote add origin https://github.com/Mampionona33/it_tp_sirh.git
+git sparse-checkout init --cone
+git sparse-checkout set front-end
+git pull origin main
 ```
+
+Assurez-vous de remplacer `<frontend_directory>` par le nom du répertoire que vous souhaitez utiliser pour le front-end.
+
+### Ajout d'un hôte
+
+Ouvrez le fichier hosts pour l'édition :
+
+```powershell
+Start-Process notepad C:\Windows\System32\drivers\etc\hosts -Verb RunAs
+```
+
+Ajoutez la ligne suivante dans le fichier hosts :
+
+```
+127.0.0.1 <nom_du_serveur>
+```
+
+Remplacez `<nom_du_serveur>` par le nom de votre serveur.
+
+### Configuration manuelle du fichier hosts
+
+Pour configurer le nom d'hôte, exécutez la commande suivante :
+
+```powershell
+Start-Process notepad C:\Windows\System32\drivers\etc\hosts -Verb RunAs
+```
+
+Cela ouvrira le fichier hosts pour que vous puissiez le modifier.
+
+### Construction et démarrage du serveur
+
+Pour construire et démarrer le serveur, exécutez les commandes suivantes :
+
+```powershell
+docker compose down --remove-orphans
+docker compose build --force-rm --no-cache
+docker compose up --remove-orphans
+```
+
+### Arrêt du serveur
+
+Pour arrêter le serveur, exécutez la commande suivante :
+
+```powershell
+docker compose down --remove-orphans
+```
+
+### Mise à jour de l'application
+
+Pour mettre à jour l'application, exécutez les commandes suivantes :
+
+```powershell
+git pull origin main
+docker compose down --remove-orphans
+docker compose build --force-rm --no-cache
+docker compose up --remove-orphans
+```
+
+### Suppression d'un hôte
+
+Pour supprimer un hôte du fichier hosts, ouvrez le fichier hosts pour l'édition :
+
+```powershell
+Start-Process notepad C:\Windows\System32\drivers\etc\hosts -Verb RunAs
+```
+
+Supprimez la ligne contenant le nom de votre serveur.
+
+En suivant ces instructions, vous pouvez configurer et gérer votre application de gestion de paie sous Windows, sans utiliser Make.
