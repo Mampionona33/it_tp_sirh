@@ -59,7 +59,6 @@
     "docxtemplater": "^3.42.2",
     "exceljs": "^4.4.0",
     "expect": "^29.7.0",
-    "express": "^4.19.2",
     "file-saver": "^2.0.5",
     "google-fonts": "^1.0.0",
     "material-icons": "^1.13.12",
@@ -91,9 +90,11 @@
     "zod-xlsx": "^0.9.1"
   },
   "devDependencies": {
+    "express": "^4.19.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/express": "^4.17.21",
     "@types/file-saver": "^2.0.7",
     "autoprefixer": "^10.4.16",
     "eslint-config-prettier": "^8.8.0",
@@ -103,7 +104,7 @@
     "sass": "^1.63.6",
     "tailwindcss": "^3.3.3",
     "ts-prune": "^0.10.3",
-    "typescript": "^5.2.0",
+    "typescript": "^5.4.5",
     "web-vitals": "^3.3.2"
   },
   "engines": {

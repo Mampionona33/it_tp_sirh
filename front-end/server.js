@@ -1,8 +1,6 @@
-import express from 'express'
-import path from 'path'
-import { fileURLToPath } from 'url'
-import { dirname } from 'path'
-import dotenv from 'dotenv'
+const express = require('express')
+const path = require('path')
+const dotenv = require('dotenv')
 
 dotenv.config()
 
@@ -18,10 +16,6 @@ if (!process.env.HOST) {
 
 const PORT = parseInt(process.env.PORT) || 3000
 const HOST = process.env.HOST || '0.0.0.0'
-
-// Obtenir le chemin absolu du répertoire courant
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
 
 // Servir les fichiers statiques du dossier 'build'
 app.use(express.static(path.join(__dirname, 'build')))

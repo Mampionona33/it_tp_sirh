@@ -1,11 +1,5 @@
-FROM httpd:alpine
+# Utilisez une image de base Apache
+FROM httpd:latest
 
-WORKDIR /usr/share/nginx/html
-
-# Remove default nginx static assets
-RUN rm -rf ./*
-
-COPY --from=builder /app/build /usr/app/build
-
-# Containers run nginx with global directives and defaults
-ENTRYPOINT [ "nginx","-g", "daemon off;" ]
+# Copiez le fichier de configuration de virtual host vers le conteneur
+COPY ./docker/apache_docker/httpd.conf /usr/local/apache2/conf/httpd.conf
