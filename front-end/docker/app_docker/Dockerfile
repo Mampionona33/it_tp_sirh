@@ -5,7 +5,7 @@ FROM node:18 AS builder
 WORKDIR /app
 
 # Copier le package.json et le yarn.lock dans le conteneur
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Installer les packages
 RUN yarn install
@@ -26,7 +26,7 @@ WORKDIR /app
 COPY --from=builder /app/build ./build
 
 # Copier le package.json et le yarn.lock pour installer uniquement les dépendances nécessaires au serveur
-COPY package.json yarn.lock ./
+COPY package.json ./
 
 # Installer uniquement les dépendances de production
 RUN yarn install --production
