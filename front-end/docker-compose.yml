@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: docker/app_docker/Dockerfile
     expose:
-      - 3000:3000
+      - '3000'
     env_file:
       - .env
 
@@ -17,8 +17,8 @@ services:
       context: .
       dockerfile: docker/apache_docker/Dockerfile
     ports:
-      - "8080:8080"
+      - '80:80'
     volumes:
-      - ./apache.conf:/usr/local/apache2/conf/httpd.conf:ro
+      - ./docker/apache_docker/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
     depends_on:
       - app
