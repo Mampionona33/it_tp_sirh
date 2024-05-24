@@ -17,7 +17,7 @@ services:
       context: .
       dockerfile: docker/apache_docker/Dockerfile
     ports:
-      - 80:80
+      - 8080:8080
     volumes:
       - ./docker/apache_docker/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
     depends_on:
