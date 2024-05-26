@@ -26,8 +26,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     default-mysql-client \
     && rm -rf /var/lib/apt/lists/*
 
-
-
 # Enable mod_rewrite for Apache
 RUN a2enmod rewrite
 

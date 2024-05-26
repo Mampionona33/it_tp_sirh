@@ -4,38 +4,27 @@ FROM node:18 AS builder
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
 
-# Copier le package.json et le yarn.lock dans le conteneur
+# Copiez le package.json et le yarn.lock dans le conteneur
 COPY package.json ./
 
-# Installer les packages
-RUN yarn install
+# Install npm latest
+RUN npm install -g npm@latest
 
-# Copier le reste des fichiers du projet dans le conteneur
+# Installez Yarn avec npm en utilisant l'option --force
+RUN npm install -g --force yarn && yarn install --frozen
+
+# Copiez le reste des fichiers du projet dans le conteneur
 COPY . .
+
 
 # Construire l'application React
 RUN yarn build
 
-# Utilisez une nouvelle image de base Node.js pour le serveur
-FROM node:18 AS server
+# Copie public files to build
+COPY ./public ./build/public
 
-# Définissez le répertoire de travail dans le conteneur
-WORKDIR /app
-
-# Copier les fichiers de construction de l'étape précédente
-COPY --from=builder /app/build ./build
-
-# Copier le package.json et le yarn.lock pour installer uniquement les dépendances nécessaires au serveur
-COPY package.json ./
-
-# Installer uniquement les dépendances de production
-RUN yarn install --production
-
-# Copier le fichier serveur
-COPY server.js ./
-
-# Exposer le port 3000 pour l'application
+# Expose port 3000 or by default port 80 to the outside world
 EXPOSE 3000
 
-# Commande pour démarrer le serveur Express
-CMD ["node", "server.js"]
+# Start Nginx when the container is run
+CMD ["node","server.js"]

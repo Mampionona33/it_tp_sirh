@@ -22,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'build')))
 
 // Pour toutes les requêtes GET, renvoyer le fichier 'index.html' du dossier 'build'
 app.get('*', (req, res) => {
+  console.log(req.url)
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 

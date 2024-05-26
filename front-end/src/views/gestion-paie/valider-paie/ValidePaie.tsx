@@ -221,11 +221,11 @@ const ValidePaie = () => {
   }
 
   // afficher les données au modifications
-  useEffect(() => {
-    if (bulletinDePaie) {
-      console.log(bulletinDePaie)
-    }
-  }, [bulletinDePaie])
+  // useEffect(() => {
+  //   if (bulletinDePaie) {
+  //     console.log(bulletinDePaie)
+  //   }
+  // }, [bulletinDePaie])
 
   const handleDateVirBancChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()

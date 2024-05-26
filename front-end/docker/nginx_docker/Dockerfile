@@ -1,11 +1,13 @@
-FROM nginx:latest
+FROM nginx:alpine
 
-# Copier les fichiers de build depuis le répertoire local
-COPY ./build /usr/share/nginx/html
+# Copy main nginx configuration
+COPY ./docker/nginx_docker/nginx.conf /etc/nginx/nginx.conf
 
-# Copier la configuration Nginx personnalisée
-COPY ./nginx.conf /etc/nginx/nginx.conf
+# Copy server-specific configuration
+COPY ./docker/nginx_docker/default.conf /etc/nginx/conf.d/default.conf
 
+# Expose port 80
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+# Set entrypoint
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

@@ -48,9 +48,9 @@ const GestionPaie: React.FC = () => {
 
   useEffect(() => {
     dispatch(resetBulletinDePaie())
-    if (data) {
-      console.log(data)
-    }
+    // if (data) {
+    //   console.log(data)
+    // }
   }, [dispatch, data])
   //   formatage des colonnes
 

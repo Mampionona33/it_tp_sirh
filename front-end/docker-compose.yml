@@ -1,24 +1,12 @@
 services:
   app:
-    image: la-ligne-scandinave-front-end
     container_name: la-ligne-scandinave-front-end
-    stdin_open: true
-    tty: true
     build:
       context: .
       dockerfile: docker/app_docker/Dockerfile
-    expose:
-      - '3000'
     env_file:
       - .env
-
-  apache:
-    build:
-      context: .
-      dockerfile: docker/apache_docker/Dockerfile
+    expose:
+      - '3000:81'
     ports:
-      - 8080:8080
-    volumes:
-      - ./docker/apache_docker/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro
-    depends_on:
-      - app
+      - '3000:81'
