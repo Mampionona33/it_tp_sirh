@@ -2,19 +2,22 @@ import { setModalClose } from '@src/redux/modal/modalReducer'
 import ButtonWithIcon, { ButtonWithIconVariant } from '@src/components/buttons/ButtonWithIcon'
 import { useAppDispatch, useAppSelector } from '@src/hooks/useAppDispatch'
 import React, { useEffect } from 'react'
-import bulletinDePaieService from '@src/services/BulletinDePaieService'
+import bulletinDePaieService, { IBltndPaieCreateParams } from '@src/services/BulletinDePaieService'
 import { useNavigate, useParams } from 'react-router-dom'
 import { resetBulletinDePaie } from '@src/redux/bulletinDePaie/bulletinDePaieReducer'
 import useAddEmployeDns from '@src/hooks/useAddEmployeDns'
 import useAddDeclarationIrsa from '@src/hooks/useAddDeclarationIrsa'
 import {
   IAvantageProps,
+  IBulletinDePaieProps,
   IPrimeEtGratification,
   IValidationProps,
 } from '@src/interfaces/interfaceBulletinDePaie'
 import useAddDeclarationOmsie from '@src/hooks/useAddDeclarationOmsie'
 import { DataOmsiProps } from '@src/interfaces/interfaceBtnDownloadOmsi'
 import { irsaProps } from '@src/interfaces/interfaceBtnDownloadIrsaProps'
+import { useMutation } from '@tanstack/react-query'
+import { IEmploye } from '@src/interfaces/interfaceEmploye'
 
 const FormValidateCalculPaie = () => {
   const dispatch = useAppDispatch()
@@ -44,6 +47,31 @@ const FormValidateCalculPaie = () => {
   const { id } = useParams()
   const bullettinDePaie = useAppSelector((store) => store.bulletinDePaie)
   const navigate = useNavigate()
+
+  const createBulletinDePaieMutation = useMutation({
+    mutationFn: async ({ id, data: bullettinDePaie }: IBltndPaieCreateParams) => {
+      try {
+        const response = await bulletinDePaieService.create({
+          id: String(id),
+          data: bullettinDePaie,
+        })
+
+        console.log('Response :', response)
+        if (response.data === 'Paie enregistrée') {
+          dispatch(resetBulletinDePaie())
+          dispatch(setModalClose())
+          navigate(`/gestion-de-paie`)
+        }
+        return response
+      } catch (error) {
+        throw error
+      }
+    },
+    onSuccess: () => {
+      dispatch(resetBulletinDePaie())
+      dispatch(setModalClose())
+    },
+  })
 
   const calculTotalAvantage = (avantages?: IAvantageProps): number => {
     let total = 0
@@ -92,7 +120,6 @@ const FormValidateCalculPaie = () => {
   }
 
   const getGenderSalarieOmsie = (gender: string): string => {
-    console.log('gender', gender)
     let result = 'M'
     if (gender.match(/feminin/gi)) {
       result = 'F'
@@ -141,12 +168,8 @@ const FormValidateCalculPaie = () => {
 
       const moisValidation = dateValidation.getMonth() + 1
 
-      if (
-        !bullettinDePaie.salarie?.matricule ||
-        !bullettinDePaie.validation.date ||
-        !bullettinDePaie.salarie?.num_cnaps
-      ) {
-        return
+      if (!bullettinDePaie.salarie?.matricule || !bullettinDePaie.validation.date) {
+        throw new Error(`Veuillez renseigner les champs obligatoires`)
       }
 
       const declarationIrsaData: irsaProps = {
@@ -181,7 +204,6 @@ const FormValidateCalculPaie = () => {
       }
 
       const genderSalarieOm = getGenderSalarieOmsie(bullettinDePaie.salarie?.genre)
-      console.log('genderSalarieOm', genderSalarieOm)
 
       const declarationOmsieData: DataOmsiProps = {
         annee: dateValidation.getFullYear().toString(),
@@ -194,20 +216,23 @@ const FormValidateCalculPaie = () => {
         genre: genderSalarieOm,
         salaires: formatSalariesOmsie(bullettinDePaie.salaireDeBase, moisValidation),
       }
-      // console.log('declarationIrsaData: ', declarationIrsaData)
-      // console.log('declarationOmsieData: ', declarationOmsieData)
 
       await addDeclarationIrsa({ data: declarationIrsaData })
       await addDeclarationOmsie({ ...declarationOmsieData })
       await addEmployeeDns(bullettinDePaie)
 
-      const resp = await bulletinDePaieService.create({ id: String(id), data: bullettinDePaie })
+      createBulletinDePaieMutation.mutate({
+        id: String(id),
+        data: bullettinDePaie,
+      })
 
-      if (resp.data === 'Paie enregistrée') {
-        dispatch(resetBulletinDePaie())
-        dispatch(setModalClose())
-        navigate(`/gestion-de-paie`)
-      }
+      // const resp = await bulletinDePaieService.create({ id: String(id), data: bullettinDePaie })
+
+      // if (resp.data === 'Paie enregistrée') {
+      //   dispatch(resetBulletinDePaie())
+      //   dispatch(setModalClose())
+      //   navigate(`/gestion-de-paie`)
+      // }
     } catch (error) {
       dispatch(setModalClose())
       throw error

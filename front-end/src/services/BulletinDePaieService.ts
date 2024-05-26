@@ -21,6 +21,7 @@ class BulletinDePaieService {
 
   async create(params: IBltndPaieCreateParams) {
     const { id, data } = params
+    console.log('data', data)
     try {
       const response = await axios.post(
         `${this.REACT_APP_API_BASE_URL}/bulletin-de-paie/ajout/${id}`,

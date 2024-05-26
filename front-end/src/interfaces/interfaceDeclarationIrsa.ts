@@ -6,7 +6,7 @@ export interface DeclarationIrsaDataProps {
   year: string
   month: string
   matricule?: string
-  num_cnaps?: string
+  num_cnaps?: string | null
   nom_prenom?: string
   cin?: string
   date_embauche?: string
