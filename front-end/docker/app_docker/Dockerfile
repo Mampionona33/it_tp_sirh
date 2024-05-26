@@ -21,7 +21,7 @@ COPY . .
 RUN yarn build
 
 # Copie public files to build
-COPY ./public ./build/public
+COPY ./public ./build
 
 # Expose port 3000 or by default port 80 to the outside world
 EXPOSE 3000
