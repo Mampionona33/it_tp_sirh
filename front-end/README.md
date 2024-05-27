@@ -1,51 +1,54 @@
+Voici une version améliorée et corrigée du `README` :
+
+````markdown
 ## Table des matières
 
 1. [Description](#description)
-2. [Technologies utilisées](#technologies-utilisees)
+2. [Technologies utilisées](#technologies-utilisées)
 3. [Initialisation](#initialisation)
-4. [Requirement "Docker" et "Make"](#utilisation-de-make)
+4. [Docker et Make](#docker-et-make)
 5. [Installation de Make](#installation-de-make)
-6. [Installation Docker](#installation-docker)
-6. [Installation de Nginx](#installation-de-nginx)
-7. [Configuration Reverse Proxy Nginx](#configuration-reverse-proxy-nginx)
-8. [Lancement de l'application](#lancement-de-lapplication)
+6. [Installation de Docker](#installation-de-docker)
+7. [Lancement de l'application](#lancement-de-lapplication)
+8. [Liste des commandes Make](#liste-des-commandes-make)
 
 ---
 
 <div id='description'/>
 
 ## Description
-Le projet vise à proposer une solution exhaustive pour la gestion de la paie, incluant les fonctionnalités suivantes : calcul des rémunérations, génération de fiches de paie au format PDF, production de la déclaration nominative des salariés sous forme de fichier XLSX, ainsi que la création des déclarations OMSI et IRSA trimestrielles.
----
 
+Ce projet propose une solution complète pour la gestion de la paie, incluant les fonctionnalités suivantes : calcul des rémunérations, génération de fiches de paie au format PDF, production de la déclaration nominative des salariés sous forme de fichier XLSX, ainsi que la création des déclarations trimestrielles OMSI et IRSA.
 
-<div id='technologies-utilisees'/>
+<div id='technologies-utilisées'/>
 
-## Technologies utilisees
+## Technologies utilisées
 
 - [Make](https://makefiletutorial.com/)
 - [Docker](https://www.docker.com/)
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/en/)
 - [TypeScript](https://www.typescriptlang.org/)
-- [CRACO](https://github.com/coreui/coreui-free-react-admin-template/blob/main/CRACO/README.md)
+- [CRACO](https://github.com/gsoft-inc/craco)
 - [React.js](https://reactjs.org/)
 
 ---
+
+<div id='initialisation'/>
 
 ## Initialisation
 
 Pour initialiser le projet et le cloner, exécutez les commandes suivantes :
 
 ```bash
-# Creer le dossier principal
+# Créer le dossier principal
 mkdir <main_directory> && cd <main_directory>
 
 # Cloner le projet
 git init
 git clone --depth=1 https://github.com/Mampionona33/it_tp_sirh.git
 
-# Creer le dossier front-end
+# Créer le dossier front-end
 cd it_tp_sirh
 git sparse-checkout set front-end
 git sparse-checkout set --no-cone front-end
@@ -55,16 +58,16 @@ cp -r front-end/* ./
 
 # Supprimer le dossier front-end
 rm -rf front-end
-
 ```
+````
 
 Assurez-vous de remplacer `<main_directory>` par le nom du répertoire que vous souhaitez utiliser pour le projet.
 
-<div id='utilisation-de-make'/>
+<div id="docker-et-make"/>
 
-## Remarque : Utilisation de Make
+## Docker et Make
 
-Le projet utilise le système de build Make pour faciliter l'exécution de diverses tâches et commandes. Cela simplifie le processus de développement et permet aux utilisateurs de gérer l'application de manière efficace.
+Le projet utilise `Make` pour faciliter l'exécution de diverses tâches et commandes, simplifiant ainsi le processus de développement et de gestion de l'application. Nous utilisons également `Docker` pour garantir un environnement de déploiement cohérent.
 
 ---
 
@@ -74,21 +77,69 @@ Le projet utilise le système de build Make pour faciliter l'exécution de diver
 
 Assurez-vous que Make est installé sur votre système pour utiliser les commandes du Makefile.
 
-[Installation make sous Linux](https://www.geeksforgeeks.org/how-to-install-make-on-ubuntu/)
+- [Installation de Make sous Linux](https://www.geeksforgeeks.org/how-to-install-make-on-ubuntu/)
+- [Installation de Make sous Windows](https://gnuwin32.sourceforge.net/packages/make.htm)
 
-[Installation make sous Windows](https://gnuwin32.sourceforge.net/packages/make.htm)
+<div id="installation-de-docker"/>
 
-<div id='lancement-du-serveur>
+## Installation de Docker
 
-## Build et Lancement du Serveur
-Pour construire et lancer le serveur, utilisez les commandes suivantes :
+- [Installation de Docker Engine sur Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+
+<div id='lancement-de-lapplication'/>
+
+## Lancement de l'application
+
+Pour construire et lancer le serveur, utilisez la commande suivante :
 
 ```bash
 make build-and-serve
 ```
- ou lancer succesivement les commandes suivantes :
+
+ou lancez successivement les commandes suivantes :
 
 ```bash
 make build
+make serve
+```
+
+<div id="liste-des-commandes-make"/>
+
+## Liste des commandes Make
+
+Voici les commandes Make disponibles :
+
+```bash
+# Réinitialiser Docker
+make reset-docker
+```
+
+```bash
+# Supprimer le cache Docker
+make remove-cache-docker
+```
+
+```bash
+# Supprimer les images Docker
+make remove-image-docker
+```
+
+```bash
+# Arrêter et supprimer les conteneurs Docker
+make down
+```
+
+```bash
+# Construire le projet
+make build
+```
+
+```bash
+# Construire et lancer le serveur
+make build-and-serve
+```
+
+```bash
+# Lancer le serveur
 make serve
 ```
