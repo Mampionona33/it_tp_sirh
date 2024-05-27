@@ -6,12 +6,13 @@
 
 1. [Description](#description)
 2. [Technologies utilisées](#technologies-utilisées)
-3. [Initialisation](#initialisation)
-4. [Docker et Make](#docker-et-make)
+3. [Prérequis](#prerequis)
+4. [Initialisation](#initialisation)
 5. [Installation de Make](#installation-de-make)
 6. [Installation de Docker](#installation-de-docker)
 7. [Lancement de l'application](#lancement-de-lapplication)
 8. [Liste des commandes Make](#liste-des-commandes-make)
+9. [Alternative commande Make](#alternative-commande-make)
 
 ---
 
@@ -34,6 +35,17 @@ Ce projet propose une solution complète pour la gestion de la paie, incluant le
 - [React.js](https://reactjs.org/)
 
 ---
+
+<div id="prerequis"/>
+
+## Prérequis
+
+Assurez-vous d'avoir Git, Docker, Docker Compose et Make installés sur votre machine.
+
+- Git est utilisé pour cloner le projet.
+- Make simplifie l'exécution de diverses commandes et tâches.
+- Docker assure un environnement de développement et de déploiement identique.
+- Docker Compose facilite la gestion des conteneurs.
 
 <div id='initialisation'/>
 
@@ -63,14 +75,6 @@ rm -rf front-end
 
 Assurez-vous de remplacer `<main_directory>` par le nom du répertoire que vous souhaitez utiliser pour le projet.
 
-<div id="docker-et-make"/>
-
-## Docker et Make
-
-Le projet utilise `Make` pour faciliter l'exécution de diverses tâches et commandes, simplifiant ainsi le processus de développement et de gestion de l'application. Nous utilisons également `Docker` pour garantir un environnement de déploiement cohérent.
-
----
-
 <div id='installation-de-make'/>
 
 ## Installation de Make
@@ -85,6 +89,7 @@ Assurez-vous que Make est installé sur votre système pour utiliser les command
 ## Installation de Docker
 
 - [Installation de Docker Engine sur Ubuntu](https://docs.docker.com/engine/install/ubuntu/)
+- [Installation de Docker Compose](https://docs.docker.com/compose/install/)
 
 <div id='lancement-de-lapplication'/>
 
@@ -142,4 +147,22 @@ make build-and-serve
 ```bash
 # Lancer le serveur
 make serve
+```
+
+---
+
+<div id='alternative-commande-make'/>
+
+## Alternative commande Make
+
+**Si vous n'avez pas installé Make, vous pouvez utiliser les commandes suivantes pour compiler et lancer le serveur:**
+
+```bash
+# Compiler le serveur
+docker compose build --no-cache
+```
+
+```bash
+# Lancer le serveur
+docker compose up
 ```
