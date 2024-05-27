@@ -1,6 +1,7 @@
-Voici une version améliorée et corrigée du `README` :
+![LogoLs](https://github.com/Mampionona33/it_tp_sirh/assets/50689325/7f6496d8-c43b-4c98-b7eb-7d863c20e34e)
 
-````markdown
+# FRONT-END
+
 ## Table des matières
 
 1. [Description](#description)
@@ -59,7 +60,6 @@ cp -r front-end/* ./
 # Supprimer le dossier front-end
 rm -rf front-end
 ```
-````
 
 Assurez-vous de remplacer `<main_directory>` par le nom du répertoire que vous souhaitez utiliser pour le projet.
 
