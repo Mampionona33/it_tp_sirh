@@ -7,6 +7,4 @@ services:
     env_file:
       - .env
     expose:
-      - '3000:81'
-    ports:
-      - '3000:81'
+      - '3000'
