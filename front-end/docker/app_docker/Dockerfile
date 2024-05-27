@@ -26,4 +26,4 @@ COPY ./public ./build/public
 EXPOSE 3000
 
 # Start Nginx when the container is run
-CMD ["yarn","start"]
+CMD ["node","server.js"]
