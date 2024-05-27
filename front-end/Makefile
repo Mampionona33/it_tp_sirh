@@ -12,6 +12,9 @@ install-nginx:
 	sudo apt update && \
 	sudo apt install nginx -y
 
+create-nginx-config:
+	sudo nano /etc/nginx/sites-available/gestion-de-paie-ls
+
 reset-docker:
 	docker system prune -a
 
@@ -33,7 +36,7 @@ build: down
 build-and-serve: build
 	docker compose up --remove-orphans
 
-run-container:
+serve:
 	docker compose up
 
 ifeq ($(OS),Windows_NT)
