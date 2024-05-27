@@ -95,7 +95,7 @@ Assurez-vous que Make est installé sur votre système pour utiliser les command
 
 ## Lancement de l'application
 
-Pour construire et lancer le serveur, utilisez la commande suivante :
+Pour compiler et lancer le serveur, utilisez la commande suivante :
 
 ```bash
 make build-and-serve
@@ -135,12 +135,12 @@ make down
 ```
 
 ```bash
-# Construire le projet
+# Compiler le projet
 make build
 ```
 
 ```bash
-# Construire et lancer le serveur
+# Compiler et lancer le serveur
 make build-and-serve
 ```
 
