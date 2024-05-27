@@ -7,6 +7,6 @@ services:
     env_file:
       - .env
     expose:
-      - '3000:3000' 
-    # ports:
-    #   - '3000:3000'  # Mappe le port 3000 de l'hôte au port 3000 du conteneur
+      - '3000:3000'
+    ports:
+      - '3000:3000' # Mappe le port 3000 de l'hôte au port 3000 du conteneur
