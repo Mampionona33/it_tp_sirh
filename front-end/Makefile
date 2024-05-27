@@ -21,10 +21,10 @@ reset-docker:
 view-docker-status:
 	docker system df
 
-remove-docker-cache:
+remove-cache-docker:
 	docker builder prune
 
-remove-docker_image:
+remove-image-docker:
 	docker image rm -f $(CONTAINER_NAME)
 
 down:	

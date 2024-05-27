@@ -10,7 +10,12 @@ if (!process.env.PORT) {
   throw new Error('PORT environment variable is not set')
 }
 
+if (!process.env.HOST) {
+  throw new Error('HOST environment variable is not set')
+}
+
 const PORT = parseInt(process.env.PORT) || 3000
+const HOST = process.env.HOST || '0.0.0.0'
 
 // Servir les fichiers statiques du dossier 'build'
 app.use(express.static(path.join(__dirname, 'build')))
@@ -21,6 +26,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`)
+app.listen(PORT, HOST, () => {
+  console.log(`Server is running on http://${HOST}:${PORT}`)
 })

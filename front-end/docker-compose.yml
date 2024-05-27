@@ -6,5 +6,7 @@ services:
       dockerfile: docker/app_docker/Dockerfile
     env_file:
       - .env
+    ports:
+      - '3000:3000'  # Mappe le port 3000 de l'hôte au port 3000 du conteneur
     expose:
-      - '3000'
+      - '3000'  # Expose le port 3000 du conteneur
