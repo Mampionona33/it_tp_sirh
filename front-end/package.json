@@ -14,7 +14,7 @@
   "author": "The CoreUI Team (https://github.com/orgs/coreui/people)",
   "scripts": {
     "build": "craco build",
-    "start": "rm -rf .env && cp .env.local.dev .env && craco start",
+    "start": "craco start",
     "lint": "eslint \"src/**/*.js\"",
     "prettier": "npx prettier --write 'src/**/*.{js,ts,tsx}'",
     "test": "craco test",
@@ -22,7 +22,7 @@
     "test:cov": "npm test -- --coverage --watchAll=false",
     "test:debug": "craco --inspect-brk test --runInBand",
     "find-deadcode": "ts-prune | (! grep -v 'used in module')",
-    "deploy:prod": "rm -rf .env.local build && cp .env.local.production .env && craco build && firebase deploy --only hosting && rm -rf .env"
+    "deploy:prod": "craco build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
