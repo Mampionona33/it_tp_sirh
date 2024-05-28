@@ -59,7 +59,7 @@ mkdir <main_directory> && cd <main_directory>
 
 # Cloner le projet
 git init
-git clone --depth=1 https://github.com/Mampionona33/it_tp_sirh.git
+git clone --depth=1 https://github.com/Mampionona33/gestion_de_paie.git
 
 # Créer le dossier front-end
 cd it_tp_sirh
